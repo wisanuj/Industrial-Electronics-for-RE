@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.6 — Diode Equivalent Circuits">1.6 — วงจรสมมูลของไดโอด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรสมมูลของไดโอด: เชิงเส้นเป็นช่วง แบบง่าย และอุดมคติ <span class="en">Piecewise-linear, simplified and ideal diode models</span></h1>
+<h1 data-l="en">Diode equivalent circuits <span class="en">Piecewise-linear, simplified and ideal models</span></h1>
+
+<p class="sub" data-l="th">วงจรสมมูล (equivalent circuit) คือกลุ่มอุปกรณ์ที่เลือกมาให้มีพฤติกรรมที่ขั้วเหมือนอุปกรณ์จริงในช่วงการทำงานหนึ่ง เมื่อแทนไดโอดด้วยวงจรสมมูลแล้ว วงจรทั้งหมดแก้ได้ด้วยวิธีวิเคราะห์วงจรตามปกติ สไลด์หน้า 57–60 ไล่จากแบบเชิงเส้นเป็นช่วง (piecewise-linear) ไปแบบง่าย (simplified) และแบบอุดมคติ (ideal) ทีละขั้น หน้านี้มีภาพจำลองที่แทนไดโอดจริงด้วยแบบจำลองทั้งสามในวงจรเดียวกัน (ส่วน A) โจทย์ข้อ 1 ที่สร้างแบบจำลองจากเอกสารข้อมูลแล้วเทียบความแม่นยำ และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">An equivalent circuit is a combination of elements chosen to behave at its terminals like the real device over some range of operation. With the diode replaced by its equivalent, the whole circuit can be solved by ordinary circuit analysis. Slides pp. 57–60 go step by step from the piecewise-linear (PWL) model to the simplified and the ideal one. This page swaps the three models for the actual diode in the same circuit (section A), builds a model from a data-sheet point and checks its accuracy (problem 1), and ends with more practice.</p>
+<div class="equation-box eqwrap">$$ r_{av} = \frac{V_F - V_K}{I_F - 0} $$ $$ I_D = \frac{E - V_K}{R + r_{av}} $$ $$ I_D = \frac{E - V_K}{R} $$ $$ I_D = \frac{E}{R} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>เชิงเส้นเป็นช่วง</b>: ประมาณกราฟด้วยเส้นตรงสองเส้น แนวนอนจนถึง \(V_K\) แล้วชันด้วยความต้านทาน \(r_{av}\) วงจรสมมูลคือแบตเตอรี \(V_K\) ที่ต้านการนำ \(r_{av}\) และไดโอดอุดมคติต่ออนุกรมกัน (สไลด์หน้า 58 · รูป 1.29–1.30)</li>
+  <li><b>แบตเตอรี \(V_K\) ไม่ใช่แหล่งจ่ายจริง</b>: วัดไดโอดที่วางเฉย ๆ บนโต๊ะจะไม่ได้ 0.7 V มันเป็นเพียงระยะเลื่อนของกราฟที่ต้องข้ามก่อนนำกระแส</li>
+  <li><b>แบบง่าย</b>: ตัด \(r_{av}\) ออกเมื่อมันเล็กมากเทียบกับความต้านทานอื่นในวงจร เหลือแรงดันตกคงที่ 0.7 V สำหรับซิลิคอนที่นำกระแส ซึ่งเป็นแบบที่ใช้บ่อยที่สุดในบทที่ 2 (สไลด์หน้า 59 · รูป 1.31)</li>
+  <li><b>อุดมคติ</b>: ตัด 0.7 V ออกด้วยเมื่อมันเล็กมากเทียบกับแรงดันของแหล่งจ่าย นิยมใช้กับวงจรแหล่งจ่ายไฟที่แรงดันสูง (สไลด์หน้า 60 · รูป 1.32 และตาราง 1.7)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Piecewise-linear</b>: two straight lines stand for the curve, flat up to \(V_K\) and then rising with resistance \(r_{av}\). The equivalent circuit is a battery \(V_K\) opposing conduction, \(r_{av}\) and an ideal diode in series (slide p. 58, Figs. 1.29–1.30).</li>
+  <li><b>The battery \(V_K\) is not a real source</b>: a voltmeter across a diode lying on the bench will not read 0.7 V. It only stands for the offset of the curve that must be overcome before conduction.</li>
+  <li><b>Simplified</b>: drop \(r_{av}\) when it is tiny next to the other resistances of the circuit, leaving a fixed 0.7 V drop for a conducting silicon diode, the model used most in chapter 2 (slide p. 59, Fig. 1.31).</li>
+  <li><b>Ideal</b>: drop the 0.7 V as well when it is tiny next to the source voltage, as is usual in power supplies with large voltages (slide p. 60, Fig. 1.32 and Table 1.7).</li></ul></section>
+
+<figure class="slide q"><img src="slides/ch1/p57.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 57, Diode Equivalent Circuits: an equivalent circuit is a combination of elements properly chosen to best represent the actual terminal characteristics of a device or system in a particular operating region: piecewise-linear equivalent circuit, simplified equivalent circuit, ideal equivalent circuit. Three drawings: a diode replaced by a battery V_T of 0.7 V, a 10 Ω resistor r_av and an ideal diode; a battery V_T = 0.7 V and an ideal diode; and an ideal diode alone.">
+  <figcaption data-l="th">สไลด์หน้า 57: วงจรสมมูลสามแบบ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 57: the three equivalent circuits · tap to enlarge</figcaption></figure>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 57–59 เขียนแบตเตอรีว่า \(V_T = 0.7\) V</b> ตามสัญลักษณ์ของตำราฉบับเก่า (threshold voltage) ตำราพิมพ์ครั้งที่ 11 เปลี่ยนเป็น \(V_K\) (knee voltage) เพราะ \(V_T\) ใช้กับแรงดันความร้อน \(kT/q \cong 26\) mV ในสมการ (1.2) ของหน้า 1.4 ไปแล้ว หน้านี้ใช้ \(V_K\) อย่าสับสนสองค่านี้</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 57–59 label the battery \(V_T = 0.7\) V</b>, the threshold voltage of earlier editions. The 11th edition calls it \(V_K\) (the knee voltage), because \(V_T\) now means the thermal voltage \(kT/q \cong 26\) mV of Eq. (1.2) on page 1.4. This page uses \(V_K\); do not mix the two up.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>เทียบแบบจำลองในวงจรเดียวกัน</a><a href="#ex1"><b>1</b>สร้างแบบจำลองแล้วตรวจความแม่น</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The models in one circuit</a><a href="#ex1"><b>1</b>Build a model, check it</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">แบบจำลองสามแบบเทียบกับไดโอดจริงในวงจรเดียวกัน</h2><h2 data-l="en">Three models against the actual diode in one circuit</h2>
+    <div class="src" data-l="th">สไลด์หน้า 58–60 · Boylestad หัวข้อ 1.9 (รูป 1.29–1.32 และตาราง 1.7)</div><div class="src" data-l="en">Slides pp. 58–60 · Boylestad, section 1.9 (Figs. 1.29–1.32, Table 1.7)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p58.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 58, Diode Equivalent Circuits, Piecewise-Linear Equivalent Circuit: one technique for obtaining an equivalent circuit for a diode is to approximate the characteristics of the device by straight-line segments, as shown in the figure. The graph shows the diode curve with a straight line from 0.7 V (V_K) on the axis rising through 10 mA at 0.8 V, the slope marked r_av; beside it a diode replaced by a battery V_T of 0.7 V, a 10 Ω resistor r_av and an ideal diode.">
+    <figcaption data-l="th">สไลด์หน้า 58: เชิงเส้นเป็นช่วง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 58: piecewise-linear · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p59.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 59, Diode Equivalent Circuits, Simplified Equivalent Circuit: for most applications, the resistance r_av is sufficiently small to be ignored in comparison to the other elements of the network. The removal of r_av from the equivalent circuit is the same as implying that the characteristics of the diode appear as shown in the figure: a horizontal line to V_T = 0.7 V then vertical, r_av = 0 Ω. It states that a forward-biased silicon diode in an electronic system under dc conditions has a drop of 0.7 V across it in the conduction state. Below, a battery V_T = 0.7 V and an ideal diode.">
+    <figcaption data-l="th">สไลด์หน้า 59: แบบง่าย · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 59: simplified · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p60.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 60, Diode Equivalent Circuits, Ideal Equivalent Circuit: now that r_av has been removed from the equivalent circuit let us take it a step further and establish that a 0.7-V level can often be ignored in comparison to the applied voltage level. The equivalent circuit will be reduced to that of an ideal diode as shown in the figure with its characteristics: a vertical line along the I_D axis and a horizontal line along the negative V_D axis, and an ideal diode in a box.">
+    <figcaption data-l="th">สไลด์หน้า 60: อุดมคติ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 60: ideal · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ไดโอดจริงในภาพจำลองเป็นไดโอดซิลิคอนตามสมการ (1.2) ที่มีความต้านทานของเนื้อสาร 5 Ω ผ่านจุด 0.8 V, 10 mA ซึ่งเป็นจุดเดียวกับที่ตำราใช้หา \(r_{av} = 10\ \Omega\) เลือกแบบจำลองเพื่อแทนไดโอดในวงจร แล้วปรับ E และ R ดูว่าแบบจำลองแต่ละแบบคลาดจากไดโอดจริงเท่าไร (แท่งกราฟเทียบกระแส) แบบเชิงเส้นเป็นช่วงแม่นเกือบทุกกรณี แบบง่ายต้องการ R ที่ใหญ่กว่า \(r_{av}\) มาก แบบอุดมคติต้องการ E ที่ใหญ่กว่า 0.7 V มากด้วย</p>
+  <p class="lead" data-l="en">The actual diode of the simulation is a silicon diode obeying Eq. (1.2) with a 5 Ω body resistance, passing through 0.8 V at 10 mA, the very point the book uses to get \(r_{av} = 10\ \Omega\). Pick a model to put in place of the diode, then change E and R and see how far each model is from the actual diode (the bar chart of currents). The piecewise-linear model is close almost always; the simplified one needs R much larger than \(r_{av}\); the ideal one needs E much larger than 0.7 V as well.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">สร้างแบบจำลองจากเอกสารข้อมูล แล้วตรวจความแม่นในสองวงจร</h2><h2 data-l="en">Build the model from a data sheet, then check it in two circuits</h2>
+    <div class="src" data-l="th">\(r_{av}\) จาก Boylestad หัวข้อ 1.9 (รูป 1.29) · วงจรแต่งเพิ่มเพื่อฝึกเงื่อนไขในตาราง 1.7 · ไม่มีเฉลยในห้อง</div><div class="src" data-l="en">\(r_{av}\) from Boylestad section 1.9 (Fig. 1.29) · the circuits are added to practise the conditions of Table 1.7 · no class solution</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>เอกสารข้อมูลของไดโอดซิลิคอนระบุกระแสไปข้างหน้า (forward current) \(I_F = 10\) mA ที่แรงดันไปข้างหน้า \(V_F = 0.8\) V (a) จงหา \(r_{av}\) ของแบบจำลองเชิงเส้นเป็นช่วงโดยใช้ \(V_K = 0.7\) V (b)–(d) ต่อไดโอดอนุกรมกับ E = 10 V และ R = 1 kΩ จงหา \(I_D\) ด้วยแบบจำลองเชิงเส้นเป็นช่วง แบบง่าย และแบบอุดมคติ (e) เทียบกับไดโอดจริง (f) ทำซ้ำเมื่อ E = 2 V และ R = 100 Ω</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The data sheet of a silicon diode gives a forward current \(I_F = 10\) mA at a forward voltage \(V_F = 0.8\) V. (a) Find \(r_{av}\) for the piecewise-linear model, taking \(V_K = 0.7\) V. (b)–(d) The diode is in series with E = 10 V and R = 1 kΩ: find \(I_D\) with the piecewise-linear, the simplified and the ideal model. (e) Compare with the actual diode. (f) Repeat with E = 2 V and R = 100 Ω.</p></div>
+  <p class="lead" data-l="th">วงจรในภาพจำลองแทนไดโอดด้วยชิ้นส่วนของแบบจำลองในแต่ละขั้น (แบตเตอรี \(V_K\), \(r_{av}\) และไดโอดอุดมคติ) ขั้น (e) และ (f) กลับมาใช้ไดโอดจริง แผงข้างภาพเทียบกระแสของทุกแบบ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">At each step the circuit in the picture puts the parts of the model in place of the diode (the battery \(V_K\), \(r_{av}\) and an ideal diode); steps (e) and (f) go back to the actual diode, and the side panel compares the currents of every model. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ \(V_K = 0.7\) V สำหรับซิลิคอนและ 0.3 V สำหรับเจอร์เมเนียม · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use \(V_K = 0.7\) V for silicon and 0.3 V for germanium · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — เมื่อไรแบบจำลองใช้ได้</h3>
+    <ol><li>ส่วน A ตั้ง E = 10 V, R = 1 kΩ: ทุกแบบจำลองคลาดไม่เกิน 10 % แบบอุดมคติคลาดมากที่สุด</li>
+    <li>ลด E เหลือ 2 V: แบบอุดมคติคลาดหลายสิบเปอร์เซ็นต์ เพราะ 0.7 V ไม่เล็กเมื่อเทียบกับ 2 V</li>
+    <li>คง E = 10 V แต่ลด R เหลือ 100 Ω: แบบง่ายคลาดมากขึ้น เพราะ \(r_{av} = 10\ \Omega\) ไม่เล็กเมื่อเทียบกับ 100 Ω</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — แบตเตอรีที่ไม่มีอยู่จริง</h3>
+    <ol><li>ตั้ง E ต่ำกว่า 0.7 V: แบบจำลองเชิงเส้นเป็นช่วงและแบบง่ายให้กระแสเป็นศูนย์ เพราะไดโอดอุดมคติภายในไม่นำ ส่วนไดโอดจริงมีกระแสเล็กน้อย</li>
+    <li>ชี้เมาส์ที่แบตเตอรี \(V_K\) ในวงจร: กระแสไหลเข้าขั้วบวก แบตเตอรีจึง "รับ" กำลัง ซึ่งเป็นส่วนหนึ่งของกำลังที่ไดโอดจริงกลายเป็นความร้อน (ส่วนที่เหลืออยู่ใน \(r_{av}\))</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 57–60 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.9 (รูป 1.29–1.32 และตาราง 1.7)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — when a model is good enough</h3>
+    <ol><li>In section A set E = 10 V, R = 1 kΩ: every model is within 10 %, the ideal one furthest off.</li>
+    <li>Lower E to 2 V: the ideal model is off by tens of percent, because 0.7 V is not small next to 2 V.</li>
+    <li>Keep E = 10 V but lower R to 100 Ω: the simplified model drifts, because \(r_{av} = 10\ \Omega\) is not small next to 100 Ω.</li></ol></div>
+  <div class="card"><h3>Try this 2 — a battery that is not there</h3>
+    <ol><li>Set E below 0.7 V: the piecewise-linear and simplified models give zero current, because their ideal diode is off, while the actual diode passes a little.</li>
+    <li>Hover over the battery \(V_K\) in the circuit: the current enters its + terminal, so the battery "takes in" power: part of the power the real diode turns into heat (the rest is in \(r_{av}\)).</li></ol>
+    <div class="book">Chapter 1 slides pp. 57–60 · Boylestad &amp; Nashelsky, 11th ed., section 1.9 (Figs. 1.29–1.32, Table 1.7)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH1.problem(1, 'models');
+
+  /* =================================================================== A: the models in one circuit */
+  const SA = { E: 10, R: 1000, m: 'pwl' };
+  const cur = () => { const c = { I: {} }; CH1.MODELS.forEach(m => { c.I[m] = CH1.mI(m, SA.E, SA.R); }); return c; };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.5, rowAsp: 0.7, pad: 1.25, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const I = CH1.mI(SA.m, SA.E, SA.R), V = SA.m === 'actual' ? CH1.op(CH1.F129, SA.E, SA.R).V : SA.m === 'ideal' ? 0 : I > 0 ? 0.7 + (SA.m === 'pwl' ? I / 1000 * 10 : 0) : SA.E;
+      CH1.mdPlot(ctx, b, bd, SA.m, { V, I }); },   // mdPlot keeps the dot inside the plot and labels it with the true values
+    waves: [{ draw: (ctx, b, bd) => CH1.mdBars(ctx, b, bd, cur(), t(`I_D (mA) และความคลาดเคลื่อน: E = ${fd(SA.E, 1)} V, R = ${CK.eng(SA.R, 'Ω')}`, `I_D (mA) and error: E = ${fd(SA.E, 1)} V, R = ${CK.eng(SA.R, 'Ω')}`)) }],
+    badge: () => [[`${CH1.MNAME[SA.m][0]}: I_D = ${fd(CH1.mI(SA.m, SA.E, SA.R), 3)} mA`, `${CH1.MNAME[SA.m][1]}: I_D = ${fd(CH1.mI(SA.m, SA.E, SA.R), 3)} mA`], 'ok'] });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('แทนไดโอดด้วย', 'Diode replaced by'));
+  ui.radio(pA, CH1.MODELS.map(m => ({ id: 'm_' + m, label: t(...CH1.MNAME[m]), on: m === SA.m })), id => { SA.m = id.slice(2); buildA(); });
+  ui.h2(pA, t('วงจร', 'Circuit'));
+  ui.slider(pA, { id: 'aE', label: 'E', min: 0.5, max: 20, step: 0.1, value: SA.E, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.E = v; buildA(); } });
+  ui.radio(pA, [100, 1000, 10000].map(r => ({ id: 'aR' + r, label: 'R = ' + CK.eng(r, 'Ω'), on: r === SA.R })), id => { SA.R = +id.slice(2); buildA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH1.model(SA.m, { E: SA.E, R: SA.R }), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); }
+  function showA() { const c = cur(), e = m => 100 * (c.I[m] / c.I.actual - 1);
+    mA.innerHTML = ui.kv(CH1.MODELS.map(m => [t(...CH1.MNAME[m]), `${fd(c.I[m], 3)} mA${m === 'actual' ? '' : ` (${e(m) >= 0 ? '+' : '−'}${fd(Math.abs(e(m)), 1)} %)`}`]));
+    const ok = m => Math.abs(e(m)) < 5, bad = CH1.MODELS.filter(m => m !== 'actual' && !ok(m)).map(m => t(...CH1.MNAME[m]));
+    $('wA').innerHTML = `<div class="answer">${t(`\\(E/V_K = ${fd(SA.E / 0.7, 1)}\\) และ \\(R/r_{av} = ${fd(SA.R / 10, 0)}\\) · ${bad.length ? `แบบจำลองที่คลาดเกิน 5 %: ${bad.join(', ')}` : 'ทุกแบบจำลองคลาดไม่เกิน 5 %'}`, `\\(E/V_K = ${fd(SA.E / 0.7, 1)}\\) and \\(R/r_{av} = ${fd(SA.R / 10, 0)}\\): ${bad.length ? `off by more than 5 %: ${bad.join(', ')}` : 'every model is within 5 %'}`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) เอกสารข้อมูลของไดโอดซิลิคอนให้ 20 mA ที่ 0.9 V จงหา \\(r_{av}\\) ของแบบจำลองเชิงเส้นเป็นช่วง (\\(V_K = 0.7\\) V)', '1) A silicon diode\'s data sheet gives 20 mA at 0.9 V. Find \\(r_{av}\\) for the piecewise-linear model (\\(V_K = 0.7\\) V).'),
+      fields: [{ key: 'x', lab: 'r_av =', ans: 10, unit: 'Ω' }], work: work(R`r_{av} = \frac{0.9 - 0.7}{20\ \text{mA}} = 10\ \Omega`) },
+    { q: t('2) ไดโอดซิลิคอนต่ออนุกรมกับ E = 12 V และ R = 2.2 kΩ จงหา \\(I_D\\) ด้วยแบบง่าย', '2) A silicon diode in series with E = 12 V and R = 2.2 kΩ. Find \\(I_D\\) with the simplified model.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 11.3 / 2.2, unit: 'mA' }], work: work(R`I_D = \frac{12 - 0.7}{2.2\ \text{k}\Omega} = ${fd(11.3 / 2.2, 3)}\ \text{mA}`) },
+    { q: t('3) วงจรเดียวกับข้อ 2 แต่ใช้ไดโอดเจอร์เมเนียม (แบบง่าย) จงหา \\(I_D\\)', '3) The circuit of question 2 with a germanium diode (simplified). Find \\(I_D\\).'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 11.7 / 2.2, unit: 'mA' }], work: work(R`I_D = \frac{12 - 0.3}{2.2\ \text{k}\Omega} = ${fd(11.7 / 2.2, 3)}\ \text{mA}`) },
+    { q: t('4) ไดโอดซิลิคอนแบบเชิงเส้นเป็นช่วง (\\(r_{av} = 20\\ \\Omega\\)) ต่ออนุกรมกับ E = 5 V และ R = 180 Ω จงหา \\(I_D\\) และแรงดันคร่อมไดโอด', '4) A piecewise-linear silicon diode (\\(r_{av} = 20\\ \\Omega\\)) in series with E = 5 V and R = 180 Ω. Find \\(I_D\\) and the voltage across the diode.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 21.5, unit: 'mA' }, { key: 'y', lab: 'V_D =', ans: 0.7 + 0.0215 * 20, unit: 'V' }],
+      work: work(R`\begin{aligned} I_D &= \frac{5 - 0.7}{180 + 20} = 21.5\ \text{mA} \\ V_D &= 0.7 + (21.5\ \text{mA})(20\ \Omega) = 1.13\ \text{V} \end{aligned}`) },
+    { q: t('5) ในข้อ 2 แบบอุดมคติคลาดจากแบบง่ายกี่เปอร์เซ็นต์ (เทียบกับแบบง่าย)', '5) In question 2, by how many percent is the ideal model above the simplified one?'),
+      fields: [{ key: 'x', lab: t('ความต่าง =', 'difference ='), ans: 100 * (12 / 11.3 - 1), unit: '%', tol: 0.02 }], work: work(R`\frac{12/2.2 - 11.3/2.2}{11.3/2.2} = \frac{0.7}{11.3} = ${fd(100 * 0.7 / 11.3, 2)}\,\%`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

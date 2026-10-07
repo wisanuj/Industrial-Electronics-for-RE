@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Industrial Electronics — Roadmap">อิเล็กทรอนิกส์อุตสาหกรรม — แผนที่การเรียน</title>
+<meta name="description" content="แผนที่การเรียนวิชา 010243302 อิเล็กทรอนิกส์อุตสาหกรรม ภาควิชาวิศวกรรมการผลิตและหุ่นยนต์ มจพ. หน้าโต้ตอบที่แก้วงจรไดโอดและทรานซิสเตอร์จริงในเบราว์เซอร์">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script>
+<script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar" id="mc-top"></header>
+  <div class="kicker"><span data-l="th">010243302 อิเล็กทรอนิกส์อุตสาหกรรม · Industrial Electronics</span><span data-l="en">010243302 Industrial Electronics</span></div>
+  <h1 data-l="th">แผนที่การเรียนอิเล็กทรอนิกส์อุตสาหกรรม <span class="en">Industrial Electronics Roadmap — from the silicon atom to the op-amp</span></h1>
+  <h1 data-l="en">Industrial Electronics Roadmap <span class="en">From the silicon atom to the op-amp</span></h1>
+
+  <div class="hero">
+    <div>
+      <p class="lede" data-l="th">สื่อการเรียนแบบโต้ตอบสำหรับนักศึกษาปริญญาตรี ภาควิชาวิศวกรรมการผลิตและหุ่นยนต์ ทุกวงจรบนจอถูกแก้สมการจริงในเบราว์เซอร์ ไดโอดใช้กราฟเดียวกับในตำรา แล้ววาดกระแสเป็นจุดที่วิ่งตามสายไฟ ภาพข้าง ๆ มีไดโอดเปล่งแสง (LED) สองดวงต่อกลับทิศกัน ดวงหนึ่งสว่าง อีกดวงไม่มีกระแสเลย ลองคลิกสวิตช์ดู</p>
+      <p class="lede" data-l="en">Interactive lessons for undergraduates of the Department of Production and Robotics Engineering. Every circuit on screen is actually solved in your browser, its diodes following the same curves as the textbook, and its current is drawn as dots running along the wires. The picture has two light-emitting diodes (LEDs) facing opposite ways: one lights, the other carries no current at all. Try clicking the switch.</p>
+      <div class="meta"><span><b id="mLive">6</b> <span data-l="th">หน้าพร้อมใช้</span><span data-l="en">pages ready</span></span><span><b>8</b> <span data-l="th">บทตามสไลด์</span><span data-l="en">chapters, as in the slides</span></span><span><span data-l="th">ประมาณ <b>20–30 นาที</b> ต่อหน้า</span><span data-l="en">about <b>20–30 min</b> per page</span></span><span><span data-l="th">พื้นฐาน: <b>วงจรไฟฟ้ากระแสตรง</b></span><span data-l="en">Prerequisite: <b>dc circuits</b></span></span></div>
+    </div>
+    <div class="card"><canvas id="hero"></canvas>
+      <div class="cap" data-l="th">คลิกสวิตช์เพื่อเปิด/ปิดวงจร · ชี้เมาส์ที่อุปกรณ์เพื่ออ่านแรงดันและกระแส</div>
+      <div class="cap" data-l="en">Click the switch to open or close the circuit · hover over a part to read its voltage and current</div></div>
+  </div>
+
+  <div class="progress">
+    <div class="prow"><span><span data-l="th">ความคืบหน้า:</span><span data-l="en">Progress:</span> <b id="pCount">0 / 6</b> &nbsp;·&nbsp; <a id="pNext" href="#"></a></span><button id="pReset" type="button"><span data-l="th">ล้างความคืบหน้า</span><span data-l="en">Reset progress</span></button></div>
+    <div class="bar"><div class="fill" id="pFill"></div></div>
+  </div>
+
+  <div class="howto" data-l="th"><b>อ่านภาพให้เป็นก่อนเริ่ม:</b>
+    <div class="keys" style="margin-top:8px">
+      <span class="k"><i style="background:#ffd166"></i><i style="background:#ffd166"></i></span><span><b>จุดสีเหลืองในวงจร</b> คือกระแสสมมติ (conventional current) ไหลออกจากขั้วบวก <b>ความเร็วของจุดแปรตามขนาดกระแส</b> ไดโอดที่ไม่นำกระแสจึงไม่มีจุดวิ่งผ่าน</span>
+      <span class="k"><i style="background:#5ad1ff"></i><i style="border:2px solid #ff7eb6;background:none"></i></span><span><b>ในภาพสารกึ่งตัวนำ</b> จุดสีฟ้าคืออิเล็กตรอน วงแหวนสีชมพูคือโฮล (ตำแหน่งที่ขาดอิเล็กตรอน)</span>
+      <span class="k" style="background:none;color:var(--accent2);font-weight:700">I–V</span><span><b>กราฟลักษณะสมบัติ</b> (กระแสเทียบแรงดันของไดโอด) วาดแบบในตำรา: ด้านบวกเป็นมิลลิแอมป์และหนึ่งในสิบโวลต์ ด้านลบเป็นสิบโวลต์ จุดสีเหลืองคือจุดทำงานของวงจร</span>
+      <span class="k" style="background:none">🖱</span><span>ชี้เมาส์ที่อุปกรณ์เพื่ออ่านค่า คลิกสวิตช์เพื่อเปิดปิด ทุกโจทย์เปิดเฉลยได้ทีละขั้นด้วยปุ่ม กลับมาหน้านี้ หน้าที่เปิดแล้วจะถูกติ๊กไว้ (บันทึกในเบราว์เซอร์เครื่องนี้)</span>
+    </div></div>
+  <div class="howto" data-l="en"><b>Learn to read the picture first:</b>
+    <div class="keys" style="margin-top:8px">
+      <span class="k"><i style="background:#ffd166"></i><i style="background:#ffd166"></i></span><span><b>Yellow dots in a circuit</b> are conventional current, leaving the positive terminal. <b>Dot speed is proportional to current</b>, so a diode that does not conduct has no dots running through it.</span>
+      <span class="k"><i style="background:#5ad1ff"></i><i style="border:2px solid #ff7eb6;background:none"></i></span><span><b>In the semiconductor pictures</b> cyan dots are electrons and pink rings are holes (places an electron is missing from).</span>
+      <span class="k" style="background:none;color:var(--accent2);font-weight:700">I–V</span><span><b>The characteristic</b> (a diode's current against its voltage) is drawn as in the book: milliamperes and tenths of volts on the positive side, tens of volts on the negative side. The yellow dot is the circuit's operating point.</span>
+      <span class="k" style="background:none">🖱</span><span>Hover over a part to read it and click a switch to toggle it; every problem opens its solution one step at a time with a button. Back on this page, visited pages are ticked (saved in this browser).</span>
+    </div></div>
+
+  <div class="road" id="road"></div>
+
+  <footer data-l="th">วิชา 010243302 อิเล็กทรอนิกส์อุตสาหกรรม (Industrial Electronics) · ผศ.ดร.วิษณุ จิตวิริยะ · ตำรา: Boylestad &amp; Nashelsky, <i>Electronic Devices and Circuit Theory</i> พิมพ์ครั้งที่ 11 · ทบทวนวงจรไฟฟ้าได้ที่ <a href="https://wisanuj.github.io/ee-web-010243307/">เว็บวิชาวิศวกรรมไฟฟ้า</a> · เปิด <code>index.html</code> ได้โดยตรงหรือเสิร์ฟโฟลเดอร์นี้ด้วย <code>python3 -m http.server</code> · สูตรใช้ KaTeX และฟอนต์จากเครือข่าย จึงต้องต่ออินเทอร์เน็ตครั้งแรก</footer>
+  <footer data-l="en">Course 010243302 Industrial Electronics · Asst. Prof. Dr. Wisanu Jitviriya · Textbook: Boylestad &amp; Nashelsky, <i>Electronic Devices and Circuit Theory</i>, 11th ed. · Review circuits on the <a href="https://wisanuj.github.io/ee-web-010243307/">Electrical Engineering site</a> · Open <code>index.html</code> directly or serve this folder with <code>python3 -m http.server</code> · Formulas use KaTeX and web fonts, so the first visit needs an internet connection.</footer>
+</div>
+<script>
+(function(){
+  /* ---------- roadmap ---------- */
+  const road=document.getElementById('road'); const stops=window.STOPS, stages=window.STAGES; const L=MC.lang;
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+  const pick=(th,en)=>MC.t(th,en);
+  const typeName={read:pick('หน้าอ่าน','Reading'),sim:pick('หน้าโต้ตอบ','Interactive'),cap:pick('แคปสโตน','Capstone'),soon:pick('กำลังสร้าง','In preparation')};
+  let html='', lastStage=null;
+  for(const s of stops){
+    if(s.stage!==lastStage){ lastStage=s.stage; const st=stages[s.stage];
+      const live=stops.some(x=>x.stage===s.stage&&!x.soon); const pinTxt=({1:'1–2',2:'3–4',3:'5–6',4:'7–8'})[s.stage]||'·';
+      html+=`<div class="milestone s${s.stage}${live?'':' soon'}"><div class="pin"${pinTxt.length>2?' style="font-size:13px"':''}>${pinTxt}</div><h2>${esc(pick(st.title,st.title_en))}</h2><p>${esc(pick(st.blurb,st.blurb_en))}</p></div>`; }
+    const titleMain=L==='en'?s.en:s.title, titleSub=L==='en'?'':s.en;   // English mode shows no Thai subtitle
+    if(s.soon){
+      html+=`<div class="node soon"><div class="dot"><span>${s.ch}</span></div><div class="stop"><div class="head"><span class="step">${pick('บทที่','Chapter')} ${s.ch}</span><span class="type soon">${typeName.soon}</span></div>
+        <h3>${esc(titleMain)}<span class="en">${esc(titleSub)}</span></h3><p>${esc(pick(s.blurb,s.blurb_en))}</p></div></div>`;
+      continue; }
+    const tags=pick(s.tags,s.tags_en)||s.tags;
+    html+=`<div class="node s${s.stage} ${s.type}" data-page="${s.file}" id="n-${s.file.replace(/\W/g,'_')}"><div class="dot"><span>${s.step}</span></div>
+      <a class="stop" href="${s.file}"><span class="arrow">→</span><div class="head"><span class="step">${pick('หน้า','Page')} ${s.step}</span><span class="type ${s.type}">${typeName[s.type]}</span></div>
+      <h3>${esc(titleMain)}<span class="en">${esc(titleSub)}</span></h3><p>${esc(pick(s.blurb,s.blurb_en))}</p>
+      <div class="goal"><b>${pick('จะทำได้:','You will be able to:')}</b> ${esc(pick(s.outcome,s.outcome_en))}</div>
+      <div class="topics">${esc(pick(s.book,s.book_en))}</div>
+      <div class="tags">${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></a></div>`;
+  }
+  road.innerHTML=html;
+  const nodes=[...road.querySelectorAll('.node[data-page]')]; document.getElementById('mLive').textContent=nodes.length;
+  function paint(){ const v=MC.visited(); let n=0; nodes.forEach(el=>{ const d=!!v[el.dataset.page]; el.classList.toggle('visited',d); if(d) n++; });
+    document.getElementById('pCount').textContent=`${n} / ${nodes.length}`; document.getElementById('pFill').style.width=Math.round(100*n/nodes.length)+'%';
+    const next=nodes.find(el=>!v[el.dataset.page]); const nx=document.getElementById('pNext');
+    if(next){ nx.innerHTML=pick('หน้าต่อไป: ','Next up: ')+'<b>'+next.querySelector('h3').childNodes[0].textContent+'</b>'; nx.href=next.querySelector('a.stop').getAttribute('href'); } else { nx.innerHTML='<b>'+pick('ทำครบทุกหน้าที่พร้อมแล้ว','All ready pages done')+'</b>'; nx.removeAttribute('href'); } }
+  nodes.forEach(el=>el.querySelector('a.stop').addEventListener('click',()=>MC.markVisited(el.dataset.page)));
+  document.getElementById('pReset').addEventListener('click',()=>{ MC.resetVisited(); paint(); });
+  paint();
+
+  /* ---------- hero: a 9 V battery, a switch, and two LED branches facing opposite ways ---------- */
+  const cv=document.getElementById('hero');
+  const ckt=new CK.Circuit({ ground:'g',
+    nodes:{ a:[0,0], s1:[1.4,0], s2:[3.0,0], b:[4.6,0], c:[7.6,0], m1:[4.6,1.35], m2:[7.6,1.35], d:[7.6,2.8], e:[4.6,2.8], g:[0,2.8], _padR:[10.2,1.4] },   // _padR: room for the right-hand label
+    parts:[ {id:'B',name:'9 V',type:'V',a:'a',b:'g',value:9,battery:true,valText:'',side:-1},
+            {type:'W',a:'a',b:'s1'}, {id:'S',name:pick('สวิตช์','switch'),type:'S',a:'s1',b:'s2',closed:true,valText:''},
+            {type:'W',a:'s2',b:'b'}, {type:'W',a:'b',b:'c'},
+            {id:'R1',name:'470 Ω',type:'R',a:'b',b:'m1',value:470,valText:'',side:-1},
+            {id:'D1',name:'LED',type:'D',a:'m1',b:'e',model:'simple',vk:2,led:true,ledColor:'#ff5a5a',ledFull:0.015,valText:'',side:-1},
+            {id:'R2',name:'470 Ω',type:'R',a:'c',b:'m2',value:470,valText:''},
+            {id:'D2',name:pick('LED กลับทิศ','LED reversed'),type:'D',a:'d',b:'m2',model:'simple',vk:2,led:true,ledColor:'#5ad1ff',ledFull:0.015,valText:''},
+            {type:'W',a:'d',b:'e'}, {type:'W',a:'e',b:'g'} ] });
+  const view=new CK.View(cv, ckt, { speed: 5000, ground:false, showI:true, pad:1.7, onToggle:()=>ckt.solve() });
+  function size(){ const r=CK.fit(cv,0.5,280); view.ctx=r.ctx; view.W=r.w; view.H=r.h; view.fit({x:4,y:6,w:r.w-8,h:r.h-12}); }
+  window.addEventListener('resize',size); size(); ckt.solve();
+  CK.loop(dt=>{ const c=view.ctx; c.fillStyle=CK.PAL.bg; c.fillRect(0,0,view.W,view.H); view.advance(dt); view.draw(); });
+})();
+</script>
+</body>
+</html>

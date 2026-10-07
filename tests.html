@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Numeric Tests">ชุดทดสอบตัวเลข</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script>
+<script src="assets/draw.js?v=1"></script><script src="assets/ch6.js?v=1"></script><script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+<style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine and its diodes against hand calculations and the textbook</span></h1>
+<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และตัวเลขของโจทย์ทุกข้อในบทที่ 1 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
+<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the numbers of every chapter 1 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
+<div id="sum" class="status"></div>
+<div style="overflow-x:auto"><table class="tbl" id="tbl"><thead><tr><th>#</th><th>test</th><th>got</th><th>expected</th><th></th></tr></thead><tbody></tbody></table></div>
+<div id="box8" style="position:absolute;left:-4000px;top:0;width:900px"></div>
+</div>
+<script>
+(function(){
+const rows = []; let n = 0, bad = 0;
+const near = (a, b, tol) => Math.abs(a - b) <= tol;
+function T(name, got, exp, tol = 1e-6) { n++; let ok;
+  if (typeof exp === 'string') ok = String(got) === exp; else ok = near(+got, exp, tol);
+  if (!ok) bad++; rows.push(`<tr><td>${n}</td><td>${name}</td><td>${typeof got === 'number' ? +got.toPrecision(10) : got}</td><td>${exp}</td><td class="${ok ? 't-ok' : 't-bad'}">${ok ? 'PASS' : 'FAIL'}</td></tr>`); }
+const { Circuit, Cx } = CK, D = CK.DIODE, f = (x, d = 4) => (+x.toFixed(d)).toString();
+
+/* --- the engine still solves linear circuits as before (EE_Web page 1.1 two-mesh circuit) --- */
+{ const c = new Circuit({ ground: 'g', nodes: { a: [0, 0], b: [4.6, 0], c: [9.2, 0], g: [0, 3.2], e: [4.6, 3.2], f: [9.2, 3.2] },
+    parts: [{ id: 'V1', type: 'V', a: 'a', b: 'g', value: 12 }, { id: 'R1', type: 'R', a: 'a', b: 'b', value: 3 }, { id: 'R2', type: 'R', a: 'b', b: 'c', value: 4 }, { id: 'R3', type: 'R', a: 'b', b: 'e', value: 2 },
+      { id: 'V2', type: 'V', a: 'c', b: 'f', value: 10 }, { id: 'w1', type: 'W', a: 'g', b: 'e' }, { id: 'w2', type: 'W', a: 'e', b: 'f' }] }); c.solve();
+  T('linear circuit: two meshes give I1 = 2 A, I2 = −1 A, I_R3 = 3 A (no diodes, one solve)', `${f(c.I('R1').re)} ${f(c.I('R2').re)} ${f(c.I('R3').re)} ${c.result.iters ?? 1}`, '2 -1 3 1'); }
+
+/* --- diodes: Boylestad Example 1.1 and the four models in a series circuit E, R, D --- */
+T('Example 1.1: V_T at 27 °C = kT/q = 25.875 mV (k = 1.38e-23 J/K, q = 1.6e-19 C, T = 300 K)', D.vt(27) * 1e3, 25.875, 1e-9);
+const ser = (E, R, d) => { const c = new Circuit({ ground: 'g', nodes: { a: [0, 0], b: [3, 0], k: [3, 2.5], g: [0, 2.5] },
+  parts: [{ id: 'E', type: 'V', a: 'a', b: 'g', value: E }, { id: 'R', type: 'R', a: 'a', b: 'b', value: R }, { id: 'D', type: 'D', a: 'b', b: 'k', ...d }, { id: 'w', type: 'W', a: 'k', b: 'g' }] }); c.solve(); return c; };
+{ const c = ser(10, 1000, {}), I = c.I('D').re, V = c.V('b').re - c.V('k').re, Is = 1e-14, vt = D.vt(27);
+  T('Shockley diode (Is = 1e-14 A, n = 1, 27 °C) with 10 V and 1 kΩ: KVL and Shockley both hold to 1e-9 (relative), in fewer than 30 Newton solves',
+    `${Math.abs((10 - I * 1000 - V) / 10) < 1e-9} ${Math.abs(I / (Is * (Math.exp(V / vt) - 1)) - 1) < 1e-9} ${c.result.iters < 30}`, 'true true true');
+  T('… V_D = V_T ln(I_D/Is + 1) = 0.713 V and I_D = (10 − 0.713)/1 kΩ = 9.287 mA', `${f(V, 3)} ${f(I * 1e3, 3)}`, '0.713 9.287'); }
+T('ideal diode model: 10 V, 1 kΩ → I_D = 10 mA (a short when on)', ser(10, 1000, { model: 'ideal' }).I('D').re * 1e3, 10, 1e-4);
+T('simplified model (0.7 V): I_D = (10 − 0.7)/1 kΩ = 9.3 mA', ser(10, 1000, { model: 'simple' }).I('D').re * 1e3, 9.3, 1e-4);
+T('piecewise-linear model (0.7 V and 10 Ω): I_D = 9.3/1010 = 9.2079 mA', ser(10, 1000, { model: 'pwl', vk: 0.7, r: 10 }).I('D').re * 1e3, 9.3 / 1010 * 1e3, 1e-4);
+T('reverse bias −10 V: the Shockley diode carries −Is, the ideal one about zero (open)', `${f(ser(-10, 1000, {}).I('D').re * 1e14, 3)} ${Math.abs(ser(-10, 1000, { model: 'ideal' }).I('D').re) < 1e-9}`, '-1 true');
+{ const z = ser(-10, 1000, { vz: 5.1 }), Vz = z.V('b').re - z.V('k').re;
+  T('Zener (Shockley, V_Z = 5.1 V, 1 mA at −V_Z): −10 V through 1 kΩ settles in breakdown at V_D = −5.1 − V_T ln(4.86) = −5.14 V, I_D = (−10 − V_D)/1 kΩ', `${f(Vz, 2)} ${Math.abs(z.I('D').re - (-10 - Vz) / 1000) < 1e-9}`, '-5.14 true'); }
+T('Zener (straight-line model, V_Z = 6 V): −12 V, 1 kΩ → −6 mA', ser(-12, 1000, { model: 'simple', vz: 6 }).I('D').re * 1e3, -6, 1e-3);
+/* two diodes in series and in parallel, mixed models */
+{ const c = new Circuit({ ground: 'g', nodes: { a: [0, 0], b: [2, 0], m: [4, 0], k: [6, 0], g: [0, 2], z: [6, 2] },
+    parts: [{ id: 'E', type: 'V', a: 'a', b: 'g', value: 12 }, { id: 'R', type: 'R', a: 'a', b: 'b', value: 2200 }, { id: 'D1', type: 'D', a: 'b', b: 'm', model: 'simple' },
+      { id: 'D2', type: 'D', a: 'm', b: 'k', model: 'simple', vk: 0.3 }, { id: 'w1', type: 'W', a: 'k', b: 'z' }, { id: 'w2', type: 'W', a: 'z', b: 'g' }] }); c.solve();
+  T('Si (0.7 V) and Ge (0.3 V) in series, 12 V, 2.2 kΩ: I = (12 − 0.7 − 0.3)/2.2 kΩ = 5 mA', c.I('R').re * 1e3, 5, 1e-3); }
+{ const c = new Circuit({ ground: 'g', nodes: { a: [0, 0], b: [2, 0], k: [4, 0], g: [0, 2], z: [4, 2] },
+    parts: [{ id: 'E', type: 'V', a: 'a', b: 'g', value: 10 }, { id: 'R', type: 'R', a: 'a', b: 'b', value: 330 }, { id: 'D1', type: 'D', a: 'b', b: 'k', model: 'simple', vk: 0.7 },
+      { id: 'D2', type: 'D', a: 'b', b: 'k', model: 'simple', vk: 0.3 }, { id: 'w1', type: 'W', a: 'k', b: 'z' }, { id: 'w2', type: 'W', a: 'z', b: 'g' }] }); c.solve();
+  T('Si and Ge in parallel: only the Ge diode conducts (0.3 V), I = (10 − 0.3)/330 Ω = 29.39 mA, the Si diode stays off',
+    `${f(c.I('D2').re * 1e3, 2)} ${Math.abs(c.I('D1').re) < 1e-6}`, '29.39 true'); }
+/* a transient: half-wave rectifier with a capacitor (simplified diode) */
+{ const c = new Circuit({ ground: 'g', mode: 'tran', w: 2 * Math.PI * 50, nodes: { a: [0, 0], b: [2, 0], o: [4, 0], g: [0, 2], z: [4, 2] },
+    parts: [{ id: 'S', type: 'VAC', a: 'a', b: 'g', amp: 10, phase: 0 }, { id: 'D', type: 'D', a: 'a', b: 'o', model: 'simple' }, { id: 'R', type: 'R', a: 'o', b: 'z', value: 1000 },
+      { id: 'C', type: 'C', a: 'o', b: 'z', value: 100e-6 }, { id: 'w', type: 'W', a: 'z', b: 'g' }] });
+  let vmax = -1e9, vmin = 1e9, worst = 0; for (let k = 0; k < 6000; k++) { const r = c.step(1e-5); worst = Math.max(worst, r.iters); if (k >= 4000) { const v = r.V.o.re; vmax = Math.max(vmax, v); vmin = Math.min(vmin, v); } }
+  T('half-wave rectifier, 10 V peak at 50 Hz, 0.7 V diode, 1 kΩ ∥ 100 µF (RC = 0.1 s): the output peaks at 10 − 0.7 = 9.3 V and its ripple lies between 9.3(1 − e^{−15 ms/RC}) = 1.30 V and 9.3(1 − e^{−20 ms/RC}) = 1.69 V (it discharges for 3/4 to 1 period); every step converged in a few solves',
+    `${f(vmax, 2)} ${(vmax - vmin) > 1.30 && (vmax - vmin) < 1.69} ${worst < 20}`, '9.3 true true'); }
+
+/* --- chapter 1: the textbook curves through the engine (model 'table'), and the numbers of every problem --- */
+const drive = (o) => { const c = new Circuit(CH1.drive(o)); c.solve(); return c; }, vD = c => c.V('b').re - c.V('k').re, iD = c => c.I('D').re;
+const T124 = IE.tableOf(CH1.F124, 1.0, 0.005), T127 = CH1.T127, F127 = CH1.F127;
+T('Ex.1 (Example 1.3, Fig. 1.24): a 2 mA source gives V_D = 0.5 V, 20 mA gives 0.8 V, −10 V gives −1 µA → R_D = 250 Ω, 40 Ω, 10 MΩ',
+  `${f(vD(drive({ I: 0.002, d: T124 })), 4)} ${f(vD(drive({ I: 0.02, d: T124 })), 4)} ${f(iD(drive({ V: -10, d: T124 })) * 1e6, 4)} ${f(vD(drive({ I: 0.002, d: T124 })) / 0.002, 1)} ${f(vD(drive({ I: 0.02, d: T124 })) / 0.02, 1)} ${f(10 / 1e-6 / 1e6, 1)}`, '0.5 0.8 -1 250 40 10');
+T('Ex.2 (Example 1.4, Fig. 1.27): the engine gives 0.7 V at 2 mA and 0.79 V at 25 mA; R_D = 350 Ω and 31.6 Ω',
+  `${f(vD(drive({ I: 0.002, d: T127 })), 4)} ${f(vD(drive({ I: 0.025, d: T127 })), 4)} ${f(vD(drive({ I: 0.002, d: T127 })) / 0.002, 1)} ${f(vD(drive({ I: 0.025, d: T127 })) / 0.025, 2)}`, '0.7 0.79 350 31.6');
+T('… the book\'s tangents are tangent to the curve: slope 4 mA/0.11 V = 36.4 mA/V at 2 mA (within 2 %) and 10 mA/0.02 V = 500 mA/V at 25 mA (within 1 %); the 25 mA tangent meets the curve at 20 and 30 mA within 2 mV',
+  `${Math.abs(F127.slope(0.7) / 36.36 - 1) < 0.02} ${Math.abs(F127.slope(0.79) / 500 - 1) < 0.01} ${Math.abs(F127.vAt(20) - 0.78) < 0.002 && Math.abs(F127.vAt(30) - 0.8) < 0.002}`, 'true true true');
+T('… above 25 mA the curve goes on as r_d = 26 mV/I + r_B with r_B = 0.96 Ω (2 Ω at 25 mA): r_d − 26 mV/I at 30 and 40 mA, read off the slope of the curve',
+  `${f(1000 / F127.slope(F127.vAt(30)) - 26 / 30, 2)} ${f(1000 / F127.slope(F127.vAt(40)) - 26 / 40, 2)}`, '0.96 0.96');
+T('Fig. 1.28: 0.65 V at 2 mA and 0.725 V at 17 mA through the engine → r_av = 0.075 V/15 mA = 5 Ω',
+  `${f(vD(drive({ I: 0.002, d: IE.tableOf(CH1.F128, 0.8, 0.002) })), 4)} ${f(vD(drive({ I: 0.017, d: IE.tableOf(CH1.F128, 0.8, 0.002) })), 4)} ${f((CH1.F128.vAt(17) - CH1.F128.vAt(2)) / 0.015, 3)}`, '0.65 0.725 5');
+{ const rd = I => { const c = new Circuit(CH1.three(I)); c.solve(); return [0, 1, 2].map(j => f(c.V('b' + j).re - c.V('k' + j).re, 3)).join(' '); };
+  T('Example 1.2 (Fig. 1.18) in the three-loop circuit: Ge, Si, GaAs at 1 mA = 0.2, 0.6, 1.1 V; at 4 mA = 0.3, 0.7, 1.2 V; at 30 mA = 0.42, 0.82, 1.33 V', `${rd(1)} | ${rd(4)} | ${rd(30)}`, '0.2 0.6 1.1 | 0.3 0.7 1.2 | 0.42 0.82 1.33'); }
+{ const sk = CH1.SK; T('Shockley (Is = 10 pA, n = 1, 27 °C): 0.5 V → 2.467 mA, 10 mA → 0.5362 V, −10 V → −10 pA, all through the engine',
+  `${f(iD(drive({ V: 0.5, d: sk.d })) * 1e3, 3)} ${f(vD(drive({ I: 0.01, d: sk.d })), 4)} ${f(iD(drive({ V: -10, d: sk.d })) * 1e12, 3)}`, '2.467 0.5362 -10'); }
+T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reverse current at 100 °C = 10 nA × 2⁸ = 2.56 µA',
+  `${f(vD(drive({ I: 0.01, d: CH1.TP.d0 })), 4)} ${f(vD(drive({ I: 0.01, d: CH1.TP.d1 })), 4)} ${f(iD(drive({ V: -10, d: CH1.TP.d1 })) * 1e6, 3)}`, '0.7 0.5 -2.56');
+{ const run = (m, E, Rv) => { const c = new Circuit(CH1.model(m, { E, R: Rv })); c.solve(); return c.I('R').re * 1e3; };
+  T('page 1.6, E = 10 V, R = 1 kΩ: piecewise-linear 9.3/1010 A, simplified 9.3 mA, ideal 10 mA (engine, drawn as battery + r_av + ideal diode), and the actual diode as found by bisection',
+    `${f(run('pwl', 10, 1000), 4)} ${f(run('simple', 10, 1000), 4)} ${f(run('ideal', 10, 1000), 4)} ${Math.abs(run('actual', 10, 1000) - CH1.MD.c1.I.actual) < 1e-4}`, `${f(9.3 / 1010 * 1000, 4)} 9.3 10 true`);
+  T('… E = 2 V, R = 100 Ω: 11.82, 13 and 20 mA against the actual diode (11.86 mA)', `${f(run('pwl', 2, 100), 2)} ${f(run('simple', 2, 100), 2)} ${f(run('ideal', 2, 100), 2)} ${f(run('actual', 2, 100), 2)}`, '11.82 13 20 11.86'); }
+{ const c = new Circuit(CH1.series({ E: 10, R: 2000 })); c.solve(); const c2 = new Circuit(CH1.series({ E: -10, R: 2000 })); c2.solve();
+  T('page 1.1: ideal diode, 10 V and 2 kΩ → 5 mA with V_D = 0; source reversed → 0 A with V_D = −10 V', `${f(c.I('D').re * 1e3, 4)} ${f(c.Vab('D').re, 4)} ${f(c2.I('D').re * 1e3, 4)} ${f(c2.Vab('D').re, 4)}`, '5 0 0 -10'); }
+{ const c = new Circuit(CH1.series({ E: -56, R: 1000, d: { model: 'shockley', Is: 1e-11, n: 1, T: 27, vz: 50 } })); c.solve();
+  T('page 1.4 section A: −56 V through 1 kΩ into a diode breaking down at 50 V settles at V_D ≈ −50.05 V, about −5.95 mA', `${f(c.Vab('D').re, 2)} ${f(c.I('D').re * 1e3, 2)}`, '-50.05 -5.95'); }
+
+/* --- page 1.3: the n- and p-type blocks are neutral (ions + minority carriers = majority carriers) --- */
+{ const cnt = b => ['e', 'h'].map(k => b.q.filter(p => p.kind === k).length), bn = new IE.Block('n', { n: 16, m: 2 }), bp = new IE.Block('p', { n: 16, m: 2 }), [ne, nh] = cnt(bn), [pe, ph] = cnt(bp);
+  T('page 1.3: n-type block, 16 donor ions + 2 holes = 18 electrons; p-type block, 16 acceptor ions + 2 electrons = 18 holes (net charge 0)', `${bn.ions.length + nh - ne} ${bp.ions.length + pe - ph} ${ne} ${ph}`, '0 0 18 18'); }
+
+/* --- formatting --- */
+T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');
+
+document.querySelector('#tbl tbody').innerHTML = rows.join('');
+document.getElementById('sum').innerHTML = bad ? `<span class="pill bad">FAIL</span> ${bad} / ${n} tests failed` : `<span class="pill good">ALL PASS</span> ${n} / ${n} tests`;
+})();
+</script>
+</body>
+</html>

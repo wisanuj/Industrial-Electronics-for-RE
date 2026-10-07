@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.2 — Semiconductor Materials and Energy Levels">1.2 — วัสดุสารกึ่งตัวนำและระดับพลังงาน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วัสดุสารกึ่งตัวนำ: สภาพต้านทาน พันธะโควาเลนต์ และแถบพลังงาน <span class="en">Semiconductor materials: resistivity, covalent bonds and energy bands</span></h1>
+<h1 data-l="en">Semiconductor materials and energy levels <span class="en">Resistivity, covalent bonds and energy bands</span></h1>
+
+<p class="sub" data-l="th">สารกึ่งตัวนำ (semiconductor) นำไฟฟ้าได้ระหว่างตัวนำกับฉนวน สไลด์หน้า 12–22 อธิบายว่าทำไมซิลิคอน (Si) และเจอร์เมเนียม (Ge) ถูกเลือกใช้ ผลึกเดี่ยวที่บริสุทธิ์มาก อะตอมที่มีเวเลนซ์อิเล็กตรอน (valence electron) สี่ตัวจับคู่กันเป็นพันธะโควาเลนต์ (covalent bond) และแถบพลังงานที่บอกว่าอิเล็กตรอนต้องได้รับพลังงานเท่าไรจึงหลุดเป็นอิสระ หน้านี้มีภาพจำลองสภาพต้านทานของวัสดุ (ส่วน A) ผลึกที่พันธะแตกเมื่อร้อนขึ้น (ส่วน B) ระดับพลังงาน (ส่วน C) โจทย์ข้อ 1 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">A semiconductor conducts somewhere between a conductor and an insulator. Slides pp. 12–22 explain why silicon (Si) and germanium (Ge) are chosen: very pure single crystals, atoms with four valence electrons paired into covalent bonds, and energy bands that tell how much energy an electron needs to break free. This page has the resistivity of materials (section A), a crystal whose bonds break as it warms (section B), energy levels (section C), problem 1 and more practice.</p>
+<div class="equation-box eqwrap">$$ \rho = \frac{RA}{l}\ \ (\Omega\text{-cm}) $$ $$ R = \rho\frac{l}{A} $$ $$ W = QV $$ $$ 1\ \text{eV} = 1.6\times10^{-19}\ \text{J} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>สภาพต้านทาน</b> (resistivity, \(\rho\)) ใช้เทียบวัสดุโดยไม่ขึ้นกับขนาด คือความต้านทานของลูกบาศก์ด้านละ 1 cm ทองแดงราว \(10^{-6}\ \Omega\)-cm ซิลิคอนบริสุทธิ์ราว \(50\times10^3\ \Omega\)-cm ไมการาว \(10^{12}\ \Omega\)-cm (สไลด์หน้า 12–14)</li>
+  <li><b>ผลึกเดี่ยวและความบริสุทธิ์</b>: Ge และ Si เรียงอะตอมเป็นโครงผลึกแบบเพชรซ้ำกันทั้งก้อน และทำให้บริสุทธิ์ได้มาก ซึ่งจำเป็นเพราะสิ่งเจือปนเพียงเล็กน้อยเปลี่ยนสมบัติทางไฟฟ้าได้มาก (สไลด์หน้า 14–15)</li>
+  <li><b>พันธะโควาเลนต์</b>: Si (14 อิเล็กตรอน) และ Ge (32 อิเล็กตรอน) มีเวเลนซ์อิเล็กตรอน 4 ตัว แต่ละตัวใช้ร่วมกับอะตอมข้างเคียงหนึ่งอะตอม รวมสี่อะตอม ความร้อนหรือแสงทำให้บางพันธะแตก ได้อิเล็กตรอนอิสระกับโฮล (hole) เป็นคู่ ที่อุณหภูมิห้องซิลิคอนบริสุทธิ์มีพาหะอิสระราว \(1.5\times10^{10}\) ต่อ cm³ เจอร์เมเนียมราว \(2.5\times10^{13}\) (สไลด์หน้า 16–18)</li>
+  <li><b>สัมประสิทธิ์อุณหภูมิเป็นลบ</b>: ร้อนขึ้นพาหะอิสระเพิ่ม สารกึ่งตัวนำจึงนำไฟฟ้าดีขึ้น ตรงข้ามกับตัวนำที่ความต้านทานเพิ่มเมื่อร้อน (Boylestad หัวข้อ 1.3)</li>
+  <li><b>แถบพลังงาน</b>: อิเล็กตรอนต้องได้พลังงานอย่างน้อย \(E_g\) จึงข้ามจากแถบเวเลนซ์ไปแถบนำได้ พลังงานวัดเป็นอิเล็กตรอนโวลต์ (electron volt, eV) ฉนวน \(E_g > 5\) eV ซิลิคอน 1.1 eV เจอร์เมเนียม 0.67 eV แกลเลียมอาร์เซไนด์ (GaAs) ราว 1.4 eV ส่วนตัวนำมีแถบซ้อนกัน ที่ 0 K เวเลนซ์อิเล็กตรอนทุกตัวของสารกึ่งตัวนำอยู่ในแถบเวเลนซ์ (สไลด์หน้า 19–22)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Resistivity</b> (\(\rho\)) compares materials whatever their size: it is the resistance of a 1 cm cube. Copper is about \(10^{-6}\ \Omega\)-cm, pure silicon about \(50\times10^3\ \Omega\)-cm, mica about \(10^{12}\ \Omega\)-cm (slides pp. 12–14).</li>
+  <li><b>Single crystals and purity</b>: Ge and Si repeat the same diamond lattice through the whole piece, and they can be made very pure, which matters because a tiny impurity changes the electrical properties a lot (slides pp. 14–15).</li>
+  <li><b>Covalent bonds</b>: Si (14 electrons) and Ge (32 electrons) have 4 valence electrons, each shared with one of four neighbouring atoms. Heat or light breaks a few bonds, freeing an electron and leaving a hole. At room temperature pure silicon has about \(1.5\times10^{10}\) free carriers per cm³, germanium about \(2.5\times10^{13}\) (slides pp. 16–18).</li>
+  <li><b>A negative temperature coefficient</b>: warmer means more free carriers, so a semiconductor conducts better, the opposite of a conductor, whose resistance rises with heat (Boylestad, section 1.3).</li>
+  <li><b>Energy bands</b>: an electron needs at least \(E_g\) to jump from the valence band to the conduction band. Energy is measured in electron volts (eV): insulators have \(E_g > 5\) eV, silicon 1.1 eV, germanium 0.67 eV, gallium arsenide (GaAs) about 1.4 eV, while in conductors the bands overlap. At 0 K every valence electron of a semiconductor is in the valence band (slides pp. 19–22).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch1/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 12, Semiconductor Materials: conductor is applied to any material that will support a generous flow of charge when a voltage source of limited magnitude is applied across its terminals. Insulator is a material that offers a very low level of conductivity under pressure from an applied voltage source. Semiconductor, therefore, is a material that has a conductivity level somewhere between the extremes of an insulator and a conductor. Quote: The higher the conductivity level, the lower the resistance level; the term resistivity (ρ, Greek letter rho) is often used when comparing the resistance levels of materials.">
+  <figcaption data-l="th">สไลด์หน้า 12: ตัวนำ ฉนวน และสารกึ่งตัวนำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 12: conductor, insulator, semiconductor · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch1/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 13, Semiconductor Materials: the units of Ω-m are derived from the substitution of the units for each quantity of the figure into the following equation (derived from the basic resistance equation) as: (the equation is missing). The figure is a 1 cm cube of material of resistivity ρ, with area A = 1 cm² and length l = 1 cm between two leads, the resistance R measured across it.">
+  <figcaption data-l="th">สไลด์หน้า 13: ลูกบาศก์ 1 cm ใช้นิยามสภาพต้านทาน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 13: the 1 cm cube that defines resistivity · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 13 ไม่มีสมการ</b> ในไฟล์ PDF และพิมพ์หน่วยว่า "Ω-m" ขณะที่รูปและตารางในหน้า 14 ใช้เซนติเมตร สมการที่หายไปคือ \(\rho = \dfrac{RA}{l} \Rightarrow \dfrac{(\Omega)(\text{cm}^2)}{\text{cm}} = \Omega\text{-cm}\) หน้านี้ใช้ Ω-cm ตามตาราง</div>
+<div class="warnbox" data-l="en"><b>Slide p. 13 has no equation</b> in the PDF and prints the unit as "Ω-m", while its figure and the table of p. 14 use centimetres. The missing equation is \(\rho = \dfrac{RA}{l} \Rightarrow \dfrac{(\Omega)(\text{cm}^2)}{\text{cm}} = \Omega\text{-cm}\). This page uses Ω-cm, as the table does.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สภาพต้านทาน</a><a href="#tB"><b>B</b>ผลึกและพันธะโควาเลนต์</a><a href="#tC"><b>C</b>ระดับพลังงาน</a><a href="#ex1"><b>1</b>ความต้านทานของแท่งวัสดุ</a><a href="#tD"><b>D</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Resistivity</a><a href="#tB"><b>B</b>Crystal and covalent bonds</a><a href="#tC"><b>C</b>Energy levels</a><a href="#ex1"><b>1</b>Resistance of a bar</a><a href="#tD"><b>D</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">สภาพต้านทาน: วัสดุสี่ชนิดบนไม้บรรทัดเดียวกัน</h2><h2 data-l="en">Resistivity: four materials on one ruler</h2>
+    <div class="src" data-l="th">สไลด์หน้า 14 (ตาราง 1.1 ของตำราฉบับเก่า)</div><div class="src" data-l="en">Slide p. 14 (Table 1.1 of an earlier edition)</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 14, Semiconductor Materials: Table 1.1, Typical Resistivity Values: conductor ρ ≅ 10^-6 Ω-cm (copper); semiconductor ρ ≅ 50 Ω-cm (germanium) and ρ ≅ 50 × 10^3 Ω-cm (silicon); insulator ρ ≅ 10^12 Ω-cm (mica). In the table, typical resistivity values are provided for three broad categories of materials. Ge and Si have received the attention they have for a number of reasons. One very important consideration is the fact that they can be manufactured to a very high purity level.">
+    <figcaption data-l="th">สไลด์หน้า 14: สภาพต้านทานโดยทั่วไป · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 14: typical resistivities · tap to enlarge</figcaption></figure>
+  <p class="lead" data-l="th">ค่าสภาพต้านทานของวัสดุในตารางต่างกันถึง \(10^{18}\) เท่า (18 อันดับขนาด) ไม้บรรทัดด้านบนจึงใช้สเกลลอการิทึม ตัวเลขบนไม้บรรทัดห่างกันทีละ 1000 เท่า ขีดสั้นทีละ 10 เท่า เลือกวัสดุ แล้วปรับความยาวและพื้นที่หน้าตัดของแท่ง ดูความต้านทานและกระแสเมื่อต่อกับแหล่งจ่าย 1 V</p>
+  <p class="lead" data-l="en">The resistivities in the table span 18 orders of magnitude, so the ruler on top is logarithmic: each labelled tick is 1000 times the last, each short tick a factor of 10. Pick a material, then change the length and cross-section of the bar, and watch its resistance and the current it would take from a 1 V source.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">ผลึกและพันธะโควาเลนต์: ร้อนขึ้นแล้วพันธะแตก</h2><h2 data-l="en">The crystal and its covalent bonds: heat breaks them</h2>
+    <div class="src" data-l="th">สไลด์หน้า 15–18 · Boylestad หัวข้อ 1.2–1.3 (รูป 1.3–1.5, Tables 1.1–1.2)</div><div class="src" data-l="en">Slides pp. 15–18 · Boylestad, sections 1.2–1.3 (Figs. 1.3–1.5, Tables 1.1–1.2)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 15, Semiconductor Materials: one complete pattern is called a crystal and the periodic arrangement of the atoms a lattice. For Ge and Si the crystal has the three-dimensional diamond structure of the figure. Any material composed of repeating crystal structures of the same kind is called a single-crystal structure. For semiconductor materials of practical application in the electronics field, this single-crystal feature exists, and, in addition, the periodicity of the structure does not change significantly with the addition of impurities in the doping process. The figure is a tetrahedron of four atoms bonded to a central atom: Ge and Si single-crystal structure.">
+    <figcaption data-l="th">สไลด์หน้า 15: โครงผลึกแบบเพชร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: the diamond lattice · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 16, Semiconductor Materials: the Bohr models of the two most commonly used semiconductors, germanium and silicon, are shown in the figure. As indicated by Fig. (a), the germanium atom has 32 orbiting electrons, while silicon has 14 orbiting electrons. In each case, there are 4 electrons in the outermost (valence) shell. The potential (ionization potential) required to remove any one of these 4 valence electrons is lower than that required for any other electron in the structure. Figure: the atomic structure of silicon and germanium, nucleus, shells, orbiting electrons, valence electrons (4 for each).">
+    <figcaption data-l="th">สไลด์หน้า 16: แบบจำลองอะตอมของบอร์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: Bohr models · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 17, Semiconductor Materials: in a pure germanium or silicon crystal these 4 valence electrons are bonded to 4 adjoining atoms, as shown in the figure for silicon. Both Ge and Si are referred to as tetravalent atoms because they each have four valence electrons. Quote: A bonding of atoms, strengthened by the sharing of electrons, is called covalent bonding. The term free reveals that their motion is quite sensitive to applied electric fields such as established by voltage sources or any difference in potential. Figure: covalent bonding of the silicon atom, a 3 by 3 grid of Si atoms with shared electrons between neighbours.">
+    <figcaption data-l="th">สไลด์หน้า 17: พันธะโควาเลนต์ของซิลิคอน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 17: covalent bonding of silicon · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 18, Semiconductor Materials: at room temperature there are approximately 1.5 × 10^10 free carriers in a cubic centimeter of intrinsic silicon material. At the same temperature, intrinsic germanium material will have approximately 2.5 × 10^13 free carriers per cubic centimeter. But both are still considered poor conductors in the intrinsic state. As the temperature rises from absolute zero (0 K), an increasing number of valence electrons absorb sufficient thermal energy to break the covalent bond and contribute to the number of free carriers.">
+    <figcaption data-l="th">สไลด์หน้า 18: พาหะอิสระในสารบริสุทธิ์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 18: free carriers in intrinsic material · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพแรกคือผลึกซิลิคอนแบบสองมิติ (เส้นคู่คือพันธะ จุดสีฟ้าคืออิเล็กตรอนในพันธะ) ภาพที่สองคือแถบพลังงานของผลึกเดียวกัน เลื่อนอุณหภูมิขึ้น พันธะบางพันธะแตก อิเล็กตรอนกระโดดไปเป็นอิสระในแถบนำ ทิ้งโฮล (วงแหวนสีชมพู) ไว้ในแถบเวเลนซ์ โฮลก็ย้ายที่ได้เมื่ออิเล็กตรอนข้างเคียงกระโดดเข้ามาแทน เลือก Ge เทียบกับ Si แล้วเลือก GaAs <b>จำนวนคู่บนจอใช้สเกลลอการิทึม</b> เพิ่มหนึ่งคู่ทุกครั้งที่จำนวนพาหะจริงเพิ่ม 10 เท่า</p>
+  <p class="lead" data-l="en">The first picture is a two-dimensional silicon crystal (double lines are bonds, cyan dots the electrons in them); the second shows the energy bands of the same crystal. Raise the temperature: some bonds break, an electron jumps free into the conduction band and leaves a hole (a pink ring) in the valence band. Holes move too, when a neighbouring electron jumps in. Compare Ge with Si, then try GaAs. <b>The number of pairs on screen is logarithmic</b>: one more pair for every tenfold rise in the real number of carriers.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ระดับพลังงาน: จากระดับเดี่ยวเป็นแถบ</h2><h2 data-l="en">Energy levels: from single levels to bands</h2>
+    <div class="src" data-l="th">สไลด์หน้า 19–22 · Boylestad หัวข้อ 1.4 (รูป 1.6, สมการ 1.1)</div><div class="src" data-l="en">Slides pp. 19–22 · Boylestad, section 1.4 (Fig. 1.6, Eq. 1.1)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 19, Energy Levels: in the isolated atomic structure there are discrete (individual) energy levels associated with each orbiting electron, as shown in the figure: an energy axis with the valence level (outermost shell), an energy gap, the second level (next inner shell), another gap, the third level, and the nucleus at the bottom. Quote: The more distant the electron from the nucleus, the higher the energy state, and any electron that has left its parent atom has a higher energy state than any electron in the atomic structure.">
+    <figcaption data-l="th">สไลด์หน้า 19: ระดับพลังงานของอะตอมเดี่ยว · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the levels of an isolated atom · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 20, Energy Levels: the net result is an expansion of the discrete levels of possible energy states for the valence electrons to that of bands as shown in the figure: an insulator with a conduction band, a gap E_g greater than 5 eV and a full valence band; a semiconductor with a smaller gap, E_g = 1.1 eV (Si), 0.67 eV (Ge), 1.41 eV (GaAs), electrons free to establish conduction in the conduction band and valence electrons bound to the atomic structure; a conductor whose bands overlap.">
+    <figcaption data-l="th">สไลด์หน้า 20: แถบของฉนวน สารกึ่งตัวนำ และตัวนำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 20: bands of an insulator, a semiconductor, a conductor · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 21, Energy Levels: there are boundary levels and maximum energy states in which any electron in the atomic lattice can find itself, and there remains a forbidden region between the valence band and the ionization level. An ionization is the mechanism whereby an electron can absorb sufficient energy to break away from the atomic structure and enter the conduction band.">
+    <figcaption data-l="th">สไลด์หน้า 21: บริเวณต้องห้ามและการแตกตัว · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 21: the forbidden region and ionization · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 22, Energy Levels: at 0 K or absolute zero (−273.15 °C), all the valence electrons of semiconductor materials find themselves locked in their outermost shell of the atom with energy levels associated with the valence band. At room temperature (300 K, 25 °C) a large number of valence electrons have acquired sufficient energy to leave the valence band, cross the energy gap defined by E_g and enter the conduction band. The figure is the semiconductor band diagram with E_g = 1.1 eV (Si), 0.67 eV (Ge), 1.41 eV (GaAs).">
+    <figcaption data-l="th">สไลด์หน้า 22: ที่ 0 K และที่อุณหภูมิห้อง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 22: at 0 K and at room temperature · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">อะตอมเดี่ยวมีระดับพลังงานเฉพาะค่า เมื่ออะตอมมาอยู่ชิดกันเป็นผลึก ระดับของเวเลนซ์อิเล็กตรอนขยายเป็นแถบ ระหว่างแถบเวเลนซ์กับแถบนำเป็นบริเวณต้องห้าม (forbidden region) กว้าง \(E_g\) พลังงานวัดเป็นอิเล็กตรอนโวลต์ (eV) เพราะ \(W = QV\): ประจุของอิเล็กตรอนหนึ่งตัวผ่านความต่างศักย์ 1 V ได้พลังงาน \(1.6\times10^{-19}\) J ซิลิคอนต้องการพลังงานมากกว่าเจอร์เมเนียมจึงไวต่ออุณหภูมิน้อยกว่า ส่วน GaAs ช่องว่างกว้างพอให้พลังงานที่ปล่อยออกมาเป็นแสง จึงใช้ทำไดโอดเปล่งแสง (light-emitting diode, LED) ซึ่งไม่มีในสไลด์ของวิชา (Boylestad หัวข้อ 1.16) ดูแถบพลังงานที่เปลี่ยนตามอุณหภูมิได้ในภาพแถบพลังงานของส่วน B</p>
+  <p class="lead" data-l="en">An isolated atom has discrete energy levels. Packed into a crystal, the levels of the valence electrons spread into bands, with a forbidden region \(E_g\) wide between the valence band and the conduction band. Energy is measured in electron volts (eV) because \(W = QV\): the charge of one electron moved through 1 V gains \(1.6\times10^{-19}\) J. Silicon needs more energy than germanium, so it is less sensitive to temperature, while the gap of GaAs is wide enough for the energy given out to be light, which is why it makes light-emitting diodes (LEDs), not in the course slides (Boylestad, section 1.16). The band picture of section B shows them changing with temperature.</p>
+  <div class="warnbox" data-l="th"><b>ตัวเลขในสไลด์หน้า 20–22 ต่างจากตำราฉบับที่ 11 เล็กน้อย</b>: สไลด์ให้ GaAs 1.41 eV ตำราให้ 1.43 eV (หน้านี้ใช้ 1.43 eV) และสไลด์หน้า 22 เขียน "300 K, 25 °C" ซึ่ง 300 K คือราว 27 °C (Example 1.1 ใช้ 27 °C = 300 K)</div>
+  <div class="warnbox" data-l="en"><b>The numbers of slides pp. 20–22 differ slightly from the 11th edition</b>: the slides give 1.41 eV for GaAs, the book 1.43 eV (used on this page), and slide p. 22 writes "300 K, 25 °C", but 300 K is about 27 °C (Example 1.1 uses 27 °C = 300 K).</div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">ความต้านทานของแท่งวัสดุยาว 2 cm หน้าตัด 1 mm × 1 mm</h2><h2 data-l="en">The resistance of a bar 2 cm long, 1 mm × 1 mm in section</h2>
+    <div class="src" data-l="th">ใช้สภาพต้านทานในสไลด์หน้า 14 · โจทย์แต่งเพิ่มเพื่อฝึกสมการของสไลด์หน้า 13 · ไม่มีเฉลยในห้อง</div><div class="src" data-l="en">Using the resistivities of slide p. 14 · a practice problem written for the equation of slide p. 13 · no class solution</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แท่งวัสดุยาว \(l = 2\) cm หน้าตัดสี่เหลี่ยมจัตุรัส 1 mm × 1 mm (a) จงแสดงว่าหน่วยของสภาพต้านทานคือ Ω-cm (b) จงหาความต้านทานของแท่งซิลิคอนบริสุทธิ์ (c) จงหาความต้านทานของแท่งเจอร์เมเนียมบริสุทธิ์ (d) เทียบกับแท่งทองแดงและแท่งไมกาขนาดเดียวกัน และกระแสเมื่อต่อแหล่งจ่าย 1 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A bar is \(l = 2\) cm long with a square 1 mm × 1 mm section. (a) Show that resistivity is in Ω-cm. (b) Find the resistance of a bar of pure silicon. (c) Find it for pure germanium. (d) Compare copper and mica bars of the same size, and the current each would take from a 1 V source.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองแสดงแท่งวัสดุและความต้านทานที่หาได้ในแต่ละขั้นบนสเกลลอการิทึม <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The picture shows the bar and, step by step, the resistances found, on a logarithmic scale. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tD">
+  <div class="prob-head"><span class="prob-no">D</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สามกลุ่มวัสดุ</h3>
+    <ol><li>ส่วน A เลือกทองแดง ลูกบาศก์ 1 cm: ความต้านทาน \(10^{-6}\ \Omega\) กระแสที่ 1 V คือหนึ่งล้านแอมแปร์ (แหล่งจ่ายจริงจ่ายไม่ได้ ตัวเลขนี้แสดงว่าทองแดงแทบไม่มีความต้านทาน)</li>
+    <li>เลือกซิลิคอนแล้วไมกา: กระแสลดลงทีละหลายอันดับขนาด สารกึ่งตัวนำอยู่ตรงกลางของไม้บรรทัด</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — อุณหภูมิและวัสดุ</h3>
+    <ol><li>ส่วน B ลดอุณหภูมิเป็น 0 K: พันธะทุกพันธะกลับมาครบ ไม่มีพาหะอิสระ ผลึกเป็นฉนวน</li>
+    <li>ที่ 300 K เทียบ Si กับ Ge: Ge มีคู่อิเล็กตรอนกับโฮลมากกว่าเพราะ \(E_g\) แคบกว่า (1,667 เท่าของ Si ในความจริง)</li>
+    <li>เลือก GaAs ที่ 300 K: แทบไม่มีพาหะเลย (\(1.7\times10^6\) ต่อ cm³) ต้องร้อนถึงราว 370 K (ราว 100 °C) จึงเห็นคู่แรก</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 12–22 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.2–1.4</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — three groups of materials</h3>
+    <ol><li>In section A pick copper, a 1 cm cube: \(10^{-6}\ \Omega\), so 1 V would drive a million amperes (no real source can; the number only shows how little resistance copper has).</li>
+    <li>Pick silicon, then mica: the current falls by many orders of magnitude each time. Semiconductors sit in the middle of the ruler.</li></ol></div>
+  <div class="card"><h3>Try this 2 — temperature and material</h3>
+    <ol><li>In section B lower the temperature to 0 K: every bond is whole again, there are no free carriers, and the crystal is an insulator.</li>
+    <li>At 300 K compare Si with Ge: Ge has more electron–hole pairs because its \(E_g\) is narrower (1,667 times as many as Si in reality).</li>
+    <li>Pick GaAs at 300 K: almost no carriers (\(1.7\times10^6\) per cm³); it takes about 370 K (about 100 °C) to see the first pair.</li></ol>
+    <div class="book">Chapter 1 slides pp. 12–22 · Boylestad &amp; Nashelsky, 11th ed., sections 1.2–1.4</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, COL = CH6.COL, T = CH6.text;
+  const SUP = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }, pow10 = e => '10' + String(e).split('').map(ch => SUP[ch]).join('');
+  const sci = (x, d = 2) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x)) + 1e-9), m = x / Math.pow(10, e); return Math.abs(m - 1) < 1e-9 ? pow10(e) : `${fd(m, d)} × ${pow10(e)}`; };
+  const ohms = x => (x >= 1e15 ? `${sci(x)} Ω` : CK.eng(x, 'Ω')), amps = x => (x < 1e-12 ? `${sci(x)} A` : CK.eng(x, 'A'));   // beyond the prefixes of CK.eng
+  const sciTex = (x, d = 2) => { const e = Math.floor(Math.log10(Math.abs(x)) + 1e-9), m = x / Math.pow(10, e); return Math.abs(m - 1) < 1e-9 ? `10^{${e}}` : `${fd(m, d)}\\times10^{${e}}`; };
+  const MAT = [{ id: 'cu', name: ['ทองแดง', 'copper'], rho: 1e-6, col: '#ffa552', grp: ['ตัวนำ', 'conductor'] }, { id: 'ge', name: ['เจอร์เมเนียม', 'germanium'], rho: 50, col: '#7ee787', grp: ['สารกึ่งตัวนำ', 'semiconductor'] },
+    { id: 'si', name: ['ซิลิคอน', 'silicon'], rho: 50e3, col: '#4fb3ff', grp: ['สารกึ่งตัวนำ', 'semiconductor'] }, { id: 'mica', name: ['ไมกา', 'mica'], rho: 1e12, col: '#c792ea', grp: ['ฉนวน', 'insulator'] }];
+  /* the log ruler of resistivity, 10^-6 … 10^12 Ω-cm; sel: the material picked; marks: which materials to show (all by default) */
+  const ruler = (ctx, b, sel, marks) => { CH6.bg(ctx, b); const L = b.x + 24, Rr = b.x + b.w - 24, y = b.y + b.h * 0.56, X = lg => L + (Rr - L) * (lg + 6) / 18;
+    [[-6.5, -3, ['ตัวนำ', 'conductor'], 'rgba(255,165,82,.10)'], [0, 6, ['สารกึ่งตัวนำ', 'semiconductor'], 'rgba(126,231,135,.10)'], [9, 12.5, ['ฉนวน', 'insulator'], 'rgba(199,146,234,.10)']].forEach(([a, z, lab, col]) => {
+      ctx.save(); ctx.fillStyle = col; ctx.fillRect(X(Math.max(-6, a)), b.y + 22, X(Math.min(12, z)) - X(Math.max(-6, a)), b.h - 30); ctx.restore(); CH8.lab(ctx, t(...lab), (X(Math.max(-6, a)) + X(Math.min(12, z))) / 2, b.y + 32, 'center', COL.muted, 11.5, b, '600'); });
+    ctx.save(); ctx.strokeStyle = COL.axis; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(L, y); ctx.lineTo(Rr, y); ctx.stroke();
+    for (let e = -6; e <= 12; e++) { ctx.beginPath(); ctx.moveTo(X(e), y - (e % 3 ? 3 : 6)); ctx.lineTo(X(e), y + (e % 3 ? 3 : 6)); ctx.stroke(); } ctx.restore();
+    for (let e = -6; e <= 12; e += 3) T(ctx, pow10(e), X(e), y + 17, { color: COL.muted, size: 11.5 });
+    T(ctx, 'ρ (Ω-cm)', Rr, y + 34, { align: 'right', color: COL.ink, size: 12, weight: '600' });
+    MAT.filter(m => !marks || marks.includes(m.id)).forEach((m, j) => { const x = X(Math.log10(m.rho)), on = !sel || m.id === sel; ctx.save(); ctx.fillStyle = on ? m.col : 'rgba(154,163,199,.45)'; ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x - 7, y - 16); ctx.lineTo(x + 7, y - 16); ctx.closePath(); ctx.fill(); ctx.restore();
+      if (on || b.w > 520) CH8.lab(ctx, t(...m.name), x, y - 24 - (m.id === 'si' ? 0 : 0), 'center', on ? m.col : COL.muted, 12, b, on ? '700' : '500'); });
+    return X; };
+  /* a bar of length l (cm) and section A (cm²), drawn in perspective with its labels */
+  const bar = (ctx, b, l, A, col) => { const sMax = Math.max(12, Math.min(b.w * 0.2, (b.h * 0.5 - 22) / 0.7)), s = Math.max(8, sMax * Math.sqrt(A)), lenMax = b.w - sMax - 120, len = 30 + (lenMax - 30) * (Math.log10(l) + 1) / 2;
+    const dx = s * 0.55, dy = -s * 0.4, x0 = b.x + (b.w - len - dx) / 2, y0 = b.y + b.h / 2 - 0.3 * s;   // the front face and its top centred, the length label under it
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 1.6; ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.beginPath(); ctx.rect(x0, y0, len, s); ctx.fill(); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0 + dx, y0 + dy); ctx.lineTo(x0 + len + dx, y0 + dy); ctx.lineTo(x0 + len, y0); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x0 + len, y0 + s); ctx.lineTo(x0 + len + dx, y0 + s + dy); ctx.lineTo(x0 + len + dx, y0 + dy); ctx.stroke();
+    ctx.strokeStyle = COL.axis; ctx.beginPath(); ctx.moveTo(x0 - 26, y0 + s / 2); ctx.lineTo(x0, y0 + s / 2); ctx.moveTo(x0 + len + dx * 0.5, y0 + s / 2 + dy * 0.5); ctx.lineTo(x0 + len + dx * 0.5 + 26, y0 + s / 2 + dy * 0.5); ctx.stroke(); ctx.restore();
+    CH8.lab(ctx, `l = ${fd(l, 2)} cm`, x0 + len / 2, y0 + s + 13, 'center', COL.ink, 12.5, b, '600'); CH8.lab(ctx, `A = ${fd(A, 3)} cm²`, x0 + len + dx + 8, y0 + dy + 2, 'left', COL.ink, 12.5, b, '600'); };
+
+  /* =================================================================== A: resistivity ruler and a bar */
+  const SA = { m: 'si', l: 1, A: 1 };
+  const PA = IE.pane($('cvA'), W => (W >= 560 ? W * 0.62 : W * 0.95));
+  LS.anim($('cvA'), () => { const { ctx, W, H } = PA, m = MAT.find(x => x.id === SA.m), Rv = m.rho * SA.l / SA.A, h1 = Math.round(H * 0.42); ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H);
+    ruler(ctx, { x: 0, y: 0, w: W, h: h1 }, SA.m); const b2 = { x: 0, y: h1 + 6, w: W, h: H - h1 - 6 }; CH6.bg(ctx, b2); bar(ctx, { x: b2.x, y: b2.y + 6, w: b2.w, h: b2.h - 50 }, SA.l, SA.A, m.col);
+    T(ctx, `R = ρl/A = ${ohms(Rv)}`, b2.x + b2.w / 2, b2.y + b2.h - 34, { color: m.col, size: 14, weight: '700' }); T(ctx, t(`ต่อ 1 V: I = ${amps(1 / Rv)}`, `across 1 V: I = ${amps(1 / Rv)}`), b2.x + b2.w / 2, b2.y + b2.h - 14, { color: COL.muted, size: 12.5 }); });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('วัสดุ', 'Material')); ui.radio(pA, MAT.map(m => ({ id: 'aM' + m.id, label: t(...m.name), on: m.id === SA.m })), id => { SA.m = id.slice(2); showA(); });
+  ui.h2(pA, t('ขนาดของแท่ง', 'Size of the bar'));
+  ui.slider(pA, { id: 'aL', label: 'l', min: 0.1, max: 10, step: 0.1, value: SA.l, fmt: v => `${fd(v, 1)} cm`, oninput: v => { SA.l = v; showA(); } });
+  ui.radio(pA, [1, 0.1, 0.01].map(a => ({ id: 'aA' + a, label: `A = ${a === 0.01 ? '0.01 cm² (1 mm²)' : a + ' cm²'}`, on: a === SA.A })), id => { SA.A = +id.slice(2); showA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function showA() { const m = MAT.find(x => x.id === SA.m), Rv = m.rho * SA.l / SA.A;
+    mA.innerHTML = ui.kv([['ρ', `${sci(m.rho)} Ω-cm`], ['R = ρl/A', ohms(Rv)], [t('กระแสที่ 1 V', 'current at 1 V'), amps(1 / Rv)], [t('กลุ่ม', 'group'), t(...m.grp)]]);
+    $('wA').innerHTML = `<div class="answer">${t(`\\(R = \\rho\\dfrac{l}{A} = (${sciTex(m.rho)})\\dfrac{${fd(SA.l, 1)}}{${fd(SA.A, 2)}} = ${sciTex(Rv)}\\ \\Omega\\) ${m.id === 'si' || m.id === 'ge' ? 'สารกึ่งตัวนำอยู่กลางไม้บรรทัด ห่างจากทั้งตัวนำและฉนวนหลายอันดับขนาด' : m.id === 'cu' ? 'ตัวนำ: ความต้านทานน้อยจนกระแสถูกจำกัดด้วยส่วนอื่นของวงจรแทน' : 'ฉนวน: กระแสเล็กจนวัดแทบไม่ได้'}`,
+      `\\(R = \\rho\\dfrac{l}{A} = (${sciTex(m.rho)})\\dfrac{${fd(SA.l, 1)}}{${fd(SA.A, 2)}} = ${sciTex(Rv)}\\ \\Omega\\). ${m.id === 'si' || m.id === 'ge' ? 'Semiconductors sit in the middle of the ruler, many orders of magnitude from both conductors and insulators.' : m.id === 'cu' ? 'A conductor: so little resistance that the rest of the circuit limits the current instead.' : 'An insulator: the current is too small to measure.'}`)}</div>`;
+    MC.renderMath($('wA')); }
+  showA();
+
+  /* =================================================================== B: the crystal, its bonds and its bands */
+  const MB = { si: { sym: 'Si', Eg: 1.1, ni: 1.5e10, name: 'Si' }, ge: { sym: 'Ge', Eg: 0.67, ni: 2.5e13, name: 'Ge' }, gaas: { sym: (r, c) => ((r + c) % 2 ? 'As' : 'Ga'), Eg: 1.43, ni: 1.7e6, name: 'GaAs' } };
+  const niOf = (m, T) => (T < 1 ? 0 : m.ni * Math.pow(T / 300, 1.5) * Math.exp(-m.Eg / (2 * 8.617e-5) * (1 / T - 1 / 300)));   // n_i ∝ T^{3/2} e^{−E_g/2kT}, through the book's value at 300 K
+  const pairsOf = (m, T) => { const n = niOf(m, T); return n <= 0 ? 0 : Math.max(0, Math.min(9, Math.round(Math.log10(n) - 8))); };
+  const SB = { m: 'si', T: 300 }, LB = new IE.Lattice({ rows: 4, cols: 6, sym: 'Si' });
+  const PB = IE.pane($('cvB'), W => (W >= 640 ? W * 0.52 : W * 1.25));
+  LS.anim($('cvB'), dt => { LB.step(dt); const { ctx, W, H } = PB, m = MB[SB.m], wide = W >= 640; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H);
+    const b1 = wide ? { x: 0, y: 0, w: Math.round(W * 0.6), h: H } : { x: 0, y: 0, w: W, h: Math.round(H * 0.56) }, b2 = wide ? { x: b1.w + 6, y: 0, w: W - b1.w - 6, h: H } : { x: 0, y: b1.h + 6, w: W, h: H - b1.h - 6 };
+    LB.draw(ctx, b1, { title: t(`ผลึก ${m.name} ที่ ${fd(SB.T, 0)} K (${fd(SB.T - 273, 0).replace('-', '−')} °C)`, `${m.name} crystal at ${fd(SB.T, 0)} K (${fd(SB.T - 273, 0).replace('-', '−')} °C)`) });
+    IE.bands(ctx, b2, { kind: 'semi', Eg: m.Eg, nE: LB.nFree, nH: LB.nHoles, short: !wide, title: t(`แถบพลังงานของ ${m.name}`, `energy bands of ${m.name}`) }); });
+  const pB = $('pB'), mB = document.createElement('div');
+  ui.h2(pB, t('วัสดุ', 'Material')); ui.radio(pB, Object.keys(MB).map(k => ({ id: 'bM' + k, label: MB[k].name, on: k === SB.m })), id => { SB.m = id.slice(2); LB.o.sym = MB[SB.m].sym; setB(); });
+  ui.h2(pB, t('อุณหภูมิ', 'Temperature'));
+  ui.slider(pB, { id: 'bT', label: 'T', min: 0, max: 600, step: 10, value: SB.T, fmt: v => `${fd(v, 0)} K`, oninput: v => { SB.T = v; setB(); } });
+  pB.appendChild(mB); mB.className = 'metrics';
+  function setB() { const m = MB[SB.m], n = niOf(m, SB.T); LB.hop = SB.T > 0 ? 0.3 + 0.9 * Math.min(1, SB.T / 300) : 0; LB.setTarget(pairsOf(m, SB.T));
+    mB.innerHTML = ui.kv([['E_g', `${m.Eg} eV`], [t('พาหะอิสระ n_i', 'free carriers n_i'), n > 0 ? `${sci(n)} cm⁻³` : '0'], [t('คู่บนจอ', 'pairs on screen'), String(pairsOf(m, SB.T))]]);
+    $('wB').innerHTML = `<div class="answer">${SB.T < 1 ? t('ที่ 0 K อิเล็กตรอนทุกตัวติดอยู่ในพันธะ (แถบเวเลนซ์เต็ม แถบนำว่าง) ผลึกไม่นำไฟฟ้าเลย', 'At 0 K every electron is locked in a bond (a full valence band, an empty conduction band): the crystal does not conduct at all.')
+      : t(`${m.name} ที่ ${fd(SB.T, 0)} K มีพาหะอิสระราว \\(${n > 0 ? sciTex(n) : '0'}\\) ต่อ cm³ ${SB.m === 'ge' ? 'ช่องว่าง 0.67 eV แคบ อิเล็กตรอนจึงข้ามได้ง่าย' : SB.m === 'gaas' ? 'ช่องว่าง 1.43 eV กว้างที่สุดในสามวัสดุ พาหะจึงน้อยที่สุด' : 'ช่องว่าง 1.1 eV'} ร้อนขึ้นพาหะเพิ่ม ความต้านทานลดลง คือสัมประสิทธิ์อุณหภูมิเป็นลบ`,
+        `${m.name} at ${fd(SB.T, 0)} K has about \\(${n > 0 ? sciTex(n) : '0'}\\) free carriers per cm³. ${SB.m === 'ge' ? 'Its gap of 0.67 eV is narrow, so electrons cross easily.' : SB.m === 'gaas' ? 'Its gap of 1.43 eV is the widest of the three, so it has the fewest carriers.' : 'Its gap is 1.1 eV.'} Warmer means more carriers and less resistance: a negative temperature coefficient.`)}</div>`;
+    MC.renderMath($('wB')); }
+  setB();
+
+  /* =================================================================== 1: the resistance of a bar */
+  const L1 = 2, A1 = 0.01, RES = { si: 50e3 * L1 / A1, ge: 50 * L1 / A1, cu: 1e-6 * L1 / A1, mica: 1e12 * L1 / A1 };
+  IE.problem(1, { h: W => (W >= 560 ? W * 0.66 : W * 1.05),
+    draw: (ctx, b, k) => { const h1 = Math.round(b.h * 0.42), sel = k >= 4 ? null : k === 3 ? 'ge' : k === 2 ? 'si' : null, m = MAT.find(x => x.id === (sel || 'si'));
+      CH6.bg(ctx, { x: b.x, y: b.y, w: b.w, h: h1 }); bar(ctx, { x: b.x, y: b.y + 4, w: b.w, h: h1 - 8 }, L1, A1, k >= 2 ? m.col : COL.muted);
+      const b2 = { x: b.x, y: h1 + 6, w: b.w, h: b.h - h1 - 6 }; CH6.bg(ctx, b2); const show = k >= 4 ? ['cu', 'ge', 'si', 'mica'] : k === 3 ? ['ge', 'si'] : k === 2 ? ['si'] : [];
+      if (!show.length) { T(ctx, t('ความต้านทานจะปรากฏที่นี่ (สเกลลอการิทึม)', 'the resistances will appear here (logarithmic scale)'), b2.x + b2.w / 2, b2.y + b2.h / 2, { color: COL.muted, size: 13 }); return; }
+      const L = b2.x + 90, Rr = b2.x + b2.w - 20, X = lg => L + (Rr - L) * (lg + 5) / 20, rowH = Math.min(34, (b2.h - 40) / 4);
+      ctx.save(); ctx.strokeStyle = COL.grid; for (let e = -5; e <= 15; e += 5) { ctx.beginPath(); ctx.moveTo(X(e), b2.y + 10); ctx.lineTo(X(e), b2.y + b2.h - 24); ctx.stroke(); } ctx.restore();
+      for (let e = -5; e <= 15; e += 5) T(ctx, pow10(e), X(e), b2.y + b2.h - 12, { color: COL.muted, size: 11 });
+      ['cu', 'ge', 'si', 'mica'].forEach((id, j) => { if (!show.includes(id)) return; const mm = MAT.find(x => x.id === id), y = b2.y + 16 + j * rowH, x1 = X(Math.log10(RES[id]));
+        T(ctx, t(...mm.name), b2.x + 10, y + rowH * 0.4, { align: 'left', color: mm.col, size: 12, weight: '600' }); ctx.save(); ctx.fillStyle = mm.col; ctx.globalAlpha = 0.75; ctx.fillRect(L, y + 4, Math.max(2, x1 - L), rowH - 10); ctx.restore();
+        CH8.lab(ctx, ohms(RES[id]), x1 + 6, y + rowH * 0.4, 'left', COL.ink, 11.5, b2, '600'); }); },
+    steps: () => [
+      LS.step(t('<b>(a) หน่วยของสภาพต้านทาน</b>: จัดสมการความต้านทาน \\(R = \\rho l/A\\) ให้เหลือ \\(\\rho\\) แล้วแทนหน่วย (สมการที่หายไปจากสไลด์หน้า 13)', '<b>(a) The unit of resistivity</b>: solve \\(R = \\rho l/A\\) for \\(\\rho\\) and put in the units (the equation missing from slide p. 13)'),
+        LS.block([R`\rho &= \frac{RA}{l} \Rightarrow \frac{(\Omega)(\text{cm}^2)}{\text{cm}} = \Omega\text{-cm}`])),
+      LS.step(t('<b>(b) ซิลิคอนบริสุทธิ์</b> \\(\\rho \\cong 50\\times10^3\\ \\Omega\\)-cm: หน้าตัด 1 mm × 1 mm = 0.1 cm × 0.1 cm', '<b>(b) Pure silicon</b>, \\(\\rho \\cong 50\\times10^3\\ \\Omega\\)-cm: the section is 1 mm × 1 mm = 0.1 cm × 0.1 cm'),
+        LS.block([R`A &= (0.1\ \text{cm})(0.1\ \text{cm}) = 0.01\ \text{cm}^2`, R`R &= \rho\frac{l}{A} = (50\times10^3)\frac{2}{0.01} = \boxed{10\ \text{M}\Omega}`])),
+      LS.step(t('<b>(c) เจอร์เมเนียมบริสุทธิ์</b> \\(\\rho \\cong 50\\ \\Omega\\)-cm', '<b>(c) Pure germanium</b>, \\(\\rho \\cong 50\\ \\Omega\\)-cm'),
+        LS.block([R`R &= (50)\frac{2}{0.01} = \boxed{10\ \text{k}\Omega}`]), t('ต่ำกว่าซิลิคอนพันเท่า เพราะ Ge มีพาหะอิสระมากกว่า (ส่วน B)', 'A thousand times less than silicon, because Ge has more free carriers (section B).')),
+      LS.step(t('<b>(d) ทองแดงและไมกาขนาดเดียวกัน</b> และกระแสเมื่อต่อ 1 V', '<b>(d) Copper and mica of the same size</b>, and the current from 1 V'),
+        LS.block([R`R_{Cu} &= (10^{-6})\frac{2}{0.01} = 2\times10^{-4}\ \Omega \ \Rightarrow\ I = 5000\ \text{A}`, R`R_{mica} &= (10^{12})\frac{2}{0.01} = 2\times10^{14}\ \Omega \ \Rightarrow\ I = 5\ \text{fA}`, R`R_{Si} &= 10^{7}\ \Omega \ \Rightarrow\ I = 0.1\ \mu\text{A}`]),
+        t('แท่งขนาดเดียวกันต่างกันถึง \\(10^{18}\\) เท่า สารกึ่งตัวนำบริสุทธิ์ยังนำไฟฟ้าไม่ดี การเจือสาร (หน้า 1.3) จะเปลี่ยนเรื่องนี้', 'The same bar spans a factor of \\(10^{18}\\). Pure semiconductors are still poor conductors; doping (page 1.3) changes that.'))],
+    ask: () => ({ fields: [{ label: t('R ซิลิคอน (MΩ) =', 'R silicon (MΩ) ='), w: 5, ok: x => Math.abs(x - 10) < 0.05 }, { label: t('R เจอร์เมเนียม (kΩ) =', 'R germanium (kΩ) ='), w: 5, ok: x => Math.abs(x - 10) < 0.05 }],
+      check: v => (Math.abs(v[0] - 0.1) < 0.002 ? t('ระวังหน่วยพื้นที่: 1 mm × 1 mm = 0.01 cm² ไม่ใช่ 1 cm²', 'Watch the area: 1 mm × 1 mm is 0.01 cm², not 1 cm².')
+        : Math.abs(v[0] - 1) < 0.02 ? t('ระวังหน่วยพื้นที่: 1 mm × 1 mm = 0.01 cm² ไม่ใช่ 0.1 cm²', 'Watch the area: 1 mm × 1 mm is 0.01 cm², not 0.1 cm².')
+        : Math.abs(v[0] - 1000) < 5 ? t('ระวังหน่วยพื้นที่: 1 mm = 0.1 cm จึงได้ 0.01 cm² ไม่ใช่ \\(10^{-4}\\) cm²', 'Watch the area: 1 mm = 0.1 cm, so it is 0.01 cm², not \\(10^{-4}\\) cm².') : '') }),
+    answer: () => t('Ω-cm · ซิลิคอน 10 MΩ · เจอร์เมเนียม 10 kΩ · ทองแดง \\(2\\times10^{-4}\\ \\Omega\\) · ไมกา \\(2\\times10^{14}\\ \\Omega\\) · โจทย์แต่งเพิ่ม ไม่มีเฉลยในห้อง', 'Ω-cm · silicon 10 MΩ · germanium 10 kΩ · copper \\(2\\times10^{-4}\\ \\Omega\\) · mica \\(2\\times10^{14}\\ \\Omega\\) · a practice problem; no class solution.') });
+
+  /* =================================================================== D: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ต้องใช้พลังงานกี่ไมโครจูลในการเคลื่อนประจุ 12 µC ผ่านความต่างศักย์ 6 V และคิดเป็นกี่ eV (ตอบเป็นหน่วย \\(10^{14}\\) eV) (Boylestad Problem 4)', '1) How much energy, in microjoules, does it take to move a charge of 12 µC through 6 V, and how many eV is that (in units of \\(10^{14}\\) eV)? (Boylestad Problem 4)'),
+      fields: [{ key: 'x', lab: 'W =', ans: 72, unit: 'µJ' }, { key: 'y', lab: 'W =', ans: 4.5, unit: '×10¹⁴ eV' }],
+      work: work(R`\begin{aligned} W &= QV = (12\times10^{-6})(6) = 72\ \mu\text{J} \\ W &= \frac{72\times10^{-6}\ \text{J}}{1.6\times10^{-19}\ \text{J/eV}} = 4.5\times10^{14}\ \text{eV} \end{aligned}`) },
+    { q: t('2) อิเล็กตรอนในแถบเวเลนซ์ของซิลิคอนต้องได้รับพลังงานอย่างน้อย \\(E_g = 1.1\\) eV คิดเป็นกี่จูล (ตอบเป็นหน่วย \\(10^{-19}\\) J)', '2) A valence electron of silicon needs at least \\(E_g = 1.1\\) eV. How many joules is that (in units of \\(10^{-19}\\) J)?'),
+      fields: [{ key: 'x', lab: 'W =', ans: 1.76, unit: '×10⁻¹⁹ J' }], work: work(R`W = (1.1)(1.6\times10^{-19}) = 1.76\times10^{-19}\ \text{J}`) },
+    { q: t('3) ต้องใช้พลังงาน 48 eV ในการเคลื่อนประจุผ่านความต่างศักย์ 3.2 V จงหาประจุ (ตอบเป็นหน่วย \\(10^{-18}\\) C) และเท่ากับประจุของอิเล็กตรอนกี่ตัว (Boylestad Problem 5)', '3) It takes 48 eV to move a charge through 3.2 V. Find the charge (in units of \\(10^{-18}\\) C) and how many electron charges that is. (Boylestad Problem 5)'),
+      fields: [{ key: 'x', lab: 'Q =', ans: 2.4, unit: '×10⁻¹⁸ C' }, { key: 'y', lab: 'n =', ans: 15 }],
+      work: work(R`\begin{aligned} Q &= \frac{W}{V} = \frac{(48)(1.6\times10^{-19})}{3.2} = 2.4\times10^{-18}\ \text{C} \\ n &= \frac{2.4\times10^{-18}}{1.6\times10^{-19}} = 15 \end{aligned}`) },
+    { q: t('4) ที่อุณหภูมิห้อง เจอร์เมเนียมบริสุทธิ์มีพาหะอิสระมากกว่าซิลิคอนบริสุทธิ์กี่เท่า', '4) At room temperature, how many times more free carriers does pure germanium have than pure silicon?'),
+      fields: [{ key: 'x', lab: t('อัตราส่วน =', 'ratio ='), ans: 2.5e13 / 1.5e10, tol: 1 }], work: work(R`\frac{2.5\times10^{13}}{1.5\times10^{10}} = ${fd(2.5e13 / 1.5e10, 0)}`) },
+    { q: t('5) ลูกบาศก์เจอร์เมเนียมด้านละ 1 cm ต่อกับแหล่งจ่าย 1.5 V จงหาความต้านทานและกระแส', '5) A 1 cm cube of germanium across a 1.5 V source. Find its resistance and the current.'),
+      fields: [{ key: 'x', lab: 'R =', ans: 50, unit: 'Ω' }, { key: 'y', lab: 'I =', ans: 30, unit: 'mA' }], work: work(R`R = (50)\frac{1}{1} = 50\ \Omega,\quad I = \frac{1.5}{50} = 30\ \text{mA}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

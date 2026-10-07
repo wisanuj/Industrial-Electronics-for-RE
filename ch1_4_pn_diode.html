@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.4 — The p–n Junction Diode">1.4 — ไดโอดรอยต่อ p–n</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ไดโอดรอยต่อ p–n: ไม่ไบแอส ไบแอสตรง และไบแอสกลับ <span class="en">The p–n junction diode: no bias, forward bias and reverse bias</span></h1>
+<h1 data-l="en">The p–n junction diode <span class="en">No bias, forward bias and reverse bias</span></h1>
+
+<p class="sub" data-l="th">ต่อวัสดุชนิด p กับชนิด n ที่ทำจากซิลิคอนหรือเจอร์เมเนียมเข้าด้วยกันก็ได้ไดโอดสารกึ่งตัวนำ อิเล็กตรอนและโฮลบริเวณรอยต่อรวมกันจนเหลือแต่ไอออนที่ไม่มีพาหะอิสระหักล้างประจุ (uncovered ions) เรียกว่าบริเวณปลอดพาหะ (depletion region) สไลด์หน้า 32–44 ดูไดโอดทั้งสามสภาวะ สมการของช็อกลีย์ ย่านซีเนอร์ ซิลิคอนเทียบกับเจอร์เมเนียม และผลของอุณหภูมิ หน้านี้มีภาพจำลองรอยต่อที่ผูกกับวงจรจริง (ส่วน A) ย่านซีเนอร์และพิกัดแรงดันย้อนกลับ (ส่วน B) โจทย์สามข้อจาก Example 1.1, 1.2 และย่อหน้าเรื่องอุณหภูมิของตำรา และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Join p-type and n-type material made from silicon or germanium and you have a semiconductor diode. Electrons and holes near the junction combine until only uncovered ions are left there: the depletion region. Slides pp. 32–44 cover the diode in its three conditions, Shockley's equation, the Zener region, silicon against germanium, and temperature. This page has a junction tied to a live circuit (section A), the Zener region and the peak inverse voltage (section B), three problems from Examples 1.1 and 1.2 and the book's temperature paragraph, and more practice.</p>
+<div class="equation-box">$$ \begin{aligned} I_D &= I_s\left(e^{V_D/nV_T} - 1\right) &&\text{(1.2)} \\ V_T &= \frac{kT_K}{q},\quad T_K = T_C + 273 &&\text{(1.3)} \end{aligned} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ไม่ไบแอส</b> (\(V_D = 0\)): พาหะข้างมากที่มีพลังงานพอข้ามรอยต่อได้บ้าง พาหะข้างน้อยที่หลุดเข้าบริเวณปลอดพาหะถูกกวาดข้ามไปอีกฝั่ง สองกระแสหักล้างกันพอดี กระแสสุทธิเป็นศูนย์ (สไลด์หน้า 32–34)</li>
+  <li><b>ไบแอสกลับ</b> (บวกที่ n ลบที่ p): บริเวณปลอดพาหะกว้างขึ้นจนพาหะข้างมากข้ามไม่ได้ เหลือเพียงพาหะข้างน้อย เป็นกระแสอิ่มตัวย้อนกลับ \(I_s\) ซึ่งเล็กมากและแทบไม่เปลี่ยนตามแรงดัน (สไลด์หน้า 35–36)</li>
+  <li><b>ไบแอสตรง</b> (บวกที่ p ลบที่ n): บริเวณปลอดพาหะแคบลงจนพาหะข้างมากไหลข้ามจำนวนมาก กระแสเพิ่มแบบเอกซ์โพเนนเชียลตามสมการ (1.2) แรงดันคร่อมไดโอดที่นำกระแสจึงมักไม่ถึง 1 V และทิศการนำตรงกับหัวลูกศร (สไลด์หน้า 37–40)</li>
+  <li><b>ย่านซีเนอร์และพิกัด PIV</b>: แรงดันย้อนกลับที่มากเกินไปทำให้กระแสย้อนกลับพุ่งขึ้นอย่างฉับพลันที่ \(V_Z\) แรงดันย้อนกลับสูงสุดก่อนถึงย่านนี้คือพิกัด PIV (peak inverse voltage) หรือ PRV (peak reverse voltage) ทั้งสองชื่อหมายถึงแรงดันย้อนกลับสูงสุด (สไลด์หน้า 41–42)</li>
+  <li><b>วัสดุและอุณหภูมิ</b>: เข่าของกราฟอยู่ราว 0.3 V (เจอร์เมเนียม, Ge) 0.7 V (ซิลิคอน, Si) และ 1.2 V (แกลเลียมอาร์เซไนด์, GaAs) เมื่อร้อนขึ้นกราฟของซิลิคอนเลื่อนซ้าย 2.5 mV/°C และกระแสย้อนกลับเพิ่มเป็นสองเท่าทุก 10 °C (สไลด์หน้า 43–44 · ค่าของ GaAs จาก Boylestad ตาราง 1.3 หัวข้อ 1.6)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>No bias</b> (\(V_D = 0\)): a few majority carriers have the energy to cross the junction, while minority carriers that stray into the depletion region are swept across the other way. The two flows cancel exactly and the net current is zero (slides pp. 32–34).</li>
+  <li><b>Reverse bias</b> (+ on n, − on p): the depletion region widens until the majority carriers cannot cross. Only the minority carriers remain: the reverse saturation current \(I_s\), very small and almost independent of the voltage (slides pp. 35–36).</li>
+  <li><b>Forward bias</b> (+ on p, − on n): the depletion region narrows until majority carriers flood across. The current rises exponentially, Eq. (1.2), so a conducting diode usually has less than 1 V across it, and it conducts in the direction of its arrowhead (slides pp. 37–40).</li>
+  <li><b>The Zener region and the PIV rating</b>: too much reverse voltage makes the reverse current shoot up suddenly at \(V_Z\). The largest reverse voltage before that region is the PIV (peak inverse voltage) or PRV (peak reverse voltage) rating; both names mean the same (slides pp. 41–42).</li>
+  <li><b>Materials and temperature</b>: the knee sits near 0.3 V (germanium, Ge), 0.7 V (silicon, Si) and 1.2 V (gallium arsenide, GaAs). Heating moves a silicon curve 2.5 mV/°C to the left and doubles the reverse current every 10 °C (slides pp. 43–44; the GaAs value from Boylestad Table 1.3, section 1.6).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch1/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 32, Semiconductor Diode: the semiconductor diode is formed by simply bringing these materials together (constructed from the same base, Ge or Si). Quote: This region of uncovered positive and negative ions is called the depletion region due to the depletion of carriers in this region. Since the diode is a two-terminal device, the application of a voltage across its terminals leaves three possibilities: no bias (V_D = 0 V), forward bias (V_D greater than 0 V), reverse bias (V_D less than 0 V). The figure shows a p region with holes and minus ions, an n region with electrons and plus ions, the depletion region of circled ions at the junction, and I_D = 0 mA with V_D = 0 V (no bias).">
+  <figcaption data-l="th">สไลด์หน้า 32: บริเวณปลอดพาหะและสามสภาวะ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: the depletion region and three conditions · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch1/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 34, Semiconductor Diode, No Applied Bias (V_D = 0 V): the symbol for a diode is repeated in the figure with the associated n- and p-type regions. The arrow is associated with the p-type component and the bar with the n-type region. The figure shows the diode symbol with V_D = 0 V, I_D = 0 mA, above a block with a p part and an n part.">
+  <figcaption data-l="th">สไลด์หน้า 34: ลูกศร (สามเหลี่ยม) คือด้าน p ขีดตั้งคือด้าน n · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 34: the arrow (the triangle) is the p side, the bar the n side · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 39 ใช้สมการของช็อกลีย์รูปแบบเก่า</b> \(I_D = I_s(e^{kV_D/T_K} - 1)\) กับ \(k = 11\,600/\eta\) ซึ่งเป็นสมการเดียวกับ (1.2) เพราะ \(q/k_B = 1.6\times10^{-19}/1.38\times10^{-23} \cong 11\,600\) K/V และ \(\eta\) ก็คือ \(n\) แต่บรรทัด "\(T_K = T_C - 273^\circ\)" ผิด ที่ถูกคือ \(T_K = T_C + 273\) (Example 1.1: 27 °C = 300 K)</div>
+<div class="warnbox" data-l="en"><b>Slide p. 39 writes Shockley's equation in its older form</b> \(I_D = I_s(e^{kV_D/T_K} - 1)\) with \(k = 11\,600/\eta\). It is the same equation as (1.2), since \(q/k_B = 1.6\times10^{-19}/1.38\times10^{-23} \cong 11\,600\) K/V and \(\eta\) is \(n\). But the line "\(T_K = T_C - 273^\circ\)" is wrong: it is \(T_K = T_C + 273\) (Example 1.1: 27 °C = 300 K).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>รอยต่อภายใต้ไบแอส</a><a href="#tB"><b>B</b>ย่านซีเนอร์และ PIV</a><a href="#ex1"><b>1</b>สมการของช็อกลีย์</a><a href="#ex2"><b>2</b>Ge, Si และ GaAs</a><a href="#ex3"><b>3</b>อุณหภูมิ</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The junction under bias</a><a href="#tB"><b>B</b>Zener region and PIV</a><a href="#ex1"><b>1</b>Shockley's equation</a><a href="#ex2"><b>2</b>Ge, Si and GaAs</a><a href="#ex3"><b>3</b>Temperature</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">รอยต่อ p–n ภายใต้ไบแอส: ข้างในเกิดอะไรขึ้น</h2><h2 data-l="en">The p–n junction under bias: what happens inside</h2>
+    <div class="src" data-l="th">สไลด์หน้า 33–40 · Boylestad หัวข้อ 1.6 (รูป 1.12–1.15)</div><div class="src" data-l="en">Slides pp. 33–40 · Boylestad, section 1.6 (Figs. 1.12–1.15)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 33, Semiconductor Diode, No Applied Bias (V_D = 0 V): a close examination of the figure will reveal that the relative magnitudes of the flow vectors are such that the net flow in either direction is zero. The doping levels for each material may result in an unequal carrier flow of holes and electrons. Quote: In the absence of an applied bias voltage, the net flow of charge in any one direction for a semiconductor diode is zero. The figure shows the p–n junction with its depletion region and I_D = 0 mA at both leads.">
+    <figcaption data-l="th">สไลด์หน้า 33: ไม่ไบแอส กระแสสุทธิเป็นศูนย์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: no bias, zero net current · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 35, Semiconductor Diode, Reverse-Bias Condition (V_D less than 0 V): the number of uncovered positive ions in the depletion region of the n-type material will increase due to the large number of free electrons drawn to the positive potential of the applied voltage. The number of uncovered negative ions will increase in the p-type material. Widening of the depletion region will establish too great a barrier for the majority carriers to overcome, effectively reducing the majority carrier flow to zero. The figure shows a wide depletion region, a battery with its minus side on p and plus side on n, I_s minority-carrier flow and I_majority approximately 0.">
+    <figcaption data-l="th">สไลด์หน้า 35: ไบแอสกลับ บริเวณปลอดพาหะกว้างขึ้น · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: reverse bias widens the depletion region · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p37.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 37, Semiconductor Diode, Forward-Bias Condition (V_D greater than 0 V): a forward-bias or on condition is established by applying the positive potential to the p-type material and the negative potential to the n-type material. The application of a forward-bias potential V_D will pressure electrons in the n-type material and holes in the p-type material to recombine with the ions near the boundary and reduce the width of the depletion region. The figure shows a narrow depletion region, a battery with plus on p, I_D = I_majority − I_s.">
+    <figcaption data-l="th">สไลด์หน้า 37: ไบแอสตรง บริเวณปลอดพาหะแคบลง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 37: forward bias narrows it · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพบนคือรอยต่อ p–n (โฮลคือวงแหวนสีชมพู อิเล็กตรอนคือจุดสีฟ้า ไอออนที่ไม่มีพาหะอิสระหักล้างประจุอยู่ในบริเวณปลอดพาหะสีเหลือง) ภาพล่างคือวงจรจริง แหล่งจ่าย E ต่ออนุกรมกับ R = 1 kΩ และไดโอดซิลิคอนตามสมการ (1.2) (\(I_s = 10\) pA, \(n = 1\), 27 °C, ย่านซีเนอร์ที่ 50 V) พร้อมกราฟลักษณะสมบัติและจุดทำงาน เลื่อน E หรือกดปุ่มสภาวะ แล้วดูความกว้างของบริเวณปลอดพาหะ ลูกศรการไหลของพาหะด้านบน (เขียว: ข้างมาก, ชมพู: ข้างน้อย) และจุดบนกราฟไปพร้อมกัน ความกว้างและจำนวนพาหะในภาพบนเป็นภาพเชิงคุณภาพ ส่วนตัวเลขของวงจรคำนวณจริง</p>
+  <p class="lead" data-l="en">The top picture is the p–n junction (holes are pink rings, electrons cyan dots, and the uncovered ions sit in the yellow depletion region). Below is a real circuit: a source E in series with R = 1 kΩ and a silicon diode obeying Eq. (1.2) (\(I_s = 10\) pA, \(n = 1\), 27 °C, a Zener region at 50 V), with its characteristic and operating point. Move E or press a condition, and watch the width of the depletion region, the carrier-flow arrows on top (green: majority, pink: minority) and the point on the graph together. The width and the carriers of the top picture are qualitative; the circuit's numbers are computed.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvJ"></canvas><canvas id="cvA" style="margin-top:8px"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 36, Semiconductor Diode, Reverse-Bias Condition (V_D less than 0 V): the current that exists under reverse-bias conditions is called the reverse saturation current and is represented by I_s. The reverse saturation current is seldom more than a few microamperes except for high-power devices. The term saturation comes from the fact that it reaches its maximum level quickly and does not change significantly with increase in the reverse-bias potential, as shown on the diode characteristics. The figure shows the diode symbol with V_D, plus at the cathode, and I_s flowing against the arrow, above a p–n block marked (Opposite).">
+    <figcaption data-l="th">สไลด์หน้า 36: กระแสอิ่มตัวย้อนกลับ \(I_s\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 36: the reverse saturation current \(I_s\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p40.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 40, Semiconductor Diode, Forward-Bias Condition (V_D greater than 0 V): the forward-bias state, the conditions for conduction (the on state), are repeated in the figure with the required biasing polarities and the resulting direction of majority-carrier flow. In particular, how the direction of conduction matches the arrow in the symbol (as revealed for the ideal diode). The figure shows the diode symbol with plus V_D minus and I_D along the arrow, above a p–n block marked (Similar).">
+    <figcaption data-l="th">สไลด์หน้า 40: ไบแอสตรง กระแสตามหัวลูกศร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 40: forward bias, current along the arrowhead · tap to enlarge</figcaption></figure></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">ย่านซีเนอร์และพิกัดแรงดันย้อนกลับสูงสุด (PIV)</h2><h2 data-l="en">The Zener region and the peak inverse voltage (PIV)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 41–42 · Boylestad หัวข้อ 1.6 (Breakdown Region, รูป 1.17)</div><div class="src" data-l="en">Slides pp. 41–42 · Boylestad, section 1.6 (Breakdown Region, Fig. 1.17)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p41.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 41, Semiconductor Diode, Zener Region: in tens of volts in the negative region, there is a point where the application of too negative a voltage will result in a sharp change in the characteristics, as shown in the figure. The current increases at a very rapid rate in a direction opposite to that of the positive voltage region. The reverse-bias potential that results in this dramatic change in characteristics is called the Zener potential and is given the symbol V_Z. The figure shows a diode characteristic with the small reverse current I_s and a steep drop at V_Z on the left, circled as the Zener region.">
+    <figcaption data-l="th">สไลด์หน้า 41: ย่านซีเนอร์ที่ \(V_Z\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 41: the Zener region at \(V_Z\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p42.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 42, Semiconductor Diode, Zener Region: the Zener breakdown mechanism is a significant contributor only at lower levels of V_Z; this sharp change in the characteristic at any level is called the Zener region and diodes employing this unique portion of the characteristic of a p-n junction are called Zener diodes. The maximum reverse-bias potential that can be applied before entering the Zener region is called the peak inverse voltage (referred to simply as the PIV rating) or the peak reverse voltage (denoted by PRV rating).">
+    <figcaption data-l="th">สไลด์หน้า 42: พิกัด PIV หรือ PRV · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 42: the PIV or PRV rating · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ในส่วน A กดปุ่ม "ย่านซีเนอร์" หรือเลื่อน E ลงไปเกิน −50 V: ภาพรอยต่อมีประกายของคู่อิเล็กตรอนกับโฮลที่เกิดใหม่ในบริเวณปลอดพาหะ ตำราอธิบายว่าพาหะข้างน้อยที่ถูกเร่งจนมีพลังงานจลน์สูงชนอะตอมแล้วปลดพาหะใหม่ออกมาเป็นทอด ๆ (avalanche) ส่วนไดโอดที่ \(V_Z\) ต่ำราว 5 V สนามไฟฟ้าแรงที่รอยต่อดึงพาหะออกจากพันธะได้เอง (Zener breakdown) ไม่ว่ากลไกใด เรียกช่วงนี้รวมกันว่าย่านซีเนอร์ แรงดันคร่อมไดโอดแทบคงที่ที่ \(V_Z\) ส่วนเกินของ E ไปตกคร่อม R ไดโอดทั่วไปต้องใช้งานไม่ให้แรงดันย้อนกลับเกินพิกัด PIV ส่วนซีเนอร์ไดโอดตั้งใจใช้ย่านนี้ (บทที่ 2) ตำราระบุว่าแรงดันพังทลายของ Si และ GaAs มักอยู่ระหว่าง 50 V ถึง 1 kV ส่วน Ge ต่ำกว่า 100 V</p>
+  <p class="lead" data-l="en">In section A press "Zener region" or move E below −50 V: sparks appear in the depletion region, new electron–hole pairs. The book explains that minority carriers accelerated to a high kinetic energy knock new carriers loose from atoms, which knock out more (avalanche); in diodes with a low \(V_Z\), around 5 V, the strong field at the junction pulls carriers out of their bonds directly (Zener breakdown). Whatever the mechanism, the region is called the Zener region. The diode voltage stays almost fixed at \(V_Z\) and the rest of E falls across R. An ordinary diode must be used below its PIV rating, while a Zener diode is meant to work here (chapter 2). The book gives breakdown voltages of 50 V to 1 kV for Si and GaAs, under 100 V for Ge.</p>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">สมการของช็อกลีย์: \(V_T\) ที่ 27 °C แล้วหา \(I_D\) และ \(V_D\)</h2><h2 data-l="en">Shockley's equation: \(V_T\) at 27 °C, then \(I_D\) and \(V_D\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 38–39 · Boylestad Example 1.1 และสมการ (1.2) กับเส้นประในรูป 1.15 (\(I_s = 10\) pA)</div><div class="src" data-l="en">Slides pp. 38–39 · Boylestad Example 1.1, and Eq. (1.2) for the dashed curve of Fig. 1.15 (\(I_s = 10\) pA)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p38.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 38, Semiconductor Diode, Forward-Bias Condition (V_D greater than 0 V): as the applied bias increases in magnitude the depletion region will continue to decrease in width until a flood of electrons can pass through the junction, resulting in an exponential rise in current as shown in the forward-bias region of the characteristics. Typically, therefore, the voltage across a forward-biased diode will be less than 1 V. The figure is the silicon diode characteristic on a grid, I_D up to 20 mA, a dashed curve labelled Eq. (1.4) rising near 0.5 V and the actual commercially available unit to its right, and the reverse-bias region down to −40 V with a small negative current.">
+    <figcaption data-l="th">สไลด์หน้า 38: กราฟของไดโอดซิลิคอน (เส้นประคือสมการ) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 38: the silicon diode characteristic (dashed: the equation) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p39.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 39, Semiconductor Diode, Forward-Bias Condition (V_D greater than 0 V): the general characteristics of a semiconductor diode can be defined by the following equation for the forward- and reverse-bias regions: I_D = I_s(e^{kV_D/T_K} − 1), where I_s = reverse saturation current; k = 11,600/η with η = 1 for Ge and η = 2 for Si for relatively low levels of diode current (at or below the knee of the curve) and η = 1 for Ge and Si for higher levels of diode current (in the rapidly increasing section of the curve); T_K = T_C − 273°.">
+    <figcaption data-l="th">สไลด์หน้า 39: สมการรูปแบบเก่า (ดูหมายเหตุด้านบน) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 39: the older form of the equation (see the note above) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>(a) จงหาแรงดันความร้อน \(V_T\) ที่ 27 °C (Example 1.1) (b) ไดโอดซิลิคอนมี \(I_s = 10\) pA และ \(n = 1\) จงหา \(I_D\) เมื่อ \(V_D = 0.5\) V (c) จงหา \(V_D\) เมื่อ \(I_D = 10\) mA (d) จงหา \(I_D\) เมื่อ \(V_D = -10\) V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>(a) Find the thermal voltage \(V_T\) at 27 °C (Example 1.1). (b) A silicon diode has \(I_s = 10\) pA and \(n = 1\): find \(I_D\) at \(V_D = 0.5\) V. (c) Find \(V_D\) at \(I_D = 10\) mA. (d) Find \(I_D\) at \(V_D = -10\) V.</p></div>
+  <p class="lead" data-l="th">วงจรในภาพจำลองใช้แหล่งจ่ายแรงดันหรือกระแสกำหนดค่าตามแต่ละข้อ ตัวแก้วงจรใช้สมการ (1.2) ตรง ๆ จึงได้ค่าเดียวกับการคำนวณด้วยมือ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The circuit in the picture uses a voltage or current source as each part requires. The solver uses Eq. (1.2) itself, so it agrees with the hand calculation. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 1.2: Ge, Si และ GaAs ที่ 1, 4 และ 30 mA</h2><h2 data-l="en">Example 1.2: Ge, Si and GaAs at 1, 4 and 30 mA</h2>
+    <div class="src" data-l="th">สไลด์หน้า 43 (มีเพียง Si กับ Ge) · Boylestad Example 1.2 (รูป 1.18, ตาราง 1.3) · ตัวอย่างนี้มาจากตำรา</div><div class="src" data-l="en">Slide p. 43 (Si and Ge only) · Boylestad Example 1.2 (Fig. 1.18, Table 1.3) · the example is from the book</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p43.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 43, Semiconductor Diode, Silicon versus Germanium: it is typically of the order of magnitude of 0.7 V for commercially available silicon diodes and 0.3 V for germanium diodes. The figure compares the Ge and Si characteristics: I_D up to 30 mA, the Ge curve rising near 0.3 V (V_T Ge) and the Si curve near 0.7 V (V_T Si); on the reverse side I_s (Si) = 0.01 µA = 10 nA and a larger I_s (Ge) of about 1 µA, with V_Z (Si) further out than V_Z (Ge).">
+    <figcaption data-l="th">สไลด์หน้า 43: ซิลิคอนเทียบกับเจอร์เมเนียม \(V_T\) ในรูปคือแรงดันที่เข่าของกราฟตามสัญลักษณ์ฉบับเก่า ฉบับ 11 ใช้ \(V_K\) เพราะ \(V_T\) คือแรงดันความร้อน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 43: silicon against germanium. The \(V_T\) in the figure is the knee voltage in the older notation; the 11th edition writes \(V_K\), since \(V_T\) is the thermal voltage · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จากกราฟของไดโอด Ge, Si และ GaAs ในท้องตลาด (รูป 1.18 ของตำรา) (a) จงหาแรงดันคร่อมไดโอดแต่ละตัวที่กระแส 1 mA (b) ทำซ้ำที่ 4 mA (c) ทำซ้ำที่ 30 mA (d) จงหาค่าเฉลี่ยของแรงดันของแต่ละวัสดุ (e) ค่าเฉลี่ยเทียบกับแรงดันที่เข่าของกราฟในตาราง 1.3 เป็นอย่างไร</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Using the curves of commercial Ge, Si and GaAs diodes (Fig. 1.18 of the book): (a) determine the voltage across each diode at a current of 1 mA; (b) repeat at 4 mA; (c) repeat at 30 mA; (d) find the average voltage of each material; (e) how do the averages compare with the knee voltages of Table 1.3?</p></div>
+  <p class="lead" data-l="th">ไดโอดทั้งสามได้กระแสเท่ากันจากแหล่งจ่ายกระแสของตัวเอง เส้นโค้งในภาพจำลองผ่านค่าที่ตำราอ่านได้ทุกจุด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">Each diode gets the same current from its own current source. The simulated curves pass through every value the book reads. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ผลของอุณหภูมิ: จาก 20 °C เป็น 100 °C</h2><h2 data-l="en">Temperature: from 20 °C to 100 °C</h2>
+    <div class="src" data-l="th">สไลด์หน้า 44 · Boylestad หัวข้อ 1.6 (Temperature Effects, รูป 1.19) · ตัวเลขจากเนื้อหาในตำรา</div><div class="src" data-l="en">Slide p. 44 · Boylestad, section 1.6 (Temperature Effects, Fig. 1.19) · numbers from the book's text</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p44.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 44, Semiconductor Diode, Temperature Effect: temperature can have a marked effect on the characteristics of a silicon semiconductor diode as witnessed by a typical silicon diode in the figure. The figure shows I_D in mA against V_D for 200 °C, 100 °C (boiling point of water), 25 °C (room temperature) and −75 °C: the curves move left as the temperature rises; on the reverse side the reverse current grows with temperature and the breakdown voltage changes.">
+    <figcaption data-l="th">สไลด์หน้า 44: กราฟของไดโอดซิลิคอนที่อุณหภูมิต่าง ๆ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 44: a silicon diode at several temperatures · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ไดโอดซิลิคอนที่อุณหภูมิห้อง 20 °C มี \(V_D = 0.7\) V เมื่อ \(I_D = 10\) mA และมีกระแสย้อนกลับ 10 nA จงหา \(V_D\) ที่กระแสเท่าเดิมและกระแสย้อนกลับ เมื่ออุณหภูมิเพิ่มเป็น 100 °C (จุดเดือดของน้ำ) ใช้กฎของตำรา: กราฟเลื่อนซ้าย 2.5 mV ต่อ °C และกระแสย้อนกลับเพิ่มเป็นสองเท่าทุก 10 °C</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>At room temperature, 20 °C, a silicon diode has \(V_D = 0.7\) V at \(I_D = 10\) mA and a reverse current of 10 nA. Find \(V_D\) at the same current, and the reverse current, at 100 °C (the boiling point of water). Use the book's rules: the curve moves 2.5 mV to the left per °C, and the reverse current doubles for every 10 °C.</p></div>
+  <p class="lead" data-l="th">ไดโอดในภาพจำลองสร้างตามกฎสองข้อนี้ ขั้นที่ 2 เปลี่ยนไดโอดเป็นตัวที่ 100 °C <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulated diode is built from these two rules; step 2 swaps in the diode at 100 °C. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(k = 1.38\times10^{-23}\) J/K, \(q = 1.6\times10^{-19}\) C · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(k = 1.38\times10^{-23}\) J/K, \(q = 1.6\times10^{-19}\) C · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สามสภาวะ</h3>
+    <ol><li>ส่วน A กด "ไม่ไบแอส": ลูกศรเขียวกับชมพูยาวเท่ากัน กระแสสุทธิเป็นศูนย์ แต่พาหะยังเคลื่อนที่อยู่ตลอด</li>
+    <li>กด "ไบแอสกลับ": บริเวณปลอดพาหะกว้างขึ้น ลูกศรเขียวหายไป เหลือลูกศรชมพู กระแสคือ \(-I_s = -10\) pA ไม่ว่า E จะเป็น −5 V หรือ −40 V</li>
+    <li>กด "ไบแอสตรง" แล้วเลื่อน E ขึ้นช้า ๆ: บริเวณปลอดพาหะแคบลง ลูกศรเขียวยาวขึ้น ส่วน \(V_D\) อยู่แถว 0.5 V (สูงสุด 0.535 V ที่ E = 10 V) แม้กระแสจะเพิ่มมาก</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — สมการและวัสดุ</h3>
+    <ol><li>ข้อ 1: ลองใช้ \(V_T = 26\) mV แทน 25.875 mV แล้วดูว่ากระแสที่ 0.5 V เปลี่ยนไปเท่าไร</li>
+    <li>ข้อ 2: ที่กระแสเดียวกัน เส้นโค้งของ Ge, Si และ GaAs ห่างกันราว 0.4–0.5 V เรียงตามช่องว่างแถบพลังงาน \(E_g\) ของแต่ละวัสดุ (หน้า 1.2)</li>
+    <li>ข้อ 3: ไดโอดร้อนขึ้นนำกระแสง่ายขึ้นที่แรงดันเท่าเดิม เป็นเหตุให้วงจรที่ไม่ออกแบบเผื่อไว้ร้อนยิ่งขึ้นได้</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 32–44 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.6 (Examples 1.1, 1.2, รูป 1.12–1.19)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the three conditions</h3>
+    <ol><li>In section A press "No bias": the green and pink arrows are equally long; the net current is zero, but the carriers never stop moving.</li>
+    <li>Press "Reverse bias": the depletion region widens, the green arrow vanishes and only the pink one is left. The current is \(-I_s = -10\) pA whether E is −5 V or −40 V.</li>
+    <li>Press "Forward bias" and raise E slowly: the depletion region narrows and the green arrow grows, while \(V_D\) stays near 0.5 V (at most 0.535 V at E = 10 V) however large the current gets.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the equation and the materials</h3>
+    <ol><li>Problem 1: put \(V_T = 26\) mV instead of 25.875 mV and see how much the current at 0.5 V changes.</li>
+    <li>Problem 2: at the same current the Ge, Si and GaAs curves are some 0.4–0.5 V apart, in the order of their band gaps \(E_g\) (page 1.2).</li>
+    <li>Problem 3: a hotter diode conducts more easily at the same voltage, which can make a circuit not designed for it heat up even more.</li></ol>
+    <div class="book">Chapter 1 slides pp. 32–44 · Boylestad &amp; Nashelsky, 11th ed., section 1.6 (Examples 1.1, 1.2, Figs. 1.12–1.19)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH1.problem(1, 'shock'); CH1.problem(2, 'mats'); CH1.problem(3, 'temp');
+
+  /* =================================================================== A: the junction under bias, tied to a circuit */
+  const VBV = 50, DIO = { model: 'shockley', Is: 1e-11, n: 1, T: 27, vz: VBV, zsym: false }, FD = IE.shockley(1e-11, 1, 27, VBV, 1e-3);
+  const SA = { E: 0 }, J = new IE.Junction({ vbv: VBV });
+  const PJ = IE.pane($('cvJ'), W => Math.max(230, Math.min(330, W * 0.5)));
+  const stateOf = () => { const c = BA.ckt, v = c ? c.Vab('D').re : 0; return Math.abs(SA.E) < 1e-9 ? 'none' : v <= -VBV + 0.5 ? 'zener' : SA.E > 0 ? 'fwd' : 'rev'; };
+  const NAME = { none: ['ไม่ไบแอส', 'no bias'], fwd: ['ไบแอสตรง', 'forward bias'], rev: ['ไบแอสกลับ', 'reverse bias'], zener: ['ย่านซีเนอร์', 'Zener region'] };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.42, rowAsp: 0.66, pad: 1.25, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt, v = c ? c.Vab('D').re : 0, i = c ? c.I('D').re * 1e3 : 0, sh = bd.short;
+      IE.ivPlot(ctx, b, { v: [-60, 0.8], i: [-12, 12], negFrac: 0.42, xt: [0.4, 0.8], xtNeg: [-50, -25], yt: [5, 10], ytNeg: [-5, -10], curves: [{ f: FD, rev: true }],
+        pts: [{ v, i: Math.max(-11.5, Math.min(11.5, i)), color: C.q, label: sh ? CK.eng(i / 1000, 'A') : `${fd(v, 2).replace('-', '−')} V, ${CK.eng(i / 1000, 'A')}`, side: v < -20 ? 1 : -1 }],
+        vl: [{ v: -VBV, color: 'rgba(255,107,107,.6)', label: sh ? 'V_Z' : 'V_Z = −50 V' }], title: sh ? '' : t('ลักษณะสมบัติ (I_s = 10 pA เล็กเกินกว่าจะเห็น)', 'characteristic (I_s = 10 pA is too small to see)') }); },
+    badge: () => { const s = stateOf(); return [[NAME[s][0], NAME[s][1]], s === 'fwd' ? 'ok' : 'wait']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('สภาวะ', 'Condition'));
+  const pre = ui.radio(pA, [{ id: 'bN', label: t('ไม่ไบแอส', 'No bias'), on: true }, { id: 'bF', label: t('ไบแอสตรง', 'Forward bias') }, { id: 'bR', label: t('ไบแอสกลับ', 'Reverse bias') }, { id: 'bZ', label: t('ย่านซีเนอร์', 'Zener region') }],
+    id => { SA.E = { bN: 0, bF: 5, bR: -10, bZ: -56 }[id]; sl.set(SA.E); buildA(); });
+  ui.h2(pA, t('แรงดันของแหล่งจ่าย', 'Source voltage'));
+  const sl = ui.slider(pA, { id: 'aE', label: 'E', min: -60, max: 10, step: 0.5, value: SA.E, fmt: v => `${fd(v, 1).replace('-', '−')} V`, oninput: v => { SA.E = v; buildA(); } });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH1.series({ E: SA.E, R: 1000, d: DIO }), { speed: 80 / 0.005, dotRef: 0.005 }); const v = BA.ckt.Vab('D').re; J.set(v); showA(); }
+  function showA() { const c = BA.ckt, v = c.Vab('D').re, i = c.I('D').re, s = stateOf();
+    pre.set({ none: 'bN', fwd: 'bF', rev: 'bR', zener: 'bZ' }[s]);
+    mA.innerHTML = ui.kv([['V_D', `${fd(v, 3).replace('-', '−')} V`], ['I_D', CK.eng(i, 'A')], ['V_R', `${fd(c.Vab('R').re, 2).replace('-', '−')} V`], [t('สภาวะ', 'condition'), t(...NAME[s])]]);
+    $('wA').innerHTML = `<div class="answer">${{
+      none: t('ไม่มีแรงดันภายนอก กระแสของพาหะข้างมากกับข้างน้อยหักล้างกันพอดี \\(I_D = 0\\) บริเวณปลอดพาหะมีความกว้างตามธรรมชาติของรอยต่อ', 'No outside voltage: the majority and minority flows cancel exactly, \\(I_D = 0\\), and the depletion region has its natural width.'),
+      fwd: t(`ด้าน p เป็นบวก บริเวณปลอดพาหะแคบลง พาหะข้างมากไหลข้ามจำนวนมาก \\(I_D\\) = ${CK.eng(i, 'A')} ขณะที่ \\(V_D\\) เพียง ${fd(v, 3)} V แรงดันที่เหลือ ${fd(SA.E - v, 2)} V ตกคร่อม R`, `The p side is positive: the depletion region narrows and majority carriers flood across, \\(I_D\\) = ${CK.eng(i, 'A')}, with only ${fd(v, 3)} V across the diode; the remaining ${fd(SA.E - v, 2)} V is across R.`),
+      rev: t(`ด้าน n เป็นบวก บริเวณปลอดพาหะกว้างขึ้น พาหะข้างมากข้ามไม่ได้ เหลือกระแสอิ่มตัวย้อนกลับ \\(I_D \\cong -I_s\\) = ${CK.eng(i, 'A')} แรงดันแทบทั้งหมด (${fd(v, 2).replace('-', '−')} V) ตกคร่อมไดโอด`, `The n side is positive: the depletion region widens, majority carriers cannot cross, and only the reverse saturation current is left, \\(I_D \\cong -I_s\\) = ${CK.eng(i, 'A')}; almost all the voltage (${fd(v, 2).replace('-', '−')} V) is across the diode.`),
+      zener: t(`แรงดันย้อนกลับถึง \\(V_Z = 50\\) V คู่พาหะใหม่เกิดขึ้นเป็นทอด ๆ กระแสย้อนกลับพุ่งเป็น ${CK.eng(i, 'A')} แต่ \\(V_D\\) ค้างอยู่ที่ ${fd(v, 2).replace('-', '−')} V ส่วนเกินของ E ไปอยู่ที่ R ไดโอดทั่วไปต้องไม่ใช้งานเกินพิกัด PIV`, `The reverse voltage has reached \\(V_Z = 50\\) V: new carrier pairs multiply and the reverse current shoots to ${CK.eng(i, 'A')}, while \\(V_D\\) stays at ${fd(v, 2).replace('-', '−')} V and the rest of E is across R. An ordinary diode must stay below its PIV rating.`) }[s]}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+  LS.anim($('cvJ'), dt => { J.step(dt); const { ctx, W, H } = PJ; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); J.draw(ctx, { x: 0, y: 0, w: W, h: H }, { short: W < 520, title: t(`รอยต่อ p–n: ${NAME[stateOf()][0]}`, `the p–n junction: ${NAME[stateOf()][1]}`) }); });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, vt = T => 1.38e-23 * (273 + T) / 1.6e-19;
+  const q2 = 40e-9 * (Math.exp(0.5 / (2 * vt(20))) - 1) * 1e3, q4 = 6e-3 / 1e-9, q4v = 0.026 * Math.log(6e-3 / 1e-9 + 1);
+  CH6.quiz('quiz', [
+    { q: t('1) จงหาแรงดันความร้อน \\(V_T\\) ที่ 20 °C และที่ 100 °C (ตอบเป็น mV)', '1) Find the thermal voltage \\(V_T\\) at 20 °C and at 100 °C (in mV).'),
+      fields: [{ key: 'x', lab: 'V_T(20 °C) =', ans: vt(20) * 1e3, unit: 'mV' }, { key: 'y', lab: 'V_T(100 °C) =', ans: vt(100) * 1e3, unit: 'mV' }],
+      work: work(R`\begin{aligned} V_T &= \frac{(1.38\times10^{-23})(293)}{1.6\times10^{-19}} = ${fd(vt(20) * 1e3, 3)}\ \text{mV} \\ V_T &= \frac{(1.38\times10^{-23})(373)}{1.6\times10^{-19}} = ${fd(vt(100) * 1e3, 3)}\ \text{mV} \end{aligned}`) },
+    { q: t('2) ไดโอดที่ 20 °C มี \\(I_s = 40\\) nA และ \\(n = 2\\) จงหา \\(I_D\\) เมื่อ \\(V_D = 0.5\\) V', '2) A diode at 20 °C has \\(I_s = 40\\) nA and \\(n = 2\\). Find \\(I_D\\) at \\(V_D = 0.5\\) V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: q2, unit: 'mA', tol: 0.01 }],
+      work: work(R`I_D = (40\ \text{nA})\left(e^{0.5/[(2)(${fd(vt(20), 5)})]} - 1\right) = ${fd(q2, 3)}\ \text{mA}`) },
+    { q: t('3) ไดโอดที่ \\(V_T = 26\\) mV, \\(n = 1\\), \\(I_s = 1\\) nA มีกระแส 6 mA จงหา \\(V_D\\)', '3) A diode with \\(V_T = 26\\) mV, \\(n = 1\\) and \\(I_s = 1\\) nA carries 6 mA. Find \\(V_D\\).'),
+      fields: [{ key: 'x', lab: 'V_D =', ans: q4v, unit: 'V', tol: 0.002 }],
+      work: work(R`V_D = (26\ \text{mV})\ln\left(\frac{6\ \text{mA}}{1\ \text{nA}} + 1\right) = (26\ \text{mV})(${fd(Math.log(q4 + 1), 3)}) = ${fd(q4v, 4)}\ \text{V}`) },
+    { q: t('4) กระแสย้อนกลับของไดโอดซิลิคอน 0.1 µA ที่ 20 °C จงหากระแสย้อนกลับเมื่ออุณหภูมิเพิ่มขึ้น 40 °C (ตอบเป็น µA)', '4) A silicon diode has a reverse current of 0.1 µA at 20 °C. Find it after a 40 °C rise (in µA).'),
+      fields: [{ key: 'x', lab: 'I_R =', ans: 1.6, unit: 'µA' }], work: work(R`I_R = (0.1\ \mu\text{A})(2^{40/10}) = (0.1)(16) = 1.6\ \mu\text{A}`) },
+    { q: t('5) ไดโอดซิลิคอนนำกระแสที่ 0.68 V ที่ 25 °C จงหาแรงดันที่กระแสเท่าเดิมเมื่ออุณหภูมิเป็น 75 °C', '5) A silicon diode conducts at 0.68 V at 25 °C. Find its voltage at the same current at 75 °C.'),
+      fields: [{ key: 'x', lab: 'V_D =', ans: 0.555, unit: 'V', tol: 0.002 }], work: work(R`V_D = 0.68 + (75 - 25)(-2.5\ \text{mV}) = 0.68 - 0.125 = 0.555\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

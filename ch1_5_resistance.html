@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.5 — Resistance Levels">1.5 — ระดับความต้านทานของไดโอด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ระดับความต้านทานของไดโอด: กระแสตรง กระแสสลับ และกระแสสลับเฉลี่ย <span class="en">dc, ac and average ac resistance of a diode</span></h1>
+<h1 data-l="en">Resistance levels of a diode <span class="en">dc, ac and average ac resistance</span></h1>
+
+<p class="sub" data-l="th">กราฟของไดโอดไม่เป็นเส้นตรง ความต้านทานของไดโอดจึงไม่ใช่ค่าเดียว ขึ้นกับจุดทำงานและชนิดของสัญญาณ สไลด์หน้า 45–56 แยกเป็นสามระดับ ความต้านทานกระแสตรง (dc หรือ static resistance) ใช้กับจุดทำงานที่ไม่เปลี่ยนตามเวลา ความต้านทานกระแสสลับ (ac หรือ dynamic resistance) ใช้กับสัญญาณเล็กที่แกว่งรอบจุดทำงาน และความต้านทานกระแสสลับเฉลี่ย (average ac resistance) ใช้กับสัญญาณใหญ่ หน้านี้มีภาพจำลองที่เทียบทั้งสามค่าที่จุดทำงานใดก็ได้ (ส่วน A) โจทย์ Ex.1 และ Ex.2 ของสไลด์ (ข้อ 1–2) ตัวอย่างความต้านทานเฉลี่ยของตำรา (ข้อ 3) และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">A diode's curve is not a straight line, so its resistance is not one number: it depends on the operating point and on the kind of signal. Slides pp. 45–56 separate three levels: the dc (static) resistance for an operating point that does not change with time, the ac (dynamic) resistance for a small signal swinging about that point, and the average ac resistance for a large signal. This page compares all three at any operating point (section A), works the slides' Ex.1 and Ex.2 (problems 1–2) and the book's average-resistance example (problem 3), and ends with more practice.</p>
+<div class="equation-box">$$ \begin{aligned} R_D &= \frac{V_D}{I_D} &&\text{(1.4)} \\ r_d &= \frac{\Delta V_d}{\Delta I_d} \cong \frac{26\ \text{mV}}{I_D} &&\text{(1.5), (1.6)} \\ r_{av} &= \frac{\Delta V_d}{\Delta I_d}\bigg|_{\text{pt. to pt.}} &&\text{(1.8)} \end{aligned} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ความต้านทานกระแสตรง</b> \(R_D = V_D/I_D\) อ่านจากจุดเดียวบนกราฟ เท่ากับส่วนกลับของความชันของเส้นจากจุดกำเนิดถึงจุดทำงาน ไม่ขึ้นกับรูปร่างกราฟรอบจุดนั้น ยิ่งกระแสสูงยิ่งต่ำ (ข้อ 1)</li>
+  <li><b>ความต้านทานกระแสสลับ</b> \(r_d = \Delta V_d/\Delta I_d\) ใช้เส้นสัมผัสที่จุด Q (quiescent point, จุดทำงานขณะไม่มีสัญญาณ) เลือกช่วงเล็กและเท่ากันทั้งสองข้างของ Q ยิ่งจุด Q ต่ำ \(r_d\) ยิ่งสูง ในช่วงที่กราฟตั้งชันประมาณได้ด้วย \(26\ \text{mV}/I_D\) (ข้อ 2)</li>
+  <li><b>ความต้านทานกระแสสลับเฉลี่ย</b> \(r_{av}\) ใช้เส้นตรงระหว่างจุดต่ำสุดกับสูงสุดของสัญญาณ ค่าเดียวใช้แทนไดโอดได้ทั้งช่วง จึงเป็นค่าที่ใช้ในวงจรสมมูลของหน้า 1.6 (ข้อ 3)</li>
+  <li><b>ทั้งสามค่าลดลงเมื่อกระแสสูงขึ้น</b> และที่จุดทำงานเดียวกัน \(R_D\) มากกว่า \(r_d\) มาก เพราะเส้นจากจุดกำเนิดลาดกว่าเส้นสัมผัสเสมอ (สไลด์หน้า 50 และ 55 · Boylestad หัวข้อ 1.8)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The dc resistance</b> \(R_D = V_D/I_D\) is read at one point of the curve: the reciprocal of the slope of the line from the origin to the operating point, whatever the curve does around it. The higher the current, the lower it is (problem 1).</li>
+  <li><b>The ac resistance</b> \(r_d = \Delta V_d/\Delta I_d\) uses the tangent at the Q-point (the quiescent point, the operating point with no signal), with small, equal swings on both sides of Q. The lower the Q-point, the higher \(r_d\); on the steep part it is about \(26\ \text{mV}/I_D\) (problem 2).</li>
+  <li><b>The average ac resistance</b> \(r_{av}\) uses the straight line between the lowest and highest points of the signal. One value stands for the diode over the whole range, which is why the equivalent circuits of page 1.6 use it (problem 3).</li>
+  <li><b>All three fall as the current rises</b>, and at the same point \(R_D\) is far above \(r_d\), because the line from the origin is always less steep than the tangent (slides pp. 50 and 55; Boylestad, section 1.8).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch1/p45.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 45, Resistance Levels, DC or Static Resistance: the application of a dc voltage to a circuit containing a semiconductor diode will result in an operating point on the characteristic curve that will not change with time. The resistance of the diode at the operating point can be found simply by finding the corresponding levels of V_D and I_D as shown in the figure: a diode curve with a point marked, an arrow across to I_D on the current axis and an arrow down to V_D on the voltage axis.">
+  <figcaption data-l="th">สไลด์หน้า 45: ความต้านทานกระแสตรง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 45: dc resistance · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch1/p56.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 56, Resistance Levels, Summary Table (Table 1.6, Resistance Levels): DC or static, R_D = V_D/I_D, defined as a point on the characteristics, drawn as a point Q with V_D and I_D; AC or dynamic, r_d = ΔV_d/ΔI_d = 26 mV/I_D, defined by a tangent line at the Q-point, drawn with ΔV_d and ΔI_d along a tangent; Average ac, r_av = ΔV_d/ΔI_d point to point, defined by a straight line between limits of operation, drawn with a chord between two points.">
+  <figcaption data-l="th">สไลด์หน้า 56: ตารางสรุปสามระดับ (ตาราง 1.6) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 56: the three levels in one table (Table 1.6) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 45, 50 และ 54 ไม่มีสมการ (1.4), (1.5) และ (1.8)</b> ข้อความจบด้วย "as shown in Figure" หรือ "In equation form" แล้วเว้นว่าง สมการที่ขาดไปอยู่ในกรอบด้านบน (Boylestad หัวข้อ 1.8) ส่วนตารางสรุปในสไลด์หน้า 56 มีครบ</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 45, 50 and 54 leave out Eqs. (1.4), (1.5) and (1.8)</b>: the text ends with "as shown in Figure" or "In equation form" and then a blank. The equations are in the box above (Boylestad, section 1.8); the summary table of slide p. 56 has them all.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สามระดับที่จุดเดียวกัน</a><a href="#ex1"><b>1</b>Ex.1 ความต้านทานกระแสตรง</a><a href="#ex2"><b>2</b>Ex.2 ความต้านทานกระแสสลับ</a><a href="#ex3"><b>3</b>ความต้านทานเฉลี่ย</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Three levels at one point</a><a href="#ex1"><b>1</b>Ex.1 dc resistance</a><a href="#ex2"><b>2</b>Ex.2 ac resistance</a><a href="#ex3"><b>3</b>Average resistance</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">สามระดับความต้านทานที่จุดทำงานเดียวกัน</h2><h2 data-l="en">The three resistance levels at one operating point</h2>
+    <div class="src" data-l="th">สไลด์หน้า 45, 49–50, 54–56 · ใช้เส้นโค้งของรูป 1.27</div><div class="src" data-l="en">Slides pp. 45, 49–50, 54–56 · on the curve of Fig. 1.27</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p49.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 49, Resistance Levels, AC or Dynamic Resistance: the dc resistance of a diode is independent of the shape of the characteristic in the region surrounding the point of interest. The varying input will move the instantaneous operating point up and down a region of the characteristics and thus defines a specific change in current and voltage as shown in the figure: a steep diode characteristic with a tangent line through the Q-point (dc operation), a sine wave beside it marking ΔI_d, and ΔV_d marked below.">
+    <figcaption data-l="th">สไลด์หน้า 49: สัญญาณเล็กแกว่งรอบจุด Q · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 49: a small signal swings about Q · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p50.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 50, Resistance Levels, AC or Dynamic Resistance: a straight line drawn tangent to the curve through the Q-point as shown in the figure will define a particular change in voltage and current that can be used to determine the ac or dynamic resistance for this region of the diode characteristics. A small figure shows the curve, the Q-point, the tangent and the ΔI_d and ΔV_d of a right triangle. Quote: In general, therefore, the lower the Q-point of operation (smaller current or lower voltage) the higher the ac resistance.">
+    <figcaption data-l="th">สไลด์หน้า 50: เส้นสัมผัสที่จุด Q · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 50: the tangent at Q · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เลื่อนกระแสที่จุดทำงาน \(I_Q\) แล้วดูสามเส้นบนกราฟเดียวกัน: เส้นสีชมพูจากจุดกำเนิดให้ \(R_D\) เส้นสีเขียวที่สัมผัสกราฟให้ \(r_d\) และเส้นสีม่วงระหว่างปลายทั้งสองของสัญญาณ (\(I_Q \pm\) แอมพลิจูด) ให้ \(r_{av}\) ปรับแอมพลิจูดให้เล็กลง \(r_{av}\) จะเข้าใกล้ \(r_d\) ภาพจำลองใช้แหล่งจ่ายกระแสที่มีทั้งค่าคงที่และสัญญาณไซน์ ชี้เมาส์ที่ไดโอดเพื่ออ่านค่าขณะนั้น</p>
+  <p class="lead" data-l="en">Move the operating current \(I_Q\) and watch three lines on one graph: the pink line from the origin gives \(R_D\), the green tangent gives \(r_d\), and the purple line between the two ends of the signal (\(I_Q \pm\) the amplitude) gives \(r_{av}\). Shrink the amplitude and \(r_{av}\) approaches \(r_d\). The simulation drives a current source with a dc part and a sine wave; hover over the diode to read it at each instant.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.1: ความต้านทานกระแสตรงที่ 2 mA, 20 mA และ −10 V</h2><h2 data-l="en">Ex.1: dc resistance at 2 mA, 20 mA and −10 V</h2>
+    <div class="src" data-l="th">สไลด์หน้า 46–48 · Boylestad Example 1.3 (รูป 1.24) · สไลด์มีแต่โจทย์ เฉลยจากตำรา</div><div class="src" data-l="en">Slides pp. 46–48 · Boylestad Example 1.3 (Fig. 1.24) · the slides give the problem; the solution follows the book</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p46.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 46, Resistance Levels, DC or Static Resistance, Ex.1: determine the dc resistance levels for the diode of the figure at (a) I_D = 2 mA (low level). The figure is a silicon diode characteristic with I_D in mA up to 30, ticks at 2, 10, 20 and 30 mA, V_D ticks at 0.5 and 0.8 V, dashed arrows from 2 mA across to the curve and down to 0.5 V and from 20 mA across and down to 0.8 V, and on the reverse side a point at −10 V on a level marked −1 µA. Slides 47 and 48 repeat the figure with parts (b) I_D = 20 mA (high level) and (c) V_D = −10 V (reverse bias).">
+    <figcaption data-l="th">สไลด์หน้า 46 (หน้า 47–48 ใช้รูปเดิมกับข้อ b และ c) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 46 (pp. 47–48 repeat the figure for parts b and c) · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาความต้านทานกระแสตรงของไดโอดตามกราฟในรูปที่ (a) \(I_D = 2\) mA (ระดับต่ำ) (b) \(I_D = 20\) mA (ระดับสูง) (c) \(V_D = -10\) V (ไบแอสกลับ)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Determine the dc resistance levels for the diode of the figure at (a) \(I_D = 2\) mA (low level), (b) \(I_D = 20\) mA (high level), (c) \(V_D = -10\) V (reverse bias).</p></div>
+  <p class="lead" data-l="th">วงจรในภาพจำลองใช้แหล่งจ่ายกระแสกำหนด \(I_D\) ให้ไดโอดตามข้อ (a) และ (b) และใช้แหล่งจ่ายแรงดัน −10 V ในข้อ (c) ตัวแก้วงจรใช้เส้นโค้งที่อ่านจากรูป 1.24 ทีละจุด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The circuit in the picture sets \(I_D\) with a current source for parts (a) and (b), and puts −10 V across the diode for part (c). The solver uses the curve of Fig. 1.24, read off point by point. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.2: ความต้านทานกระแสสลับที่ 2 mA และ 25 mA</h2><h2 data-l="en">Ex.2: ac resistance at 2 mA and 25 mA</h2>
+    <div class="src" data-l="th">สไลด์หน้า 51–53 · Boylestad Example 1.4 (รูป 1.27) · สไลด์มีแต่โจทย์ เฉลยจากตำรา</div><div class="src" data-l="en">Slides pp. 51–53 · Boylestad Example 1.4 (Fig. 1.27) · the slides give the problem; the solution follows the book</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p51.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 51, Resistance Levels, AC or Dynamic Resistance, Ex.2: for the characteristics of the figure, (a) determine the ac resistance at I_D = 2 mA. The figure is a diode curve with I_D up to 30 mA and V_D from 0 to 1 V in steps of 0.1 V, a black dot at 2 mA with a short tangent, dashed lines at 4 and 2 mA, brackets ΔI_d on the right and ΔV_d under the axis near 0.7 V, and a second black dot at 25 mA with dashed lines at 20 and 30 mA, a bracket ΔI_d and ΔV_d near 0.8 V. Slides 52 and 53 repeat it with (b) the ac resistance at I_D = 25 mA and (c) compare the results of parts (a) and (b) to the dc resistances at each current level.">
+    <figcaption data-l="th">สไลด์หน้า 51 (หน้า 52–53 ใช้รูปเดิมกับข้อ b และ c) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 51 (pp. 52–53 repeat the figure for parts b and c) · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จากกราฟในรูป (a) จงหาความต้านทานกระแสสลับที่ \(I_D = 2\) mA (b) จงหาความต้านทานกระแสสลับที่ \(I_D = 25\) mA (c) เทียบผลของข้อ (a) และ (b) กับความต้านทานกระแสตรงที่กระแสเดียวกัน</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the characteristics of the figure: (a) determine the ac resistance at \(I_D = 2\) mA; (b) determine the ac resistance at \(I_D = 25\) mA; (c) compare the results of parts (a) and (b) to the dc resistances at each current level.</p></div>
+  <p class="lead" data-l="th">แหล่งจ่ายกระแสมีทั้งค่าคงที่ (จุด Q) และสัญญาณเล็กแบบไซน์ จุดสีขาวบนกราฟคือจุดทำงานขณะนั้นที่วิ่งขึ้นลงตามเส้นโค้ง เส้นสัมผัสสีเขียวลากตามตำแหน่งที่ตำราใช้ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The current source has a dc part (the Q-point) and a small sine wave; the white dot on the graph is the operating point at each instant, riding up and down the curve. The green tangents are drawn where the book draws them. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ความต้านทานกระแสสลับเฉลี่ยระหว่าง 2 mA ถึง 17 mA</h2><h2 data-l="en">The average ac resistance from 2 mA to 17 mA</h2>
+    <div class="src" data-l="th">สไลด์หน้า 54–55 · ตัวอย่างในเนื้อหา Boylestad หัวข้อ 1.8 (รูป 1.28) · สไลด์ไม่ได้คำนวณ</div><div class="src" data-l="en">Slides pp. 54–55 · the worked example in Boylestad section 1.8 (Fig. 1.28) · the slides do not work the numbers</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p54.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 54, Resistance Levels, Average AC Resistance: the average ac resistance is, by definition, the resistance determined by a straight line drawn between the two intersections established by the maximum and minimum values of input voltage. In equation form (the equation is missing). The figure is a diode curve with I_D up to 20 mA and V_D from 0 to 1 V, with a straight line between a point near 2 mA and a point near 17 mA, a bracket ΔI_d on the left and ΔV_d below the axis near 0.7 V.">
+    <figcaption data-l="th">สไลด์หน้า 54: เส้นตรงระหว่างขอบเขตของสัญญาณ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 54: a straight line between the limits of the signal · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p55.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 55, Resistance Levels, Average AC Resistance: the fact that one resistance level can be used for such a wide range of the characteristics will prove quite useful in the definition of equivalent circuits for a diode in a later section. Quote: As with the dc and ac resistance levels, the lower the level of currents used to determine the average resistance the higher the resistance level. The figure of slide 54 is repeated.">
+    <figcaption data-l="th">สไลด์หน้า 55: ค่าเดียวใช้ได้ทั้งช่วง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 55: one value for the whole range · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>สัญญาณขาเข้าทำให้กระแสของไดโอดในรูปแกว่งระหว่าง 2 mA ถึง 17 mA จงหาความต้านทานกระแสสลับเฉลี่ยในช่วงนี้</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The input signal swings the current of the diode in the figure between 2 mA and 17 mA. Find the average ac resistance over this range.</p></div>
+  <p class="lead" data-l="th">จุดสีขาววิ่งตามเส้นโค้งระหว่าง 2 mA ถึง 17 mA ตามสัญญาณใหญ่ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The white dot rides the curve between 2 mA and 17 mA with the large signal. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ \(V_T \cong 26\) mV และ \(n = 1\) เมื่อไม่ได้บอกเป็นอื่น · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use \(V_T \cong 26\) mV and \(n = 1\) unless told otherwise · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สามเส้นบนกราฟเดียว</h3>
+    <ol><li>ส่วน A ตั้ง \(I_Q = 2\) mA: เส้นสีชมพู (\(R_D\)) ลาดกว่าเส้นสีเขียว (\(r_d\)) มาก \(R_D\) จึงสูงกว่า \(r_d\) หลายเท่า</li>
+    <li>เลื่อน \(I_Q\) ขึ้นไป 25 mA: ทั้งสองค่าลดลง แต่ \(r_d\) ลดเร็วกว่า</li>
+    <li>ลดแอมพลิจูดลงเรื่อย ๆ: เส้นสีม่วงหมุนเข้าหาเส้นสีเขียว \(r_{av}\) เข้าใกล้ \(r_d\) นี่คือเหตุผลที่ \(r_d\) นิยามด้วยสัญญาณเล็ก</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — สูตร 26 mV</h3>
+    <ol><li>ที่ 25 mA เส้นสัมผัสให้ 2 Ω เทียบกับ 26 mV/25 mA = 1.04 Ω ส่วนเกินราว 1 Ω คือ \(r_B\) ความต้านทานของเนื้อสารและหน้าสัมผัส (สมการ 1.7) ส่วนที่ 2 mA (เข่าของกราฟ) ค่าจากกราฟสูงกว่า \(26\ \text{mV}/I_Q\) ราวสองเท่า ตรงกับที่ตำราให้คูณ 2 (\(n = 2\))</li>
+    <li>ส่วน A เลื่อน \(I_Q\) เกิน 25 mA แล้วเทียบ \(r_d\) กับ \(26\ \text{mV}/I_Q\) ในแผงข้างภาพ: ทั้งสองค่าลดลง แต่ \(r_d\) มากกว่าอยู่ราว 1 Ω เสมอ ภาพจำลองต่อกราฟส่วนนี้ด้วย \(r_B = 0.96\ \Omega\)</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 45–56 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.8 (Examples 1.3, 1.4, รูป 1.28, ตาราง 1.6)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — three lines on one graph</h3>
+    <ol><li>In section A set \(I_Q = 2\) mA: the pink line (\(R_D\)) is far less steep than the green one (\(r_d\)), so \(R_D\) is many times \(r_d\).</li>
+    <li>Move \(I_Q\) up to 25 mA: both fall, but \(r_d\) falls faster.</li>
+    <li>Keep shrinking the amplitude: the purple line turns towards the green one and \(r_{av}\) approaches \(r_d\). That is why \(r_d\) is defined with a small signal.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the 26 mV formula</h3>
+    <ol><li>At 25 mA the tangent gives 2 Ω against 26 mV/25 mA = 1.04 Ω; the extra ≈1 Ω is \(r_B\), the body and contact resistance (Eq. 1.7). At 2 mA (the knee) the graph gives about twice \(26\ \text{mV}/I_Q\), which is why the book doubles it there (\(n = 2\)).</li>
+    <li>In section A move \(I_Q\) above 25 mA and compare \(r_d\) with \(26\ \text{mV}/I_Q\) in the side panel: both fall, but \(r_d\) stays about 1 Ω higher. The simulation continues the curve there with \(r_B = 0.96\ \Omega\).</li></ol>
+    <div class="book">Chapter 1 slides pp. 45–56 · Boylestad &amp; Nashelsky, 11th ed., section 1.8 (Examples 1.3, 1.4, Fig. 1.28, Table 1.6)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, F = CH1.F127;
+  CH1.problem(1, 'ex1'); CH1.problem(2, 'ex2'); CH1.problem(3, 'avg');
+
+  /* =================================================================== A: the three levels at one operating point (Fig. 1.27 curve) */
+  const SA = { IQ: 10, amp: 4, ph: 0, run: true };
+  const lv = () => { const IQ = SA.IQ, lo = Math.max(0.05, IQ - SA.amp), hi = IQ + SA.amp, VQ = F.vAt(IQ), vlo = F.vAt(lo), vhi = F.vAt(hi), sl = F.slope(VQ);
+    return { IQ, VQ, lo, hi, vlo, vhi, RD: VQ / IQ * 1000, rd: 1000 / sl, rav: (vhi - vlo) / (hi - lo) * 1000, r26: 26 / IQ }; };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.42, rowAsp: 0.7, pad: 1.25, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const L = lv(), sh = bd.short, c = BA.ckt, v = c ? c.Vab('D').re : L.VQ, i = c ? c.I('D').re * 1e3 : L.IQ, top = L.hi > 16 ? 40 : 20, dI = top / 4, dv = dI * L.rd / 1000;   // the tangent spans ±top/4 in current
+      IE.ivPlot(ctx, b, { v: [0, 1], i: [0, top], xt: [0.2, 0.4, 0.6, 0.8, 1], yt: top > 20 ? [10, 20, 30, 40] : [5, 10, 15, 20], curves: [{ f: F }],
+        segs: [{ a: [0, 0], b: [L.VQ, L.IQ], color: C.chord, w: 2.4 }, { a: [L.VQ - dv, L.IQ - dI], b: [L.VQ + dv, L.IQ + dI], color: C.tan, w: 2.6 },
+          { a: [L.vlo, L.lo], b: [L.vhi, L.hi], color: C.avg, w: 2.4, dash: [7, 4] }],
+        pts: [{ v: L.vlo, i: L.lo, color: C.avg, r: 4.5 }, { v: L.vhi, i: L.hi, color: C.avg, r: 4.5 }, { v: L.VQ, i: L.IQ, color: C.q, label: sh ? 'Q' : `Q: ${fd(L.VQ, 3)} V, ${fd(L.IQ, 1)} mA`, side: -1 }, { v, i, color: '#e8ecf7', r: 4.5 }],
+        title: sh ? '' : t('เส้นโค้งของรูป 1.27', 'the curve of Fig. 1.27') }); },
+    badge: () => [[`R_D = ${fd(lv().RD, 1)} Ω · r_d = ${fd(lv().rd, 2)} Ω · r_av = ${fd(lv().rav, 2)} Ω`, `R_D = ${fd(lv().RD, 1)} Ω · r_d = ${fd(lv().rd, 2)} Ω · r_av = ${fd(lv().rav, 2)} Ω`], 'ok'] });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('จุดทำงาน', 'Operating point'));
+  ui.slider(pA, { id: 'aI', label: 'I_Q', min: 1, max: 30, step: 0.5, value: SA.IQ, fmt: v => `${fd(v, 1)} mA`, oninput: v => { SA.IQ = v; SA.amp = Math.min(SA.amp, v - 0.1); amp.set(SA.amp); showA(); } });
+  ui.h2(pA, t('แอมพลิจูดของสัญญาณ', 'Signal amplitude'));
+  const amp = ui.slider(pA, { id: 'aD', label: 'ΔI', min: 0.2, max: 10, step: 0.1, value: SA.amp, fmt: v => `± ${fd(v, 1)} mA`, oninput: v => { SA.amp = Math.min(v, SA.IQ - 0.1); showA(); } });
+  ui.buttons(pA, [{ label: t('หยุดสัญญาณ', 'Pause the signal'), onclick: el => { SA.run = !SA.run; el.classList.toggle('on', !SA.run); } }]);
+  pA.appendChild(mA); mA.className = 'metrics';
+  function showA() { const L = lv();
+    mA.innerHTML = ui.kv([['V_Q', `${fd(L.VQ, 3)} V`], ['R_D = V_Q/I_Q', `${fd(L.RD, 2)} Ω`], ['r_d (' + t('เส้นสัมผัส', 'tangent') + ')', `${fd(L.rd, 2)} Ω`], ['26 mV/I_Q', `${fd(L.r26, 2)} Ω`], ['r_av (' + t('ระหว่างปลาย', 'end to end') + ')', `${fd(L.rav, 2)} Ω`]]);
+    $('wA').innerHTML = `<div class="answer">${t(`ที่ \\(I_Q = ${fd(L.IQ, 1)}\\) mA: \\(R_D = ${fd(L.RD, 1)}\\ \\Omega\\) สูงกว่า \\(r_d = ${fd(L.rd, 2)}\\ \\Omega\\) ราว ${fd(L.RD / L.rd, 0)} เท่า สัญญาณ ±${fd(SA.amp, 1)} mA ให้ \\(r_{av} = ${fd(L.rav, 2)}\\ \\Omega\\) ${Math.abs(L.rav / L.rd - 1) < 0.1 ? 'ใกล้ \\(r_d\\) เพราะสัญญาณเล็ก' : 'ยังต่างจาก \\(r_d\\) เพราะสัญญาณกวาดส่วนที่โค้งของกราฟ'}`,
+      `At \\(I_Q = ${fd(L.IQ, 1)}\\) mA: \\(R_D = ${fd(L.RD, 1)}\\ \\Omega\\), about ${fd(L.RD / L.rd, 0)} times \\(r_d = ${fd(L.rd, 2)}\\ \\Omega\\). A ±${fd(SA.amp, 1)} mA signal gives \\(r_{av} = ${fd(L.rav, 2)}\\ \\Omega\\), ${Math.abs(L.rav / L.rd - 1) < 0.1 ? 'close to \\(r_d\\) because the signal is small.' : 'still unlike \\(r_d\\) because the signal sweeps a curved part of the graph.'}`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); BA.set(CH1.drive({ I: SA.IQ / 1000, d: CH1.T127, sText: t('I_Q + สัญญาณ', 'I_Q + signal') }), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => { if (SA.run) SA.ph += dt * Math.PI * 2 / 4; const c = BA.ckt, p = c && c.part('S'); if (p) { p.value = (SA.IQ + SA.amp * Math.sin(SA.ph)) / 1000; c.solve(); } BA.frame(dt); });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ไดโอดมี \\(V_D = 0.65\\) V ที่ \\(I_D = 5\\) mA จงหาความต้านทานกระแสตรง', '1) A diode has \\(V_D = 0.65\\) V at \\(I_D = 5\\) mA. Find its dc resistance.'),
+      fields: [{ key: 'x', lab: 'R_D =', ans: 130, unit: 'Ω' }], work: work(R`R_D = \frac{0.65\ \text{V}}{5\ \text{mA}} = 130\ \Omega`) },
+    { q: t('2) ใช้สมการ (1.6) หาความต้านทานกระแสสลับที่ \\(I_D = 13\\) mA และที่ \\(I_D = 0.5\\) mA (ช่วงเข่าของกราฟ ใช้ \\(n = 2\\))', '2) Use Eq. (1.6) for the ac resistance at \\(I_D = 13\\) mA, and at \\(I_D = 0.5\\) mA (the knee: use \\(n = 2\\)).'),
+      fields: [{ key: 'x', lab: 'r_d(13 mA) =', ans: 2, unit: 'Ω' }, { key: 'y', lab: 'r_d(0.5 mA) =', ans: 104, unit: 'Ω' }],
+      work: work(R`\begin{aligned} r_d &= \frac{26\ \text{mV}}{13\ \text{mA}} = 2\ \Omega \\ r_d &= 2\left(\frac{26\ \text{mV}}{0.5\ \text{mA}}\right) = 104\ \Omega \end{aligned}`) },
+    { q: t('3) ไดโอดตัวหนึ่ง: ที่ 0.6 V กระแส 1 mA และที่ 0.75 V กระแส 16 mA จงหาความต้านทานกระแสสลับเฉลี่ยในช่วงนี้', '3) A diode carries 1 mA at 0.6 V and 16 mA at 0.75 V. Find the average ac resistance over this range.'),
+      fields: [{ key: 'x', lab: 'r_av =', ans: 10, unit: 'Ω' }], work: work(R`r_{av} = \frac{0.75 - 0.6}{16\ \text{mA} - 1\ \text{mA}} = \frac{0.15\ \text{V}}{15\ \text{mA}} = 10\ \Omega`) },
+    { q: t('4) ไดโอดในข้อ 2 ของหน้านี้ (รูป 1.27) วัดความต้านทานกระแสสลับจากกราฟได้ 2 Ω ที่ 25 mA ถ้าสมการ (1.7) ใช้ได้ \\(r_B\\) มีค่าเท่าใด', '4) For the diode of problem 2 on this page (Fig. 1.27) the graph gives 2 Ω at 25 mA. If Eq. (1.7) holds, what is \\(r_B\\)?'),
+      fields: [{ key: 'x', lab: 'r_B =', ans: 0.96, unit: 'Ω', tol: 0.011 }], work: work(R`r_B = r_d - \frac{26\ \text{mV}}{I_D} = 2 - \frac{26\ \text{mV}}{25\ \text{mA}} = 2 - 1.04 = 0.96\ \Omega`) },
+    { q: t('5) ไดโอดกลับขั้วที่ \\(V_D = -20\\) V มีกระแสย้อนกลับ 0.5 µA จงหาความต้านทานกระแสตรง (ตอบเป็น MΩ)', '5) A reverse-biased diode at \\(V_D = -20\\) V carries 0.5 µA. Find its dc resistance (in MΩ).'),
+      fields: [{ key: 'x', lab: 'R_D =', ans: 40, unit: 'MΩ' }], work: work(R`R_D = \frac{20\ \text{V}}{0.5\ \mu\text{A}} = 40\ \text{M}\Omega`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

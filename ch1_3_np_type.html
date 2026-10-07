@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.3 — n-Type and p-Type Materials">1.3 — สารกึ่งตัวนำชนิด n และชนิด p</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">สารกึ่งตัวนำชนิด n และชนิด p: เติมสารเจือแล้วอะไรเปลี่ยน <span class="en">n-type and p-type materials: what doping changes</span></h1>
+<h1 data-l="en">n-type and p-type materials <span class="en">What doping changes</span></h1>
+
+<p class="sub" data-l="th">สารกึ่งตัวนำบริสุทธิ์ยังนำไฟฟ้าไม่ดี แต่ถ้าเติมอะตอมแปลกปลอม (impurity) เพียงหนึ่งส่วนในสิบล้านส่วน สมบัติทางไฟฟ้าจะเปลี่ยนไปอย่างสิ้นเชิง กระบวนการนี้เรียกว่าการเจือสาร (doping) และวัสดุที่ได้เรียกว่าสารกึ่งตัวนำไม่บริสุทธิ์ (extrinsic material) สไลด์หน้า 23–31 อธิบายวัสดุชนิด n ชนิด p การไหลของโฮลเทียบกับอิเล็กตรอน และพาหะข้างมากกับข้างน้อย หน้านี้มีภาพจำลองการเจือสาร (ส่วน A) การไหลของโฮล (ส่วน B) พาหะข้างมากและข้างน้อย (ส่วน C) โจทย์ข้อ 1 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">A pure semiconductor is still a poor conductor, but add foreign atoms (impurities) at only one part in ten million and its electrical properties change completely. The process is called doping, and the result an extrinsic material. Slides pp. 23–31 cover n-type and p-type material, hole flow against electron flow, and majority and minority carriers. This page has doping (section A), hole flow (section B), majority and minority carriers (section C), problem 1 and more practice.</p>
+<div class="equation-box eqwrap">$$ \text{Si} + \text{Sb, As, P} \Rightarrow \text{n} $$ $$ \text{Si} + \text{B, Ga, In} \Rightarrow \text{p} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ชนิด n</b>: อะตอมที่มีเวเลนซ์อิเล็กตรอนห้าตัว (หมู่ V: พลวง Sb, สารหนู As, ฟอสฟอรัส P) ใช้สี่ตัวสร้างพันธะ เหลือตัวที่ห้าที่ยึดไว้หลวม ๆ หลุดเป็นอิสระได้ง่าย อะตอมนี้ "ให้" อิเล็กตรอน จึงเรียกว่าโดเนอร์ (donor) (สไลด์หน้า 24–25)</li>
+  <li><b>ระดับโดเนอร์</b>: อิเล็กตรอนตัวที่ห้าอยู่ในระดับพลังงานใต้แถบนำเพียงราว 0.05 อิเล็กตรอนโวลต์ (electron volt, eV) ในซิลิคอน ที่อุณหภูมิห้องจึงขึ้นไปแถบนำได้แทบทุกตัว การนำไฟฟ้าเพิ่มขึ้นมาก (สไลด์หน้า 26)</li>
+  <li><b>ชนิด p</b>: อะตอมที่มีเวเลนซ์อิเล็กตรอนสามตัว (หมู่ III: โบรอน B, แกลเลียม Ga, อินเดียม In) สร้างพันธะได้ไม่ครบ ช่องว่างที่เหลือคือโฮล ซึ่ง "รับ" อิเล็กตรอนได้ง่าย อะตอมนี้จึงเรียกว่าแอกเซปเตอร์ (acceptor) วัสดุทั้งสองชนิดยังเป็นกลางทางไฟฟ้า (สไลด์หน้า 27–28)</li>
+  <li><b>โฮลเคลื่อนที่สวนทางกับอิเล็กตรอน</b>: เวเลนซ์อิเล็กตรอนกระโดดเข้าโฮลไปทางขวา โฮลจึงย้ายไปทางซ้าย ทิศของกระแสในตำราคือทิศของกระแสสมมติ ซึ่งตรงกับทิศการไหลของโฮล (สไลด์หน้า 29)</li>
+  <li><b>พาหะข้างมากและข้างน้อย</b>: ในชนิด n อิเล็กตรอนเป็นพาหะข้างมาก โฮลเป็นพาหะข้างน้อย ในชนิด p กลับกัน วัสดุชนิด n และ p คือชิ้นส่วนพื้นฐานของอุปกรณ์สารกึ่งตัวนำทุกชนิด (สไลด์หน้า 30–31)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>n-type</b>: an atom with five valence electrons (Group V: antimony Sb, arsenic As, phosphorus P) uses four for bonds and keeps a loosely bound fifth one that breaks free easily. It "donates" an electron, so it is called a donor (slides pp. 24–25).</li>
+  <li><b>The donor level</b>: the fifth electron sits only about 0.05 electron volts (eV) below the conduction band in silicon, so at room temperature almost every one is up in the conduction band, and the conductivity rises a great deal (slide p. 26).</li>
+  <li><b>p-type</b>: an atom with three valence electrons (Group III: boron B, gallium Ga, indium In) cannot complete its bonds; the vacancy left is a hole, which readily "accepts" an electron, so the atom is called an acceptor. Both materials stay electrically neutral (slides pp. 27–28).</li>
+  <li><b>Holes move against the electrons</b>: valence electrons jump into a hole towards the right, so the hole moves to the left. The current direction of the book is conventional current, the direction of hole flow (slide p. 29).</li>
+  <li><b>Majority and minority carriers</b>: in n-type material electrons are the majority carriers and holes the minority; in p-type the other way round. n- and p-type materials are the building blocks of every semiconductor device (slides pp. 30–31).</li></ul></section>
+
+<figure class="slide q"><img src="slides/ch1/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 23, Extrinsic Materials n-type and p-type: the characteristics of semiconductor materials can be altered significantly by the addition of certain impurity atoms into the relatively pure semiconductor material. Only added to perhaps 1 part in 10 million, can alter the band structure sufficiently to totally change the electrical properties of the material. Quote: A semiconductor material that has been subjected to the doping process is called an extrinsic material. There are two extrinsic materials of immeasurable importance to semiconductor device fabrication: n-type and p-type.">
+  <figcaption data-l="th">สไลด์หน้า 23: สารกึ่งตัวนำไม่บริสุทธิ์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 23: extrinsic materials · tap to enlarge</figcaption></figure>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>เติมโดเนอร์หรือแอกเซปเตอร์</a><a href="#tB"><b>B</b>โฮลไหลสวนทางอิเล็กตรอน</a><a href="#tC"><b>C</b>พาหะข้างมากและข้างน้อย</a><a href="#ex1"><b>1</b>เจือสารแล้วพาหะเพิ่มกี่เท่า</a><a href="#tD"><b>D</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Add a donor or an acceptor</a><a href="#tB"><b>B</b>Holes flow against electrons</a><a href="#tC"><b>C</b>Majority and minority carriers</a><a href="#ex1"><b>1</b>How many more carriers?</a><a href="#tD"><b>D</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">เติมโดเนอร์หรือแอกเซปเตอร์ลงในผลึกซิลิคอน</h2><h2 data-l="en">Put a donor or an acceptor into a silicon crystal</h2>
+    <div class="src" data-l="th">สไลด์หน้า 24–28 · Boylestad หัวข้อ 1.5 (รูป 1.7–1.9)</div><div class="src" data-l="en">Slides pp. 24–28 · Boylestad, section 1.5 (Figs. 1.7–1.9)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 24, Extrinsic Materials n-type and p-type, n-Type Material: the n-type is created by introducing those impurity elements that have five valence electrons (pentavalent), such as antimony (Sb), arsenic (As) and phosphorus (P). The four covalent bonds are still present. There is, however, an additional fifth electron due to the impurity atom, which is unassociated with any particular covalent bond. Figure: a 3 by 3 grid of Si atoms with an Sb atom in the centre and its fifth valence electron marked.">
+    <figcaption data-l="th">สไลด์หน้า 24: พลวงในผลึกซิลิคอน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 24: antimony in a silicon crystal · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 25, Extrinsic Materials n-type and p-type, n-Type Material: this remaining electron, loosely bound to its parent (antimony) atom, is relatively free to move within the newly formed n-type material, since the inserted impurity atom has donated a relatively free electron to the structure. Quote: Diffused impurities with five valence electrons are called donor atoms. The figure of slide 24 is repeated.">
+    <figcaption data-l="th">สไลด์หน้า 25: อะตอมโดเนอร์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 25: donor atoms · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 26, Extrinsic Materials n-type and p-type, n-Type Material: the effect of this doping process on the relative conductivity can best be described through the use of the energy-band diagram of the figure. Note that a discrete energy level (called the donor level) appears in the forbidden band with an E_g significantly less than that of the intrinsic material. Figure: conduction band, a dashed donor energy level just below it with E_g = 0.05 eV (Si), 0.01 eV (Ge), E_g as before, and the valence band. Effect of donor impurities on the energy band structure.">
+    <figcaption data-l="th">สไลด์หน้า 26: ระดับโดเนอร์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 26: the donor level · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p27.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 27, Extrinsic Materials n-type and p-type, p-Type Material: the p-type material is formed by doping a pure germanium or silicon crystal with impurity atoms having three valence electrons. The elements most frequently used for this purpose are boron (B), gallium (Ga) and indium (In). The resulting vacancy is called a hole and is represented by a small circle or positive sign due to the absence of a negative charge, since the resulting vacancy will readily accept a free electron. Figure: a 3 by 3 grid of Si atoms with a B atom in the centre and a void marked in one of its bonds.">
+    <figcaption data-l="th">สไลด์หน้า 27: โบรอนในผลึกซิลิคอน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 27: boron in a silicon crystal · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 28, Extrinsic Materials n-type and p-type, p-Type Material: the resulting vacancy is called a hole and is represented by a small circle or positive sign due to the absence of a negative charge. Quote: The diffused impurities with three valence electrons are called acceptor atoms. The resulting p-type material is electrically neutral, for the same reasons described for the n-type material. The figure of slide 27 is repeated.">
+    <figcaption data-l="th">สไลด์หน้า 28: อะตอมแอกเซปเตอร์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 28: acceptor atoms · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เลือกสารเจือ แล้วสลับอุณหภูมิระหว่าง 0 K กับอุณหภูมิห้อง ที่ 0 K อิเล็กตรอนตัวที่ห้าของโดเนอร์ยังโคจรรอบอะตอมของมัน (เส้นประสีส้ม) และช่องว่างของแอกเซปเตอร์ยังอยู่ติดกับอะตอม ที่อุณหภูมิห้อง อิเล็กตรอนตัวที่ห้าหลุดเป็นอิสระ ทิ้งไอออนบวกไว้ หรืออิเล็กตรอนข้างเคียงกระโดดเข้าช่องว่าง ทิ้งไอออนลบไว้และโฮลเคลื่อนที่ออกไป ภาพแถบพลังงานแสดงระดับโดเนอร์หรือแอกเซปเตอร์</p>
+  <p class="lead" data-l="en">Pick an impurity and switch between 0 K and room temperature. At 0 K the donor's fifth electron still circles its atom (the dashed orange orbit) and the acceptor's vacancy still sits beside its atom. At room temperature the fifth electron breaks free and leaves a positive ion, or a neighbouring electron jumps into the vacancy, leaving a negative ion while the hole moves away. The band picture shows the donor or acceptor level among the bands.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">โฮลไหลสวนทางกับอิเล็กตรอน</h2><h2 data-l="en">Holes flow against the electrons</h2>
+    <div class="src" data-l="th">สไลด์หน้า 29 · Boylestad หัวข้อ 1.5 (รูป 1.10)</div><div class="src" data-l="en">Slide p. 29 · Boylestad, section 1.5 (Fig. 1.10)</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 29, Extrinsic Materials n-type and p-type, Electron versus Hole Flow: a valence electron acquires sufficient kinetic energy to break its covalent bond and fills the void created by a hole. A transfer of holes to the left and electrons to the right, as shown in the figure. The direction to be used in this text is that of conventional flow, which is indicated by the direction of hole flow. Figure: two rows of Si atoms, one of them with a B atom, and a curved arrow showing an electron jumping into the hole beside the B; arrows below: hole flow to the left, electron flow to the right.">
+    <figcaption data-l="th">สไลด์หน้า 29: การไหลของโฮลกับอิเล็กตรอน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: hole flow and electron flow · tap to enlarge</figcaption></figure>
+  <p class="lead" data-l="th">ผลึกชนิด p ที่มีโฮลสามตัว (แอกเซปเตอร์ไม่ได้วาดไว้) อยู่ในสนามไฟฟ้า ทุกครั้งที่เวเลนซ์อิเล็กตรอนกระโดดเข้าโฮล โฮลจะย้ายไปอยู่ที่พันธะที่อิเล็กตรอนตัวนั้นจากมา ดูว่าอิเล็กตรอนกระโดดไปทางไหน แล้วโฮลเลื่อนไปทางไหน กลับทิศสนามแล้วดูอีกครั้ง</p>
+  <p class="lead" data-l="en">A p-type crystal with three holes (the acceptors are not drawn) sits in an electric field. Each time a valence electron jumps into a hole, the hole moves to the bond the electron came from. See which way the electrons jump and which way the holes drift, then turn the field round.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">พาหะข้างมากและพาหะข้างน้อย</h2><h2 data-l="en">Majority and minority carriers</h2>
+    <div class="src" data-l="th">สไลด์หน้า 30–31 · Boylestad หัวข้อ 1.5 (รูป 1.11)</div><div class="src" data-l="en">Slides pp. 30–31 · Boylestad, section 1.5 (Fig. 1.11)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 30, Extrinsic Materials n-type and p-type, Majority and Minority Carriers: in an n-type material, the number of holes has not changed significantly from this intrinsic level. The net result, therefore, is that the number of electrons far outweighs the number of holes. Quote: In an n-type material the electron is called the majority carrier and the hole the minority carrier. Figure: an n-type block with circled plus donor ions, many minus majority carriers and three uncircled plus minority carriers.">
+    <figcaption data-l="th">สไลด์หน้า 30: วัสดุชนิด n · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 30: n-type material · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p31.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 31, Extrinsic Materials n-type and p-type, Majority and Minority Carriers: for the p-type material the number of holes far outweighs the number of electrons, as shown in the figure. Quote: In a p-type material the hole is the majority carrier and the electron is the minority carrier. The n- and p-type materials represent the basic building blocks of semiconductor devices. Figure: a p-type block with circled minus acceptor ions, many plus majority carriers and two uncircled minus minority carriers.">
+    <figcaption data-l="th">สไลด์หน้า 31: วัสดุชนิด p · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: p-type material · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ไอออนของสารเจือ (วงกลมมีเครื่องหมาย) ยึดอยู่กับที่ในผลึก พาหะเคลื่อนที่ไปมาได้ พาหะข้างน้อยมีวงล้อมไว้ให้เห็น ในวัสดุจริงอัตราส่วนสูงกว่าในภาพมาก ทั้งสองก้อนเป็นกลางทางไฟฟ้า เพราะประจุของไอออนรวมกับพาหะข้างน้อยหักล้างกับพาหะข้างมากพอดี (นับได้จากตัวเลขใต้ภาพ)</p>
+  <p class="lead" data-l="en">The impurity ions (circled signs) are fixed in the crystal; the carriers move about. The minority carriers are ringed so they can be seen; in a real material the ratio is far larger than drawn. Both blocks are electrically neutral, because the ions and minority carriers together balance the majority carriers (count them under the picture).</p>
+  <div class="card sim"><canvas id="cvC"></canvas></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">เจือสารหนึ่งส่วนในสิบล้าน พาหะเพิ่มขึ้นกี่เท่า</h2><h2 data-l="en">One part in ten million: how many more carriers?</h2>
+    <div class="src" data-l="th">สไลด์หน้า 23 · ตัวอย่างตัวเลขในเนื้อหา Boylestad หัวข้อ 1.5 · ไม่มีเฉลยในห้อง</div><div class="src" data-l="en">Slide p. 23 · the figures in the text of Boylestad section 1.5 · no class solution</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ซิลิคอนบริสุทธิ์ที่อุณหภูมิห้องมีอิเล็กตรอนอิสระราวหนึ่งตัวต่ออะตอม \(10^{12}\) อะตอม ถ้าเจือสารโดเนอร์หนึ่งอะตอมต่ออะตอมซิลิคอน \(10^7\) อะตอม (หนึ่งส่วนในสิบล้าน) และโดเนอร์ทุกตัวให้อิเล็กตรอนอิสระหนึ่งตัวที่อุณหภูมิห้อง (a) จำนวนพาหะเพิ่มขึ้นกี่เท่า (b) ถ้าซิลิคอนบริสุทธิ์มีพาหะ \(1.5\times10^{10}\) ต่อ cm³ (สไลด์หน้า 18) หลังเจือสารจะมีราวเท่าใด</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Pure silicon at room temperature has about one free electron for every \(10^{12}\) atoms. It is doped with one donor atom per \(10^7\) silicon atoms (one part in ten million), and every donor gives one free electron at room temperature. (a) By what factor does the number of carriers grow? (b) If pure silicon has \(1.5\times10^{10}\) carriers per cm³ (slide p. 18), about how many are there after doping?</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเทียบจำนวนพาหะต่ออะตอม \(10^{12}\) อะตอมบนสเกลลอการิทึม <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The picture compares the carriers per \(10^{12}\) atoms on a logarithmic scale. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tD">
+  <div class="prob-head"><span class="prob-no">D</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบเป็นตัวเลข</div><div class="src" data-l="en">Answer with a number</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — โดเนอร์และแอกเซปเตอร์</h3>
+    <ol><li>ส่วน A เลือกชนิด n ที่ 0 K: นับเวเลนซ์อิเล็กตรอนรอบโดเนอร์ได้แปดตัวในพันธะสี่พันธะ บวกตัวที่ห้าที่โคจรอยู่ เปลี่ยนเป็นอุณหภูมิห้อง: ตัวที่ห้าหลุดออกไป อะตอมกลายเป็นไอออนบวก</li>
+    <li>เลือกชนิด p ที่ 0 K: พันธะหนึ่งของแอกเซปเตอร์มีอิเล็กตรอนตัวเดียว เปลี่ยนเป็นอุณหภูมิห้อง: อิเล็กตรอนข้างเคียงกระโดดเข้ามา แอกเซปเตอร์เป็นไอออนลบ โฮลเคลื่อนออกไป</li>
+    <li>ดูแผงแถบพลังงาน: ระดับโดเนอร์อยู่ชิดแถบนำ ระดับแอกเซปเตอร์อยู่ชิดแถบเวเลนซ์ จึงต้องการพลังงานน้อยมาก</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ทิศของกระแส</h3>
+    <ol><li>ส่วน B สนามชี้ไปทางซ้าย: อิเล็กตรอนกระโดดไปทางขวา โฮลไหลไปทางซ้าย กระแสสมมติไหลทางเดียวกับโฮล</li>
+    <li>กลับทิศสนาม: ทั้งสองกลับทิศตาม กระแสสมมติยังตามโฮลเสมอ</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 23–31 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.5</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — donors and acceptors</h3>
+    <ol><li>In section A pick n-type at 0 K: count eight valence electrons around the donor in four bonds, plus the fifth one circling. Switch to room temperature: the fifth leaves and the atom becomes a positive ion.</li>
+    <li>Pick p-type at 0 K: one of the acceptor's bonds has a single electron. Switch to room temperature: a neighbouring electron jumps in, the acceptor becomes a negative ion and the hole moves away.</li>
+    <li>Look at the band panel: the donor level is just under the conduction band and the acceptor level just above the valence band, so very little energy is needed.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the current direction</h3>
+    <ol><li>In section B the field points left: electrons jump to the right and holes flow to the left. Conventional current goes the way of the holes.</li>
+    <li>Turn the field round: both reverse, and conventional current still follows the holes.</li></ol>
+    <div class="book">Chapter 1 slides pp. 23–31 · Boylestad &amp; Nashelsky, 11th ed., section 1.5</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, COL = CH6.COL, T = CH6.text;
+
+  /* =================================================================== A: doping a silicon crystal */
+  const DOP = { n: ['Sb', 'As', 'P'], p: ['B', 'Ga', 'In'] };
+  const SA = { kind: 'n', sym: 'Sb', warm: false }, LA = new IE.Lattice({ rows: 3, cols: 5, sym: 'Si', hop: 0 });
+  const PA = IE.pane($('cvA'), W => (W >= 640 ? W * 0.5 : W * 1.2));
+  const setA = () => { if (SA.kind === 'i') LA.dope(null); else LA.dope(SA.kind === 'n' ? 'donor' : 'acceptor', SA.sym, 1, 2);
+    LA.hop = SA.warm && SA.kind === 'p' ? 0.6 : 0; LA.setTarget(SA.warm && SA.kind === 'i' ? 1 : 0); if (SA.warm) setTimeout(() => LA.ionize(), 700); showA(); };
+  LS.anim($('cvA'), dt => { LA.step(dt); const { ctx, W, H } = PA, wide = W >= 640; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H);
+    const b1 = wide ? { x: 0, y: 0, w: Math.round(W * 0.6), h: H } : { x: 0, y: 0, w: W, h: Math.round(H * 0.55) }, b2 = wide ? { x: b1.w + 6, y: 0, w: W - b1.w - 6, h: H } : { x: 0, y: b1.h + 6, w: W, h: H - b1.h - 6 };
+    const name = SA.kind === 'i' ? t('ซิลิคอนบริสุทธิ์', 'pure silicon') : SA.kind === 'n' ? t(`ชนิด n: เจือ ${SA.sym}`, `n-type: ${SA.sym} added`) : t(`ชนิด p: เจือ ${SA.sym}`, `p-type: ${SA.sym} added`);
+    LA.draw(ctx, b1, { title: `${name} · ${SA.warm ? t('อุณหภูมิห้อง', 'room temperature') : '0 K'}` });
+    const d = LA.dop, lvl = d ? { kind: d.kind, n: 1, full: d.kind === 'donor' ? (d.ionized ? 0 : 1) : (d.ionized ? 1 : 0) } : null;
+    IE.bands(ctx, b2, { kind: 'semi', Eg: 1.1, nE: LA.nFree, nH: d && d.kind === 'acceptor' && !d.ionized ? 0 : LA.nHoles, level: lvl, short: !wide, title: t('แถบพลังงาน', 'energy bands') }); });
+  const pA = $('pA'), mA = document.createElement('div'), elBox = document.createElement('div');
+  ui.h2(pA, t('วัสดุ', 'Material'));
+  ui.radio(pA, [{ id: 'kI', label: t('บริสุทธิ์', 'pure Si') }, { id: 'kN', label: t('ชนิด n', 'n-type'), on: true }, { id: 'kP', label: t('ชนิด p', 'p-type') }], id => { SA.kind = { kI: 'i', kN: 'n', kP: 'p' }[id]; if (SA.kind !== 'i') SA.sym = DOP[SA.kind][0]; elems(); setA(); });
+  ui.h2(pA, t('สารเจือ', 'Impurity')); pA.appendChild(elBox);
+  function elems() { elBox.innerHTML = ''; if (SA.kind === 'i') { elBox.innerHTML = `<p class="metrics">${t('ไม่มีสารเจือ', 'no impurity')}</p>`; return; }
+    ui.radio(elBox, DOP[SA.kind].map(s => ({ id: 'e' + s, label: s, on: s === SA.sym })), id => { SA.sym = id.slice(1); setA(); }); }
+  ui.h2(pA, t('อุณหภูมิ', 'Temperature'));
+  ui.radio(pA, [{ id: 'tC', label: '0 K', on: true }, { id: 'tW', label: t('อุณหภูมิห้อง', 'room temperature') }], id => { SA.warm = id === 'tW'; setA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function showA() { const k = SA.kind, w = SA.warm;
+    mA.innerHTML = ui.kv([[t('เวเลนซ์อิเล็กตรอนของสารเจือ', 'valence electrons of the impurity'), k === 'i' ? '—' : k === 'n' ? '5' : '3'], [t('ชื่อ', 'name'), k === 'i' ? '—' : k === 'n' ? t('โดเนอร์', 'donor') : t('แอกเซปเตอร์', 'acceptor')],
+      [t('พาหะข้างมาก', 'majority carrier'), k === 'i' ? t('ไม่มี (จำนวนเท่ากัน)', 'none (equal numbers)') : k === 'n' ? t('อิเล็กตรอน', 'electrons') : t('โฮล', 'holes')]]);
+    $('wA').innerHTML = `<div class="answer">${k === 'i' ? t(w ? 'ซิลิคอนบริสุทธิ์ที่อุณหภูมิห้อง: มีพันธะแตกเป็นครั้งคราว ได้อิเล็กตรอนกับโฮลจำนวนเท่ากันและน้อยมาก (หน้า 1.2)' : 'ซิลิคอนบริสุทธิ์ที่ 0 K: ทุกพันธะครบ ไม่มีพาหะอิสระ', w ? 'Pure silicon at room temperature: a bond breaks now and then, giving equal, very small numbers of electrons and holes (page 1.2).' : 'Pure silicon at 0 K: every bond is whole and there are no free carriers.')
+      : k === 'n' ? t(`${SA.sym} มีเวเลนซ์อิเล็กตรอนห้าตัว สี่ตัวสร้างพันธะกับซิลิคอน ตัวที่ห้า${w ? 'หลุดเป็นอิเล็กตรอนอิสระแล้ว อะตอมกลายเป็นไอออนบวก (วงกลม +) ระดับโดเนอร์ว่าง อิเล็กตรอนอยู่ในแถบนำ' : 'ยังโคจรรอบอะตอม ยึดไว้หลวม ๆ อยู่ในระดับโดเนอร์ใต้แถบนำราว 0.05 eV'}`, `${SA.sym} has five valence electrons: four bond with silicon, and the fifth ${w ? 'has broken free; the atom is now a positive ion (circled +), the donor level is empty and the electron is in the conduction band.' : 'still circles the atom, loosely held, in the donor level about 0.05 eV below the conduction band.'}`)
+      : t(`${SA.sym} มีเวเลนซ์อิเล็กตรอนสามตัว พันธะหนึ่งจึงขาดอิเล็กตรอนไปหนึ่งตัว ${w ? 'อิเล็กตรอนข้างเคียงกระโดดเข้ามาเติมแล้ว อะตอมกลายเป็นไอออนลบ (วงกลม −) และโฮลเคลื่อนที่ต่อไปในผลึก' : 'ช่องว่างนี้คือโฮล ยังอยู่ติดกับอะตอม'}`, `${SA.sym} has three valence electrons, so one bond is an electron short. ${w ? 'A neighbouring electron has jumped in: the atom is now a negative ion (circled −) and the hole wanders on through the crystal.' : 'That vacancy is a hole, still beside the atom.'}`)}</div>`; }
+  elems(); setA();
+
+  /* =================================================================== B: hole flow against electron flow */
+  const LB = new IE.Lattice({ rows: 2, cols: 7, sym: 'Si', hop: 1.1 }); let fieldB = -1;
+  const initB = () => { LB.build(2, 7); for (let k = 0; k < 3; k++) LB.addHole(); LB.field = fieldB; };
+  initB();
+  const PB = IE.pane($('cvB'), W => Math.max(220, W * 0.42));
+  LS.anim($('cvB'), dt => { LB.step(dt); const { ctx, W, H } = PB; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); const b = { x: 0, y: 0, w: W, h: H - 40 };
+    LB.draw(ctx, b, { title: fieldB ? t(`สนามไฟฟ้าชี้ไปทาง${fieldB < 0 ? 'ซ้าย' : 'ขวา'}`, `electric field pointing ${fieldB < 0 ? 'left' : 'right'}`) : t('ไม่มีสนามไฟฟ้า', 'no electric field') });
+    const y = H - 22, xm = W / 2, L = Math.min(150, W * 0.3); if (fieldB) { const d = fieldB < 0 ? -1 : 1;
+      CH6.arrow(ctx, xm - d * L * 0.1, y - 8, xm + d * L, y - 8, C.hole, 2.6); T(ctx, t('โฮลไหล (กระแสสมมติ)', 'hole flow (conventional current)'), xm + d * (L + 8), y - 8, { align: d < 0 ? 'right' : 'left', color: C.hole, size: 12, weight: '600' });
+      CH6.arrow(ctx, xm + d * L * 0.1, y + 8, xm - d * L, y + 8, C.elec, 2.6); T(ctx, t('อิเล็กตรอนกระโดด', 'electrons jump'), xm - d * (L + 8), y + 8, { align: d < 0 ? 'left' : 'right', color: C.elec, size: 12, weight: '600' }); }
+    else T(ctx, t('โฮลเดินสุ่มไปทุกทิศ ไม่มีการไหลสุทธิ', 'holes wander every way: no net flow'), xm, y, { color: COL.muted, size: 12 }); });
+  const pB = $('pB');
+  ui.h2(pB, t('สนามไฟฟ้า', 'Electric field'));
+  ui.radio(pB, [{ id: 'fL', label: t('← ชี้ซ้าย', '← to the left'), on: true }, { id: 'f0', label: t('ไม่มี', 'none') }, { id: 'fR', label: t('ชี้ขวา →', 'to the right →') }], id => { fieldB = { fL: -1, f0: 0, fR: 1 }[id]; LB.field = fieldB; showB(); });
+  ui.buttons(pB, [{ label: t('↺ เริ่มใหม่', '↺ Restart'), onclick: () => initB() }]);
+  function showB() { $('wB').innerHTML = `<div class="answer">${fieldB ? t(`เวเลนซ์อิเล็กตรอนกระโดดเข้าโฮลไปทาง${fieldB < 0 ? 'ขวา' : 'ซ้าย'} โฮลจึงเคลื่อนไปทาง${fieldB < 0 ? 'ซ้าย' : 'ขวา'} ตามทิศสนาม ทิศกระแสในตำราใช้ทิศของโฮล (กระแสสมมติ)`, `Valence electrons jump into the holes towards the ${fieldB < 0 ? 'right' : 'left'}, so the holes move to the ${fieldB < 0 ? 'left' : 'right'}, along the field. The book's current direction is that of the holes (conventional current).`)
+    : t('ไม่มีสนาม: อิเล็กตรอนกระโดดเข้าโฮลจากทุกทิศเท่า ๆ กัน โฮลเดินสุ่ม ไม่มีกระแสสุทธิ', 'No field: electrons jump into the holes from every side alike, the holes wander at random, and there is no net current.')}</div>`; }
+  showB();
+
+  /* =================================================================== C: majority and minority carriers */
+  const BN = new IE.Block('n', { n: 16, m: 2 }), BP = new IE.Block('p', { n: 16, m: 2 });
+  const PC = IE.pane($('cvC'), W => (W >= 640 ? Math.min(360, W * 0.36) : W * 1.2));
+  LS.anim($('cvC'), dt => { BN.step(dt); BP.step(dt); const { ctx, W, H } = PC, wide = W >= 640; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H);
+    const b1 = wide ? { x: 0, y: 0, w: Math.floor((W - 6) / 2), h: H } : { x: 0, y: 0, w: W, h: Math.floor((H - 6) / 2) }, b2 = wide ? { x: b1.w + 6, y: 0, w: W - b1.w - 6, h: H } : { x: 0, y: b1.h + 6, w: W, h: H - b1.h - 6 };
+    BN.draw(ctx, b1, { title: t('ชนิด n: อิเล็กตรอนเป็นพาหะข้างมาก', 'n-type: electrons are the majority') }); BP.draw(ctx, b2, { title: t('ชนิด p: โฮลเป็นพาหะข้างมาก', 'p-type: holes are the majority') }); });
+
+  /* =================================================================== 1: carriers before and after doping */
+  IE.problem(1, { h: W => (W >= 560 ? W * 0.5 : W * 0.85),
+    draw: (ctx, b, k) => { CH6.bg(ctx, b); const L = b.x + 120, Rr = b.x + b.w - 30, X = e => L + (Rr - L) * e / 6, rows = [{ lab: t('บริสุทธิ์', 'pure'), e: 0, col: C.atom, on: k >= 1 }, { lab: t('เจือสาร', 'doped'), e: 5, col: C.donor, on: k >= 2 }];
+      T(ctx, t('อิเล็กตรอนอิสระต่ออะตอม 10¹² อะตอม', 'free electrons per 10¹² atoms'), b.x + 12, b.y + 16, { align: 'left', color: COL.muted, size: 13 });
+      ctx.save(); ctx.strokeStyle = COL.grid; for (let e = 0; e <= 6; e++) { ctx.beginPath(); ctx.moveTo(X(e), b.y + 34); ctx.lineTo(X(e), b.y + b.h - 34); ctx.stroke(); } ctx.restore();
+      ['1', '10', '10²', '10³', '10⁴', '10⁵', '10⁶'].forEach((s2, e) => T(ctx, s2, X(e), b.y + b.h - 20, { color: COL.muted, size: 11.5 }));
+      const rh = Math.min(46, (b.h - 90) / 2); rows.forEach((r, j) => { const y = b.y + 44 + j * (rh + 16); T(ctx, r.lab, b.x + 12, y + rh / 2, { align: 'left', color: r.on ? r.col : COL.muted, size: 13, weight: '600' });
+        if (!r.on) return; ctx.save(); ctx.fillStyle = r.col; ctx.globalAlpha = 0.8; ctx.fillRect(L, y, Math.max(4, X(r.e) - L), rh); ctx.restore(); CH8.lab(ctx, r.e ? '10⁵' : '1', X(r.e) + 8, y + rh / 2, 'left', COL.ink, 13, b, '700'); });
+      if (k >= 3) CH6.tag(ctx, t('× 100 000', '× 100 000'), (L + X(5)) / 2, b.y + 44 + (rh + 16) + rh + 12, C.q, { size: 13 }); },
+    steps: () => [
+      LS.step(t('<b>ก่อนเจือสาร</b>: ซิลิคอนบริสุทธิ์ที่อุณหภูมิห้องมีอิเล็กตรอนอิสระราวหนึ่งตัวต่ออะตอม \\(10^{12}\\) อะตอม (ตำราหัวข้อ 1.5)', '<b>Before doping</b>: pure silicon at room temperature has about one free electron per \\(10^{12}\\) atoms (book, section 1.5)'),
+        LS.block([R`n_{\text{pure}} &\approx 1\ \text{per}\ 10^{12}\ \text{atoms}`])),
+      LS.step(t('<b>หลังเจือสาร</b>: โดเนอร์หนึ่งอะตอมต่อ \\(10^7\\) อะตอม ในอะตอม \\(10^{12}\\) อะตอมจึงมีโดเนอร์จำนวนดังนี้ และมีอิเล็กตรอนอิสระจากโดเนอร์เท่ากัน', '<b>After doping</b>: one donor per \\(10^7\\) atoms, so \\(10^{12}\\) atoms hold this many donors, and as many free electrons from them'),
+        LS.block([R`n_{\text{doped}} &\approx \frac{10^{12}}{10^{7}} = 10^5\ \text{per}\ 10^{12}\ \text{atoms}`])),
+      LS.step(t('<b>(a) อัตราส่วน</b>: อิเล็กตรอนที่ซิลิคอนมีอยู่เดิมน้อยมากเมื่อเทียบกับที่โดเนอร์ให้ จึงตัดทิ้งได้', '<b>(a) The ratio</b>: the electrons pure silicon had are negligible next to those the donors give'),
+        LS.block([R`\frac{n_{\text{doped}}}{n_{\text{pure}}} &= \frac{10^5}{1} = \boxed{10^5} = 100\,000 : 1`]), t('ตรงกับสไลด์หน้า 23: เติมเพียงหนึ่งส่วนในสิบล้านก็เปลี่ยนสมบัติทางไฟฟ้าของวัสดุได้ทั้งหมด', 'As slide p. 23 says: one part in ten million is enough to change the material\'s electrical properties completely.')),
+      LS.step(t('<b>(b) ต่อลูกบาศก์เซนติเมตร</b>: คูณจำนวนพาหะของซิลิคอนบริสุทธิ์ด้วยอัตราส่วนเดียวกัน', '<b>(b) Per cubic centimetre</b>: multiply the carriers of pure silicon by the same ratio'),
+        LS.block([R`n &\approx (1.5\times10^{10})(10^5) = \boxed{1.5\times10^{15}\ \text{cm}^{-3}}`]), t('การนำไฟฟ้าแปรตามจำนวนพาหะ (ความคล่องตัวเท่าเดิม) จึงเพิ่มขึ้นราวแสนเท่า ถ้านับตรง ๆ จากอะตอมของซิลิคอน \\(5\\times10^{22}\\) อะตอมต่อ cm³ โดเนอร์หนึ่งต่อ \\(10^7\\) อะตอมให้ \\(5\\times10^{15}\\) ต่อ cm³ ค่า \\(1.5\\times10^{15}\\) มาจากการปัดของตำราว่าซิลิคอนบริสุทธิ์มีอิเล็กตรอนอิสระหนึ่งตัวต่อ \\(10^{12}\\) อะตอม จึงถือเป็นอันดับขนาด \\(10^{15}\\)', 'The conductivity follows the number of carriers (the mobility is unchanged), so it too rises about a hundred thousand times. Counted directly, one donor per \\(10^7\\) of silicon\'s \\(5\\times10^{22}\\) atoms per cm³ gives \\(5\\times10^{15}\\) cm⁻³; the \\(1.5\\times10^{15}\\) rests on the book\'s rounded "one free electron per \\(10^{12}\\) atoms", so take it as of order \\(10^{15}\\).'))],
+    ask: () => ({ fields: [{ label: t('(a) เพิ่มขึ้น (เท่า) =', '(a) factor ='), w: 7, ok: x => Math.abs(x - 1e5) < 1 }, { label: t('(b) n (×10¹⁵ cm⁻³) =', '(b) n (×10¹⁵ cm⁻³) ='), w: 5, ok: x => Math.abs(x - 1.5) < 0.01 }],
+      check: v => (Math.abs(v[0] - 1e7) < 1 ? t('\\(10^7\\) คืออัตราการเจือจาง (โดเนอร์หนึ่งต่อ \\(10^7\\) อะตอม) ไม่ใช่อัตราส่วนของพาหะ: \\(10^{12}/10^7 = 10^5\\)', '\\(10^7\\) is the dilution (one donor per \\(10^7\\) atoms), not the ratio: \\(10^{12}/10^7 = 10^5\\).')
+        : Math.abs(v[0] - 1e19) < 1e13 ? t('หาร ไม่ใช่คูณ: \\(10^{12}/10^7 = 10^5\\)', 'Divide, do not multiply: \\(10^{12}/10^7 = 10^5\\).') : '') }),
+    answer: () => t('(a) \\(10^5\\) เท่า (100,000 : 1) (b) ราว \\(1.5\\times10^{15}\\) ต่อ cm³ · ตัวเลขจาก Boylestad หัวข้อ 1.5 ไม่มีเฉลยในห้อง', '(a) \\(10^5\\) times (100,000 : 1) (b) about \\(1.5\\times10^{15}\\) per cm³ · figures from Boylestad section 1.5; no class solution.') });
+
+  /* =================================================================== D: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ฟอสฟอรัส (P) มีเวเลนซ์อิเล็กตรอนกี่ตัว และเมื่อเจือลงในซิลิคอนได้วัสดุชนิดใด (ตอบ 1 = ชนิด n, 2 = ชนิด p)', '1) How many valence electrons does phosphorus (P) have, and what type of material does it make when added to silicon? (1 = n-type, 2 = p-type)'),
+      fields: [{ key: 'x', lab: t('เวเลนซ์ =', 'valence ='), ans: 5, tol: 0 }, { key: 'y', lab: t('ชนิด =', 'type ='), ans: 1, tol: 0 }], work: `<p>${t('P มีเวเลนซ์อิเล็กตรอน 5 ตัว จึงเป็นโดเนอร์ ได้ชนิด n', 'P has 5 valence electrons, so it is a donor: n-type.')}</p>` },
+    { q: t('2) อินเดียม (In) มีเวเลนซ์อิเล็กตรอนกี่ตัว และในวัสดุที่ได้ พาหะข้างมากคืออะไร (ตอบ 1 = อิเล็กตรอน, 2 = โฮล)', '2) How many valence electrons does indium (In) have, and what are the majority carriers of the material it makes? (1 = electrons, 2 = holes)'),
+      fields: [{ key: 'x', lab: t('เวเลนซ์ =', 'valence ='), ans: 3, tol: 0 }, { key: 'y', lab: t('พาหะข้างมาก =', 'majority ='), ans: 2, tol: 0 }], work: `<p>${t('In มีเวเลนซ์อิเล็กตรอน 3 ตัว จึงเป็นแอกเซปเตอร์ ได้ชนิด p ซึ่งโฮลเป็นพาหะข้างมาก', 'In has 3 valence electrons, so it is an acceptor: p-type, whose majority carriers are holes.')}</p>` },
+    { q: t('3) ผลึกซิลิคอนชนิด n มีโดเนอร์ \\(10^{16}\\) อะตอมต่อ cm³ ที่แตกตัวหมด และมีโฮลราว \\(10^4\\) ต่อ cm³ พาหะข้างมากมากกว่าพาหะข้างน้อยกี่เท่า (ตอบเป็นเลขชี้กำลังของ 10)', '3) An n-type silicon crystal has \\(10^{16}\\) fully ionized donors per cm³ and about \\(10^4\\) holes per cm³. By what power of 10 do the majority carriers outnumber the minority?'),
+      fields: [{ key: 'x', lab: t('เลขชี้กำลัง =', 'power ='), ans: 12, tol: 0 }], work: work(R`\frac{10^{16}}{10^{4}} = 10^{12}`) },
+    { q: t('4) ระดับโดเนอร์ของซิลิคอนอยู่ใต้แถบนำ 0.05 eV ช่องว่าง \\(E_g\\) ของซิลิคอนกว้างกว่ากี่เท่า', '4) The donor level of silicon is 0.05 eV below the conduction band. How many times wider is the gap \\(E_g\\) of silicon?'),
+      fields: [{ key: 'x', lab: t('อัตราส่วน =', 'ratio ='), ans: 22 }], work: work(R`\frac{1.1\ \text{eV}}{0.05\ \text{eV}} = 22`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

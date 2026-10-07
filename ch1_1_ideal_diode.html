@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="1.1 — The Ideal Diode">1.1 — ไดโอดอุดมคติ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=1">
+<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
+<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script><script src="assets/ch6.js?v=1"></script>
+<script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ไดโอดอุดมคติ: สวิตช์ที่นำกระแสได้ทางเดียว <span class="en">The ideal diode: a one-way switch</span></h1>
+<h1 data-l="en">The ideal diode <span class="en">A switch that conducts in one direction only</span></h1>
+
+<p class="sub" data-l="th">บทที่ 1 เริ่มจากไดโอด อุปกรณ์อิเล็กทรอนิกส์ที่ง่ายที่สุดแต่ใช้งานแทบทุกระบบ สไลด์หน้า 7–11 เปรียบไดโอดอุดมคติ (ideal diode) กับสวิตช์ เมื่อกระแสไหลตามหัวลูกศรของสัญลักษณ์ ไดโอดเป็นลัดวงจร (short circuit) เมื่อวงจรพยายามดันกระแสสวนหัวลูกศร ไดโอดเป็นเปิดวงจร (open circuit) หน้านี้มีบทนำของบท (สไลด์หน้า 2–6) ภาพจำลองไดโอดอุดมคติในวงจรอนุกรม (ส่วน A) โจทย์ข้อ 1 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 1 starts with the diode, the simplest electronic device and one found in almost every system. Slides pp. 7–11 compare the ideal diode with a switch: when the current follows the arrowhead of its symbol, the diode is a short circuit; when the circuit tries to push current against the arrowhead, it is an open circuit. This page has the chapter introduction (slides pp. 2–6), an ideal diode in a series circuit (section A), problem 1 and more practice.</p>
+<div class="equation-box eqwrap">$$ R_F = \frac{V_D}{I_D} = \frac{0\ \text{V}}{I_D} = 0\ \Omega $$ $$ R_R = \frac{|V_D|}{I_D} = \frac{|V_D|}{0\ \text{mA}} \to \infty\ \Omega $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ไดโอดมีสองขั้ว</b>: แอโนด (anode) อยู่ด้านฐานของสามเหลี่ยม และแคโทด (cathode) อยู่ด้านขีดตั้งที่หัวลูกศรชี้ไปหา ทิศ \(I_D\) และขั้ว \(V_D\) ที่นิยามไว้ (สไลด์หน้า 7) ทำให้บริเวณนำกระแสอยู่ในจตุภาคที่ 1 ของกราฟลักษณะสมบัติ</li>
+  <li><b>นำกระแส = ลัดวงจร</b>: ถ้ากระแสที่วงจรสร้างไหลทางเดียวกับหัวลูกศร ไดโอดอุดมคติมี \(V_D = 0\) และ \(R_F = 0\ \Omega\) ขนาดกระแสถูกกำหนดโดยวงจรรอบนอก ไม่ใช่โดยไดโอด (สไลด์หน้า 8)</li>
+  <li><b>ไม่นำกระแส = เปิดวงจร</b>: ถ้าวงจรพยายามดันกระแสสวนหัวลูกศร \(I_D = 0\) และ \(R_R \to \infty\) แรงดันคร่อมไดโอดถูกกำหนดโดยวงจรรอบนอก และอาจสูงเท่าแรงดันของแหล่งจ่ายทั้งหมด (สไลด์หน้า 9)</li>
+  <li><b>ต่างจากสวิตช์ธรรมดาตรงไหน</b>: สวิตช์ที่ปิดอยู่ให้กระแสไหลได้ทั้งสองทาง ไดโอดที่นำกระแสให้ไหลได้ทางเดียว และ "ปิดหรือเปิด" เองตามทิศของกระแสที่วงจรพยายามสร้าง (สไลด์หน้า 10–11)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>A diode has two terminals</b>: the anode at the base of the triangle and the cathode at the bar the arrowhead points to. With the defined direction of \(I_D\) and polarity of \(V_D\) (slide p. 7), the conduction region is the first quadrant of the characteristic.</li>
+  <li><b>Conducting = a short</b>: when the current set up by the circuit follows the arrowhead, an ideal diode has \(V_D = 0\) and \(R_F = 0\ \Omega\). The size of the current is set by the rest of the circuit, not by the diode (slide p. 8).</li>
+  <li><b>Not conducting = an open circuit</b>: when the circuit tries to push current against the arrowhead, \(I_D = 0\) and \(R_R \to \infty\). The voltage across the diode is set by the rest of the circuit and can be as large as the whole source voltage (slide p. 9).</li>
+  <li><b>How it differs from a plain switch</b>: a closed switch passes current both ways; a conducting diode passes it one way only, and it "closes or opens" by itself according to the direction of the current the circuit tries to set up (slides pp. 10–11).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch1/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 7, Ideal Diode: the first electronic device to be introduced is called the diode. It is the simplest of semiconductor devices but plays a very vital role in electronic systems, having characteristics that closely match those of a simple switch. The ideal diode is a two-terminal device having the symbol and characteristics shown: a diode symbol with plus V_D minus across it and I_D flowing along the arrowhead; the characteristic has a green vertical line along the positive I_D axis and a red horizontal line along the negative V_D axis; below, the same symbol with minus V_D plus across it and I_D drawn against the arrowhead. Boxed quote: The characteristics of an ideal diode are those of a switch that can conduct current in only one direction.">
+  <figcaption data-l="th">สไลด์หน้า 7: สัญลักษณ์และลักษณะสมบัติของไดโอดอุดมคติ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 7: symbol and characteristic of the ideal diode · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch1/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 10, Ideal Diode: in review, the conditions depicted in the figure are applicable. (a) A diode with plus V_D minus across it becomes a short circuit, I_D limited by the circuit, pointing at the vertical part of the characteristic; (b) a diode with minus V_D plus across it becomes an open circuit with I_D = 0, pointing at the horizontal part. Figure (a) Conduction and (b) Non-conduction states of the ideal diode as determined by the applied bias.">
+  <figcaption data-l="th">สไลด์หน้า 10: สรุปสองสถานะ ลัดวงจรและเปิดวงจร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 10: the two states, short and open · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 8 และ 9 ไม่มีสมการ</b> หน้า 8 เขียนว่า "the value of the forward resistance, R<sub>F</sub>, as defined by Ohm's law is" แล้วเว้นว่าง หน้า 9 เขียนว่า "Consider the region of negatively applied potential (third quadrant) of Fig. (b)" แล้วเว้นว่างเช่นกัน สมการที่ขาดไปคือ \(R_F = V_D/I_D = 0\ \Omega\) (หน้า 8) และ \(R_R = |V_D|/I_D \to \infty\ \Omega\) (หน้า 9) ตามกรอบสมการด้านบน (Boylestad หัวข้อ 1.7)</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 8 and 9 have no equation</b>: p. 8 reads "the value of the forward resistance, R<sub>F</sub>, as defined by Ohm's law is" and leaves a blank; p. 9 reads "Consider the region of negatively applied potential (third quadrant) of Fig. (b)" and leaves one too. The missing equations are \(R_F = V_D/I_D = 0\ \Omega\) (p. 8) and \(R_R = |V_D|/I_D \to \infty\ \Omega\) (p. 9), as in the box above (Boylestad, section 1.7).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#t0"><b>0</b>บทนำของบทที่ 1</a><a href="#tA"><b>A</b>ไดโอดอุดมคติในวงจร</a><a href="#ex1"><b>1</b>ลัดวงจรหรือเปิดวงจร</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#t0"><b>0</b>Chapter 1 introduction</a><a href="#tA"><b>A</b>An ideal diode in a circuit</a><a href="#ex1"><b>1</b>Short or open?</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="t0">
+  <div class="prob-head"><span class="prob-no">0</span><div><h2 data-l="th">บทนำของบทที่ 1: จากหลอดสุญญากาศสู่สารกึ่งตัวนำ</h2><h2 data-l="en">Chapter 1 introduction: from vacuum tubes to semiconductors</h2>
+    <div class="src" data-l="th">สไลด์หน้า 2–6 · Boylestad หัวข้อ 1.1</div><div class="src" data-l="en">Slides pp. 2–6 · Boylestad, section 1.1</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch1/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 5, Introduction: it is now some 50 years since the first transistor was introduced on December 23, 1947. For those of us who experienced the change from glass envelope tubes to the solid-state device, it still seems like a few short years ago. Photographs: John Bardeen, William Shockley and Walter Brattain at Bell Labs in 1948, and a replica of the first point-contact transistor under a glass dome. They invented the point-contact transistor in 1947 and the bipolar junction transistor in 1948.">
+    <figcaption data-l="th">สไลด์หน้า 5: ทรานซิสเตอร์ตัวแรก 23 ธันวาคม 1947 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 5: the first transistor, December 23, 1947 · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch1/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 6, Introduction: complete systems now appear on wafers thousands of times smaller than the single element of earlier networks; new designs and systems surface weekly. Miniaturization appears to be limited by three factors: the quality of the semiconductor material itself, the network design technique, and the limits of the manufacturing and processing equipment. A picture shows a laboratory instrument shrinking along an arrow, from a room-sized set-up in 1940 through bench-top units in 1972 and 2005 to hand-held, key-fob and phone add-on sizes in 2008, 2014 and 2016, with 2017 and a question mark at the end.">
+    <figcaption data-l="th">สไลด์หน้า 6: ข้อจำกัดของการย่อขนาด · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 6: the limits of miniaturization · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">บทที่ 1 มีเป้าหมายตามสไลด์หน้า 2–3: รู้จักวัสดุสารกึ่งตัวนำสามชนิด คือ ซิลิคอน (Si) เจอร์เมเนียม (Ge) และแกลเลียมอาร์เซไนด์ (GaAs) เข้าใจการนำไฟฟ้าด้วยอิเล็กตรอนและโฮล แยกวัสดุชนิด n กับ p ได้ เข้าใจไดโอดเมื่อไม่ได้ไบแอส ไบแอสตรง และไบแอสกลับ คำนวณความต้านทานกระแสตรง กระแสสลับ และกระแสสลับเฉลี่ยจากกราฟได้ และรู้จักวงจรสมมูลของไดโอด สไลด์หน้า 4 แบ่งเนื้อหาเป็นหัวข้อ ซึ่งเว็บนี้จัดเป็นหน้า ดังนี้ ไดโอดอุดมคติ (หน้า 1.1) วัสดุสารกึ่งตัวนำและระดับพลังงาน (หน้า 1.2) วัสดุชนิด n และ p (หน้า 1.3) ไดโอดรอยต่อ p–n (หน้า 1.4) ระดับความต้านทาน (หน้า 1.5) และวงจรสมมูล (หน้า 1.6) ซีเนอร์ไดโอดจะเรียนในบทที่ 2 ส่วนไดโอดเปล่งแสง (light-emitting diode, LED) ที่ระบุในเป้าหมายไม่มีในสไลด์ของวิชา อ่านได้ใน Boylestad หัวข้อ 1.16</p>
+  <p class="lead" data-l="en">Slides pp. 2–3 set the goals of chapter 1: know the three semiconductor materials, silicon (Si), germanium (Ge) and gallium arsenide (GaAs), understand conduction by electrons and holes, tell n- from p-type material, understand the diode with no bias, forward bias and reverse bias, find its dc, ac and average ac resistance from the characteristic, and know its equivalent circuits. Slide p. 4 lists the topics, which this site turns into pages: the ideal diode (page 1.1), semiconductor materials and energy levels (1.2), n- and p-type materials (1.3), the p–n junction diode (1.4), resistance levels (1.5) and equivalent circuits (1.6). The Zener diode comes in chapter 2; the light-emitting diode (LED), named in the goals, is not in the course slides (Boylestad, section 1.16).</p>
+</section>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ไดโอดอุดมคติในวงจรอนุกรม: ใครเป็นคนกำหนดกระแส</h2><h2 data-l="en">An ideal diode in a series circuit: who sets the current?</h2>
+    <div class="src" data-l="th">สไลด์หน้า 7–11 · Boylestad หัวข้อ 1.7 (รูป 1.21–1.22)</div><div class="src" data-l="en">Slides pp. 7–11 · Boylestad, section 1.7 (Figs. 1.21–1.22)</div></div></div>
+  <figure class="slide q"><img src="slides/ch1/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 11, Ideal Diode: for conventional flow (opposite to that of electron flow), if the resultant diode current has the same direction as the arrowhead of the diode symbol, the diode is operating in the conducting region as depicted in Fig. (a). The resulting current has the opposite direction, as shown in Fig. (b), the open circuit equivalent is appropriate. Figure (a) a diode with I_D along the arrowhead becomes a closed line; (b) a diode with I_D against the arrowhead becomes an open gap with I_D = 0. Figure (a) Conduction and (b) nonconduction states of the ideal diode as determined by the direction of conventional current established by the network.">
+    <figcaption data-l="th">สไลด์หน้า 11: กระแสตามหัวลูกศร = นำกระแส · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 11: current along the arrowhead = conducting · tap to enlarge</figcaption></figure>
+  <p class="lead" data-l="th">แหล่งจ่าย E ต่ออนุกรมกับตัวต้านทาน R และไดโอดอุดมคติ เลื่อน E จากบวกไปลบ หรือกดกลับทิศไดโอด แล้วดูว่าจุดทำงาน (จุดสีเหลือง) อยู่บนเส้นสีเขียว (นำกระแส) หรือเส้นสีแดง (ไม่นำกระแส) ของกราฟ กด "แสดงวงจรสมมูล" เพื่อแทนไดโอดด้วยเส้นลวดหรือช่องเปิด ชี้เมาส์ที่อุปกรณ์เพื่ออ่านแรงดันและกระแส</p>
+  <p class="lead" data-l="en">A source E in series with a resistor R and an ideal diode. Slide E from positive to negative, or turn the diode round, and see whether the operating point (the yellow dot) sits on the green line (conducting) or the red line (not conducting) of the characteristic. Press "Show the equivalent" to replace the diode by a wire or a gap. Hover over a part to read its voltage and current.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">ลัดวงจรหรือเปิดวงจร: E = 10 V, R = 2 kΩ</h2><h2 data-l="en">Short or open: E = 10 V, R = 2 kΩ</h2>
+    <div class="src" data-l="th">โจทย์แต่งเพิ่มเพื่อฝึกหลักของสไลด์หน้า 8–11 · ไม่มีเฉลยในห้อง</div><div class="src" data-l="en">A practice problem written for slides pp. 8–11 · no class solution</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แหล่งจ่ายแรงดันคงที่ E = 10 V ต่ออนุกรมกับตัวต้านทาน R = 2 kΩ และไดโอดอุดมคติ โดยขั้วบวกของแหล่งจ่ายต่อเข้ากับด้านแอโนดของไดโอดผ่าน R (a) จงหา \(I_D\) และ \(V_D\) (b) กลับขั้วแหล่งจ่าย (E = −10 V) จงหา \(I_D\) และ \(V_D\) อีกครั้ง</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 10 V dc source E is in series with a resistor R = 2 kΩ and an ideal diode, the + terminal of the source feeding the anode side of the diode through R. (a) Find \(I_D\) and \(V_D\). (b) The source is turned round (E = −10 V): find \(I_D\) and \(V_D\) again.</p></div>
+  <p class="lead" data-l="th">ทุกขั้นของเฉลยเปลี่ยนวงจรในภาพจำลองตาม: ไดโอดถูกแทนด้วยเส้นลวดหรือช่องเปิด และจุดทำงานปรากฏบนกราฟลักษณะสมบัติ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">Each step of the solution changes the circuit in the picture: the diode is replaced by a wire or a gap, and the operating point appears on the characteristic. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ไดโอดทุกตัวในหัวข้อนี้เป็นไดโอดอุดมคติ · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Every diode here is ideal · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ใครกำหนดกระแส</h3>
+    <ol><li>ส่วน A ตั้ง E = 10 V และ R = 1 kΩ: จุดทำงานอยู่ที่ 10 mA บนเส้นสีเขียว เปลี่ยน R เป็น 5 kΩ: จุดเลื่อนลงไปที่ 2 mA แต่ยังอยู่บนเส้นเดิม ไดโอดอุดมคติไม่ได้กำหนดกระแส วงจรรอบนอกต่างหากที่กำหนด</li>
+    <li>เลื่อน E ลงเป็นลบ: จุดทำงานกระโดดไปอยู่บนเส้นสีแดงที่ \(V_D = E\) กระแสเป็นศูนย์ไม่ว่า R เท่าไร</li>
+    <li>กดกลับทิศไดโอดแล้วทำซ้ำ: ตอนนี้ไดโอดนำกระแสเมื่อ E เป็นลบ เพราะกระแสที่วงจรพยายามสร้างไปทางเดียวกับหัวลูกศร</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — วงจรสมมูล</h3>
+    <ol><li>กด "แสดงวงจรสมมูล": ไดโอดที่นำกระแสกลายเป็นเส้นลวด ไดโอดที่ไม่นำกลายเป็นช่องเปิด ค่าที่อ่านได้ทุกค่าเท่าเดิม แปลว่าการแทนแบบนี้ถูกต้อง</li>
+    <li>ชี้เมาส์ที่ช่องเปิดตอนไดโอดไม่นำ: แรงดันคร่อมเท่ากับ E ทั้งหมด ไดโอดจริงต้องทนแรงดันนี้ได้</li></ol>
+    <div class="book">สไลด์บทที่ 1 หน้า 2–11 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 1.1 และ 1.7</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — who sets the current</h3>
+    <ol><li>In section A set E = 10 V and R = 1 kΩ: the operating point sits at 10 mA on the green line. Change R to 5 kΩ: it moves down to 2 mA but stays on the same line. The ideal diode does not set the current; the rest of the circuit does.</li>
+    <li>Slide E below zero: the operating point jumps to the red line at \(V_D = E\); the current is zero whatever R is.</li>
+    <li>Turn the diode round and repeat: now it conducts when E is negative, because the current the circuit tries to set up then follows the arrowhead.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the equivalent circuit</h3>
+    <ol><li>Press "Show the equivalent": a conducting diode becomes a wire, a non-conducting one a gap. Every reading stays the same, so the replacement is right.</li>
+    <li>Hover over the gap while the diode is off: the voltage across it is the whole of E. A real diode has to withstand that voltage.</li></ol>
+    <div class="book">Chapter 1 slides pp. 2–11 · Boylestad &amp; Nashelsky, 11th ed., sections 1.1 and 1.7</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  CH1.problem(1, 'ideal');
+
+  /* =================================================================== A: an ideal diode in a series circuit */
+  const SA = { E: 10, R: 1000, flip: false, eq: false };
+  const onOf = () => (SA.flip ? SA.E < 0 : SA.E > 0);
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.5, rowAsp: 0.62, pad: 1.25, wideAt: 1e9, dotSpeed: 80,
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' }, shortSpec: sp => CH8.margins(sp, 1.2),
+    after: v => { if (SA.eq && Math.abs(SA.E) > 1e-9) CH1.eqTag(v, onOf() ? ['ลัดวงจร', 'short'] : ['เปิดวงจร', 'open'], onOf() ? IE.COL.tan : IE.COL.red); },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const v = c.Vab('D').re, i = c.I('D').re * 1e3, imax = 10 / (SA.R / 1000), top = imax > 6 ? 12 : imax > 3 ? 6 : 2.4;
+      CH1.idealPlot(ctx, b, bd, { v: Math.abs(v) < 1e-6 ? 0 : v, i: Math.max(0, i), label: bd.short ? `${fd(i, 2)} mA` : `${fd(v, 2).replace('-', '−')} V, ${fd(i, 2)} mA` },
+        { i: [0, top], yt: top > 6 ? [4, 8, 12] : top > 3 ? [2, 4, 6] : [1, 2] }); },
+    badge: () => (onOf() ? [['นำกระแส: ไดโอดเป็นลัดวงจร', 'conducting: the diode is a short'], 'ok'] : Math.abs(SA.E) < 1e-9 ? [['E = 0: ไม่มีกระแส', 'E = 0: no current'], 'wait'] : [['ไม่นำกระแส: ไดโอดเป็นเปิดวงจร', 'not conducting: the diode is an open circuit'], 'wait']) });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('แรงดันของแหล่งจ่าย', 'Source voltage'));
+  ui.slider(pA, { id: 'aE', label: 'E', min: -10, max: 10, step: 0.5, value: SA.E, fmt: v => `${fd(v, 1).replace('-', '−')} V`, oninput: v => { SA.E = v; buildA(); } });
+  ui.h2(pA, t('ตัวต้านทาน', 'Resistor')); ui.radio(pA, [1000, 2000, 5000].map(r => ({ id: 'aR' + r, label: CK.eng(r, 'Ω'), on: r === SA.R })), id => { SA.R = +id.slice(2); buildA(); });
+  ui.h2(pA, t('ไดโอด', 'Diode'));
+  ui.buttons(pA, [{ label: t('กลับทิศไดโอด', 'Turn the diode round'), onclick: el => { SA.flip = !SA.flip; el.classList.toggle('on', SA.flip); buildA(); } },
+    { label: t('แสดงวงจรสมมูล', 'Show the equivalent'), onclick: el => { SA.eq = !SA.eq; el.classList.toggle('on', SA.eq); buildA(); } }]);
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { const on = onOf(), eq = SA.eq && Math.abs(SA.E) > 1e-9 ? (on ? 'on' : 'off') : undefined;
+    BA.set(CH1.series({ E: SA.E, R: SA.R, flip: SA.flip, eq }), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); }
+  function showA() { const c = BA.ckt, v = c.Vab('D').re, i = c.I('D').re, on = onOf();
+    mA.innerHTML = ui.kv([['I_D', `${fd(i * 1e3, 3)} mA`], ['V_D', `${fd(v, 3).replace('-', '−')} V`], ['V_R', `${fd(c.Vab('R').re, 3).replace('-', '−')} V`], [t('สถานะ', 'state'), on ? t('ลัดวงจร', 'short') : t('เปิดวงจร', 'open')]]);
+    $('wA').innerHTML = `<div class="answer">${Math.abs(SA.E) < 1e-9 ? t('E = 0: ไม่มีอะไรดันกระแส ทุกค่าเป็นศูนย์', 'E = 0: nothing pushes a current; everything is zero.')
+      : on ? t(`กระแสที่วงจรพยายามสร้างไหลตามหัวลูกศร ไดโอดจึงเป็นลัดวงจร \\(V_D = 0\\) และ \\(I_D = \\dfrac{|E|}{R} = \\dfrac{${fd(Math.abs(SA.E), 1)}}{${fd(SA.R / 1000, 0)}\\ \\text{k}\\Omega} = ${fd(Math.abs(SA.E) / SA.R * 1e3, 2)}\\) mA ขนาดกระแสขึ้นกับ E และ R เท่านั้น`, `The current the circuit tries to set up follows the arrowhead, so the diode is a short: \\(V_D = 0\\) and \\(I_D = \\dfrac{|E|}{R} = \\dfrac{${fd(Math.abs(SA.E), 1)}}{${fd(SA.R / 1000, 0)}\\ \\text{k}\\Omega} = ${fd(Math.abs(SA.E) / SA.R * 1e3, 2)}\\) mA, set by E and R alone.`)
+      : t(`วงจรพยายามดันกระแสสวนหัวลูกศร ไดโอดจึงเป็นเปิดวงจร \\(I_D = 0\\) ไม่มีแรงดันตกคร่อม R แรงดันทั้งหมดไปอยู่ที่ไดโอด \\(V_D = ${fd(-Math.abs(SA.E), 1)}\\) V (ขั้วกลับกับที่นิยามไว้)`, `The circuit tries to push current against the arrowhead, so the diode is an open circuit: \\(I_D = 0\\), R drops nothing, and the whole voltage is across the diode, \\(V_D = ${fd(-Math.abs(SA.E), 1)}\\) V (opposite to the defined polarity).`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) แหล่งจ่าย 12 V ต่ออนุกรมกับตัวต้านทาน 4 kΩ และไดโอดอุดมคติที่หันหัวลูกศรตามทิศกระแสจากขั้วบวก จงหา \\(I_D\\) และ \\(V_D\\)', '1) A 12 V source in series with a 4 kΩ resistor and an ideal diode whose arrowhead follows the current from the + terminal. Find \\(I_D\\) and \\(V_D\\).'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 3, unit: 'mA' }, { key: 'y', lab: 'V_D =', ans: 0, unit: 'V', tol: 1e-6 }],
+      work: work(R`I_D = \frac{12\ \text{V}}{4\ \text{k}\Omega} = 3\ \text{mA},\quad V_D = 0\ \text{V}`) },
+    { q: t('2) วงจรของข้อ 1 แต่กลับทิศไดโอด จงหา \\(I_D\\) และ \\(V_D\\) (ตามขั้วที่นิยามไว้ แอโนดเป็นบวก)', '2) The circuit of question 1 with the diode turned round. Find \\(I_D\\) and \\(V_D\\) (with the defined polarity, anode positive).'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 0, unit: 'mA', tol: 1e-6 }, { key: 'y', lab: 'V_D =', ans: -12, unit: 'V' }],
+      work: work(R`I_D = 0,\quad V_D = -12\ \text{V}`, `<p>${t('ไม่มีแรงดันตกคร่อม R แรงดันทั้งหมดอยู่ที่ไดโอด และแคโทดเป็นบวก', 'R drops nothing; the whole voltage is across the diode, cathode positive.')}</p>`) },
+    { q: t('3) แหล่งจ่าย 9 V ต่ออนุกรมกับ R<sub>1</sub> = 1 kΩ, ไดโอดอุดมคติที่นำกระแส และ R<sub>2</sub> = 2 kΩ จงหากระแสและแรงดันคร่อม R<sub>2</sub>', '3) A 9 V source in series with R<sub>1</sub> = 1 kΩ, a conducting ideal diode and R<sub>2</sub> = 2 kΩ. Find the current and the voltage across R<sub>2</sub>.'),
+      fields: [{ key: 'x', lab: 'I =', ans: 3, unit: 'mA' }, { key: 'y', lab: 'V_R2 =', ans: 6, unit: 'V' }],
+      work: work(R`\begin{aligned} I &= \frac{9}{1\ \text{k}\Omega + 2\ \text{k}\Omega} = 3\ \text{mA} \\ V_{R_2} &= (3\ \text{mA})(2\ \text{k}\Omega) = 6\ \text{V} \end{aligned}`, `<p>${t('ไดโอดที่นำกระแสเป็นเส้นลวด วงจรจึงเหลือตัวต้านทานสองตัวต่ออนุกรม', 'A conducting diode is a wire, so only two resistors in series remain.')}</p>`) },
+    { q: t('4) ไดโอดอุดมคติสองตัวต่ออนุกรมแบบหันหลังชนกัน (แอโนดต่อแอโนด) กับแหล่งจ่าย 6 V และตัวต้านทาน 3 kΩ จงหากระแส และขนาดของแรงดันคร่อมไดโอดตัวที่ถูกดันสวนหัวลูกศร (ไบแอสกลับ)', '4) Two ideal diodes in series back to back (anode to anode) with a 6 V source and a 3 kΩ resistor. Find the current and the size of the voltage across the diode pushed against its arrowhead (reverse-biased).'),
+      fields: [{ key: 'x', lab: 'I =', ans: 0, unit: 'mA', tol: 1e-6 }, { key: 'y', lab: '|V_D| =', ans: 6, unit: 'V' }],
+      work: work(R`I = 0,\quad |V_D| = 6\ \text{V}`, `<p>${t('ไม่ว่าแหล่งจ่ายจะหันทางใด ไดโอดตัวหนึ่งต้องถูกดันสวนหัวลูกศรเสมอ วงจรจึงเปิด ไดโอดตัวที่ถูกดันสวนหัวลูกศรรับแรงดันทั้งหมด ส่วนอีกตัวมีแรงดันศูนย์ (ไม่มีกระแสทั้งคู่)', 'Whichever way the source points, one diode is always pushed against its arrowhead, so the circuit is open. The diode pushed against its arrowhead takes the whole voltage; the other has none (neither carries current).')}</p>`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
