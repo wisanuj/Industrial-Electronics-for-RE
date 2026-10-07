@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="2.6 — Full-Wave Rectification">2.6 — วงจรเรียงกระแสเต็มคลื่น</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script><script src="assets/ch6.js?v=2"></script>
+<script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรเรียงกระแสเต็มคลื่น: บริดจ์และแท็ปกลาง <span class="en">Full-wave rectification: bridge and centre tap</span></h1>
+<h1 data-l="en">Full-wave rectification <span class="en">The bridge and the centre-tapped transformer</span></h1>
+
+<p class="sub" data-l="th">วงจรครึ่งคลื่นทิ้งสัญญาณไปครึ่งหนึ่ง สไลด์หน้า 40–50 ใช้ทั้งสองครึ่งด้วยการเรียงกระแสเต็มคลื่น (full-wave rectification) ซึ่งเพิ่มระดับกระแสตรงเป็นสองเท่า มีสองแบบ คือบริดจ์ไดโอดสี่ตัว และหม้อแปลงแท็ปกลาง (center-tapped, CT) ที่ใช้ไดโอดสองตัว หน้านี้มีภาพจำลองตามเวลาของทั้งสองแบบ (ส่วน A และ B) โจทย์บริดจ์ที่มีไดโอดเพียงสองตัวจากตำรา โจทย์ฝึกของวงจรแท็ปกลาง และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">A half-wave rectifier throws half the signal away. Slides pp. 40–50 use both halves with full-wave rectification, doubling the dc level, in two ways: a bridge of four diodes, and a centre-tapped (CT) transformer with two diodes. This page simulates both in time (sections A and B), works the book's bridge with only two diodes and a practice problem on the centre tap, and ends with more practice.</p>
+<div class="equation-box eqwrap">$$ V_{dc} = 0.636V_m $$ $$ V_{dc} \cong 0.636(V_m - 2V_K)\ \ \text{(bridge)} $$ $$ \text{PIV} \ge V_m\ \ \text{(bridge)} $$ $$ \text{PIV} \ge 2V_m\ \ \text{(CT)} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>บริดจ์</b>: ครึ่งบวก D<sub>2</sub> กับ D<sub>3</sub> นำ ครึ่งลบ D<sub>1</sub> กับ D<sub>4</sub> นำ ทั้งสองครึ่งกระแสผ่าน R ทางเดียวกัน ขาออกจึงเป็นบวกทั้งสองครึ่ง (สไลด์หน้า 41–43)</li>
+  <li><b>ระดับกระแสตรงเป็นสองเท่าของครึ่งคลื่น</b>: \(V_{dc} = 0.636V_m\) (สไลด์หน้า 43) บริดจ์มีไดโอดสองตัวในทุกเส้นทางนำ ไดโอดซิลิคอนจึงลดยอดลง \(2V_K\) (สไลด์หน้า 44)</li>
+  <li><b>แท็ปกลาง</b>: หม้อแปลง 1:2 ให้ขดทุติยภูมิแต่ละครึ่งมีแรงดันเท่ากับ \(v_i\) ไดโอดผลัดกันนำครึ่งละตัว ใช้ไดโอดเพียงสองตัวและมีไดโอดตัวเดียวในเส้นทางนำ (สไลด์หน้า 46–48)</li>
+  <li><b>PIV</b>: ไดโอดในบริดจ์ต้องทน \(V_m\) แต่ไดโอดในวงจรแท็ปกลางต้องทน \(2V_m\) เพราะรับทั้งแรงดันของขดครึ่งหนึ่งและแรงดันขาออก (สไลด์หน้า 45, 49)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The bridge</b>: in the positive half D<sub>2</sub> and D<sub>3</sub> conduct, in the negative half D<sub>1</sub> and D<sub>4</sub>; both halves drive current through R the same way, so the output is positive in both (slides pp. 41–43).</li>
+  <li><b>The dc level doubles</b>: \(V_{dc} = 0.636V_m\) (slide p. 43). Every conduction path of a bridge has two diodes, so silicon diodes lower the peak by \(2V_K\) (slide p. 44).</li>
+  <li><b>The centre tap</b>: a 1:2 transformer gives each half of the secondary a voltage equal to \(v_i\); the two diodes take turns, one per half, with only one diode in each path (slides pp. 46–48).</li>
+  <li><b>PIV</b>: a bridge diode must withstand \(V_m\), a centre-tap diode \(2V_m\), since it sees the half-winding and the output in series (slides pp. 45, 49).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch2a/p40.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 40, Sinusoidal Inputs; Full-Wave Rectification, 1. Bridge Network: the dc level obtained from a sinusoidal input can be improved 100% using a process called full-wave rectification. The most familiar network for performing such a function appears in the figure with its four diodes in a bridge configuration: v_i, a sine wave, connected to the top and bottom corners of a diamond of diodes D_1 (top left), D_2 (top right), D_3 (bottom left) and D_4 (bottom right), with R across the left and right corners and − v_o + across it.">
+  <figcaption data-l="th">สไลด์หน้า 40: บริดจ์ไดโอดสี่ตัว · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 40: the four-diode bridge · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p43.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 43, Sinusoidal Inputs; Full-Wave Rectification, 1. Bridge Network: over one full cycle the input and output voltages appear as shown: v_i a full sine wave, v_o both halves positive with a dashed line at V_dc = 0.636 V_m. Since the area above the axis for one full cycle is now twice that obtained for a half-wave system, the dc level has also been doubled: boxed V_dc = 0.636 V_m, full-wave.">
+  <figcaption data-l="th">สไลด์หน้า 43: \(V_{dc} = 0.636V_m\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 43: \(V_{dc} = 0.636V_m\) · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p50.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 50, Sinusoidal Inputs; Full-Wave Rectifications: a table of rectifier, ideal V_DC and realistic V_DC: half-wave rectifier, V_DC = 0.318 V_m and V_DC = 0.318 V_m − 0.7 V; bridge rectifier, V_DC = 0.636 V_m and V_DC = 0.636 V_m − 2(0.7 V); centre-tapped transformer rectifier, V_DC = 0.636 V_m and V_DC = 0.636 V_m − 0.7 V. V_m = peak of the ac voltage; in the centre-tapped transformer rectifier circuit, the peak ac voltage is the transformer secondary voltage to the tap.">
+  <figcaption data-l="th">สไลด์หน้า 50: ตารางสรุปสามวงจร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 50: the three rectifiers in a table · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สูตร "realistic" ในตารางสไลด์หน้า 50 ต่างจากสไลด์หน้า 35 และ 44</b>: ตารางลบแรงดันของไดโอดหลังหาค่าเฉลี่ย เช่น \(0.318V_m - 0.7\) V ส่วนสไลด์หน้า 35, 44 และตำรา (สมการ 2.8, 2.11) ลบออกจาก \(V_m\) ก่อน เช่น \(0.318(V_m - 0.7)\) เมื่อ \(V_m\) ใหญ่กว่า 0.7 V มาก ทั้งสองแบบให้ค่าใกล้กัน แต่ที่ \(V_m\) = 20 V วงจรครึ่งคลื่นได้ 5.66 V เทียบกับ 6.14 V ค่าเฉลี่ยจริงของคลื่น (ภาพจำลอง) อยู่ระหว่างทั้งสอง คือราว 6.02 V เพราะไดโอดกินแรงดัน \(V_K\) ตลอดเวลาที่นำ (หน้า 2.5)</div>
+<div class="warnbox" data-l="en"><b>The "realistic" formulas in the table of slide p. 50 differ from slides pp. 35 and 44</b>: the table takes the diode voltage off after averaging, e.g. \(0.318V_m - 0.7\) V, while slides pp. 35 and 44 and the book (Eqs. 2.8, 2.11) take it off \(V_m\) first, e.g. \(0.318(V_m - 0.7)\). When \(V_m\) is much larger than 0.7 V the two agree closely, but at \(V_m\) = 20 V a half-wave rectifier gives 5.66 V against 6.14 V. The actual average of the wave (simulated) lies between them, about 6.02 V, because the diode takes \(V_K\) whenever it conducts (page 2.5).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>บริดจ์</a><a href="#tB"><b>B</b>แท็ปกลาง</a><a href="#ex1"><b>1</b>บริดจ์ไดโอดสองตัว</a><a href="#ex2"><b>2</b>ฝึกแท็ปกลาง</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The bridge</a><a href="#tB"><b>B</b>The centre tap</a><a href="#ex1"><b>1</b>A two-diode bridge</a><a href="#ex2"><b>2</b>Centre-tap practice</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">บริดจ์ไดโอดสี่ตัวตามเวลา</h2><h2 data-l="en">The four-diode bridge in time</h2>
+    <div class="src" data-l="th">สไลด์หน้า 41–45 · Boylestad หัวข้อ 2.7 (รูป 2.53–2.59)</div><div class="src" data-l="en">Slides pp. 41–45 · Boylestad, section 2.7 (Figs. 2.53–2.59)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2a/p41.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 41, Full-Wave Rectifications, 1. Bridge Network: during the period t = 0 to T/2 the polarity of the input is as shown: D_1 and D_4 are marked off, D_2 and D_3 on; the redrawn conduction path runs from the top input terminal through D_2, through R from right to left (− v_o + across R), through D_3 back to the bottom terminal; v_o is the positive half reaching V_m at T/2.">
+    <figcaption data-l="th">สไลด์หน้า 41: ครึ่งบวก D2 และ D3 นำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 41: positive half, D2 and D3 on · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p42.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 42, Full-Wave Rectifications, 1. Bridge Network: during the period t = T/2 to T, for the negative region of the input the conducting diodes are D_1 and D_4, resulting in the configuration of the figure: the path runs from the bottom terminal through D_4, through R from right to left, through D_1 to the top terminal; v_o is again positive, a second hump up to V_m between T/2 and T.">
+    <figcaption data-l="th">สไลด์หน้า 42: ครึ่งลบ D1 และ D4 นำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 42: negative half, D1 and D4 on · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p44.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 44, Full-Wave Rectifications, 1. Bridge Network: if silicon rather than ideal diodes are employed, an application of Kirchhoff's voltage law around the conduction path results in the figure: two 0.7 V batteries (V_T = 0.7 V) in the path with R between them, and v_o peaking at V_m − 2V_T; boxed V_dc ≅ 0.636(V_m − 2V_T).">
+    <figcaption data-l="th">สไลด์หน้า 44: ไดโอดซิลิคอนสองตัวในเส้นทาง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 44: two silicon diodes in the path · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p45.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 45, Full-Wave Rectifications, 1. Bridge Network (PIV): the required PIV of each diode (ideal) can be determined from the figure obtained at the peak of the positive region of the input signal; for the indicated loop the maximum voltage across R is V_m and the PIV rating is defined by PIV ≥ V_m, full-wave bridge rectifier. The figure shows the bridge with − PIV + across an off diode and V_m across R.">
+    <figcaption data-l="th">สไลด์หน้า 45: PIV ของบริดจ์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 45: the PIV of a bridge · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพบนคือบริดจ์ตามสไลด์หน้า 40 ขาเข้าต่อมุมบนและมุมล่าง R ต่อระหว่างมุมซ้ายกับมุมขวา ถัดมาคือกระแสในไดโอดแต่ละตัวขณะนี้ และล่างสุดคือรูปคลื่น ดูจุดวิ่งเปลี่ยนเส้นทางทุกครึ่งคาบ แต่ยังผ่าน R จากขวาไปซ้ายเสมอ</p>
+  <p class="lead" data-l="en">On top is the bridge of slide p. 40: the input on the top and bottom corners, R between the left and right ones. Then the current in each diode at this instant, and the waveforms at the bottom. Watch the dots change path every half period, yet always cross R from right to left.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">หม้อแปลงแท็ปกลางตามเวลา</h2><h2 data-l="en">The centre-tapped transformer in time</h2>
+    <div class="src" data-l="th">สไลด์หน้า 46–49 · Boylestad หัวข้อ 2.7 (รูป 2.60–2.63)</div><div class="src" data-l="en">Slides pp. 46–49 · Boylestad, section 2.7 (Figs. 2.60–2.63)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2a/p46.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 46, Full-Wave Rectifications, 2. Center-Tapped Transformer: a second popular full-wave rectifier appears in the figure with only two diodes but requiring a center-tapped (CT) transformer to establish the input signal across each section of the secondary of the transformer. The figure: v_i on the primary of a 1:2 transformer; the secondary's upper half with v_i and D_1 to the right node, the lower half with v_i and D_2 to the same node, R between the centre tap and that node with − v_o +.">
+    <figcaption data-l="th">สไลด์หน้า 46: หม้อแปลง 1:2 แท็ปกลาง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 46: a 1:2 centre-tapped transformer · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p47.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 47, Full-Wave Rectifications, 2. Center-Tapped Transformer: during the positive portion of v_i applied to the primary of the transformer, the network appears as shown: each half of the secondary carries V_m, the upper half drives current through D_1 and R (− v_o + across R), and v_o is the positive half up to V_m.">
+    <figcaption data-l="th">สไลด์หน้า 47: ครึ่งบวก D1 นำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 47: positive half, D1 on · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p48.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 48, Full-Wave Rectifications, 2. Center-Tapped Transformer: during the negative portion of the input the network appears as shown, reversing the roles of the diodes but maintaining the same polarity for the voltage across the load resistor R: the lower half of the secondary drives current through D_2 and R, and v_o shows a second positive hump between T/2 and T.">
+    <figcaption data-l="th">สไลด์หน้า 48: ครึ่งลบ D2 นำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 48: negative half, D2 on · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p49.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 49, Full-Wave Rectifications, 2. Center-Tapped Transformer (PIV): the network of the figure helps determine the net PIV for each diode for this full-wave rectifier; inserting the maximum voltage for the secondary voltage and V_m as established by the adjoining loop results in PIV ≥ 2V_m, CT transformer, full-wave rectifier. The figure shows the secondary half with V_m, − PIV + across the off diode, and V_m across R.">
+    <figcaption data-l="th">สไลด์หน้า 49: PIV ≥ \(2V_m\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 49: PIV ≥ \(2V_m\) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพจำลองวาดขดทุติยภูมิสองครึ่งของหม้อแปลง 1:2 เป็นแหล่งจ่ายสองตัวที่มีแรงดันเท่ากับ \(v_i\) ต่ออนุกรมกัน โดยมีแท็ปกลาง (CT) อยู่ตรงกลางเป็นจุดอ้างอิง (ขดปฐมภูมิไม่ได้วาด) D<sub>1</sub> และ D<sub>2</sub> ผลัดกันนำ ปลายขดที่เป็นลบรับแรงดันย้อนกลับสูงสุด \(2V_m\)</p>
+  <p class="lead" data-l="en">The simulation draws the two halves of the 1:2 secondary as two sources in series, each equal to \(v_i\), with the centre tap (CT) between them as the reference (the primary is not drawn). D<sub>1</sub> and D<sub>2</sub> take turns; the off diode sees up to \(2V_m\) in reverse.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">บริดจ์ที่มีไดโอดเพียงสองตัว</h2><h2 data-l="en">A bridge with only two diodes</h2>
+    <div class="src" data-l="th">Boylestad Example 2.17 (รูป 2.64–2.67) · สไลด์ไม่มีตัวอย่างของหัวข้อนี้</div><div class="src" data-l="en">Boylestad Example 2.17 (Figs. 2.64–2.67) · the slides have no example for this topic</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>บริดจ์ที่แขนบนทั้งสองเป็นไดโอดอุดมคติ D<sub>1</sub> และ D<sub>2</sub> ส่วนแขนล่างทั้งสองเป็นตัวต้านทาน 2 kΩ และโหลด R = 2 kΩ ต่อระหว่างมุมซ้ายกับมุมขวา ขาเข้า \(v_i = 10\sin\omega t\) V จงเขียนรูปคลื่นขาออก หาระดับกระแสตรง และหา PIV ของไดโอดแต่ละตัว</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A bridge has ideal diodes D<sub>1</sub> and D<sub>2</sub> in its two upper arms and 2 kΩ resistors in its two lower arms, with the load R = 2 kΩ between the left and right corners. The input is \(v_i = 10\sin\omega t\) V. Sketch the output, find its dc level and the required PIV of each diode.</p></div>
+  <p class="lead" data-l="th">แขนล่างทั้งสองในภาพจำลองเป็นตัวต้านทาน 2 kΩ ป้ายนำหรือไม่นำข้างไดโอดเปลี่ยนตามขณะนั้น <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The two lower arms of the simulation are 2 kΩ resistors; the on/off tags beside the diodes follow the instant. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ฝึกวงจรแท็ปกลาง</h2><h2 data-l="en">Centre-tap practice</h2>
+    <div class="src" data-l="th">โจทย์แต่งเพิ่มเพื่อฝึกสไลด์หน้า 46–49 · ไม่มีเฉลยในห้อง</div><div class="src" data-l="en">A practice problem written for slides pp. 46–49 · no class solution</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>หม้อแปลงแท็ปกลาง 1:2 ทำให้ขดทุติยภูมิแต่ละครึ่งมีแรงดัน \(v_i = 20\sin\omega t\) V ป้อนไดโอดสองตัวและ R = 1 kΩ (a) จงเขียนรูปคลื่นขาออกเมื่อใช้ไดโอดอุดมคติ (b) หาระดับกระแสตรงของไดโอดอุดมคติและไดโอดซิลิคอน (c) หา PIV ของไดโอด</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 1:2 centre-tapped transformer gives each half of its secondary \(v_i = 20\sin\omega t\) V, feeding two diodes and R = 1 kΩ. (a) Sketch the output with ideal diodes. (b) Find the dc level with ideal and with silicon diodes. (c) Find the PIV of the diodes.</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 3 ภาพจำลองเปลี่ยนเป็นไดโอดซิลิคอน <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">At step 3 the simulation switches to silicon diodes. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้สูตรของตำรา \(0.636V_m\) และ \(0.636(V_m - 2V_K)\) · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use the book's \(0.636V_m\) and \(0.636(V_m - 2V_K)\) · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — เส้นทางของกระแส</h3>
+    <ol><li>ส่วน A กดหยุดชั่วคราวในครึ่งบวก: แท่งกระแสของ D2 และ D3 สูงเท่ากัน D1 และ D4 เป็นศูนย์ ตรงกับสไลด์หน้า 41</li>
+    <li>เลือกไดโอดซิลิคอนแล้วลด \(V_m\) เหลือ 3 V: ขาออกเหลือยอดเพียง 1.6 V เพราะเสียไป 1.4 V ในไดโอดสองตัว</li>
+    <li>ส่วน B เทียบกับส่วน A ที่ \(V_m\) เท่ากัน: ระดับกระแสตรงของไดโอดอุดมคติเท่ากัน แต่ PIV ของแท็ปกลางเป็นสองเท่า</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เลือกวงจร</h3>
+    <ol><li>บริดจ์: ไม่ต้องใช้หม้อแปลงแท็ปกลาง และไดโอดทน PIV เพียง \(V_m\) แต่เสียแรงดันในไดโอดสองตัว</li>
+    <li>แท็ปกลาง: ใช้ไดโอดสองตัวและเสียแรงดันในไดโอดตัวเดียว แต่ต้องใช้หม้อแปลงแท็ปกลาง และไดโอดต้องทน \(2V_m\)</li></ol>
+    <div class="book">สไลด์บทที่ 2 ชุดที่ 1 หน้า 40–50 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 2.7 (Example 2.17)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the current paths</h3>
+    <ol><li>In section A pause during the positive half: the bars of D2 and D3 are equal and those of D1 and D4 are zero, as on slide p. 41.</li>
+    <li>Choose silicon diodes and lower \(V_m\) to 3 V: the output peaks at only 1.6 V, having lost 1.4 V in two diodes.</li>
+    <li>Compare section B with section A at the same \(V_m\): the dc level with ideal diodes is the same, but the centre tap's PIV is twice as large.</li></ol></div>
+  <div class="card"><h3>Try this 2 — choosing a circuit</h3>
+    <ol><li>The bridge needs no centre-tapped transformer and its diodes see a PIV of only \(V_m\), but it loses the voltage of two diodes.</li>
+    <li>The centre tap needs two diodes and loses the voltage of one, but it needs a centre-tapped transformer and diodes rated for \(2V_m\).</li></ol>
+    <div class="book">Chapter 2 slides, Part I, pp. 40–50 · Boylestad &amp; Nashelsky, 11th ed., section 2.7 (Example 2.17)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  const v2 = x => fd(x, 2).replace('-', '−');
+  CH2.problem(1, 'ex17'); CH2.problem(2, 'ct');
+  const DCOL = { D1: C.hole, D2: C.tan, D3: C.elec, D4: C.q };
+  const dBars = (ctx, b, bd, c, ids) => CH8.bars(ctx, b, ids.map(id => ({ label: id.replace('D', 'I_D'), v: Math.max(0, c.I(id).re * 1e3), color: DCOL[id], sub: c.I(id).re > 1e-6 ? t('นำ', 'on') : t('ไม่นำ', 'off') })),
+    { title: bd.short ? t('กระแสในไดโอด (mA)', 'diode currents (mA)') : t('กระแสในไดโอดแต่ละตัวขณะนี้ (mA)', 'the current in each diode now (mA)'), fmt: v => fd(v, 2), sub: !bd.short });
+  const board = (cv, spec, ids, tags) => new CH8.Board(cv, { T: 4, mid: false, wideAt: 1e9, cktAspN: 0.68, sideAspN: 0.5, pad: 1.25, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' }, side: (ctx, b, bd) => { if (bd.ckt) dBars(ctx, b, bd, bd.ckt, ids); },
+    waves: [{ title: bd => (bd.short ? '' : t('สัญญาณขาเข้าและขาออก', 'input and output')), sigs: () => (spec.cy ? CH2.wsigs(spec.cy, { lines: [{ v: spec.cy.avg('vo'), label: 'V_dc' }] }) : []) }],
+    after: v => (tags ? CH2.stTags(v, tags) : CH2.bridgeTags(v)), badge: () => [[`v_o = ${v2(spec.B.ckt.Vab('R').re)} V`, `v_o = ${v2(spec.B.ckt.Vab('R').re)} V`], 'ok'] });
+
+  /* =================================================================== A: the bridge */
+  const SA = { Vm: 20, si: false };
+  SA.B = board('cvA', SA, ['D1', 'D2', 'D3', 'D4'], null);
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('ไดโอด', 'Diodes'));
+  ui.radio(pA, [{ id: 'aI', label: t('อุดมคติ', 'ideal'), on: true }, { id: 'aS', label: t('ซิลิคอน 0.7 V', 'silicon 0.7 V') }], id => { SA.si = id === 'aS'; buildA(); });
+  ui.buttons(pA, [{ label: t('หยุดชั่วคราว', 'Pause'), onclick: el => { SA.B.clk.run = !SA.B.clk.run; el.classList.toggle('on', !SA.B.clk.run); } }]);
+  ui.h2(pA, t('ขาเข้า', 'Input'));
+  ui.slider(pA, { id: 'aV', label: 'V_m', min: 1, max: 30, step: 0.5, value: SA.Vm, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.Vm = v; buildA(); } });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { const sp = CH2.bridge({ Vm: SA.Vm, R: 2000, d: SA.si ? CH2.SI : CH2.IDEAL }); SA.B.set(sp, { speed: 80 / 0.01, dotRef: 0.01 });
+    SA.cy = CH2.cycle(sp, 'S', CH2.sine(SA.Vm), { ...CH2.BROUT, v1: c => c.Vab('D1').re }); showA(); }
+  function showA() { const avg = SA.cy.avg('vo'), piv = -SA.cy.min('v1');
+    mA.innerHTML = ui.kv([[t('V_dc จากคลื่นจริง', 'V_dc of the actual wave'), `${fd(avg, 2)} V`], ['0.636 V_m', `${fd(0.636 * SA.Vm, 2)} V`], ['0.636(V_m − 1.4)', `${fd(0.636 * (SA.Vm - 1.4), 2)} V`], [t('0.636 V_m − 1.4 สไลด์หน้า 50', '0.636 V_m − 1.4, slide p. 50'), `${fd(0.636 * SA.Vm - 1.4, 2)} V`], ['PIV', `${fd(piv, 2)} V`]]);
+    $('wA').innerHTML = `<div class="answer">${t(`ยอดของขาออก ${fd(SA.cy.max('vo'), 2)} V ${SA.si ? '(เสียไป 1.4 V ในไดโอดสองตัว)' : '(เท่ากับ \\(V_m\\))'} ทั้งสองครึ่งเป็นบวก ระดับกระแสตรงจึงเป็นสองเท่าของวงจรครึ่งคลื่น ไดโอดที่ไม่นำรับแรงดันย้อนกลับสูงสุด ${fd(piv, 2)} V`, `The output peaks at ${fd(SA.cy.max('vo'), 2)} V ${SA.si ? '(1.4 V lost in two diodes)' : '(equal to \\(V_m\\))'}; both halves are positive, so the dc level is twice that of a half-wave rectifier. An off diode sees up to ${fd(piv, 2)} V in reverse.`)}</div>`;
+    MC.renderMath($('wA')); }
+  SA.B.resize(); buildA(); window.addEventListener('resize', () => SA.B.resize());
+  LS.anim($('cvA'), dt => { CH2.drive(SA.B.ckt, 'S', SA.Vm * Math.sin(SA.B.clk.ph)); SA.B.frame(dt); });
+
+  /* =================================================================== B: the centre tap */
+  const SB = { Vm: 20, si: false };
+  SB.B = board('cvB', SB, ['D1', 'D2'], [['D1', 0, -0.72, 'D_1'], ['D2', 0, 0.72, 'D_2']]);
+  const pB = $('pB'), mB = document.createElement('div');
+  ui.h2(pB, t('ไดโอด', 'Diodes'));
+  ui.radio(pB, [{ id: 'bI', label: t('อุดมคติ', 'ideal'), on: true }, { id: 'bS', label: t('ซิลิคอน 0.7 V', 'silicon 0.7 V') }], id => { SB.si = id === 'bS'; buildB(); });
+  ui.buttons(pB, [{ label: t('หยุดชั่วคราว', 'Pause'), onclick: el => { SB.B.clk.run = !SB.B.clk.run; el.classList.toggle('on', !SB.B.clk.run); } }]);
+  ui.h2(pB, t('ขาเข้า (ขดครึ่งหนึ่ง)', 'Input (one half-winding)'));
+  ui.slider(pB, { id: 'bV', label: 'V_m', min: 1, max: 30, step: 0.5, value: SB.Vm, fmt: v => `${fd(v, 1)} V`, oninput: v => { SB.Vm = v; buildB(); } });
+  pB.appendChild(mB); mB.className = 'metrics';
+  function buildB() { const sp = CH2.ct({ Vm: SB.Vm, R: 1000, d: SB.si ? CH2.SI : CH2.IDEAL }); SB.B.set(sp, { speed: 80 / 0.01, dotRef: 0.01 });
+    SB.cy = CH2.cycle(sp, ['S1', 'S2'], CH2.sine(SB.Vm), CH2.CTOUT); showB(); }
+  function showB() { const avg = SB.cy.avg('vo'), piv = -SB.cy.min('v2');
+    mB.innerHTML = ui.kv([[t('V_dc จากคลื่นจริง', 'V_dc of the actual wave'), `${fd(avg, 2)} V`], ['0.636 V_m', `${fd(0.636 * SB.Vm, 2)} V`], ['0.636(V_m − 0.7)', `${fd(0.636 * (SB.Vm - 0.7), 2)} V`], [t('0.636 V_m − 0.7 สไลด์หน้า 50', '0.636 V_m − 0.7, slide p. 50'), `${fd(0.636 * SB.Vm - 0.7, 2)} V`], ['PIV', `${fd(piv, 2)} V`]]);
+    $('wB').innerHTML = `<div class="answer">${t(`ไดโอดผลัดกันนำครึ่งละตัว ยอดของขาออก ${fd(SB.cy.max('vo'), 2)} V ${SB.si ? '(เสียไป 0.7 V ในไดโอดตัวเดียว)' : ''} ไดโอดที่ไม่นำรับแรงดันย้อนกลับถึง ${fd(piv, 2)} V ราว \\(2V_m\\)`, `The diodes take turns, one per half; the output peaks at ${fd(SB.cy.max('vo'), 2)} V${SB.si ? ' (0.7 V lost in one diode)' : ''}. The off diode sees up to ${fd(piv, 2)} V in reverse, about \\(2V_m\\).`)}</div>`;
+    MC.renderMath($('wB')); }
+  SB.B.resize(); buildB(); window.addEventListener('resize', () => SB.B.resize());
+  LS.anim($('cvB'), dt => { CH2.drive(SB.B.ckt, ['S1', 'S2'], SB.Vm * Math.sin(SB.B.clk.ph)); SB.B.frame(dt); });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) บริดจ์ไดโอดอุดมคติ \\(V_m\\) = 15 V จงหา \\(V_{dc}\\) และ PIV', '1) A bridge of ideal diodes with \\(V_m\\) = 15 V. Find \\(V_{dc}\\) and the PIV.'),
+      fields: [{ key: 'x', lab: 'V_dc =', ans: 0.636 * 15, unit: 'V' }, { key: 'y', lab: 'PIV =', ans: 15, unit: 'V' }], work: work(R`V_{dc} = 0.636(15) = ${fd(0.636 * 15, 2)}\ \text{V},\qquad \text{PIV} = V_m = 15\ \text{V}`) },
+    { q: t('2) บริดจ์เดียวกันใช้ไดโอดซิลิคอน จงหายอดของ \\(v_o\\) และ \\(V_{dc}\\) ตามสูตรของตำรา', '2) The same bridge with silicon diodes. Find the peak of \\(v_o\\) and the book\'s \\(V_{dc}\\).'),
+      fields: [{ key: 'x', lab: 'V_o(max) =', ans: 13.6, unit: 'V' }, { key: 'y', lab: 'V_dc =', ans: 0.636 * 13.6, unit: 'V' }], work: work(R`V_{o(\max)} = 15 - 2(0.7) = 13.6\ \text{V},\qquad V_{dc} \cong 0.636(13.6) = ${fd(0.636 * 13.6, 2)}\ \text{V}`) },
+    { q: t('3) วงจรแท็ปกลางที่ขดครึ่งหนึ่งมี \\(V_m\\) = 15 V จงหา PIV ของไดโอด', '3) A centre-tapped rectifier with \\(V_m\\) = 15 V on each half-winding. Find the PIV of its diodes.'),
+      fields: [{ key: 'x', lab: 'PIV =', ans: 30, unit: 'V' }], work: work(R`\text{PIV} = 2V_m = 30\ \text{V}`) },
+    { q: t('4) ต้องการ \\(V_{dc}\\) = 12 V จากบริดจ์ไดโอดอุดมคติ ขาเข้าต้องมี \\(V_m\\) เท่าใด', '4) A bridge of ideal diodes must give \\(V_{dc}\\) = 12 V. What \\(V_m\\) does it need?'),
+      fields: [{ key: 'x', lab: 'V_m =', ans: 12 / 0.636, unit: 'V', tol: 0.02 }], work: work(R`V_m = \frac{12}{0.636} = ${fd(12 / 0.636, 2)}\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

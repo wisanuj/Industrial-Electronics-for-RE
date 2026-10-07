@@ -5,18 +5,18 @@
 <title data-en="Numeric Tests">ชุดทดสอบตัวเลข</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=1">
-<script src="assets/stops.js?v=1"></script><script src="assets/shell.js?v=1"></script>
-<script src="assets/circuit.js?v=1"></script><script src="assets/alg.js?v=1"></script><script src="assets/lesson.js?v=1"></script>
-<script src="assets/draw.js?v=1"></script><script src="assets/ch6.js?v=1"></script><script src="assets/ch8.js?v=1"></script><script src="assets/ie.js?v=1"></script><script src="assets/ie1.js?v=1"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script>
+<script src="assets/draw.js?v=2"></script><script src="assets/ch6.js?v=2"></script><script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
 <div class="wrap">
 <header class="topbar" id="mc-top"></header>
 <h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine and its diodes against hand calculations and the textbook</span></h1>
-<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และตัวเลขของโจทย์ทุกข้อในบทที่ 1 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
-<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the numbers of every chapter 1 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
+<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และตัวเลขของโจทย์ทุกข้อในบทที่ 1–2 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
+<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the numbers of every chapter 1 and 2 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
 <div id="sum" class="status"></div>
 <div style="overflow-x:auto"><table class="tbl" id="tbl"><thead><tr><th>#</th><th>test</th><th>got</th><th>expected</th><th></th></tr></thead><tbody></tbody></table></div>
 <div id="box8" style="position:absolute;left:-4000px;top:0;width:900px"></div>
@@ -100,6 +100,44 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
 /* --- page 1.3: the n- and p-type blocks are neutral (ions + minority carriers = majority carriers) --- */
 { const cnt = b => ['e', 'h'].map(k => b.q.filter(p => p.kind === k).length), bn = new IE.Block('n', { n: 16, m: 2 }), bp = new IE.Block('p', { n: 16, m: 2 }), [ne, nh] = cnt(bn), [pe, ph] = cnt(bp);
   T('page 1.3: n-type block, 16 donor ions + 2 holes = 18 electrons; p-type block, 16 acceptor ions + 2 electrons = 18 holes (net charge 0)', `${bn.ions.length + nh - ne} ${bp.ions.length + pe - ph} ${ne} ${ph}`, '0 0 18 18'); }
+
+/* --- chapter 2: every slide example through the engine, the rectifier averages, the clamper transient, the Zener ranges --- */
+{ const run = sp => { const c = new Circuit(sp); c.solve(); return c; }, mA = x => x * 1e3, SI = CH2.SI, IDEAL = CH2.IDEAL;
+  const c1 = run(CH2.loop({ E: 10, R: 500, d: CH2.T23 })), V1 = c1.Vab('D').re, I1 = mA(c1.I('D').re);
+  T('Ex.1 (Example 2.1): the load line of E = 10 V, R = 0.5 kΩ meets Fig. 2.3b at the book\'s reading V_DQ ≅ 0.78 V, I_DQ ≅ 18.5 mA (within 0.01 V and 0.2 mA); V_R = E − V_DQ',
+    `${Math.abs(V1 - 0.78) < 0.01} ${Math.abs(I1 - 18.5) < 0.2} ${Math.abs(c1.Vab('R').re - (10 - V1)) < 1e-9}`, 'true true true');
+  const a2 = run(CH2.loop({ E: 10, R: 500, d: SI })), a3 = run(CH2.loop({ E: 10, R: 500, d: IDEAL }));
+  T('Ex.2, Ex.3 (Examples 2.2, 2.3): approximate model 0.7 V and 18.6 mA; ideal model 0 V and 20 mA', `${f(a2.Vab('D').re, 3)} ${f(mA(a2.I('D').re), 3)} ${f(a3.Vab('D').re, 3)} ${f(mA(a3.I('D').re), 3)}`, '0.7 18.6 0 20');
+  const a4 = run(CH2.loop({ E: 8, R: 2200, d: SI })), a5 = run(CH2.loop({ E: 8, R: 2200, d: SI, flip: true }));
+  T('Ex.4, Ex.5 (Examples 2.4, 2.5): V_D = 0.7 V, V_R = 7.3 V, I_D = 3.32 mA; reversed: I_D = 0, V_R = 0, 8 V across the diode (V_ab = −8 V)',
+    `${f(a4.Vab('D').re, 3)} ${f(a4.Vab('R').re, 3)} ${f(mA(a4.I('D').re), 2)} | ${f(mA(a5.I('D').re), 4)} ${f(a5.Vab('R').re, 4)} ${f(a5.Vab('D').re, 3)}`, '0.7 7.3 3.32 | 0 0 -8');
+  const a6 = run(CH2.two({ E: 12, R: 5600, d1: SI, d2: CH2.GE })), a7 = run(CH2.two({ E: 12, R: 5600, d1: SI, d2: SI, flip2: true })), a8 = run(CH2.ex8(false));
+  T('Ex.6 (an earlier edition\'s Example 2.7): Si + Ge in series: V_o = 11 V, I = 1.96 mA · Ex.7 (Example 2.8 with 12 V): the second diode reversed, I = 0, V_D1 = 0 (I_D = 0 ⇒ V_D = 0), V_D2 = 12 V, V_o = 0',
+    `${f(a6.V('o').re, 3)} ${f(mA(a6.I('R').re), 2)} | ${f(mA(a7.I('R').re), 4)} ${f(a7.Vab('D1').re, 3)} ${f(Math.abs(a7.Vab('D2').re), 3)} ${f(a7.V('o').re, 4)}`, '11 1.96 | 0 0 12 0');
+  T('Ex.8 (Example 2.9): two supplies, I = 2.07 mA, V_1 = 9.74 V, V_2 = 4.56 V, V_o = −0.44 V', `${f(mA(a8.I('R1').re), 2)} ${f(a8.Vab('R1').re, 2)} ${f(a8.Vab('R2').re, 2)} ${f(a8.V('o').re, 2)}`, '2.07 9.74 4.56 -0.44');
+  const a9 = run(CH2.ex9(false)), a10 = run(CH2.ex10(false)), a11 = run(CH2.ex11(false)), a12 = run(CH2.ex12(false));
+  T('Ex.9 (Example 2.10): two Si in parallel, V_o = 0.7 V, I_1 = 28.18 mA, 14.09 mA each', `${f(a9.V('o').re, 3)} ${f(mA(a9.I('R').re), 2)} ${f(mA(a9.I('D1').re), 2)} ${f(mA(a9.I('D2').re), 2)}`, '0.7 28.18 14.09 14.09');
+  T('Ex.10 (older edition): E1 = 20 V, E2 = 4 V, I = 6.95 mA through D1, D2 off', `${f(mA(a10.I('R').re), 2)} ${f(mA(a10.I('D1').re), 2)} ${Math.abs(a10.I('D2').re) < 1e-7}`, '6.95 6.95 true');
+  T('Ex.11 (an earlier edition\'s Example 2.12): Si ∥ Ge from 12 V into 2.2 kΩ: V_o = 11.7 V, the Si diode off', `${f(a11.V('o').re, 3)} ${Math.abs(a11.I('D1').re) < 1e-7}`, '11.7 true');
+  T('Ex.12 (Example 2.13): I_1 = 0.212 mA, I_2 = 3.32 mA, I_D2 = 3.11 mA', `${f(mA(a12.I('R1').re), 3)} ${f(mA(a12.I('R2').re), 2)} ${f(mA(a12.I('D2').re), 2)}`, '0.212 3.32 3.11');
+  const E = CH2.E13;
+  T('Ex.13 (Example 2.16), one cycle through the solver: the average of v_o = −20/π = −6.37 V (book −0.318·20 = −6.36), silicon ≈ −6.02 V (≈ −20/π + 0.35; book ≅ −6.14), V_m = 200 V: −63.66 and −63.31 V; PIV = 20 V',
+    `${f(E.a.avg('vo'), 2)} ${f(E.b.avg('vo'), 2)} ${f(E.ca.avg('vo'), 2)} ${f(E.cb.avg('vo'), 2)} ${f(-E.a.min('vd'), 2)}`, '-6.37 -6.02 -63.66 -63.31 20');
+  const B = CH2.B17, CT = CH2.CT;
+  T('Example 2.17 (bridge with two resistors): v_o peaks at 5 V, V_dc = 0.636 · 5 = 3.18 V, PIV = 5 V · centre tap, V_m = 20 V: V_dc = 0.636 · 20 = 12.73 V, PIV = 2V_m = 40 V',
+    `${f(B.max('vo'), 3)} ${f(B.avg('vo'), 2)} ${f(-B.min('v1'), 2)} | ${f(CT.a.avg('vo'), 2)} ${f(-CT.a.min('v2'), 2)}`, '5 3.18 5 | 12.73 40');
+  T('Part II Ex.1 (Example 2.18): series clipper with +5 V: v_o from 0 to 25 V, 5 V when v_i = 0 · Ex.2 (Example 2.20): parallel clipper, triangle 16 V, 4 V: v_o from 4 to 16 V',
+    `${f(CH2.E18.max('vo'), 3)} ${f(CH2.E18.min('vo'), 3)} ${f(CH2.E18.f('vo')(0), 3)} | ${f(CH2.E20.min('vo'), 3)} ${f(CH2.E20.max('vo'), 3)}`, '25 0 5 | 4 16');
+  const clamp = d => { const c = new Circuit(CH2.clamp({ d })), h = 1e-3 / 400, out = []; for (let k = 1; k <= 4000; k++) { c.step(h); if (k === 3700 || k === 3900) out.push(c.Vab('R').re, -c.Vab('C').re); } return out; };
+  const k3 = clamp(IDEAL), k4 = clamp(SI);
+  T('Part II Ex.3, Ex.4 (Examples 2.22, 2.23), a transient of 10 periods: in the +10 V half v_o ≈ 35 V (34.3 V with Si; RC = 0.1 s, so it droops < 0.2 V), in the −20 V half v_o = 5 V (4.3 V) and V_C = 25 V (24.3 V)',
+    `${Math.abs(k3[0] - 35) < 0.2} ${f(k3[2], 3)} ${f(k3[3], 2)} | ${Math.abs(k4[0] - 34.3) < 0.2} ${f(k4[2], 3)} ${f(k4[3], 2)}`, 'true 5 25 | true 4.3 24.3');
+  const z = (Vi, Rv, RL, Vz) => { const c = run(CH2.zreg({ Vi, R: Rv, RL, Vz })); return [c.Vab('RL').re, CH2.iz(c)]; };
+  const z5a = z(16, 1000, 1200, 10), z5b = z(16, 1000, 3000, 10);
+  T('Part II Ex.5 (Example 2.26): R_L = 1.2 kΩ, the Zener off, V_L = 8.73 V; R_L = 3 kΩ, V_L = 10 V, I_Z = 2.67 mA, P_Z = 26.7 mW', `${f(z5a[0], 2)} ${f(z5a[1], 4)} | ${f(z5b[0], 3)} ${f(z5b[1], 2)} ${f(10 * z5b[1], 1)}`, '8.73 0 | 10 2.67 26.7');
+  const z6a = z(50, 1000, 250, 10), z6b = z(50, 1000, 1250, 10), z7a = z(1420 * 20 / 1200, 220, 1200, 20), z7b = z(0.07667 * 220 + 20, 220, 1200, 20);
+  T('Part II Ex.6, Ex.7 (Examples 2.27, 2.28): I_Z = 0 at R_Lmin = 250 Ω and 32 mA = I_ZM at R_Lmax = 1.25 kΩ; I_Z = 0 at V_imin = 23.67 V and 60 mA = I_ZM at V_imax = 36.87 V',
+    `${f(z6a[1], 2)} ${f(z6b[1], 2)} ${f(z7a[1], 2)} ${f(z7b[1], 1)}`, '0 32 0 60'); }
 
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');

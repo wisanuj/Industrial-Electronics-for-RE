@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="2.2 — Diode Approximations and Series Circuits">2.2 — แบบจำลองโดยประมาณและวงจรอนุกรม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script><script src="assets/ch6.js?v=2"></script>
+<script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">แบบจำลองโดยประมาณและวงจรไดโอดอนุกรม <span class="en">Diode approximations and series circuits</span></h1>
+<h1 data-l="en">Diode approximations and series circuits <span class="en">Find the state, then substitute the model</span></h1>
+
+<p class="sub" data-l="th">สไลด์หน้า 13–22 สรุปแบบจำลองของไดโอดที่จะใช้ทั้งบทไว้ในตาราง 2.1 คือ ซิลิคอนที่นำกระแสมีแรงดัน 0.7 V เจอร์เมเนียม 0.3 V และแบบอุดมคติ 0 V แล้ววางขั้นตอนวิเคราะห์วงจรอนุกรม: นึกว่าไดโอดเป็นตัวต้านทานเพื่อดูทิศของกระแสที่วงจรพยายามสร้าง แล้วแทนไดโอดด้วยแบบจำลองที่ตรงกับสถานะ หน้านี้มีภาพจำลองที่หาสถานะให้ดูทีละขั้น (ส่วน A) โจทย์ Ex.4 และ Ex.5 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Slides pp. 13–22 sum up, in Table 2.1, the diode models used all through the chapter: a conducting silicon diode has 0.7 V, germanium 0.3 V, the ideal diode 0 V. They then set out how to analyse a series circuit: imagine a resistor in place of the diode to see which way the circuit tries to push current, then put in the model that matches the state. This page shows the state being found step by step (section A), works Ex.4 and Ex.5, and ends with more practice.</p>
+<div class="equation-box eqwrap">$$ V_D = V_K\ \ (0.7\ \text{V Si},\ 0.3\ \text{V Ge}) $$ $$ I_D = I_R = \frac{V_R}{R} = \frac{E - V_K}{R} $$ $$ I_D = 0 \Rightarrow V_R = 0,\ V_D = E $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ตาราง 2.1</b>: ไดโอดซิลิคอนที่นำกระแสคือแบตเตอรี 0.7 V เจอร์เมเนียม 0.3 V แบบอุดมคติคือลัดวงจร ส่วนไดโอดที่ไม่นำคือเปิดวงจร \(I_D = 0\) แบบประมาณใช้ได้เมื่อ \(R \gg r_{av}\) แบบอุดมคติใช้ได้เมื่อ \(E \gg V_K\) ด้วย (สไลด์หน้า 14–15)</li>
+  <li><b>หาสถานะก่อน</b>: นึกว่าไดโอดเป็นตัวต้านทาน ถ้ากระแสที่ได้ไหลทางเดียวกับหัวลูกศร และแรงดันที่ดันอยู่มากกว่า \(V_K\) ไดโอดนำ ไม่อย่างนั้นไม่นำ (สไลด์หน้า 16–17)</li>
+  <li><b>ขั้วของ \(V_D\)</b> เหมือนกับเมื่อไดโอดเป็นตัวต้านทาน และในวงจรอนุกรม \(I_D = I_R\) (สไลด์หน้า 18)</li>
+  <li><b>เปิดวงจรมีแรงดันเท่าไรก็ได้แต่กระแสเป็นศูนย์</b> ลัดวงจรมีแรงดันศูนย์แต่กระแสถูกจำกัดด้วยวงจรรอบนอก ไดโอดที่ไม่นำจึงอาจรับแรงดันทั้งหมดของแหล่งจ่าย (สไลด์หน้า 22)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Table 2.1</b>: a conducting silicon diode is a 0.7 V battery, germanium 0.3 V, the ideal diode a short; a diode that is off is an open circuit, \(I_D = 0\). The approximate model needs \(R \gg r_{av}\), the ideal one also \(E \gg V_K\) (slides pp. 14–15).</li>
+  <li><b>Find the state first</b>: imagine a resistor in place of the diode. If the resulting current follows the arrowhead and the voltage pushing it exceeds \(V_K\), the diode is on; otherwise it is off (slides pp. 16–17).</li>
+  <li><b>The polarity of \(V_D\)</b> is the one a resistor would have, and in a series circuit \(I_D = I_R\) (slide p. 18).</li>
+  <li><b>An open circuit can have any voltage but no current</b>; a short has no voltage but a current set by the rest of the network. An off diode can therefore take the whole supply voltage (slide p. 22).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch2a/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 13, Diode Approximations: quote, the primary purpose of this book is to develop a general knowledge of the behavior, capabilities, and possible areas of application of a device in a manner that will minimize the need for extensive mathematical developments. The complete piecewise-linear equivalent model introduced in Chapter 1 was not employed in the load-line analysis because r_av is typically much less than the other series elements of the network.">
+  <figcaption data-l="th">สไลด์หน้า 13: ทำไมไม่ใช้ \(r_{av}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 13: why \(r_{av}\) is left out · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 14, Diode Approximations, Table 2.1, Approximate and Ideal Semiconductor Diode Models, silicon: a series circuit of E, R and a silicon diode with V_T across it, valid for E greater than V_T and R much greater than r_av; the characteristic, horizontal up to 0.7 V and then vertical; on, a diode with + 0.7 V − becomes a 0.7 V battery with I_D; off, I_D = 0 A, an open circuit.">
+  <figcaption data-l="th">สไลด์หน้า 14: ตาราง 2.1 ไดโอดซิลิคอน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 14: Table 2.1, the silicon diode · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 15, Diode Approximations, Table 2.1 continued: germanium, the same as silicon with 0.3 V (a 0.3 V battery when on, an open circuit with I_D = 0 A when off); the ideal model (Si or Ge), valid for E much greater than V_T and R much greater than r_av, with the characteristic along the vertical axis, V_D = 0 V and a short when on, I_D = 0 A and an open circuit when off.">
+  <figcaption data-l="th">สไลด์หน้า 15: เจอร์เมเนียมและแบบอุดมคติ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: germanium and the ideal model · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 14–15 และ 18 เขียนแรงดันที่เข่าว่า \(V_T\)</b> ตามสัญลักษณ์ของตำราฉบับเก่า ตำราพิมพ์ครั้งที่ 11 ใช้ \(V_K\) เพราะ \(V_T\) คือแรงดันความร้อนในสมการของช็อกลีย์ (หน้า 1.4) หน้านี้ใช้ \(V_K\) · สไลด์หน้า 21 (Ex.5) วาดไดโอดเป็นช่องเปิดไว้แล้ว ซึ่งเป็นวงจรสมมูลในคำตอบ โจทย์จริงคือ Ex.4 ที่กลับทิศไดโอด (Boylestad Example 2.5)</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 14–15 and 18 write the knee voltage as \(V_T\)</b>, the notation of earlier editions; the 11th edition uses \(V_K\), because \(V_T\) is the thermal voltage of Shockley's equation (page 1.4). This page uses \(V_K\). Slide p. 21 (Ex.5) already draws the diode as a gap, the equivalent circuit of the answer; the problem itself is Ex.4 with the diode turned round (Boylestad Example 2.5).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>หาสถานะทีละขั้น</a><a href="#ex1"><b>1</b>Ex.4 ไดโอดนำ</a><a href="#ex2"><b>2</b>Ex.5 กลับทิศไดโอด</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The state, step by step</a><a href="#ex1"><b>1</b>Ex.4 the diode on</a><a href="#ex2"><b>2</b>Ex.5 reversed</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">หาสถานะของไดโอดทีละขั้น</h2><h2 data-l="en">Finding the state of a diode, step by step</h2>
+    <div class="src" data-l="th">สไลด์หน้า 16–19 · Boylestad หัวข้อ 2.3–2.4 (ตาราง 2.1, รูป 2.10–2.12)</div><div class="src" data-l="en">Slides pp. 16–19 · Boylestad, sections 2.3–2.4 (Table 2.1, Figs. 2.10–2.12)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2a/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 16, Diode Approximations: in general, a diode is in the on state if the current established by the applied sources is such that its direction matches that of the arrow in the diode symbol, and V_D = 0.7 V for silicon and V_D = 0.3 V for germanium. The series circuit of the figure, described in some detail in the previous section, will be used to demonstrate the approach: E, a silicon diode with V_D, I_D and I_R, and R with V_R.">
+    <figcaption data-l="th">สไลด์หน้า 16: นำเมื่อกระแสไหลตามหัวลูกศร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: on when the current follows the arrowhead · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 17, Series Diode Configurations with DC Inputs: the state of the diode is first determined by mentally replacing the diode with a resistive element (a circuit with a resistor drawn in place of the diode and the current I flowing clockwise). The network is then redrawn with the appropriate equivalent model for the forward-biased silicon diode (a 0.7 V battery with + V_D − across it, I_D and I_R).">
+    <figcaption data-l="th">สไลด์หน้า 17: แทนไดโอดด้วยตัวต้านทานในใจ แล้วด้วยแบบจำลอง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 17: a resistor in mind first, then the model · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 18, Series Diode Configurations with DC Inputs: note for future reference that the polarity of V_D is the same as would result if in fact the diode were a resistive element. The resulting voltage and current levels: V_D = V_T, V_R = E − V_T, I_D = I_R = V_R/R. The figure is the circuit with the 0.7 V battery in place of the diode.">
+    <figcaption data-l="th">สไลด์หน้า 18: \(V_D\), \(V_R\) และ \(I_D\) ของไดโอดที่นำ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 18: \(V_D\), \(V_R\) and \(I_D\) of a conducting diode · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 19, Series Diode Configurations with DC Inputs: reversing the diode; determining the state of the diode with a resistor in its place, the current I flowing against the arrowhead; substituting the equivalent model for the off diode, I_D = 0 A and V_D = E. The diode is in the off state; due to the open circuit the diode current is 0 A and V_R = I_R R = I_D R = (0 A)R = 0 V. The fact that V_R = 0 V will establish E volts across the open circuit as defined by Kirchhoff's voltage law.">
+    <figcaption data-l="th">สไลด์หน้า 19: กลับทิศไดโอด ไม่นำ \(V_D = E\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the diode reversed is off, \(V_D = E\) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เลือกสิ่งที่วางในตำแหน่งของไดโอด: "ขั้นที่ 1" ใส่ตัวต้านทานแทน (จุดแสดงทิศของกระแสที่วงจรพยายามสร้าง) "ขั้นที่ 2" ใส่วงจรสมมูลตามสถานะที่หาได้ (แบตเตอรี \(V_K\) หรือช่องเปิด) และ "ไดโอด" คือไดโอดตามแบบจำลองที่เลือก ค่าในขั้นที่ 2 ต้องเท่ากับของไดโอดทุกค่า เลื่อน E ทั้งบวกและลบ กลับทิศไดโอด และเปลี่ยนวัสดุ แผงข้างภาพแสดงแรงดันรอบวงตามกฎของเคียร์ชอฟฟ์ (ยกขึ้นเป็นบวก ตกลงเป็นลบ ผลรวมเป็นศูนย์)</p>
+  <p class="lead" data-l="en">Choose what sits in the diode's place: "step 1" puts a resistor there (the dots show which way the circuit tries to push current), "step 2" the equivalent of the state found (a battery \(V_K\) or a gap), and "diode" the diode itself in the chosen model. Every value of step 2 must match the diode's. Move E both ways, turn the diode round and change the material. The side panel shows the loop voltages of Kirchhoff's law (rises positive, drops negative, summing to zero).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.4: ไดโอดซิลิคอนในวงจรอนุกรม</h2><h2 data-l="en">Ex.4: a silicon diode in a series circuit</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad Example 2.4 (รูป 2.13–2.14)</div><div class="src" data-l="en">Slide p. 20 · Boylestad Example 2.4 (Figs. 2.13–2.14)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 20, Series Diode Configurations with DC Inputs, Ex.4: for the series diode configuration of the figure, determine V_D, V_R, and I_D. The figure: E = 8 V, a silicon diode with + V_D − and I_D, R = 2.2 kΩ with I_R and V_R.">
+    <figcaption data-l="th">สไลด์หน้า 20: Ex.4 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 20: Ex.4 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรอนุกรมมีแหล่งจ่าย E = 8 V ไดโอดซิลิคอน และ R = 2.2 kΩ ดังรูป จงหา \(V_D\), \(V_R\) และ \(I_D\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A series circuit has E = 8 V, a silicon diode and R = 2.2 kΩ, as in the figure. Determine \(V_D\), \(V_R\) and \(I_D\).</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 2 วงจรในภาพจำลองแทนไดโอดด้วยแบตเตอรี 0.7 V ตามตาราง 2.1 <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">At step 2 the simulated circuit puts the 0.7 V battery of Table 2.1 in place of the diode. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.5: กลับทิศไดโอดของ Ex.4</h2><h2 data-l="en">Ex.5: the diode of Ex.4 turned round</h2>
+    <div class="src" data-l="th">สไลด์หน้า 21–22 · Boylestad Example 2.5 (รูป 2.15)</div><div class="src" data-l="en">Slides pp. 21–22 · Boylestad Example 2.5 (Fig. 2.15)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 21, Series Diode Configurations with DC Inputs, Ex. 5: for the series diode configuration of the figure, determine V_D, V_R, and I_D. The figure: E = 8 V, a gap marked I_D = 0 A with + V_D − across it, R = 2.2 kΩ with I_R = 0 A and V_R.">
+    <figcaption data-l="th">สไลด์หน้า 21: Ex.5 (ไดโอดถูกวาดเป็นช่องเปิดแล้ว) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 21: Ex.5 (the diode already drawn as a gap) · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทำ Ex.4 ซ้ำเมื่อกลับทิศไดโอด (แคโทดหันเข้าหาแหล่งจ่าย) จงหา \(V_D\), \(V_R\) และ \(I_D\) โดย \(V_D\) วัดตามขั้วในรูป (บวกทางซ้าย)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Repeat Ex.4 with the diode turned round (its cathode towards the source). Determine \(V_D\), \(V_R\) and \(I_D\), with \(V_D\) taken as marked in the figure (positive on the left).</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 2 แทนไดโอดด้วยช่องเปิด แผงข้างภาพแสดงว่าแรงดันทั้งหมดไปอยู่ที่ช่องเปิด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">At step 2 the diode becomes a gap; the side panel shows the whole voltage landing across it. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+  <figure class="slide"><img src="slides/ch2a/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 22, Series Diode Configurations with DC Inputs: in particular, note in the figure the high voltage across the diode even though it is in an off state. The current is zero, but the voltage is significant. For review purposes keep the following in mind: 1. An open circuit can have any voltage across its terminals, but the current is always 0 A. 2. A short circuit has a 0 V drop across its terminals, but the current is limited only by the surrounding network.">
+    <figcaption data-l="th">สไลด์หน้า 22: สรุปเปิดวงจรและลัดวงจร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 22: open and short circuits in review · tap to enlarge</figcaption></figure>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ 0.7 V สำหรับซิลิคอนและ 0.3 V สำหรับเจอร์เมเนียมเมื่อนำกระแส · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use 0.7 V for silicon and 0.3 V for germanium when conducting · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ตัวต้านทานในใจ</h3>
+    <ol><li>ส่วน A เลือก "ขั้นที่ 1" แล้วเลื่อน E จาก +8 V ลงไป −8 V: จุดเปลี่ยนทิศ ตอน E เป็นบวกกระแสไหลตามเข็มนาฬิกา ผ่านตำแหน่งไดโอดตามหัวลูกศร</li>
+    <li>กลับไปที่ "ไดโอด" แล้วเลื่อน E ช้า ๆ ผ่าน 0.7 V: ไดโอดซิลิคอนเริ่มนำที่ 0.7 V พอดี ต่ำกว่านั้นแรงดันทั้งหมดอยู่ที่ไดโอด</li>
+    <li>เปลี่ยนเป็นเจอร์เมเนียม: เริ่มนำที่ 0.3 V และกระแสสูงกว่าซิลิคอนเล็กน้อยที่ E เท่ากัน</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ขั้นที่ 2 ต้องตรงกับไดโอด</h3>
+    <ol><li>สลับระหว่าง "ขั้นที่ 2" กับ "ไดโอด" ที่ E ใด ๆ: ค่าในแผงข้างภาพไม่เปลี่ยน แปลว่าวงจรสมมูลถูกต้อง</li>
+    <li>กลับทิศไดโอดแล้วตั้ง E = 8 V: ขั้นที่ 2 เป็นช่องเปิด แท่ง \(V_D\) ยาวเท่ากับ E และ \(V_R = 0\)</li></ol>
+    <div class="book">สไลด์บทที่ 2 ชุดที่ 1 หน้า 13–22 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 2.3–2.4 (ตาราง 2.1, Examples 2.4–2.6)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the imagined resistor</h3>
+    <ol><li>In section A choose "step 1" and move E from +8 V to −8 V: the dots turn round. With E positive the current flows clockwise, through the diode's place along the arrowhead.</li>
+    <li>Back to "diode", move E slowly through 0.7 V: the silicon diode turns on at exactly 0.7 V; below that the whole voltage is across the diode.</li>
+    <li>Switch to germanium: it turns on at 0.3 V, and at the same E carries slightly more current than silicon.</li></ol></div>
+  <div class="card"><h3>Try this 2 — step 2 must match the diode</h3>
+    <ol><li>Switch between "step 2" and "diode" at any E: the values in the side panel do not change, so the equivalent circuit is right.</li>
+    <li>Turn the diode round and set E = 8 V: step 2 is a gap, the \(V_D\) bar is as long as E, and \(V_R = 0\).</li></ol>
+    <div class="book">Chapter 2 slides, Part I, pp. 13–22 · Boylestad &amp; Nashelsky, 11th ed., sections 2.3–2.4 (Table 2.1, Examples 2.4–2.6)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  const v2 = x => fd(x, 2).replace('-', '−');
+  CH2.problem(1, 'ex4'); CH2.problem(2, 'ex5');
+
+  /* =================================================================== A: the state of a diode, step by step */
+  const SA = { E: 8, flip: false, m: 'si', view: 'diode' };
+  const MOD = { si: ['ซิลิคอน 0.7 V', 'silicon 0.7 V'], ge: ['เจอร์เมเนียม 0.3 V', 'germanium 0.3 V'], ideal: ['อุดมคติ', 'ideal'] }, DM = { si: CH2.SI, ge: CH2.GE, ideal: CH2.IDEAL };
+  const vk = () => (SA.m === 'si' ? 0.7 : SA.m === 'ge' ? 0.3 : 0);
+  const isOn = () => (SA.flip ? -SA.E : SA.E) > vk() + 1e-9;
+  const spec = () => CH2.loop({ E: SA.E, R: 2200, d: DM[SA.m], flip: SA.flip, dName: SA.m === 'ideal' ? '' : SA.m === 'ge' ? 'Ge' : 'Si',
+    eq: SA.view === 'res' ? 'res' : SA.view === 'eq' ? (isOn() ? (SA.m === 'ideal' ? 'on' : 'vk') : 'off') : undefined });
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.5, rowAsp: 0.6, pad: 1.25, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const vD = c.V('d1').re - c.V('d2').re, vR = c.Vab('R').re;
+      CH2.kvl(ctx, b, bd, [{ label: 'E', v: SA.E, color: C.elec, sub: t('ยกขึ้น', 'rise') }, { label: SA.view === 'res' ? t('ตัวต้านทาน', 'resistor') : 'V_D', v: -vD, color: C.tan, sub: t('ซ้าย → ขวา', 'left → right') }, { label: 'V_R', v: -vR, color: C.q, sub: 'I R' }],
+        t('แรงดันรอบวงตามเข็มนาฬิกา (V): Σ = 0', 'voltages clockwise round the loop (V): Σ = 0')); },
+    after: v => { const p = v.ckt.part('D'); if (!p) return; if (SA.view === 'res') CH2.tagAt(v, 'D', ['ขั้นที่ 1: ตัวต้านทาน', 'step 1: a resistor'], C.muted, 0, -0.8);
+      else CH2.tagAt(v, 'D', isOn() ? ['นำ', 'on'] : ['ไม่นำ', 'off'], isOn() ? C.tan : C.red, 0, -0.8); },
+    badge: () => { const c = BA.ckt; return [[`I = ${fd(Math.abs(c.I('R').re) * 1e3, 3)} mA`, `I = ${fd(Math.abs(c.I('R').re) * 1e3, 3)} mA`], isOn() || SA.view === 'res' ? 'ok' : 'wait']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('ในตำแหน่งของไดโอด', 'In the diode\'s place'));
+  ui.radio(pA, [{ id: 'vres', label: t('ขั้นที่ 1: ตัวต้านทาน', 'step 1: a resistor') }, { id: 'veq', label: t('ขั้นที่ 2: วงจรสมมูล', 'step 2: the equivalent') }, { id: 'vdiode', label: t('ไดโอด', 'diode'), on: true }], id => { SA.view = id.slice(1); buildA(); });
+  ui.h2(pA, t('วงจร', 'Circuit'));
+  ui.slider(pA, { id: 'aE', label: 'E', min: -12, max: 12, step: 0.1, value: SA.E, fmt: v => `${v2(v)} V`, oninput: v => { SA.E = v; buildA(); } });
+  ui.radio(pA, Object.keys(MOD).map(m => ({ id: 'aM' + m, label: t(...MOD[m]), on: m === SA.m })), id => { SA.m = id.slice(2); buildA(); });
+  ui.buttons(pA, [{ label: t('กลับทิศไดโอด', 'Turn the diode round'), onclick: el => { SA.flip = !SA.flip; el.classList.toggle('on', SA.flip); buildA(); } }]);
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(spec(), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); }
+  function showA() { const c = BA.ckt, vD = c.V('d1').re - c.V('d2').re, vR = c.Vab('R').re, I = c.I('R').re * 1e3, on = isOn(), push = SA.flip ? -SA.E : SA.E;
+    mA.innerHTML = ui.kv([[t('แรงดันคร่อมไดโอด (ซ้าย − ขวา)', 'across the diode (left − right)'), `${fd(vD, 3).replace('-', '−')} V`], ['V_R', `${fd(vR, 3).replace('-', '−')} V`], ['I', `${fd(I, 3).replace('-', '−')} mA`], [t('สถานะ', 'state'), on ? t('นำ', 'on') : t('ไม่นำ', 'off')]]);
+    const dir = Math.abs(SA.E) < 1e-9 ? t('E = 0 ไม่มีอะไรดันกระแส', 'E = 0 pushes nothing') : (SA.E > 0) !== SA.flip ? t('ไหลผ่านตำแหน่งของไดโอด<b>ตามหัวลูกศร</b>', 'passes the diode\'s place <b>along the arrowhead</b>') : t('ไหลผ่านตำแหน่งของไดโอด<b>สวนหัวลูกศร</b>', 'passes the diode\'s place <b>against the arrowhead</b>');
+    $('wA').innerHTML = `<div class="answer">${t(`<b>ขั้นที่ 1</b>: ถ้าไดโอดเป็นตัวต้านทาน กระแสที่ E = ${v2(SA.E)} V ดัน ${dir} · <b>ขั้นที่ 2</b>: ${on ? `แรงดันที่ดันตามหัวลูกศร ${v2(push)} V มากกว่า \\(V_K = ${fd(vk(), 1)}\\) V ไดโอดนำ \\(V_D = ${fd(vk(), 1)}\\) V และ \\(I = (${v2(push)} - ${fd(vk(), 1)})/2.2\\ \\text{k}\\Omega = ${fd(Math.abs(I), 3)}\\) mA` : `ไดโอดไม่นำ (เปิดวงจร) ไม่มีกระแส \\(V_R = 0\\) และแรงดันทั้งหมด ${v2(SA.E)} V อยู่ที่ไดโอด`}`,
+      `<b>Step 1</b>: with a resistor in the diode's place, the current E = ${v2(SA.E)} V pushes ${dir}. <b>Step 2</b>: ${on ? `the voltage pushing along the arrowhead, ${v2(push)} V, exceeds \\(V_K = ${fd(vk(), 1)}\\) V, so the diode is on: \\(V_D = ${fd(vk(), 1)}\\) V and \\(I = (${v2(push)} - ${fd(vk(), 1)})/2.2\\ \\text{k}\\Omega = ${fd(Math.abs(I), 3)}\\) mA` : `the diode is off (an open circuit): no current, \\(V_R = 0\\), and the whole ${v2(SA.E)} V is across the diode`}.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) E = 6 V ต่ออนุกรมกับไดโอดเจอร์เมเนียม (ตามทิศกระแส) และ R = 1.5 kΩ จงหา \\(V_R\\) และ \\(I_D\\)', '1) E = 6 V in series with a germanium diode (pointing with the current) and R = 1.5 kΩ. Find \\(V_R\\) and \\(I_D\\).'),
+      fields: [{ key: 'x', lab: 'V_R =', ans: 5.7, unit: 'V' }, { key: 'y', lab: 'I_D =', ans: 3.8, unit: 'mA' }], work: work(R`V_R = 6 - 0.3 = 5.7\ \text{V},\qquad I_D = \frac{5.7\ \text{V}}{1.5\ \text{k}\Omega} = 3.8\ \text{mA}`) },
+    { q: t('2) วงจรเดียวกันแต่เป็นไดโอดซิลิคอนที่กลับทิศ จงหา \\(I_D\\) และขนาดของแรงดันคร่อมไดโอด', '2) The same circuit with a silicon diode turned round. Find \\(I_D\\) and the size of the voltage across the diode.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 0, unit: 'mA', tol: 1e-6 }, { key: 'y', lab: '|V_D| =', ans: 6, unit: 'V' }], work: work(R`I_D = 0,\qquad |V_D| = E - I_DR = 6\ \text{V}`) },
+    { q: t('3) E = 0.5 V ต่ออนุกรมกับไดโอดซิลิคอน (ตามทิศกระแส) และ R = 1.2 kΩ จงหา \\(I_D\\) และ \\(V_D\\) (Boylestad Example 2.6)', '3) E = 0.5 V in series with a silicon diode (pointing with the current) and R = 1.2 kΩ. Find \\(I_D\\) and \\(V_D\\) (Boylestad Example 2.6).'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 0, unit: 'mA', tol: 1e-6 }, { key: 'y', lab: 'V_D =', ans: 0.5, unit: 'V' }], work: work(R`0.5\ \text{V} < 0.7\ \text{V} \Rightarrow \text{off}:\ I_D = 0,\ V_D = E = 0.5\ \text{V}`, `<p>${t('ทิศถูกแต่แรงดันไม่ถึง 0.7 V ไดโอดจึงไม่นำ', 'The direction is right, but the voltage does not reach 0.7 V, so the diode stays off.')}</p>`) },
+    { q: t('4) ไดโอดซิลิคอนต่ออนุกรมกับ R = 470 Ω จะต้องใช้ E เท่าใดจึงได้ \\(I_D\\) = 20 mA', '4) A silicon diode in series with R = 470 Ω: what E gives \\(I_D\\) = 20 mA?'),
+      fields: [{ key: 'x', lab: 'E =', ans: 0.7 + 0.02 * 470, unit: 'V' }], work: work(R`E = V_K + I_DR = 0.7 + (20\ \text{mA})(470\ \Omega) = ${fd(0.7 + 9.4, 2)}\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

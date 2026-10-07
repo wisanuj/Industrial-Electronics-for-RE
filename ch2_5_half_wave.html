@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="2.5 — Half-Wave Rectification">2.5 — วงจรเรียงกระแสครึ่งคลื่น</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script><script src="assets/ch6.js?v=2"></script>
+<script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรเรียงกระแสครึ่งคลื่น <span class="en">Half-wave rectification</span></h1>
+<h1 data-l="en">Half-wave rectification <span class="en">A sine wave through one diode</span></h1>
+
+<p class="sub" data-l="th">สไลด์หน้า 31–39 เปลี่ยนแหล่งจ่ายกระแสตรงเป็นสัญญาณไซน์ \(v_i = V_m\sin\omega t\) ในแต่ละขณะ ขาเข้าเหมือนแหล่งจ่ายกระแสตรงค่าหนึ่ง จึงใช้วิธีของหน้า 2.2 ได้ทุกขณะ ไดโอดนำเพียงครึ่งคาบ ขาออกจึงเหลือครึ่งคลื่นที่มีค่าเฉลี่ยไม่เป็นศูนย์ เป็นจุดเริ่มต้นของการแปลงกระแสสลับเป็นกระแสตรง (rectification) หน้านี้มีภาพจำลองตามเวลาจริงที่ช้าลง (1 คาบใช้ 4 วินาที) ที่เลือกแบบจำลองของไดโอดได้ (ส่วน A) โจทย์ Ex.13 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Slides pp. 31–39 replace the dc source with a sine wave, \(v_i = V_m\sin\omega t\). At any instant the input acts like a dc source of that value, so the method of page 2.2 works instant by instant. The diode conducts for only half the period, so the output keeps half of each cycle and has a non-zero average: the first step in turning ac into dc (rectification). This page has a simulation in slowed-down time (one period takes 4 s) with a choice of diode model (section A), Ex.13, and more practice.</p>
+<div class="equation-box eqwrap">$$ V_{dc} = 0.318V_m $$ $$ V_{dc} \cong 0.318(V_m - V_K) $$ $$ \text{PIV} \ge V_m $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ครึ่งคาบที่ไดโอดนำ</b> (\(0 \to T/2\) เมื่อไดโอดหันตามแหล่งจ่าย): ไดโอดอุดมคติเป็นลัดวงจร \(v_o = v_i\) ครึ่งคาบที่เหลือไดโอดเป็นเปิดวงจร \(v_o = iR = 0\) (สไลด์หน้า 32–33)</li>
+  <li><b>ระดับกระแสตรง</b> (ค่าเฉลี่ยของขาออกตลอดคาบ) ของครึ่งคลื่นคือ \(V_{dc} = 0.318V_m\) ซึ่ง 0.318 คือ \(1/\pi\) (สไลด์หน้า 34)</li>
+  <li><b>ไดโอดซิลิคอน</b> นำเมื่อ \(v_i\) เกิน 0.7 V และขณะนำ \(v_o = v_i - 0.7\) V ตำราประมาณ \(V_{dc} \cong 0.318(V_m - V_K)\) ซึ่งสำคัญเฉพาะเมื่อ \(V_m\) ไม่ใหญ่กว่า \(V_K\) มากนัก (สไลด์หน้า 35)</li>
+  <li><b>แรงดันย้อนกลับสูงสุด</b> (peak inverse voltage, PIV หรือ peak reverse voltage, PRV): ขณะไม่นำ ไดโอดรับแรงดันของขาเข้าทั้งหมด จึงต้องมีพิกัด PIV ≥ \(V_m\) ไม่อย่างนั้นจะเข้าย่านซีเนอร์ (สไลด์หน้า 39)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The half period the diode conducts</b> (\(0 \to T/2\) with the diode pointing with the source): an ideal diode is a short, so \(v_o = v_i\); for the other half it is an open circuit and \(v_o = iR = 0\) (slides pp. 32–33).</li>
+  <li><b>The dc level</b> (the average of the output over a period) of a half-wave output is \(V_{dc} = 0.318V_m\), 0.318 being \(1/\pi\) (slide p. 34).</li>
+  <li><b>A silicon diode</b> conducts once \(v_i\) passes 0.7 V and then \(v_o = v_i - 0.7\) V; the book approximates \(V_{dc} \cong 0.318(V_m - V_K)\), which matters only when \(V_m\) is not much larger than \(V_K\) (slide p. 35).</li>
+  <li><b>The peak inverse voltage</b> (PIV, or peak reverse voltage, PRV): while off, the diode takes the whole input, so its rating must be PIV ≥ \(V_m\), or it enters the Zener region (slide p. 39).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch2a/p31.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 31, Sinusoidal Inputs; Half-Wave Rectification: the diode analysis will now be expanded to include time-varying functions such as the sinusoidal waveform and the square wave. The simplest network to examine with a time-varying signal appears in the figure: a sine wave v_i = V_m sin ωt with one cycle T marked (positive half shaded up to T/2, negative half after), and a circuit with v_i on the left, a diode along the top pointing right, and R down to ground with v_o across it.">
+  <figcaption data-l="th">สไลด์หน้า 31: ขาเข้าไซน์และวงจรครึ่งคลื่น · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: a sine input and the half-wave circuit · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 34, Sinusoidal Inputs; Half-Wave Rectification: the output signal v_o now has a net positive area above the axis over a full period and an average value determined by V_dc = 0.318 V_m (half-wave, boxed). The figure shows v_i, two cycles of a sine wave with V_dc = 0 V, and below it v_o, the positive halves only, with a dashed line at V_dc = 0.318 V_m and the period T marked.">
+  <figcaption data-l="th">สไลด์หน้า 34: \(V_{dc} = 0.318V_m\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 34: \(V_{dc} = 0.318V_m\) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 37–38 เป็นหน้าว่าง</b> ซึ่งน่าจะเป็นที่ของเฉลย Ex.13 ข้อ 1 ของหน้านี้เฉลยตาม Boylestad Example 2.16 · สไลด์หน้า 35 เขียนแรงดันที่เข่าว่า \(V_T\) ตามสัญลักษณ์ฉบับเก่า ตำราฉบับที่ 11 ใช้ \(V_K\)</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 37–38 are blank</b>, probably where the solution of Ex.13 should be; problem 1 of this page solves it as Boylestad Example 2.16 does. Slide p. 35 writes the knee voltage as \(V_T\), the notation of earlier editions; the 11th edition uses \(V_K\).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรครึ่งคลื่นตามเวลา</a><a href="#ex1"><b>1</b>Ex.13 ไดโอดกลับทิศ</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A half-wave rectifier in time</a><a href="#ex1"><b>1</b>Ex.13 the diode reversed</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรเรียงกระแสครึ่งคลื่นตามเวลา</h2><h2 data-l="en">A half-wave rectifier in time</h2>
+    <div class="src" data-l="th">สไลด์หน้า 32–35 · Boylestad หัวข้อ 2.6 (รูป 2.44–2.48)</div><div class="src" data-l="en">Slides pp. 32–35 · Boylestad, section 2.6 (Figs. 2.44–2.48)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2a/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 32, Sinusoidal Inputs; Half-Wave Rectification: during the interval t = 0 to T/2, substituting the short-circuit equivalence for the ideal diode results in the equivalent circuit of the figure: the circuit with a clockwise arrow and the diode, then the diode replaced by a wire so that v_o = v_i, and the output graph showing the positive half cycle reaching V_m at T/2.">
+    <figcaption data-l="th">สไลด์หน้า 32: \(0 \to T/2\) ไดโอดเป็นลัดวงจร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: \(0 \to T/2\), the diode is a short · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 33, Sinusoidal Inputs; Half-Wave Rectification: for the period T/2 to T, the polarity of the input v_i is as shown (minus at the top); the resulting polarity across the ideal diode produces an off state with an open-circuit equivalent; there is no path for charge to flow and v_o = iR = (0)R = 0 V for the period T/2 to T. The figure shows the circuit with a counterclockwise arrow, the diode replaced by a gap with v_o = 0 V, and the output graph: the positive half then v_o = 0 V up to T.">
+    <figcaption data-l="th">สไลด์หน้า 33: \(T/2 \to T\) ไดโอดเป็นเปิดวงจร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: \(T/2 \to T\), the diode is open · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 35, Sinusoidal Inputs; Half-Wave Rectification: the effect of using a silicon diode with V_T = 0.7 V is demonstrated in the figure for the forward-bias region. For levels of v_i less than 0.7 V the diode is still in an open-circuit state and v_o = 0 V. When conducting, the difference between v_o and v_i is a fixed level of V_T = 0.7 V and v_o = v_i − V_T. Boxed: V_dc ≅ 0.318(V_m − V_T). The figure shows v_i with a dashed line at V_T = 0.7 V, the circuit with a 0.7 V battery, and v_o peaking at V_m − V_T with the offset due to V_T marked. Caption: Effect of V_T on half-wave rectified signal.">
+    <figcaption data-l="th">สไลด์หน้า 35: ผลของ 0.7 V · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: the effect of 0.7 V · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพบนสุดคือวงจร ถัดมาคือลักษณะสมบัติของไดโอดที่จุดทำงานวิ่งไปตามกราฟ และล่างสุดคือรูปคลื่นของ \(v_i\) (ฟ้า) กับ \(v_o\) (เหลือง) เส้นแนวตั้งคือขณะปัจจุบัน เส้นประสีเขียวคือ \(V_{dc}\) ที่หาจากคลื่นจริง เลือกแบบจำลองของไดโอด ปรับ \(V_m\) หรือกลับทิศไดโอด แล้วเทียบ \(V_{dc}\) กับสูตรในแผงข้างภาพ "ไดโอดจริง" คือไดโอดซิลิคอนของหน้า 1.6</p>
+  <p class="lead" data-l="en">On top is the circuit, then the diode characteristic with the operating point riding along it, and at the bottom the waveforms of \(v_i\) (blue) and \(v_o\) (yellow); the vertical line marks the present instant and the dashed green line is the \(V_{dc}\) found from the actual wave. Choose the diode model, change \(V_m\) or turn the diode round, and compare \(V_{dc}\) with the formulas in the panel. The "actual diode" is the silicon diode of page 1.6.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.13: ไดโอดหันเข้าหาแหล่งจ่าย</h2><h2 data-l="en">Ex.13: the diode facing the source</h2>
+    <div class="src" data-l="th">สไลด์หน้า 36 และ 39 · Boylestad Example 2.16 (รูป 2.49–2.51)</div><div class="src" data-l="en">Slides pp. 36 and 39 · Boylestad Example 2.16 (Figs. 2.49–2.51)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 36, Sinusoidal Inputs; Half-Wave Rectification, Ex. 13: (a) sketch the output v_o and determine the dc level of the output for the network of the figure; (b) repeat part (a) if the ideal diode is replaced by a silicon diode; (c) repeat parts (a) and (b) if V_m is increased to 200 V and compare solutions. The figure: v_i, a sine wave of peak 20 V, and the circuit with the diode along the top pointing left, towards the source, and R = 2 kΩ with v_o across it.">
+    <figcaption data-l="th">สไลด์หน้า 36: Ex.13 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 36: Ex.13 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ขาเข้า \(v_i = 20\sin\omega t\) V ต่อกับไดโอดอุดมคติที่หันหัวลูกศรเข้าหาแหล่งจ่าย และ R = 2 kΩ (a) จงเขียนรูปคลื่นขาออกและหาระดับกระแสตรง (b) ทำซ้ำเมื่อใช้ไดโอดซิลิคอน (c) ทำ (a) และ (b) ซ้ำเมื่อ \(V_m\) = 200 V แล้วเทียบผล</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The input \(v_i = 20\sin\omega t\) V drives an ideal diode whose arrowhead points at the source, and R = 2 kΩ. (a) Sketch the output and find its dc level. (b) Repeat with a silicon diode. (c) Repeat (a) and (b) with \(V_m\) = 200 V and compare.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองวิ่งตามเวลาจริงที่ช้าลง กราฟใต้วงจรคือ \(v_i\) และ \(v_o\) ที่ตัวแก้วงจรคำนวณทีละขณะ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation runs in slowed-down time; under the circuit are \(v_i\) and the \(v_o\) the solver finds instant by instant. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+  <figure class="slide"><img src="slides/ch2a/p39.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 39, Sinusoidal Inputs; Half-Wave Rectification, the peak inverse voltage (PIV): the PIV [or PRV (peak reverse voltage)] rating of the diode is of primary importance in the design of rectification systems. Recall that it is the voltage rating that must not be exceeded in the reverse-bias region or the diode will enter the Zener avalanche region. Applying Kirchhoff's voltage law, the PIV rating of the diode must equal or exceed the peak value of the applied voltage: boxed PIV rating ≥ V_m, half-wave rectifier. The figure: the circuit at the negative peak, V_m across the open diode, I = 0 and V_o = IR = (0)R = 0 V.">
+    <figcaption data-l="th">สไลด์หน้า 39: PIV ≥ \(V_m\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 39: PIV ≥ \(V_m\) · tap to enlarge</figcaption></figure>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ \(V_{dc} = 0.318V_m\) และ \(0.318(V_m - V_K)\) ตามตำรา · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use the book's \(V_{dc} = 0.318V_m\) and \(0.318(V_m - V_K)\) · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ดูไดโอดสลับสถานะ</h3>
+    <ol><li>ส่วน A ใช้ไดโอดอุดมคติ: จุดทำงานบนลักษณะสมบัติวิ่งขึ้นตามแกนตั้งในครึ่งบวก แล้ววิ่งไปตามแกนนอนด้านลบในครึ่งลบ ตรงกับลัดวงจรและเปิดวงจร</li>
+    <li>เลือกซิลิคอนแล้วลด \(V_m\) เหลือ 2 V: ขาออกเหลือยอดเพียง 1.3 V และ \(V_{dc}\) ต่างจาก \(0.318V_m\) มาก</li>
+    <li>เลือก "ไดโอดจริง": เข่าของกราฟไม่คม จุดทำงานโค้งขึ้นไปตามเส้น ขาออกจึงต่ำกว่าแบบ 0.7 V เล็กน้อยเมื่อกระแสสูง</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — สูตรไหนแม่นกว่า</h3>
+    <ol><li>เลือกซิลิคอน \(V_m\) = 20 V: \(V_{dc}\) จากคลื่นจริงราว 6.02 V อยู่ระหว่าง \(0.318(V_m - 0.7)\) = 6.14 V ของตำรากับ \(0.318V_m - 0.7\) = 5.66 V ของสไลด์หน้า 50</li>
+    <li>เหตุผล: ไดโอดกินแรงดัน 0.7 V ตลอดราวครึ่งคาบที่นำ ค่าเฉลี่ยตลอดคาบจึงลดลงราว 0.7/2 = 0.35 V จาก \(0.318V_m\) = 6.37 V</li></ol>
+    <div class="book">สไลด์บทที่ 2 ชุดที่ 1 หน้า 31–39 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 2.6 (Example 2.16)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — watch the diode switch</h3>
+    <ol><li>In section A with the ideal diode, the operating point climbs the vertical axis in the positive half and runs along the negative horizontal axis in the negative half: the short and the open circuit.</li>
+    <li>Choose silicon and lower \(V_m\) to 2 V: the output peaks at only 1.3 V and \(V_{dc}\) is far from \(0.318V_m\).</li>
+    <li>Choose the "actual diode": its knee is not sharp, so the operating point curves up along the line and the output is a little below the 0.7 V model at high current.</li></ol></div>
+  <div class="card"><h3>Try this 2 — which formula is closer?</h3>
+    <ol><li>Choose silicon with \(V_m\) = 20 V: the \(V_{dc}\) of the actual wave, about 6.02 V, lies between the book's \(0.318(V_m - 0.7)\) = 6.14 V and the \(0.318V_m - 0.7\) = 5.66 V of slide p. 50.</li>
+    <li>The reason: the diode takes 0.7 V for about the half period it conducts, so the average over the period falls by about 0.7/2 = 0.35 V from \(0.318V_m\) = 6.37 V.</li></ol>
+    <div class="book">Chapter 2 slides, Part I, pp. 31–39 · Boylestad &amp; Nashelsky, 11th ed., section 2.6 (Example 2.16)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  const v2 = x => fd(x, 2).replace('-', '−');
+  CH2.problem(1, 'ex13', { });
+
+  /* =================================================================== A: a half-wave rectifier in time */
+  const ACT = IE.tableOf(CH1.F129, 1.0, 0.002), MOD = { ideal: ['อุดมคติ', 'ideal'], si: ['ซิลิคอน 0.7 V', 'silicon 0.7 V'], act: ['ไดโอดจริง (หน้า 1.6)', 'actual diode (page 1.6)'] };
+  const dOf = m => (m === 'ideal' ? CH2.IDEAL : m === 'si' ? CH2.SI : ACT);
+  const SA = { Vm: 20, m: 'si', flip: false };
+  let CY = null;
+  const spec = () => CH2.hw({ Vm: SA.Vm, d: dOf(SA.m), flip: SA.flip, R: 2000 });
+  const BA = new CH8.Board('cvA', { T: 4, mid: false, wideAt: 1e9, cktAspN: 0.5, sideAspN: 0.62, pad: 1.25, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const vd = c.Vab('D').re, id = c.I('D').re * 1e3, top = SA.Vm / 2 * 1.2, segs = [], curves = [];
+      if (SA.m === 'act') curves.push({ f: CH1.F129, color: C.curve }); else { const k = SA.m === 'si' ? 0.7 : 0; segs.push({ a: [k, 0], b: [k, top * 1.2], color: C.curve, w: 3 }, { a: [0, 0], b: [k, 0], color: C.curve, w: 3 }); }
+      segs.push({ a: [-SA.Vm * 1.1, 0], b: [0, 0], color: C.curve, w: 3 });
+      IE.ivPlot(ctx, b, { v: [-SA.Vm * 1.1, 1], i: [0, top], negFrac: 0.42, xt: [0.7], xtNeg: [-SA.Vm], yt: [SA.Vm / 4, SA.Vm / 2].map(x => +x.toFixed(1)), curves, segs,
+        pts: [{ v: Math.max(-SA.Vm * 1.1, Math.min(0.99, vd)), i: Math.max(0, Math.min(top, id)), color: C.q, label: bd.short ? '' : `${v2(vd)} V, ${fd(Math.max(0, id), 2)} mA` }],
+        title: bd.short ? '' : t('ลักษณะสมบัติของไดโอดและจุดทำงานขณะนี้', 'the diode characteristic and the operating point now') }); },
+    waves: [{ title: bd => (bd.short ? '' : t('สัญญาณขาเข้าและขาออก', 'input and output')), sigs: () => (CY ? CH2.wsigs(CY, { lines: [{ v: CY.avg('vo'), label: 'V_dc' }] }) : []) }],
+    after: v => CH2.stTags(v, [['D', 0, -0.78]]),
+    badge: () => { const c = BA.ckt; return [[`v_i = ${v2(c.Vab('S').re)} V, v_o = ${v2(c.Vab('R').re)} V`, `v_i = ${v2(c.Vab('S').re)} V, v_o = ${v2(c.Vab('R').re)} V`], 'ok']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('ไดโอด', 'Diode'));
+  ui.radio(pA, Object.keys(MOD).map(m => ({ id: 'aM' + m, label: t(...MOD[m]), on: m === SA.m })), id => { SA.m = id.slice(2); buildA(); });
+  ui.buttons(pA, [{ label: t('กลับทิศไดโอด', 'Turn the diode round'), onclick: el => { SA.flip = !SA.flip; el.classList.toggle('on', SA.flip); buildA(); } },
+    { label: t('หยุดชั่วคราว', 'Pause'), onclick: el => { BA.clk.run = !BA.clk.run; el.classList.toggle('on', !BA.clk.run); } }]);
+  ui.h2(pA, t('ขาเข้า', 'Input'));
+  ui.slider(pA, { id: 'aV', label: 'V_m', min: 1, max: 30, step: 0.5, value: SA.Vm, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.Vm = v; buildA(); } });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(spec(), { speed: 80 / 0.01, dotRef: 0.01 }); CY = CH2.cycle(spec(), 'S', CH2.sine(SA.Vm), CH2.HWOUT); showA(); }
+  function showA() { const s = SA.flip ? -1 : 1, avg = CY.avg('vo'), piv = -CY.min('vd'), vk = SA.m === 'ideal' ? 0 : 0.7;
+    mA.innerHTML = ui.kv([[t('V_dc จากคลื่นจริง', 'V_dc of the actual wave'), `${v2(avg)} V`], ['±0.318 V_m', `${v2(s * 0.318 * SA.Vm)} V`], ['±0.318(V_m − 0.7)', `${v2(s * 0.318 * (SA.Vm - 0.7))} V`], [t('±(0.318 V_m − 0.7) สไลด์หน้า 50', '±(0.318 V_m − 0.7), slide p. 50'), `${v2(s * (0.318 * SA.Vm - 0.7))} V`], ['PIV', `${fd(piv, 2)} V`]]);
+    $('wA').innerHTML = `<div class="answer">${t(`ไดโอด${SA.flip ? 'หันเข้าหาแหล่งจ่าย นำในครึ่งลบ ขาออกจึงติดลบ' : 'หันตามแหล่งจ่าย นำในครึ่งบวก'} ${SA.m === 'ideal' ? 'ไดโอดอุดมคติ: \\(V_{dc}\\) เท่ากับ \\(0.318V_m\\) (0.318 คือ \\(1/\\pi\\) ที่ปัด)' : `ขณะนำไดโอดกินแรงดันราว ${fd(vk, 1)} V ค่าเฉลี่ยจริงจึงลดลงราว 0.35 V จาก \\(0.318V_m\\)`} · ไดโอดต้องทนแรงดันย้อนกลับ PIV ≈ ${fd(piv, 1)} V`,
+      `The diode ${SA.flip ? 'faces the source and conducts in the negative half, so the output is negative' : 'points with the source and conducts in the positive half'}. ${SA.m === 'ideal' ? 'Ideal diode: \\(V_{dc}\\) equals \\(0.318V_m\\) (0.318 is \\(1/\\pi\\) rounded)' : `While conducting, the diode takes about ${fd(vk, 1)} V, so the actual average is about 0.35 V below \\(0.318V_m\\)`}; the diode must withstand a PIV of about ${fd(piv, 1)} V.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => { CH2.drive(BA.ckt, 'S', SA.Vm * Math.sin(BA.clk.ph)); BA.frame(dt); });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) วงจรครึ่งคลื่นที่ไดโอดอุดมคติหันตามแหล่งจ่าย \\(V_m\\) = 10 V จงหา \\(V_{dc}\\)', '1) A half-wave rectifier with an ideal diode pointing with the source and \\(V_m\\) = 10 V. Find \\(V_{dc}\\).'),
+      fields: [{ key: 'x', lab: 'V_dc =', ans: 3.18, unit: 'V' }], work: work(R`V_{dc} = 0.318(10\ \text{V}) = 3.18\ \text{V}`) },
+    { q: t('2) วงจรเดียวกันใช้ไดโอดซิลิคอน จงหายอดของ \\(v_o\\) และ \\(V_{dc}\\) ตามสูตรของตำรา', '2) The same circuit with a silicon diode. Find the peak of \\(v_o\\) and the book\'s \\(V_{dc}\\).'),
+      fields: [{ key: 'x', lab: 'V_o(max) =', ans: 9.3, unit: 'V' }, { key: 'y', lab: 'V_dc =', ans: 0.318 * 9.3, unit: 'V' }], work: work(R`V_{o(\max)} = 10 - 0.7 = 9.3\ \text{V},\qquad V_{dc} \cong 0.318(9.3) = ${fd(0.318 * 9.3, 3)}\ \text{V}`) },
+    { q: t('3) ต้องการ \\(V_{dc}\\) = 5 V จากวงจรครึ่งคลื่นที่ใช้ไดโอดอุดมคติ ขาเข้าต้องมี \\(V_m\\) เท่าใด', '3) A half-wave rectifier with an ideal diode must give \\(V_{dc}\\) = 5 V. What \\(V_m\\) does it need?'),
+      fields: [{ key: 'x', lab: 'V_m =', ans: 5 / 0.318, unit: 'V', tol: 0.02 }], work: work(R`V_m = \frac{5\ \text{V}}{0.318} = ${fd(5 / 0.318, 2)}\ \text{V}`) },
+    { q: t('4) ไฟบ้าน 220 V (ค่ายังผล หรือค่ารากกำลังสองเฉลี่ย root mean square, rms) ป้อนวงจรครึ่งคลื่นโดยตรง ไดโอดต้องมีพิกัด PIV อย่างน้อยเท่าใด', '4) The 220 V mains (a root-mean-square, rms, value) feeds a half-wave rectifier directly. What PIV rating does the diode need at least?'),
+      fields: [{ key: 'x', lab: 'PIV ≥', ans: 220 * Math.SQRT2, unit: 'V', tol: 0.5 }], work: work(R`V_m = \sqrt{2}(220\ \text{V}) = ${fd(220 * Math.SQRT2, 1)}\ \text{V} \Rightarrow \text{PIV} \ge ${fd(220 * Math.SQRT2, 1)}\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

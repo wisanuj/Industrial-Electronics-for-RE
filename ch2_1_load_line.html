@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="2.1 — Load-Line Analysis">2.1 — การวิเคราะห์ด้วยเส้นโหลด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script><script src="assets/ch6.js?v=2"></script>
+<script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">การวิเคราะห์ด้วยเส้นโหลด: จุดทำงานของวงจรไดโอด <span class="en">Load-line analysis</span></h1>
+<h1 data-l="en">Load-line analysis <span class="en">The operating point of a diode circuit</span></h1>
+
+<p class="sub" data-l="th">บทที่ 2 นำไดโอดของบทที่ 1 มาใช้ในวงจร สไลด์หน้า 3 ตั้งเป้าหมายไว้ว่าต้องเข้าใจพฤติกรรมของไดโอดในวงจรกระแสตรงและกระแสสลับ ด้วยแบบจำลองที่เหมาะกับงาน สไลด์ชุดที่ 1 ของบท (Diode Applications, Part I) หน้า 4–12 เริ่มจากการวิเคราะห์ด้วยเส้นโหลด (load-line analysis) ซึ่งใช้ลักษณะสมบัติจริงของไดโอด หน้านี้มีภาพจำลองเส้นโหลดที่เลื่อนตาม E และ R (ส่วน A) โจทย์ Ex.1–Ex.3 ของสไลด์ซึ่งเทียบเส้นโค้งจริง แบบจำลองโดยประมาณ และแบบอุดมคติ และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 2 puts the diodes of chapter 1 to work. Slide p. 3 sets the goal: understand how diodes behave in dc and ac networks, with models suited to the job. The first set of chapter 2 slides (Diode Applications, Part I), pp. 4–12, starts with load-line analysis, which uses the diode's actual characteristic. This page has a load line that moves with E and R (section A), the slides' Ex.1–Ex.3, which compare the actual curve, the approximate model and the ideal model, and more practice.</p>
+<div class="equation-box eqwrap">$$ E = V_D + I_DR $$ $$ V_D = 0:\ I_D = \frac{E}{R} $$ $$ I_D = 0:\ V_D = E $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>เส้นโหลด</b> (load line) มาจากวงจรล้วน ๆ: กฎแรงดันของเคียร์ชอฟฟ์รอบวงให้ \(E = V_D + I_DR\) ซึ่งเป็นเส้นตรงบนระนาบ \(I_D\)–\(V_D\) ตัดแกนตั้งที่ \(E/R\) และตัดแกนนอนที่ \(E\) (สไลด์หน้า 4–6)</li>
+  <li><b>จุดทำงาน Q</b> (quiescent point จุดทำงานที่นิ่งในวงจรกระแสตรง) คือจุดตัดของเส้นโหลดกับลักษณะสมบัติของไดโอด ซึ่งต้องเป็นจริงพร้อมกันทั้งสองเส้น ลากลงแกนนอนได้ \(V_{DQ}\) ลากไปแกนตั้งได้ \(I_{DQ}\) (สไลด์หน้า 7)</li>
+  <li><b>เปลี่ยน R ความชันของเส้นโหลดเปลี่ยน</b> เปลี่ยน E เส้นเลื่อนขนานไปจากเดิม ทั้งสองกรณีจุดตัดย้ายที่ (สไลด์หน้า 6)</li>
+  <li><b>แบบจำลองที่ง่ายกว่าให้คำตอบใกล้เคียง</b>: แบบประมาณ 0.7 V ได้ 18.6 mA เทียบกับ 18.5 mA จากเส้นโค้งจริง ส่วนแบบอุดมคติได้ 20 mA (Ex.1–Ex.3)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The load line</b> comes from the network alone: Kirchhoff's voltage law round the loop gives \(E = V_D + I_DR\), a straight line on the \(I_D\)–\(V_D\) plane through \(E/R\) on the vertical axis and \(E\) on the horizontal one (slides pp. 4–6).</li>
+  <li><b>The Q-point</b> (the quiescent point, still in a dc network) is where the load line meets the diode characteristic: both must hold at once. Down to the horizontal axis gives \(V_{DQ}\), across to the vertical axis \(I_{DQ}\) (slide p. 7).</li>
+  <li><b>Changing R changes the slope</b> of the load line; changing E shifts it parallel to itself. Either way the intersection moves (slide p. 6).</li>
+  <li><b>Simpler models come close</b>: the 0.7 V approximation gives 18.6 mA against 18.5 mA from the actual curve; the ideal model gives 20 mA (Ex.1–Ex.3).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch2a/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 3, Introduction: the primary goal of this chapter is to develop a working knowledge of the diode in a variety of configurations using models appropriate for the area of application. By the end of this chapter, the fundamental behavior pattern of diodes in dc and ac networks should be clearly understood. Diodes are frequently employed in the description of the basic construction of transistors and in the analysis of transistor networks in the dc and ac domains. Below, drawings of diode symbols and of a diode with its anode and cathode marked.">
+  <figcaption data-l="th">สไลด์หน้า 3: เป้าหมายของบทที่ 2 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 3: the goal of chapter 2 · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2a/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 4, Load-Line Analysis: the intersection of the load line with the characteristics will determine the point of operation of the system; such an analysis is called load-line analysis. The diode is in the on state and conduction has been established; the resulting polarity across the diode is as shown and the first quadrant (V_D and I_D positive) applies. Figure: (a) a series circuit of E, a diode and R, with I_D, V_D and V_R marked; (b) the diode characteristic I_D in mA against V_D. Applying Kirchhoff's voltage law to the series circuit: E − V_D − V_R = 0, boxed E = V_D + I_D R, Eq. (1).">
+  <figcaption data-l="th">สไลด์หน้า 4: วงจรอนุกรมและสมการ (1) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 4: the series circuit and Eq. (1) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 9 เป็นหน้าว่าง</b> มีเพียงชื่อโจทย์ Ex.1 ส่วนเฉลยแบบกราฟของ Ex.1 อยู่ในสไลด์หน้า 10 ซึ่งแสดงไว้ท้ายข้อ 1 ของหน้านี้</div>
+<div class="warnbox" data-l="en"><b>Slide p. 9 is blank</b> apart from the heading of Ex.1; the graphical solution of Ex.1 is on slide p. 10, shown after problem 1 of this page.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>เส้นโหลดที่เลื่อนได้</a><a href="#ex1"><b>1</b>Ex.1 เส้นโค้งจริง</a><a href="#ex2"><b>2</b>Ex.2 แบบประมาณ</a><a href="#ex3"><b>3</b>Ex.3 แบบอุดมคติ</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A moving load line</a><a href="#ex1"><b>1</b>Ex.1 the actual curve</a><a href="#ex2"><b>2</b>Ex.2 approximate</a><a href="#ex3"><b>3</b>Ex.3 ideal</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">เส้นโหลดที่เลื่อนตาม E และ R</h2><h2 data-l="en">A load line that moves with E and R</h2>
+    <div class="src" data-l="th">สไลด์หน้า 5–7 · Boylestad หัวข้อ 2.2 (รูป 2.1–2.2, สมการ 2.1–2.3)</div><div class="src" data-l="en">Slides pp. 5–7 · Boylestad, section 2.2 (Figs. 2.1–2.2, Eqs. 2.1–2.3)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2a/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 5, Load-Line Analysis: the intersections of the load line on the characteristics can easily be determined if one simply employs the fact that anywhere on the horizontal axis I_D = 0 A and anywhere on the vertical axis V_D = 0 V. Set V_D = 0 V in Eq. (1) and solve for I_D: the magnitude of I_D on the vertical axis. The figure shows the device characteristic and the network's load line from E/R on the I_D axis to E on the V_D axis, crossing at the Q-point with I_DQ and V_DQ marked.">
+    <figcaption data-l="th">สไลด์หน้า 5: ให้ \(V_D = 0\) ได้จุดตัดแกนตั้ง \(E/R\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 5: \(V_D = 0\) gives the intercept \(E/R\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 6, Load-Line Analysis: set I_D = 0 A in Eq. (1) and solve for V_D: E = V_D + I_D R = V_D + (0 A)R, boxed V_D = E at I_D = 0 A. A straight line drawn between the two points defines the load line; a change in R results in a change in the slope of the load line and a different point of intersection with the device characteristics. The figure repeats the characteristic and the load line.">
+    <figcaption data-l="th">สไลด์หน้า 6: ให้ \(I_D = 0\) ได้จุดตัดแกนนอน \(E\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 6: \(I_D = 0\) gives the intercept \(E\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2a/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 7, Load-Line Analysis: by simply drawing a line down to the horizontal axis the diode voltage V_DQ can be determined, whereas a horizontal line from the point of intersection to the vertical axis provides the level of I_DQ. The current I_D is the current through the entire series configuration. The point of operation is usually called the quiescent point (Q-pt.) to reflect its still, unmoving qualities as defined by a dc network. The figure shows the Q-point with dashed lines to V_DQ and I_DQ.">
+    <figcaption data-l="th">สไลด์หน้า 7: อ่านจุด Q ลงบนแกนทั้งสอง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 7: reading the Q-point off both axes · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">วงจรในภาพจำลองคือวงจรของ Ex.1: แหล่งจ่าย E ไดโอดซิลิคอน และ R ต่ออนุกรมกัน ไดโอดใช้เส้นโค้งที่อ่านจากรูป 2.3b ทีละจุด เลื่อน E หรือเลือก R แล้วดูเส้นโหลด (เส้นสีเหลือง) เลื่อนหรือหมุน จุด Q คือจุดตัดที่ตัวแก้วงจรหาได้จริง ลองเปลี่ยนเป็นแบบจำลองโดยประมาณหรืออุดมคติ แล้วกด "ขยายรอบจุดตัด" เพื่อดูว่าต่างกันเท่าไร</p>
+  <p class="lead" data-l="en">The simulated circuit is that of Ex.1: a source E, a silicon diode and R in series, the diode following the curve read off Fig. 2.3b point by point. Move E or pick R and watch the load line (yellow) shift or turn; the Q-point is the crossing the solver actually finds. Switch to the approximate or the ideal model, and press "Zoom on the crossing" to see how far apart they are.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.1: จุดทำงานจากเส้นโค้งจริงของไดโอด</h2><h2 data-l="en">Ex.1: the operating point from the actual diode curve</h2>
+    <div class="src" data-l="th">สไลด์หน้า 8–10 · Boylestad Example 2.1 (รูป 2.3–2.4)</div><div class="src" data-l="en">Slides pp. 8–10 · Boylestad Example 2.1 (Figs. 2.3–2.4)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 8, Load-Line Analysis (Example), Ex. 1: for the series diode configuration of Figure (a) employing the diode characteristics of Figure (b) determine (a) V_DQ and I_DQ, (b) V_R. Figure (a): E = 10 V, a silicon diode with V_D and I_D marked, R = 0.5 kΩ with V_R. Figure (b): the silicon diode characteristic, I_D in mA from 0 to 20 with ticks every 2 mA, V_D with ticks at 0.5 and 0.8 V, a dashed line at 20 mA.">
+    <figcaption data-l="th">สไลด์หน้า 8: Ex.1 วงจรและลักษณะสมบัติของไดโอด · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 8: Ex.1, the circuit and the diode characteristic · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรอนุกรมในรูป (a) มี E = 10 V, R = 0.5 kΩ และไดโอดซิลิคอนที่มีลักษณะสมบัติตามรูป (b) จงหา (a) \(V_{DQ}\) และ \(I_{DQ}\) (b) \(V_R\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The series circuit of Figure (a) has E = 10 V, R = 0.5 kΩ and a silicon diode with the characteristic of Figure (b). Determine (a) \(V_{DQ}\) and \(I_{DQ}\); (b) \(V_R\).</p></div>
+  <p class="lead" data-l="th">กราฟข้างวงจรแสดงเส้นโหลดบนลักษณะสมบัติ ขั้นที่ 2 ขยายรอบจุดตัด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The graph shows the load line on the characteristic; step 2 zooms in on the crossing. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+  <figure class="slide"><img src="slides/ch2a/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 10, Load-Line Analysis (Example), Ex. 1, the solution: the characteristic with the load line drawn from 20 mA (E/R) on the I_D axis to 10 V on the V_D axis; the Q-point marked where they cross, I_DQ ≅ 18.5 mA and V_DQ ≅ 0.78 V.">
+    <figcaption data-l="th">สไลด์หน้า 10: เฉลยแบบกราฟของ Ex.1 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 10: the graphical solution of Ex.1 · tap to enlarge</figcaption></figure>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.2: แบบจำลองโดยประมาณของไดโอดซิลิคอน</h2><h2 data-l="en">Ex.2: the approximate model of a silicon diode</h2>
+    <div class="src" data-l="th">สไลด์หน้า 11 · Boylestad Example 2.2 (รูป 2.5)</div><div class="src" data-l="en">Slide p. 11 · Boylestad Example 2.2 (Fig. 2.5)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 11, Load-Line Analysis (Approx. equivalent model), Ex. 2: repeat Ex. 1 using the approximate equivalent model for the silicon semiconductor diode; (a) V_DQ and I_DQ, (b) V_R. The circuit of Ex. 1 is repeated: E = 10 V, a silicon diode, R = 0.5 kΩ.">
+    <figcaption data-l="th">สไลด์หน้า 11: Ex.2 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 11: Ex.2 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทำ Ex.1 ซ้ำโดยใช้แบบจำลองโดยประมาณของไดโอดซิลิคอน (แรงดันคงที่ 0.7 V เมื่อนำกระแส) จงหา (a) \(V_{DQ}\) และ \(I_{DQ}\) (b) \(V_R\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Repeat Ex.1 using the approximate equivalent model of the silicon diode (a fixed 0.7 V when conducting). Determine (a) \(V_{DQ}\) and \(I_{DQ}\); (b) \(V_R\).</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 1 แทนไดโอดด้วยแบตเตอรี 0.7 V ขั้นที่ 2 ตรวจกฎแรงดันรอบวงด้วยแท่งแรงดัน (ยกขึ้นเป็นบวก ตกลงเป็นลบ ผลรวมเป็นศูนย์) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">Step 1 puts a 0.7 V battery in place of the diode; step 2 checks Kirchhoff's voltage law with voltage bars (rises positive, drops negative, summing to zero). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Ex.3: แบบจำลองอุดมคติ</h2><h2 data-l="en">Ex.3: the ideal model</h2>
+    <div class="src" data-l="th">สไลด์หน้า 12 · Boylestad Example 2.3 (รูป 2.6)</div><div class="src" data-l="en">Slide p. 12 · Boylestad Example 2.3 (Fig. 2.6)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2a/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 12, Load-Line Analysis (The ideal diode model), Ex. 3: repeat Ex. 1 using the ideal diode model; (a) V_DQ and I_DQ, (b) V_R. The circuit of Ex. 1 is repeated: E = 10 V, a diode, R = 0.5 kΩ.">
+    <figcaption data-l="th">สไลด์หน้า 12: Ex.3 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 12: Ex.3 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทำ Ex.1 ซ้ำโดยใช้แบบจำลองอุดมคติของไดโอด จงหา (a) \(V_{DQ}\) และ \(I_{DQ}\) (b) \(V_R\) แล้วเทียบผลของทั้งสามข้อ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Repeat Ex.1 using the ideal diode model. Determine (a) \(V_{DQ}\) and \(I_{DQ}\); (b) \(V_R\); then compare the three results.</p></div>
+  <p class="lead" data-l="th">ขั้นสุดท้ายเทียบ \(V_{DQ}\) ของทั้งสามแบบจำลองในแผงข้างภาพ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The last step compares \(V_{DQ}\) of the three models in the side panel. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ 0.7 V สำหรับซิลิคอนและ 0.3 V สำหรับเจอร์เมเนียมเมื่อนำกระแส · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use 0.7 V for silicon and 0.3 V for germanium when conducting · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — เส้นโหลดเลื่อนและหมุน</h3>
+    <ol><li>ส่วน A ตั้ง R = 0.5 kΩ แล้วเลื่อน E จาก 10 V ลงเป็น 5 V: เส้นโหลดเลื่อนขนานลงมา จุดตัดแกนตั้งเหลือ 10 mA แต่ \(V_{DQ}\) ลดลงเพียงไม่กี่สิบมิลลิโวลต์</li>
+    <li>คง E = 10 V แล้วเปลี่ยน R เป็น 2 kΩ: เส้นโหลดหมุนรอบจุด (10 V, 0) ลาดลง \(I_{DQ}\) ลดเหลือราว 4.6 mA</li>
+    <li>เลื่อน E ลงต่ำกว่า 0.5 V: เส้นโหลดตัดกราฟใกล้แกนนอน กระแสแทบเป็นศูนย์ แบบจำลองโดยประมาณให้ศูนย์พอดี</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เทียบแบบจำลอง</h3>
+    <ol><li>E = 10 V, R = 0.5 kΩ: สลับสามแบบจำลองแล้วอ่าน \(I_{DQ}\) ในแผงข้างภาพ: 18.4, 18.6 และ 20 mA</li>
+    <li>ลด E เหลือ 2 V: แบบอุดมคติคลาดไปมาก เพราะ 0.7 V ไม่เล็กเมื่อเทียบกับ 2 V (หน้า 1.6)</li></ol>
+    <div class="book">สไลด์บทที่ 2 ชุดที่ 1 หน้า 3–12 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 2.2 (Examples 2.1–2.3)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the load line shifts and turns</h3>
+    <ol><li>In section A set R = 0.5 kΩ and move E from 10 V down to 5 V: the load line moves down parallel to itself and its vertical intercept falls to 10 mA, while \(V_{DQ}\) drops by only a few tens of millivolts.</li>
+    <li>Keep E = 10 V and change R to 2 kΩ: the load line turns about the point (10 V, 0) and flattens; \(I_{DQ}\) falls to about 4.6 mA.</li>
+    <li>Move E below 0.5 V: the load line meets the curve close to the horizontal axis and the current is almost zero; the approximate model gives exactly zero.</li></ol></div>
+  <div class="card"><h3>Try this 2 — comparing the models</h3>
+    <ol><li>E = 10 V, R = 0.5 kΩ: switch between the three models and read \(I_{DQ}\) in the side panel: 18.4, 18.6 and 20 mA.</li>
+    <li>Lower E to 2 V: the ideal model is far off, because 0.7 V is not small next to 2 V (page 1.6).</li></ol>
+    <div class="book">Chapter 2 slides, Part I, pp. 3–12 · Boylestad &amp; Nashelsky, 11th ed., section 2.2 (Examples 2.1–2.3)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH2.problem(1, 'ex1'); CH2.problem(2, 'ex2'); CH2.problem(3, 'ex3');
+
+  /* =================================================================== A: a load line that moves with E and R */
+  const SA = { E: 10, R: 500, m: 'curve', zoom: false };
+  const MOD = { curve: ['เส้นโค้งจริง (รูป 2.3b)', 'actual curve (Fig. 2.3b)'], apx: ['แบบประมาณ 0.7 V', 'approximate, 0.7 V'], ideal: ['อุดมคติ', 'ideal'] };
+  const dOf = m => (m === 'curve' ? CH2.T23 : m === 'apx' ? CH2.SI : CH2.IDEAL);
+  const q = () => { const c = BA.ckt; return c ? { V: c.Vab('D').re, I: c.I('D').re * 1e3 } : { V: 0, I: 0 }; };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.5, rowAsp: 0.66, pad: 1.25, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const Q = q(), zoom = SA.zoom && SA.m !== 'ideal';
+      CH2.llPlot(ctx, b, bd, { model: SA.m, E: SA.E, R: SA.R, zoom, ends: !zoom, q: { V: Q.V, I: Q.I, label: bd.short ? 'Q' : `Q: ${fd(Q.V, 3)} V, ${fd(Q.I, 2)} mA` },
+        title: zoom ? t('ขยายรอบจุดตัด (0.55–0.95 V)', 'zoomed on the crossing (0.55–0.95 V)') : t(`เส้นโหลด E = ${fd(SA.E, 1)} V, R = ${CK.eng(SA.R, 'Ω')}`, `load line, E = ${fd(SA.E, 1)} V, R = ${CK.eng(SA.R, 'Ω')}`) }); },
+    badge: () => { const Q = q(); return [[`I_DQ = ${fd(Q.I, 2)} mA`, `I_DQ = ${fd(Q.I, 2)} mA`], 'ok']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('แหล่งจ่ายและตัวต้านทาน', 'Source and resistor'));
+  ui.slider(pA, { id: 'aE', label: 'E', min: 0, max: 15, step: 0.1, value: SA.E, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.E = v; buildA(); } });
+  ui.radio(pA, [250, 500, 1000, 2000].map(r => ({ id: 'aR' + r, label: 'R = ' + CK.eng(r, 'Ω'), on: r === SA.R })), id => { SA.R = +id.slice(2); buildA(); });
+  ui.h2(pA, t('แบบจำลองของไดโอด', 'Diode model'));
+  ui.radio(pA, Object.keys(MOD).map(m => ({ id: 'aM' + m, label: t(...MOD[m]), on: m === SA.m })), id => { SA.m = id.slice(2); buildA(); });
+  ui.buttons(pA, [{ label: t('ขยายรอบจุดตัด', 'Zoom on the crossing'), onclick: el => { SA.zoom = !SA.zoom; el.classList.toggle('on', SA.zoom); } }]);
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH2.loop({ E: SA.E, R: SA.R, d: dOf(SA.m), dName: 'Si' }), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); }
+  function showA() { const Q = q(), Im = SA.E / SA.R * 1000;
+    mA.innerHTML = ui.kv([['E/R', `${fd(Im, 2)} mA`], ['V_DQ', `${fd(Q.V, 3)} V`], ['I_DQ', `${fd(Q.I, 2)} mA`], ['V_R = E − V_DQ', `${fd(SA.E - Q.V, 3)} V`]]);
+    $('wA').innerHTML = `<div class="answer">${t(`เส้นโหลดตัดแกนตั้งที่ \\(E/R = ${fd(Im, 2)}\\) mA และแกนนอนที่ \\(E = ${fd(SA.E, 1)}\\) V ${SA.m === 'ideal' ? 'ไดโอดอุดมคติคือแกนตั้ง จุดตัดจึงอยู่ที่ \\(E/R\\) พอดี' : SA.m === 'apx' ? 'แบบประมาณคือเส้นตั้งที่ 0.7 V ได้ \\(I_D = (E - 0.7)/R\\)' : 'จุดตัดกับเส้นโค้งจริงอยู่ใกล้เข่าของกราฟ \\(V_{DQ}\\) เปลี่ยนน้อยมากแม้กระแสเปลี่ยนมาก'}`,
+      `The load line meets the vertical axis at \\(E/R = ${fd(Im, 2)}\\) mA and the horizontal axis at \\(E = ${fd(SA.E, 1)}\\) V. ${SA.m === 'ideal' ? 'The ideal diode is the vertical axis, so the crossing is exactly \\(E/R\\).' : SA.m === 'apx' ? 'The approximate model is a vertical line at 0.7 V: \\(I_D = (E - 0.7)/R\\).' : 'The crossing with the actual curve is near its knee: \\(V_{DQ}\\) hardly changes even when the current changes a lot.'}`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) วงจรอนุกรมมี E = 12 V และ R = 1 kΩ จงหาจุดตัดแกนทั้งสองของเส้นโหลด', '1) A series circuit has E = 12 V and R = 1 kΩ. Find the two intercepts of its load line.'),
+      fields: [{ key: 'x', lab: t('แกนตั้ง E/R =', 'vertical E/R ='), ans: 12, unit: 'mA' }, { key: 'y', lab: t('แกนนอน E =', 'horizontal E ='), ans: 12, unit: 'V' }],
+      work: work(R`V_D = 0:\ I_D = \frac{12\ \text{V}}{1\ \text{k}\Omega} = 12\ \text{mA},\qquad I_D = 0:\ V_D = E = 12\ \text{V}`) },
+    { q: t('2) วงจรเดียวกับข้อ 1 ใช้แบบจำลองโดยประมาณของไดโอดซิลิคอน จงหา \\(I_{DQ}\\) และ \\(V_R\\)', '2) The circuit of question 1 with the approximate model of a silicon diode. Find \\(I_{DQ}\\) and \\(V_R\\).'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: 11.3, unit: 'mA' }, { key: 'y', lab: 'V_R =', ans: 11.3, unit: 'V' }],
+      work: work(R`I_{DQ} = \frac{12 - 0.7}{1\ \text{k}\Omega} = 11.3\ \text{mA},\qquad V_R = 12 - 0.7 = 11.3\ \text{V}`) },
+    { q: t('3) ไดโอดเจอร์เมเนียมต่ออนุกรมกับ E = 5 V และ R = 470 Ω จงหา \\(I_{DQ}\\) ด้วยแบบจำลองโดยประมาณ', '3) A germanium diode in series with E = 5 V and R = 470 Ω. Find \\(I_{DQ}\\) with the approximate model.'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: 10, unit: 'mA' }], work: work(R`I_{DQ} = \frac{5 - 0.3}{0.47\ \text{k}\Omega} = 10\ \text{mA}`) },
+    { q: t('4) ถ้า E = 10 V จะต้องใช้ R เท่าใด เส้นโหลดจึงผ่านจุด (0.7 V, 10 mA)', '4) With E = 10 V, what R makes the load line pass through (0.7 V, 10 mA)?'),
+      fields: [{ key: 'x', lab: 'R =', ans: 930, unit: 'Ω', tol: 0.5 }], work: work(R`R = \frac{E - V_D}{I_D} = \frac{10 - 0.7}{10\ \text{mA}} = 930\ \Omega`) },
+    { q: t('5) จากจุด Q ของ Ex.1 (0.78 V, 18.5 mA) จงหาความต้านทานกระแสตรงของไดโอด แล้วตรวจว่าวงจรที่ใช้ R<sub>D</sub> แทนไดโอดให้กระแสเท่าเดิม', '5) From the Q-point of Ex.1 (0.78 V, 18.5 mA) find the dc resistance of the diode, and check that the circuit with R<sub>D</sub> in its place carries the same current.'),
+      fields: [{ key: 'x', lab: 'R_D =', ans: 42.16, unit: 'Ω', tol: 0.05 }, { key: 'y', lab: 'I_D =', ans: 18.44, unit: 'mA', tol: 0.07 }],
+      work: work(R`R_D = \frac{0.78}{18.5\ \text{mA}} = 42.16\ \Omega,\qquad I_D = \frac{10}{42.16 + 500} = 18.44\ \text{mA} \cong 18.5\ \text{mA}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

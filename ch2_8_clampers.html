@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="2.8 — Clampers">2.8 — วงจรยึดระดับสัญญาณ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=2">
+<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
+<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script><script src="assets/ch6.js?v=2"></script>
+<script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรยึดระดับสัญญาณ <span class="en">Clampers</span></h1>
+<h1 data-l="en">Clampers <span class="en">Shifting a signal to a new dc level</span></h1>
+
+<p class="sub" data-l="th">สไลด์ชุดที่ 2 หน้า 14–20 ใช้ตัวเก็บประจุ ไดโอด และตัวต้านทาน "ยึด" (clamp) สัญญาณไว้ที่ระดับกระแสตรงใหม่ รูปคลื่นไม่เปลี่ยน แต่ถูกเลื่อนขึ้นหรือลงทั้งก้อน แหล่งจ่ายกระแสตรงที่ต่อเพิ่มให้เลื่อนได้มากขึ้น วงจรนี้มีหน่วยความจำ (ประจุในตัวเก็บประจุ) จึงต้องจำลองตามเวลาจริง หน้านี้มีภาพจำลองตามเวลาที่ช้าลง 4000 เท่า (ส่วน A) โจทย์ Ex.3 และ Ex.4 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Part II slides pp. 14–20 use a capacitor, a diode and a resistor to "clamp" a signal to a new dc level: the waveform keeps its shape but moves up or down as a whole, and an added dc supply moves it further. The circuit has a memory (the charge on the capacitor), so it is simulated as a real transient. This page slows time down 4000 times (section A), works Ex.3 and Ex.4, and ends with more practice.</p>
+<div class="equation-box eqwrap">$$ \text{on}:\ C \text{ charges at once to } V_C $$ $$ \text{off}:\ v_o = v_i + V_C $$ $$ 5\tau = 5RC \gg \frac{T}{2} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>วงจรยึดระดับสัญญาณต้องมีตัวเก็บประจุ ไดโอด และตัวต้านทาน</b> อาจมีแหล่งจ่ายกระแสตรงเพิ่มเพื่อเลื่อนระดับมากขึ้น (สไลด์ชุดที่ 2 หน้า 14)</li>
+  <li><b>ช่วงที่ไดโอดนำ</b>: ไดโอดลัด R ออกไป ตัวเก็บประจุชาร์จจนถึงแรงดันที่วงจรกำหนดแทบทันที (สไลด์ชุดที่ 2 หน้า 15)</li>
+  <li><b>ช่วงที่ไดโอดไม่นำ</b>: ตัวเก็บประจุคายประจุผ่าน R ด้วยค่าคงตัวเวลา \(\tau = RC\) ถ้า \(5\tau\) ยาวกว่าครึ่งคาบมาก ตัวเก็บประจุแทบรักษาแรงดันไว้ได้ทั้งช่วง (สไลด์ชุดที่ 2 หน้า 16)</li>
+  <li><b>ขั้นตอนและการตรวจ</b>: เริ่มจากช่วงที่ขาเข้าไบแอสตรงไดโอด หา \(V_C\) แล้วหา \(v_o\) ในช่วงที่ไดโอดไม่นำ ระวังขั้วของ \(v_o\) และ<b>สวิงของขาออกต้องเท่ากับสวิงของขาเข้า</b>เสมอ (สไลด์ชุดที่ 2 หน้า 17)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>A clamper needs a capacitor, a diode and a resistor</b>, and may add a dc supply for a further shift (Part II slide p. 14).</li>
+  <li><b>While the diode conducts</b> it shorts R out, and the capacitor charges almost at once to the voltage the network sets (Part II slide p. 15).</li>
+  <li><b>While the diode is off</b> the capacitor discharges through R with the time constant \(\tau = RC\); if \(5\tau\) is much longer than half a period, it holds its voltage practically the whole time (Part II slide p. 16).</li>
+  <li><b>Steps and a check</b>: start with the part of the input that forward-biases the diode, find \(V_C\), then \(v_o\) while the diode is off; watch the polarity of \(v_o\), and remember that <b>the output swing always equals the input swing</b> (Part II slide p. 17).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch2b/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 14, Clampers: the clamping network is one that will clamp a signal to a different dc level. The network must have a capacitor, a diode, and a resistive element, but it can also employ an independent dc supply to introduce an additional shift. The figure: v_i, a square wave between V and −V with half period T/2; the circuit with C in series, a diode down to ground pointing down, and R with v_o across it.">
+  <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 14: วงจรยึดระดับสัญญาณ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 14: a clamper · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch2b/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 17, Clampers: in general, the following steps may be helpful when analyzing clamping networks: start by considering that part of the input signal that will forward bias the diode; during the period that the diode is in the on state, assume that the capacitor will charge up instantaneously to a voltage level determined by the network; assume that during the period when the diode is in the off state the capacitor will hold on to its established voltage level; throughout the analysis maintain a continual awareness of the location and reference polarity for v_o; keep in mind the general rule that the total swing of the total output must match the swing of the input signal.">
+  <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 17: ขั้นตอนวิเคราะห์ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 17: the steps · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์ชุดที่ 2 หน้า 18–19 ใช้ C = 1 µF</b> ตำรา (Example 2.22) ใช้ 0.1 µF ค่าคงตัวเวลาจึงเป็น 0.1 s และ 10 ms ตามลำดับ ทั้งสองยาวกว่าครึ่งคาบ 0.5 ms มาก คำตอบจึงเท่ากัน ภาพจำลองใช้ 1 µF ตามสไลด์ · สไลด์หน้า 19 เขียนแรงดันที่เข่าว่า \(V_T\) ตามสัญลักษณ์ฉบับเก่า ตำราฉบับที่ 11 ใช้ \(V_K\)</div>
+<div class="warnbox" data-l="en"><b>Part II slides pp. 18–19 use C = 1 µF</b>; the book (Example 2.22) uses 0.1 µF, giving time constants of 0.1 s and 10 ms. Both are far longer than the 0.5 ms half period, so the answers are the same; the simulation uses the slides' 1 µF. Slide p. 19 writes the knee voltage as \(V_T\), the notation of earlier editions; the 11th edition uses \(V_K\).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรยึดระดับตามเวลา</a><a href="#ex1"><b>1</b>Ex.3 ไดโอดอุดมคติ</a><a href="#ex2"><b>2</b>Ex.4 ไดโอดซิลิคอน</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A clamper in time</a><a href="#ex1"><b>1</b>Ex.3 an ideal diode</a><a href="#ex2"><b>2</b>Ex.4 a silicon diode</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรยึดระดับสัญญาณตามเวลาจริง</h2><h2 data-l="en">A clamper as a real transient</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 15–16, 20 · Boylestad หัวข้อ 2.9 (รูป 2.87–2.100)</div><div class="src" data-l="en">Part II slides pp. 15–16, 20 · Boylestad, section 2.9 (Figs. 2.87–2.100)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch2b/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 15, Clampers: during the interval 0 to T/2 the network appears as shown, with the diode in the on state effectively shorting out the effect of the resistor R; the capacitor will charge to V volts very quickly; during this interval the output voltage is directly across the short circuit and v_o = 0 V. Caption: diode on and the capacitor charging to V volts.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 15: ไดโอดนำ C ชาร์จถึง V · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 15: diode on, C charges to V · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2b/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 16, Clampers: when the input switches to the −V state, the network appears as shown, with the open-circuit equivalent for the diode determined by the applied signal and the stored voltage across the capacitor, both pressuring current through the diode from cathode to anode. R is back in the network; the time constant determined by the RC product is sufficiently large to establish a discharge period 5τ much greater than the period T/2 to T. The equation: −V − V − v_o = 0, v_o = −2V. Caption: determining v_o with the diode off.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 16: ไดโอดไม่นำ \(v_o = -2V\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 16: diode off, \(v_o = -2V\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch2b/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 20, Clampers: a number of clamping circuits and their effect on the input signal are shown: for a square wave between V and −V, simple clampers with the diode either way give outputs between 0 and −2V or 0 and 2V; biased clampers with a battery V_1 in the diode branch shift these by V_1 up or down.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 20: วงจรยึดระดับแบบต่าง ๆ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 20: clamping circuits · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ขาเข้าเป็นคลื่นสี่เหลี่ยม 1 kHz (1 คาบใช้ 4 วินาทีในภาพจำลอง) แถบสีบนตัวเก็บประจุแสดงประจุ กราฟแสดงสองคาบล่าสุดเหมือนออสซิลโลสโคป: \(v_i\) (ฟ้า) \(v_o\) (เหลือง) และ \(v_C\) (ม่วง) ตอนเริ่ม C ไม่มีประจุ จึงเห็นครึ่งคาบแรกที่ยังไม่ยึดระดับ ลองเลือก R = 1 kΩ ซึ่ง \(\tau = RC\) = 1 ms เท่ากับคาบ: ตัวเก็บประจุคายประจุมากระหว่างพัลส์ ขาออกจึงผิดรูป</p>
+  <p class="lead" data-l="en">The input is a 1 kHz square wave (one period takes 4 s in the simulation); the colour on the capacitor shows its charge. The graph shows the last two periods, as on an oscilloscope: \(v_i\) (blue), \(v_o\) (yellow) and \(v_C\) (purple). C starts empty, so the first half period is not yet clamped. Try R = 1 kΩ, where \(\tau = RC\) = 1 ms equals the period: the capacitor discharges a lot between pulses and the output is distorted.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.3: วงจรยึดระดับกับแบตเตอรี 5 V</h2><h2 data-l="en">Ex.3: a clamper with a 5 V battery</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 18 · Boylestad Example 2.22 (รูป 2.93–2.96)</div><div class="src" data-l="en">Part II slide p. 18 · Boylestad Example 2.22 (Figs. 2.93–2.96)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2b/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 18, Clampers, Ex.3: determine v_o for the network of the figure for the input indicated. The figure: v_i, a square wave at f = 1000 Hz between 10 V and −20 V with instants t_1 to t_4 and the period T; the circuit with C = 1 µF in series, a diode pointing up from a 5 V battery V to the output node, and R = 100 kΩ with v_o across it.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 18: Ex.3 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 18: Ex.3 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ขาเข้าเป็นคลื่นสี่เหลี่ยม 1000 Hz ระดับ +10 V และ −20 V ผ่าน C = 1 µF ไปยังจุดขาออก ซึ่งมีไดโอดอุดมคติ (แคโทดที่จุดขาออก แอโนดที่ขั้วบวกของแบตเตอรี 5 V) และ R = 100 kΩ ต่อลงกราวด์ จงหา \(v_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 1000 Hz square wave of +10 V and −20 V drives, through C = 1 µF, the output node, which has an ideal diode (cathode on the output, anode on the + terminal of a 5 V battery) and R = 100 kΩ to ground. Determine \(v_o\).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองนี้คำนวณตามเวลาจริง ครึ่งคาบแรก C ยังไม่มีประจุ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">This simulation is a real transient; in the first half period C is still empty. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.4: วงจรเดิมกับไดโอดซิลิคอน</h2><h2 data-l="en">Ex.4: the same circuit with a silicon diode</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 19 · Boylestad Example 2.23 (รูป 2.97–2.99)</div><div class="src" data-l="en">Part II slide p. 19 · Boylestad Example 2.23 (Figs. 2.97–2.99)</div></div></div>
+  <figure class="slide q"><img src="slides/ch2b/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Part II slide 19, Clampers, Ex.4: repeat Ex. 3 using a silicon diode with V_T = 0.7 V. The figure repeats the input and the circuit of Ex. 3: a 1000 Hz square wave between 10 V and −20 V, C = 1 µF, a diode with a 5 V battery, R = 100 kΩ.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 19: Ex.4 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Part II slide p. 19: Ex.4 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทำ Ex.3 ซ้ำโดยใช้ไดโอดซิลิคอน \(V_K = 0.7\) V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Repeat Ex.3 with a silicon diode, \(V_K = 0.7\) V.</p></div>
+  <p class="lead" data-l="th">เทียบผลกับข้อ 1: ทุกระดับลดลง 0.7 V แต่สวิงยังเท่าเดิม <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">Compare with problem 1: every level drops by 0.7 V, yet the swing is unchanged. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ถือว่า RC ยาวกว่าครึ่งคาบมาก · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Take RC as much longer than half a period · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ตัวเก็บประจุทำงานอย่างไร</h3>
+    <ol><li>ส่วน A กด "เริ่มใหม่" แล้วดูครึ่งคาบแรก: C ยังว่าง ไดโอดไม่นำ \(v_o = v_i\) พอขาเข้าลงไป −20 V ไดโอดนำ C ชาร์จถึง 25 V ทันที แล้วขาออกถูกยึดระดับตั้งแต่นั้น</li>
+    <li>เลือก R = 1 kΩ: ระหว่างช่วง +10 V ขาออกลดลงอย่างเห็นได้ชัด เพราะ \(\tau\) = 1 ms ไม่ยาวกว่าครึ่งคาบมาก</li>
+    <li>กลับทิศไดโอด: ขาออกถูกยึดด้านบนแทนด้านล่าง</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — สวิงเท่าเดิม</h3>
+    <ol><li>เปลี่ยนแบตเตอรีจาก +5 V เป็น 0 V และ −5 V: ขาออกเลื่อนตามทั้งก้อน แต่ระยะจากยอดถึงยอดยังเท่ากับ 30 V</li>
+    <li>ชี้เมาส์ที่ตัวเก็บประจุ: แรงดันคร่อม C แทบคงที่ ส่วนที่เปลี่ยนตามขาเข้าคือขาออก</li></ol>
+    <div class="book">สไลด์บทที่ 2 ชุดที่ 2 หน้า 14–20 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 2.9 (Examples 2.22–2.23)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — what the capacitor does</h3>
+    <ol><li>In section A press "Start again" and watch the first half period: C is empty and the diode off, so \(v_o = v_i\). As soon as the input drops to −20 V the diode conducts, C charges to 25 V at once, and the output is clamped from then on.</li>
+    <li>Choose R = 1 kΩ: during the +10 V half the output sags visibly, because \(\tau\) = 1 ms is not much longer than half a period.</li>
+    <li>Turn the diode round: the output is clamped at the top instead of the bottom.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the same swing</h3>
+    <ol><li>Change the battery from +5 V to 0 V and to −5 V: the output moves as a whole, but its peak-to-peak span stays 30 V.</li>
+    <li>Hover over the capacitor: its voltage is nearly constant; it is the output that follows the input.</li></ol>
+    <div class="book">Chapter 2 slides, Part II, pp. 14–20 · Boylestad &amp; Nashelsky, 11th ed., section 2.9 (Examples 2.22–2.23)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  const v2 = x => fd(x, 2).replace('-', '−');
+  CH2.problem(1, 'cl3'); CH2.problem(2, 'cl4');
+
+  /* =================================================================== A: a clamper as a real transient */
+  const SA = { hi: 10, lo: -20, V: 5, flip: false, si: false, R: 1e5 }, rec = new CH2.Rec(1e-3, CH2.CLOUT);
+  const spec = () => CH2.clamp({ hi: SA.hi, lo: SA.lo, V: SA.V, flip: SA.flip, d: SA.si ? CH2.SI : CH2.IDEAL, R: SA.R });
+  const BA = new CH8.Board('cvA', { T: 4, mid: false, wideAt: 1e9, cktAspN: 0.52, pad: 1.25, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, glowColor: 'rgba(255,126,182,.4)' },
+    waves: [{ title: bd => (bd.short ? '' : t('ภาพจำลองตามเวลา: 1 คาบ (1 ms) ใช้ 4 วินาที', 'a transient: one period (1 ms) takes 4 s')),
+      sigs: () => CH2.clSigs(rec, { vc: true, mag: Math.max(40, Math.abs(SA.hi) + Math.abs(SA.lo) + Math.abs(SA.V) + 5) }), opts: () => ({ now: rec.now, w: 2 * Math.PI * 1000 }) }],
+    after: v => CH2.stTags(v, [['D', -0.5, 0, 'D']]),
+    badge: () => [[`v_o = ${v2(rec.last('vo'))} V, v_C = ${v2(rec.last('vc'))} V`, `v_o = ${v2(rec.last('vo'))} V, v_C = ${v2(rec.last('vc'))} V`], 'ok'] });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('ไดโอดและแบตเตอรี', 'Diode and battery'));
+  ui.radio(pA, [{ id: 'dI', label: t('อุดมคติ', 'ideal'), on: true }, { id: 'dS', label: t('ซิลิคอน 0.7 V', 'silicon 0.7 V') }], id => { SA.si = id === 'dS'; buildA(); });
+  ui.buttons(pA, [{ label: t('กลับทิศไดโอด', 'Turn the diode round'), onclick: el => { SA.flip = !SA.flip; el.classList.toggle('on', SA.flip); buildA(); } }, { label: t('เริ่มใหม่ (C ว่าง)', 'Start again (C empty)'), onclick: () => buildA() }]);
+  ui.slider(pA, { id: 'aV', label: t('แบตเตอรี V', 'battery V'), min: -10, max: 10, step: 0.5, value: SA.V, fmt: v => `${v2(v)} V`, oninput: v => { SA.V = v; buildA(); } });
+  ui.h2(pA, t('ขาเข้าและตัวต้านทาน', 'Input and resistor'));
+  ui.slider(pA, { id: 'aH', label: t('ระดับบน', 'upper level'), min: 0, max: 20, step: 1, value: SA.hi, fmt: v => `${fd(v, 0)} V`, oninput: v => { SA.hi = v; buildA(); } });
+  ui.slider(pA, { id: 'aL', label: t('ระดับล่าง', 'lower level'), min: -20, max: 0, step: 1, value: SA.lo, fmt: v => `${v2(v)} V`, oninput: v => { SA.lo = v; buildA(); } });
+  ui.radio(pA, [1e5, 1e4, 1e3].map(r => ({ id: 'aR' + r, label: 'R = ' + CK.eng(r, 'Ω'), on: r === SA.R })), id => { SA.R = +id.slice(2); buildA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(spec(), { speed: 80 / 0.01, dotRef: 0.01 }); showA(); }
+  function showA() { const tau = SA.R * 1e-6; mA.innerHTML = ui.kv([['τ = RC', CK.eng(tau, 's')], ['5τ', CK.eng(5 * tau, 's')], ['T/2', '0.5 ms'], [t('สวิงขาเข้า', 'input swing'), `${fd(SA.hi - SA.lo, 0)} V`]]);
+    $('wA').innerHTML = `<div class="answer">${tau >= 0.01 ? t(`\\(5\\tau\\) = ${CK.eng(5 * tau, 's')} ยาวกว่าครึ่งคาบ 0.5 ms มาก ตัวเก็บประจุจึงรักษาแรงดันไว้ได้ ขาออกมีรูปเดิมแต่เลื่อนทั้งก้อน และมีสวิงเท่ากับขาเข้า ${fd(SA.hi - SA.lo, 0)} V`, `\\(5\\tau\\) = ${CK.eng(5 * tau, 's')} is far longer than the 0.5 ms half period, so the capacitor holds its voltage: the output keeps its shape, moved as a whole, with the same ${fd(SA.hi - SA.lo, 0)} V swing as the input.`)
+      : t(`\\(5\\tau\\) = ${CK.eng(5 * tau, 's')} ไม่ยาวกว่าครึ่งคาบมาก ตัวเก็บประจุคายประจุมากระหว่างพัลส์ ขาออกผิดรูป สมมติฐานของการวิเคราะห์ใช้ไม่ได้`, `\\(5\\tau\\) = ${CK.eng(5 * tau, 's')} is not much longer than half a period, so the capacitor discharges a lot between pulses and the output is distorted: the assumption of the analysis fails.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => { rec.run(BA.ckt, dt); BA.frame(dt); });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) วงจรของสไลด์ชุดที่ 2 หน้า 14 (ไดโอดอุดมคติหันลง ไม่มีแบตเตอรี) ขาเข้าเป็นคลื่นสี่เหลี่ยม ±10 V จงหา \\(v_o\\) ในแต่ละครึ่ง', '1) The circuit of Part II slide p. 14 (an ideal diode pointing down, no battery) with a ±10 V square wave. Find \\(v_o\\) in each half.'),
+      fields: [{ key: 'x', lab: t('v_o (+10 V) =', 'v_o (+10 V) ='), ans: 0, unit: 'V', tol: 1e-3 }, { key: 'y', lab: t('v_o (−10 V) =', 'v_o (−10 V) ='), ans: -20, unit: 'V' }],
+      work: work(R`+10:\ \text{on},\ v_o = 0,\ V_C = 10\ \text{V};\qquad -10:\ \text{off},\ v_o = -10 - 10 = -20\ \text{V}`) },
+    { q: t('2) วงจรเดียวกับข้อ 1 แต่ใช้ไดโอดซิลิคอน จงหา \\(v_o\\) ในแต่ละครึ่ง', '2) The circuit of question 1 with a silicon diode. Find \\(v_o\\) in each half.'),
+      fields: [{ key: 'x', lab: t('v_o (+10 V) =', 'v_o (+10 V) ='), ans: 0.7, unit: 'V' }, { key: 'y', lab: t('v_o (−10 V) =', 'v_o (−10 V) ='), ans: -19.3, unit: 'V' }],
+      work: work(R`+10:\ v_o = 0.7\ \text{V},\ V_C = 9.3\ \text{V};\qquad -10:\ v_o = -10 - 9.3 = -19.3\ \text{V}`) },
+    { q: t('3) วงจรยึดระดับสัญญาณที่ขาเข้าเป็นคลื่นสี่เหลี่ยม +15 V และ −5 V ถ้าขาออกขณะ \\(v_i\\) = −5 V คือ 2 V ขาออกขณะ \\(v_i\\) = +15 V เป็นเท่าใด', '3) A clamper driven by a square wave of +15 V and −5 V gives 2 V while \\(v_i\\) = −5 V. What is the output while \\(v_i\\) = +15 V?'),
+      fields: [{ key: 'x', lab: 'v_o =', ans: 22, unit: 'V' }], work: work(R`\text{swing} = 15 - (-5) = 20\ \text{V} \Rightarrow v_o = 2 + 20 = 22\ \text{V}`) },
+    { q: t('4) R = 10 kΩ และ C = 0.1 µF ใช้กับขาเข้า 1 kHz ได้หรือไม่ จงหา \\(5\\tau\\) (ms)', '4) R = 10 kΩ and C = 0.1 µF with a 1 kHz input: will it clamp well? Find \\(5\\tau\\) in ms.'),
+      fields: [{ key: 'x', lab: '5τ =', ans: 5, unit: 'ms' }], work: work(R`5\tau = 5(10\ \text{k}\Omega)(0.1\ \mu\text{F}) = 5\ \text{ms} \gg 0.5\ \text{ms}`, `<p>${t('ยาวกว่าครึ่งคาบ 10 เท่า ใช้ได้ แต่ขาออกจะตกลงเล็กน้อยระหว่างพัลส์', 'Ten times half a period: good enough, though the output will sag a little between pulses.')}</p>`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

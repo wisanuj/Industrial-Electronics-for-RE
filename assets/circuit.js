@@ -23,6 +23,7 @@
        ctrl = id of a V/VAC/E/H/motor part (current from its a to b) or of a resistor
      any part may set draw: 'box' to be drawn as a plain rectangle (an "unknown element" as in Hayt's figures)
      O   open gap (no current): a source that has been switched off for superposition / Thevenin (chapter 5)
+     V   wave: 'sine' | 'square' | 'tri' draws a signal source (glyph in the circle; the page sets value or fn(t))
      D   diode, anode a, cathode b (Industrial Electronics, Oct 2026; zsym: false draws a plain symbol for a diode with a breakdown voltage). model: 'shockley' (default; Is A, n, T °C) | 'ideal' (a switch) |
          'table' (curve: [[v V, i A], …] from v = 0 up, read off a textbook figure; Irev A below 0 V) |
          'simple' (vk V drop when on) | 'pwl' (vk in series with r Ω). vz: a Zener breakdown at V_ab = −vz (shockley: ibv A at −vz, nz;
@@ -101,7 +102,7 @@ const GMIN = 1e-12;
 /* ---------------- diode models ---------------- */
 /* the current through a diode at V_ab = v and its slope g = dI/dv (A/V). VT = kT/q with the textbook's constants (k = 1.38e-23 J/K,
    q = 1.6e-19 C, T_K = 273 + °C), so 27 °C gives 25.875 mV as in Boylestad Example 1.1 */
-const DIODE = { GON: 1e3, GOFF: 1e-12 };
+const DIODE = { GON: 1e3, GOFF: 1e-12, GFWD: 1e-7 };
 DIODE.vt = T => 1.38e-23 * (273 + (T ?? 27)) / 1.6e-19;
 /* monotone cubic through a digitized curve (Fritsch–Carlson): f(x) → {y, d}; straight on past the ends */
 DIODE.pchip = pts => { const xs = pts.map(q => q[0]), ys = pts.map(q => q[1]), n = xs.length, h = [], dl = [], m = new Array(n);
@@ -119,9 +120,12 @@ DIODE.iv = (p, v) => { const m = p.model || 'shockley';
     if (p.vz) { const nz = (p.nz ?? 1) * DIODE.vt(p.T), ib = p.ibv ?? 1e-3, y = Math.min(-(v + p.vz) / nz, 90), eb = Math.exp(y); i -= ib * eb; g += ib / nz * eb; if (y === 90) i -= ib * eb * (-(v + p.vz) / nz - 90); }
     return { i, g: g + DIODE.GOFF }; }
   const vk = m === 'ideal' ? 0 : (p.vk ?? 0.7), gon = m === 'pwl' ? 1 / Math.max(p.r ?? 10, 1e-6) : DIODE.GON;
-  if (v > vk) return { i: (v - vk) * gon, g: gon };
+  if (v > vk) return { i: vk * DIODE.GFWD + (v - vk) * gon, g: gon };   // on: from the leakage at the knee (0.07 µA for 0.7 V) up the straight line
   if (p.vz && v < -p.vz) { const gz = 1 / Math.max(p.rz ?? 1e-3, 1e-6); return { i: (v + p.vz) * gz, g: gz }; }
-  return { i: 0, g: DIODE.GOFF }; };   // off: an open circuit (GOFF only keeps the matrix regular; at convergence I = GOFF(v − vd) = 0)
+  /* off, forward below the knee: a real leakage GFWD (≤ 0.07 µA at 0.7 V), so that two diodes in series with no current leave the forward
+     one at V_D ≈ 0 and the reverse one with the whole voltage (Boylestad: I_D = 0 A ⇒ V_D = 0 V); within 50 mV of zero counts as forward */
+  if (v > -0.05) return { i: v * DIODE.GFWD, g: DIODE.GFWD };
+  return { i: 0, g: DIODE.GOFF }; };   // off, reverse: an exact open circuit at convergence (GOFF only keeps the matrix regular: I = GOFF(v − vd) = 0)
 /* SPICE pnjlim: keeps a Newton step on the exponential from jumping past the knee */
 DIODE.lim = (p, vnew, vold) => { if (p.model === 'table') return vold + Math.max(-0.25, Math.min(0.25, vnew - vold));   // small steps on a read-off curve
   if ((p.model || 'shockley') !== 'shockley') return vnew;
@@ -156,6 +160,7 @@ class Circuit {
      Newton–Raphson: each diode is replaced by its slope g and an offset current at the voltage guessed so far (p.vd), the linear
      circuit is solved, the diode voltages are updated (limited on the exponential), until they stop moving. result.iters counts the solves */
   solve(dt) {
+    if (this.mode === 'tran' && !(dt > 0)) dt = 1e-6;   // a board solves once without a step: look 1 µs ahead (capacitor voltages are only updated by step)
     const ds = this.parts.filter(p => p.type === 'D'); if (!ds.length || this.mode === 'ac') return this.solve1(dt);
     ds.forEach(p => { if (p.vd === undefined || !isFinite(p.vd)) p.vd = (p.model || 'shockley') === 'shockley' || p.model === 'table' ? 0.6 : 0; });
     let r = null, it = 0, damp = false;
@@ -164,7 +169,13 @@ class Circuit {
       ds.forEach(p => { const v = r.V[p.a].re - r.V[p.b].re; let vn = DIODE.lim(p, v, p.vd); if (damp && ['ideal', 'simple', 'pwl'].includes(p.model)) vn = p.vd + Math.max(-0.5, Math.min(0.5, vn - p.vd));
         if (Math.abs(vn - p.vd) > 1e-9 + 1e-7 * Math.abs(vn)) done = false; p.vd = vn; });
       if (done) break; }
-    r.iters = it + 1; return r;
+    r.iters = it + 1;
+    /* a straight-line diode left "on" with (almost) no current sits on its boundary: restart it once from "off", so that with no current
+       its voltage settles at about 0 (two diodes in series facing each other: the forward one at 0 V, the other with the whole voltage) */
+    if (!this._recheck) { const lim = p => (p.model === 'ideal' ? 0 : (p.vk ?? 0.7));
+      const stuck = ds.filter(p => ['ideal', 'simple', 'pwl'].includes(p.model) && p.vd > lim(p) && DIODE.iv(p, p.vd).i - lim(p) * DIODE.GFWD < 1e-9);
+      if (stuck.length) { stuck.forEach(p => { p.vd = 0; }); this._recheck = true; try { const r2 = this.solve(dt); r2.iters += r.iters; return r2; } finally { this._recheck = false; } } }
+    return r;
   }
   solve1(dt) {
     const mode = this.mode, parts = this.parts, names = Object.keys(this.nodes);
@@ -801,7 +812,12 @@ View.prototype.symbols = {
   V(ctx, p, h, u) { const r = Math.min(h, u * 0.4); if (p.battery) { const g = u * 0.09; ctx.beginPath(); ctx.moveTo(-h, 0); ctx.lineTo(-g, 0); ctx.moveTo(g, 0); ctx.lineTo(h, 0);
       ctx.moveTo(-g, -u * 0.36); ctx.lineTo(-g, u * 0.36); ctx.stroke(); ctx.save(); ctx.lineWidth *= 1.8; ctx.beginPath(); ctx.moveTo(g, -u * 0.18); ctx.lineTo(g, u * 0.18); ctx.stroke(); ctx.restore();
       this.signs(ctx, -g - u * 0.18, g + u * 0.18, u); return; }
-    ctx.beginPath(); ctx.moveTo(-h, 0); ctx.lineTo(-r, 0); ctx.moveTo(r, 0); ctx.lineTo(h, 0); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 2 * Math.PI); ctx.stroke(); this.signs(ctx, -r * 0.5, r * 0.5, u); },
+    ctx.beginPath(); ctx.moveTo(-h, 0); ctx.lineTo(-r, 0); ctx.moveTo(r, 0); ctx.lineTo(h, 0); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 2 * Math.PI); ctx.stroke();
+    /* wave: 'sine' | 'square' | 'tri' — a signal source whose value the page sets in time (fn(t), or value per frame): the glyph inside, the signs outside */
+    if (p.wave) { const W = r * 0.55, A = r * 0.32, f = p.wave === 'square' ? q => (q < 0.5 ? 1 : -1) : p.wave === 'tri' ? q => (q < 0.25 ? 4 * q : q < 0.75 ? 2 - 4 * q : 4 * q - 4) : q => Math.sin(2 * Math.PI * q);
+      ctx.beginPath(); for (let k = 0; k <= 40; k++) { const q = k / 40, s = -W + q * 2 * W; const y = -f(q) * A; k ? ctx.lineTo(y, s) : ctx.moveTo(y, s); } ctx.stroke();
+      this.signs(ctx, -r * 1.35, r * 1.35, u, true); return; }
+    this.signs(ctx, -r * 0.5, r * 0.5, u); },
   VAC(ctx, p, h, u) { const r = Math.min(h, u * 0.4); ctx.beginPath(); ctx.moveTo(-h, 0); ctx.lineTo(-r, 0); ctx.moveTo(r, 0); ctx.lineTo(h, 0); ctx.stroke(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 2 * Math.PI); ctx.stroke();
     ctx.save(); ctx.rotate(-Math.atan2(Math.sin(0), 1)); ctx.beginPath(); for (let k = 0; k <= 20; k++) { const s = -r * 0.55 + k / 20 * r * 1.1; const y = -Math.sin(k / 20 * 2 * Math.PI) * r * 0.3; k ? ctx.lineTo(y, s) : ctx.moveTo(y, s); } ctx.stroke(); ctx.restore();
     this.signs(ctx, -r * 1.35, r * 1.35, u, true); },
@@ -886,10 +902,14 @@ CK.View = View;
 
 /* status badge in the top-left corner of a canvas: kind 'ok' (green) or 'wait' (amber) */
 CK.badge = (ctx, msg, kind = 'wait', x = 8, y = 6) => {
-  const ok = kind === 'ok'; ctx.save(); ctx.font = `600 14.5px ${FONT_TH}`; const w = ctx.measureText(msg).width + 20;
+  /* "V_m", "I_DQ", "V_{dc}": the part after "_" is drawn as a subscript, as in the circuit labels */
+  const ok = kind === 'ok', parts = []; String(msg).replace(/_\{([^}]*)\}|_([A-Za-z0-9]+)|([^_]+|_)/g, (m, b1, b2, tx) => { parts.push(tx !== undefined ? { s: tx, sub: false } : { s: b1 ?? b2, sub: true }); return m; });
+  ctx.save(); const font = q => { ctx.font = `600 ${q.sub ? 10.5 : 14.5}px ${FONT_TH}`; };
+  let w = 20; parts.forEach(q => { font(q); w += ctx.measureText(q.s).width; });
   ctx.fillStyle = ok ? 'rgba(126,231,135,.16)' : 'rgba(255,209,102,.14)'; ctx.strokeStyle = ok ? '#7ee787' : '#ffd166'; ctx.lineWidth = 1;
   ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, 27, 6); else ctx.rect(x, y, w, 27); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = ok ? '#7ee787' : '#ffd166'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(msg, x + 10, y + 14); ctx.restore();
+  ctx.fillStyle = ok ? '#7ee787' : '#ffd166'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; let cx = x + 10;
+  parts.forEach(q => { font(q); ctx.fillText(q.s, cx, y + 14 + (q.sub ? 4 : 0)); cx += ctx.measureText(q.s).width; }); ctx.restore();
 };
 /* ---------------- canvas sizing + loop helpers ---------------- */
 CK.setup = (canvas, w, h) => { const dpr = Math.min(window.devicePixelRatio || 1, 2.5); canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
