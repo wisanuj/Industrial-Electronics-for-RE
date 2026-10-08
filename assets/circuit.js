@@ -29,6 +29,9 @@
          'simple' (vk V drop when on) | 'pwl' (vk in series with r Ω). vz: a Zener breakdown at V_ab = −vz (shockley: ibv A at −vz, nz;
          the others: rz Ω). led: true draws light arrows and a glow (ledColor). DC and transients are solved by Newton–Raphson
          (SPICE junction limiting for the exponential, segment switching for the straight-line models); AC uses the slope at the last DC point
+     Q   bipolar junction transistor (chapter 3, Oct 2026): collector C, base B, emitter E (node names; C straight above or below E, B to one
+         side, level with the middle of the symbol); pnp: true; see BJT below for the models (beta, be, fam, vsat, va, iceo). pins: true
+         writes C, B, E beside the leads. Results: I[id] = I_C from C to E, I[id + ':b'] = I_B from B to E; circuit.Q(id) gives them in npn terms
    Sign convention for results: I[id] is the current through the part from a to b. */
 (function (global) {
 'use strict';
@@ -136,12 +139,58 @@ DIODE.lim = (p, vnew, vold) => { if (p.model === 'table') return vold + Math.max
   return vnew; };
 CK.DIODE = DIODE;
 
+/* ---------------- BJT models (chapter 3, Oct 2026) ----------------
+   In npn terms (a pnp uses v_EB and v_EC, and its currents run the other way) the base current is a diode from base to emitter,
+   I_B = f(v_BE): be, a diode model as for D (default { model: 'simple', vk: 0.7 }: V_BE = 0.7 V once on, Eq. 3.4), or a list
+   [{ vce, …diode }, …] of input characteristics at a few v_CE (Fig. 3.13b; straight-line between them, the end ones beyond). The collector current:
+     beta (default 100): I_C = (β I_B + iceo)·S(v_CE)·(1 + v_CE/va): I_C = β I_B in the active region (Eq. 3.15), I_CEO with I_B = 0 (Eq. 3.9)
+     fam (BJT.family): I_C(I_B, v_CE) from collector characteristics read off a figure, straight-line between its I_B curves
+     alpha (common-base form, Figs. 3.7–3.8): be gives the emitter current I_E = f(v_BE), I_C = (α I_E + icbo) S(v_CE), I_B = I_E − I_C (in saturation
+       the emitter keeps its current and the base takes what the collector does not, without a large v_BE)
+   S(v) = 1 − e^{−(v − vsat)/vs} (vs = 0.02 V) is the saturation region: I_C falls to 0 as v_CE falls to vsat (default 0 V, the V_CE(sat) ≅ 0 V
+   of chapter 4), straight on below it (the collector junction conducts the other way). DC and transients: Newton–Raphson on (v_BE, v_CE) with
+   the two currents linearised (four slopes: the base and collector currents against v_BE and v_CE); AC uses the slopes at the last DC point */
+const BJT = { VS: 0.02, BE: { model: 'simple', vk: 0.7 } };
+BJT.beOf = p => { const be = p.be || BJT.BE; return Array.isArray(be) ? be[0] : be; };
+BJT.v0 = p => { const m = BJT.beOf(p).model || 'shockley'; return m === 'shockley' || m === 'table' ? 0.6 : 0; };
+BJT.S = (p, v) => { const vs = p.vs ?? BJT.VS, x = (v - (p.vsat ?? 0)) / vs; if (x >= 0) { const e = Math.exp(-x); return { s: 1 - e, d: e / vs }; } return { s: x, d: 1 / vs }; };
+/* base current { i, g = dI/dv_BE, gc = dI/dv_CE } */
+BJT.ib = (p, vbe, vce) => { const be = p.be || BJT.BE;
+  if (!Array.isArray(be)) { const L = DIODE.iv(be, vbe); return { i: L.i, g: L.g, gc: 0 }; }
+  const n = be.length; if (n === 1 || vce <= be[0].vce || vce >= be[n - 1].vce) { const L = DIODE.iv(vce <= be[0].vce ? be[0] : be[n - 1], vbe); return { i: L.i, g: L.g, gc: 0 }; }
+  let k = 0; while (k < n - 2 && vce > be[k + 1].vce) k++;
+  const A = DIODE.iv(be[k], vbe), B = DIODE.iv(be[k + 1], vbe), h = be[k + 1].vce - be[k].vce, w = (vce - be[k].vce) / h;
+  return { i: A.i + (B.i - A.i) * w, g: A.g + (B.g - A.g) * w, gc: (B.i - A.i) / h }; };
+/* collector characteristics read off a figure: o = { ib: [µA, …] rising, curves: [[[v_CE V, I_C mA], …], …] } → f(I_B A, v_CE V) = { i (A),
+   di = dI_C/dI_B, dv = dI_C/dv_CE }: each curve a monotone cubic in v_CE (straight on past its ends), straight-line between neighbouring curves */
+BJT.family = o => { const ib = o.ib.map(x => x * 1e-6), fs = o.curves.map(c => DIODE.pchip(c.map(([v, i]) => [v, i * 1e-3])));
+  const f = (IB, v) => { const n = ib.length; let k = 0; while (k < n - 2 && IB > ib[k + 1]) k++;
+    const a = fs[k](v), b = fs[k + 1](v), h = ib[k + 1] - ib[k], w = (IB - ib[k]) / h;
+    return { i: a.y + (b.y - a.y) * w, di: (b.y - a.y) / h, dv: a.d + (b.d - a.d) * w }; };
+  f.ib = ib; f.curves = o.curves; f.fs = fs; return f; };
+/* both currents and their four slopes at (v_BE, v_CE), npn terms */
+BJT.iv = (p, vbe, vce) => { const B = BJT.ib(p, vbe, vce);
+  if (p.alpha !== undefined) { const a = p.alpha, S = BJT.S(p, vce), k = 1 - a * S.s, L = p.icbo || 0;   // B is the emitter current here; icbo: I_C = α I_E + I_CBO (Eq. 3.6)
+    return { ib: B.i * k - L * S.s, ic: a * B.i * S.s + L * S.s, g11: B.g * k, g12: B.gc * k - (B.i * a + L) * S.d, g21: a * S.s * B.g, g22: a * B.gc * S.s + (a * B.i + L) * S.d }; }
+  if (p.fam) { const F = p.fam(B.i, vce); return { ib: B.i, ic: F.i, g11: B.g, g12: B.gc, g21: F.di * B.g, g22: F.dv + F.di * B.gc }; }
+  const beta = p.beta ?? 100, S = BJT.S(p, vce), on = p.va && vce > 0, E = on ? 1 + vce / p.va : 1, dE = on ? 1 / p.va : 0, src = beta * B.i + (p.iceo || 0);
+  return { ib: B.i, ic: src * S.s * E, g11: B.g, g12: B.gc, g21: beta * B.g * S.s * E, g22: beta * B.gc * S.s * E + src * (S.d * E + S.s * dE) }; };
+/* the collector current at a given I_B and v_CE (a point of the collector characteristics) */
+BJT.icAt = (p, IB, vce) => { if (p.fam) return p.fam(IB, vce).i; if (p.alpha !== undefined) { const s = BJT.S(p, vce).s; return p.alpha * s * IB / (1 - p.alpha * s); } const S = BJT.S(p, vce), E = p.va && vce > 0 ? 1 + vce / p.va : 1; return ((p.beta ?? 100) * IB + (p.iceo || 0)) * S.s * E; };
+/* v_BE that gives the base current IB at v_CE (a point of the input characteristics; bisection) */
+BJT.vbeAt = (p, IB, vce) => { let lo = -1, hi = 2; for (let k = 0; k < 80; k++) { const m = (lo + hi) / 2; if (BJT.ib(p, m, vce).i < IB) lo = m; else hi = m; } return (lo + hi) / 2; };
+/* common base: given I_E and V_CB, the base–emitter voltage and the currents (Figs. 3.7–3.8) */
+BJT.cb = (p, IE, vcb) => { let lo = -1, hi = 2; const tot = v => { const m = BJT.iv(p, v, vcb + v); return m.ib + m.ic; };
+  for (let k = 0; k < 80; k++) { const m = (lo + hi) / 2; if (tot(m) < IE) lo = m; else hi = m; } const v = (lo + hi) / 2, m = BJT.iv(p, v, vcb + v); return { VBE: v, IB: m.ib, IC: m.ic }; };
+CK.BJT = BJT;
+
 /* ---------------- the circuit ---------------- */
 class Circuit {
   constructor(spec) {
     this.nodes = spec.nodes;                      // name -> [x, y] in grid units
     this.ground = spec.ground || Object.keys(spec.nodes)[0];
     this.parts = spec.parts.map((p, i) => ({ ...p, id: p.id || (p.type + '_' + i) }));
+    this.parts.forEach(p => { if (p.type === 'Q') { p.a = p.C; p.b = p.E; } });   // a transistor's collector path is its a → b (dots, picking, the meter's clamp)
     this.byId = {}; this.parts.forEach(p => { this.byId[p.id] = p; });
     this.mode = spec.mode || 'dc';                // 'dc' | 'ac' | 'tran'
     this.w = spec.w || 2 * Math.PI * 50;          // AC angular frequency (rad/s)
@@ -161,13 +210,19 @@ class Circuit {
      circuit is solved, the diode voltages are updated (limited on the exponential), until they stop moving. result.iters counts the solves */
   solve(dt) {
     if (this.mode === 'tran' && !(dt > 0)) dt = 1e-6;   // a board solves once without a step: look 1 µs ahead (capacitor voltages are only updated by step)
-    const ds = this.parts.filter(p => p.type === 'D'); if (!ds.length || this.mode === 'ac') return this.solve1(dt);
+    const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'); if ((!ds.length && !qs.length) || this.mode === 'ac') return this.solve1(dt);
     ds.forEach(p => { if (p.vd === undefined || !isFinite(p.vd)) p.vd = (p.model || 'shockley') === 'shockley' || p.model === 'table' ? 0.6 : 0; });
+    qs.forEach(p => { if (!isFinite(p.vbe)) p.vbe = BJT.v0(p); if (!isFinite(p.vce)) p.vce = 0; });
+    const moved = (a, b) => Math.abs(a - b) > 1e-9 + 1e-7 * Math.abs(a);
     let r = null, it = 0, damp = false;
     for (; it < 400; it++) { r = this.solve1(dt); if (r.error === 'singular') return r; let done = true;
       if (it === 60) damp = true;   // the straight-line models can flip between two segments: from here, smaller steps
       ds.forEach(p => { const v = r.V[p.a].re - r.V[p.b].re; let vn = DIODE.lim(p, v, p.vd); if (damp && ['ideal', 'simple', 'pwl'].includes(p.model)) vn = p.vd + Math.max(-0.5, Math.min(0.5, vn - p.vd));
-        if (Math.abs(vn - p.vd) > 1e-9 + 1e-7 * Math.abs(vn)) done = false; p.vd = vn; });
+        if (moved(vn, p.vd)) done = false; p.vd = vn; });
+      qs.forEach(p => { const s = p.pnp ? -1 : 1, vb = s * (r.V[p.B].re - r.V[p.E].re), vc = s * (r.V[p.C].re - r.V[p.E].re);
+        let nb = DIODE.lim(BJT.beOf(p), vb, p.vbe), nc = vc;
+        if (damp) { nb = p.vbe + Math.max(-0.5, Math.min(0.5, nb - p.vbe)); nc = p.vce + Math.max(-1, Math.min(1, nc - p.vce)); }
+        if (moved(nb, p.vbe) || moved(nc, p.vce)) done = false; p.vbe = nb; p.vce = nc; });
       if (done) break; }
     r.iters = it + 1;
     /* a straight-line diode left "on" with (almost) no current sits on its boundary: restart it once from "off", so that with no current
@@ -183,7 +238,7 @@ class Circuit {
     const parent = {}; names.forEach(n => { parent[n] = n; });
     const find = n => { while (parent[n] !== n) { parent[n] = parent[parent[n]]; n = parent[n]; } return n; };
     const shorts = [], others = [];
-    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent)) throw new Error('unknown node in ' + p.id);
+    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent) || (p.type === 'Q' && !(p.B in parent))) throw new Error('unknown node in ' + p.id);
       if (this.isShort(p)) { shorts.push(p); const ra = find(p.a), rb = find(p.b); if (ra !== rb) parent[ra] = rb; } else others.push(p); }
     const gRoot = find(this.ground); const netOf = {}; let nNet = 0; const netIdx = { [gRoot]: -1 };
     for (const n of names) { const r = find(n); if (!(r in netIdx)) netIdx[r] = nNet++; netOf[n] = netIdx[r]; }
@@ -204,6 +259,8 @@ class Circuit {
       if (na >= 0 && nb >= 0) { Ar[na][nb] -= yr; Ai[na][nb] -= yi; Ar[nb][na] -= yr; Ai[nb][na] -= yi; } };
     const stampI = (na, nb, ir, ii) => { // current ir+j ii flowing from net na through the element to net nb (leaves na, enters nb)
       if (na >= 0) { br[na] -= ir; bi[na] -= ii; } if (nb >= 0) { br[nb] += ir; bi[nb] += ii; } };
+    const stampG = (x, y, pp, qq, g) => { // a current g·(V_pp − V_qq) from net x through the element to net y (a transconductance; pp = x, qq = y: a conductance)
+      if (x >= 0) { if (pp >= 0) Ar[x][pp] += g; if (qq >= 0) Ar[x][qq] -= g; } if (y >= 0) { if (pp >= 0) Ar[y][pp] -= g; if (qq >= 0) Ar[y][qq] += g; } };
     const t = this.t + (mode === 'tran' ? dt : 0);
     const val = p => (typeof p.fn === 'function') ? p.fn(t) : p.value;
     let error = null;
@@ -229,6 +286,11 @@ class Circuit {
           break; }
         case 'Z': { if (mode === 'ac') { const y = Cx.inv(p.value); stampY(na, nb, y.re, y.im); } else stampY(na, nb, 1 / Math.max(p.value.re, 1e-9), 0); break; }
         case 'D': { const L = DIODE.iv(p, p.vd ?? 0); stampY(na, nb, L.g, 0); if (mode !== 'ac') stampI(na, nb, L.i - L.g * (p.vd ?? 0), 0); break; }   // slope + offset (Newton)
+        case 'Q': { // the base current B → E and the collector current C → E, each linearised in v_BE and v_CE (npn terms; s = −1 turns a pnp round)
+          const s = p.pnp ? -1 : 1, nC = netOf[p.C], nB = netOf[p.B], nE = netOf[p.E], vb0 = p.vbe ?? 0, vc0 = p.vce ?? 0, m = BJT.iv(p, vb0, vc0);
+          stampG(nB, nE, nB, nE, m.g11); stampG(nB, nE, nC, nE, m.g12); stampG(nC, nE, nB, nE, m.g21); stampG(nC, nE, nC, nE, m.g22);
+          if (mode !== 'ac') { stampI(nB, nE, s * (m.ib - m.g11 * vb0 - m.g12 * vc0), 0); stampI(nC, nE, s * (m.ic - m.g21 * vb0 - m.g22 * vc0), 0); }
+          break; }
       }
     });
     extra.forEach((p, k) => {
@@ -283,6 +345,10 @@ class Circuit {
         case 'L': I[p.id] = mode === 'ac' ? Cx.mul(vab, cx(0, -1 / (w * p.value))) : cx(p.il + dt / p.value * vab.re); break;
         case 'Z': I[p.id] = mode === 'ac' ? Cx.div(vab, p.value) : cx(vab.re / Math.max(p.value.re, 1e-9)); break;
         case 'D': { const L = DIODE.iv(p, p.vd ?? 0); I[p.id] = mode === 'ac' ? Cx.scale(vab, L.g) : cx(L.i + L.g * (vab.re - (p.vd ?? 0))); break; }
+        case 'Q': { const s = p.pnp ? -1 : 1, vb0 = p.vbe ?? 0, vc0 = p.vce ?? 0, m = BJT.iv(p, vb0, vc0), be = Cx.sub(V[p.B], V[p.E]), ce = vab;
+          if (mode === 'ac') { I[p.id] = Cx.add(Cx.scale(be, m.g21), Cx.scale(ce, m.g22)); I[p.id + ':b'] = Cx.add(Cx.scale(be, m.g11), Cx.scale(ce, m.g12)); break; }
+          const db = s * be.re - vb0, dc = s * ce.re - vc0;
+          I[p.id] = cx(s * (m.ic + m.g21 * db + m.g22 * dc)); I[p.id + ':b'] = cx(s * (m.ib + m.g11 * db + m.g12 * dc)); break; }
       }
     });
     extra.forEach((p, k) => { const x = cx(sol.re[nNet + k], sol.im[nNet + k]);
@@ -295,7 +361,7 @@ class Circuit {
     const addInj = (n, z) => { inj[n] = Cx.add(inj[n], z); };
     others.forEach(p => { const i = I[p.id]; if (!i) return;
       if (p.type === 'XF') { addInj(p.a, Cx.neg(i)); addInj(p.b, i); const i2 = I[p.id + ':2']; addInj(p.c, Cx.neg(i2)); addInj(p.d, i2); }
-      else { addInj(p.a, Cx.neg(i)); addInj(p.b, i); } });
+      else { addInj(p.a, Cx.neg(i)); addInj(p.b, i); if (p.type === 'Q') { const ib = I[p.id + ':b']; addInj(p.B, Cx.neg(ib)); addInj(p.E, ib); } } });
     // in our convention a current I through an element from a to b leaves node a. inj[n] = net current arriving at n from elements,
     // which the shorts must carry away from n.
     const groups = {}; shorts.forEach(p => { const r = find(p.a); (groups[r] = groups[r] || []).push(p); });
@@ -325,6 +391,11 @@ class Circuit {
   }
   /* readouts of the last result. In AC mode these are phasors {re, im}; in DC/tran use .re */
   V(n) { return this.result ? this.result.V[n] : cx(0); }
+  /* a transistor's state in npn terms (a pnp: I_B out of the base, V_EB, V_EC …, all positive when it conducts): region 'cutoff' (I_B below
+     0.1 µA), 'saturation' (v_CE below satAt, default vsat + 0.08 V where S < 0.98, or 0.3 V for a family read off a figure) or 'active' */
+  Q(id) { const p = this.byId[id], s = p.pnp ? -1 : 1, r = this.result, v = n => (r ? r.V[n].re : 0), i = k => (r && r.I[k] ? r.I[k].re : 0);
+    const IB = s * i(id + ':b'), IC = s * i(id), VBE = s * (v(p.B) - v(p.E)), VCE = s * (v(p.C) - v(p.E)), sat = p.satAt ?? (p.fam ? 0.3 : (p.vsat ?? 0) + 0.08);
+    return { IB, IC, IE: IB + IC, VBE, VCE, VCB: VCE - VBE, region: IB < 1e-7 ? 'cutoff' : VCE < sat ? 'saturation' : 'active' }; }
   Vab(id) { const p = this.byId[id]; return Cx.sub(this.V(p.a), this.V(p.b)); }
   I(id) { return (this.result && this.result.I[id]) || cx(0); }
   /* power absorbed by the part (DC/tran: instantaneous; AC: average, phasors are peak) */
@@ -470,11 +541,13 @@ class View {
     this.ox = box.x + (box.w - (x1 - x0) * s) / 2 - x0 * s; this.oy = box.y + (box.h - (y1 - y0) * s) / 2 - y0 * s;
     this.flows = {};
     this.ckt.parts.forEach(p => { const path = this.path(p); if (path) { const f = new Flow(path); this.flows[p.id] = f; }
-      if (p.type === 'XF') this.flows[p.id + ':2'] = new Flow([this.P(p.c), this.P(p.d)]); });
+      if (p.type === 'XF') this.flows[p.id + ':2'] = new Flow([this.P(p.c), this.P(p.d)]);
+      if (p.type === 'Q') this.flows[p.id + ':b'] = new Flow(this.qBasePath(p)); });
   }
   P(n) { const [x, y] = Array.isArray(n) ? n : this.ckt.nodes[n]; return [this.ox + x * this.u, this.oy + y * this.u]; }
   path(p) {
     if (p.type === 'XF') return [this.P(p.a), this.P(p.b)];
+    if (p.type === 'Q') { const g = this.qGeom(p); return [g.C, g.cT, g.at(-0.14, 0.31), g.at(0.14, 0.31), g.eT, g.E]; }   // collector current: in at the collector, across the base, out of the emitter
     const pts = [this.P(p.a)]; (p.pts || []).forEach(q => pts.push(this.P(q))); pts.push(this.P(p.b)); return pts;
   }
   ampScale() { return this.o.speed ?? 60; }
@@ -508,7 +581,7 @@ class View {
     // wires & element leads
     c.parts.forEach(p => { if (!p.hidden) this.drawPart(p, vcol); });
     // junction dots
-    const deg = {}; c.parts.forEach(p => { [p.a, p.b, p.c, p.d].forEach(n => { if (n) deg[n] = (deg[n] || 0) + 1; }); });
+    const deg = {}; c.parts.forEach(p => { [p.a, p.b, p.c, p.d, p.B].forEach(n => { if (n) deg[n] = (deg[n] || 0) + 1; }); });
     for (const n in c.nodes) { if ((deg[n] || 0) >= 3) { const [x, y] = this.P(n); ctx.beginPath(); ctx.arc(x, y, Math.max(3, u * 0.07), 0, 2 * Math.PI); ctx.fillStyle = vcol(n); ctx.fill(); } }
     // ground symbol
     if (this.o.ground !== false) this.drawGround(c.ground);
@@ -533,8 +606,9 @@ class View {
         this.flows[id].draw(ctx, { color: col, r: Math.max(2.4, u * 0.075), spacing: Math.max(14, u * 0.42), glow: true, alpha });
       }
     }
+    c.parts.forEach(p => { if (p.type === 'Q' && !p.hidden) this.qArrow(p); });
     // current labels
-    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
+    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S' || p.type === 'Q'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
     // the meter (voltage probes and a current clamp, opened with the button at the top right)
     this._drawT = performance.now(); this.drawMeter();
     // hover tooltip
@@ -565,6 +639,7 @@ class View {
       if (p.type === 'A') { const [x, y] = this.mid(pts); this.meterFace(x, y, 'A', CK.eng(this.ckt.mode === 'ac' ? Cx.abs(this.ckt.I(p.id)) * this.acK() : this.ckt.I(p.id).re, 'A'), hi); }
       return; }
     if (p.type === 'XF') { this.drawXF(p, vcol, hi); return; }
+    if (p.type === 'Q') { this.drawQ(p, vcol, hi); return; }
     const [ax, ay] = this.P(p.a), [bx, by] = this.P(p.b); const L = Math.hypot(bx - ax, by - ay); const ang = Math.atan2(by - ay, bx - ax);
     const body = Math.min(L * 0.7, u * (p.bodyLen || (p.type === 'R' ? 1.1 : p.type === 'L' ? 1.2 : 0.95)));
     const m1 = (L - body) / 2;
@@ -623,6 +698,37 @@ class View {
     if (vertical) this.text(txt, px + nx * 6, py, { align: nx >= 0 ? 'left' : 'right', color: col, size: sz, weight: '600' });
     else this.text(txt, px, py + ny * u * 0.28, { color: col, size: sz, weight: '600' });
   }
+  /* the transistor: C and E on one line (vertical or horizontal), the base off to one side, the symbol centred level with it; arrow on the emitter,
+     out of the symbol for an npn and into it for a pnp (Fig. 3.6); a faint circle round it as on the slides. at(t, s): t along C → E,
+     s towards the base (grid units) */
+  qGeom(p) { const u = this.u, C = this.P(p.C), E = this.P(p.E), B = this.P(p.B), L = Math.hypot(E[0] - C[0], E[1] - C[1]) || 1, ax = (E[0] - C[0]) / L, ay = (E[1] - C[1]) / L;
+    const k = (B[0] - C[0]) * ax + (B[1] - C[1]) * ay, m = [C[0] + ax * k, C[1] + ay * k]; let nx = B[0] - m[0], ny = B[1] - m[1], nl = Math.hypot(nx, ny);
+    if (nl < 1e-6) { nx = ay; ny = -ax; nl = 1; } nx /= nl; ny /= nl;
+    const at = (t, sd) => [m[0] + (ax * t + nx * sd) * u, m[1] + (ay * t + ny * sd) * u];
+    return { C, E, B, m, at, n: [nx, ny], cJ: at(-0.14, 0.36), eJ: at(0.14, 0.36), cT: at(-0.42, 0), eT: at(0.42, 0), bJ: at(0, 0.36), cc: at(0, 0.16), r: 0.52 * u }; }
+  /* the emitter arrow (drawn again over the dots, so that it stays visible) */
+  qArrow(p, col, g) { g = g || this.qGeom(p); const ctx = this.ctx, u = this.u, [ax, ay] = g.eJ, [bx, by] = g.eT, out = !p.pnp, f = out ? 0.9 : 0.34, tx = ax + (bx - ax) * f, ty = ay + (by - ay) * f;
+    const an = Math.atan2(by - ay, bx - ax) + (out ? 0 : Math.PI), hl = Math.max(9, u * 0.22);
+    ctx.save(); ctx.fillStyle = col || (this.hover === p || this.sel === p || p.highlight ? PAL.sel : (p.color || PAL.body)); ctx.strokeStyle = '#0f1220'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(tx, ty);
+    ctx.lineTo(tx - hl * Math.cos(an - 0.42), ty - hl * Math.sin(an - 0.42)); ctx.lineTo(tx - hl * Math.cos(an + 0.42), ty - hl * Math.sin(an + 0.42)); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); }
+  qBasePath(p) { const g = this.qGeom(p); return [g.B, g.bJ, g.at(0.14, 0.31), g.eT, g.E]; }
+  drawQ(p, vcol, hi) {
+    const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055), g = this.qGeom(p), col = hi ? PAL.sel : (p.color || PAL.body);
+    ctx.save(); ctx.fillStyle = 'rgba(90,209,255,.08)'; ctx.strokeStyle = hi ? PAL.sel : 'rgba(154,163,199,.6)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(g.cc[0], g.cc[1], g.r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); ctx.restore();
+    this.stroke([g.C, g.cT], hi ? PAL.sel : vcol(p.C), lw); this.stroke([g.eT, g.E], hi ? PAL.sel : vcol(p.E), lw); this.stroke([g.B, g.bJ], hi ? PAL.sel : vcol(p.B), lw);
+    this.stroke([g.cT, g.cJ], col, lw); this.stroke([g.eJ, g.eT], col, lw);
+    const b1 = g.at(-0.27, 0.36), b2 = g.at(0.27, 0.36); ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw * 2; ctx.beginPath(); ctx.moveTo(b1[0], b1[1]); ctx.lineTo(b2[0], b2[1]); ctx.stroke(); ctx.restore();
+    this.qArrow(p, col, g);
+    const sz = Math.max(11.5, u * 0.31), side = Math.abs(g.n[0]) > 0.7;   // side: the base comes in from the left or right
+    if (p.pins) { const ps = Math.max(10.5, u * 0.25), o = g.at(0, -0.2), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
+      const mid = (q, r) => [(q[0] + r[0]) / 2, (q[1] + r[1]) / 2], pc = mid(g.C, g.cT), pe = mid(g.E, g.eT), sh = [o[0] - g.m[0], o[1] - g.m[1]], pb = mid(g.B, g.bJ);
+      this.text('C', pc[0] + sh[0], pc[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al }); this.text('E', pe[0] + sh[0], pe[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al });
+      this.text('B', pb[0] + (side ? 0 : 0.2 * u), pb[1] - (side ? 0.22 * u : 0), { color: PAL.muted, size: ps, weight: '700', align: side ? 'center' : 'left' }); }
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : (p.fam ? '' : `β = ${p.beta ?? 100}`);
+      const [lx, ly] = g.at(0, -(0.36 + 0.34 + (side ? 0 : 0.16))), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
+      if (side) { this.text(name, lx, ly - (v ? sz * 0.62 : 0), { align: al, color: PAL.ink, size: sz, weight: '600' }); if (v) this.text(v, lx, ly + sz * 0.62, { align: al, color: PAL.muted, size: sz * 0.92 }); }
+      else this.text(v ? `${name}  ${v}` : name, lx, ly, { align: al, color: PAL.ink, size: sz, weight: '600' }); }
+  }
   drawXF(p, vcol, hi) {
     const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055); const A = this.P(p.a), B = this.P(p.b), Cc = this.P(p.c), D = this.P(p.d);
     const col = hi ? PAL.sel : PAL.body; const turns = (x, ya, yb, dir, nT) => { const y0 = Math.min(ya, yb), h = Math.abs(yb - ya) / nT; if (h < 0.5) return; ctx.beginPath(); ctx.moveTo(x, y0);
@@ -678,7 +784,7 @@ class View {
       jack: { red: [x + 26, y + h], clamp: [x + w / 2, y + h], black: [x + w - 26, y + h] } }; }
   mtSize() { const L = Math.max(26, Math.min(40, this.u * 0.7)), f = L / 40; return { L, N: 11 * f, w: 9 * f }; }
   mtClampR() { return Math.max(8, Math.min(12, this.u * 0.2)); }
-  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
+  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd', 'B'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
   mtParts() { return this.ckt.parts.filter(p => p.type !== 'VM' && p.type !== 'XF'); }   // the clamp goes round wires and elements
   /* after a rebuild: a probe on a node that is gone, or the clamp on a part that is gone, goes back to the meter; one that no longer sits
      where it was moves to its node, or to the middle of its part */
@@ -764,6 +870,8 @@ class View {
   drawTip(p) {
     if (p.type === 'W' && !this.o.wireTips) return; const c = this.ckt, ac = c.mode === 'ac';
     if (this.o.tip) { const L = this.o.tip(p, c); if (L && L.length) this.tipBox(L); return; }   // o.tip(part, circuit) → lines (first line = title)
+    if (p.type === 'Q') { const q = c.Q(p.id), e = p.pnp ? ['V_EB', 'V_EC'] : ['V_BE', 'V_CE'], reg = { cutoff: MCt('ย่านคัตออฟ', 'cutoff'), saturation: MCt('ย่านอิ่มตัว', 'saturation'), active: MCt('ย่านแอกทีฟ', 'active') }[q.region];
+      this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} (${p.pnp ? 'pnp' : 'npn'}) · ${reg}`, `I_B = ${CK.eng(q.IB, 'A')}, I_C = ${CK.eng(q.IC, 'A')}`, `I_E = ${CK.eng(q.IE, 'A')}`, `${e[0]} = ${CK.eng(q.VBE, 'V')}, ${e[1]} = ${CK.eng(q.VCE, 'V')}`]); return; }
     const v = c.Vab(p.id), i = c.I(p.id); const lines = [];
     const name = p.name ?? p.id.replace(/_\d+$/, '');
     lines.push(name + (p.type === 'S' ? (p.closed ? MCt('  (ปิดวงจร: คลิกเพื่อเปิด)', '  (closed: click to open)') : MCt('  (เปิดวงจร: คลิกเพื่อปิด)', '  (open: click to close)')) : ''));

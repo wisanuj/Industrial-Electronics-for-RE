@@ -102,7 +102,8 @@ const ui = {};
 ui.h2 = (parent, text) => { const h = document.createElement('h2'); h.textContent = text; parent.appendChild(h); return h; };
 ui.slider = (parent, spec) => {
   const d = document.createElement('div'); d.className = 'slider-block';
-  d.innerHTML = `<div class="row"><label for="${spec.id}">${spec.label}</label><span class="val" id="${spec.id}-val"></span></div>` +
+  const lab = subs(spec.label);   // "V_i", "V_{CC}": subscripts
+  d.innerHTML = `<div class="row"><label for="${spec.id}">${lab}</label><span class="val" id="${spec.id}-val"></span></div>` +
     `<input type="range" id="${spec.id}" min="${spec.min}" max="${spec.max}" step="${spec.step}" value="${spec.value}">`;
   parent.appendChild(d); const inp = d.querySelector('input'), val = d.querySelector('.val');
   const fmt = spec.fmt || (v => NUM.fmt(v, spec.dec ?? 2) + (spec.unit ? ' ' + spec.unit : ''));
@@ -113,7 +114,7 @@ ui.slider = (parent, spec) => {
 ui.buttons = (parent, list) => {
   const d = document.createElement('div'); d.className = 'toggles'; parent.appendChild(d); const out = {};
   list.forEach(b => { const el = document.createElement('button'); el.type = 'button'; el.className = 'btn' + (b.on ? ' on' : '') + (b.cls ? ' ' + b.cls : '');
-    if (b.id) el.id = b.id; el.textContent = b.label; if (b.title) el.title = b.title; el.addEventListener('click', () => b.onclick && b.onclick(el)); d.appendChild(el); if (b.id) out[b.id] = el; });
+    if (b.id) el.id = b.id; if (/_/.test(b.label)) el.innerHTML = subs(b.label); else el.textContent = b.label; if (b.title) el.title = b.title; el.addEventListener('click', () => b.onclick && b.onclick(el)); d.appendChild(el); if (b.id) out[b.id] = el; });
   return out;
 };
 ui.radio = (parent, list, onchange) => {
@@ -124,7 +125,9 @@ ui.status = (parent, id) => { const d = document.createElement('div'); d.classNa
 ui.setStatus = (el, pill, text, kind) => { el.innerHTML = `<span class="pill ${kind || ''}">${pill}</span> ${text}`; };
 ui.metrics = (parent, id) => { const d = document.createElement('div'); d.className = 'metrics'; if (id) d.id = id; parent.appendChild(d); return d; };
 ui.html = (parent, html, cls) => { const d = document.createElement('div'); if (cls) d.className = cls; d.innerHTML = html; parent.appendChild(d); return d; };
-ui.kv = rows => rows.map(([k, v]) => `<div class="kv"><span class="k">${k}</span><code>${v}</code></div>`).join('');
+const subs = s => String(s).replace(/_\{([^}]*)\}|_([A-Za-zα-ω0-9]+)/g, (m, a, b) => `<sub>${a ?? b}</sub>`);   // "V_L", "β_{dc}": subscripts
+ui.subs = subs;
+ui.kv = rows => rows.map(([k, v]) => `<div class="kv"><span class="k">${subs(k)}</span><code>${v}</code></div>`).join('');
 /* standard run/pause button label pair */
 ui.runLabel = running => running ? MC.t('หยุด', 'Pause') : MC.t('เล่นต่อ', 'Resume');
 MC.ui = ui;

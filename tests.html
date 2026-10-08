@@ -5,18 +5,18 @@
 <title data-en="Numeric Tests">ชุดทดสอบตัวเลข</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=2">
-<script src="assets/stops.js?v=2"></script><script src="assets/shell.js?v=2"></script>
-<script src="assets/circuit.js?v=2"></script><script src="assets/alg.js?v=2"></script><script src="assets/lesson.js?v=2"></script>
-<script src="assets/draw.js?v=2"></script><script src="assets/ch6.js?v=2"></script><script src="assets/ch8.js?v=2"></script><script src="assets/ie.js?v=2"></script><script src="assets/ie1.js?v=2"></script><script src="assets/ie2.js?v=2"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script>
+<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
 <div class="wrap">
 <header class="topbar" id="mc-top"></header>
-<h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine and its diodes against hand calculations and the textbook</span></h1>
-<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และตัวเลขของโจทย์ทุกข้อในบทที่ 1–2 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
-<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the numbers of every chapter 1 and 2 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
+<h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine, its diodes and transistors against hand calculations and the textbook</span></h1>
+<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และทรานซิสเตอร์ และตัวเลขของโจทย์ทุกข้อในบทที่ 1–3 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
+<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the transistor, and the numbers of every chapter 1–3 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
 <div id="sum" class="status"></div>
 <div style="overflow-x:auto"><table class="tbl" id="tbl"><thead><tr><th>#</th><th>test</th><th>got</th><th>expected</th><th></th></tr></thead><tbody></tbody></table></div>
 <div id="box8" style="position:absolute;left:-4000px;top:0;width:900px"></div>
@@ -138,6 +138,46 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
   const z6a = z(50, 1000, 250, 10), z6b = z(50, 1000, 1250, 10), z7a = z(1420 * 20 / 1200, 220, 1200, 20), z7b = z(0.07667 * 220 + 20, 220, 1200, 20);
   T('Part II Ex.6, Ex.7 (Examples 2.27, 2.28): I_Z = 0 at R_Lmin = 250 Ω and 32 mA = I_ZM at R_Lmax = 1.25 kΩ; I_Z = 0 at V_imin = 23.67 V and 60 mA = I_ZM at V_imax = 36.87 V',
     `${f(z6a[1], 2)} ${f(z6b[1], 2)} ${f(z7a[1], 2)} ${f(z7b[1], 1)}`, '0 32 0 60'); }
+
+/* --- chapter 3: the transistor part 'Q' (models, regions, convergence) and the numbers of every chapter 3 problem --- */
+{ const run = sp => { const c = new Circuit(sp); c.solve(); return c; }, q = c => CH3.q(c), BJT = CK.BJT, S = CH3.SIMPLE;
+  const fb = (RC, o = {}) => ({ ground: 'g', nodes: { vcc: [4, 0], c: [4, 1], b: [2, 2], e: [4, 3], g: [4, 4] }, parts: [{ id: 'VCC', type: 'V', a: o.pnp ? 'g' : 'vcc', b: o.pnp ? 'vcc' : 'g', value: 12 },
+    { id: 'RC', type: 'R', a: 'vcc', b: 'c', value: RC }, { id: 'RB', type: 'R', a: o.cut ? 'g' : 'vcc', b: 'b', value: 240e3 }, { id: 'Q', type: 'Q', C: 'c', B: 'b', E: 'e', beta: 50, pnp: !!o.pnp }, { type: 'W', a: 'e', b: 'g' }] });
+  const f1 = run(fb(2200)), q1 = q(f1), f2 = run(fb(10e3)), q2 = q(f2), f3 = run(fb(2200, { cut: true })), q3 = q(f3), f4 = run(fb(2200, { pnp: true })), q4 = q(f4);
+  T('BJT, 0.7 V model, β = 50, fixed bias (V_CC = 12 V, R_B = 240 kΩ, R_C = 2.2 kΩ; Boylestad Example 4.1): I_B = 47.08 µA, I_C = 2.354 mA, V_CE = 6.82 V, V_BE = 0.7 V, active; KCL I_E = I_B + I_C, I(R_C) = I_C (to the 1 pA of the solver\'s node leak)',
+    `${f(q1.uA, 2)} ${f(q1.ic, 3)} ${f(q1.VCE, 2)} ${f(q1.VBE, 3)} ${q1.region} ${Math.abs(q1.IE - q1.IB - q1.IC) < 1e-12} ${Math.abs(f1.I('RC').re - q1.IC) < 1e-10}`, '47.08 2.354 6.82 0.7 active true true');
+  T('BJT: R_C = 10 kΩ saturates (V_CE < 0.08 V, I_C ≅ V_CC/R_C = 1.2 mA), R_B to ground cuts it off (I_C = 0), the pnp mirror gives the same numbers with the collector at −6.82 V',
+    `${q2.region} ${q2.VCE < 0.08} ${f(q2.ic, 2)} | ${q3.region} ${f(q3.ic, 6)} | ${q4.region} ${f(q4.ic, 3)} ${f(q4.VCE, 2)} ${f(f4.V('c').re, 2)}`, 'saturation true 1.2 | cutoff 0 | active 2.354 6.82 -6.82');
+  let worst = 0, failN = 0, kcl = 0;
+  for (let vbb = 0; vbb <= 10.7; vbb += 0.7) for (let vcc = 0; vcc <= 20; vcc += 2.5) { const c = run(CH3.ce({ VBB: vbb, RB: 100e3, VCC: vcc, RC: 2000 })), z = q(c); worst = Math.max(worst, c.result.iters); if (c.result.iters >= 400) failN++;
+    kcl = Math.max(kcl, Math.abs(z.IE - (vcc - z.VCE) / 2000 - (vbb - z.VBE) / 100e3)); }
+  for (const pnp of [false, true]) for (let vee = 0; vee <= 8; vee += 1) for (let vcc = -2; vcc <= 30; vcc += 4) { const c = run(CH3.cb({ VEE: vee, RE: 1000, VCC: vcc, RC: 3300, pnp })); worst = Math.max(worst, c.result.iters); if (c.result.iters >= 400) failN++; }
+  T('BJT convergence: the common-emitter circuit of page 3.3 (Fig. 3.13 curves) over V_BB 0–10.7 V × V_CC 0–20 V and the common-base circuit of page 3.2 (Fig. 3.7, α = 0.995, npn and pnp, into saturation) solve in at most 15 Newton steps; KCL holds to 1e-9 A',
+    `${failN} ${worst <= 15} ${kcl < 1e-9}`, '0 true true');
+  const a = q(run(CH3.E32.a)), b = q(run(CH3.E32.b)), I16 = CH3.IC16;
+  T('Example 3.2 on the curves read off Fig. 3.13: (a) I_B = 30 µA, V_CE = 10 V → I_C = 3.41 mA (book 3.4) · (b) V_BE = 0.7 V, V_CE = 15 V → I_B = 20.0 µA → I_C = 2.50 mA (book 20 µA, 2.5 mA)',
+    `${f(a.ic, 2)} | ${f(b.uA, 1)} ${f(b.ic, 2)}`, '3.41 | 20 2.5');
+  T('Fig. 3.16 at V_CE = 7.5 V: I_C = 2.20, 2.70, 3.20 mA for 20, 25, 30 µA (book 2.2, 2.7, 3.2): β_ac = 100, β_dc = 108',
+    `${f(I16[20], 2)} ${f(I16[25], 2)} ${f(I16[30], 2)} ${f((I16[30] - I16[20]) / 0.01, 0)} ${f(I16[25] / 0.025, 0)}`, '2.2 2.7 3.2 100 108');
+  const e = CH3.E31, ea = q(run(e.a)), eb = q(run(e.b)), ec = q(run(e.c)), ed = q(run(e.d));
+  T('Example 3.1 (common base, α = 0.995, Fig. 3.7): (a) I_E = 3 mA, V_CB = 10 V → I_C = 2.985 mA ≅ 3 mA (b) V_CB = 2 V → still 2.985 mA (c) I_C = 4 mA, V_CB = 20 V → V_BE = 0.733 V (book "about 0.74 V") (d) the 0.7 V model → 0.7 V',
+    `${f(ea.ic, 3)} ${f(eb.ic, 3)} | ${f(ec.ic, 3)} ${f(ec.VBE, 3)} | ${f(ed.VBE, 3)}`, '2.985 2.985 | 4 0.733 | 0.7');
+  const D = CH3.DEF, p15a = q(run(D.alpha.spec(1))), p15b = q(run(D.alpha.spec(2))), p9 = q(run(D.p9.spec())), amp = run(D.amp.spec());
+  T('Problem 15: (a) α = 0.998, I_E = 4 mA → I_C = 3.992 mA (b) I_E = 2.8 mA, I_C = 2.75 mA, I_CBO = 0.1 µA → α = (I_C − I_CBO)/I_E = 0.9821 · Problem 9: I_E = 8 mA, I_B = I_C/100 → I_C = 7.921 mA, I_B = 79.21 µA',
+    `${f(p15a.ic, 3)} | ${f(p15b.ic, 4)} ${f((p15b.ic - 1e-4) / p15b.ie, 4)} | ${f(p9.ic, 3)} ${f(p9.uA, 2)}`, '3.992 | 2.75 0.9821 | 7.921 79.21');
+  T('Amplifying action (an earlier edition): V_i = 200 mV, R_i = 20 Ω, α = 1, R = 5 kΩ → I_i = I_L = 10 mA, V_L = 50 V, A_v = 250',
+    `${f(amp.I('Ri').re * 1e3, 3)} ${f(amp.I('RL').re * 1e3, 3)} ${f(amp.Vab('RL').re, 3)} ${f(amp.Vab('RL').re / 0.2, 1)}`, '10 10 50 250');
+  const ab = q(run(D.ab.spec(3))), ce0 = q(run(D.ab.spec(4)));
+  T('Problem 24 (c): β = 120, I_C = 2 mA → I_B = 16.67 µA, I_E = 2.0167 mA · I_CEO with α = 0.996, I_CBO = 1 µA, base open: I_C = 250 I_CBO = 0.25 mA',
+    `${f(ab.ic, 3)} ${f(ab.uA, 2)} ${f(ab.ie, 4)} | ${f(ce0.ic, 3)} ${ce0.region}`, '2 16.67 2.0167 | 0.25 cutoff');
+  const pw = d => [1, 2, 3].map(k => { const z = q(run(d.spec(k))); return f(z.VCE * z.ic, 1); }).join(' ');
+  T('Limits (Fig. 3.22): the transistor placed at (6 V, 50 mA), (20 V, 15 mA), (12 V, 25 mA) dissipates 300 mW · Problem 28 (Fig. 3.13): (5.83 V, 6 mA), (15 V, 2.33 mA), (11.67 V, 3 mA) dissipate 35 mW',
+    `${pw(D.pc)} | ${pw(D.p28)}`, '300 300 300 | 35 35 35');
+  const cy = CH3.cy26(), av = (cy.max('vo') - cy.min('vo')) / (cy.max('vi') - cy.min('vi')), ie = (cy.max('ie') - cy.min('ie')) / 2 / Math.SQRT2;
+  T('Problem 26 (emitter follower, one cycle through the solver): v_i = 4 V + 2 V rms, R_E = 1 kΩ, 0.1 V rms across the junction → A_v = 0.95, I_e = 1.9 mA rms, the transistor on throughout',
+    `${f(av, 3)} ${f(ie, 2)} ${cy.min('ie') > 0.3}`, '0.95 1.9 true');
+  T('BJT helpers: BJT.cb (Fig. 3.8 curve) at I_E = 3 mA, V_CB = 10 V gives the circuit\'s 2.985 mA; BJT.icAt on Fig. 3.13 at 30 µA, 10 V gives 3.406 mA; BJT.vbeAt gives 0.700 V at 20 µA and 15 V',
+    `${f(BJT.cb(CH3.QCB, 3e-3, 10).IC * 1e3, 3)} ${f(BJT.icAt(CH3.Q313, 30e-6, 10) * 1e3, 3)} ${f(BJT.vbeAt(CH3.Q313, 20e-6, 15), 3)}`, '2.985 3.406 0.7'); }
 
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');

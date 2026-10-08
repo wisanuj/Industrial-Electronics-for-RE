@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="3.4 — Common Collector and Limits of Operation">3.4 — วงจรคอลเล็กเตอร์ร่วมและขีดจำกัดการทำงาน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรคอลเล็กเตอร์ร่วมและขีดจำกัดการทำงาน <span class="en">Common collector and the limits of operation</span></h1>
+<h1 data-l="en">Common collector and the limits of operation <span class="en">The emitter follower, \(I_{C\max}\), \(BV_{CEO}\) and \(P_{C\max}\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 3 หน้า 17–19 วงจรคอลเล็กเตอร์ร่วม (common-collector) มีความต้านทานด้านเข้าสูงและด้านออกต่ำ จึงใช้จับคู่อิมพีแดนซ์ ส่วนขีดจำกัดการทำงานกำหนดย่านบนลักษณะสมบัติที่ทรานซิสเตอร์ทำงานได้โดยไม่เกินพิกัดและสัญญาณผิดเพี้ยนน้อยที่สุด หน้านี้มีภาพจำลองวงจรอิมิตเตอร์ร่วมบนลักษณะสมบัติของรูป 3.22 พร้อมขีดจำกัดทั้งหมด (ส่วน A) การร่างเส้นกำลังสูงสุด ย่านทำงานของทรานซิสเตอร์ในรูป 3.13 ตัวตามแรงดันที่อิมิตเตอร์ และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 3 slides pp. 17–19. The common-collector configuration has a high input and a low output impedance, so it is used for impedance matching. The limits of operation mark the region of the characteristics where a transistor works without exceeding its ratings and with the least distortion. This page has a common-emitter circuit on the characteristics of Fig. 3.22 with all the limits drawn (section A), sketching the maximum-power curve, the region of operation of the transistor of Fig. 3.13, the emitter follower, and more practice.</p>
+<div class="equation-box eqwrap">$$ P_{C\max} = V_{CE}I_C $$ $$ I_{CEO} \le I_C \le I_{C\max} $$ $$ V_{CE\text{sat}} \le V_{CE} \le V_{CE\max} $$ $$ V_{CE}I_C \le P_{C\max} $$ $$ A_v = \frac{V_o}{V_i} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>คอลเล็กเตอร์ร่วม</b>: โหลดต่อที่อิมิตเตอร์ คอลเล็กเตอร์เป็นขาร่วม (ต่อกราวด์ทางไฟสลับ) ความต้านทานด้านเข้าสูงและด้านออกต่ำ ตรงข้ามกับเบสร่วมและอิมิตเตอร์ร่วม ใช้จับคู่อิมพีแดนซ์ (impedance matching) (สไลด์หน้า 17) ออกแบบได้ด้วยลักษณะสมบัติของวงจรอิมิตเตอร์ร่วม เพราะ \(I_E \cong I_C\)</li>
+  <li><b>ขีดจำกัดที่อ่านตรง ๆ</b>: กระแสคอลเล็กเตอร์สูงสุด \(I_{C\max}\) และแรงดันคอลเล็กเตอร์–อิมิตเตอร์สูงสุด \(BV_{CEO}\) (หรือ \(V_{(BR)CEO}\)) รูป 3.22 คือ 50 mA และ 20 V (สไลด์หน้า 18)</li>
+  <li><b>ย่านอิ่มตัวและคัตออฟ</b>: \(V_{CE}\) ต้องไม่ต่ำกว่า \(V_{CE\text{sat}}\) (ราว 0.3 V) และ \(I_C\) ต้องไม่ต่ำกว่า \(I_{CEO}\) จึงจะขยายสัญญาณโดยผิดเพี้ยนน้อย</li>
+  <li><b>เส้นกำลังสูงสุด</b>: \(V_{CE}I_C = P_{C\max}\) เป็นไฮเพอร์โบลา ร่างได้จากสามจุด: ที่ \(I_{C\max}\), ที่ \(V_{CE\max}\) และที่ \(\tfrac12 I_{C\max}\) (สไลด์หน้า 19, สมการ 3.17)</li>
+  <li><b>ถ้าไม่มีเส้นลักษณะสมบัติ</b> ให้ตรวจสามเงื่อนไขของสมการ 3.18 ซึ่งดูได้จากข้อมูลจำเพาะ (specification sheet) ของทรานซิสเตอร์ (สไลด์หน้า 19)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Common collector</b>: the load is at the emitter and the collector is common (at ac ground). Its input impedance is high and its output impedance low, the opposite of common base and common emitter, so it is used for impedance matching (slide p. 17). It is designed with the common-emitter characteristics, since \(I_E \cong I_C\).</li>
+  <li><b>Limits read directly</b>: the maximum collector current \(I_{C\max}\) and the maximum collector–emitter voltage \(BV_{CEO}\) (or \(V_{(BR)CEO}\)); for Fig. 3.22, 50 mA and 20 V (slide p. 18).</li>
+  <li><b>Saturation and cutoff</b>: \(V_{CE}\) must not fall below \(V_{CE\text{sat}}\) (about 0.3 V) and \(I_C\) not below \(I_{CEO}\), for amplification with little distortion.</li>
+  <li><b>The maximum-power curve</b> \(V_{CE}I_C = P_{C\max}\) is a hyperbola, sketched from three points: at \(I_{C\max}\), at \(V_{CE\max}\) and at \(\tfrac12 I_{C\max}\) (slide p. 19, Eq. 3.17).</li>
+  <li><b>With no characteristics at hand</b>, check the three conditions of Eq. 3.18, which a transistor's specification sheet provides (slide p. 19).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch3/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 18, Limits of Operation: a region has been defined for the transistor characteristics of the figure; all of the limits of operation are defined on a typical transistor specification sheet. Some of the limits of operation are self-explanatory, such as maximum collector current and maximum collector-to-emitter voltage. For the transistor of the figure, I_Cmax was specified as 50 mA and V_CEO as 20 V. Figure 3.22: I_C 0 to 60 mA against V_CE 0 to 20 V for I_B = 0 to 70 µA, the dashed I_Cmax line at 50 mA, the dashed P_Cmax curve V_CE I_C = 300 mW with the shaded region beyond it, V_CEsat = 0.3 V, the cutoff region, I_CEO and V_CEmax.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 18: ย่านทำงานของรูป 3.22 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 18: the region of operation of Fig. 3.22 · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 19 ไม่มีสมการ</b> มีเพียงข้อความนำของ \(P_{C\max} = V_{CE}I_C\) และสามเงื่อนไขของย่านทำงาน (สมการ 3.17–3.18 ของตำรา) หน้านี้เขียนไว้ในกรอบด้านบนและในข้อ 1 · สไลด์หน้า 18 เขียนแรงดันสูงสุดว่า \(V_{CEO}\) ตำราเขียน \(BV_{CEO}\) (ค่าเดียวกัน)</div>
+<div class="warnbox" data-l="en"><b>Slide p. 19 has no equations</b>, only the sentences leading to \(P_{C\max} = V_{CE}I_C\) and the three conditions of the region of operation (Eqs. 3.17–3.18 of the book); this page writes them in the box above and in problem 1. Slide p. 18 writes the maximum voltage as \(V_{CEO}\); the book writes \(BV_{CEO}\) (the same limit).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ย่านทำงาน</a><a href="#ex1"><b>1</b>เส้นกำลังสูงสุด</a><a href="#ex2"><b>2</b>ข้อ 28</a><a href="#ex3"><b>3</b>ตัวตามแรงดัน</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The region of operation</a><a href="#ex1"><b>1</b>The power curve</a><a href="#ex2"><b>2</b>Problem 28</a><a href="#ex3"><b>3</b>The emitter follower</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">จุดทำงานกับขีดจำกัดของรูป 3.22</h2><h2 data-l="en">An operating point against the limits of Fig. 3.22</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18–19 · Boylestad หัวข้อ 3.7 (รูป 3.22)</div><div class="src" data-l="en">Slides pp. 18–19 · Boylestad, section 3.7 (Fig. 3.22)</div></div></div>
+  <p class="lead" data-l="th">วงจรอิมิตเตอร์ร่วมแบบหน้า 3.3 แต่ทรานซิสเตอร์คือเส้นที่อ่านจากรูป 3.22 (\(I_B\) = 0–70 µA, \(R_B\) = 100 kΩ) แผงข้างภาพวาดขีดจำกัดทั้งหมด: \(I_{C\max}\) = 50 mA, \(BV_{CEO}\) = 20 V, เส้นประ \(V_{CE}I_C\) = 300 mW, \(V_{CE\text{sat}}\) = 0.3 V และ \(I_{CEO}\) ราว 1 mA บริเวณสีแดงจางคือส่วนที่เกินพิกัด ปรับ \(V_{BB}\), \(V_{CC}\) และ \(R_C\) แล้วดูว่าจุด Q ออกนอกย่านเมื่อใด (เส้นที่โค้งขึ้นใกล้ 20 V คือย่านพังทลาย ตามที่ตำราวาด)</p>
+  <p class="lead" data-l="en">The common-emitter circuit of page 3.3, but the transistor is the set of curves read off Fig. 3.22 (\(I_B\) = 0–70 µA, \(R_B\) = 100 kΩ). The side panel draws every limit: \(I_{C\max}\) = 50 mA, \(BV_{CEO}\) = 20 V, the dashed curve \(V_{CE}I_C\) = 300 mW, \(V_{CE\text{sat}}\) = 0.3 V and \(I_{CEO}\) about 1 mA; the faint red area lies beyond the ratings. Change \(V_{BB}\), \(V_{CC}\) and \(R_C\) and see when Q leaves the region (the upturn of the curves near 20 V is the breakdown region, as the book draws it).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">ร่างเส้นกำลังสูงสุด</h2><h2 data-l="en">Sketching the maximum-power curve</h2>
+    <div class="src" data-l="th">สไลด์หน้า 19 · Boylestad หัวข้อ 3.7 (สมการ 3.17–3.18, รูป 3.22)</div><div class="src" data-l="en">Slide p. 19 · Boylestad, section 3.7 (Eqs. 3.17–3.18, Fig. 3.22)</div></div></div>
+  <figure class="slide q"><img src="slides/ch3/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 19, Limits of Operation: the maximum dissipation level is defined by the following equation (missing). One must simply be sure that I_C, V_CE, and their product V_CE I_C fall into the range appearing in the following equation (missing). Figure 3.22 again: the characteristics with I_Cmax = 50 mA, the P_Cmax curve V_CE I_C = 300 mW through its marked points, V_CEsat = 0.3 V, I_CEO and V_CEmax = 20 V.">
+    <figcaption data-l="th">สไลด์หน้า 19: กำลังสูงสุดและย่านทำงาน (สมการหายไป) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the maximum power and the region (equations missing) · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทรานซิสเตอร์ของรูป 3.22 มีกำลังสูญเสียที่คอลเล็กเตอร์สูงสุด \(P_{C\max}\) = 300 mW, \(I_{C\max}\) = 50 mA และ \(BV_{CEO}\) = 20 V จงหาจุดบนเส้นกำลังสูงสุดที่ \(I_C = I_{C\max}\), ที่ \(V_{CE} = BV_{CEO}\) และที่ \(I_C = \tfrac12 I_{C\max}\) แล้วเขียนย่านทำงานเชิงเส้น</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The transistor of Fig. 3.22 has a maximum collector dissipation \(P_{C\max}\) = 300 mW, \(I_{C\max}\) = 50 mA and \(BV_{CEO}\) = 20 V. Find the points of the maximum-power curve at \(I_C = I_{C\max}\), at \(V_{CE} = BV_{CEO}\) and at \(I_C = \tfrac12 I_{C\max}\), then write the linear region of operation.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองวางทรานซิสเตอร์ของรูป 3.22 ไว้ที่แต่ละจุด (ป้อน \(I_B\) ที่ให้ \(I_C\) นั้นพอดี และตั้ง \(V_{CE}\) ด้วยแหล่งจ่ายแรงดัน) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation puts the transistor of Fig. 3.22 at each point (fed the \(I_B\) that gives that \(I_C\), with \(V_{CE}\) set by a voltage source). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ย่านทำงานของทรานซิสเตอร์ในรูป 3.13</h2><h2 data-l="en">The region of operation of the transistor of Fig. 3.13</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 28 ท้ายบทที่ 3</div><div class="src" data-l="en">Boylestad, chapter 3, end-of-chapter problem 28</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาย่านทำงานของทรานซิสเตอร์ที่มีลักษณะสมบัติตามรูป 3.13 ถ้า \(I_{C\max}\) = 6 mA, \(BV_{CEO}\) = 15 V และ \(P_{C\max}\) = 35 mW</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Determine the region of operation for a transistor having the characteristics of Fig. 3.13 if \(I_{C\max}\) = 6 mA, \(BV_{CEO}\) = 15 V and \(P_{C\max}\) = 35 mW.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองวางทรานซิสเตอร์ของรูป 3.13 (หน้า 3.3) ไว้ที่จุดบนเส้นกำลังสูงสุดทีละจุด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation puts the transistor of Fig. 3.13 (page 3.3) at the points of the power curve one at a time. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">The emitter follower</h2>
+    <div class="src" data-l="th">สไลด์หน้า 17 · Boylestad หัวข้อ 3.6 (รูป 3.20–3.21) และข้อ 26 ท้ายบท</div><div class="src" data-l="en">Slide p. 17 · Boylestad, section 3.6 (Figs. 3.20–3.21) and end-of-chapter problem 26</div></div></div>
+  <figure class="slide q"><img src="slides/ch3/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 17, Common-Collector Configuration: the common-collector configuration is used primarily for impedance-matching purposes since it has a high input impedance and low output impedance, opposite to that of the common-base and common-emitter configurations. Figures: a pnp symbol with I_E out of the emitter at the top, I_B out of the base and I_C into the collector at the bottom, beside its p-n-p block with a large arrow down; and an npn symbol with the currents the other way, beside its n-p-n block with a large arrow up.">
+    <figcaption data-l="th">สไลด์หน้า 17: วงจรคอลเล็กเตอร์ร่วม · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 17: the common-collector configuration · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ป้อนแรงดัน 2 V rms (วัดจากเบสเทียบกราวด์) ให้วงจรคอลเล็กเตอร์ร่วมในรูป 3.21 สมมติว่าแรงดันอิมิตเตอร์ตามแรงดันเบส และ \(V_{be}\) (rms) = 0.1 V จงหาอัตราขยายแรงดัน \(A_v = V_o/V_i\) และกระแสอิมิตเตอร์เมื่อ \(R_E\) = 1 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An input voltage of 2 V rms (measured from base to ground) is applied to the common-collector circuit of Fig. 3.21. Assuming that the emitter voltage follows the base voltage and that \(V_{be}\) (rms) = 0.1 V, calculate the voltage amplification \(A_v = V_o/V_i\) and the emitter current for \(R_E\) = 1 kΩ.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเป็นวงจรคอลเล็กเตอร์ร่วม npn: คอลเล็กเตอร์ต่อ \(V_{CC}\) = 12 V (กราวด์ทางไฟสลับ) เบสรับ \(v_i\) = 4 V ไฟตรง + 2 V rms และ \(R_E\) = 1 kΩ เป็นโหลดที่อิมิตเตอร์ กราฟล่างคือ \(v_i\) และ \(v_o\) ตามเวลา (จุดวิ่งช้าลง) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is an npn common-collector stage: the collector on \(V_{CC}\) = 12 V (ac ground), the base driven by \(v_i\) = 4 V dc + 2 V rms, and \(R_E\) = 1 kΩ as the load at the emitter. Below, \(v_i\) and \(v_o\) against time (the dots run in slowed-down time). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ข้อ 3 และ 5 ใช้ข้อมูลจำเพาะของ 2N4123 (Boylestad รูป 3.23) ข้อ 4 คือข้อ 29 ท้ายบท</div><div class="src" data-l="en">Questions 3 and 5 use the 2N4123 data sheet (Boylestad Fig. 3.23); question 4 is end-of-chapter problem 29</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ออกนอกย่าน</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{CC}\) = 20 V, \(R_C\) = 330 Ω แล้วเพิ่ม \(V_{BB}\): จุด Q ไต่ขึ้นตามเส้นโหลด กำลัง \(V_{CE}I_C\) สูงสุดที่กลางเส้นโหลด (\(V_{CE} = V_{CC}/2\)) ซึ่งเกิน 300 mW</li>
+    <li>เลือก \(R_C\) = 470 Ω: เส้นโหลดชันน้อยลง จุดกลางได้กำลัง \(V_{CC}^2/4R_C\) = 213 mW เส้นโหลดทั้งเส้นอยู่ใต้เส้นกำลังสูงสุด</li>
+    <li>ตั้ง \(V_{CC}\) เกิน 20 V แล้วลด \(V_{BB}\) ลง: \(V_{CE}\) เข้าใกล้ \(V_{CC}\) และเกิน \(BV_{CEO}\) เส้นโค้งขึ้น (ย่านพังทลาย)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ตัวตามแรงดัน</h3>
+    <ol><li>ข้อ 3: \(v_o\) มีรูปเหมือน \(v_i\) ทุกประการ เลื่อนลงมาเท่ากับแรงดันไฟตรงคร่อมรอยต่อ และเล็กกว่าเล็กน้อย</li>
+    <li>ถ้ารอยต่อเบส–อิมิตเตอร์คงที่ 0.7 V พอดี (แบบจำลองของหน้า 3.2) ส่วนไฟสลับคร่อมรอยต่อจะเป็นศูนย์ และ \(A_v\) = 1 พอดี ค่า 0.1 V rms ในโจทย์คือแรงดันไฟสลับที่สมมติให้รอยต่อ</li></ol>
+    <div class="book">สไลด์บทที่ 3 หน้า 17–19 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 3.6–3.8 (รูป 3.20–3.23, สมการ 3.17–3.19, ข้อ 26, 28, 29 ท้ายบท)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — leaving the region</h3>
+    <ol><li>In section A set \(V_{CC}\) = 20 V and \(R_C\) = 330 Ω, then raise \(V_{BB}\): Q climbs the load line, and the power \(V_{CE}I_C\) peaks at the middle of the load line (\(V_{CE} = V_{CC}/2\)), beyond 300 mW.</li>
+    <li>Pick \(R_C\) = 470 Ω: the load line is less steep and its middle gives \(V_{CC}^2/4R_C\) = 213 mW; the whole load line stays under the power curve.</li>
+    <li>Set \(V_{CC}\) above 20 V and lower \(V_{BB}\): \(V_{CE}\) approaches \(V_{CC}\) and passes \(BV_{CEO}\), where the curves turn up (breakdown).</li></ol></div>
+  <div class="card"><h3>Try this 2 — the emitter follower</h3>
+    <ol><li>Problem 3: \(v_o\) has exactly the shape of \(v_i\), shifted down by the dc voltage across the junction and a little smaller.</li>
+    <li>If the base–emitter junction held exactly 0.7 V (the model of page 3.2), the ac voltage across it would be zero and \(A_v\) exactly 1; the 0.1 V rms of the problem is the ac voltage assumed across the junction.</li></ol>
+    <div class="book">Chapter 3 slides pp. 17–19 · Boylestad &amp; Nashelsky, 11th ed., sections 3.6–3.8 (Figs. 3.20–3.23, Eqs. 3.17–3.19, end-of-chapter problems 26, 28, 29)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH3.problem(1, 'pc'); CH3.problem(2, 'p28'); CH3.problem(3, 'cc');
+
+  /* =================================================================== A: an operating point against the limits of Fig. 3.22 */
+  const L = CH3.LIM322, SA = { VBB: 3.5, VCC: 20, RC: 470, RB: 100e3 };
+  const viol = q => { const P = q.VCE * q.ic, out = [];
+    if (q.ic > L.icmax) out.push(['I_C > I_Cmax', 'I_C > I_Cmax']); if (q.VCE > L.bv) out.push(['V_CE > BV_CEO', 'V_CE > BV_CEO']); if (P > L.pc) out.push([`P = ${fd(P, 0)} mW > 300 mW`, `P = ${fd(P, 0)} mW > 300 mW`]);
+    if (q.VCE < L.vsat) out.push(['อิ่มตัว: V_CE < V_CEsat', 'saturated: V_CE < V_CEsat']); if (q.ic < L.iceo * 1.05) out.push(['คัตออฟ: I_C ≈ I_CEO', 'cutoff: I_C ≈ I_CEO']); return out; };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.52, rowAsp: 0.72, rowMin: 280, pad: 1.2, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, minV: 7, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const q = CH3.q(c);
+      CH3.limPlot(ctx, b, bd, { lim: L, load: { vcc: SA.VCC, rc: SA.RC }, q: { v: q.VCE, i: q.ic, ib: q.IB, label: 'Q', side: q.VCE > 13 ? -1 : 1 }, title: t('รูป 3.22 กับขีดจำกัด', 'Fig. 3.22 with its limits') }); },
+    badge: () => { const q = CH3.q(BA.ckt), v = viol(q); return v.length ? [[v.map(x => x[0]).join(' · '), v.map(x => x[1]).join(' · ')], 'wait'] : [[`ในย่านทำงาน: P = ${fd(q.VCE * q.ic, 0)} mW`, `inside the region: P = ${fd(q.VCE * q.ic, 0)} mW`], 'ok']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('แหล่งจ่ายและตัวต้านทาน', 'Supplies and resistors'));
+  ui.slider(pA, { id: 'aVBB', label: 'V_{BB}', min: 0, max: 8, step: 0.1, value: SA.VBB, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VBB = v; buildA(); } });
+  ui.slider(pA, { id: 'aVCC', label: 'V_{CC}', min: 0, max: 26, step: 0.5, value: SA.VCC, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VCC = v; buildA(); } });
+  ui.radio(pA, [220, 330, 470].map(r => ({ id: 'aRC' + r, label: 'R_C = ' + CK.eng(r, 'Ω'), on: r === SA.RC })), id => { SA.RC = +id.slice(3); buildA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH3.ce({ VBB: SA.VBB, RB: SA.RB, VCC: SA.VCC, RC: SA.RC, q: CH3.Q322 }), { speed: 80 / 0.03, dotRef: 0.03 }); showA(); }
+  function showA() { const q = CH3.q(BA.ckt), v = viol(q), P = q.VCE * q.ic;
+    mA.innerHTML = ui.kv([['I_B', `${fd(q.uA, 1)} µA`], ['I_C', `${fd(q.ic, 2)} mA`], ['V_CE', `${fd(q.VCE, 2)} V`], ['P = V_CE I_C', `${fd(P, 0)} mW`], [t('สถานะ', 'status'), v.length ? t('นอกย่าน', 'outside') : t('ในย่าน', 'inside')]]);
+    $('wA').innerHTML = `<div class="answer">${v.length ? t(`จุด Q (${fd(q.VCE, 2)} V, ${fd(q.ic, 1)} mA) อยู่นอกย่านทำงาน: ${v.map(x => x[0].replace(/_(\w+)/g, '<sub>$1</sub>')).join(', ')}`, `Q (${fd(q.VCE, 2)} V, ${fd(q.ic, 1)} mA) is outside the region of operation: ${v.map(x => x[1].replace(/_(\w+)/g, '<sub>$1</sub>')).join(', ')}.`)
+      : t(`จุด Q (${fd(q.VCE, 2)} V, ${fd(q.ic, 1)} mA) อยู่ในย่าน: ${fd(L.iceo, 0)} mA ≤ ${fd(q.ic, 1)} mA ≤ 50 mA, 0.3 V ≤ ${fd(q.VCE, 2)} V ≤ 20 V และ \\(V_{CE}I_C\\) = ${fd(P, 0)} mW ≤ 300 mW`, `Q (${fd(q.VCE, 2)} V, ${fd(q.ic, 1)} mA) is inside: ${fd(L.iceo, 0)} mA ≤ ${fd(q.ic, 1)} mA ≤ 50 mA, 0.3 V ≤ ${fd(q.VCE, 2)} V ≤ 20 V and \\(V_{CE}I_C\\) = ${fd(P, 0)} mW ≤ 300 mW.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ทรานซิสเตอร์มี \\(P_{C\\max}\\) = 250 mW จงหา \\(I_C\\) สูงสุดที่ใช้ได้เมื่อ \\(V_{CE}\\) = 10 V', '1) A transistor has \\(P_{C\\max}\\) = 250 mW. Find the largest \\(I_C\\) allowed at \\(V_{CE}\\) = 10 V.'),
+      fields: [{ key: 'x', lab: 'I_C =', ans: 25, unit: 'mA' }], work: work(R`I_C = \frac{P_{C\max}}{V_{CE}} = \frac{250\ \text{mW}}{10\ \text{V}} = 25\ \text{mA}`) },
+    { q: t('2) จุดทำงาน \\(V_{CE}\\) = 8 V, \\(I_C\\) = 30 mA ของทรานซิสเตอร์ในรูป 3.22 กำลังสูญเสียเท่าใด (เกิน 300 mW หรือไม่)', '2) An operating point at \\(V_{CE}\\) = 8 V, \\(I_C\\) = 30 mA on the transistor of Fig. 3.22: what is its dissipation (is it over 300 mW)?'),
+      fields: [{ key: 'x', lab: 'P_C =', ans: 240, unit: 'mW' }], work: work(R`P_C = V_{CE}I_C = (8\ \text{V})(30\ \text{mA}) = 240\ \text{mW} < 300\ \text{mW}`) },
+    { q: t('3) 2N4123 มี \\(I_{CBO}\\) = 50 nA และ \\(h_{FE}\\) สูงสุด 150 จงหา \\(I_{CEO}\\) (ขอบล่างของ \\(I_C\\))', '3) The 2N4123 has \\(I_{CBO}\\) = 50 nA and \\(h_{FE}\\) up to 150. Find \\(I_{CEO}\\), the lower edge of \\(I_C\\).'),
+      fields: [{ key: 'x', lab: 'I_CEO =', ans: 7.5, unit: 'µA', tol: 0.06 }], work: work(R`I_{CEO} \cong \beta I_{CBO} = (150)(50\ \text{nA}) = 7.5\ \mu\text{A}`) },
+    { q: t('4) ทรานซิสเตอร์ของรูป 3.8 (เบสร่วม) มี \\(I_{C\\max}\\) = 7 mA, \\(BV_{CBO}\\) = 20 V และ \\(P_{C\\max}\\) = 42 mW จงหา \\(V_{CB}\\) บนเส้นกำลังที่ \\(I_{C\\max}\\) และ \\(I_C\\) ที่ 20 V (สมการ 3.19)', '4) The common-base transistor of Fig. 3.8 has \\(I_{C\\max}\\) = 7 mA, \\(BV_{CBO}\\) = 20 V and \\(P_{C\\max}\\) = 42 mW. Find \\(V_{CB}\\) on the power curve at \\(I_{C\\max}\\), and \\(I_C\\) at 20 V (Eq. 3.19).'),
+      fields: [{ key: 'x', lab: 'V_CB =', ans: 6, unit: 'V' }, { key: 'y', lab: 'I_C =', ans: 2.1, unit: 'mA' }], work: work(R`V_{CB} = \frac{42\ \text{mW}}{7\ \text{mA}} = 6\ \text{V},\ I_C = \frac{42\ \text{mW}}{20\ \text{V}} = 2.1\ \text{mA}`) },
+    { q: t('5) 2N4123 มี \\(P_D\\) = 625 mW ที่ 25 °C และลดลง 5 mW ต่อองศาที่สูงกว่า 25 °C จงหาพิกัดกำลังที่ 75 °C', '5) The 2N4123 has \\(P_D\\) = 625 mW at 25 °C, derated by 5 mW for every degree above 25 °C. Find its power rating at 75 °C.'),
+      fields: [{ key: 'x', lab: 'P_D =', ans: 375, unit: 'mW' }], work: work(R`P_D = 625\ \text{mW} - (5\ \text{mW/°C})(75 - 25)\ \text{°C} = 375\ \text{mW}`,
+        `<p>${t('ตำรา (หัวข้อ 3.8) เขียนกรอบ Limits of Operation ของ 2N4123 ว่า V<sub>CE</sub>I<sub>C</sub> ≤ 650 mW ซึ่งไม่ตรงกับตารางพิกัดของรูป 3.23 (625 mW)', 'The book (section 3.8) writes the limits box of the 2N4123 as V<sub>CE</sub>I<sub>C</sub> ≤ 650 mW, which does not match the ratings table of Fig. 3.23 (625 mW).')}</p>`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

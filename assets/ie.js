@@ -50,7 +50,7 @@ IE.problem = (n, d) => {
    o: { v: [vmin, vmax] (V; vmin < 0 adds the reverse side, on its own scale), i: [imin, imax] (mA; imin < 0 puts negative currents on the mA scale),
         negFrac (share of the width for v < 0, default 0.3), revPx (the reverse current drawn as a strip this many px under the axis, whatever its size),
         revLabel ('−1 µA'), xt / xtNeg (voltage ticks, v ≥ 0 / v < 0), yt / ytNeg (current ticks, mA), xl, yl (axis labels), title,
-        curves: [{ f(v) → mA, rev (also draw v < 0), color, w, dash, label, labelAt (v), from (first v) }],
+        curves: [{ f(v) → mA, rev (also draw v < 0), color, w, dash, label, labelAt (v), from (first v), to (last v) }],
         segs: [{ a: [v, i], b: [v, i], color, w, dash, ext (lengthen both ends by this share) }], hl: [{ i, color, label }], vl: [{ v, color, label }],
         pts: [{ v, i, color, label, r, dy, side }], guides: [{ v, i, color, toX, toY }] (dashed lines from a point to the axes),
         dV: [{ v1, v2, at (mA), label, color, above }], dI: [{ i1, i2, at (V), label, color, left }] (brackets), bands: [{ v1, v2, color, label }] }
@@ -89,8 +89,8 @@ IE.ivPlot = (ctx, b, o = {}) => {
     const put = (x, y) => { if (pen) ctx.lineTo(x, y); else { ctx.moveTo(x, y); pen = true; } };
     if (neg && c.rev) { if (rp) { put(L, yz + rp); put(xz - 9, yz + rp); ctx.quadraticCurveTo(xz - 1, yz + rp, xz, yz + rp * 0.35); put(xz, yz); }
       else { const N = c.nr || 240; for (let j = 0; j <= N; j++) { const v = v0 * (1 - j / N), i = c.f(v); if (!isFinite(i)) { pen = false; continue; } put(X(v), Y(Math.max(i, i0 * 1.2))); } } }
-    const N = c.n || 280, va = Math.max(zoom ? v0 : 0, c.from ?? 0);
-    for (let j = 0; j <= N; j++) { const v = va + (v1 - va) * j / N, i = c.f(v); if (!isFinite(i)) { pen = false; continue; } if (i > i1 * 1.3) { put(X(v), Y(i1 * 1.3)); break; } put(X(v), Y(i)); }
+    const N = c.n || 280, va = Math.max(zoom ? v0 : 0, c.from ?? 0), vb = Math.min(v1, c.to ?? v1);   // to: the curve ends there (as the book draws a family)
+    for (let j = 0; j <= N; j++) { const v = va + (vb - va) * j / N, i = c.f(v); if (!isFinite(i)) { pen = false; continue; } if (i > i1 * 1.3) { put(X(v), Y(i1 * 1.3)); break; } put(X(v), Y(i)); }
     ctx.stroke(); ctx.restore(); });
   (o.segs || []).forEach(s => { let [va, ia] = s.a, [vb, ib] = s.b; if (s.ext) { const dv = vb - va, di = ib - ia; va -= dv * s.ext; ia -= di * s.ext; vb += dv * s.ext; ib += di * s.ext; }
     ctx.save(); ctx.strokeStyle = s.color || IE.COL.tan; ctx.lineWidth = s.w || 2.4; ctx.lineCap = 'round'; if (s.dash) ctx.setLineDash(s.dash); ctx.beginPath(); ctx.moveTo(X(va), Y(ia)); ctx.lineTo(X(vb), Y(ib)); ctx.stroke(); ctx.restore(); });

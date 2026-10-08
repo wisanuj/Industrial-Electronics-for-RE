@@ -220,7 +220,7 @@ CH6.imax = c => c.parts.reduce((m, p) => (p.type === 'VM' || p.type === 'O') ? m
 CH6.quiz = (el, rows, o = {}) => {
   el = typeof el === 'string' ? document.getElementById(el) : el; const id0 = o.id || el.id || 'qz', score = {};
   el.innerHTML = `<div class="score" id="${id0}_s"></div><div class="quiz">` + rows.map((r, k) => `<div class="qrow${o.wide ? ' wide' : ''}"><div class="q">${r.q}</div><div class="ins">${r.fields.map(f =>
-    `<label>${f.lab} <input id="${id0}_${k}_${f.key}" inputmode="decimal" autocomplete="off" aria-label="${f.aria || f.key}"></label>${f.unit ? ' ' + f.unit : ''}`).join(' ')}</div>` +
+    `<label>${MC.ui && MC.ui.subs ? MC.ui.subs(f.lab) : f.lab} <input id="${id0}_${k}_${f.key}" inputmode="decimal" autocomplete="off" aria-label="${f.aria || f.key}"></label>${f.unit ? ' ' + f.unit : ''}`).join(' ')}</div>` +
     `<div class="toggles"><button type="button" class="btn on" data-k="${k}">${MC.t('ตรวจ', 'Check')}</button><span class="res" id="${id0}_${k}_res"></span></div>` +
     (r.work ? `<details><summary>${MC.t('ดูวิธีทำ', 'Show working')}</summary>${r.work}</details>` : '') + '</div>').join('') + '</div>';
   const num = id => { const v = document.getElementById(id).value.trim().replace(/−/g, '-').replace(',', '.'); return v === '' ? NaN : Number(v); };

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="3.3 — Common-Emitter Configuration">3.3 — วงจรอิมิตเตอร์ร่วม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรอิมิตเตอร์ร่วม <span class="en">Common-emitter configuration</span></h1>
+<h1 data-l="en">Common-emitter configuration <span class="en">β, the two sets of characteristics, and biasing</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 3 หน้า 11–16 วงจรอิมิตเตอร์ร่วม (common-emitter) ใช้มากที่สุด อิมิตเตอร์เป็นขาร่วมของด้านเข้า (เบส) และด้านออก (คอลเล็กเตอร์) ลักษณะสมบัติด้านออกคือ \(I_C\) เทียบกับ \(V_{CE}\) ที่ \(I_B\) ค่าต่าง ๆ และด้านเข้าคือ \(I_B\) เทียบกับ \(V_{BE}\) ที่ \(V_{CE}\) ค่าต่าง ๆ หน้านี้มีภาพจำลองวงจรที่ปรับ \(V_{BB}\) และ \(V_{CC}\) ได้ พร้อมจุดทำงานบนลักษณะสมบัติทั้งสองชุดของรูป 3.13 (ส่วน A) Example 3.2 การหาเบตา (β) จากลักษณะสมบัติ ความสัมพันธ์ของแอลฟา (α) กับเบตา และกระแส \(I_{CEO}\) และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 3 slides pp. 11–16. The common-emitter configuration is the one met most often: the emitter is common to the input (base) and the output (collector). Its output characteristics are \(I_C\) against \(V_{CE}\) for a range of \(I_B\), its input characteristics \(I_B\) against \(V_{BE}\) for a range of \(V_{CE}\). This page has a circuit whose \(V_{BB}\) and \(V_{CC}\) you can change, with its operating point on both sets of characteristics of Fig. 3.13 (section A), Example 3.2, finding beta (β) from the characteristics, the relation between alpha (α) and beta and the current \(I_{CEO}\), and more practice.</p>
+<div class="equation-box eqwrap">$$ \beta_{dc} = \frac{I_C}{I_B} $$ $$ \beta_{ac} = \left.\frac{\Delta I_C}{\Delta I_B}\right|_{V_{CE}} $$ $$ \alpha = \frac{\beta}{\beta + 1} $$ $$ \beta = \frac{\alpha}{1 - \alpha} $$ $$ I_C = \beta I_B $$ $$ I_E = (\beta + 1)I_B $$ $$ I_{CEO} \cong \beta I_{CBO} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ขาร่วม</b>: อิมิตเตอร์เป็นจุดอ้างอิงของทั้งด้านเข้าและด้านออก ความสัมพันธ์ \(I_E = I_C + I_B\) และ \(I_C = \alpha I_E\) ยังใช้ได้เหมือนวงจรเบสร่วม (สไลด์หน้า 11)</li>
+  <li><b>ย่านแอกทีฟ</b>: รอยต่อเบส–อิมิตเตอร์ไบแอสตรง รอยต่อคอลเล็กเตอร์–เบสไบแอสกลับ เส้นลักษณะสมบัติเกือบตรงและห่างเท่ากัน อยู่ทางขวาของ \(V_{CE\text{sat}}\) และเหนือเส้น \(I_B = 0\) ทางซ้ายของ \(V_{CE\text{sat}}\) คือย่านอิ่มตัว (สไลด์หน้า 12)</li>
+  <li><b>เบตา</b>: \(\beta_{dc} = I_C/I_B\) ที่จุดทำงาน (ในข้อมูลจำเพาะคือ \(h_{FE}\)) และ \(\beta_{ac} = \Delta I_C/\Delta I_B\) ที่ \(V_{CE}\) คงที่ (\(h_{fe}\)) ค่าทั่วไปราว 50 ถึงกว่า 400 สองค่ามักใกล้กันจนใช้แทนกันได้ (สไลด์หน้า 13–14)</li>
+  <li><b>α กับ β</b>: \(\alpha = \beta/(\beta + 1)\), \(I_C = \beta I_B\), \(I_E = (\beta + 1)I_B\) และกระแสรั่วไหลเมื่อเปิดวงจรขาเบส \(I_{CEO} \cong \beta I_{CBO}\) (สไลด์หน้า 15)</li>
+  <li><b>การไบแอส</b>: ใส่ทิศของ \(I_E\) ตามลูกศรของสัญลักษณ์ก่อน แล้วใส่ \(I_B\) และ \(I_C\) ตามกฎกระแส \(I_C + I_B = I_E\) แล้วจึงใส่แหล่งจ่ายให้ขั้วส่งกระแสตามทิศนั้น (สไลด์หน้า 16)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The common terminal</b>: the emitter is the reference of both the input and the output. \(I_E = I_C + I_B\) and \(I_C = \alpha I_E\) still hold, as in common base (slide p. 11).</li>
+  <li><b>The active region</b>: base–emitter junction forward-biased, collector–base junction reverse-biased; the curves are nearly straight and equally spaced, right of \(V_{CE\text{sat}}\) and above the \(I_B = 0\) curve. Left of \(V_{CE\text{sat}}\) is the saturation region (slide p. 12).</li>
+  <li><b>Beta</b>: \(\beta_{dc} = I_C/I_B\) at the operating point (\(h_{FE}\) on data sheets) and \(\beta_{ac} = \Delta I_C/\Delta I_B\) at a fixed \(V_{CE}\) (\(h_{fe}\)); typically from about 50 to over 400, and the two are usually close enough to be used for each other (slides pp. 13–14).</li>
+  <li><b>α and β</b>: \(\alpha = \beta/(\beta + 1)\), \(I_C = \beta I_B\), \(I_E = (\beta + 1)I_B\), and the leakage with the base open, \(I_{CEO} \cong \beta I_{CBO}\) (slide p. 15).</li>
+  <li><b>Biasing</b>: draw \(I_E\) the way the arrow of the symbol points, add \(I_B\) and \(I_C\) by the current law \(I_C + I_B = I_E\), then put in supplies whose polarities drive those currents (slide p. 16).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch3/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 11, Common-Emitter Configuration: the most frequently encountered transistor configuration appears in the figure for the pnp and npn transistors; it is called the common-emitter configuration since the emitter is common or reference to both the input and output terminals. Figures: an npn symbol with I_B into the base, I_C into the collector and I_E out of the emitter, beside an n-p-n block biased by V_BB and V_CC with a large arrow down through it; and a pnp symbol with all three currents the other way, beside a p-n-p block with the arrow up.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 11: สัญกรณ์ของวงจรอิมิตเตอร์ร่วม · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 11: common-emitter notation · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch3/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 12, Common-Emitter Configuration: for the common-emitter configuration the output characteristics are a plot of the output current (I_C) versus output voltage (V_CE) for a range of values of input current (I_B); the input characteristics are a plot of the input current (I_B) versus the input voltage (V_BE) for a range of values of output voltage (V_CE). Quote: in the active region of a common-emitter amplifier the collector-base junction is reverse-biased, while the base-emitter junction is forward-biased. Figure: the collector characteristics, I_C 0 to 8 mA against V_CE 0 to 20 V for I_B = 0 to 90 µA, with the saturation region left of V_CEsat, the active region, and the cutoff region below the I_B = 0 curve, I_CEO ≅ β I_CBO.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 12: ลักษณะสมบัติด้านออก · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 12: the output characteristics · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 13–15 ไม่มีสมการ</b>: หน้า 13 มีแต่ข้อความนิยามเบตาแบบไฟตรงและไฟสลับ (ช่องสมการว่าง และตกสัญลักษณ์ β ใน "the level of typically ranges") หน้า 14 มีรูป 3.16 แต่ไม่มีการคำนวณ \(\beta_{ac}\), \(\beta_{dc}\) และหน้า 15 มีเฉพาะสมการตั้งต้น ไม่มีผลลัพธ์ \(\alpha = \beta/(\beta + 1)\) หน้านี้เขียนสมการเหล่านั้นไว้ในกรอบด้านบนและในข้อ 2–3 (สมการ 3.10–3.16 ของตำรา)</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 13–15 have no equations</b>: p. 13 gives only the text defining the dc and ac beta (the equation spaces are empty, and β is missing from "the level of typically ranges"), p. 14 has Fig. 3.16 but not the calculation of \(\beta_{ac}\) and \(\beta_{dc}\), and p. 15 has only the starting equations, not the result \(\alpha = \beta/(\beta + 1)\). This page writes them in the box above and in problems 2–3 (Eqs. 3.10–3.16 of the book).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรอิมิตเตอร์ร่วม</a><a href="#ex1"><b>1</b>Example 3.2</a><a href="#ex2"><b>2</b>β จากลักษณะสมบัติ</a><a href="#ex3"><b>3</b>α, β และ I<sub>CEO</sub></a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A common-emitter circuit</a><a href="#ex1"><b>1</b>Example 3.2</a><a href="#ex2"><b>2</b>β from the characteristics</a><a href="#ex3"><b>3</b>α, β and I<sub>CEO</sub></a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรอิมิตเตอร์ร่วมกับลักษณะสมบัติของรูป 3.13</h2><h2 data-l="en">A common-emitter circuit on the characteristics of Fig. 3.13</h2>
+    <div class="src" data-l="th">สไลด์หน้า 11–12, 16 · Boylestad หัวข้อ 3.5 (รูป 3.13, 3.18 และวงจรรูป 3.34)</div><div class="src" data-l="en">Slides pp. 11–12, 16 · Boylestad, section 3.5 (Figs. 3.13, 3.18, and the circuit of Fig. 3.34)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch3/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 16, Common-Emitter Configuration: the first step is to indicate the direction of I_E as established by the arrow in the transistor symbol as shown in the left figure. Next, the other currents are introduced as shown, keeping in mind the Kirchhoff's current law relationship: I_C + I_B = I_E. The supplies are introduced with polarities that will support the resulting directions of I_B and I_C as shown in the right figure. Figures: an npn transistor with I_B, I_C and I_E drawn in, then the same transistor with the base and collector supplies added.">
+    <figcaption data-l="th">สไลด์หน้า 16: ขั้นตอนการไบแอสวงจรอิมิตเตอร์ร่วม · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: biasing a common-emitter stage · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">วงจรไบแอสตามสไลด์หน้า 16: ลูกศรของ npn ชี้ออกจากอิมิตเตอร์ \(I_B\) และ \(I_C\) จึงไหลเข้า \(V_{BB}\) ผ่าน \(R_B\) = 100 kΩ ส่งกระแสเข้าเบส และ \(V_{CC}\) ผ่าน \(R_C\) ส่งกระแสเข้าคอลเล็กเตอร์ ทรานซิสเตอร์ในภาพจำลองคือเส้นที่อ่านจากรูป 3.13 ทั้งสองชุด เลื่อน \(V_{BB}\) แล้วดูจุดทำงาน Q วิ่งบนเส้นโหลด จากย่านคัตออฟ ผ่านย่านแอกทีฟ ไปจนอิ่มตัว เส้นประสีเหลืองคือเส้น \(I_B\) ที่เป็นอยู่ขณะนั้น</p>
+  <p class="lead" data-l="en">The biasing of slide p. 16: the npn arrow points out of the emitter, so \(I_B\) and \(I_C\) flow in; \(V_{BB}\) drives the base through \(R_B\) = 100 kΩ and \(V_{CC}\) drives the collector through \(R_C\). The simulated transistor is the two sets of curves read off Fig. 3.13. Move \(V_{BB}\) and watch the operating point Q run along the load line from cutoff, through the active region, into saturation. The dashed yellow curve is the \(I_B\) of the moment.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 3.2: อ่านลักษณะสมบัติทั้งสองชุด</h2><h2 data-l="en">Example 3.2: reading both sets of characteristics</h2>
+    <div class="src" data-l="th">Boylestad Example 3.2 (รูป 3.13) · ภาพในสไลด์หน้า 12</div><div class="src" data-l="en">Boylestad Example 3.2 (Fig. 3.13) · the figure of slide p. 12</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ใช้ลักษณะสมบัติของรูป 3.13 (a) จงหา \(I_C\) ที่ \(I_B\) = 30 µA และ \(V_{CE}\) = 10 V (b) จงหา \(I_C\) ที่ \(V_{BE}\) = 0.7 V และ \(V_{CE}\) = 15 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Using the characteristics of Fig. 3.13, (a) determine \(I_C\) at \(I_B\) = 30 µA and \(V_{CE}\) = 10 V; (b) determine \(I_C\) at \(V_{BE}\) = 0.7 V and \(V_{CE}\) = 15 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองตั้งค่าที่โจทย์ให้ด้วยแหล่งจ่ายในอุดมคติ: ข้อ (a) แหล่งจ่ายกระแส \(I_B\) และแหล่งจ่ายแรงดัน \(V_{CE}\) ข้อ (b) แหล่งจ่ายแรงดัน \(V_{BE}\) แผงล่างคือลักษณะสมบัติด้านออก (ซ้าย) และด้านเข้า (ขวา) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation sets what the problem gives with ideal sources: in (a) a current source \(I_B\) and a voltage source \(V_{CE}\), in (b) a voltage source \(V_{BE}\). Below are the output (left) and input (right) characteristics. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">หา \(\beta_{ac}\) และ \(\beta_{dc}\) จากลักษณะสมบัติ</h2><h2 data-l="en">\(\beta_{ac}\) and \(\beta_{dc}\) from the characteristics</h2>
+    <div class="src" data-l="th">สไลด์หน้า 13–14 · Boylestad หัวข้อ 3.5 (รูป 3.16–3.17)</div><div class="src" data-l="en">Slides pp. 13–14 · Boylestad, section 3.5 (Figs. 3.16–3.17)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch3/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 13, Common-Emitter Configuration: in the dc mode the levels of I_C and I_B are related by a quantity called beta and defined by the following equation (the equation is missing). For practical devices the level of (beta, missing) typically ranges from about 50 to over 400, with most in the midrange. On specification sheets (beta) dc is usually included as h_FE with the h derived from an ac hybrid equivalent circuit. For ac situations an ac beta has been defined as follows (the equation is missing).">
+    <figcaption data-l="th">สไลด์หน้า 13: นิยามของเบตา (สมการหายไป) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 13: the definitions of beta (equations missing) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch3/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 14, Common-Emitter Configuration: determining (beta) ac and dc from the collector characteristics. Figure 3.16: I_C 0 to 9 mA against V_CE 0 to 25 V for I_B = 0 to 90 µA, a dashed 25 µA curve, the Q-point at V_CE = 7.5 V on it, horizontal lines from the 20 µA and 30 µA crossings to I_C1 and I_C2, and ΔI_C between them. Bullets: the resulting ac (beta) for the region can then be determined by (missing); if we determine the dc beta at the Q-point: (missing).">
+    <figcaption data-l="th">สไลด์หน้า 14: รูป 3.16 (การคำนวณหายไป) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 14: Fig. 3.16 (the calculation is missing) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ใช้ลักษณะสมบัติของรูป 3.16 จงหา \(\beta_{ac}\) และ \(\beta_{dc}\) ที่จุดทำงาน \(I_B\) = 25 µA และ \(V_{CE}\) = 7.5 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Using the characteristics of Fig. 3.16, determine \(\beta_{ac}\) and \(\beta_{dc}\) at the operating point \(I_B\) = 25 µA, \(V_{CE}\) = 7.5 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองใช้เส้นที่อ่านจากรูป 3.16 ตรึง \(V_{CE}\) ไว้ที่ 7.5 V แล้วเปลี่ยน \(I_B\) ไปตามแต่ละขั้น <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation uses the curves read off Fig. 3.16, holds \(V_{CE}\) at 7.5 V and sets \(I_B\) as each step needs. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">α, β และกระแส \(I_{CEO}\)</h2><h2 data-l="en">α, β and the current \(I_{CEO}\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 15 · Boylestad หัวข้อ 3.5 (สมการ 3.8–3.16) และข้อ 24 ท้ายบท</div><div class="src" data-l="en">Slide p. 15 · Boylestad, section 3.5 (Eqs. 3.8–3.16) and end-of-chapter problem 24</div></div></div>
+  <figure class="slide q"><img src="slides/ch3/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 15, Common-Emitter Configuration: a relationship can be developed between β and α using the basic relationships. A box holds I_E = I_C + I_B, I_C = β I_B and α_dc = I_C/I_E, with a large arrow pointing to the right and no result.">
+    <figcaption data-l="th">สไลด์หน้า 15: สมการตั้งต้นของความสัมพันธ์ α–β · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: the starting equations of the α–β relation · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>(a) ถ้า \(\alpha_{dc}\) = 0.980 จงหา \(\beta_{dc}\) (b) ถ้า \(\beta_{dc}\) = 120 จงหา α (c) ถ้า \(\beta_{dc}\) = 120 และ \(I_C\) = 2.0 mA จงหา \(I_E\) และ \(I_B\) (d) ทรานซิสเตอร์ที่มี α = 0.996 และ \(I_{CBO}\) = 1 µA จงหา \(I_{CEO}\) (กระแสคอลเล็กเตอร์เมื่อ \(I_B\) = 0)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>(a) Given \(\alpha_{dc}\) = 0.980, determine \(\beta_{dc}\). (b) Given \(\beta_{dc}\) = 120, determine α. (c) Given \(\beta_{dc}\) = 120 and \(I_C\) = 2.0 mA, find \(I_E\) and \(I_B\). (d) A transistor has α = 0.996 and \(I_{CBO}\) = 1 µA: find \(I_{CEO}\), the collector current with \(I_B\) = 0.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองข้อ (c) คือทรานซิสเตอร์ β = 120 ที่ป้อน \(I_B\) ให้ได้ \(I_C\) = 2 mA ข้อ (d) เปิดวงจรขาเบส <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation of (c) is a β = 120 transistor fed the \(I_B\) that gives \(I_C\) = 2 mA; in (d) its base is left open. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ข้อ 1–3 อ่านจากรูป 3.13a (Boylestad ข้อ 21–23 ท้ายบท) คำตอบจากเส้นที่อ่านจากรูป ยอมให้คลาดราว 5 %</div><div class="src" data-l="en">Questions 1–3 read Fig. 3.13a (Boylestad end-of-chapter problems 21–23); answers come from the curves read off the figure, within about 5 %</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — จุดทำงานบนเส้นโหลด</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{CC}\) = 10 V, \(R_C\) = 2 kΩ แล้วเลื่อน \(V_{BB}\) จาก 0 ขึ้นไป: ต่ำกว่าราว 0.6 V แทบไม่มีกระแสเบส จุด Q ค้างอยู่ที่เส้น \(I_B\) = 0 (ราว 0.3 mA คือ \(I_{CEO}\))</li>
+    <li>เพิ่มต่อ: Q ไต่ขึ้นตามเส้นโหลดสีชมพู \(I_C\) เพิ่มตาม \(I_B\) เกือบเป็นสัดส่วน (ย่านแอกทีฟ) จนเมื่อ \(V_{BB}\) ราว 5 V Q ชนแถบสีแดงทางซ้าย (ย่านอิ่มตัว) \(I_C\) หยุดเพิ่มแม้ \(I_B\) ยังเพิ่ม</li>
+    <li>ดูค่า \(\beta_{dc}\) ในแผงข้างภาพ: ไม่คงที่ ต่ำลงที่กระแสสูง และสูงขึ้นเมื่อ \(V_{CE}\) สูง (เส้นลาดขึ้น) ทรานซิสเตอร์จริงไม่ได้มี β ค่าเดียว</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ด้านเข้าแทบไม่ขึ้นกับ \(V_{CE}\)</h3>
+    <ol><li>คง \(V_{BB}\) ไว้ แล้วเลื่อน \(V_{CC}\): จุดบนลักษณะสมบัติด้านเข้าแทบไม่ขยับ เพราะเส้นทั้งสามของรูป 3.13b ใกล้กันมาก แบบจำลอง 0.7 V (รูป 3.15) จึงใช้ได้ดี</li>
+    <li>ข้อ 2: ลองหา \(\beta_{ac}\) ที่ \(I_B\) = 60 µA เทียบกับ 25 µA บนรูป 3.16 เส้นด้านบนห่างกันน้อยกว่า \(\beta_{ac}\) จึงต่ำกว่า</li></ol>
+    <div class="book">สไลด์บทที่ 3 หน้า 11–16 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 3.5 (Example 3.2, รูป 3.13–3.18, ข้อ 21–24 ท้ายบท)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the operating point on the load line</h3>
+    <ol><li>In section A set \(V_{CC}\) = 10 V and \(R_C\) = 2 kΩ, then raise \(V_{BB}\) from 0: below about 0.6 V there is almost no base current and Q stays on the \(I_B\) = 0 curve (about 0.3 mA, which is \(I_{CEO}\)).</li>
+    <li>Keep going: Q climbs the pink load line and \(I_C\) rises almost in proportion to \(I_B\) (the active region), until at about \(V_{BB}\) = 5 V Q reaches the red strip on the left (saturation) and \(I_C\) stops rising although \(I_B\) still does.</li>
+    <li>Watch \(\beta_{dc}\) in the side panel: it is not constant; it is lower at high currents and higher at high \(V_{CE}\) (the curves slope up). A real transistor does not have one β.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the input hardly depends on \(V_{CE}\)</h3>
+    <ol><li>Hold \(V_{BB}\) and move \(V_{CC}\): the point on the input characteristics hardly moves, because the three curves of Fig. 3.13b are very close. That is why the 0.7 V model (Fig. 3.15) works well.</li>
+    <li>Problem 2: try \(\beta_{ac}\) at \(I_B\) = 60 µA against 25 µA on Fig. 3.16; the upper curves are closer together, so \(\beta_{ac}\) is lower there.</li></ol>
+    <div class="book">Chapter 3 slides pp. 11–16 · Boylestad &amp; Nashelsky, 11th ed., section 3.5 (Example 3.2, Figs. 3.13–3.18, end-of-chapter problems 21–24)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH3.problem(1, 'ex32'); CH3.problem(2, 'beta'); CH3.problem(3, 'ab');
+
+  /* =================================================================== A: a common-emitter circuit on Fig. 3.13 */
+  const SA = { VBB: 2.7, VCC: 10, RC: 2000, RB: 100e3 };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.52, rowAsp: 0.66, rowMin: 270, pad: 1.2, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, minV: 7, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const q = CH3.q(c);
+      CH3.outPlot(ctx, b, bd, { sat: 0.7, load: { vcc: SA.VCC, rc: SA.RC }, q: { v: q.VCE, i: q.ic, ib: q.IB, label: 'Q', side: q.VCE > 11 ? -1 : 1 }, title: t('ลักษณะสมบัติด้านออก (รูป 3.13a) และเส้นโหลด', 'collector characteristics (Fig. 3.13a), load line') }); },
+    waves: [{ draw: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const q = CH3.q(c);
+      CH3.inPlot(ctx, b, bd, { vce: q.VCE, q: { v: q.VBE, i: q.uA, label: 'Q' }, title: t('ลักษณะสมบัติด้านเข้า (รูป 3.13b)', 'base characteristics (Fig. 3.13b)') }); } }],
+    badge: () => { const q = CH3.q(BA.ckt), r = CH3.reg(q.region); return [[`${r[0]}: I_C = ${fd(q.ic, 2)} mA`, `${r[1]}: I_C = ${fd(q.ic, 2)} mA`], q.region === 'active' ? 'ok' : 'wait']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('แหล่งจ่ายและตัวต้านทาน', 'Supplies and resistors'));
+  ui.slider(pA, { id: 'aVBB', label: 'V_{BB}', min: 0, max: 10.7, step: 0.1, value: SA.VBB, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VBB = v; buildA(); } });
+  ui.slider(pA, { id: 'aVCC', label: 'V_{CC}', min: 0, max: 20, step: 0.5, value: SA.VCC, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VCC = v; buildA(); } });
+  ui.radio(pA, [1000, 2000, 3300].map(r => ({ id: 'aRC' + r, label: 'R_C = ' + CK.eng(r, 'Ω'), on: r === SA.RC })), id => { SA.RC = +id.slice(3); buildA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH3.ce({ VBB: SA.VBB, RB: SA.RB, VCC: SA.VCC, RC: SA.RC }), { speed: 80 / 0.004, dotRef: 0.004 }); showA(); }
+  function showA() { const q = CH3.q(BA.ckt), r = CH3.reg(q.region);
+    mA.innerHTML = ui.kv([['I_B', `${fd(q.uA, 2)} µA`], ['I_C', `${fd(q.ic, 3)} mA`], ['V_BE', `${fd(q.VBE, 3)} V`], ['V_CE', `${fd(q.VCE, 2)} V`], ['β_dc = I_C/I_B', q.uA > 0.5 ? fd(q.ic * 1e3 / q.uA, 1) : '—'], [t('ย่าน', 'region'), t(r[0], r[1])]]);
+    $('wA').innerHTML = `<div class="answer">${q.region === 'cutoff' ? t(`\\(V_{BB}\\) ยังไม่พอให้รอยต่อเบส–อิมิตเตอร์นำ \\(I_B \\approx 0\\) กระแสคอลเล็กเตอร์เหลือเพียง \\(I_{CEO}\\) ราว ${fd(q.ic, 2)} mA`, `\\(V_{BB}\\) is not enough to turn the base–emitter junction on: \\(I_B \\approx 0\\) and the collector carries only \\(I_{CEO}\\), about ${fd(q.ic, 2)} mA.`)
+      : q.region === 'saturation' ? t(`อิ่มตัว: \\(V_{CE}\\) = ${fd(q.VCE, 2)} V ต่ำกว่า \\(V_{CE\\text{sat}}\\) กระแสถูกจำกัดด้วยวงจรภายนอก \\(I_C \\approx V_{CC}/R_C\\) = ${fd(SA.VCC / SA.RC * 1e3, 2)} mA ไม่ใช่ \\(\\beta I_B\\) อีกต่อไป`, `Saturated: \\(V_{CE}\\) = ${fd(q.VCE, 2)} V is below \\(V_{CE\\text{sat}}\\); the current is set by the outside circuit, \\(I_C \\approx V_{CC}/R_C\\) = ${fd(SA.VCC / SA.RC * 1e3, 2)} mA, no longer by \\(\\beta I_B\\).`)
+      : t(`ย่านแอกทีฟ: \\(I_B = (V_{BB} - V_{BE})/R_B\\) = (${fd(SA.VBB, 1)} − ${fd(q.VBE, 2)})/100 kΩ = ${fd(q.uA, 1)} µA, \\(I_C\\) = ${fd(q.ic, 2)} mA และ \\(V_{CE} = V_{CC} - I_CR_C\\) = ${fd(q.VCE, 2)} V`, `Active region: \\(I_B = (V_{BB} - V_{BE})/R_B\\) = (${fd(SA.VBB, 1)} − ${fd(q.VBE, 2)})/100 kΩ = ${fd(q.uA, 1)} µA, \\(I_C\\) = ${fd(q.ic, 2)} mA and \\(V_{CE} = V_{CC} - I_CR_C\\) = ${fd(q.VCE, 2)} V.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice (Fig. 3.13a) */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, F = (ib, v) => CH3.F313(ib * 1e-6, v).i * 1e3;
+  const b1 = F(60, 4) / 0.06, b2 = (F(40, 7) - F(20, 7)) / 0.02, ic3 = F(25, 10), bd3 = ic3 / 0.025, a3 = bd3 / (bd3 + 1);
+  CH6.quiz('quiz', [
+    { q: t('1) จากรูป 3.13a จงหา \\(\\beta_{dc}\\) ที่ \\(I_B\\) = 60 µA และ \\(V_{CE}\\) = 4 V', '1) From Fig. 3.13a, determine \\(\\beta_{dc}\\) at \\(I_B\\) = 60 µA and \\(V_{CE}\\) = 4 V.'),
+      fields: [{ key: 'x', lab: 'β_dc =', ans: b1, tol: 0.05 * b1 }], work: work(R`I_C \cong ${fd(F(60, 4), 2)}\ \text{mA}:\ \beta_{dc} = \frac{${fd(F(60, 4), 2)}\ \text{mA}}{60\ \mu\text{A}} = ${fd(b1, 1)}`) },
+    { q: t('2) จากรูป 3.13a จงหา \\(\\beta_{ac}\\) ที่ \\(I_B\\) = 30 µA และ \\(V_{CE}\\) = 7 V (ใช้เส้น 20 µA และ 40 µA)', '2) From Fig. 3.13a, determine \\(\\beta_{ac}\\) at \\(I_B\\) = 30 µA and \\(V_{CE}\\) = 7 V (use the 20 µA and 40 µA curves).'),
+      fields: [{ key: 'x', lab: 'β_ac =', ans: b2, tol: 0.06 * b2 }], work: work(R`\beta_{ac} = \frac{${fd(F(40, 7), 2)} - ${fd(F(20, 7), 2)}\ \text{mA}}{40 - 20\ \mu\text{A}} = ${fd(b2, 1)}`) },
+    { q: t('3) จากรูป 3.13a จงหา \\(\\beta_{dc}\\) ที่ \\(I_B\\) = 25 µA และ \\(V_{CE}\\) = 10 V แล้วหา \\(\\alpha_{dc}\\)', '3) From Fig. 3.13a, determine \\(\\beta_{dc}\\) at \\(I_B\\) = 25 µA and \\(V_{CE}\\) = 10 V, then \\(\\alpha_{dc}\\).'),
+      fields: [{ key: 'x', lab: 'β_dc =', ans: bd3, tol: 0.05 * bd3 }, { key: 'y', lab: 'α_dc =', ans: a3, tol: 0.001 }],
+      work: work(R`I_C \cong \tfrac12(${fd(F(20, 10), 2)} + ${fd(F(30, 10), 2)}) = ${fd(ic3, 2)}\ \text{mA},\ \beta_{dc} = ${fd(bd3, 1)},\ \alpha_{dc} = \frac{${fd(bd3, 1)}}{${fd(bd3 + 1, 1)}} = ${fd(a3, 4)}`) },
+    { q: t('4) ทรานซิสเตอร์ β = 150 มี \\(I_B\\) = 20 µA จงหา \\(I_C\\) และ \\(I_E\\)', '4) A transistor with β = 150 has \\(I_B\\) = 20 µA. Find \\(I_C\\) and \\(I_E\\).'),
+      fields: [{ key: 'x', lab: 'I_C =', ans: 3, unit: 'mA' }, { key: 'y', lab: 'I_E =', ans: 3.02, unit: 'mA', tol: 0.002 }], work: work(R`I_C = \beta I_B = 150(20\ \mu\text{A}) = 3\ \text{mA},\ I_E = (\beta + 1)I_B = 3.02\ \text{mA}`) },
+    { q: t('5) ทรานซิสเตอร์ที่มี \\(I_{CBO}\\) = 50 nA และ β = 150 จงหา \\(I_{CEO}\\) โดยประมาณ', '5) A transistor has \\(I_{CBO}\\) = 50 nA and β = 150. Find \\(I_{CEO}\\) approximately.'),
+      fields: [{ key: 'x', lab: 'I_CEO =', ans: 7.5, unit: 'µA', tol: 0.06 }], work: work(R`I_{CEO} \cong \beta I_{CBO} = 150(50\ \text{nA}) = 7.5\ \mu\text{A}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="3.2 — Common-Base Configuration">3.2 — วงจรเบสร่วม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรเบสร่วมและแอลฟา <span class="en">Common-base configuration</span></h1>
+<h1 data-l="en">The common-base configuration and alpha <span class="en">Its characteristics, \(V_{BE} \cong 0.7\) V, and voltage gain</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 3 หน้า 8–10 วงจรเบสร่วม (common-base) มีเบสเป็นขาร่วมของด้านเข้า (อิมิตเตอร์) และด้านออก (คอลเล็กเตอร์) และเบสมักต่อลงกราวด์ อุปกรณ์สามขาต้องใช้ลักษณะสมบัติสองชุด: ด้านเข้า \(I_E\) เทียบกับ \(V_{BE}\) และด้านออก \(I_C\) เทียบกับ \(V_{CB}\) หน้านี้มีภาพจำลองวงจรเบสร่วมทั้ง npn และ pnp ที่ปรับ \(V_{EE}\) และ \(V_{CC}\) ได้ (ส่วน A) Example 3.1 แอลฟา (α) แบบไฟตรงและไฟสลับ การขยายแรงดันของวงจรเบสร่วม และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 3 slides pp. 8–10. In the common-base configuration the base is common to the input (emitter) and the output (collector), and is usually at ground. A three-terminal device needs two sets of characteristics: the input, \(I_E\) against \(V_{BE}\), and the output, \(I_C\) against \(V_{CB}\). This page has a common-base circuit, npn or pnp, whose \(V_{EE}\) and \(V_{CC}\) you can change (section A), Example 3.1, the dc and ac alpha (α), how a common-base stage amplifies voltage, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_E = I_C + I_B $$ $$ V_{BE} \cong 0.7\ \text{V} $$ $$ \alpha_{dc} = \frac{I_C}{I_E} $$ $$ I_C = \alpha I_E + I_{CBO} $$ $$ \alpha_{ac} = \left.\frac{\Delta I_C}{\Delta I_E}\right|_{V_{CB}} $$ $$ A_v = \frac{V_L}{V_i} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ลูกศรของสัญลักษณ์</b> ชี้ทิศของกระแสอิมิตเตอร์ (กระแสตามแบบนิยม): npn ชี้ออก (not pointing in) pnp ชี้เข้า (pointing in) แล้วใส่แหล่งจ่ายให้ขั้วส่งกระแสตามทิศนั้น (สไลด์หน้า 8, รูป 3.11)</li>
+  <li><b>สามย่าน</b>: แอกทีฟ (รอยต่อเบส–อิมิตเตอร์ไบแอสตรง คอลเล็กเตอร์–เบสไบแอสกลับ ใช้ขยายสัญญาณ) คัตออฟ (ไบแอสกลับทั้งคู่ \(I_C\) เหลือเพียง \(I_{CBO}\)) และอิ่มตัว (ไบแอสตรงทั้งคู่ ทางซ้ายของ \(V_{CB}\) = 0) (สไลด์หน้า 9)</li>
+  <li><b>ในย่านแอกทีฟ</b> \(I_C \cong I_E\) และเส้นแทบไม่ขึ้นกับ \(V_{CB}\) ด้านเข้าคล้ายไดโอด และเมื่อทรานซิสเตอร์นำ ใช้ \(V_{BE} \cong 0.7\) V (สไลด์หน้า 10, สมการ 3.3–3.4)</li>
+  <li><b>แอลฟา</b>: \(\alpha_{dc} = I_C/I_E\) (ราว 0.90–0.998) รวมกระแสรั่วไหลเป็น \(I_C = \alpha I_E + I_{CBO}\) และแบบไฟสลับ \(\alpha_{ac} = \Delta I_C/\Delta I_E\) ที่ \(V_{CB}\) คงที่ ซึ่งใกล้กับ \(\alpha_{dc}\) (สไลด์หน้า 10)</li>
+  <li><b>ขยายแรงดัน</b>: กระแสเท่าเดิมถูกย้ายจากด้านเข้าที่ความต้านทานต่ำไปด้านออกที่ความต้านทานสูง (transfer + resistor) แรงดันจึงขยายได้หลายร้อยเท่า แม้ \(I_C/I_E\) น้อยกว่า 1</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The arrow of the symbol</b> shows the direction of the emitter current (conventional flow): out for npn ("not pointing in"), in for pnp ("pointing in"); the supplies are then put in with polarities that drive that current (slide p. 8, Fig. 3.11).</li>
+  <li><b>Three regions</b>: active (base–emitter forward-biased, collector–base reverse-biased; used for amplification), cutoff (both reverse-biased; \(I_C\) is only \(I_{CBO}\)) and saturation (both forward-biased; left of \(V_{CB}\) = 0) (slide p. 9).</li>
+  <li><b>In the active region</b> \(I_C \cong I_E\), almost regardless of \(V_{CB}\). The input behaves like a diode, and once the transistor is on, \(V_{BE} \cong 0.7\) V (slide p. 10, Eqs. 3.3–3.4).</li>
+  <li><b>Alpha</b>: \(\alpha_{dc} = I_C/I_E\) (about 0.90–0.998); with the leakage, \(I_C = \alpha I_E + I_{CBO}\); the ac alpha \(\alpha_{ac} = \Delta I_C/\Delta I_E\) at a fixed \(V_{CB}\) is close to \(\alpha_{dc}\) (slide p. 10).</li>
+  <li><b>Voltage gain</b>: the same current is moved from a low-resistance input to a high-resistance output (transfer + resistor), so the voltage is amplified hundreds of times although \(I_C/I_E\) is below 1.</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch3/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 8, Common-Base Configuration: the common-base terminology is derived from the fact that the base is common to both the input and output sides of the configuration; the base is usually the terminal closest to, or at, ground potential. Quote: the arrow in the graphic symbol defines the direction of emitter current (conventional flow) through the device. Figures: a p-n-p block with I_E into the emitter, I_C out of the collector and I_B out of the base to ground, with a large arrow to the right, and its symbol; an n-p-n block with all currents the other way, with a large arrow to the left, and its symbol.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 8: สัญกรณ์ของวงจรเบสร่วม · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 8: common-base notation · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 10 ไม่มีสมการ</b> มีเพียงข้อความนำของ \(V_{BE} \cong 0.7\) V, \(\alpha_{dc} = I_C/I_E\) และ \(\alpha_{ac}\) (สมการ 3.4, 3.5 และ 3.7 ของตำรา) หน้านี้เขียนไว้ในกรอบด้านบนและในข้อ 1–2 · หัวข้อ "Transistor Amplifying Action" อยู่ในสารบัญ (สไลด์หน้า 2) แต่ไม่มีสไลด์ และตำราฉบับที่ 11 ตัดหัวข้อนี้ออก ข้อ 3 ของหน้านี้ใช้ตัวอย่างจากตำราฉบับพิมพ์ก่อนหน้า</div>
+<div class="warnbox" data-l="en"><b>Slide p. 10 has no equations</b>, only the sentences leading to \(V_{BE} \cong 0.7\) V, \(\alpha_{dc} = I_C/I_E\) and \(\alpha_{ac}\) (Eqs. 3.4, 3.5 and 3.7 of the book); this page writes them in the box above and in problems 1–2. "Transistor Amplifying Action" is on the contents slide (p. 2) but has no slide, and the 11th edition dropped the section; problem 3 of this page uses the example of earlier editions.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรเบสร่วม</a><a href="#ex1"><b>1</b>Example 3.1</a><a href="#ex2"><b>2</b>แอลฟา</a><a href="#ex3"><b>3</b>การขยายแรงดัน</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A common-base circuit</a><a href="#ex1"><b>1</b>Example 3.1</a><a href="#ex2"><b>2</b>Alpha</a><a href="#ex3"><b>3</b>Voltage amplification</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรเบสร่วมกับลักษณะสมบัติของรูป 3.7–3.8</h2><h2 data-l="en">A common-base circuit on the characteristics of Figs. 3.7–3.8</h2>
+    <div class="src" data-l="th">สไลด์หน้า 9–10 · Boylestad หัวข้อ 3.4 (รูป 3.6–3.11)</div><div class="src" data-l="en">Slides pp. 9–10 · Boylestad, section 3.4 (Figs. 3.6–3.11)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch3/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 9, Common-Base Configuration: the output set will relate an output current (I_C) to an output voltage (V_CB) for various levels of input current (I_E) as shown in the figure. Quotes: in the active region the collector-base junction is reverse-biased, while the base-emitter junction is forward-biased; in the cutoff region the collector-base and base-emitter junctions of a transistor are both reverse-biased; in the saturation region the collector-base and base-emitter junctions are forward-biased. Figure: I_C (mA) against V_CB from −1 to 20 V for I_E = 0 to 7 mA, flat lines in the unshaded active region, the shaded saturation region left of 0 V, and the cutoff region along the axis.">
+    <figcaption data-l="th">สไลด์หน้า 9: ลักษณะสมบัติด้านออกและสามย่าน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 9: the output characteristics and the three regions · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch3/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 10, Common-Base Configuration: a transistor is in the on state, the base-to-emitter voltage will be assumed to be the following (equation missing). In the dc mode the levels of I_C and I_E due to the majority carriers are related by a quantity called alpha (α) and defined by the following equation (missing). For ac situations where the point of operation moves on the characteristic curve, an ac alpha is defined by (missing).">
+    <figcaption data-l="th">สไลด์หน้า 10: \(V_{BE}\) และแอลฟา (สมการหายไป) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 10: \(V_{BE}\) and alpha (equations missing) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">อิมิตเตอร์ทางซ้ายรับ \(V_{EE}\) ผ่าน \(R_E\) = 1 kΩ (ด้านเข้า) คอลเล็กเตอร์ทางขวารับ \(V_{CC}\) ผ่าน \(R_C\) (ด้านออก) เบสลงกราวด์ ขั้วของแหล่งจ่ายตั้งตามรูป 3.6 คือ pnp กับ npn กลับขั้วกัน ทรานซิสเตอร์ในภาพจำลองใช้ลักษณะสมบัติด้านเข้าที่อ่านจากรูป 3.7 และ α = 0.995 เส้นสีชมพูคือเส้นโหลดด้านออก \(V_{CB} = V_{CC} - I_CR_C\) ลด \(V_{CC}\) จนจุด Q เข้าแถบสีแดง (ย่านอิ่มตัว) แล้วดูว่า \(I_C\) ลดลงแม้ \(I_E\) เท่าเดิม (สำหรับ pnp กราฟใช้ขนาดของแรงดัน)</p>
+  <p class="lead" data-l="en">The emitter on the left is fed by \(V_{EE}\) through \(R_E\) = 1 kΩ (the input), the collector on the right by \(V_{CC}\) through \(R_C\) (the output), and the base is grounded. The supply polarities follow Fig. 3.6: pnp and npn are opposite. The simulated transistor uses the input characteristics read off Fig. 3.7 and α = 0.995. The pink line is the output load line \(V_{CB} = V_{CC} - I_CR_C\). Lower \(V_{CC}\) until Q enters the red strip (saturation) and see \(I_C\) fall although \(I_E\) stays (for a pnp the graphs use the magnitudes of the voltages).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 3.1: อ่านลักษณะสมบัติของวงจรเบสร่วม</h2><h2 data-l="en">Example 3.1: reading the common-base characteristics</h2>
+    <div class="src" data-l="th">Boylestad Example 3.1 (รูป 3.7, 3.8, 3.10c)</div><div class="src" data-l="en">Boylestad Example 3.1 (Figs. 3.7, 3.8, 3.10c)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>(a) ใช้ลักษณะสมบัติของรูป 3.8 จงหา \(I_C\) เมื่อ \(I_E\) = 3 mA และ \(V_{CB}\) = 10 V (b) \(I_E\) ยังเป็น 3 mA แต่ลด \(V_{CB}\) เหลือ 2 V จงหา \(I_C\) (c) ใช้รูป 3.7 และ 3.8 จงหา \(V_{BE}\) เมื่อ \(I_C\) = 4 mA และ \(V_{CB}\) = 20 V (d) ทำข้อ (c) ซ้ำโดยใช้รูป 3.8 และ 3.10c</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>(a) Using the characteristics of Fig. 3.8, determine \(I_C\) if \(I_E\) = 3 mA and \(V_{CB}\) = 10 V. (b) \(I_E\) remains 3 mA but \(V_{CB}\) is reduced to 2 V: determine \(I_C\). (c) Using Figs. 3.7 and 3.8, determine \(V_{BE}\) if \(I_C\) = 4 mA and \(V_{CB}\) = 20 V. (d) Repeat (c) using Figs. 3.8 and 3.10c.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองตั้ง \(I_E\) ด้วยแหล่งจ่ายกระแสและ \(V_{CB}\) ด้วยแหล่งจ่ายแรงดัน ข้อ (c) ตั้ง \(I_E\) ให้ \(I_C\) เป็น 4 mA พอดี <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation sets \(I_E\) with a current source and \(V_{CB}\) with a voltage source; in (c) \(I_E\) is set so that \(I_C\) is exactly 4 mA. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">แอลฟาแบบไฟตรงและไฟสลับ</h2><h2 data-l="en">The dc and ac alpha</h2>
+    <div class="src" data-l="th">สไลด์หน้า 10 · Boylestad สมการ 3.5–3.7 และข้อ 15 ท้ายบท</div><div class="src" data-l="en">Slide p. 10 · Boylestad Eqs. 3.5–3.7 and end-of-chapter problem 15</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>(a) ทรานซิสเตอร์มี \(\alpha_{dc}\) = 0.998 จงหา \(I_C\) เมื่อ \(I_E\) = 4 mA (b) จงหา \(\alpha_{dc}\) เมื่อ \(I_E\) = 2.8 mA, \(I_C\) = 2.75 mA และ \(I_{CBO}\) = 0.1 µA</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>(a) Given \(\alpha_{dc}\) = 0.998, determine \(I_C\) if \(I_E\) = 4 mA. (b) Determine \(\alpha_{dc}\) if \(I_E\) = 2.8 mA, \(I_C\) = 2.75 mA and \(I_{CBO}\) = 0.1 µA.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเป็นวงจรเบสร่วมที่ตั้ง \(I_E\) ด้วยแหล่งจ่ายกระแส แผงข้างภาพแสดงกระแสทั้งสาม <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is a common-base circuit with \(I_E\) set by a current source; the side panel shows the three currents. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">การขยายแรงดันของทรานซิสเตอร์</h2><h2 data-l="en">Transistor amplifying action</h2>
+    <div class="src" data-l="th">หัวข้อในสารบัญสไลด์หน้า 2 · ตัวอย่างจาก Boylestad ฉบับพิมพ์ก่อนหน้า (หัวข้อ Transistor Amplifying Action)</div><div class="src" data-l="en">On the contents slide, p. 2 · the example of earlier editions of Boylestad ("Transistor amplifying action")</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรเบสร่วมในแบบจำลองไฟสลับ (ตัดไบแอสไฟตรงออก): แรงดันขาเข้า \(V_i\) = 200 mV ความต้านทานด้านเข้า \(R_i\) = 20 Ω โหลด R = 5 kΩ และ \(\alpha_{ac}\) = 1 จงหา \(I_i\), \(I_L\), \(V_L\) และอัตราขยายแรงดัน \(A_v\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A common-base stage in its ac model (the dc biasing left out): input voltage \(V_i\) = 200 mV, input resistance \(R_i\) = 20 Ω, load R = 5 kΩ and \(\alpha_{ac}\) = 1. Find \(I_i\), \(I_L\), \(V_L\) and the voltage amplification \(A_v\).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองวาดทรานซิสเตอร์เป็นแบบจำลอง: ด้านเข้าคือความต้านทานต่ำ \(R_i\) ของรอยต่อที่ไบแอสตรง ด้านออกคือแหล่งจ่ายกระแส \(\alpha I_i\) ของรอยต่อที่ไบแอสกลับ ทั้งสองข้างใช้เบสร่วมกัน (กราวด์) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation draws the transistor as its model: the input is the low resistance \(R_i\) of the forward-biased junction, the output the current source \(\alpha I_i\) of the reverse-biased one, both sharing the base (ground). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ข้อ 4–5 อ่านจากรูป 3.8 และ 3.7 (Boylestad ข้อ 13 และ 11 ท้ายบท) · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Questions 4–5 read Figs. 3.8 and 3.7 (Boylestad end-of-chapter problems 13 and 11) · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สามย่านในวงจรเดียว</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{EE}\) = 0: รอยต่อเบส–อิมิตเตอร์ไม่ได้ไบแอสตรง \(I_E\) = 0 และ \(I_C\) เป็นศูนย์ (ย่านคัตออฟ)</li>
+    <li>เพิ่ม \(V_{EE}\): \(I_E \approx (V_{EE} - 0.7)/R_E\) และ \(I_C\) ตาม \(I_E\) ทันที ไม่ว่า \(V_{CC}\) จะเป็นเท่าใด ตราบที่ \(V_{CB}\) ยังไม่ติดลบ (ย่านแอกทีฟ)</li>
+    <li>ลด \(V_{CC}\) ลงหรือเลือก \(R_C\) ที่ใหญ่ขึ้น: เมื่อ \(V_{CB}\) ต่ำกว่าราว −0.5 V รอยต่อคอลเล็กเตอร์–เบสถูกไบแอสตรงด้วย \(I_C\) ลดลง ส่วนที่เหลือของ \(I_E\) ออกทางเบส (ย่านอิ่มตัว)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — npn กับ pnp</h3>
+    <ol><li>สลับเป็น pnp: ขั้วของ \(V_{EE}\) และ \(V_{CC}\) กลับ ทิศของจุดที่วิ่งก็กลับ แต่ขนาดของกระแสเหมือนเดิมทุกค่า</li>
+    <li>ข้อ 3: ลองคิดว่าถ้า \(R_i\) เป็น 100 Ω (ปลายบนของช่วง) อัตราขยายแรงดันจะเหลือเท่าใด (ตอบ: 50)</li></ol>
+    <div class="book">สไลด์บทที่ 3 หน้า 2, 8–10 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 3.4 (Example 3.1, รูป 3.6–3.11, ข้อ 11–15 ท้ายบท) และหัวข้อ Transistor Amplifying Action ของฉบับพิมพ์ก่อนหน้า</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — three regions in one circuit</h3>
+    <ol><li>In section A set \(V_{EE}\) = 0: the base–emitter junction is not forward-biased, \(I_E\) = 0 and \(I_C\) is zero (cutoff).</li>
+    <li>Raise \(V_{EE}\): \(I_E \approx (V_{EE} - 0.7)/R_E\) and \(I_C\) follows \(I_E\) at once, whatever \(V_{CC}\) is, as long as \(V_{CB}\) is not negative (active region).</li>
+    <li>Lower \(V_{CC}\) or pick a larger \(R_C\): once \(V_{CB}\) is below about −0.5 V the collector–base junction is forward-biased too; \(I_C\) falls and the rest of \(I_E\) leaves by the base (saturation).</li></ol></div>
+  <div class="card"><h3>Try this 2 — npn and pnp</h3>
+    <ol><li>Switch to pnp: the polarities of \(V_{EE}\) and \(V_{CC}\) turn round and so do the moving dots, but every current has the same size.</li>
+    <li>Problem 3: what would the voltage gain be with \(R_i\) = 100 Ω, the top of the range? (Answer: 50.)</li></ol>
+    <div class="book">Chapter 3 slides pp. 2, 8–10 · Boylestad &amp; Nashelsky, 11th ed., section 3.4 (Example 3.1, Figs. 3.6–3.11, end-of-chapter problems 11–15), and the "Transistor amplifying action" section of earlier editions</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL;
+  CH3.problem(1, 'ex31'); CH3.problem(2, 'alpha'); CH3.problem(3, 'amp');
+
+  /* =================================================================== A: a common-base circuit */
+  const SA = { VEE: 4, VCC: 10, RC: 2000, RE: 1000, pnp: false };
+  const BA = new CH8.Board('cvA', { T: 4, mid: true, midMin: 420, cktAspM: 0.44, rowAsp: 0.66, rowMin: 270, pad: 1.2, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+    view: { acPeak: false, minV: 7, glowColor: 'rgba(255,126,182,.4)' },
+    side: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const q = CH3.q(c), il = (SA.VCC + 1) / SA.RC * 1e3;
+      CH3.cbOut(ctx, b, bd, { q: { v: Math.max(-1, q.VCB), i: q.ic, label: 'Q', side: q.VCB > 25 ? -1 : 1 }, segs: [{ a: [SA.VCC, 0], b: [0, SA.VCC / SA.RC * 1e3], color: C.chord, w: 2 }, { a: [0, SA.VCC / SA.RC * 1e3], b: [-1, il], color: C.chord, w: 2 }],
+        title: t('ลักษณะสมบัติด้านออก (รูป 3.8) และเส้นโหลด', 'output characteristics (Fig. 3.8), load line') }); },
+    waves: [{ draw: (ctx, b, bd) => { const c = BA.ckt; if (!c) return; const q = CH3.q(c);
+      CH3.inPlot(ctx, b, bd, { kind: 'cb', vce: Math.max(0, q.VCB), q: { v: q.VBE, i: q.ie, label: 'Q' }, title: t('ลักษณะสมบัติด้านเข้า (รูป 3.7)', 'input characteristics (Fig. 3.7)') }); } }],
+    badge: () => { const q = CH3.q(BA.ckt), r = CH3.reg(q.region); return [[`${r[0]}: I_C = ${fd(q.ic, 3)} mA`, `${r[1]}: I_C = ${fd(q.ic, 3)} mA`], q.region === 'active' ? 'ok' : 'wait']; } });
+  const pA = $('pA'), mA = document.createElement('div');
+  ui.h2(pA, t('ทรานซิสเตอร์และแหล่งจ่าย', 'Transistor and supplies'));
+  ui.radio(pA, [{ id: 'aN', label: 'npn', on: true }, { id: 'aP', label: 'pnp' }], id => { SA.pnp = id === 'aP'; buildA(); });
+  ui.slider(pA, { id: 'aVEE', label: 'V_{EE}', min: 0, max: 8, step: 0.1, value: SA.VEE, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VEE = v; buildA(); } });
+  ui.slider(pA, { id: 'aVCC', label: 'V_{CC}', min: 0, max: 30, step: 0.5, value: SA.VCC, fmt: v => `${fd(v, 1)} V`, oninput: v => { SA.VCC = v; buildA(); } });
+  ui.radio(pA, [1000, 2000, 3300].map(r => ({ id: 'aRC' + r, label: 'R_C = ' + CK.eng(r, 'Ω'), on: r === SA.RC })), id => { SA.RC = +id.slice(3); buildA(); });
+  pA.appendChild(mA); mA.className = 'metrics';
+  function buildA() { BA.set(CH3.cb({ VEE: SA.VEE, RE: SA.RE, VCC: SA.VCC, RC: SA.RC, pnp: SA.pnp }), { speed: 80 / 0.004, dotRef: 0.004 }); showA(); }
+  function showA() { const q = CH3.q(BA.ckt), r = CH3.reg(q.region), p = SA.pnp;
+    mA.innerHTML = ui.kv([['I_E', `${fd(q.ie, 3)} mA`], ['I_C', `${fd(q.ic, 3)} mA`], ['I_B', `${fd(q.uA, 2)} µA`], [p ? 'V_EB' : 'V_BE', `${fd(q.VBE, 3)} V`], [p ? 'V_BC' : 'V_CB', `${fd(q.VCB, 2)} V`], ['α = I_C/I_E', q.ie > 1e-3 ? fd(q.ic / q.ie, 4) : '—'], [t('ย่าน', 'region'), t(r[0], r[1])]]);
+    $('wA').innerHTML = `<div class="answer">${q.region === 'cutoff' ? t('รอยต่อเบส–อิมิตเตอร์ไม่ได้ไบแอสตรง ไม่มีกระแสอิมิตเตอร์ \\(I_C\\) เหลือเพียงกระแสรั่วไหล \\(I_{CBO}\\) ซึ่งแทบเป็นศูนย์ (ย่านคัตออฟ)', 'The base–emitter junction is not forward-biased: there is no emitter current, and \\(I_C\\) is only the leakage \\(I_{CBO}\\), practically zero (cutoff).')
+      : q.region === 'saturation' ? t(`รอยต่อคอลเล็กเตอร์–เบสถูกไบแอสตรงด้วย (\\(V_{CB}\\) = ${fd(q.VCB, 2)} V) \\(I_C\\) = ${fd(q.ic, 2)} mA น้อยกว่า \\(\\alpha I_E\\) = ${fd(0.995 * q.ie, 2)} mA ส่วนที่เหลือออกทางเบส \\(I_B\\) = ${fd(q.ib, 2)} mA (ย่านอิ่มตัว)`, `The collector–base junction is forward-biased too (\\(V_{CB}\\) = ${fd(q.VCB, 2)} V): \\(I_C\\) = ${fd(q.ic, 2)} mA is less than \\(\\alpha I_E\\) = ${fd(0.995 * q.ie, 2)} mA, and the rest leaves by the base, \\(I_B\\) = ${fd(q.ib, 2)} mA (saturation).`)
+      : t(`ย่านแอกทีฟ: \\(I_E = (V_{EE} - V_{BE})/R_E\\) = (${fd(SA.VEE, 1)} − ${fd(q.VBE, 2)})/1 kΩ = ${fd(q.ie, 2)} mA และ \\(I_C = \\alpha I_E\\) = ${fd(q.ic, 3)} mA ไม่ขึ้นกับ \\(V_{CC}\\) หรือ \\(R_C\\) ส่วน \\(V_{CB} = V_{CC} - I_CR_C\\) = ${fd(q.VCB, 2)} V`, `Active region: \\(I_E = (V_{EE} - V_{BE})/R_E\\) = (${fd(SA.VEE, 1)} − ${fd(q.VBE, 2)})/1 kΩ = ${fd(q.ie, 2)} mA and \\(I_C = \\alpha I_E\\) = ${fd(q.ic, 3)} mA, whatever \\(V_{CC}\\) or \\(R_C\\) is; \\(V_{CB} = V_{CC} - I_CR_C\\) = ${fd(q.VCB, 2)} V.`)}</div>`;
+    MC.renderMath($('wA')); }
+  BA.resize(); buildA(); window.addEventListener('resize', () => BA.resize());
+  LS.anim($('cvA'), dt => BA.frame(dt));
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  const ic13 = CK.BJT.cb(CH3.QCB, 3.5e-3, 10).IC * 1e3, vbe11 = CK.BJT.cb(CH3.QCB, 5e-3, 20).VBE;
+  CH6.quiz('quiz', [
+    { q: t('1) ทรานซิสเตอร์ที่มี α = 0.99 และ \\(I_E\\) = 5 mA จงหา \\(I_C\\) และ \\(I_B\\)', '1) A transistor with α = 0.99 carries \\(I_E\\) = 5 mA. Find \\(I_C\\) and \\(I_B\\).'),
+      fields: [{ key: 'x', lab: 'I_C =', ans: 4.95, unit: 'mA' }, { key: 'y', lab: 'I_B =', ans: 50, unit: 'µA' }], work: work(R`I_C = \alpha I_E = (0.99)(5\ \text{mA}) = 4.95\ \text{mA},\ I_B = I_E - I_C = 0.05\ \text{mA} = 50\ \mu\text{A}`) },
+    { q: t('2) วัดได้ \\(I_C\\) = 3.96 mA และ \\(I_E\\) = 4 mA จงหา \\(\\alpha_{dc}\\)', '2) \\(I_C\\) = 3.96 mA and \\(I_E\\) = 4 mA are measured. Find \\(\\alpha_{dc}\\).'),
+      fields: [{ key: 'x', lab: 'α_dc =', ans: 0.99, tol: 0.0005 }], work: work(R`\alpha_{dc} = \frac{I_C}{I_E} = \frac{3.96}{4} = 0.99`) },
+    { q: t('3) ทรานซิสเตอร์ α = 0.995 มี \\(I_E\\) = 6 mA จงหา \\(I_B\\)', '3) A transistor with α = 0.995 carries \\(I_E\\) = 6 mA. Find \\(I_B\\).'),
+      fields: [{ key: 'x', lab: 'I_B =', ans: 30, unit: 'µA', tol: 0.3 }], work: work(R`I_B = I_E - \alpha I_E = (1 - 0.995)(6\ \text{mA}) = 30\ \mu\text{A}`) },
+    { q: t('4) จากรูป 3.8 จงหา \\(I_C\\) เมื่อ \\(I_E\\) = 3.5 mA และ \\(V_{CB}\\) = 10 V', '4) From Fig. 3.8, find \\(I_C\\) for \\(I_E\\) = 3.5 mA and \\(V_{CB}\\) = 10 V.'),
+      fields: [{ key: 'x', lab: 'I_C ≅', ans: 3.5, unit: 'mA', tol: 0.05 }], work: work(R`I_C \cong I_E = 3.5\ \text{mA}`, `<p>${t(`ภาพจำลอง (α = 0.995) ได้ ${fd(ic13, 3)} mA`, `The simulation (α = 0.995) gives ${fd(ic13, 3)} mA.`)}</p>`) },
+    { q: t('5) จากรูป 3.7 จงหา \\(V_{BE}\\) ที่ \\(I_E\\) = 5 mA และ \\(V_{CB}\\) = 20 V', '5) From Fig. 3.7, find \\(V_{BE}\\) at \\(I_E\\) = 5 mA and \\(V_{CB}\\) = 20 V.'),
+      fields: [{ key: 'x', lab: 'V_BE ≅', ans: vbe11, unit: 'V', tol: 0.012 }], work: work(R`V_{BE} \cong ${fd(vbe11, 2)}\ \text{V}`, `<p>${t('อ่านบนเส้น V<sub>CB</sub> = 20 V ซึ่งอยู่ซ้ายสุด', 'Read on the V<sub>CB</sub> = 20 V curve, the leftmost one.')}</p>`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

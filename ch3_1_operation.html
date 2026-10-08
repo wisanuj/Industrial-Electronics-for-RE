@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="3.1 — Transistor Construction and Operation">3.1 — โครงสร้างและการทำงานของทรานซิสเตอร์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">โครงสร้างและการทำงานของทรานซิสเตอร์ <span class="en">Transistor construction and operation</span></h1>
+<h1 data-l="en">Transistor construction and operation <span class="en">Three layers, two junctions, and \(I_E = I_C + I_B\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 3 หน้า 2–7 ทรานซิสเตอร์แบบรอยต่อคู่ (bipolar junction transistor, BJT) เป็นอุปกรณ์สามขาตัวแรกของรายวิชา คือสารกึ่งตัวนำสามชั้นแบบ npn หรือ pnp ที่ขาหนึ่งควบคุมกระแสระหว่างอีกสองขา หน้านี้มีภาพเคลื่อนไหวของพาหะในทรานซิสเตอร์ที่ต่อหรือปลดแหล่งจ่ายแต่ละตัวได้ (ส่วน A) โจทย์กฎกระแสของทรานซิสเตอร์ และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 3 slides pp. 2–7. The bipolar junction transistor (BJT) is the first three-terminal device of the course: three layers of semiconductor, npn or pnp, in which one terminal controls the current between the other two. This page has an animation of the carriers inside a transistor whose two supplies you can connect or remove (section A), a problem on the transistor's current law, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_E = I_C + I_B $$ $$ I_C = I_{C_\text{majority}} + I_{CO_\text{minority}} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ทรานซิสเตอร์ตัวแรก</b>: Brattain และ Bardeen (ร่วมกับ Shockley) สาธิตการขยายของทรานซิสเตอร์แบบจุดสัมผัส (point-contact) ที่ Bell Telephone Laboratories เมื่อ 23 ธันวาคม 1947 ข้อดีเหนือหลอดสุญญากาศคือเล็ก เบา ทนทาน ประสิทธิภาพสูง ไม่ต้องอุ่นเครื่อง และใช้แรงดันต่ำกว่า (สไลด์หน้า 3)</li>
+  <li><b>อุปกรณ์สามขา</b>: วงจรขยายทุกชนิด (เพิ่มแรงดัน กระแส หรือกำลัง) มีอย่างน้อยสามขา โดยขาหนึ่งควบคุมการไหลระหว่างอีกสองขา (สไลด์หน้า 4)</li>
+  <li><b>โครงสร้าง</b>: สามชั้นแบบ npn หรือ pnp อิมิตเตอร์ (emitter, E) โดปมาก เบส (base, B) โดปน้อยและบางมาก (ความกว้างรวมต่อเบสราว 150 : 1) คอลเล็กเตอร์ (collector, C) โดปน้อย คำว่าไบโพลาร์ (bipolar) หมายถึงทั้งโฮลและอิเล็กตรอนมีส่วนในการนำกระแส (สไลด์หน้า 5)</li>
+  <li><b>การทำงาน</b>: รอยต่อหนึ่งไบแอสตรง อีกรอยต่อไบแอสกลับ (สไลด์หน้า 6) พาหะข้างมากจากอิมิตเตอร์แพร่เข้าเบสที่บาง ส่วนน้อยรวมตัวในเบสเป็นกระแสเบสระดับไมโครแอมแปร์ ส่วนใหญ่ข้ามรอยต่อที่ไบแอสกลับเข้าคอลเล็กเตอร์ (สไลด์หน้า 7)</li>
+  <li><b>กระแส</b>: มองทรานซิสเตอร์เป็นโหนดเดียว \(I_E = I_C + I_B\) (สมการ 3.1) กระแสอิมิตเตอร์มากที่สุด กระแสเบสน้อยที่สุด และ \(I_C\) มีส่วนของพาหะข้างน้อย (กระแสรั่วไหล \(I_{CO}\)) ซึ่งไวต่ออุณหภูมิ (สมการ 3.2)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The first transistor</b>: Brattain and Bardeen (with Shockley) demonstrated the amplifying action of a point-contact transistor at Bell Telephone Laboratories on 23 December 1947. Its advantages over the vacuum tube: smaller, lighter, rugged, more efficient, no warm-up, lower operating voltages (slide p. 3).</li>
+  <li><b>Three terminals</b>: every amplifier (raising voltage, current or power) has at least three terminals, one controlling the flow between the other two (slide p. 4).</li>
+  <li><b>Construction</b>: three layers, npn or pnp. The emitter (E) is heavily doped; the base (B) lightly doped and very thin (total width to base about 150 : 1); the collector (C) lightly doped. Bipolar means both holes and electrons take part in conduction (slide p. 5).</li>
+  <li><b>Operation</b>: one junction forward-biased, the other reverse-biased (slide p. 6). Majority carriers from the emitter diffuse into the thin base; a few recombine there (a base current of microamperes), most cross the reverse-biased junction into the collector (slide p. 7).</li>
+  <li><b>Currents</b>: the transistor as one node gives \(I_E = I_C + I_B\) (Eq. 3.1). The emitter current is the largest, the base current the smallest, and \(I_C\) includes a minority-carrier part, the leakage \(I_{CO}\), which is temperature-sensitive (Eq. 3.2).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch3/p02.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 2, Contents: Introduction; Transistor Construction; Transistor Operation; Common-Base Configuration; Transistor Amplifying Action; Common-Emitter Configuration; Common-Collector Configuration; Limits of Operation.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 2: สารบัญ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 2: contents · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch3/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 3, Introduction: Walter H. Brattain and John Bardeen demonstrated the amplifying action of the first transistor at the Bell Telephone Laboratories; the original transistor (a point-contact transistor) is shown in the figure. Photographs: the three co-inventors at a laboratory bench, and the first transistor (courtesy Bell Telephone Laboratories).">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 3: ทรานซิสเตอร์ตัวแรก · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 3: the first transistor · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch3/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 4, Introduction: note that this chapter is our first discussion of devices with three or more terminals; all amplifiers (devices that increase the voltage, current, or power level) will have at least three terminals with one controlling the flow between two other terminals. Figure: several transistor packages with their emitter, base and collector leads marked, including one whose case is the collector and one with a white dot.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 4: อุปกรณ์สามขาและตัวถังแบบต่าง ๆ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 4: three terminals and some packages · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch3/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 5, Transistor Construction: the transistor is a three-layer semiconductor device consisting of either two n- and one p-type layers of material or two p- and one n-type layers of material. The emitter layer is heavily doped, the base lightly doped, and the collector only lightly doped; the outer layers have widths much greater than the sandwiched p- or n-type material. Figures: an n+ p n block (emitter, base, collector) with I_E, I_B and I_C and its npn symbol; a p+ n p block with its pnp symbol.">
+  <figcaption data-l="th">สไลด์บทที่ 3 หน้า 5: โครงสร้าง npn และ pnp · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 3 slide p. 5: npn and pnp construction · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>พาหะในทรานซิสเตอร์</a><a href="#ex1"><b>1</b>กฎกระแส</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Carriers in a transistor</a><a href="#ex1"><b>1</b>The current law</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">พาหะในทรานซิสเตอร์ที่ไบแอสแล้ว</h2><h2 data-l="en">The carriers of a biased transistor</h2>
+    <div class="src" data-l="th">สไลด์หน้า 6–7 · Boylestad หัวข้อ 3.3 (รูป 3.4–3.5)</div><div class="src" data-l="en">Slides pp. 6–7 · Boylestad, section 3.3 (Figs. 3.4–3.5)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch3/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 6, Transistor Operation: in the figure the pnp transistor has been redrawn without the base-to-collector bias; note the similarities between this situation and that of the forward-biased diode in Chapter 1. The depletion region has been reduced in width due to the applied bias, resulting in a heavy flow of majority carriers from the p- to the n-type material. Figures: the emitter–base junction with V_EE, a narrow depletion region and many majority carriers; the collector–base junction with V_CC, a wide depletion region and only minority carriers. Quote: one p-n junction of a transistor is reverse biased, while the other is forward biased.">
+    <figcaption data-l="th">สไลด์หน้า 6: รอยต่อหนึ่งไบแอสตรง อีกรอยต่อไบแอสกลับ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 6: one junction forward-biased, the other reverse-biased · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch3/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 3 slide 7, Transistor Operation: in the figure both biasing potentials have been applied to a pnp transistor, with the resulting majority- and minority-carrier flow indicated. A large number of majority carriers will diffuse across the forward-biased p-n junction into the n-type material; the larger number of these majority carriers will diffuse across the reverse-biased junction into the p-type material connected to the collector terminal. Figure: a p-n-p bar with both depletion regions, a wide arrow of majority carriers from emitter to collector, I_E in, I_C out, a small I_B out of the base, and the supplies V_EE and V_CC below.">
+    <figcaption data-l="th">สไลด์หน้า 7: การไหลของพาหะเมื่อไบแอสทั้งสองรอยต่อ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 7: the carrier flow with both junctions biased · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพจำลองคือทรานซิสเตอร์ตามรูป 3.5: อิมิตเตอร์ทางซ้าย เบสบาง ๆ ตรงกลาง คอลเล็กเตอร์ทางขวา \(V_{EE}\) ไบแอสตรงรอยต่ออิมิตเตอร์–เบส และ \(V_{CC}\) ไบแอสกลับรอยต่อคอลเล็กเตอร์–เบส ต่อหรือปลดแหล่งจ่ายทีละตัวแล้วดูความกว้างของบริเวณปลอดพาหะ (แถบสีเหลือง) และพาหะที่ข้ามรอยต่อ พาหะข้างน้อยมีวงล้อม ตัวเลขกระแสเป็นตัวอย่าง (α = 0.99 และ \(I_{CO}\) ขยายให้เห็นได้)</p>
+  <p class="lead" data-l="en">The simulation is the transistor of Fig. 3.5: emitter on the left, a thin base in the middle, collector on the right; \(V_{EE}\) forward-biases the emitter–base junction and \(V_{CC}\) reverse-biases the collector–base junction. Connect or remove each supply and watch the width of the depletion regions (yellow strips) and the carriers crossing. Minority carriers are ringed. The currents are illustrative (α = 0.99, with \(I_{CO}\) enlarged so that it shows).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">กฎกระแสของทรานซิสเตอร์</h2><h2 data-l="en">The transistor's current law</h2>
+    <div class="src" data-l="th">สไลด์หน้า 7 · Boylestad สมการ 3.1 และข้อ 9 ท้ายบท</div><div class="src" data-l="en">Slide p. 7 · Boylestad Eq. 3.1 and end-of-chapter problem 9</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>กระแสอิมิตเตอร์ของทรานซิสเตอร์ตัวหนึ่งเท่ากับ 8 mA และ \(I_B\) เท่ากับ 1/100 ของ \(I_C\) จงหา \(I_C\) และ \(I_B\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The emitter current of a transistor is 8 mA and \(I_B\) is 1/100 of \(I_C\). Determine \(I_C\) and \(I_B\).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเป็นทรานซิสเตอร์ npn ในวงจรเบสร่วม (หน้า 3.2): แหล่งจ่ายกระแส 8 mA ดึงกระแสออกจากอิมิตเตอร์ และแหล่งจ่าย 5 V ไบแอสกลับรอยต่อคอลเล็กเตอร์–เบส <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is an npn transistor in a common-base circuit (page 3.2): an 8 mA current source draws the emitter current, and a 5 V supply reverse-biases the collector–base junction. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้ \(I_E = I_C + I_B\) · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use \(I_E = I_C + I_B\) · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ทีละรอยต่อ</h3>
+    <ol><li>ส่วน A ปลด \(V_{CC}\) ออก เหลือ \(V_{EE}\): รอยต่ออิมิตเตอร์–เบสเป็นไดโอดไบแอสตรง (รูป 3.4a) บริเวณปลอดพาหะแคบ พาหะข้างมากไหลข้ามจำนวนมาก และออกทางขาเบสทั้งหมด \(I_B = I_E\)</li>
+    <li>ต่อ \(V_{CC}\) กลับเข้าไป ปลด \(V_{EE}\) ออก: รอยต่อคอลเล็กเตอร์–เบสเป็นไดโอดไบแอสกลับ (รูป 3.4b) บริเวณปลอดพาหะกว้าง มีเพียงพาหะข้างน้อยข้ามรอยต่อ คือกระแสรั่วไหล \(I_{CO}\)</li>
+    <li>ต่อทั้งสองตัว: พาหะที่ฉีดเข้าเบสเกือบทั้งหมดไปถึงคอลเล็กเตอร์ \(I_B\) เหลือเพียงส่วนน้อย นี่คือเหตุที่เบสต้องบางและโดปน้อย</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — npn</h3>
+    <ol><li>สลับเป็น npn: อิเล็กตรอนเป็นพาหะข้างมากของอิมิตเตอร์และคอลเล็กเตอร์ โฮลเป็นของเบส ขั้วแหล่งจ่ายและทิศของกระแสทุกตัวกลับ แต่หลักการเหมือนเดิมทุกอย่าง</li>
+    <li>ลองจำทิศของลูกศรในสัญลักษณ์ (หน้า 3.2): npn "not pointing in" pnp "pointing in"</li></ol>
+    <div class="book">สไลด์บทที่ 3 หน้า 2–7 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 3.1–3.3 (รูป 3.1–3.5, สมการ 3.1–3.2, ข้อ 9 ท้ายบท)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — one junction at a time</h3>
+    <ol><li>In section A remove \(V_{CC}\), leaving \(V_{EE}\): the emitter–base junction is a forward-biased diode (Fig. 3.4a), its depletion region narrow, many majority carriers cross, and all of them leave by the base: \(I_B = I_E\).</li>
+    <li>Connect \(V_{CC}\) again and remove \(V_{EE}\): the collector–base junction is a reverse-biased diode (Fig. 3.4b), its depletion region wide, and only minority carriers cross: the leakage \(I_{CO}\).</li>
+    <li>Connect both: nearly all the carriers injected into the base reach the collector and only a small \(I_B\) remains. This is why the base must be thin and lightly doped.</li></ol></div>
+  <div class="card"><h3>Try this 2 — npn</h3>
+    <ol><li>Switch to npn: electrons are the majority carriers of the emitter and the collector, holes of the base; every supply polarity and current direction turns round, but the principle is exactly the same.</li>
+    <li>Remember the arrow of the symbol (page 3.2): npn "not pointing in", pnp "pointing in".</li></ol>
+    <div class="book">Chapter 3 slides pp. 2–7 · Boylestad &amp; Nashelsky, 11th ed., sections 3.1–3.3 (Figs. 3.1–3.5, Eqs. 3.1–3.2, end-of-chapter problem 9)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  CH3.problem(1, 'p9');
+
+  /* =================================================================== A: the carriers of a biased transistor (Figs. 3.4–3.5) */
+  const car = new CH3.Carriers(), pane = IE.pane($('cvA'), W => Math.max(330, Math.min(470, W * 0.68)));
+  LS.anim($('cvA'), dt => { car.step(dt); const { ctx, W, H } = pane; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); car.draw(ctx, { x: 0, y: 0, w: W, h: H }, { short: W < 520 });
+    const st = car.vee && car.vcc ? [t('แอกทีฟ: I_C ≅ I_E', 'active: I_C ≅ I_E'), 'ok'] : car.vee ? [t('เหลือ V_EE: ไดโอดไบแอสตรง', 'V_EE only: a forward-biased diode'), 'wait'] : car.vcc ? [t('เหลือ V_CC: เฉพาะ I_CO', 'V_CC only: I_CO alone'), 'wait'] : [t('ไม่มีไบแอส', 'no bias'), 'wait'];
+    CK.badge(ctx, st[0], st[1]); });
+  const pA = $('pA');
+  ui.h2(pA, t('แหล่งจ่ายและชนิด', 'Supplies and type'));
+  const tg = ui.buttons(pA, [{ id: 'aEE', label: t('V_EE ไบแอสตรง E–B', 'V_EE forward-biases E–B'), on: true, onclick: el => { car.set({ vee: !car.vee }); el.classList.toggle('on', car.vee); showA(); } },
+    { id: 'aCC', label: t('V_CC ไบแอสกลับ C–B', 'V_CC reverse-biases C–B'), on: true, onclick: el => { car.set({ vcc: !car.vcc }); el.classList.toggle('on', car.vcc); showA(); } }]);
+  ui.radio(pA, [{ id: 'aP', label: 'pnp', on: true }, { id: 'aN', label: 'npn' }], id => { car.set({ npn: id === 'aN' }); showA(); });
+  const mA = document.createElement('div'); mA.className = 'metrics'; pA.appendChild(mA);
+  function showA() { const c = car.cur(), npn = car.npn, maj = npn ? t('อิเล็กตรอน', 'electrons') : t('โฮล', 'holes'), mb = npn ? t('โฮล', 'holes') : t('อิเล็กตรอน', 'electrons');
+    mA.innerHTML = ui.kv([['I_E', `${fd(c.ie, 3)} mA`], ['I_C', `${fd(c.ic, 3)} mA`], ['I_B', c.ib < -1e-6 ? t('−I_CO (ไหลออก)', '−I_CO (flows out)') : `${fd(c.ib, 3)} mA`]]);
+    const s = car.vee && car.vcc ? t(`ทั้งสองแหล่งจ่ายต่ออยู่ (รูป 3.5): ${maj}จำนวนมากจากอิมิตเตอร์แพร่ข้ามรอยต่อที่ไบแอสตรงเข้าเบส เบสบางและมีพาหะน้อย จึงมีเพียงส่วนน้อยที่รวมตัวกับ${mb}ในเบส ซึ่งแหล่งจ่ายต้องเติมให้ทางขาเบส (\\(I_B\\) ระดับไมโครแอมแปร์) ส่วนใหญ่ถูกสนามของรอยต่อที่ไบแอสกลับกวาดเข้าคอลเล็กเตอร์ (\\(I_C\\)) พาหะข้างน้อยก็ยังข้ามรอยต่อคอลเล็กเตอร์อยู่ (\\(I_{CO}\\))`,
+        `Both supplies connected (Fig. 3.5): many ${maj} from the emitter diffuse across the forward-biased junction into the base. The base is thin and has few carriers, so only a few recombine with its ${mb}, which the supply replaces through the base lead (\\(I_B\\), microamperes). Most are swept into the collector by the field of the reverse-biased junction (\\(I_C\\)). Minority carriers still cross the collector junction too (\\(I_{CO}\\)).`)
+      : car.vee ? t(`เหลือแต่ \\(V_{EE}\\) (รูป 3.4a): รอยต่ออิมิตเตอร์–เบสคือไดโอดไบแอสตรง บริเวณปลอดพาหะแคบลง ${maj}ไหลจากอิมิตเตอร์เข้าเบสมาก แล้วออกทางขาเบสทั้งหมด ไม่มีกระแสคอลเล็กเตอร์`, `\\(V_{EE}\\) only (Fig. 3.4a): the emitter–base junction is a forward-biased diode; its depletion region narrows and many ${maj} flow from the emitter into the base, all leaving by the base lead. There is no collector current.`)
+      : car.vcc ? t('เหลือแต่ \\(V_{CC}\\) (รูป 3.4b): รอยต่อคอลเล็กเตอร์–เบสคือไดโอดไบแอสกลับ บริเวณปลอดพาหะกว้างขึ้น ไม่มีพาหะข้างมากไหล มีเพียงพาหะข้างน้อยที่ข้ามรอยต่อ คือกระแสรั่วไหล \\(I_{CO}\\) ระดับไมโครหรือนาโนแอมแปร์', '\\(V_{CC}\\) only (Fig. 3.4b): the collector–base junction is a reverse-biased diode; its depletion region widens, no majority carriers flow, and only minority carriers cross: the leakage \\(I_{CO}\\), micro- or nanoamperes.')
+      : t('ไม่มีไบแอส: พาหะเคลื่อนที่แบบสุ่ม ไม่มีกระแสสุทธิ ทั้งสองรอยต่อมีบริเวณปลอดพาหะตามธรรมชาติ', 'No bias: the carriers move at random, there is no net current, and both junctions keep their natural depletion regions.');
+    $('wA').innerHTML = `<div class="answer">${s}</div>`; MC.renderMath($('wA')); }
+  showA(); void tg;
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ทรานซิสเตอร์มี \\(I_E\\) = 5 mA และ \\(I_B\\) = 40 µA จงหา \\(I_C\\)', '1) A transistor has \\(I_E\\) = 5 mA and \\(I_B\\) = 40 µA. Find \\(I_C\\).'),
+      fields: [{ key: 'x', lab: 'I_C =', ans: 4.96, unit: 'mA' }], work: work(R`I_C = I_E - I_B = 5\ \text{mA} - 0.04\ \text{mA} = 4.96\ \text{mA}`) },
+    { q: t('2) ทรานซิสเตอร์มี \\(I_C\\) = 2 mA และ \\(I_B\\) = 25 µA จงหา \\(I_E\\)', '2) A transistor has \\(I_C\\) = 2 mA and \\(I_B\\) = 25 µA. Find \\(I_E\\).'),
+      fields: [{ key: 'x', lab: 'I_E =', ans: 2.025, unit: 'mA', tol: 0.001 }], work: work(R`I_E = I_C + I_B = 2\ \text{mA} + 0.025\ \text{mA} = 2.025\ \text{mA}`) },
+    { q: t('3) วัดได้ \\(I_E\\) = 4.55 mA และ \\(I_C\\) = 4.5 mA จงหา \\(I_B\\)', '3) \\(I_E\\) = 4.55 mA and \\(I_C\\) = 4.5 mA are measured. Find \\(I_B\\).'),
+      fields: [{ key: 'x', lab: 'I_B =', ans: 50, unit: 'µA', tol: 0.5 }], work: work(R`I_B = I_E - I_C = 0.05\ \text{mA} = 50\ \mu\text{A}`) },
+    { q: t('4) \\(I_C\\) = 5 mA ซึ่งรวมกระแสรั่วไหล \\(I_{CO}\\) = 2 µA จงหาส่วนของพาหะข้างมาก', '4) \\(I_C\\) = 5 mA, which includes a leakage \\(I_{CO}\\) = 2 µA. Find the majority-carrier part.'),
+      fields: [{ key: 'x', lab: 'I_Cmajority =', ans: 4.998, unit: 'mA', tol: 0.0005 }], work: work(R`I_{C_\text{majority}} = I_C - I_{CO} = 5\ \text{mA} - 0.002\ \text{mA} = 4.998\ \text{mA}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
