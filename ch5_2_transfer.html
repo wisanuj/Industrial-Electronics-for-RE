@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="5.2 — Transfer Characteristics">5.2 — ลักษณะสมบัติถ่ายโอนและสมการของ Shockley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ลักษณะสมบัติถ่ายโอนและสมการของ Shockley <span class="en">Transfer characteristics and Shockley's equation</span></h1>
+<h1 data-l="en">Transfer characteristics and Shockley's equation <span class="en">\(I_D\) against \(V_{GS}\): a parabola from \(I_{DSS}\) to \(V_P\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 5 หน้า 17–22 สำหรับ BJT ความสัมพันธ์ขาเข้า–ขาออก \(I_C = \beta I_B\) เป็นเส้นตรง แต่สำหรับ JFET ความสัมพันธ์ \(I_D = f(V_{GS})\) คือสมการของ Shockley ซึ่งมีกำลังสอง เส้นโค้งถ่ายโอน (transfer curve) นี้ไม่ขึ้นกับวงจรภายนอก จึงเป็นเครื่องมือหลักของการวิเคราะห์ไบแอสในหน้า 5.3–5.5 หน้านี้มีรูปสองกราฟของรูป 6.17 ที่ปรับ \(I_{DSS}\), \(V_P\), \(V_{GS}\) ได้ (ส่วน A) การใช้สมการและจุดลัดของตาราง 6.1 Examples 6.1–6.2 ตารางเทียบ JFET กับ BJT และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 5 slides pp. 17–22. For a BJT the input–output relation \(I_C = \beta I_B\) is linear; for a JFET the relation \(I_D = f(V_{GS})\) is Shockley's equation, with a square. This transfer curve does not depend on the external network, which makes it the main tool of the bias analysis of pages 5.3–5.5. This page has the two-graph figure of Fig. 6.17 with adjustable \(I_{DSS}\), \(V_P\), \(V_{GS}\) (section A), the use of the equation and the shortcuts of Table 6.1, Examples 6.1–6.2, the JFET-against-BJT table, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_D = I_{DSS}\left(1 - \frac{V_{GS}}{V_P}\right)^2 $$ $$ V_{GS} = V_P\left(1 - \sqrt{\frac{I_D}{I_{DSS}}}\right) $$ $$ V_{GS} = \tfrac12 V_P:\ I_D = \tfrac14 I_{DSS};\quad I_D = \tfrac12 I_{DSS}:\ V_{GS} \cong 0.3V_P $$ $$ I_G \cong 0,\quad I_D = I_S $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>สมการของ Shockley</b> (สไลด์หน้า 17, สมการ 6.3): \(I_D = I_{DSS}(1 - V_{GS}/V_P)^2\) ตัวแปรควบคุมคือ \(V_{GS}\) ส่วน \(I_{DSS}\) กับ \(V_P\) เป็นค่าคงที่ของอุปกรณ์ (จากใบข้อมูล) กำลังสองทำให้ความสัมพันธ์ไม่เป็นเส้นตรง: เส้นโค้งที่ชันขึ้นเมื่อ \(|V_{GS}|\) ลดลง</li>
+  <li><b>ได้จากลักษณะสมบัติด้านเดรน</b> (สไลด์หน้า 18–19, รูป 6.17): ลากเส้นระดับจากส่วนราบของเส้น \(V_{GS}\) แต่ละเส้นไปทางซ้ายถึงแกน \(V_{GS}\) ที่ค่านั้น ได้จุดบนเส้นโค้งถ่ายโอน ปลายทั้งสองคือ (0, \(I_{DSS}\)) และ (\(V_P\), 0) (สมการ 6.4–6.5)</li>
+  <li><b>ไม่ขึ้นกับวงจร</b>: "The transfer characteristics defined by Shockley's equation are unaffected by the network in which the device is employed" วงจรเปลี่ยนได้แค่สมการของวงจรและจุดตัด (บทที่ 7) ไม่ใช่เส้นโค้งของอุปกรณ์</li>
+  <li><b>จุดลัด</b> (ตาราง 6.1): \(V_{GS} = V_P/2\) ให้ \(I_D = I_{DSS}/4\) (สมการ 6.9) และ \(I_D = I_{DSS}/2\) ให้ \(V_{GS} \cong 0.3V_P\) (สมการ 6.10) รวมกับปลายทั้งสองก็ร่างเส้นโค้งได้แม่นพอสำหรับบทที่ 7 ซึ่งมักใช้แค่สามจุด</li>
+  <li><b>p-channel</b>: ใช้สมการเดิมโดย \(V_P\) และ \(V_{GS}\) เป็นบวกทั้งคู่ เส้นโค้งเป็นภาพสะท้อน (Example 6.2)</li>
+  <li><b>ความสัมพันธ์สำคัญ</b> (สไลด์หน้า 21–22, ตาราง 6.2): \(I_G \cong 0\) และ \(I_D = I_S\) ของ JFET เทียบกับ \(V_{BE} \cong 0.7\) V และ \(I_C \cong I_E\) ของ BJT; \(I_C = \beta I_B\) เทียบกับสมการของ Shockley การวิเคราะห์ JFET มักเริ่มจาก \(I_G\) = 0 แล้วหา \(V_{GS}\) ก่อน เหมือนที่ BJT เริ่มจาก \(V_{BE}\) = 0.7 V แล้วหา \(I_B\)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Shockley's equation</b> (slide p. 17, Eq. 6.3): \(I_D = I_{DSS}(1 - V_{GS}/V_P)^2\). The control variable is \(V_{GS}\); \(I_{DSS}\) and \(V_P\) are constants of the device (from its data sheet). The square makes the relation nonlinear: a curve that steepens as \(|V_{GS}|\) decreases.</li>
+  <li><b>From the drain characteristics</b> (slides pp. 18–19, Fig. 6.17): carry a horizontal line from the flat part of each \(V_{GS}\) curve leftward to that \(V_{GS}\) on the other axis to get a point of the transfer curve. Its ends are (0, \(I_{DSS}\)) and (\(V_P\), 0) (Eqs. 6.4–6.5).</li>
+  <li><b>Independent of the network</b>: "The transfer characteristics defined by Shockley's equation are unaffected by the network in which the device is employed." A network can only change its own equation and the intersection (chapter 7), never the device curve.</li>
+  <li><b>Shortcuts</b> (Table 6.1): \(V_{GS} = V_P/2\) gives \(I_D = I_{DSS}/4\) (Eq. 6.9) and \(I_D = I_{DSS}/2\) gives \(V_{GS} \cong 0.3V_P\) (Eq. 6.10); with the two ends these sketch the curve accurately enough for chapter 7, which mostly uses three points.</li>
+  <li><b>p-channel</b>: the same equation with \(V_P\) and \(V_{GS}\) both positive; the curve is the mirror image (Example 6.2).</li>
+  <li><b>Important relationships</b> (slides pp. 21–22, Table 6.2): \(I_G \cong 0\) and \(I_D = I_S\) for the JFET against \(V_{BE} \cong 0.7\) V and \(I_C \cong I_E\) for the BJT; \(I_C = \beta I_B\) against Shockley's equation. A JFET analysis usually starts from \(I_G\) = 0 and finds \(V_{GS}\) first, as a BJT analysis starts from \(V_{BE}\) = 0.7 V and finds \(I_B\).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch5/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 17, Transfer Characteristics, derivation: the relationship between I_D and V_GS is defined by Shockley's equation, I_D = I_DSS (1 − V_GS/V_P)², with V_GS marked as the control variable and I_DSS, V_P as constants; the squared term of the equation will result in a nonlinear relationship between I_D and V_GS, producing a curve that grows exponentially with decreasing magnitudes of V_GS; the transfer characteristics defined by Shockley's equation are unaffected by the network in which the device is employed.">
+  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 17: สมการของ Shockley · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 17: Shockley's equation · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สองกราฟของรูป 6.17</a><a href="#ex1"><b>1</b>ใช้สมการ</a><a href="#ex2"><b>2</b>Example 6.1</a><a href="#ex3"><b>3</b>Example 6.2 (p-channel)</a><a href="#tB"><b>B</b>JFET กับ BJT</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The two graphs of Fig. 6.17</a><a href="#ex1"><b>1</b>Using the equation</a><a href="#ex2"><b>2</b>Example 6.1</a><a href="#ex3"><b>3</b>Example 6.2 (p-channel)</a><a href="#tB"><b>B</b>JFET against BJT</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">สองกราฟของรูป 6.17: จากลักษณะสมบัติด้านเดรนสู่เส้นโค้งถ่ายโอน</h2><h2 data-l="en">The two graphs of Fig. 6.17: from the drain characteristics to the transfer curve</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18–19 · Boylestad หัวข้อ 6.3 (รูป 6.17, ตาราง 6.1)</div><div class="src" data-l="en">Slides pp. 18–19 · Boylestad, section 6.3 (Fig. 6.17, Table 6.1)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 18, Transfer Characteristics, derivation: in the figure two graphs are provided, with the vertical scaling in milliamperes for each graph; the point of intersection on the I_D versus V_GS curve will be as shown since the vertical axis is defined as V_GS = 0 V; when V_GS = 0 V, I_D = I_DSS. Figure 6.17: the transfer curve on the left with V_GS from −4 to 0 V and the drain characteristics on the right with V_GS = 0, −1, −2, −3, −4 V, an arrow carrying the I_DSS level across.">
+    <figcaption data-l="th">สไลด์หน้า 18: จุดแรก \(V_{GS}\) = 0 ให้ \(I_{DSS}\) (รูป 6.17) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 18: the first point, \(V_{GS}\) = 0 gives \(I_{DSS}\) (Fig. 6.17) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 19, Transfer Characteristics, derivation: when V_GS = V_P = −4 V, the drain current is zero milliamperes, defining another point on the transfer curve; that is, when V_GS = V_P, I_D = 0 mA. Figure 6.17 repeated.">
+    <figcaption data-l="th">สไลด์หน้า 19: จุดที่สอง \(V_{GS} = V_P\) ให้ \(I_D\) = 0 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the second point, \(V_{GS} = V_P\) gives \(I_D\) = 0 · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">กราฟซ้ายคือเส้นโค้งถ่ายโอน กราฟขวาคือลักษณะสมบัติด้านเดรนของอุปกรณ์เดียวกัน ใช้สเกล \(I_D\) ร่วมกัน เลื่อน \(V_{GS}\) แล้วเส้นของมันสว่างขึ้นและระดับอิ่มตัวถูกลากข้ามไปทางซ้ายเป็นจุดบนเส้นโค้งถ่ายโอน (ลูกศรในรูป 6.17) เปลี่ยน \(I_{DSS}\) และ \(V_P\) เพื่อดูว่าสองค่านี้กำหนดเส้นโค้งทั้งเส้น เปิดจุดของตาราง 6.1 เพื่อดูว่าสี่จุดพอสำหรับร่างเส้นโค้ง</p>
+  <p class="lead" data-l="en">The left graph is the transfer curve, the right one the drain characteristics of the same device, sharing the \(I_D\) scale. Move \(V_{GS}\) and its curve lights up while its saturation level is carried across to the left as a point of the transfer curve (the arrow of Fig. 6.17). Change \(I_{DSS}\) and \(V_P\) to see that these two values fix the whole curve, and show the points of Table 6.1 to see that four points suffice to sketch it.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">ใช้สมการของ Shockley และจุดลัดของตาราง 6.1</h2><h2 data-l="en">Using Shockley's equation and the shortcuts of Table 6.1</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad หัวข้อ 6.3 (สมการ 6.3–6.10)</div><div class="src" data-l="en">Slide p. 20 · Boylestad, section 6.3 (Eqs. 6.3–6.10)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 20, Transfer Characteristics, applying Shockley's equation: for the drain characteristics of the figure, if we substitute V_GS = −1 V, I_D = I_DSS (1 − V_GS/V_P)² = 8 mA (1 − (−1 V)/(−4 V))² = 8 mA (1 − 1/4)² = 8 mA (0.75)² = 8 mA (0.5625) = 4.5 mA. Figure 6.17 repeated.">
+    <figcaption data-l="th">สไลด์หน้า 20: แทน \(V_{GS}\) = −1 V ได้ 4.5 mA · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 20: substituting \(V_{GS}\) = −1 V gives 4.5 mA · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อุปกรณ์ของรูป 6.17 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) จงหา \(I_D\) เมื่อ \(V_{GS}\) = −1, −2 และ −3 V แล้วหา \(V_{GS}\) ที่ให้ \(I_D\) = 4.5 mA ด้วยสมการ 6.8</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the device of Fig. 6.17 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) find \(I_D\) at \(V_{GS}\) = −1, −2 and −3 V, then the \(V_{GS}\) that gives \(I_D\) = 4.5 mA from Eq. 6.8.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองคือ JFET ที่มี \(V_{GG}\) ตั้ง \(V_{GS}\) ผ่าน \(R_G\) = 1 MΩ (ไม่มีแรงดันตกเพราะ \(I_G\) = 0) และ \(V_{DD}\) = 20 V คร่อมเดรน–ซอร์ส แต่ละขั้นเปลี่ยน \(V_{GG}\) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is a JFET whose \(V_{GS}\) is set by \(V_{GG}\) through \(R_G\) = 1 MΩ (no drop, since \(I_G\) = 0) with \(V_{DD}\) = 20 V across drain–source; each step changes \(V_{GG}\). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ร่างเส้นโค้งถ่ายโอนจากสี่จุด</h2><h2 data-l="en">Sketching the transfer curve from four points</h2>
+    <div class="src" data-l="th">Boylestad Example 6.1 (รูป 6.18)</div><div class="src" data-l="en">Boylestad Example 6.1 (Fig. 6.18)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงร่างเส้นโค้งถ่ายโอนของ JFET ที่มี \(I_{DSS}\) = 12 mA และ \(V_P\) = −6 V ด้วยสี่จุดของตาราง 6.1</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Sketch the transfer curve of a JFET with \(I_{DSS}\) = 12 mA and \(V_P\) = −6 V from the four points of Table 6.1.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">อุปกรณ์ p-channel</h2><h2 data-l="en">A p-channel device</h2>
+    <div class="src" data-l="th">Boylestad Example 6.2 (รูป 6.19) · สไลด์หน้า 12–13</div><div class="src" data-l="en">Boylestad Example 6.2 (Fig. 6.19) · slides pp. 12–13</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงร่างเส้นโค้งถ่ายโอนของ JFET p-channel ที่มี \(I_{DSS}\) = 4 mA และ \(V_P\) = +3 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Sketch the transfer curve of a p-channel JFET with \(I_{DSS}\) = 4 mA and \(V_P\) = +3 V.</p></div>
+  <p class="lead" data-l="th">ในภาพจำลอง \(V_{DD}\) ต่อขั้วลบเข้าเดรน (\(V_{DS}\) = −12 V) และ \(V_{GG}\) ต่อขั้วบวกเข้าเกต สังเกตลูกศรที่เกตชี้ออก <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">In the simulation \(V_{DD}\) puts its negative terminal at the drain (\(V_{DS}\) = −12 V) and \(V_{GG}\) its positive terminal at the gate; note the gate arrow pointing out. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">ความสัมพันธ์สำคัญ: JFET กับ BJT</h2><h2 data-l="en">Important relationships: JFET against BJT</h2>
+    <div class="src" data-l="th">สไลด์หน้า 21–22 · Boylestad หัวข้อ 6.6 (ตาราง 6.2, รูป 6.23) และหัวข้อ 7.1 (สมการ 7.1–7.4)</div><div class="src" data-l="en">Slides pp. 21–22 · Boylestad, section 6.6 (Table 6.2, Fig. 6.23) and section 7.1 (Eqs. 7.1–7.4)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 21, Important Relationships: the JFET equations are defined for the configuration of the left figure, while the BJT equations relate to the right figure. Figure 6.23: the JFET with I_G = 0 A, I_D = I_DSS (1 − V_GS/V_P)², I_S, and the BJT with I_B, I_C = β I_B, V_BE = 0.7 V, I_E; Table 6.2: I_D = I_DSS (1 − V_GS/V_P)² against I_C = β I_B, I_D = I_S against I_C ≅ I_E, I_G ≅ 0 A against V_BE ≅ 0.7 V.">
+    <figcaption data-l="th">สไลด์หน้า 21: ตาราง 6.2 เทียบ JFET กับ BJT · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 21: Table 6.2, JFET against BJT · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 22, Introduction (to FET biasing): another distinct difference between the analysis of BJT and FET transistors is that the input controlling variable for a BJT transistor is a current level, while for the FET a voltage is the controlling variable; the general relationships that can be applied to the dc analysis of all FET amplifiers are I_G ≅ 0 A and I_D = I_S; for JFETs and depletion-type MOSFETs, Shockley's equation is applied to relate the input and output quantities, I_D = I_DSS (1 − V_GS/V_P)²; for enhancement-type MOSFETs, the following equation is applicable: I_D = k (V_GS − V_T)².">
+    <figcaption data-l="th">สไลด์หน้า 22: ความสัมพันธ์ทั่วไปของการวิเคราะห์ไบแอส FET (สมการ 7.1–7.4) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 22: the general relationships of FET bias analysis (Eqs. 7.1–7.4) · tap to enlarge</figcaption></figure></div>
+  <div class="card" style="overflow-x:auto"><table class="tbl" data-l="th"><thead><tr><th></th><th>JFET</th><th>BJT</th></tr></thead><tbody>
+    <tr><td>ตัวแปรควบคุม</td><td>แรงดัน \(V_{GS}\)</td><td>กระแส \(I_B\)</td></tr>
+    <tr><td>ขาเข้า–ขาออก</td><td>\(I_D = I_{DSS}(1 - V_{GS}/V_P)^2\) (ไม่เป็นเส้นตรง)</td><td>\(I_C = \beta I_B\) (เส้นตรง)</td></tr>
+    <tr><td>กระแสสองขา</td><td>\(I_D = I_S\) (เท่ากันพอดี)</td><td>\(I_C \cong I_E\)</td></tr>
+    <tr><td>จุดเริ่มวิเคราะห์</td><td>\(I_G \cong 0\) → หา \(V_{GS}\) ก่อน</td><td>\(V_{BE} \cong 0.7\) V → หา \(I_B\) ก่อน</td></tr>
+    <tr><td>วิธีที่นิยม</td><td>กราฟ: เส้นโค้งถ่ายโอนตัดกับเส้นของวงจร</td><td>คณิตศาสตร์: กฎแรงดันรอบวงเบส</td></tr>
+    <tr><td>MOSFET (บทที่ 6)</td><td>แบบดีพลีชัน: สมการเดิม · แบบเอนแฮนซ์เมนต์: \(I_D = k(V_{GS} - V_T)^2\)</td><td>—</td></tr></tbody></table>
+  <table class="tbl" data-l="en"><thead><tr><th></th><th>JFET</th><th>BJT</th></tr></thead><tbody>
+    <tr><td>Control variable</td><td>a voltage, \(V_{GS}\)</td><td>a current, \(I_B\)</td></tr>
+    <tr><td>Input to output</td><td>\(I_D = I_{DSS}(1 - V_{GS}/V_P)^2\) (nonlinear)</td><td>\(I_C = \beta I_B\) (linear)</td></tr>
+    <tr><td>The two currents</td><td>\(I_D = I_S\) (exactly)</td><td>\(I_C \cong I_E\)</td></tr>
+    <tr><td>Where the analysis starts</td><td>\(I_G \cong 0\) → find \(V_{GS}\) first</td><td>\(V_{BE} \cong 0.7\) V → find \(I_B\) first</td></tr>
+    <tr><td>Usual method</td><td>graphical: the transfer curve against the network line</td><td>mathematical: the base-loop law</td></tr>
+    <tr><td>MOSFET (chapter 6)</td><td>depletion type: the same equation · enhancement type: \(I_D = k(V_{GS} - V_T)^2\)</td><td>—</td></tr></tbody></table></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สองค่ากำหนดทุกอย่าง</h3>
+    <ol><li>ส่วน A ตั้ง \(I_{DSS}\) = 8 mA, \(V_P\) = −4 V แล้วเลื่อน \(V_{GS}\) จาก 0 ถึง −4 V ทีละ 1 V: อ่าน \(I_D\) = 8, 4.5, 2, 0.5, 0 mA ช่วงห่างไม่เท่ากัน</li>
+    <li>คง \(V_P\) ไว้ เพิ่ม \(I_{DSS}\) เป็นสองเท่า: ทุกจุดบนเส้นโค้งสูงขึ้นสองเท่า (สเกลตามแกนตั้ง) ส่วน \(V_P\) ยืด–หดเส้นโค้งตามแกนนอน</li>
+    <li>เปิดจุดของตาราง 6.1: จุด \(V_P/2\) อยู่ที่หนึ่งในสี่ของความสูงเสมอ ไม่ว่าจะเลือก \(I_{DSS}\), \(V_P\) เท่าใด</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ย้อนกลับ</h3>
+    <ol><li>ข้อ 1 ขั้นที่ 4: ถ้ารู้ \(I_D\) = 2 mA จะได้ \(V_{GS} = -4(1 - \sqrt{0.25}) = -2\) V ตรงกับขั้นที่ 2</li>
+    <li>ข้อ 3: ลองเขียน \(V_{GS}\) ของ p-channel ที่ให้ \(I_D\) = 1 mA ด้วยสมการ 6.8: \(3(1 - \sqrt{0.25}) = +1.5\) V เครื่องหมายบวกมาเองจาก \(V_P\)</li></ol>
+    <div class="book">สไลด์บทที่ 5 หน้า 17–22 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 6.3 (รูป 6.16–6.19, ตาราง 6.1, สมการ 6.3–6.10, Examples 6.1–6.2), หัวข้อ 6.6 (ตาราง 6.2) และ 7.1</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — two numbers fix everything</h3>
+    <ol><li>In section A set \(I_{DSS}\) = 8 mA, \(V_P\) = −4 V and move \(V_{GS}\) from 0 to −4 V in 1 V steps: read \(I_D\) = 8, 4.5, 2, 0.5, 0 mA, unevenly spaced.</li>
+    <li>Keep \(V_P\) and double \(I_{DSS}\): every point of the curve doubles (a vertical scaling), while \(V_P\) stretches or squeezes the curve horizontally.</li>
+    <li>Show the points of Table 6.1: the \(V_P/2\) point is always at a quarter of the height, whatever \(I_{DSS}\), \(V_P\) you choose.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the inverse</h3>
+    <ol><li>Problem 1, step 4: given \(I_D\) = 2 mA, \(V_{GS} = -4(1 - \sqrt{0.25}) = -2\) V, agreeing with step 2.</li>
+    <li>Problem 3: write the p-channel \(V_{GS}\) for \(I_D\) = 1 mA with Eq. 6.8: \(3(1 - \sqrt{0.25}) = +1.5\) V; the positive sign comes from \(V_P\) by itself.</li></ol>
+    <div class="book">Chapter 5 slides pp. 17–22 · Boylestad &amp; Nashelsky, 11th ed., section 6.3 (Figs. 6.16–6.19, Table 6.1, Eqs. 6.3–6.10, Examples 6.1–6.2), section 6.6 (Table 6.2) and 7.1</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET;
+  CH5.problem(1, 'sh'); CH5.problem(2, 'ex61'); CH5.problem(3, 'ex62');
+
+  /* =================================================================== A: the two graphs of Fig. 6.17 */
+  const S = { idss: 8, vp: -4, mag: 1, tbl: false }, pane = IE.pane($('cvA'), W => Math.max(330, Math.min(440, W * 0.6))), sg = x => (x < 0 ? '−' : '') + fd(Math.abs(x), 1);
+  const dev = () => ({ idss: S.idss * 1e-3, vp: S.vp }), vgs = () => Math.max(S.vp, -S.mag);
+  LS.anim($('cvA'), () => { const { ctx, W, H } = pane; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H);
+    const r = CH5.fig617(ctx, { x: 0, y: 0, w: W, h: H }, { dev: dev(), vgs: vgs(), tbl: S.tbl, imax: Math.ceil(S.idss * 1.25), vmaxD: Math.max(20, Math.ceil(-S.vp * 3)), short: W < 560 });
+    CK.badge(ctx, `V_GS = ${sg(r.vgs)} V → I_D = ${fd(r.id, 2)} mA`, 'ok'); });
+  const pA = $('pA'); ui.h2(pA, t('อุปกรณ์และ V_GS', 'The device and V_GS'));
+  ui.slider(pA, { id: 'aI', label: 'I_DSS', min: 2, max: 16, step: 0.5, value: 8, fmt: v => `${fd(v, 1)} mA`, oninput: v => { S.idss = v; showA(); } });
+  const slP = ui.slider(pA, { id: 'aP', label: 'V_P', min: 1, max: 8, step: 0.5, value: 4, fmt: v => `−${fd(v, 1)} V`, oninput: v => { S.vp = -v; slG.el.max = v; if (S.mag > v) { S.mag = v; slG.set(v); } slG.set(slG.get()); showA(); } });
+  const slG = ui.slider(pA, { id: 'aG', label: 'V_GS', min: 0, max: 4, step: 0.1, value: 1, fmt: v => `−${fd(v, 1)} V`, oninput: v => { S.mag = v; showA(); } });
+  ui.buttons(pA, [{ id: 'aT', label: t('จุดของตาราง 6.1', 'Table 6.1 points'), on: false, onclick: el => { S.tbl = !S.tbl; el.classList.toggle('on', S.tbl); showA(); } }]);
+  const mA_ = document.createElement('div'); mA_.className = 'metrics'; pA.appendChild(mA_); void slP;
+  function showA() { const v = vgs(), u = 1 - v / S.vp, id = S.idss * u * u;
+    mA_.innerHTML = ui.kv([['V_GS / V_P', fd(v / S.vp, 3)], ['(1 − V_GS/V_P)²', fd(u * u, 4)], ['I_D', `${fd(id, 3)} mA`], [t('V_GS ที่ I_DSS/2 (0.293 V_P)', 'V_GS at I_DSS/2 (0.293 V_P)'), `${sg(0.293 * S.vp)} V`], ['I_D(V_P/2) = I_DSS/4', `${fd(S.idss / 4, 2)} mA`]]);
+    $('wA').innerHTML = `<div class="answer">${t(`\\(I_D = ${fd(S.idss, 1)}\\ \\text{mA}\\left(1 - \\dfrac{${sg(v)}}{${sg(S.vp)}}\\right)^2 = ${fd(S.idss, 1)}(${fd(u, 3)})^2 = ${fd(id, 2)}\\) mA · ระดับอิ่มตัวของเส้น \\(V_{GS}\\) = ${sg(v)} V ทางขวา ถูกลากข้ามไปเป็นจุด (${sg(v)} V, ${fd(id, 2)} mA) บนเส้นโค้งถ่ายโอนทางซ้าย`, `\\(I_D = ${fd(S.idss, 1)}\\ \\text{mA}\\left(1 - \\dfrac{${sg(v)}}{${sg(S.vp)}}\\right)^2 = ${fd(S.idss, 1)}(${fd(u, 3)})^2 = ${fd(id, 2)}\\) mA. The saturation level of the \\(V_{GS}\\) = ${sg(v)} V curve on the right is carried across to the point (${sg(v)} V, ${fd(id, 2)} mA) of the transfer curve on the left.`)}</div>`; MC.renderMath($('wA')); }
+  showA();
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) \\(I_{DSS}\\) = 10 mA, \\(V_P\\) = −5 V จงหา \\(I_D\\) ที่ \\(V_{GS}\\) = −2 V', '1) \\(I_{DSS}\\) = 10 mA, \\(V_P\\) = −5 V. Find \\(I_D\\) at \\(V_{GS}\\) = −2 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 3.6, unit: 'mA', tol: 0.01 }], work: work(R`I_D = 10\ \text{mA}\left(1 - \frac{-2}{-5}\right)^2 = 10(0.6)^2 = 3.6\ \text{mA}`) },
+    { q: t('2) อุปกรณ์ข้อ 1: \\(V_{GS}\\) ใดให้ \\(I_D\\) = 2.5 mA', '2) The device of question 1: which \\(V_{GS}\\) gives \\(I_D\\) = 2.5 mA?'),
+      fields: [{ key: 'x', lab: 'V_GS =', ans: -2.5, unit: 'V', tol: 0.01 }], work: work(R`2.5\ \text{mA} = \frac{I_{DSS}}{4}\ \Rightarrow\ V_{GS} = \frac{V_P}{2} = -2.5\ \text{V}`, t('<div class="sub2">สมการ 6.8 ให้ค่าเดียวกัน: −5(1 − √0.25) = −2.5 V</div>', '<div class="sub2">Eq. 6.8 gives the same: −5(1 − √0.25) = −2.5 V</div>')) },
+    { q: t('3) JFET p-channel \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = +6 V จงหา \\(I_D\\) ที่ \\(V_{GS}\\) = +3 V', '3) A p-channel JFET, \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = +6 V. Find \\(I_D\\) at \\(V_{GS}\\) = +3 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 1.5, unit: 'mA', tol: 0.01 }], work: work(R`I_D = 6\ \text{mA}\left(1 - \frac{3}{6}\right)^2 = \frac{I_{DSS}}{4} = 1.5\ \text{mA}`) },
+    { q: t('4) \\(I_{DSS}\\) = 9 mA, \\(V_P\\) = −4.5 V จงหา \\(V_{GS}\\) ที่ \\(I_D\\) = 4.5 mA (ค่าแม่นยำ ไม่ใช่ 0.3\\(V_P\\))', '4) \\(I_{DSS}\\) = 9 mA, \\(V_P\\) = −4.5 V. Find \\(V_{GS}\\) at \\(I_D\\) = 4.5 mA (exactly, not 0.3\\(V_P\\)).'),
+      fields: [{ key: 'x', lab: 'V_GS =', ans: -4.5 * (1 - Math.sqrt(0.5)), unit: 'V', tol: 0.01 }], work: work(R`V_{GS} = -4.5\left(1 - \sqrt{\tfrac{4.5}{9}}\right) = -4.5(1 - 0.7071) = ${fd(-4.5 * (1 - Math.sqrt(0.5)), 3)}\ \text{V}\quad (0.3V_P = -1.35\ \text{V})`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

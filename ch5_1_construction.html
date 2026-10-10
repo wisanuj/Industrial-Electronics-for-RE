@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="5.1 — JFET Construction and Characteristics">5.1 — โครงสร้างและลักษณะสมบัติของ JFET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">โครงสร้างและลักษณะสมบัติของ JFET <span class="en">JFET construction and characteristics</span></h1>
+<h1 data-l="en">JFET construction and characteristics <span class="en">A channel whose width the gate voltage controls</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 5 หน้า 2–16 ทรานซิสเตอร์สนามไฟฟ้า (field-effect transistor, FET) เป็นอุปกรณ์สามขาเช่นเดียวกับทรานซิสเตอร์แบบรอยต่อคู่ (bipolar junction transistor, BJT) แต่ควบคุมด้วย<b>แรงดัน</b> \(V_{GS}\) ไม่ใช่กระแส: แรงดันที่เกตปรับความกว้างของบริเวณปลอดพาหะ (depletion region) จึงปรับความกว้างของช่อง (channel) ที่กระแสเดรน \(I_D\) ไหลผ่าน หน้านี้มีภาพตัดขวางของช่องที่ปรับ \(V_{GS}\), \(V_{DS}\) ได้พร้อมลักษณะสมบัติด้านเดรน (ส่วน A) การอ่านรูป 6.11 ตัวต้านทานที่ควบคุมด้วยแรงดัน สรุปสามกรณีของรูป 6.15 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 5 slides pp. 2–16. The field-effect transistor (FET) is a three-terminal device like the bipolar junction transistor (BJT), but it is controlled by a <b>voltage</b>, \(V_{GS}\), not a current: the gate voltage sets the width of the depletion regions and so the width of the channel through which the drain current \(I_D\) flows. This page has a cross-section of the channel whose \(V_{GS}\), \(V_{DS}\) you can change beside the drain characteristics (section A), a reading of Fig. 6.11, the voltage-controlled resistor, the three cases of Fig. 6.15, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_D = I_{DSS}\ \text{at}\ V_{GS} = 0,\ V_{DS} \ge |V_P| $$ $$ I_D = 0\ \text{at}\ V_{GS} = V_P = V_{GS(\text{off})} $$ $$ r_d = \frac{r_o}{(1 - V_{GS}/V_P)^2} $$ $$ I_G \cong 0,\quad I_D = I_S $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ควบคุมด้วยแรงดัน</b>: BJT มี \(I_C = f(I_B)\) แต่ JFET มี \(I_D = f(V_{GS})\) (สไลด์หน้า 3) FET เป็นอุปกรณ์ยูนิโพลาร์ (unipolar) นำกระแสด้วยพาหะชนิดเดียว: อิเล็กตรอนใน n-channel หรือโฮลใน p-channel ข้อดี: อิมพีแดนซ์ขาเข้าสูงมาก (1 MΩ ถึงหลายร้อย MΩ) เสถียรต่ออุณหภูมิกว่า และเล็กกว่า จึงเหมาะกับวงจรรวม ข้อเสีย: อัตราขยายแรงดันต่ำกว่า BJT (สไลด์หน้า 4)</li>
+  <li><b>โครงสร้าง</b> (สไลด์หน้า 5, รูป 6.3): แท่งสาร n เป็นช่องระหว่างสารชนิด p สองชั้นที่ต่อกันเป็นเกต (gate, G) ปลายบนของช่องคือเดรน (drain, D) ปลายล่างคือซอร์ส (source, S) รอยต่อ p–n ทั้งสองมีบริเวณปลอดพาหะตามธรรมชาติ</li>
+  <li><b>\(V_{GS}\) = 0 แล้วเพิ่ม \(V_{DS}\)</b> (สไลด์หน้า 6–8): กระแสเพิ่มตามกฎของโอห์มก่อน แรงดันตกในช่องทำให้รอยต่อไบแอสกลับมากขึ้นทางด้านเดรน บริเวณปลอดพาหะจึงกว้างขึ้นจนแตะกันที่ \(V_{DS} = V_P\) (พินช์ออฟ) จากนั้นกระแสคงที่ที่ \(I_{DSS}\) (drain-to-source current with the gate shorted) \(I_G\) = 0 เพราะรอยต่อไบแอสกลับตลอด</li>
+  <li><b>\(V_{GS}\) &lt; 0</b> (สไลด์หน้า 9–10, รูป 6.11): แรงดันลบที่เกตบีบช่องตั้งแต่ต้น อิ่มตัวเร็วขึ้นที่กระแสต่ำลง จนที่ \(V_{GS} = V_P\) (ใบข้อมูลเรียก \(V_{GS(\text{off})}\)) กระแสเป็นศูนย์ ทางขวาของแนวพินช์ออฟคือย่านอิ่มตัว (ย่านกระแสคงที่ ใช้ขยายสัญญาณ) ทางซ้ายคือย่านโอห์มิก</li>
+  <li><b>ตัวต้านทานควบคุมด้วยแรงดัน</b> (สไลด์หน้า 11): ในย่านโอห์มิก JFET คือตัวต้านทาน \(r_d = r_o/(1 - V_{GS}/V_P)^2\) (สมการ 6.1) ใช้ในวงจรควบคุมอัตราขยายอัตโนมัติได้</li>
+  <li><b>p-channel และสัญลักษณ์</b> (สไลด์หน้า 12–13): สลับสาร p กับ n ขั้วแรงดันและทิศกระแสกลับหมด (\(V_P\) &gt; 0, \(V_{DS}\) &lt; 0) ลูกศรที่เกตชี้เข้าสำหรับ n-channel (ทิศที่ \(I_G\) จะไหลถ้ารอยต่อไบแอสตรง) และชี้ออกสำหรับ p-channel สรุป (สไลด์หน้า 14–16): \(V_{GS}\) = 0 ให้ \(I_{DSS}\), \(|V_{GS}| \ge |V_P|\) ให้ 0, ระหว่างนั้นอยู่ระหว่าง 0 กับ \(I_{DSS}\)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Voltage-controlled</b>: a BJT has \(I_C = f(I_B)\), a JFET \(I_D = f(V_{GS})\) (slide p. 3). The FET is unipolar, conducting with one kind of carrier: electrons in an n-channel, holes in a p-channel. Advantages: a very high input impedance (1 MΩ to hundreds of MΩ), better temperature stability, smaller size, hence ideal for integrated circuits. Drawback: a lower voltage gain than a BJT (slide p. 4).</li>
+  <li><b>Construction</b> (slide p. 5, Fig. 6.3): a bar of n-material forms the channel between two layers of p-material joined as the gate (G); the top of the channel is the drain (D), the bottom the source (S). Both p–n junctions have their natural depletion regions.</li>
+  <li><b>\(V_{GS}\) = 0, raising \(V_{DS}\)</b> (slides pp. 6–8): the current first follows Ohm's law; the drop along the channel reverse-biases the junctions more toward the drain, the depletion regions widen until they touch at \(V_{DS} = V_P\) (pinch-off), and the current then stays at \(I_{DSS}\) (the drain-to-source current with the gate shorted). \(I_G\) = 0 because the junctions are always reverse-biased.</li>
+  <li><b>\(V_{GS}\) &lt; 0</b> (slides pp. 9–10, Fig. 6.11): a negative gate voltage narrows the channel from the start; saturation comes sooner and lower, until at \(V_{GS} = V_P\) (\(V_{GS(\text{off})}\) on data sheets) the current is zero. Right of the pinch-off locus is the saturation (constant-current) region used for amplification, left of it the ohmic region.</li>
+  <li><b>The voltage-controlled resistor</b> (slide p. 11): in the ohmic region the JFET is a resistor, \(r_d = r_o/(1 - V_{GS}/V_P)^2\) (Eq. 6.1), usable in automatic gain control.</li>
+  <li><b>p-channel and symbols</b> (slides pp. 12–13): swap p and n and every polarity and current direction turns round (\(V_P\) &gt; 0, \(V_{DS}\) &lt; 0). The gate arrow points in for an n-channel (the way \(I_G\) would flow if the junction were forward-biased) and out for a p-channel. Summary (slides pp. 14–16): \(V_{GS}\) = 0 gives \(I_{DSS}\), \(|V_{GS}| \ge |V_P|\) gives 0, and in between the current lies between 0 and \(I_{DSS}\).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch5/p02.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 2, Contents: Introduction; Construction and Characteristics of JFETs; Transfer Characteristics; Important Relationships; Fixed-Bias Configuration (JFET); Self-Bias Configuration (JFET); Voltage-Divider Biasing (JFET).">
+  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 2: สารบัญ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 2: contents · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch5/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 3, Introduction: the field-effect transistor (FET) is a three-terminal device used for a variety of applications; the primary difference between the two types of transistors is that the BJT is a current-controlled device and the JFET a voltage-controlled device, as shown in the figure; there are n-channel and p-channel field-effect transistors. Figure 6.1: a BJT block with the control current I_B and the output I_C, and a FET block with the control voltage V_GS and the output I_D.">
+  <figcaption data-l="th">สไลด์หน้า 3: BJT ควบคุมด้วยกระแส JFET ควบคุมด้วยแรงดัน (รูป 6.1) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 3: the BJT is current-controlled, the JFET voltage-controlled (Fig. 6.1) · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch5/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 4, Introduction: the FET is a unipolar device depending solely on either electron (n-channel) or hole (p-channel) conduction; one of the most important characteristics of the FET is its high input impedance; FETs are more temperature stable than BJTs; FETs are usually smaller in construction than BJTs, making them particularly useful in integrated-circuit (IC) chips; two types of FETs will be introduced in this chapter, the junction field-effect transistor (JFET) and the metal-oxide-semiconductor field-effect transistor (MOSFET).">
+  <figcaption data-l="th">สไลด์หน้า 4: ข้อดีของ FET และสองชนิดที่จะเรียน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 4: the advantages of the FET and the two types to come · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch5/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 5, Construction and Characteristics of JFETs: the basic construction of the n-channel JFET is shown in the figure; the top of the n-type channel is connected through an ohmic contact to a terminal referred to as the drain (D); the lower end of the same material is connected through an ohmic contact to a terminal referred to as the source (S); the two p-type materials are connected together and to the gate (G) terminal; a depletion region is that region void of free carriers. Figure 6.3: the n-channel between two p regions with depletion regions, drain at the top, source at the bottom, gate on the sides; and Fig. 6.4, the water analogy with a gate valve between source and drain.">
+  <figcaption data-l="th">สไลด์หน้า 5: โครงสร้าง n-channel JFET (รูป 6.3) และการเปรียบเทียบกับวาล์วน้ำ (รูป 6.4) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 5: the n-channel JFET (Fig. 6.3) and the water analogy (Fig. 6.4) · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch5/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 13, Construction and Characteristics of JFETs, Symbols: the graphic symbols for the n-channel and p-channel JFETs are provided in the figure. Figure 6.14: (a) the n-channel symbol with the gate arrow pointing in, I_D into the drain, V_DS plus at the drain and V_GS plus at the gate; (b) the p-channel symbol with the arrow pointing out and I_D out of the drain.">
+  <figcaption data-l="th">สไลด์หน้า 13: สัญลักษณ์ n-channel (ลูกศรชี้เข้า) และ p-channel (ลูกศรชี้ออก) (รูป 6.14) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 13: the n-channel (arrow in) and p-channel (arrow out) symbols (Fig. 6.14) · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ช่องและบริเวณปลอดพาหะ</a><a href="#ex1"><b>1</b>อ่านรูป 6.11</a><a href="#ex2"><b>2</b>ตัวต้านทานควบคุมด้วยแรงดัน</a><a href="#ex3"><b>3</b>สามกรณีของรูป 6.15</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The channel and its depletion regions</a><a href="#ex1"><b>1</b>Reading Fig. 6.11</a><a href="#ex2"><b>2</b>The voltage-controlled resistor</a><a href="#ex3"><b>3</b>The three cases of Fig. 6.15</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ช่องและบริเวณปลอดพาหะ: \(V_{GS}\) บีบ \(V_{DS}\) ดึง</h2><h2 data-l="en">The channel and its depletion regions: \(V_{GS}\) squeezes, \(V_{DS}\) pulls</h2>
+    <div class="src" data-l="th">สไลด์หน้า 6–12 · Boylestad หัวข้อ 6.2 (รูป 6.5–6.13)</div><div class="src" data-l="en">Slides pp. 6–12 · Boylestad, section 6.2 (Figs. 6.5–6.13)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 6, Construction and Characteristics of JFETs, in case V_GS = 0 V and V_DS some positive value: the instant the voltage V_DD (= V_DS) is applied, the electrons will be drawn to the drain terminal; the path of charge flow clearly reveals that the drain and source currents are equivalent (I_D = I_S); the flow of charge is relatively uninhibited and limited solely by the resistance of the n-channel between drain and source. Figure 6.5: the JFET with V_GS = 0 V, electrons moving up the channel toward V_DD; Fig. 6.6: the channel as a chain of resistances with 0.5 V, 1 V, 1.5 V along it and I_G = 0 A.">
+    <figcaption data-l="th">สไลด์หน้า 6: \(V_{GS}\) = 0 อิเล็กตรอนถูกดึงไปเดรน \(I_D = I_S\), \(I_G\) = 0 (รูป 6.5–6.6) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 6: \(V_{GS}\) = 0, electrons drawn to the drain, \(I_D = I_S\), \(I_G\) = 0 (Figs. 6.5–6.6) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 7, Construction and Characteristics of JFETs, in case V_GS = 0 V: if V_DS is increased to a level where it appears that the two depletion regions would touch, as shown in the figure, a condition referred to as pinch-off will result; the level of V_DS that establishes this condition is referred to as the pinch-off voltage and is denoted by V_P, as shown in the figure. Figure 6.7: I_D against V_DS for V_GS = 0 V, the n-channel resistance region rising to the saturation level with increasing resistance due to the narrowing channel, V_P marked; Fig. 6.8: the depletion regions touching at V_DS = V_P.">
+    <figcaption data-l="th">สไลด์หน้า 7: พินช์ออฟที่ \(V_{DS} = V_P\) (รูป 6.7–6.8) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 7: pinch-off at \(V_{DS} = V_P\) (Figs. 6.7–6.8) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 9, Construction and Characteristics of JFETs, in case V_GS < 0 V: a negative voltage of −1 V has been applied between the gate and source terminals for a low level of V_DS; the effect of the applied negative-bias V_GS is to establish depletion regions similar to those obtained with V_GS = 0 V but at lower levels of V_DS. Figure 6.11: n-channel JFET characteristics with I_DSS = 8 mA and V_P = −4 V, the curves for V_GS = 0, −1, −2, −3 and −4 V, the ohmic region, the saturation region and the locus of pinch-off values; Fig. 6.10: the JFET with V_GS = −1 V and I_G = 0 A.">
+    <figcaption data-l="th">สไลด์หน้า 9: \(V_{GS}\) = −1 V และชุดเส้นของรูป 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 9: \(V_{GS}\) = −1 V and the family of Fig. 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 12, Construction and Characteristics of JFETs, p-channel devices: the p-channel JFET is constructed in exactly the same manner as the n-channel device of the figure. Figure 6.13: p-channel characteristics with I_DSS = 6 mA and V_P = +6 V, the curves for V_GS = 0, +1, +2, +3, +4 and +5 V against negative V_DS, with the breakdown region beyond V_DSmax; Fig. 6.12: the p-channel JFET with the n gates, V_GG plus at the gate and V_DD minus at the drain.">
+    <figcaption data-l="th">สไลด์หน้า 12: p-channel JFET ขั้วทุกอย่างกลับ (รูป 6.12–6.13) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 12: the p-channel JFET, every polarity reversed (Figs. 6.12–6.13) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพตัดขวางคือรูป 6.3/6.5: ช่อง n (สีฟ้า) ระหว่างเกต p สองข้าง (สีชมพู) แถบสีเหลืองคือบริเวณปลอดพาหะซึ่งกว้างขึ้นตามไบแอสกลับของรอยต่อ: \(V_{GS}\) ที่ลบมากขึ้นบีบทั้งช่อง ส่วน \(V_{DS}\) ดึงให้กว้างทางด้านเดรนจนแตะกัน (พินช์ออฟ) อิเล็กตรอนวิ่งจากซอร์สไปเดรนเร็วตาม \(I_D\) กราฟขวาคือรูป 6.11 ของอุปกรณ์ตัวเดียวกันพร้อมจุดทำงาน ลองเพิ่ม \(V_{DS}\) ที่ \(V_{GS}\) = 0 แล้วดูจุดเดินตามเส้นจนราบที่ 8 mA แล้วลด \(V_{GS}\) ลงทีละ 1 V สลับเป็น p-channel (รูป 6.12) เพื่อดูขั้วกลับ</p>
+  <p class="lead" data-l="en">The cross-section is Fig. 6.3/6.5: the n-channel (blue) between the two p-gates (pink). The yellow strips are the depletion regions, which widen with the reverse bias of the junctions: a more negative \(V_{GS}\) squeezes the whole channel, while \(V_{DS}\) widens them toward the drain until they touch (pinch-off). Electrons run from source to drain at a speed set by \(I_D\). The graph on the right is Fig. 6.11 for the same device, with the operating point. Raise \(V_{DS}\) at \(V_{GS}\) = 0 and watch the point follow the curve until it levels off at 8 mA, then lower \(V_{GS}\) 1 V at a time. Switch to p-channel (Fig. 6.12) to see every polarity reversed.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">อ่านรูป 6.11: \(I_{DSS}\), \(V_P\) และแนวพินช์ออฟ</h2><h2 data-l="en">Reading Fig. 6.11: \(I_{DSS}\), \(V_P\) and the pinch-off locus</h2>
+    <div class="src" data-l="th">สไลด์หน้า 6–10 · Boylestad หัวข้อ 6.2 (รูป 6.7–6.11)</div><div class="src" data-l="en">Slides pp. 6–10 · Boylestad, section 6.2 (Figs. 6.7–6.11)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 8, Construction and Characteristics of JFETs, in case V_GS = 0 V: the choice of notation I_DSS is derived from the fact that it is the drain-to-source current with a short-circuit connection from gate to source; I_DSS is the maximum drain current for a JFET and is defined by the conditions V_GS = 0 V and V_DS > |V_P|. Figures 6.7 and 6.8 repeated.">
+    <figcaption data-l="th">สไลด์หน้า 8: ที่มาของชื่อ \(I_{DSS}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 8: where the name \(I_{DSS}\) comes from · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 10, Construction and Characteristics of JFETs, in case V_GS < 0 V: the level of V_GS that results in I_D = 0 mA is defined by V_GS = V_P, with V_P being a negative voltage for n-channel devices and a positive voltage for p-channel JFETs; on most specification sheets the pinch-off voltage is specified as V_GS(off) rather than V_P. Figure 6.11 repeated with V_P (for V_GS = 0 V) marked at 4 V.">
+    <figcaption data-l="th">สไลด์หน้า 10: \(V_{GS} = V_P\) ตัดกระแส; ใบข้อมูลเรียก \(V_{GS(\text{off})}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 10: \(V_{GS} = V_P\) cuts the current off; data sheets say \(V_{GS(\text{off})}\) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จากรูป 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) จงบอก \(I_{DSS}\) และ \(V_P\) กระแสอิ่มตัวเมื่อ \(V_{GS}\) = −1 V และแรงดัน \(V_{DS}\) ที่เกิดพินช์ออฟเมื่อ \(V_{GS}\) = −1 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>From Fig. 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) give \(I_{DSS}\) and \(V_P\), the saturation current at \(V_{GS}\) = −1 V, and the \(V_{DS}\) at which pinch-off occurs when \(V_{GS}\) = −1 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองคือวงจรของรูป 6.5/6.10: แหล่งจ่าย \(V_{GG}\) ที่เกต (ขั้ว − ด้านเกต จึง \(V_{GS} = -V_{GG}\)) และ \(V_{DD}\) คร่อมเดรน–ซอร์สโดยตรง แต่ละขั้นเปลี่ยนแหล่งจ่ายแล้วจุดทำงานเลื่อนบนรูป 6.11 ทางขวา <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is the circuit of Figs. 6.5/6.10: a supply \(V_{GG}\) at the gate (− toward the gate, so \(V_{GS} = -V_{GG}\)) and \(V_{DD}\) straight across drain–source. Each step changes the supplies and the operating point moves on Fig. 6.11 on the right. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ตัวต้านทานที่ควบคุมด้วยแรงดัน</h2><h2 data-l="en">The voltage-controlled resistor</h2>
+    <div class="src" data-l="th">สไลด์หน้า 11 · Boylestad สมการ 6.1 และตัวอย่างในเนื้อหา</div><div class="src" data-l="en">Slide p. 11 · Boylestad Eq. 6.1 and its in-text example</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 11, Construction and Characteristics of JFETs, voltage-controlled resistor: the region to the left of the pinch-off locus of the figure is referred to as the ohmic or voltage-controlled resistance region; as V_GS becomes more and more negative, the slope of each curve becomes more and more horizontal, corresponding with an increasing resistance level; the following equation will provide a good first approximation to the resistance level in terms of the applied voltage V_GS: r_d = r_o/(1 − V_GS/V_P)², where r_o is the resistance with V_GS = 0 V and r_d the resistance at a particular level of V_GS.">
+    <figcaption data-l="th">สไลด์หน้า 11: ย่านโอห์มิกและสมการ 6.1 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 11: the ohmic region and Eq. 6.1 · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>JFET n-channel ตัวหนึ่งมี \(r_o\) = 10 kΩ (ที่ \(V_{GS}\) = 0) และ \(V_P\) = −6 V จงหาความต้านทาน \(r_d\) ของช่องเมื่อ \(V_{GS}\) = −3 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An n-channel JFET has \(r_o\) = 10 kΩ (at \(V_{GS}\) = 0) and \(V_P\) = −6 V. Find the channel resistance \(r_d\) at \(V_{GS}\) = −3 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองใช้อุปกรณ์ที่มี \(r_o\) = 10 kΩ (\(I_{DSS}\) = 0.3 mA, \(V_P\) = −6 V) กับ \(V_{DS}\) = 1 V เล็ก ๆ ในย่านโอห์มิก ป้ายบอก \(V_{DS}/I_D\) ที่วัดได้ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation uses a device with \(r_o\) = 10 kΩ (\(I_{DSS}\) = 0.3 mA, \(V_P\) = −6 V) at a small \(V_{DS}\) = 1 V in the ohmic region; the badge shows the measured \(V_{DS}/I_D\). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">สามกรณีของรูป 6.15</h2><h2 data-l="en">The three cases of Fig. 6.15</h2>
+    <div class="src" data-l="th">สไลด์หน้า 14–16 · Boylestad หัวข้อ 6.2 สรุป (รูป 6.15)</div><div class="src" data-l="en">Slides pp. 14–16 · Boylestad, section 6.2 summary (Fig. 6.15)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 14, Construction and Characteristics of JFETs, summary: the maximum current is defined as I_DSS and occurs when V_GS = 0 V and V_DS ≥ |V_P|, as shown in the figure. Figure 6.15(a): the JFET with the gate tied to the source, V_GS = 0 V, I_D = I_DSS, and V_DD ≥ |V_P| at the drain.">
+    <figcaption data-l="th">สไลด์หน้า 14: (a) \(V_{GS}\) = 0 ให้ \(I_{DSS}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 14: (a) \(V_{GS}\) = 0 gives \(I_{DSS}\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 15, Construction and Characteristics of JFETs, summary: for gate-to-source voltages V_GS less than (more negative than) the pinch-off level, the drain current is 0 A (I_D = 0 A), as appearing in the figure. Figure 6.15(b): V_GS = −V_GG with |V_GG| ≥ |V_P|, I_D = 0 A.">
+    <figcaption data-l="th">สไลด์หน้า 15: (b) \(|V_{GG}| \ge |V_P|\) ให้ \(I_D\) = 0 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: (b) \(|V_{GG}| \ge |V_P|\) gives \(I_D\) = 0 · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 16, Construction and Characteristics of JFETs, summary: for all levels of V_GS between 0 V and the pinch-off level, the current I_D will range between I_DSS and 0 A, respectively, as reviewed by the figure. Figure 6.15(c): |V_P| ≥ |V_GG| ≥ 0 V, 0 mA ≤ I_D < I_DSS.">
+    <figcaption data-l="th">สไลด์หน้า 16: (c) ระหว่างนั้น \(0 \le I_D < I_{DSS}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: (c) in between, \(0 \le I_D < I_{DSS}\) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>JFET ของรูป 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) ต่อกับ \(V_{DD}\) = 12 V ตามรูป 6.15 จงหา \(I_D\) เมื่อ \(V_{GG}\) = 0, 1 V และ 4 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The JFET of Fig. 6.11 (\(I_{DSS}\) = 8 mA, \(V_P\) = −4 V) is connected to \(V_{DD}\) = 12 V as in Fig. 6.15. Find \(I_D\) for \(V_{GG}\) = 0, 1 V and 4 V.</p></div>
+  <p class="lead" data-l="th">กราฟข้างภาพคือเส้นโค้งถ่ายโอน \(I_D\)–\(V_{GS}\) ที่หน้า 5.2 จะอธิบาย (สมการของ Shockley) ตอนนี้แค่อ่านค่า <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The side graph is the transfer curve \(I_D\)–\(V_{GS}\) that page 5.2 explains (Shockley's equation); for now just read it. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ดูพินช์ออฟเกิดขึ้น</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{GS}\) = 0 แล้วเลื่อน \(V_{DS}\) จาก 0 ถึง 4 V ช้า ๆ: แถบเหลืองด้านเดรนกว้างขึ้นจนแตะกันพอดีที่ 4 V ป้ายเปลี่ยนจากย่านโอห์มิกเป็นย่านอิ่มตัว และจุดบนกราฟถึงหัวเข่าของเส้น</li>
+    <li>เลื่อนต่อถึง 20 V: ช่องที่แตะกันยาวขึ้น แต่ \(I_D\) ไม่เปลี่ยน นี่คือพฤติกรรมแหล่งจ่ายกระแส</li>
+    <li>ตั้ง \(V_{GS}\) = −3 V: แถบเหลืองกว้างตั้งแต่ \(V_{DS}\) = 0 พินช์ออฟเกิดที่ 1 V และกระแสเหลือ 0.5 mA</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — p-channel</h3>
+    <ol><li>สลับเป็น p-channel: ช่องเป็นสาร p (โฮลเป็นพาหะ) เกตเป็นสาร n แหล่งจ่ายกลับขั้วทั้งสอง \(V_{GS}\) เป็นบวก \(V_{DS}\) เป็นลบ แต่รูปร่างของทุกอย่างเหมือนเดิม</li>
+    <li>ข้อ 2: ถ้า \(V_{GS}\) = −1.5 V (หนึ่งในสี่ของ \(V_P\)) สมการ 6.1 ให้ \(r_d\) = 10/(0.75)² = 17.8 kΩ ลองเทียบกับที่ภาพจำลองวัดได้</li></ol>
+    <div class="book">สไลด์บทที่ 5 หน้า 2–16 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 6.1–6.2 (รูป 6.1–6.15, สมการ 6.1)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — watch pinch-off happen</h3>
+    <ol><li>In section A set \(V_{GS}\) = 0 and slide \(V_{DS}\) slowly from 0 to 4 V: the yellow strips widen at the drain end until they just touch at 4 V, the badge turns from the ohmic region to saturation, and the point on the graph reaches the knee of the curve.</li>
+    <li>Keep going to 20 V: the touching part grows longer but \(I_D\) does not change: current-source behaviour.</li>
+    <li>Set \(V_{GS}\) = −3 V: the strips are wide from \(V_{DS}\) = 0 on, pinch-off comes at 1 V, and only 0.5 mA is left.</li></ol></div>
+  <div class="card"><h3>Try this 2 — p-channel</h3>
+    <ol><li>Switch to p-channel: the channel is p-material (holes are the carriers), the gates n-material, both supplies are turned round, \(V_{GS}\) is positive and \(V_{DS}\) negative, but every shape is the same.</li>
+    <li>Problem 2: at \(V_{GS}\) = −1.5 V (a quarter of \(V_P\)) Eq. 6.1 gives \(r_d\) = 10/(0.75)² = 17.8 kΩ; compare with what the simulation measures.</li></ol>
+    <div class="book">Chapter 5 slides pp. 2–16 · Boylestad &amp; Nashelsky, 11th ed., sections 6.1–6.2 (Figs. 6.1–6.15, Eq. 6.1)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET;
+  CH5.problem(1, 'f611'); CH5.problem(2, 'rd'); CH5.problem(3, 'f615');
+
+  /* =================================================================== A: the channel cross-section beside Fig. 6.11 */
+  const ch = new CH5.Channel(), S = { vgs: 0, vds: 8, pch: false }, pane = IE.pane($('cvA'), W => (W >= 640 ? Math.max(360, Math.min(430, W * 0.62)) : 620));
+  const dev = () => (S.pch ? CH5.DEV.f613 : CH5.DEV.f611), sgn = () => (S.pch ? -1 : 1), sg = x => (x < 0 ? '−' : '') + fd(Math.abs(x), 1);
+  const sync = () => { const d = dev(); S.vgs = Math.max(d.vp < 0 ? d.vp - 0.5 : -d.vp - 0.5, Math.min(0, -Math.abs(S.mag))); ch.set({ vgs: S.vgs, vds: S.vds, pch: S.pch, dev: d }); };
+  S.mag = 0; sync();
+  LS.anim($('cvA'), dt => { ch.step(dt); const { ctx, W, H } = pane; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); const m = ch.cur(), d = dev(), wide = W >= 640;
+    const bL = wide ? { x: 0, y: 0, w: Math.round(W * 0.46), h: H } : { x: 0, y: 0, w: W, h: 330 }, bR = wide ? { x: bL.w, y: 0, w: W - bL.w, h: H } : { x: 0, y: 330, w: W, h: H - 330 };
+    ch.draw(ctx, bL, { short: bL.w < 360 });
+    CH5.dPlot(ctx, bR, { short: bR.w < 420 }, { dev: d, imax: S.pch ? 8 : 10, vmax: S.pch ? 25 : 20, q: { v: ch.vds, i: m.i * 1e3, label: bR.w < 420 ? '' : `(${sg(sgn() * ch.vds)} V, ${fd(m.i * 1e3, 2)} mA)`, side: ch.vds > 11 ? -1 : 1, dy: 16 }, labels: bR.w >= 420,
+      title: S.pch ? t('รูป 6.13: p-channel, I_DSS = 6 mA, V_P = +6 V', 'Fig. 6.13: p-channel, I_DSS = 6 mA, V_P = +6 V') : t('รูป 6.11: I_DSS = 8 mA, V_P = −4 V', 'Fig. 6.11: I_DSS = 8 mA, V_P = −4 V') });
+    const reg = CH5.reg(m.region); CK.badge(ctx, `${reg[0]} · I_D = ${fd(m.i * 1e3, 2)} mA`, reg[1]); });
+  const pA = $('pA'); ui.h2(pA, t('แหล่งจ่ายทั้งสอง', 'The two supplies'));
+  const sl1 = ui.slider(pA, { id: 'aVGS', label: 'V_GS', min: 0, max: 4.5, step: 0.1, value: 0, fmt: v => `${sg(sgn() * -v)} V`, oninput: v => { S.mag = v; sync(); showA(); } });
+  const sl2 = ui.slider(pA, { id: 'aVDS', label: 'V_DS', min: 0, max: 20, step: 0.1, value: 8, fmt: v => `${sg(sgn() * v)} V`, oninput: v => { S.vds = v; sync(); showA(); } });
+  ui.radio(pA, [{ id: 'aN', label: 'n-channel (8 mA, −4 V)', on: true }, { id: 'aP', label: 'p-channel (6 mA, +6 V)' }], id => { S.pch = id === 'aP'; sl1.el.max = S.pch ? 6.5 : 4.5; sl1.set(Math.min(S.mag, +sl1.el.max)); S.mag = sl1.get(); sl2.set(sl2.get()); sync(); showA(); });
+  const mA_ = document.createElement('div'); mA_.className = 'metrics'; pA.appendChild(mA_);
+  function showA() { const m = ch.cur(), d = dev(), s = sgn(), vov = Math.max(0, ch.vgs - d.vp), rd = vov > 0 ? d.vp * d.vp / (2 * d.idss * vov) : Infinity;
+    mA_.innerHTML = ui.kv([['I_D', `${fd(m.i * 1e3, 3)} mA`], ['V_GS', `${sg(s * ch.vgs)} V`], ['V_DS', `${sg(s * ch.vds)} V`], [t('ย่าน', 'region'), CH5.reg(m.region)[0]], ['V_GS − V_P', `${sg(s * vov)} V`], [t('r_d (ความชันที่จุดกำเนิด)', 'r_d (slope at the origin)'), isFinite(rd) ? CK.eng(rd, 'Ω') : '∞']]);
+    const txt = m.region === 'cutoff' ? t(`\\(|V_{GS}| \\ge |V_P|\\) = ${fd(Math.abs(d.vp), 0)} V: บริเวณปลอดพาหะปิดช่องทั้งหมดตั้งแต่ \\(V_{DS}\\) = 0 ไม่มีกระแส (คัตออฟ, รูป 6.15b)`, `\\(|V_{GS}| \\ge |V_P|\\) = ${fd(Math.abs(d.vp), 0)} V: the depletion regions close the whole channel from \\(V_{DS}\\) = 0 on and no current flows (cutoff, Fig. 6.15b).`)
+      : m.region === 'ohmic' ? t(`\\(|V_{DS}|\\) = ${fd(ch.vds, 1)} V ยังน้อยกว่า \\(|V_{GS} - V_P|\\) = ${fd(vov, 1)} V: ช่องยังเปิดตลอดความยาว JFET เป็นตัวต้านทานราว ${CK.eng(rd, 'Ω')} ที่ควบคุมด้วย \\(V_{GS}\\) (ย่านโอห์มิก) เพิ่ม \\(V_{DS}\\) แล้วกระแสยังเพิ่ม`, `\\(|V_{DS}|\\) = ${fd(ch.vds, 1)} V is still below \\(|V_{GS} - V_P|\\) = ${fd(vov, 1)} V: the channel is open along its whole length and the JFET is a resistor of about ${CK.eng(rd, 'Ω')} controlled by \\(V_{GS}\\) (the ohmic region); more \\(V_{DS}\\) still means more current.`)
+      : t(`\\(|V_{DS}|\\) = ${fd(ch.vds, 1)} V ≥ \\(|V_{GS} - V_P|\\) = ${fd(vov, 1)} V: บริเวณปลอดพาหะแตะกันทางด้านเดรน (พินช์ออฟ) กระแสคงที่ที่ \\(I_{DSS}(1 - V_{GS}/V_P)^2\\) = ${fd(m.i * 1e3, 2)} mA ไม่ว่า \\(V_{DS}\\) จะเพิ่มอีกเท่าใด (ย่านอิ่มตัว ใช้ขยายสัญญาณ)`, `\\(|V_{DS}|\\) = ${fd(ch.vds, 1)} V ≥ \\(|V_{GS} - V_P|\\) = ${fd(vov, 1)} V: the depletion regions touch at the drain end (pinch-off) and the current holds at \\(I_{DSS}(1 - V_{GS}/V_P)^2\\) = ${fd(m.i * 1e3, 2)} mA however much \\(V_{DS}\\) rises (the saturation region, used for amplification).`);
+    $('wA').innerHTML = `<div class="answer">${txt}</div>`; MC.renderMath($('wA')); }
+  showA();
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) JFET มี \\(r_o\\) = 2 kΩ และ \\(V_P\\) = −5 V จงหา \\(r_d\\) ที่ \\(V_{GS}\\) = −2 V (สมการ 6.1)', '1) A JFET has \\(r_o\\) = 2 kΩ and \\(V_P\\) = −5 V. Find \\(r_d\\) at \\(V_{GS}\\) = −2 V (Eq. 6.1).'),
+      fields: [{ key: 'x', lab: 'r_d =', ans: 2 / 0.36, unit: 'kΩ', tol: 0.02 }], work: work(R`r_d = \frac{2\ \text{k}\Omega}{(1 - (-2)/(-5))^2} = \frac{2}{(0.6)^2} = ${fd(2 / 0.36, 2)}\ \text{k}\Omega`) },
+    { q: t('2) JFET n-channel มี \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V จงหา \\(I_D\\) เมื่อ \\(V_{GS}\\) = 0, \\(V_{DS}\\) = 10 V และเมื่อ \\(V_{GS}\\) = −3.5 V', '2) An n-channel JFET has \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V. Find \\(I_D\\) at \\(V_{GS}\\) = 0, \\(V_{DS}\\) = 10 V, and at \\(V_{GS}\\) = −3.5 V.'),
+      fields: [{ key: 'x', lab: 'I_D(0 V) =', ans: 6, unit: 'mA' }, { key: 'y', lab: 'I_D(−3.5 V) =', ans: 0, unit: 'mA', tol: 0.001 }], work: work(R`V_{DS} = 10\ \text{V} \ge |V_P|:\ I_D = I_{DSS} = 6\ \text{mA};\quad V_{GS} = -3.5\ \text{V} < V_P:\ I_D = 0`) },
+    { q: t('3) JFET มี \\(V_P\\) = −6 V ที่ \\(V_{GS}\\) = −1.5 V พินช์ออฟเกิดที่ \\(V_{DS}\\) เท่าใด', '3) A JFET has \\(V_P\\) = −6 V. At \\(V_{GS}\\) = −1.5 V, at what \\(V_{DS}\\) does pinch-off occur?'),
+      fields: [{ key: 'x', lab: 'V_DS =', ans: 4.5, unit: 'V', tol: 0.01 }], work: work(R`V_{DS} = V_{GS} - V_P = -1.5 - (-6) = 4.5\ \text{V}`) },
+    { q: t('4) JFET p-channel มี \\(I_{DSS}\\) = 5 mA, \\(V_P\\) = +4 V ที่ \\(V_{GS}\\) เท่าใดกระแสเป็นศูนย์ และ \\(V_{DS}\\) มีเครื่องหมายใด', '4) A p-channel JFET has \\(I_{DSS}\\) = 5 mA, \\(V_P\\) = +4 V. At what \\(V_{GS}\\) is the current zero, and what is the sign of \\(V_{DS}\\)?'),
+      fields: [{ key: 'x', lab: 'V_GS(off) =', ans: 4, unit: 'V', tol: 0.01 }], work: work(R`V_{GS(\text{off})} = V_P = +4\ \text{V},\quad V_{DS} < 0`, t('<div class="sub2">V<sub>GS</sub> เป็นบวก และ V<sub>DS</sub> เป็นลบ (ซอร์สมีศักย์สูงกว่าเดรน)</div>', '<div class="sub2">V<sub>GS</sub> is positive and V<sub>DS</sub> negative (the source above the drain).</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

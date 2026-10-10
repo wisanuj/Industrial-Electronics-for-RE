@@ -8,15 +8,15 @@
 <link rel="stylesheet" href="assets/ee.css?v=3">
 <script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
 <script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script>
-<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
 <div class="wrap">
 <header class="topbar" id="mc-top"></header>
 <h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine, its diodes and transistors against hand calculations and the textbook</span></h1>
-<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และทรานซิสเตอร์ และตัวเลขของโจทย์ทุกข้อในบทที่ 1–4 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
-<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the transistor, and the numbers of every chapter 1–4 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
+<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และทรานซิสเตอร์ และตัวเลขของโจทย์ทุกข้อในบทที่ 1–5 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
+<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the transistors, and the numbers of every chapter 1–5 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
 <div id="sum" class="status"></div>
 <div style="overflow-x:auto"><table class="tbl" id="tbl"><thead><tr><th>#</th><th>test</th><th>got</th><th>expected</th><th></th></tr></thead><tbody></tbody></table></div>
 <div id="box8" style="position:absolute;left:-4000px;top:0;width:900px"></div>
@@ -214,6 +214,29 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
   const s = CH4.sol({ VCC: 10, RF: 250e3, RC: 4700, RE: 1200, beta: 90 }), s2 = CH4.sol({ VCC: 20, VEE: 20, R1: 8.2e3, R2: 2.2e3, RC: 2700, RE: 1800, beta: 120 });
   T('CH4.sol reproduces the book\'s hand arithmetic (I_C\' ≅ I_C, I_E ≅ I_C) before its rounding: Example 4.12 I_B = 11.91 µA, V_CE = 3.68 V (book 3.69 from I_C = 1.07); Example 4.20 I_B = 35.35 µA (35.39), V_C = 8.55 V (8.53) · CH4.std: 86520 → 91 kΩ, 482500 → 470 kΩ, 639800 → 620 kΩ, 2.5 kΩ → 2.4 kΩ',
     `${f(s.IB * 1e6, 2)} ${f(s.VCE, 2)} ${f(s2.IB * 1e6, 2)} ${f(s2.VC, 2)} | ${CH4.std(86520)} ${CH4.std(482500)} ${CH4.std(639800)} ${CH4.std(2500)}`, '11.91 3.68 35.35 8.55 | 91000 470000 620000 2400'); }
+
+/* --- chapter 5: the JFET through the engine (Shockley's equation with the square-law ohmic region) against the book --- */
+{ const FET = CK.FET, run = o => { const c = new Circuit(CH5.net(o)); c.solve(); return c; }, jj = c => CH5.j(c), V = (c, n) => c.V(n).re, D = CH5.DEV;
+  T('Shockley (8 mA, −4 V): I_D(−1 V) = 4.5 mA, I_D(−2 V) = 2 mA (Table 6.1: I_DSS/4), I_D(−3 V) = 0.5 mA, I_D(−4 V) = 0; V_GS at 4.5 mA = −1 V (Eq. 6.8), at I_DSS/2: 0.293 V_P = −1.172 V · p-channel Example 6.2 (4 mA, +3 V): I_D(1.5 V) = 1 mA, V_GS(2 mA) = 0.879 V',
+    `${f(FET.id(8e-3, -4, -1) * 1e3, 3)} ${f(FET.id(8e-3, -4, -2) * 1e3, 3)} ${f(FET.id(8e-3, -4, -3) * 1e3, 3)} ${f(FET.id(8e-3, -4, -4) * 1e3, 3)} ${f(FET.vgs(8e-3, -4, 4.5e-3), 3)} ${f(FET.vgs(8e-3, -4, 4e-3), 3)} | ${f(FET.id(4e-3, 3, 1.5) * 1e3, 3)} ${f(FET.vgs(4e-3, 3, 2e-3), 3)}`, '4.5 2 0.5 0 -1 -1.172 | 1 0.879');
+  const m = FET.iv(D.f611, -1, 10), m2 = FET.iv(D.f611, -1, 3), m3 = FET.iv(D.f611, 0, 0.1), m4 = FET.iv(D.f611, -4, 10);
+  T('FET.iv (8 mA, −4 V): saturation at (−1 V, 10 V) 4.5 mA with g_m = 3 mS; on the pinch-off locus (−1 V, 3 V) the same 4.5 mA (continuous; the locus itself counts as saturation); ohmic at (0, 0.1 V) 0.395 mA (r_o = |V_P|/2I_DSS = 250 Ω); cutoff at V_GS = V_P',
+    `${f(m.i * 1e3, 3)} ${f(m.gm * 1e3, 3)} ${m.region} | ${f(m2.i * 1e3, 3)} ${m2.region} | ${f(m3.i * 1e3, 3)} ${m3.region} | ${f(m4.i * 1e3, 3)} ${m4.region}`, '4.5 3 saturation | 4.5 saturation | 0.395 ohmic | 0 cutoff');
+  const c1 = run({ dev: D.f611, VGG: 1, VDD: 12, RG: 0, RD: 0 }), z1 = jj(c1), c2 = run({ dev: D.f611, VGG: 4, VDD: 12, RG: 0, RD: 0 }), z2 = jj(c2), c3 = run({ dev: D.rd, VGG: 3, VDD: 1, RG: 0, RD: 0 }), z3 = jj(c3), c3b = run({ dev: D.rd, VGG: 0, VDD: 1, RG: 0, RD: 0 }), z3b = jj(c3b);
+  T('Fig. 6.15 through the engine: V_GG = 1 V → 4.5 mA (saturation, I_G = 0), V_GG = 4 V → 0 (cutoff) · the voltage-controlled resistor (r_o = 10 kΩ, V_P = −6 V): the square law gives r_d = 20 kΩ at −3 V (Eq. 6.1: 40 kΩ), 10 kΩ at 0',
+    `${f(z1.id, 3)} ${z1.region} ${Math.abs(z1.ig) < 1e-3} | ${f(z2.id, 4)} ${z2.region} | ${f(z3.rdk, 2)} ${f(z3b.rdk, 2)}`, '4.5 saturation true | 0 cutoff | 20 10');
+  const c4 = run({ dev: D.ex71, VGG: 2, VDD: 16, RG: 1e6, RD: 2000 }), z4 = jj(c4), s4 = CH5.sol({ dev: D.ex71, VGG: 2, VDD: 16, RG: 1e6, RD: 2000 });
+  T('Example 7.1 (fixed bias): the book\'s V_GS = −2 V, I_D = 5.625 mA, V_DS = 4.75 V sit left of the pinch-off locus (V_GS − V_P = 6 V > 4.75 V): the engine lands in the ohmic region at 5.481 mA, 5.04 V, V_G = −2 V, V_S = 0',
+    `${f(s4.VGS, 2)} ${f(s4.ID * 1e3, 3)} ${f(s4.VDS, 2)} ${s4.sat} | ${f(z4.id, 3)} ${f(z4.VDS, 2)} ${z4.region} ${f(V(c4, 'g'), 2)} ${f(V(c4, 's'), 3)}`, '-2 5.625 4.75 false | 5.481 5.04 ohmic -2 0');
+  const c5 = run({ dev: D.ex72, VDD: 20, RG: 1e6, RD: 3300, RS: 1000 }), z5 = jj(c5), c5a = run({ dev: D.ex72, VDD: 20, RG: 1e6, RD: 3300, RS: 100 }), z5a = jj(c5a), c5b = run({ dev: D.ex72, VDD: 20, RG: 1e6, RD: 3300, RS: 10000 }), z5b = jj(c5b);
+  T('Example 7.2 (self bias): the quadratic gives I_D = 2.588 mA, V_GS = −2.588 V (book 2.6, −2.6 from the graph), V_DS = 8.87 V (8.82), V_D = 11.46 V, V_G = 0 · Example 7.3: R_S = 100 Ω → the curve says 6.39 mA but the real circuit is ohmic at 5.066 mA, V_DS = 2.78 V; R_S = 10 kΩ → 0.457 mA, −4.566 V (book 0.46, −4.6)',
+    `${f(z5.id, 3)} ${f(z5.VGS, 3)} ${f(z5.VDS, 2)} ${f(V(c5, 'd'), 2)} ${f(V(c5, 'g'), 4)} ${z5.region} | ${f(CH5.sol({ dev: D.ex72, RS: 100 }).ID * 1e3, 2)} ${f(z5a.id, 3)} ${f(z5a.VDS, 2)} ${z5a.region} | ${f(z5b.id, 3)} ${f(z5b.VGS, 3)} ${z5b.region}`, '2.588 -2.588 8.87 11.46 0 saturation | 6.39 5.066 2.78 ohmic | 0.457 -4.566 saturation');
+  const c6 = run({ dev: D.f611, VDD: 16, R1: 2.1e6, R2: 270e3, RD: 2400, RS: 1500 }), z6 = jj(c6), s6 = CH5.sol({ dev: D.f611, VDD: 16, R1: 2.1e6, R2: 270e3, RD: 2400, RS: 1500 });
+  T('Example 7.4 (voltage divider): V_G = 1.823 V (book 1.82), I_D = 2.416 mA, V_GS = −1.802 V (book 2.4, −1.8 from the graph), V_D = 10.2 V (10.24), V_S = 3.62 V (3.6), V_DS = 6.58 V (6.64), V_DG = 8.38 V (8.42); I_R1 = 6.75 µA; saturation',
+    `${f(V(c6, 'g'), 3)} ${f(z6.id, 3)} ${f(z6.VGS, 3)} ${f(V(c6, 'd'), 1)} ${f(V(c6, 's'), 2)} ${f(z6.VDS, 2)} ${f(z6.VDG, 2)} ${f(s6.IRR * 1e6, 2)} ${z6.region}`, '1.823 2.416 -1.802 10.2 3.62 6.58 8.38 6.75 saturation');
+  const c7 = run({ dev: D.ex62, VGG: 1.5, VDD: 12, RG: 1e6, RD: 0 }), z7 = jj(c7), c8 = run({ dev: D.f611, VGG: -1.5, VDD: 16, RG: 1e6, RD: 2000 }), z8 = jj(c8);
+  T('A p-channel device (Example 6.2) with both supplies turned round: V_GS = +1.5 V → I_D = 1 mA, V_D = −12 V · a gate driven 1.5 V positive on an n-channel: the gate diode clamps V_GS at 0.7 V and I_G = 0.8 µA through 1 MΩ',
+    `${f(z7.id, 3)} ${f(V(c7, 'd'), 2)} ${f(-z7.VGS, 2)} | ${f(z8.VGS, 2)} ${f(z8.ig, 2)}`, '1 -12 1.5 | 0.7 0.8'); }
 
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');

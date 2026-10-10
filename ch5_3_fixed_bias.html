@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="5.3 — JFET Fixed Bias">5.3 — วงจรไบแอสคงที่ของ JFET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรไบแอสคงที่ของ JFET <span class="en">JFET fixed bias</span></h1>
+<h1 data-l="en">JFET fixed bias <span class="en">\(V_{GS} = -V_{GG}\), then Shockley's equation directly</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 5 หน้า 22–27 การไบแอสกระแสตรงของ FET เริ่มจากความสัมพันธ์ทั่วไป \(I_G \cong 0\) และ \(I_D = I_S\) แล้วแก้สมการของอุปกรณ์ (Shockley) ร่วมกับสมการของวงจรพร้อมกัน ตำราเลือกวิธี<b>กราฟ</b>: วาดเส้นโค้งถ่ายโอนแล้วลากเส้นของวงจรทับ จุดตัดคือจุดทำงาน Q วงจรไบแอสคงที่ (fixed bias) เป็นวงจรที่ง่ายที่สุด เพราะ \(V_{GS}\) ถูกตรึงด้วยแหล่งจ่าย \(V_{GG}\) จึงแก้ได้ทั้งทางคณิตศาสตร์และกราฟ หน้านี้มีวงจรที่ปรับ \(V_{GG}\), \(V_{DD}\), \(R_D\) และอุปกรณ์ได้ (ส่วน A) Example 7.1 ทั้งสองวิธี กรณี \(V_{GG} = |V_P|/2\) และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 5 slides pp. 22–27. The dc biasing of a FET starts from the general relations \(I_G \cong 0\) and \(I_D = I_S\), then solves the device equation (Shockley) together with the network equation. The book prefers the <b>graphical</b> way: draw the transfer curve, superimpose the network line, and the intersection is the operating point Q. Fixed bias is the simplest circuit, because \(V_{GS}\) is pinned by the supply \(V_{GG}\), so it can be solved mathematically as well as graphically. This page has a circuit whose \(V_{GG}\), \(V_{DD}\), \(R_D\) and device you can change (section A), Example 7.1 both ways, the case \(V_{GG} = |V_P|/2\), and more practice.</p>
+<div class="equation-box eqwrap">$$ I_G \cong 0:\quad V_{R_G} = 0,\quad V_{GS} = -V_{GG} $$ $$ I_D = I_{DSS}\left(1 - \frac{V_{GS}}{V_P}\right)^2 $$ $$ V_{DS} = V_{DD} - I_DR_D,\quad V_D = V_{DS},\quad V_G = V_{GS},\quad V_S = 0 $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ความสัมพันธ์ทั่วไป</b> (สไลด์หน้า 22, สมการ 7.1–7.3): \(I_G \cong 0\), \(I_D = I_S\) และสมการของ Shockley เป็นของอุปกรณ์เท่านั้น ไม่เปลี่ยนตามวงจร (ตราบที่อยู่ในย่านแอกทีฟ) วงจรเพิ่มสมการของตัวเองเข้ามา และคำตอบคือคำตอบร่วมของทั้งสอง</li>
+  <li><b>วงจร</b> (สไลด์หน้า 23, รูป 7.1–7.2): ตัวเก็บประจุคู่ควบ \(C_1\), \(C_2\) เป็นวงจรเปิดสำหรับกระแสตรง \(R_G\) มีไว้ให้สัญญาณ \(V_i\) ปรากฏที่เกต (บทที่ 8) แต่สำหรับกระแสตรง \(V_{R_G} = I_GR_G = 0\) จึงแทนด้วยลัดวงจร</li>
+  <li><b>วงเกต–ซอร์ส</b> (สไลด์หน้า 24): กฎแรงดันของเคียร์ชอฟฟ์ (Kirchhoff's voltage law) \(-V_{GG} - V_{GS} = 0\) ให้ \(V_{GS} = -V_{GG}\) (สมการ 7.5) ค่าคงที่ จึงชื่อ "ไบแอสคงที่" แทนลงในสมการของ Shockley ได้ \(I_D\) ทันที (วิธีคณิตศาสตร์) หรือลากเส้นตั้งที่ \(V_{GS} = -V_{GG}\) ตัดเส้นโค้งถ่ายโอน (วิธีกราฟ รูป 7.3–7.4) โดยร่างเส้นโค้งจากสามจุด: \(I_{DSS}\), \(V_P\) และ (\(V_P/2\), \(I_{DSS}/4\))</li>
+  <li><b>วงเดรน–ซอร์ส</b> (สไลด์หน้า 25): \(V_{DS} = V_{DD} - I_DR_D\) (สมการ 7.6) และเพราะ \(V_S\) = 0 จึง \(V_D = V_{DS}\), \(V_G = V_{GS}\) (สมการ 7.7–7.9) มิเตอร์ของรูป 7.5 วัดค่า Q เหล่านี้ได้จริง (ลองใช้มิเตอร์ของภาพจำลอง)</li>
+  <li><b>ข้อจำกัด</b>: ต้องใช้แหล่งจ่ายสองตัว จึงใช้จริงน้อย และสมการของ Shockley ถูกต้องเฉพาะในย่านอิ่มตัว \(V_{DS} \ge V_{GS} - V_P\) ซึ่งตำราไม่ได้ตรวจ ใน Example 7.1 เงื่อนไขนี้ไม่ผ่านเล็กน้อย (ข้อ 1)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The general relations</b> (slide p. 22, Eqs. 7.1–7.3): \(I_G \cong 0\), \(I_D = I_S\) and Shockley's equation belong to the device alone and do not change with the network (as long as it stays in the active region). The network adds its own equation, and the solution satisfies both.</li>
+  <li><b>The circuit</b> (slide p. 23, Figs. 7.1–7.2): the coupling capacitors \(C_1\), \(C_2\) are open circuits for dc. \(R_G\) is there so that the signal \(V_i\) appears at the gate (chapter 8); for dc \(V_{R_G} = I_GR_G = 0\), so it is replaced by a short.</li>
+  <li><b>The gate–source loop</b> (slide p. 24): Kirchhoff's voltage law \(-V_{GG} - V_{GS} = 0\) gives \(V_{GS} = -V_{GG}\) (Eq. 7.5), a constant, hence "fixed bias". Substitute into Shockley's equation for \(I_D\) at once (the mathematical approach) or draw the vertical line at \(V_{GS} = -V_{GG}\) across the transfer curve (the graphical approach, Figs. 7.3–7.4), sketching the curve from three points: \(I_{DSS}\), \(V_P\) and (\(V_P/2\), \(I_{DSS}/4\)).</li>
+  <li><b>The drain–source loop</b> (slide p. 25): \(V_{DS} = V_{DD} - I_DR_D\) (Eq. 7.6), and since \(V_S\) = 0, \(V_D = V_{DS}\), \(V_G = V_{GS}\) (Eqs. 7.7–7.9). The meters of Fig. 7.5 would read these Q values (try the simulation's meter).</li>
+  <li><b>Limits</b>: two supplies are needed, so the circuit is seldom used; and Shockley's equation is only right in the saturation region \(V_{DS} \ge V_{GS} - V_P\), which the book does not check. In Example 7.1 the condition narrowly fails (problem 1).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch5/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 23, Fixed-Bias Configuration: the simplest of biasing arrangements for the n-channel JFET appears in the figure. Figure 7.1: the fixed-bias circuit with V_DD, R_D, C_1, C_2, R_G and V_GG; an arrow to Fig. 7.2, the dc network with I_G ≅ 0 A, V_RG = I_G R_G = (0 A) R_G = 0 V, the loop through V_GG and V_GS, I_DSS and V_P beside the JFET.">
+  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 23: วงจรไบแอสคงที่และวงจรสำหรับกระแสตรง (รูป 7.1–7.2) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 23: the fixed-bias circuit and its dc network (Figs. 7.1–7.2) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 26 กับ 27 เหมือนกันทุกประการ</b> (โจทย์ Example 7.1 ซ้ำ) หน้านี้แสดงหน้า 26 หน้าเดียว · สไลด์หน้า 24 สมการของ Shockley มีขีดตั้ง "|" เกินมาหลังกำลังสอง เป็นเศษจากการคัดลอก · สไลด์หน้า 22 ใช้หัวข้อ "Introduction" แต่เป็นบทนำของการไบแอส FET (ตำราหัวข้อ 7.1) ไม่ใช่ของบทที่ 5</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 26 and 27 are identical</b> (the statement of Example 7.1 twice); this page shows p. 26 only. On slide p. 24 Shockley's equation carries a stray "|" after the square, a copying artefact. Slide p. 22 is headed "Introduction" but introduces FET biasing (the book's section 7.1), not chapter 5.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรปรับได้</a><a href="#ex1"><b>1</b>Example 7.1</a><a href="#ex2"><b>2</b>V<sub>GG</sub> = |V<sub>P</sub>|/2</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The adjustable circuit</a><a href="#ex1"><b>1</b>Example 7.1</a><a href="#ex2"><b>2</b>V<sub>GG</sub> = |V<sub>P</sub>|/2</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ไบแอสคงที่: เส้นตั้งบนเส้นโค้งถ่ายโอน</h2><h2 data-l="en">Fixed bias: a vertical line on the transfer curve</h2>
+    <div class="src" data-l="th">สไลด์หน้า 24–25 · Boylestad หัวข้อ 7.2 (รูป 7.3–7.5, สมการ 7.5–7.9)</div><div class="src" data-l="en">Slides pp. 24–25 · Boylestad, section 7.2 (Figs. 7.3–7.5, Eqs. 7.5–7.9)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 24, Fixed-Bias Configuration: applying Kirchhoff's voltage law in the clockwise direction of the indicated loop of the figure, −V_GG − V_GS = 0, V_GS = −V_GG, I_D = I_DSS (1 − V_GS/V_P)²; recall that choosing V_GS = V_P/2 will result in a drain current of I_DSS/4 when plotting the equation. Figure 7.3: Shockley's curve with I_DSS, V_P, V_P/2 and I_DSS/4 marked.">
+    <figcaption data-l="th">สไลด์หน้า 24: \(V_{GS} = -V_{GG}\) และการวาดเส้นโค้งของ Shockley (รูป 7.3) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 24: \(V_{GS} = -V_{GG}\) and plotting Shockley's curve (Fig. 7.3) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 25, Fixed-Bias Configuration: the drain-to-source voltage of the output section can be determined by applying Kirchhoff's voltage law as follows: +V_DS + I_D R_D − V_DD = 0, V_DS = V_DD − I_D R_D; V_DS = V_D − V_S, V_D = V_DS + V_S = V_DS + 0 V, V_D = V_DS; V_GS = V_G − V_S, V_G = V_GS + V_S = V_GS + 0 V, V_G = V_GS. Figure 7.5: the circuit with an ammeter in the drain lead reading I_DQ and a voltmeter across gate–source reading V_GSQ.">
+    <figcaption data-l="th">สไลด์หน้า 25: วงเดรน–ซอร์ส และมิเตอร์วัดค่า Q (รูป 7.5) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 25: the drain–source loop and the meters reading Q (Fig. 7.5) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Example 7.1 กราฟบนคือเส้นโค้งถ่ายโอนกับเส้นตั้งที่ \(V_{GS} = -V_{GG}\) (รูป 7.4) กราฟล่างคือลักษณะสมบัติด้านเดรนกับเส้นโหลด \(V_{DS} = V_{DD} - I_DR_D\) และแนวพินช์ออฟ ป้ายบอกว่าจุด Q อยู่ในย่านอิ่มตัวหรือหลุดเข้าย่านโอห์มิก ลองเพิ่ม \(R_D\) จนจุด Q ข้ามแนวพินช์ออฟ แล้วดู \(I_D\) ของภาพจำลองเริ่มต่ำกว่าสมการของ Shockley</p>
+  <p class="lead" data-l="en">Start from the circuit of Example 7.1. The upper graph is the transfer curve with the vertical line at \(V_{GS} = -V_{GG}\) (Fig. 7.4); the lower one the drain characteristics with the load line \(V_{DS} = V_{DD} - I_DR_D\) and the pinch-off locus. The badge says whether Q is in saturation or has slipped into the ohmic region. Raise \(R_D\) until Q crosses the locus and watch the simulated \(I_D\) fall below Shockley's value.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 7.1: วิธีคณิตศาสตร์และวิธีกราฟ</h2><h2 data-l="en">Example 7.1: the mathematical and the graphical approach</h2>
+    <div class="src" data-l="th">สไลด์หน้า 26 · Boylestad Example 7.1 (รูป 7.6–7.7)</div><div class="src" data-l="en">Slide p. 26 · Boylestad Example 7.1 (Figs. 7.6–7.7)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 26, Fixed-Bias Configuration: determine the following for the network of the figure: (a) V_GSQ, (b) I_DQ, (c) V_DS, (d) V_D, (e) V_G, (f) V_S. Figure 7.6: 16 V supply, 2 kΩ drain resistor, 1 MΩ gate resistor, a 2 V gate supply with its negative terminal toward the gate, I_DSS = 10 mA, V_P = −8 V.">
+    <figcaption data-l="th">สไลด์หน้า 26: โจทย์ Example 7.1 (รูป 7.6) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 26: Example 7.1 (Fig. 7.6) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 16 V, \(R_D\) = 2 kΩ, \(R_G\) = 1 MΩ, \(V_{GG}\) = 2 V, \(I_{DSS}\) = 10 mA, \(V_P\) = −8 V จงหา (a) \(V_{GS_Q}\) (b) \(I_{D_Q}\) (c) \(V_{DS}\) (d) \(V_D\) (e) \(V_G\) (f) \(V_S\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 16 V, \(R_D\) = 2 kΩ, \(R_G\) = 1 MΩ, \(V_{GG}\) = 2 V, \(I_{DSS}\) = 10 mA, \(V_P\) = −8 V. Determine (a) \(V_{GS_Q}\) (b) \(I_{D_Q}\) (c) \(V_{DS}\) (d) \(V_D\) (e) \(V_G\) (f) \(V_S\).</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพแสดงเส้นโค้งถ่ายโอนกับเส้นตั้ง แล้วแรงดันของโหนด และท้ายสุดเส้นโหลดบนลักษณะสมบัติด้านเดรน ชี้ที่ทรานซิสเตอร์เพื่ออ่านย่านการทำงาน <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The side panel shows the transfer curve with the vertical line, then the node voltages, and finally the load line on the drain characteristics. Hover over the transistor to read its region. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">เมื่อ \(V_{GG} = |V_P|/2\): จุดลัดของตาราง 6.1</h2><h2 data-l="en">When \(V_{GG} = |V_P|/2\): the shortcut of Table 6.1</h2>
+    <div class="src" data-l="th">วงจรของ Example 7.1 ด้วย \(V_{GG}\) = 4 V</div><div class="src" data-l="en">The circuit of Example 7.1 with \(V_{GG}\) = 4 V</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรของ Example 7.1 แต่ \(V_{GG}\) = 4 V จงหา \(I_D\) และ \(V_{DS}\) แล้วตรวจว่าอยู่ในย่านอิ่มตัวหรือไม่</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The circuit of Example 7.1 with \(V_{GG}\) = 4 V. Find \(I_D\) and \(V_{DS}\), and check whether the JFET is in saturation.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(I_G\) = 0 · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(I_G\) = 0 · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — จุด Q กับแนวพินช์ออฟ</h3>
+    <ol><li>ส่วน A ด้วยค่าของ Example 7.1 ป้ายบอก "ย่านโอห์มิก": จุด Q อยู่ซ้ายแนวพินช์ออฟเล็กน้อย ลด \(R_D\) เหลือ 1.5 kΩ ป้ายเปลี่ยนเป็นย่านอิ่มตัว และ \(I_D\) ของภาพจำลองกลับมาเท่ากับ 5.625 mA ของ Shockley</li>
+    <li>เพิ่ม \(R_D\) เป็น 4 kΩ: เส้นโหลดชันลง Q ลึกเข้าไปในย่านโอห์มิก \(I_D\) ลดเหลือราว 3.6 mA แม้ \(V_{GS}\) จะเท่าเดิม นี่คือเหตุที่ต้องตรวจ \(V_{DS}\) เสมอ</li>
+    <li>เลื่อน \(V_{GG}\) ถึง 8 V (= \(|V_P|\)): เส้นตั้งไปถึงปลายเส้นโค้ง กระแสเป็นศูนย์ \(V_{DS} = V_{DD}\)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — มิเตอร์ของรูป 7.5</h3>
+    <ol><li>เปิดมิเตอร์ของภาพจำลอง (ปุ่มมุมขวาบน) หนีบขาเดรนอ่าน \(I_{D_Q}\) และจิ้มโพรบที่เกตกับซอร์สอ่าน \(V_{GS_Q}\) เหมือนรูป 7.5</li>
+    <li>ข้อ 2: ลองคิดต่อว่า \(V_{GG}\) เท่าใดให้ \(I_D = I_{DSS}/2\): \(V_{GG} = -0.3V_P\) = 2.4 V (ตาราง 6.1)</li></ol>
+    <div class="book">สไลด์บทที่ 5 หน้า 22–27 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 7.1–7.2 (รูป 7.1–7.7, สมการ 7.1–7.9, Example 7.1)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — Q and the pinch-off locus</h3>
+    <ol><li>In section A with the values of Example 7.1 the badge says "ohmic region": Q sits just left of the locus. Lower \(R_D\) to 1.5 kΩ, the badge turns to saturation, and the simulated \(I_D\) comes back to Shockley's 5.625 mA.</li>
+    <li>Raise \(R_D\) to 4 kΩ: the load line steepens, Q goes deep into the ohmic region, and \(I_D\) falls to about 3.6 mA although \(V_{GS}\) is unchanged. This is why \(V_{DS}\) must always be checked.</li>
+    <li>Slide \(V_{GG}\) to 8 V (= \(|V_P|\)): the vertical line reaches the end of the curve, the current is zero and \(V_{DS} = V_{DD}\).</li></ol></div>
+  <div class="card"><h3>Try this 2 — the meters of Fig. 7.5</h3>
+    <ol><li>Open the simulation's meter (button at the top right), clamp the drain lead to read \(I_{D_Q}\), and probe gate and source to read \(V_{GS_Q}\), as in Fig. 7.5.</li>
+    <li>Problem 2: which \(V_{GG}\) gives \(I_D = I_{DSS}/2\)? \(V_{GG} = -0.3V_P\) = 2.4 V (Table 6.1).</li></ol>
+    <div class="book">Chapter 5 slides pp. 22–27 · Boylestad &amp; Nashelsky, 11th ed., sections 7.1–7.2 (Figs. 7.1–7.7, Eqs. 7.1–7.9, Example 7.1)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET, C = IE.COL;
+  CH5.problem(1, 'ex71'); CH5.problem(2, 'fb2');
+
+  /* =================================================================== A: the adjustable fixed-bias circuit */
+  const sg = x => (x < 0 ? '−' : '') + fd(Math.abs(x), 2), dev = S => ({ idss: S.idss * 1e-3, vp: S.vp }), logR = (id, label, lo, hi, get, set, p, build, step = 100) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  CH5.explorer({ init: { VGG: 2, VDD: 16, RD: 2000, idss: 10, vp: -8 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      ui.slider(p, { id: 'aVGG', label: 'V_GG', min: 0, max: 10, step: 0.1, value: S.VGG, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VGG = v; build(); } });
+      ui.slider(p, { id: 'aVDD', label: 'V_DD', min: 4, max: 30, step: 0.5, value: S.VDD, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VDD = v; build(); } });
+      logR('aRD', 'R_D', 200, 10e3, () => S.RD, v => { S.RD = v; }, p, build, 100);
+      ui.slider(p, { id: 'aI', label: 'I_DSS', min: 2, max: 16, step: 0.5, value: S.idss, fmt: v => `${fd(v, 1)} mA`, oninput: v => { S.idss = v; build(); } });
+      ui.slider(p, { id: 'aP', label: 'V_P', min: 1, max: 10, step: 0.5, value: -S.vp, fmt: v => `−${fd(v, 1)} V`, oninput: v => { S.vp = -v; build(); } }); },
+    spec: S => CH5.net({ dev: dev(S), VGG: S.VGG, VDD: S.VDD, RG: 1e6, RD: S.RD }),
+    side: (ctx, b, bd, c, S) => { const z = CH5.j(c), d = dev(S), sh = FET.id(d.idss, d.vp, -S.VGG) * 1e3;
+      CH5.tPlot(ctx, b, bd, { dev: d, imax: Math.ceil(S.idss * 1.25), vmin: Math.floor(S.vp * 1.15), vl: [{ v: -S.VGG, label: bd.short ? '' : `V_GS = −V_GG = ${sg(-S.VGG)} V`, color: C.tan, w: 2.2, dash: [] }], tbl: !bd.short,
+        pts: [{ v: z.VGS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.id, 2)} mA)`, side: -1, dy: 14 }].concat(Math.abs(sh - z.id) > 0.02 ? [{ v: -S.VGG, i: sh, color: C.tan, r: 5, label: bd.short ? '' : t(`Shockley ${fd(sh, 2)} mA`, `Shockley ${fd(sh, 2)} mA`), side: -1, dy: -14 }] : []), guides: [{ v: z.VGS, i: z.id }],
+        title: t('เส้นตั้งที่ V_GS = −V_GG ตัดเส้นโค้งถ่ายโอน', 'the vertical line at V_GS = −V_GG meets the transfer curve') }); },
+    waves: [(ctx, b, bd, c, S) => { const z = CH5.j(c), d = dev(S); CH5.dPlot(ctx, b, bd, { dev: d, imax: Math.ceil(S.idss * 1.25), vmax: Math.max(10, Math.ceil(S.VDD * 1.15)), xt: [5, 10, 15, 20, 25, 30, 35].filter(x => x <= S.VDD * 1.15), load: { vdd: S.VDD, r: S.RD }, q: { v: z.VDS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.VDS, 2)} V, ${fd(z.id, 2)} mA)`, side: z.VDS > S.VDD * 0.55 ? -1 : 1, dy: -18 }, labels: !bd.short,
+      title: t('เส้นโหลด V_DS = V_DD − I_D R_D และแนวพินช์ออฟ', 'load line V_DS = V_DD − I_D R_D and the pinch-off locus') }); }],
+    badge: (c, S) => { const z = CH5.j(c), reg = CH5.reg(z.region); return [[`${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_DS = ${fd(z.VDS, 2)} V`, `${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_DS = ${fd(z.VDS, 2)} V`], reg[1]]; },
+    rows: (c, z, S) => { const d = dev(S); return [['V_GS = −V_GG', `${sg(z.VGS)} V`], [t('I_D (Shockley)', 'I_D (Shockley)'), `${fd(FET.id(d.idss, d.vp, -S.VGG) * 1e3, 3)} mA`], [t('I_D (ภาพจำลอง)', 'I_D (simulation)'), `${fd(z.id, 3)} mA`], ['V_DS = V_D', `${fd(z.VDS, 2)} V`], ['V_GS − V_P', `${fd(z.vov, 2)} V`], [t('ย่าน', 'region'), CH5.reg(z.region)[0]], ['I_G', `${fd(z.ig, 3)} µA`]]; },
+    text: (c, z, S) => { const d = dev(S), sh = FET.id(d.idss, d.vp, -S.VGG) * 1e3, vov = -S.VGG - d.vp;
+      return z.region === 'cutoff' ? t(`\\(V_{GG}\\) = ${fd(S.VGG, 1)} V ≥ \\(|V_P|\\): \\(V_{GS}\\) ต่ำกว่าแรงดันพินช์ออฟ กระแสเป็นศูนย์ และ \\(V_{DS} = V_{DD}\\) = ${fd(S.VDD, 1)} V (ไม่มีแรงดันตกคร่อม \\(R_D\\))`, `\\(V_{GG}\\) = ${fd(S.VGG, 1)} V ≥ \\(|V_P|\\): \\(V_{GS}\\) is below the pinch-off level, the current is zero and \\(V_{DS} = V_{DD}\\) = ${fd(S.VDD, 1)} V (nothing drops across \\(R_D\\)).`)
+        : z.region === 'saturation' ? t(`\\(V_{GS} = -V_{GG}\\) = ${sg(-S.VGG)} V → สมการของ Shockley ให้ \\(I_D\\) = ${fd(sh, 2)} mA แล้ว \\(V_{DS} = V_{DD} - I_DR_D\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_P\\) = ${fd(vov, 2)} V: อยู่ในย่านอิ่มตัว ภาพจำลองตรงกับสมการ`, `\\(V_{GS} = -V_{GG}\\) = ${sg(-S.VGG)} V → Shockley's equation gives \\(I_D\\) = ${fd(sh, 2)} mA, then \\(V_{DS} = V_{DD} - I_DR_D\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_P\\) = ${fd(vov, 2)} V: saturation, and the simulation agrees with the equation.`)
+        : t(`สมการของ Shockley ให้ \\(I_D\\) = ${fd(sh, 2)} mA แต่ \\(V_{DD} - I_DR_D\\) = ${fd(S.VDD - sh * S.RD / 1e3, 2)} V น้อยกว่า \\(V_{GS} - V_P\\) = ${fd(vov, 2)} V: จุด Q อยู่ซ้ายของแนวพินช์ออฟ (ย่านโอห์มิก) ช่องยังไม่พินช์ออฟ JFET จึงทำตัวเป็นตัวต้านทาน ภาพจำลองให้ \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ลด \\(R_D\\) หรือเพิ่ม \\(V_{DD}\\) เพื่อกลับเข้าย่านอิ่มตัว`, `Shockley's equation gives \\(I_D\\) = ${fd(sh, 2)} mA, but \\(V_{DD} - I_DR_D\\) = ${fd(S.VDD - sh * S.RD / 1e3, 2)} V is below \\(V_{GS} - V_P\\) = ${fd(vov, 2)} V: Q sits left of the pinch-off locus (the ohmic region), the channel is not pinched off and the JFET acts as a resistor; the simulation gives \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{DS}\\) = ${fd(z.VDS, 2)} V. Lower \\(R_D\\) or raise \\(V_{DD}\\) to return to saturation.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) \\(V_{DD}\\) = 12 V, \\(R_D\\) = 1.2 kΩ, \\(V_{GG}\\) = 1.5 V, \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −4.5 V จงหา \\(I_D\\) และ \\(V_{DS}\\)', '1) \\(V_{DD}\\) = 12 V, \\(R_D\\) = 1.2 kΩ, \\(V_{GG}\\) = 1.5 V, \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −4.5 V. Find \\(I_D\\) and \\(V_{DS}\\).'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 6 * (1 - 1.5 / 4.5) ** 2, unit: 'mA', tol: 0.02 }, { key: 'y', lab: 'V_DS =', ans: 12 - 6 * (1 - 1.5 / 4.5) ** 2 * 1.2, unit: 'V', tol: 0.05 }],
+      work: work(R`I_D = 6\ \text{mA}\left(1 - \frac{-1.5}{-4.5}\right)^2 = 6(0.6667)^2 = ${fd(6 * (1 - 1.5 / 4.5) ** 2, 2)}\ \text{mA},\quad V_{DS} = 12 - (${fd(6 * (1 - 1.5 / 4.5) ** 2, 2)})(1.2) = ${fd(12 - 6 * (1 - 1.5 / 4.5) ** 2 * 1.2, 2)}\ \text{V}`) },
+    { q: t('2) วงจรข้อ 1: \\(V_G\\), \\(V_D\\) และ \\(V_S\\) เท่าใด', '2) The circuit of question 1: what are \\(V_G\\), \\(V_D\\) and \\(V_S\\)?'),
+      fields: [{ key: 'x', lab: 'V_G =', ans: -1.5, unit: 'V', tol: 0.01 }, { key: 'y', lab: 'V_D =', ans: 12 - 6 * (1 - 1.5 / 4.5) ** 2 * 1.2, unit: 'V', tol: 0.05 }],
+      work: work(R`V_S = 0,\quad V_G = V_{GS} = -V_{GG} = -1.5\ \text{V},\quad V_D = V_{DS} = ${fd(12 - 6 * (1 - 1.5 / 4.5) ** 2 * 1.2, 2)}\ \text{V}`) },
+    { q: t('3) วงจรข้อ 1 อยู่ในย่านอิ่มตัวหรือไม่ (\\(V_{DS} \\ge V_{GS} - V_P\\)?) ตอบค่า \\(V_{GS} - V_P\\)', '3) Is the circuit of question 1 in saturation (\\(V_{DS} \\ge V_{GS} - V_P\\)?) Give \\(V_{GS} - V_P\\).'),
+      fields: [{ key: 'x', lab: 'V_GS − V_P =', ans: 3, unit: 'V', tol: 0.01 }], work: work(R`V_{GS} - V_P = -1.5 - (-4.5) = 3\ \text{V} \le V_{DS} = ${fd(12 - 6 * (1 - 1.5 / 4.5) ** 2 * 1.2, 2)}\ \text{V}:\ \text{saturation}\ \checkmark`) },
+    { q: t('4) ออกแบบ: ต้องการ \\(I_D\\) = 2 mA จาก JFET \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V ด้วยไบแอสคงที่ ต้องใช้ \\(V_{GG}\\) เท่าใด', '4) Design: \\(I_D\\) = 2 mA is wanted from a JFET with \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V using fixed bias. What \\(V_{GG}\\) is needed?'),
+      fields: [{ key: 'x', lab: 'V_GG =', ans: 2, unit: 'V', tol: 0.01 }], work: work(R`I_D = \frac{I_{DSS}}{4}\ \Rightarrow\ V_{GS} = \frac{V_P}{2} = -2\ \text{V}\ \Rightarrow\ V_{GG} = 2\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

@@ -32,6 +32,10 @@
      Q   bipolar junction transistor (chapter 3, Oct 2026): collector C, base B, emitter E (node names; C straight above or below E, B to one
          side, level with the middle of the symbol); pnp: true; see BJT below for the models (beta, be, fam, vsat, va, iceo). pins: true
          writes C, B, E beside the leads. Results: I[id] = I_C from C to E, I[id + ':b'] = I_B from B to E; circuit.Q(id) gives them in npn terms
+     J   field-effect transistor (chapter 5, Oct 2026): drain D, gate G, source S (node names; D straight above or below S, G to one side, level
+         with the middle of the symbol); pch: true for a p-channel; see FET below for the model (idss, vp; kind 'jfet' | 'dmos' | 'emos' with k, vt;
+         gate: the gate-junction diode). pins: true writes D, G, S beside the leads. Results: I[id] = I_D from D to S, I[id + ':g'] = I_G from G to S;
+         circuit.J(id) gives them in n-channel terms
    Sign convention for results: I[id] is the current through the part from a to b. */
 (function (global) {
 'use strict';
@@ -184,13 +188,44 @@ BJT.cb = (p, IE, vcb) => { let lo = -1, hi = 2; const tot = v => { const m = BJT
   for (let k = 0; k < 80; k++) { const m = (lo + hi) / 2; if (tot(m) < IE) lo = m; else hi = m; } const v = (lo + hi) / 2, m = BJT.iv(p, v, vcb + v); return { VBE: v, IB: m.ib, IC: m.ic }; };
 CK.BJT = BJT;
 
+/* ---------------- FET models (chapter 5, Oct 2026) ----------------
+   In n-channel terms (a p-channel: v_SG, v_SD, and its currents run the other way) the drain current follows Shockley's equation (Eq. 6.3):
+     saturation (v_DS ≥ v_GS − V_P): I_D = I_DSS (1 − v_GS/V_P)²                         (× (1 + (v_DS − v_GS + V_P)/va) when va is given)
+     ohmic     (0 ≤ v_DS < v_GS − V_P): I_D = I_DSS/V_P² · [2 (v_GS − V_P) v_DS − v_DS²]   (meets the saturation level at the pinch-off locus with the same slope)
+     cutoff    (v_GS ≤ V_P): I_D = 0
+   so the channel resistance at the origin is r_d = V_P²/(2 I_DSS (v_GS − V_P)) = r_o/(1 − v_GS/V_P), with r_o = |V_P|/(2 I_DSS) (the book's Eq. 6.1
+   squares the bracket; it is a first approximation). kind 'jfet' (default; idss A, vp V < 0; gate: a diode model from G to S, default
+   { model: 'simple', vk: 0.7 }, gate: false for none), 'dmos' (depletion MOSFET: the same equation on both sides of v_GS = 0, no gate diode), 'emos'
+   (enhancement MOSFET: I_D = k (v_GS − V_T)² with k A/V², vt V > 0, and v_GS − V_T in place of v_GS − V_P). Negative v_DS: the straight line through
+   the origin with the ohmic slope. DC and transients: Newton–Raphson on (v_GS, v_DS) with the drain current linearised (g_m, g_ds) and the gate diode
+   as any diode; AC uses the slopes at the last DC point */
+const FET = { GATE: { model: 'simple', vk: 0.7 } };
+FET.kind = p => p.kind || 'jfet';
+FET.gate = p => (FET.kind(p) === 'jfet' ? (p.gate === false ? null : (p.gate || FET.GATE)) : (p.gate || null));
+/* the threshold (V_P or V_T) and the coefficient b = I_DSS/V_P² or k, n-channel terms */
+FET.kb = p => { if (FET.kind(p) === 'emos') return { vt: p.vt ?? 2, b: p.k ?? 1e-3 }; const vp = -Math.abs(p.vp ?? -4); return { vt: vp, b: (p.idss ?? 8e-3) / (vp * vp) }; };
+/* the drain current and its slopes { i, gm = ∂I_D/∂v_GS, gds = ∂I_D/∂v_DS, region } at (v_GS, v_DS), n-channel terms */
+FET.iv = (p, vgs, vds) => { const { vt, b } = FET.kb(p), vov = vgs - vt, va = p.va;
+  if (vov <= 0) return { i: 0, gm: 0, gds: 0, region: 'cutoff' };
+  if (vds < 0) { const g = 2 * b * vov; return { i: g * vds, gm: 2 * b * vds, gds: g, region: 'ohmic' }; }
+  if (vds < vov) return { i: b * (2 * vov * vds - vds * vds), gm: 2 * b * vds, gds: 2 * b * (vov - vds), region: 'ohmic' };
+  const i0 = b * vov * vov, E = va ? 1 + (vds - vov) / va : 1;
+  return { i: i0 * E, gm: 2 * b * vov * E - (va ? i0 / va : 0), gds: va ? i0 / va : 0, region: 'saturation' }; };
+/* Shockley's equation and its inverse (Eqs. 6.3, 6.8) with the book's signs: an n-channel has vp < 0 and vgs ≤ 0, a p-channel both positive */
+FET.id = (idss, vp, vgs) => { const u = 1 - vgs / vp; return u <= 0 ? 0 : idss * u * u; };
+FET.vgs = (idss, vp, id) => vp * (1 - Math.sqrt(Math.max(0, id) / idss));
+/* the Q-point of a bias line v_GS = vg − I_D R_S (Eq. 7.16; vg = 0: self bias, Eq. 7.10) on Shockley's curve: { id, vgs } (n-channel) */
+FET.bias = (idss, vp, rs, vg = 0) => { if (!(rs > 0)) return { id: FET.id(idss, vp, vg), vgs: vg }; let lo = 0, hi = Math.max(idss, vg / rs) * 2 + 1e-9;
+  for (let k = 0; k < 90; k++) { const m = (lo + hi) / 2; if (m - FET.id(idss, vp, vg - m * rs) < 0) lo = m; else hi = m; } const id = (lo + hi) / 2; return { id, vgs: vg - id * rs }; };
+CK.FET = FET;
+
 /* ---------------- the circuit ---------------- */
 class Circuit {
   constructor(spec) {
     this.nodes = spec.nodes;                      // name -> [x, y] in grid units
     this.ground = spec.ground || Object.keys(spec.nodes)[0];
     this.parts = spec.parts.map((p, i) => ({ ...p, id: p.id || (p.type + '_' + i) }));
-    this.parts.forEach(p => { if (p.type === 'Q') { p.a = p.C; p.b = p.E; } });   // a transistor's collector path is its a → b (dots, picking, the meter's clamp)
+    this.parts.forEach(p => { if (p.type === 'Q') { p.a = p.C; p.b = p.E; } if (p.type === 'J') { p.a = p.D; p.b = p.S; } });   // a transistor's collector (drain) path is its a → b (dots, picking, the meter's clamp)
     this.byId = {}; this.parts.forEach(p => { this.byId[p.id] = p; });
     this.mode = spec.mode || 'dc';                // 'dc' | 'ac' | 'tran'
     this.w = spec.w || 2 * Math.PI * 50;          // AC angular frequency (rad/s)
@@ -210,9 +245,11 @@ class Circuit {
      circuit is solved, the diode voltages are updated (limited on the exponential), until they stop moving. result.iters counts the solves */
   solve(dt) {
     if (this.mode === 'tran' && !(dt > 0)) dt = 1e-6;   // a board solves once without a step: look 1 µs ahead (capacitor voltages are only updated by step)
-    const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'); if ((!ds.length && !qs.length) || this.mode === 'ac') return this.solve1(dt);
+    const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'), js = this.parts.filter(p => p.type === 'J');
+    if ((!ds.length && !qs.length && !js.length) || this.mode === 'ac') return this.solve1(dt);
     ds.forEach(p => { if (p.vd === undefined || !isFinite(p.vd)) p.vd = (p.model || 'shockley') === 'shockley' || p.model === 'table' ? 0.6 : 0; });
     qs.forEach(p => { if (!isFinite(p.vbe)) p.vbe = BJT.v0(p); if (!isFinite(p.vce)) p.vce = 0; });
+    js.forEach(p => { if (!isFinite(p.vgs)) p.vgs = 0; if (!isFinite(p.vds)) p.vds = 0; });
     const moved = (a, b) => Math.abs(a - b) > 1e-9 + 1e-7 * Math.abs(a);
     let r = null, it = 0, damp = false;
     for (; it < 400; it++) { r = this.solve1(dt); if (r.error === 'singular') return r; let done = true;
@@ -223,6 +260,10 @@ class Circuit {
         let nb = DIODE.lim(BJT.beOf(p), vb, p.vbe), nc = vc;
         if (damp) { nb = p.vbe + Math.max(-0.5, Math.min(0.5, nb - p.vbe)); nc = p.vce + Math.max(-1, Math.min(1, nc - p.vce)); }
         if (moved(nb, p.vbe) || moved(nc, p.vce)) done = false; p.vbe = nb; p.vce = nc; });
+      js.forEach(p => { const s = p.pch ? -1 : 1, vg = s * (r.V[p.G].re - r.V[p.S].re), vd = s * (r.V[p.D].re - r.V[p.S].re), gd = FET.gate(p);
+        let ng = gd ? DIODE.lim(gd, vg, p.vgs) : vg, nd = vd;   // the square law is smooth: plain Newton, smaller steps only once damping has set in
+        if (damp) { ng = p.vgs + Math.max(-0.5, Math.min(0.5, ng - p.vgs)); nd = p.vds + Math.max(-1, Math.min(1, nd - p.vds)); }
+        if (moved(ng, p.vgs) || moved(nd, p.vds)) done = false; p.vgs = ng; p.vds = nd; });
       if (done) break; }
     r.iters = it + 1;
     /* a straight-line diode left "on" with (almost) no current sits on its boundary: restart it once from "off", so that with no current
@@ -238,7 +279,7 @@ class Circuit {
     const parent = {}; names.forEach(n => { parent[n] = n; });
     const find = n => { while (parent[n] !== n) { parent[n] = parent[parent[n]]; n = parent[n]; } return n; };
     const shorts = [], others = [];
-    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent) || (p.type === 'Q' && !(p.B in parent))) throw new Error('unknown node in ' + p.id);
+    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent) || (p.type === 'Q' && !(p.B in parent)) || (p.type === 'J' && !(p.G in parent))) throw new Error('unknown node in ' + p.id);
       if (this.isShort(p)) { shorts.push(p); const ra = find(p.a), rb = find(p.b); if (ra !== rb) parent[ra] = rb; } else others.push(p); }
     const gRoot = find(this.ground); const netOf = {}; let nNet = 0; const netIdx = { [gRoot]: -1 };
     for (const n of names) { const r = find(n); if (!(r in netIdx)) netIdx[r] = nNet++; netOf[n] = netIdx[r]; }
@@ -290,6 +331,11 @@ class Circuit {
           const s = p.pnp ? -1 : 1, nC = netOf[p.C], nB = netOf[p.B], nE = netOf[p.E], vb0 = p.vbe ?? 0, vc0 = p.vce ?? 0, m = BJT.iv(p, vb0, vc0);
           stampG(nB, nE, nB, nE, m.g11); stampG(nB, nE, nC, nE, m.g12); stampG(nC, nE, nB, nE, m.g21); stampG(nC, nE, nC, nE, m.g22);
           if (mode !== 'ac') { stampI(nB, nE, s * (m.ib - m.g11 * vb0 - m.g12 * vc0), 0); stampI(nC, nE, s * (m.ic - m.g21 * vb0 - m.g22 * vc0), 0); }
+          break; }
+        case 'J': { // the drain current D → S linearised in v_GS and v_DS, and the gate diode G → S (n-channel terms; s = −1 turns a p-channel round)
+          const s = p.pch ? -1 : 1, nD = netOf[p.D], nG = netOf[p.G], nS = netOf[p.S], vg0 = p.vgs ?? 0, vd0 = p.vds ?? 0, m = FET.iv(p, vg0, vd0), gd = FET.gate(p), L = gd ? DIODE.iv(gd, vg0) : { i: 0, g: 0 };
+          stampG(nD, nS, nG, nS, m.gm); stampG(nD, nS, nD, nS, m.gds); stampY(nG, nS, L.g + GMIN, 0);
+          if (mode !== 'ac') { stampI(nD, nS, s * (m.i - m.gm * vg0 - m.gds * vd0), 0); stampI(nG, nS, s * (L.i - L.g * vg0), 0); }
           break; }
       }
     });
@@ -349,6 +395,10 @@ class Circuit {
           if (mode === 'ac') { I[p.id] = Cx.add(Cx.scale(be, m.g21), Cx.scale(ce, m.g22)); I[p.id + ':b'] = Cx.add(Cx.scale(be, m.g11), Cx.scale(ce, m.g12)); break; }
           const db = s * be.re - vb0, dc = s * ce.re - vc0;
           I[p.id] = cx(s * (m.ic + m.g21 * db + m.g22 * dc)); I[p.id + ':b'] = cx(s * (m.ib + m.g11 * db + m.g12 * dc)); break; }
+        case 'J': { const s = p.pch ? -1 : 1, vg0 = p.vgs ?? 0, vd0 = p.vds ?? 0, m = FET.iv(p, vg0, vd0), gd = FET.gate(p), L = gd ? DIODE.iv(gd, vg0) : { i: 0, g: 0 }, gs = Cx.sub(V[p.G], V[p.S]), ds = vab;
+          if (mode === 'ac') { I[p.id] = Cx.add(Cx.scale(gs, m.gm), Cx.scale(ds, m.gds)); I[p.id + ':g'] = Cx.scale(gs, L.g + GMIN); break; }
+          const dg = s * gs.re - vg0, dd = s * ds.re - vd0;
+          I[p.id] = cx(s * (m.i + m.gm * dg + m.gds * dd)); I[p.id + ':g'] = cx(s * (L.i + L.g * dg) + GMIN * gs.re); break; }
       }
     });
     extra.forEach((p, k) => { const x = cx(sol.re[nNet + k], sol.im[nNet + k]);
@@ -361,7 +411,8 @@ class Circuit {
     const addInj = (n, z) => { inj[n] = Cx.add(inj[n], z); };
     others.forEach(p => { const i = I[p.id]; if (!i) return;
       if (p.type === 'XF') { addInj(p.a, Cx.neg(i)); addInj(p.b, i); const i2 = I[p.id + ':2']; addInj(p.c, Cx.neg(i2)); addInj(p.d, i2); }
-      else { addInj(p.a, Cx.neg(i)); addInj(p.b, i); if (p.type === 'Q') { const ib = I[p.id + ':b']; addInj(p.B, Cx.neg(ib)); addInj(p.E, ib); } } });
+      else { addInj(p.a, Cx.neg(i)); addInj(p.b, i); if (p.type === 'Q') { const ib = I[p.id + ':b']; addInj(p.B, Cx.neg(ib)); addInj(p.E, ib); }
+        if (p.type === 'J') { const ig = I[p.id + ':g']; addInj(p.G, Cx.neg(ig)); addInj(p.S, ig); } } });
     // in our convention a current I through an element from a to b leaves node a. inj[n] = net current arriving at n from elements,
     // which the shorts must carry away from n.
     const groups = {}; shorts.forEach(p => { const r = find(p.a); (groups[r] = groups[r] || []).push(p); });
@@ -396,6 +447,12 @@ class Circuit {
   Q(id) { const p = this.byId[id], s = p.pnp ? -1 : 1, r = this.result, v = n => (r ? r.V[n].re : 0), i = k => (r && r.I[k] ? r.I[k].re : 0);
     const IB = s * i(id + ':b'), IC = s * i(id), VBE = s * (v(p.B) - v(p.E)), VCE = s * (v(p.C) - v(p.E)), sat = p.satAt ?? (p.fam ? 0.3 : (p.vsat ?? 0) + 0.08);
     return { IB, IC, IE: IB + IC, VBE, VCE, VCB: VCE - VBE, region: IB < 1e-7 ? 'cutoff' : VCE < sat ? 'saturation' : 'active' }; }
+  /* a FET's state in n-channel terms (a p-channel: v_SG, v_SD and the currents turned round, all positive when it conducts): region 'cutoff'
+     (v_GS at or below V_P), 'ohmic' (v_DS below v_GS − V_P: the voltage-controlled resistor) or 'saturation' (the constant-current region);
+     vov = v_GS − V_P (the pinch-off voltage for this v_GS), rd = the channel resistance at the origin for this v_GS */
+  J(id) { const p = this.byId[id], s = p.pch ? -1 : 1, r = this.result, v = n => (r ? r.V[n].re : 0), i = k => (r && r.I[k] ? r.I[k].re : 0);
+    const VGS = s * (v(p.G) - v(p.S)), VDS = s * (v(p.D) - v(p.S)), m = FET.iv(p, VGS, VDS), kb = FET.kb(p), vov = VGS - kb.vt;
+    return { ID: s * i(id), IG: s * i(id + ':g'), IS: s * (i(id) + i(id + ':g')), VGS, VDS, VDG: VDS - VGS, region: m.region, vov, rd: vov > 0 ? 1 / (2 * kb.b * vov) : Infinity }; }
   Vab(id) { const p = this.byId[id]; return Cx.sub(this.V(p.a), this.V(p.b)); }
   I(id) { return (this.result && this.result.I[id]) || cx(0); }
   /* power absorbed by the part (DC/tran: instantaneous; AC: average, phasors are peak) */
@@ -542,12 +599,14 @@ class View {
     this.flows = {};
     this.ckt.parts.forEach(p => { const path = this.path(p); if (path) { const f = new Flow(path); this.flows[p.id] = f; }
       if (p.type === 'XF') this.flows[p.id + ':2'] = new Flow([this.P(p.c), this.P(p.d)]);
-      if (p.type === 'Q') this.flows[p.id + ':b'] = new Flow(this.qBasePath(p)); });
+      if (p.type === 'Q') this.flows[p.id + ':b'] = new Flow(this.qBasePath(p));
+      if (p.type === 'J') this.flows[p.id + ':g'] = new Flow(this.jGatePath(p)); });
   }
   P(n) { const [x, y] = Array.isArray(n) ? n : this.ckt.nodes[n]; return [this.ox + x * this.u, this.oy + y * this.u]; }
   path(p) {
     if (p.type === 'XF') return [this.P(p.a), this.P(p.b)];
     if (p.type === 'Q') { const g = this.qGeom(p); return [g.C, g.cT, g.at(-0.14, 0.31), g.at(0.14, 0.31), g.eT, g.E]; }   // collector current: in at the collector, across the base, out of the emitter
+    if (p.type === 'J') { const g = this.jGeom(p); return [g.D, g.dT, g.dB, g.sB, g.sT, g.S]; }   // drain current: in at the drain, down the channel bar, out of the source
     const pts = [this.P(p.a)]; (p.pts || []).forEach(q => pts.push(this.P(q))); pts.push(this.P(p.b)); return pts;
   }
   ampScale() { return this.o.speed ?? 60; }
@@ -606,9 +665,9 @@ class View {
         this.flows[id].draw(ctx, { color: col, r: Math.max(2.4, u * 0.075), spacing: Math.max(14, u * 0.42), glow: true, alpha });
       }
     }
-    c.parts.forEach(p => { if (p.type === 'Q' && !p.hidden) this.qArrow(p); });
+    c.parts.forEach(p => { if (p.hidden) return; if (p.type === 'Q') this.qArrow(p); if (p.type === 'J') this.jArrow(p); });
     // current labels
-    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S' || p.type === 'Q'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
+    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S' || p.type === 'Q' || p.type === 'J'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
     // the meter (voltage probes and a current clamp, opened with the button at the top right)
     this._drawT = performance.now(); this.drawMeter();
     // hover tooltip
@@ -640,6 +699,7 @@ class View {
       return; }
     if (p.type === 'XF') { this.drawXF(p, vcol, hi); return; }
     if (p.type === 'Q') { this.drawQ(p, vcol, hi); return; }
+    if (p.type === 'J') { this.drawJ(p, vcol, hi); return; }
     const [ax, ay] = this.P(p.a), [bx, by] = this.P(p.b); const L = Math.hypot(bx - ax, by - ay); const ang = Math.atan2(by - ay, bx - ax);
     const body = Math.min(L * 0.7, u * (p.bodyLen || (p.type === 'R' ? 1.1 : p.type === 'L' ? 1.2 : 0.95)));
     const m1 = (L - body) / 2;
@@ -729,6 +789,38 @@ class View {
       if (side) { this.text(name, lx, ly - (v ? sz * 0.62 : 0), { align: al, color: PAL.ink, size: sz, weight: '600' }); if (v) this.text(v, lx, ly + sz * 0.62, { align: al, color: PAL.muted, size: sz * 0.92 }); }
       else this.text(v ? `${name}  ${v}` : name, lx, ly, { align: al, color: PAL.ink, size: sz, weight: '600' }); }
   }
+  /* the field-effect transistor (Fig. 6.14): D and S on one line, the gate off to one side; a channel bar facing the gate, the drain and source leads
+     joining its ends through short stubs, the gate lead meeting its middle with the arrow (into the bar for an n-channel, out of it for a p-channel);
+     a faint circle round it. at(t, s): t along D → S, s towards the gate (grid units) */
+  jGeom(p) { const u = this.u, D = this.P(p.D), S = this.P(p.S), G = this.P(p.G), L = Math.hypot(S[0] - D[0], S[1] - D[1]) || 1, ax = (S[0] - D[0]) / L, ay = (S[1] - D[1]) / L;
+    const k = (G[0] - D[0]) * ax + (G[1] - D[1]) * ay, m = [D[0] + ax * k, D[1] + ay * k]; let nx = G[0] - m[0], ny = G[1] - m[1], nl = Math.hypot(nx, ny);
+    if (nl < 1e-6) { nx = ay; ny = -ax; nl = 1; } nx /= nl; ny /= nl;
+    const at = (t, sd) => [m[0] + (ax * t + nx * sd) * u, m[1] + (ay * t + ny * sd) * u];
+    return { D, S, G, m, at, n: [nx, ny], dT: at(-0.3, 0), dB: at(-0.3, 0.3), sB: at(0.3, 0.3), sT: at(0.3, 0), gB: at(0, 0.3), b1: at(-0.42, 0.3), b2: at(0.42, 0.3), cc: at(0, 0.12), r: 0.55 * u }; }
+  /* the gate arrow (drawn again over the dots, so that it stays visible) */
+  jArrow(p, col, g) { g = g || this.jGeom(p); const ctx = this.ctx, u = this.u, [ax, ay] = g.G, [bx, by] = g.gB, into = !p.pch, f = into ? 0.82 : 0.45, tx = ax + (bx - ax) * f, ty = ay + (by - ay) * f;
+    const an = Math.atan2(by - ay, bx - ax) + (into ? 0 : Math.PI), hl = Math.max(9, u * 0.22);
+    ctx.save(); ctx.fillStyle = col || (this.hover === p || this.sel === p || p.highlight ? PAL.sel : (p.color || PAL.body)); ctx.strokeStyle = '#0f1220'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(tx, ty);
+    ctx.lineTo(tx - hl * Math.cos(an - 0.42), ty - hl * Math.sin(an - 0.42)); ctx.lineTo(tx - hl * Math.cos(an + 0.42), ty - hl * Math.sin(an + 0.42)); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); }
+  jGatePath(p) { const g = this.jGeom(p); return [g.G, g.gB, g.sB, g.sT, g.S]; }
+  drawJ(p, vcol, hi) {
+    const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055), g = this.jGeom(p), col = hi ? PAL.sel : (p.color || PAL.body);
+    ctx.save(); ctx.fillStyle = 'rgba(90,209,255,.08)'; ctx.strokeStyle = hi ? PAL.sel : 'rgba(154,163,199,.6)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(g.cc[0], g.cc[1], g.r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); ctx.restore();
+    this.stroke([g.D, g.dT], hi ? PAL.sel : vcol(p.D), lw); this.stroke([g.sT, g.S], hi ? PAL.sel : vcol(p.S), lw); this.stroke([g.G, g.gB], hi ? PAL.sel : vcol(p.G), lw);
+    this.stroke([g.dT, g.dB], col, lw); this.stroke([g.sB, g.sT], col, lw);
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw * 2.2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(g.b1[0], g.b1[1]); ctx.lineTo(g.b2[0], g.b2[1]); ctx.stroke(); ctx.restore();
+    this.jArrow(p, col, g);
+    const sz = Math.max(11.5, u * 0.31), side = Math.abs(g.n[0]) > 0.7;   // side: the gate comes in from the left or right
+    if (p.pins) { const ps = Math.max(10.5, u * 0.25), o = g.at(0, -0.2), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
+      const mid = (q, r) => [(q[0] + r[0]) / 2, (q[1] + r[1]) / 2], pd = mid(g.D, g.dT), ps2 = mid(g.S, g.sT), sh = [o[0] - g.m[0], o[1] - g.m[1]], pg = mid(g.G, g.gB);
+      this.text('D', pd[0] + sh[0], pd[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al }); this.text('S', ps2[0] + sh[0], ps2[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al });
+      this.text('G', pg[0] + (side ? 0 : 0.2 * u), pg[1] - (side ? 0.22 * u : 0), { color: PAL.muted, size: ps, weight: '700', align: side ? 'center' : 'left' }); }
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : '';
+      const [lx, ly] = g.at(0, -(0.36 + 0.34 + (side ? 0 : 0.16))), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
+      if (side) { const lines = [name].concat(v ? String(v).split('\n') : []), n = lines.length;   // a value with line breaks stacks beside the symbol
+        lines.forEach((s, k) => this.text(s, lx, ly + (k - (n - 1) / 2) * sz * 1.08, { align: al, color: k ? PAL.muted : PAL.ink, size: k ? sz * 0.92 : sz, weight: k ? '' : '600' })); }
+      else this.text(v ? `${name}  ${String(v).replace(/\n/g, ', ')}` : name, lx, ly, { align: al, color: PAL.ink, size: sz, weight: '600' }); }
+  }
   drawXF(p, vcol, hi) {
     const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055); const A = this.P(p.a), B = this.P(p.b), Cc = this.P(p.c), D = this.P(p.d);
     const col = hi ? PAL.sel : PAL.body; const turns = (x, ya, yb, dir, nT) => { const y0 = Math.min(ya, yb), h = Math.abs(yb - ya) / nT; if (h < 0.5) return; ctx.beginPath(); ctx.moveTo(x, y0);
@@ -784,7 +876,7 @@ class View {
       jack: { red: [x + 26, y + h], clamp: [x + w / 2, y + h], black: [x + w - 26, y + h] } }; }
   mtSize() { const L = Math.max(26, Math.min(40, this.u * 0.7)), f = L / 40; return { L, N: 11 * f, w: 9 * f }; }
   mtClampR() { return Math.max(8, Math.min(12, this.u * 0.2)); }
-  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd', 'B'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
+  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd', 'B', 'G'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
   mtParts() { return this.ckt.parts.filter(p => p.type !== 'VM' && p.type !== 'XF'); }   // the clamp goes round wires and elements
   /* after a rebuild: a probe on a node that is gone, or the clamp on a part that is gone, goes back to the meter; one that no longer sits
      where it was moves to its node, or to the middle of its part */
@@ -872,6 +964,8 @@ class View {
     if (this.o.tip) { const L = this.o.tip(p, c); if (L && L.length) this.tipBox(L); return; }   // o.tip(part, circuit) → lines (first line = title)
     if (p.type === 'Q') { const q = c.Q(p.id), e = p.pnp ? ['V_EB', 'V_EC'] : ['V_BE', 'V_CE'], reg = { cutoff: MCt('ย่านคัตออฟ', 'cutoff'), saturation: MCt('ย่านอิ่มตัว', 'saturation'), active: MCt('ย่านแอกทีฟ', 'active') }[q.region];
       this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} (${p.pnp ? 'pnp' : 'npn'}) · ${reg}`, `I_B = ${CK.eng(q.IB, 'A')}, I_C = ${CK.eng(q.IC, 'A')}`, `I_E = ${CK.eng(q.IE, 'A')}`, `${e[0]} = ${CK.eng(q.VBE, 'V')}, ${e[1]} = ${CK.eng(q.VCE, 'V')}`]); return; }
+    if (p.type === 'J') { const j = c.J(p.id), s = p.pch ? -1 : 1, reg = { cutoff: MCt('คัตออฟ', 'cutoff'), ohmic: MCt('ย่านโอห์มิก', 'ohmic region'), saturation: MCt('ย่านอิ่มตัว (กระแสคงที่)', 'saturation (constant current)') }[j.region];
+      this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} (${p.pch ? 'p' : 'n'}-channel ${FET.kind(p) === 'jfet' ? 'JFET' : 'MOSFET'}) · ${reg}`, `I_D = ${CK.eng(j.ID, 'A')}, I_G = ${CK.eng(j.IG, 'A')}`, `V_GS = ${CK.eng(s * j.VGS, 'V')}, V_DS = ${CK.eng(s * j.VDS, 'V')}`]); return; }
     const v = c.Vab(p.id), i = c.I(p.id); const lines = [];
     const name = p.name ?? p.id.replace(/_\d+$/, '');
     lines.push(name + (p.type === 'S' ? (p.closed ? MCt('  (ปิดวงจร: คลิกเพื่อเปิด)', '  (closed: click to open)') : MCt('  (เปิดวงจร: คลิกเพื่อปิด)', '  (open: click to close)')) : ''));

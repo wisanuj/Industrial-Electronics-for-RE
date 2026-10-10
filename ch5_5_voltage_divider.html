@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="5.5 — JFET Voltage-Divider Bias">5.5 — วงจรไบแอสแบบตัวแบ่งแรงดันของ JFET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรไบแอสแบบตัวแบ่งแรงดันของ JFET <span class="en">JFET voltage-divider bias</span></h1>
+<h1 data-l="en">JFET voltage-divider bias <span class="en">\(V_{GS} = V_G - I_DR_S\): a line that misses the origin</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 5 หน้า 34–38 วงจรตัวแบ่งแรงดันของ BJT (หน้า 4.3) นำมาใช้กับ JFET ได้ทั้งโครงสร้าง แต่การวิเคราะห์ต่างกันมาก: เพราะ \(I_G\) = 0 ตัวแบ่ง \(R_1\), \(R_2\) ให้ \(V_G\) ตรง ๆ โดยไม่ต้องทำเทเวนิน (Thévenin) แล้ววงเกต–ซอร์สให้ \(V_{GS} = V_G - I_DR_S\) ซึ่งยังเป็นเส้นตรงบนกราฟถ่ายโอน แต่ไม่ผ่านจุดกำเนิดแล้ว: ตัดแกนนอนที่ \(V_G\) และแกนตั้งที่ \(V_G/R_S\) หน้านี้มีวงจรที่ปรับ \(R_1\), \(R_2\), \(R_S\), \(R_D\), \(V_{DD}\) ได้ (ส่วน A) Example 7.4 ทั้งห้าข้อย่อย ผลของ \(R_S\) ตามรูป 7.20 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 5 slides pp. 34–38. The BJT voltage-divider circuit (page 4.3) carries over to the JFET in structure, but the analysis is quite different: since \(I_G\) = 0 the divider \(R_1\), \(R_2\) gives \(V_G\) directly, with no Thévenin step, and the gate–source loop gives \(V_{GS} = V_G - I_DR_S\), still a straight line on the transfer graph but one that misses the origin: it crosses the horizontal axis at \(V_G\) and the vertical axis at \(V_G/R_S\). This page has a circuit whose \(R_1\), \(R_2\), \(R_S\), \(R_D\), \(V_{DD}\) you can change (section A), Example 7.4 in all five parts, the effect of \(R_S\) as in Fig. 7.20, and more practice.</p>
+<div class="equation-box eqwrap">$$ V_G = \frac{R_2V_{DD}}{R_1 + R_2} $$ $$ V_{GS} = V_G - I_DR_S $$ $$ V_{GS}\big|_{I_D = 0} = V_G,\quad I_D\big|_{V_{GS} = 0} = \frac{V_G}{R_S} $$ $$ V_{DS} = V_{DD} - I_D(R_D + R_S) $$ $$ V_D = V_{DD} - I_DR_D,\quad V_S = I_DR_S $$ $$ I_{R_1} = I_{R_2} = \frac{V_{DD}}{R_1 + R_2} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>วงจร</b> (สไลด์หน้า 34, รูป 7.17–7.18): \(R_1\), \(R_2\) ตั้งแรงดันเกต \(R_S\) ที่ซอร์ส \(R_D\) ที่เดรน ตัวเก็บประจุทุกตัวรวมทั้ง \(C_S\) ที่คร่อม \(R_S\) เป็นวงจรเปิดสำหรับกระแสตรง แยก \(V_{DD}\) เป็นสองแหล่งเท่ากันเพื่อแยกฝั่งเกตกับฝั่งเดรน</li>
+  <li><b>\(V_G\) จากตัวแบ่ง</b> (สไลด์หน้า 35, สมการ 7.15): \(I_G\) = 0 บังคับให้ \(I_{R_1} = I_{R_2}\) จึงใช้กฎตัวแบ่งแรงดันได้ตรง ๆ ต่างจาก BJT ที่ \(I_B\) ดึงแรงดันเบสลงจนต้องใช้เทเวนินหรือเงื่อนไข \(\beta R_E \ge 10R_2\)</li>
+  <li><b>สมการของวงจร</b> (สมการ 7.16): วงเกต–ซอร์ส \(V_G - V_{GS} - I_DR_S = 0\) ให้ \(V_{GS} = V_G - I_DR_S\) วาดได้จากจุดตัดสองแกน: \(I_D\) = 0 ให้ \(V_{GS} = V_G\) (สมการ 7.17) และ \(V_{GS}\) = 0 ให้ \(I_D = V_G/R_S\) (สมการ 7.18) จุด Q คือจุดตัดกับเส้นโค้งถ่ายโอนทางซ้ายของแกนตั้ง (สไลด์หน้า 36, รูป 7.19)</li>
+  <li><b>ผลของ \(R_S\)</b> (รูป 7.20): จุดตัดแกนนอน \(V_G\) ถูกตรึงด้วยตัวแบ่ง เส้นจึงหมุนรอบจุดนั้น \(R_S\) ใหญ่ขึ้นทำให้ \(I_{D_Q}\) น้อยลงและ \(V_{GS_Q}\) ลบมากขึ้น</li>
+  <li><b>ที่เหลือเหมือนเดิม</b> (สไลด์หน้า 37, สมการ 7.19–7.22): \(V_{DS} = V_{DD} - I_D(R_D + R_S)\), \(V_D = V_{DD} - I_DR_D\), \(V_S = I_DR_S\), \(I_{R_1} = I_{R_2} = V_{DD}/(R_1 + R_2)\)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The circuit</b> (slide p. 34, Figs. 7.17–7.18): \(R_1\), \(R_2\) set the gate voltage, \(R_S\) sits at the source, \(R_D\) at the drain. Every capacitor, including \(C_S\) across \(R_S\), is open for dc, and \(V_{DD}\) is split into two equal sources to separate the gate side from the drain side.</li>
+  <li><b>\(V_G\) from the divider</b> (slide p. 35, Eq. 7.15): \(I_G\) = 0 forces \(I_{R_1} = I_{R_2}\), so the voltage-divider rule applies directly, unlike the BJT, whose \(I_B\) pulls the base down and needs Thévenin or the criterion \(\beta R_E \ge 10R_2\).</li>
+  <li><b>The network equation</b> (Eq. 7.16): the gate–source loop \(V_G - V_{GS} - I_DR_S = 0\) gives \(V_{GS} = V_G - I_DR_S\), drawn from its two intercepts: \(I_D\) = 0 gives \(V_{GS} = V_G\) (Eq. 7.17), \(V_{GS}\) = 0 gives \(I_D = V_G/R_S\) (Eq. 7.18). Q is the intersection with the transfer curve left of the vertical axis (slide p. 36, Fig. 7.19).</li>
+  <li><b>The effect of \(R_S\)</b> (Fig. 7.20): the horizontal intercept \(V_G\) is pinned by the divider, so the line pivots about it; a larger \(R_S\) gives a lower \(I_{D_Q}\) and a more negative \(V_{GS_Q}\).</li>
+  <li><b>The rest as before</b> (slide p. 37, Eqs. 7.19–7.22): \(V_{DS} = V_{DD} - I_D(R_D + R_S)\), \(V_D = V_{DD} - I_DR_D\), \(V_S = I_DR_S\), \(I_{R_1} = I_{R_2} = V_{DD}/(R_1 + R_2)\).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch5/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 34, Voltage-Divider Biasing: the network of the left figure is redrawn as shown in the right figure for the dc analysis; note that all the capacitors, including the bypass capacitor C_S, have been replaced by an open-circuit equivalent. Figure 7.17: V_DD, R_1, R_2, R_D, R_S with C_S, C_1 from V_i, C_2 to V_o; Fig. 7.18: the dc network split into the R_1–R_2 divider giving V_G and the output side with I_G ≅ 0 A, the loop through V_G, V_GS and V_RS, I_S through R_S.">
+  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 34: วงจรตัวแบ่งแรงดันและวงจรสำหรับกระแสตรง (รูป 7.17–7.18) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 34: the divider circuit and its dc network (Figs. 7.17–7.18) · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรปรับได้</a><a href="#ex1"><b>1</b>Example 7.4</a><a href="#ex2"><b>2</b>ผลของ R<sub>S</sub> (รูป 7.20)</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The adjustable circuit</a><a href="#ex1"><b>1</b>Example 7.4</a><a href="#ex2"><b>2</b>The effect of R<sub>S</sub> (Fig. 7.20)</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวแบ่งแรงดัน: เส้นที่หมุนรอบ \(V_G\)</h2><h2 data-l="en">The divider: a line that pivots about \(V_G\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 35–37 · Boylestad หัวข้อ 7.4 (รูป 7.19–7.20, สมการ 7.15–7.22)</div><div class="src" data-l="en">Slides pp. 35–37 · Boylestad, section 7.4 (Figs. 7.19–7.20, Eqs. 7.15–7.22)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 35, Voltage-Divider Biasing: since I_G = 0 A, Kirchhoff's current law requires that I_R1 = I_R2 and the series equivalent circuit appearing to the left of the figure can be used to find the level of V_G: V_G = R_2 V_DD/(R_1 + R_2); V_G − V_GS − V_RS = 0, V_GS = V_G − V_RS, V_GS = V_G − I_D R_S. Figures: the divider alone, then the dc network with the gate–source loop.">
+    <figcaption data-l="th">สไลด์หน้า 35: \(V_G\) จากตัวแบ่ง และ \(V_{GS} = V_G - I_DR_S\) (สมการ 7.15–7.16) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: \(V_G\) from the divider, and \(V_{GS} = V_G - I_DR_S\) (Eqs. 7.15–7.16) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 36, Voltage-Divider Biasing: the point just determined appears in the figure. Figure 7.19: the transfer curve with the network line V_GS = V_G − I_D R_S from +V_G on the horizontal axis through V_G/R_S on the vertical axis, the Q-point at I_DQ, V_GSQ; equations: V_GS = V_G − I_D R_S, 0 V = V_G − I_D R_S, I_D = V_G/R_S at V_GS = 0 V; V_GS = V_G − (0 mA) R_S, V_GS = V_G at I_D = 0 mA.">
+    <figcaption data-l="th">สไลด์หน้า 36: จุดตัดสองแกนของเส้นและจุด Q (รูป 7.19) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 36: the line's two intercepts and Q (Fig. 7.19) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch5/p37.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 37, Voltage-Divider Biasing: once the quiescent values of I_DQ and V_GSQ are determined, the remaining network analysis can be performed in the usual manner, that is, V_DS = V_DD − I_D (R_D + R_S), V_D = V_DD − I_D R_D, V_S = I_D R_S, I_R1 = I_R2 = V_DD/(R_1 + R_2). Figures: the divider and the dc network repeated.">
+    <figcaption data-l="th">สไลด์หน้า 37: ที่เหลือของการวิเคราะห์ (สมการ 7.19–7.22) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 37: the rest of the analysis (Eqs. 7.19–7.22) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Example 7.4 กราฟบนคือรูป 7.19: เส้นของวงจรจาก (\(V_G\), 0) ผ่าน (0, \(V_G/R_S\)) ตัดเส้นโค้งถ่ายโอนที่ Q กราฟล่างคือเส้นโหลด ลองเลื่อน \(R_S\): เส้นหมุนรอบ \(V_G\) (รูป 7.20) เลื่อน \(R_2\): \(V_G\) เลื่อนไปตามแกนนอนพาทั้งเส้นไปด้วย สังเกตว่าจุดในภาพจำลองไม่วิ่งเข้าเกตเลย ส่วนในตัวแบ่งวิ่งช้ามากเพราะกระแสระดับไมโครแอมแปร์</p>
+  <p class="lead" data-l="en">Start from the circuit of Example 7.4. The upper graph is Fig. 7.19: the network line from (\(V_G\), 0) through (0, \(V_G/R_S\)) meets the transfer curve at Q. The lower one is the load line. Move \(R_S\): the line pivots about \(V_G\) (Fig. 7.20). Move \(R_2\): \(V_G\) slides along the horizontal axis and takes the whole line with it. Notice that no dots run into the gate at all, and the ones in the divider crawl, since that current is in microamperes.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 7.4: วงจรตัวแบ่งแรงดันครบทุกค่า</h2><h2 data-l="en">Example 7.4: the divider circuit, every value</h2>
+    <div class="src" data-l="th">สไลด์หน้า 38 · Boylestad Example 7.4 (รูป 7.21–7.22)</div><div class="src" data-l="en">Slide p. 38 · Boylestad Example 7.4 (Figs. 7.21–7.22)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch5/p38.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 38, Voltage-Divider Biasing: determine the following for the network of the figure: (a) I_DQ and V_GSQ, (b) V_D, (c) V_S, (d) V_DS, (e) V_DG. Figure 7.21: +16 V, R_1 = 2.1 MΩ, R_2 = 270 kΩ, R_D = 2.4 kΩ, R_S = 1.5 kΩ with a 20 µF bypass capacitor, 5 µF input and 10 µF output coupling capacitors, I_DSS = 8 mA, V_P = −4 V.">
+    <figcaption data-l="th">สไลด์หน้า 38: โจทย์ Example 7.4 (รูป 7.21) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 38: Example 7.4 (Fig. 7.21) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 16 V, \(R_1\) = 2.1 MΩ, \(R_2\) = 270 kΩ, \(R_D\) = 2.4 kΩ, \(R_S\) = 1.5 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −4 V จงหา (a) \(I_{D_Q}\) และ \(V_{GS_Q}\) (b) \(V_D\) (c) \(V_S\) (d) \(V_{DS}\) (e) \(V_{DG}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 16 V, \(R_1\) = 2.1 MΩ, \(R_2\) = 270 kΩ, \(R_D\) = 2.4 kΩ, \(R_S\) = 1.5 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −4 V. Determine (a) \(I_{D_Q}\) and \(V_{GS_Q}\) (b) \(V_D\) (c) \(V_S\) (d) \(V_{DS}\) (e) \(V_{DG}\).</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพสร้างรูป 7.22 ทีละขั้น แล้วแสดงแรงดันของโหนด และเส้นโหลดในขั้นสุดท้าย <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The side panel builds Fig. 7.22 step by step, then shows the node voltages, and the load line at the end. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ผลของ \(R_S\): เส้นหมุนรอบ \(V_G\)</h2><h2 data-l="en">The effect of \(R_S\): the line pivots about \(V_G\)</h2>
+    <div class="src" data-l="th">Boylestad รูป 7.20 กับวงจรของ Example 7.4</div><div class="src" data-l="en">Boylestad Fig. 7.20 with the circuit of Example 7.4</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรของ Example 7.4 จงหา \(I_{D_Q}\) และ \(V_{GS_Q}\) เมื่อ \(R_S\) = 0.5 kΩ และเมื่อ \(R_S\) = 3 kΩ (\(V_G\) = 1.82 V เท่าเดิม)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the circuit of Example 7.4 find \(I_{D_Q}\) and \(V_{GS_Q}\) when \(R_S\) = 0.5 kΩ and when \(R_S\) = 3 kΩ (\(V_G\) = 1.82 V unchanged).</p></div>
+  <p class="lead" data-l="th">ใช้กราฟ (เส้นผ่าน (1.82 V, 0) กับ (0, \(V_G/R_S\))) หรือแก้สมการกำลังสอง เฉลยใช้ค่าแม่นยำ ยอมรับความคลาดเคลื่อนจากการอ่านกราฟ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">Use the graph (the line through (1.82 V, 0) and (0, \(V_G/R_S\))) or solve the quadratic; the answers are exact, with a tolerance for graph reading. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(I_G\) = 0 · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(I_G\) = 0 · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — จุดหมุน \(V_G\)</h3>
+    <ol><li>ส่วน A เลื่อน \(R_S\) จาก 1.5 kΩ ไป 4 kΩ: จุดตัดแกนตั้ง \(V_G/R_S\) ลดจาก 1.21 เหลือ 0.46 mA เส้นราบลงรอบจุด (1.82 V, 0) และ \(I_D\) ลดจาก 2.4 เหลือราว 1.1 mA</li>
+    <li>เพิ่ม \(R_2\) เป็น 1 MΩ: \(V_G\) = 5.2 V จุดหมุนเลื่อนขวา เส้นทั้งเส้นยกขึ้น \(I_D\) เพิ่มถึงราว 4 mA ถ้าเพิ่ม \(V_G\) มากกว่านี้จุด Q จะไปถึง \(V_{GS}\) &gt; 0 ซึ่ง JFET ไม่ควรทำงาน (รอยต่อเกตไบแอสตรง)</li>
+    <li>ลด \(R_D\) หรือเพิ่ม \(V_{DD}\) ไม่เปลี่ยนจุด Q บนกราฟบนเลย (\(I_D\), \(V_{GS}\) ขึ้นกับฝั่งเกตเท่านั้น) เปลี่ยนแต่ \(V_{DS}\) ตราบที่ยังอยู่ในย่านอิ่มตัว</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เทียบกับ BJT</h3>
+    <ol><li>ข้อ 1: ถ้าเป็น BJT (หน้า 4.3) ต้องถามก่อนว่า \(\beta R_E \ge 10R_2\) หรือไม่ ส่วน JFET ไม่ต้อง: \(I_G\) = 0 ทำให้ \(V_G\) = 1.82 V แน่นอนไม่ว่าอุปกรณ์จะเป็นอย่างไร</li>
+    <li>ข้อ 2: ลองเขียนสมการกำลังสองของกรณี \(R_S\) = 3 kΩ: \(I_D = 8(1 - (1.82 - 3I_D)/(-4))^2\) แล้วเทียบกับค่าที่ได้</li></ol>
+    <div class="book">สไลด์บทที่ 5 หน้า 34–38 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 7.4 (รูป 7.17–7.22, สมการ 7.15–7.22, Example 7.4)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the pivot \(V_G\)</h3>
+    <ol><li>In section A move \(R_S\) from 1.5 kΩ to 4 kΩ: the vertical intercept \(V_G/R_S\) falls from 1.21 to 0.46 mA, the line flattens about (1.82 V, 0), and \(I_D\) falls from 2.4 to about 1.1 mA.</li>
+    <li>Raise \(R_2\) to 1 MΩ: \(V_G\) = 5.2 V, the pivot moves right, the whole line lifts, and \(I_D\) rises to about 4 mA. Raise \(V_G\) much further and Q would reach \(V_{GS}\) &gt; 0, where a JFET should not operate (a forward-biased gate junction).</li>
+    <li>Lowering \(R_D\) or raising \(V_{DD}\) does not move Q on the upper graph at all (\(I_D\), \(V_{GS}\) depend on the gate side only); it only changes \(V_{DS}\), as long as the device stays in saturation.</li></ol></div>
+  <div class="card"><h3>Try this 2 — compared with the BJT</h3>
+    <ol><li>Problem 1: with a BJT (page 4.3) one must first ask whether \(\beta R_E \ge 10R_2\); with a JFET there is no need: \(I_G\) = 0 makes \(V_G\) = 1.82 V exact, whatever the device.</li>
+    <li>Problem 2: write the quadratic for \(R_S\) = 3 kΩ, \(I_D = 8(1 - (1.82 - 3I_D)/(-4))^2\), and compare with the value found.</li></ol>
+    <div class="book">Chapter 5 slides pp. 34–38 · Boylestad &amp; Nashelsky, 11th ed., section 7.4 (Figs. 7.17–7.22, Eqs. 7.15–7.22, Example 7.4)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET, C = IE.COL;
+  CH5.problem(1, 'ex74'); CH5.problem(2, 'rs720');
+
+  /* =================================================================== A: the adjustable divider circuit */
+  const sg = x => (x < 0 ? '−' : '') + fd(Math.abs(x), 2), DEV = CH5.DEV.f611, logR = (id, label, lo, hi, get, set, p, build, step = 10) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  const vg = S => S.R2 * S.VDD / (S.R1 + S.R2);
+  CH5.explorer({ init: { R1: 2.1e6, R2: 270e3, RS: 1500, RD: 2400, VDD: 16 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      logR('aR1', 'R_1', 100e3, 10e6, () => S.R1, v => { S.R1 = v; }, p, build, 10e3); logR('aR2', 'R_2', 10e3, 2e6, () => S.R2, v => { S.R2 = v; }, p, build, 10e3);
+      logR('aRS', 'R_S', 100, 10e3, () => S.RS, v => { S.RS = v; }, p, build, 100); logR('aRD', 'R_D', 200, 10e3, () => S.RD, v => { S.RD = v; }, p, build, 100);
+      ui.slider(p, { id: 'aVDD', label: 'V_DD', min: 5, max: 30, step: 0.5, value: S.VDD, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VDD = v; build(); } }); },
+    spec: S => CH5.net({ dev: DEV, VDD: S.VDD, R1: S.R1, R2: S.R2, RD: S.RD, RS: S.RS }),
+    side: (ctx, b, bd, c, S) => { const z = CH5.j(c), VG = vg(S), q = FET.bias(DEV.idss, DEV.vp, S.RS, VG), vmax = Math.max(1, Math.ceil(VG + 0.5));
+      CH5.tPlot(ctx, b, bd, { dev: DEV, imax: 10, vmin: -5, vmax, xt: [-4, -3, -2, -1].concat(Array.from({ length: vmax }, (_, k) => k + 1)), lines: [{ a: [VG, 0], b: [VG - 10 * S.RS / 1e3, 10], label: bd.short ? '' : 'V_GS = V_G − I_D R_S', at: 0.2 }], tbl: !bd.short,
+        pts: [{ v: VG, i: 0, color: C.tan, r: 5, label: bd.short ? '' : `V_G = ${fd(VG, 2)} V`, side: 1, dy: 16 }, { v: 0, i: VG / S.RS * 1e3, color: C.tan, r: 5, label: bd.short ? '' : `V_G/R_S = ${fd(VG / S.RS * 1e3, 2)} mA`, side: 1, dy: 14 }, { v: z.VGS, i: z.id, label: bd.short ? 'Q' : `Q (${sg(z.VGS)} V, ${fd(z.id, 2)} mA)`, side: -1, dy: -14 }].concat(Math.abs(q.id * 1e3 - z.id) > 0.02 ? [{ v: q.vgs, i: q.id * 1e3, color: C.tan, r: 5, label: bd.short ? '' : t(`จากเส้นโค้ง ${fd(q.id * 1e3, 2)} mA`, `curve: ${fd(q.id * 1e3, 2)} mA`), side: 1, dy: 16 }] : []),
+        guides: [{ v: z.VGS, i: z.id }], title: t('รูป 7.19: เส้นของวงจรผ่าน (V_G, 0) และ (0, V_G/R_S)', 'Fig. 7.19: the network line through (V_G, 0) and (0, V_G/R_S)') }); },
+    waves: [(ctx, b, bd, c, S) => { const z = CH5.j(c), r = S.RD + S.RS; CH5.dPlot(ctx, b, bd, { dev: DEV, imax: 10, vmax: Math.max(10, Math.ceil(S.VDD * 1.15)), xt: [5, 10, 15, 20, 25, 30, 35].filter(x => x <= S.VDD * 1.15), load: { vdd: S.VDD, r }, q: { v: z.VDS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.VDS, 2)} V, ${fd(z.id, 2)} mA)`, side: z.VDS > S.VDD * 0.55 ? -1 : 1, dy: -18 }, labels: !bd.short,
+      title: t('เส้นโหลด V_DS = V_DD − I_D(R_D + R_S)', 'load line V_DS = V_DD − I_D(R_D + R_S)') }); }],
+    badge: (c, S) => { const z = CH5.j(c), reg = CH5.reg(z.region); return [[`${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_GS = ${sg(z.VGS)} V`, `${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_GS = ${sg(z.VGS)} V`], z.VGS > 0 ? 'wait' : reg[1]]; },
+    rows: (c, z, S) => { const VG = vg(S); return [['V_G = R_2 V_DD/(R_1 + R_2)', `${fd(VG, 3)} V`], ['V_G/R_S', `${fd(VG / S.RS * 1e3, 3)} mA`], ['I_D', `${fd(z.id, 3)} mA`], ['V_GS = V_G − I_D R_S', `${sg(z.VGS)} V`], ['V_S', `${fd(c.V('s').re, 2)} V`], ['V_D', `${fd(c.V('d').re, 2)} V`], ['V_DS', `${fd(z.VDS, 2)} V`], ['I_R1 = I_R2', `${fd(S.VDD / (S.R1 + S.R2) * 1e6, 2)} µA`], [t('ย่าน', 'region'), CH5.reg(z.region)[0]]]; },
+    text: (c, z, S) => { const VG = vg(S);
+      return z.VGS > 0.05 ? t(`\\(V_G\\) = ${fd(VG, 2)} V สูงจนจุดตัดอยู่ที่ \\(V_{GS}\\) = ${sg(z.VGS)} V &gt; 0: รอยต่อเกต–ซอร์สเริ่มไบแอสตรง (ภาพจำลองมีไดโอดเกต 0.7 V) JFET ไม่ควรทำงานตรงนี้ ลด \\(R_2\\) หรือเพิ่ม \\(R_S\\)`, `\\(V_G\\) = ${fd(VG, 2)} V is so high that the intersection is at \\(V_{GS}\\) = ${sg(z.VGS)} V &gt; 0: the gate–source junction starts to conduct (the simulation has a 0.7 V gate diode). A JFET should not be run here; lower \\(R_2\\) or raise \\(R_S\\).`)
+        : z.region === 'saturation' ? t(`\\(I_G\\) = 0 จึง \\(V_G\\) = ${fd(VG, 2)} V ตรงจากตัวแบ่ง เส้น \\(V_{GS} = V_G - I_DR_S\\) ตัดเส้นโค้งที่ \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS}\\) = ${sg(z.VGS)} V และ \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: ย่านอิ่มตัว`, `\\(I_G\\) = 0, so \\(V_G\\) = ${fd(VG, 2)} V comes straight from the divider. The line \\(V_{GS} = V_G - I_DR_S\\) meets the curve at \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS}\\) = ${sg(z.VGS)} V, and \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: saturation.`)
+        : t(`\\(V_{DS}\\) = ${fd(z.VDS, 2)} V น้อยกว่า \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: \\(R_D + R_S\\) กิน \\(V_{DD}\\) จนจุด Q หลุดเข้าย่านโอห์มิก กระแสจริง ${fd(z.id, 2)} mA ต่ำกว่าที่เส้นโค้งถ่ายโอนบอก เพิ่ม \\(V_{DD}\\) หรือลด \\(R_D\\)`, `\\(V_{DS}\\) = ${fd(z.VDS, 2)} V is below \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: \\(R_D + R_S\\) use up \\(V_{DD}\\) and Q slips into the ohmic region; the actual ${fd(z.id, 2)} mA is below what the transfer curve says. Raise \\(V_{DD}\\) or lower \\(R_D\\).`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, VG1 = 330 * 18 / 1830, q1 = FET.bias(6e-3, -3, 1800, VG1), q3 = FET.bias(8e-3, -4, 1000, 2);
+  CH6.quiz('quiz', [
+    { q: t('1) \\(V_{DD}\\) = 18 V, \\(R_1\\) = 1.5 MΩ, \\(R_2\\) = 330 kΩ, \\(R_S\\) = 1.8 kΩ จงหา \\(V_G\\) และจุดตัดสองแกนของเส้นของวงจร', '1) \\(V_{DD}\\) = 18 V, \\(R_1\\) = 1.5 MΩ, \\(R_2\\) = 330 kΩ, \\(R_S\\) = 1.8 kΩ. Find \\(V_G\\) and the two intercepts of the network line.'),
+      fields: [{ key: 'x', lab: 'V_G =', ans: VG1, unit: 'V', tol: 0.02 }, { key: 'y', lab: t('I_D ที่ V_GS = 0:', 'I_D at V_GS = 0:'), ans: VG1 / 1.8, unit: 'mA', tol: 0.02 }],
+      work: work(R`V_G = \frac{(330\ \text{k}\Omega)(18\ \text{V})}{1.83\ \text{M}\Omega} = ${fd(VG1, 2)}\ \text{V};\quad V_{GS}\big|_{I_D = 0} = ${fd(VG1, 2)}\ \text{V},\quad I_D\big|_{V_{GS} = 0} = \frac{${fd(VG1, 2)}}{1.8\ \text{k}\Omega} = ${fd(VG1 / 1.8, 2)}\ \text{mA}`) },
+    { q: t('2) วงจรข้อ 1 กับ JFET \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V จงหา \\(I_{D_Q}\\) และ \\(V_{GS_Q}\\) (กราฟหรือสมการกำลังสอง)', '2) The circuit of question 1 with a JFET \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V. Find \\(I_{D_Q}\\) and \\(V_{GS_Q}\\) (graph or quadratic).'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: q1.id * 1e3, unit: 'mA', tol: 0.06 }, { key: 'y', lab: 'V_GSQ =', ans: q1.vgs, unit: 'V', tol: 0.1 }],
+      work: work(R`I_D = 6\left(1 - \frac{${fd(VG1, 2)} - 1.8I_D}{-3}\right)^2 \Rightarrow I_{D_Q} = ${fd(q1.id * 1e3, 2)}\ \text{mA},\quad V_{GS_Q} = ${fd(VG1, 2)} - (${fd(q1.id * 1e3, 2)})(1.8) = ${fd(q1.vgs, 2)}\ \text{V}`) },
+    { q: t('3) \\(V_G\\) = 2 V, \\(R_S\\) = 1 kΩ, JFET \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V จงหา \\(I_{D_Q}\\)', '3) \\(V_G\\) = 2 V, \\(R_S\\) = 1 kΩ, a JFET with \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V. Find \\(I_{D_Q}\\).'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: q3.id * 1e3, unit: 'mA', tol: 0.06 }], work: work(R`V_{GS} = 2 - I_D(1\ \text{k}\Omega);\quad I_D = 8\left(1 - \frac{2 - I_D}{-4}\right)^2 \Rightarrow I_{D_Q} = ${fd(q3.id * 1e3, 2)}\ \text{mA},\ V_{GS_Q} = ${fd(q3.vgs, 2)}\ \text{V}`) },
+    { q: t('4) วงจรข้อ 3 กับ \\(V_{DD}\\) = 20 V, \\(R_D\\) = 2 kΩ จงหา \\(V_{DS}\\) แล้วตรวจย่านอิ่มตัว (ตอบ \\(V_{GS} - V_P\\))', '4) The circuit of question 3 with \\(V_{DD}\\) = 20 V, \\(R_D\\) = 2 kΩ. Find \\(V_{DS}\\) and check saturation (give \\(V_{GS} - V_P\\)).'),
+      fields: [{ key: 'x', lab: 'V_DS =', ans: 20 - q3.id * 3000, unit: 'V', tol: 0.2 }, { key: 'y', lab: 'V_GS − V_P =', ans: q3.vgs + 4, unit: 'V', tol: 0.1 }],
+      work: work(R`V_{DS} = 20 - (${fd(q3.id * 1e3, 2)})(2 + 1) = ${fd(20 - q3.id * 3000, 2)}\ \text{V} \ge V_{GS} - V_P = ${fd(q3.vgs + 4, 2)}\ \text{V}\ \checkmark`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
