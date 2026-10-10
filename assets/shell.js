@@ -108,7 +108,7 @@ ui.slider = (parent, spec) => {
   parent.appendChild(d); const inp = d.querySelector('input'), val = d.querySelector('.val');
   const fmt = spec.fmt || (v => NUM.fmt(v, spec.dec ?? 2) + (spec.unit ? ' ' + spec.unit : ''));
   const show = () => { val.textContent = fmt(parseFloat(inp.value)); }; show();
-  inp.addEventListener('input', () => { show(); if (spec.oninput) spec.oninput(parseFloat(inp.value)); });
+  inp.addEventListener('input', () => { if (spec.oninput) spec.oninput(parseFloat(inp.value)); show(); });   // the page's state first, so that fmt may read it
   return { get: () => parseFloat(inp.value), set: v => { inp.value = v; show(); }, el: inp, block: d };
 };
 ui.buttons = (parent, list) => {

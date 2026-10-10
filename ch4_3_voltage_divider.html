@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="4.3 — Voltage-Divider Bias">4.3 — วงจรไบแอสแบบตัวแบ่งแรงดัน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรไบแอสแบบตัวแบ่งแรงดัน <span class="en">Voltage-divider bias</span></h1>
+<h1 data-l="en">Voltage-divider bias <span class="en">Exact with Thévenin, approximate when \(\beta R_E \ge 10R_2\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 20–25 วงจรไบแอสแบบตัวแบ่งแรงดัน (voltage-divider bias) ตั้งแรงดันเบสด้วย \(R_1\), \(R_2\) ถ้าเลือกค่าดี จุด Q (\(I_{CQ}\), \(V_{CEQ}\)) แทบไม่ขึ้นกับ β เลย มีสองวิธี: <b>แม่นยำ</b> แทนตัวแบ่งด้วยวงจรเทเวนิน (Thévenin) \(R_{Th}\), \(E_{Th}\) แล้วใช้สมการแบบเดียวกับไบแอสอิมิตเตอร์ และ <b>โดยประมาณ</b> ตัดกระแสเบสทิ้งเมื่อ \(\beta R_E \ge 10R_2\) หน้านี้มีภาพจำลองที่ปรับ \(R_1\), \(R_2\), \(R_E\), β ได้พร้อมตัวชี้เงื่อนไข (ส่วน A) Ex.4 วิธีแม่นยำ วิธีโดยประมาณกับผลของ β ที่ลดครึ่ง (Examples 4.9–4.10) กรณีเงื่อนไขไม่ผ่าน (Example 4.11) และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 4 slides pp. 20–25. Voltage-divider bias sets the base voltage with \(R_1\), \(R_2\); with the values well chosen, Q (\(I_{CQ}\), \(V_{CEQ}\)) hardly depends on β. Two methods: the <b>exact</b> one replaces the divider by its Thévenin circuit \(R_{Th}\), \(E_{Th}\) and then uses the emitter-bias equations; the <b>approximate</b> one drops the base current when \(\beta R_E \ge 10R_2\). This page has a circuit whose \(R_1\), \(R_2\), \(R_E\), β you can change with a criterion indicator (section A), Ex.4 exactly, the approximate method and β halved (Examples 4.9–4.10), the case where the criterion fails (Example 4.11), and more practice.</p>
+<div class="equation-box eqwrap">$$ R_{Th} = R_1 \parallel R_2,\quad E_{Th} = \frac{R_2V_{CC}}{R_1 + R_2} $$ $$ I_B = \frac{E_{Th} - V_{BE}}{R_{Th} + (\beta + 1)R_E} $$ $$ V_{CE} = V_{CC} - I_C(R_C + R_E) $$ $$ \beta R_E \ge 10R_2:\quad V_B = \frac{R_2V_{CC}}{R_1 + R_2} $$ $$ V_E = V_B - V_{BE},\quad I_C \cong I_E = \frac{V_E}{R_E} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ทำไมต้องมี</b>: ในวงจรก่อนหน้า \(I_{CQ}\) และ \(V_{CEQ}\) ยังขึ้นกับ β ซึ่งไม่แน่นอนและเปลี่ยนตามอุณหภูมิ วงจรนี้ให้จุด Q คงที่แม้ β เปลี่ยน โดย \(I_{BQ}\) เป็นตัวที่ปรับตัวเอง (สไลด์หน้า 20)</li>
+  <li><b>วิธีแม่นยำ</b> (สไลด์หน้า 21–23): มองจากเบสไปทางซ้าย ตัวแบ่งแรงดันแทนได้ด้วยเทเวนิน ขั้นที่ 1 \(R_{Th} = R_1 \parallel R_2\) (ลัดวงจร \(V_{CC}\)) ขั้นที่ 2 \(E_{Th}\) = แรงดันคร่อม \(R_2\) ขั้นที่ 3 กฎแรงดันรอบวงให้ \(I_B\) (สมการ 4.30) ขั้นที่ 4 ที่เหลือเหมือนไบแอสอิมิตเตอร์</li>
+  <li><b>วิธีโดยประมาณ</b>: เมื่อ \(R_i = (\beta + 1)R_E \gg R_2\) กระแสเบสน้อยกว่ากระแสในตัวแบ่งมาก ให้ \(V_B\) จากกฎตัวแบ่งแรงดัน แล้ว \(V_E\), \(I_E \cong I_C\), \(V_{CE}\) โดยไม่ใช้ β (สมการ 4.32–4.37) เกณฑ์คือ \(\beta R_E \ge 10R_2\) (สมการ 4.33)</li>
+  <li><b>ความไวต่อ β</b>: β จาก 100 เหลือ 50 เปลี่ยน \(V_{CEQ}\) ไม่ถึง 3 % (วงจรไบแอสคงที่: กว่า 300 %) (Example 4.10)</li>
+  <li><b>อิ่มตัวและเส้นโหลด</b>: เหมือนวงจรไบแอสอิมิตเตอร์ทุกประการ \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\) (สไลด์หน้า 25)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Why</b>: in the earlier circuits \(I_{CQ}\) and \(V_{CEQ}\) still depend on β, which is uncertain and drifts with temperature. This circuit holds Q while β changes; \(I_{BQ}\) is what adjusts itself (slide p. 20).</li>
+  <li><b>The exact method</b> (slides pp. 21–23): looking left from the base, the divider becomes its Thévenin circuit. Step 1, \(R_{Th} = R_1 \parallel R_2\) (\(V_{CC}\) shorted); step 2, \(E_{Th}\) = the voltage across \(R_2\); step 3, the loop law gives \(I_B\) (Eq. 4.30); step 4, the rest is emitter bias.</li>
+  <li><b>The approximate method</b>: when \(R_i = (\beta + 1)R_E \gg R_2\) the base current is much smaller than the divider current; take \(V_B\) from the divider rule, then \(V_E\), \(I_E \cong I_C\), \(V_{CE}\) without β (Eqs. 4.32–4.37). The criterion is \(\beta R_E \ge 10R_2\) (Eq. 4.33).</li>
+  <li><b>Sensitivity to β</b>: β from 100 to 50 changes \(V_{CEQ}\) by under 3 % (fixed bias: over 300 %) (Example 4.10).</li>
+  <li><b>Saturation and the load line</b>: exactly as for emitter bias, \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\) (slide p. 25).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch4/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 20, Voltage-Divider Bias: the voltage-divider bias configuration of the figure is such a network; if analyzed on an exact basis the sensitivity to changes in beta is quite small. Figures 4.28–4.29: V_CC, R_1, R_2, R_C, R_E, C_1, C_2 and the transistor; and the characteristics with the Q-point fixed at I_CQ, V_CEQ while the resulting I_BQ curve moves.">
+  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 20: วงจรตัวแบ่งแรงดันและจุด Q ที่คงที่ (รูป 4.28–4.29) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 20: the divider circuit and its fixed Q (Figs. 4.28–4.29) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 24 (Ex.4) ให้ β = 140</b> ตามตำราฉบับก่อน ตำราฉบับที่ 11 (Example 4.8) ใช้ β = 100 ได้ \(I_B\) = 8.38 µA, \(I_C\) = 0.84 mA, \(V_{CE}\) = 12.34 V หน้านี้เฉลยตามสไลด์ (β = 140) และแสดงค่าของตำราไว้ด้วย · ตำรา Example 4.9 อ้าง "Example 4.7" ที่ถูกคือ Example 4.8</div>
+<div class="warnbox" data-l="en"><b>Slide p. 24 (Ex.4) gives β = 140</b>, from an earlier edition; the 11th edition (Example 4.8) uses β = 100 and gets \(I_B\) = 8.38 µA, \(I_C\) = 0.84 mA, \(V_{CE}\) = 12.34 V. This page solves the slide's version (β = 140) and shows the book's values too. The book's Example 4.9 refers to "Example 4.7"; Example 4.8 is meant.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>แม่นยำกับโดยประมาณ</a><a href="#ex1"><b>1</b>Ex.4</a><a href="#ex2"><b>2</b>โดยประมาณ, β ลดครึ่ง</a><a href="#ex3"><b>3</b>เงื่อนไขไม่ผ่าน</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Exact against approximate</a><a href="#ex1"><b>1</b>Ex.4</a><a href="#ex2"><b>2</b>Approximate, β halved</a><a href="#ex3"><b>3</b>The criterion fails</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวแบ่งแรงดัน: วิธีแม่นยำกับวิธีโดยประมาณ</h2><h2 data-l="en">The divider: exact against approximate</h2>
+    <div class="src" data-l="th">สไลด์หน้า 21–23 · Boylestad หัวข้อ 4.5 (รูป 4.30–4.36)</div><div class="src" data-l="en">Slides pp. 21–23 · Boylestad, section 4.5 (Figs. 4.30–4.36)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch4/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 21, Voltage-Divider Bias, exact analysis: the Thévenin equivalent network for the network to the left of the base terminal can then be found in the following manner. Figures: the divider circuit with the input side boxed, an arrow to the Thévenin view: V_CC, R_1, R_2 feeding the base with R_E at the emitter.">
+    <figcaption data-l="th">สไลด์หน้า 21: แยกส่วนตัวแบ่งแรงดันออกมาทำเทเวนิน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 21: the divider taken out for its Thévenin circuit · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch4/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 22, Voltage-Divider Bias, exact analysis: step 1, find R_Th (kill source): the voltage source is replaced by a short-circuit equivalent, R_Th = R_1 ∥ R_2. Step 2, find E_Th: the voltage source V_CC is returned to the network and the open-circuit Thévenin voltage is E_Th = V_R2 = R_2 V_CC/(R_1 + R_2).">
+    <figcaption data-l="th">สไลด์หน้า 22: ขั้นที่ 1–2 \(R_{Th}\) และ \(E_{Th}\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 22: steps 1–2, \(R_{Th}\) and \(E_{Th}\) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch4/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 23, Voltage-Divider Bias, exact analysis: step 3, the Thévenin network is then redrawn as shown in the figure, and I_BQ can be determined by first applying Kirchhoff's voltage law in the clockwise direction, I_B = (E_Th − V_BE)/(R_Th + (β + 1) R_E). Step 4: once I_BQ is known, the remaining quantities of the network can be found in the same manner as developed for the emitter-bias configuration: I_C = β I_B, V_CE = V_CC − I_C (R_C + R_E).">
+    <figcaption data-l="th">สไลด์หน้า 23: ขั้นที่ 3–4 กฎแรงดันรอบวงเทเวนิน · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 23: steps 3–4, the loop law on the Thévenin circuit · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.4 แผงค่าแสดงทั้งสองวิธี: วิธีแม่นยำ (ตัวแก้วงจร) และวิธีโดยประมาณ พร้อมตัวชี้ว่า \(\beta R_E \ge 10R_2\) หรือไม่ ลองเพิ่ม \(R_2\) หรือลด β จนเงื่อนไขไม่ผ่าน แล้วดูผลต่างระหว่างสองวิธีโตขึ้น กราฟล่าง (\(I_C\) เทียบกับ β) ของวงจรนี้แทบราบ</p>
+  <p class="lead" data-l="en">Start from the circuit of Ex.4. The reading list shows both methods, exact (the solver) and approximate, with an indicator of whether \(\beta R_E \ge 10R_2\). Raise \(R_2\) or lower β until the criterion fails and watch the gap between the two methods grow. The lower graph (\(I_C\) against β) of this circuit is almost flat.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.4: วิธีแม่นยำ</h2><h2 data-l="en">Ex.4: the exact method</h2>
+    <div class="src" data-l="th">สไลด์หน้า 24–25 · Boylestad Example 4.8 (รูป 4.35) ด้วย β = 140 ของสไลด์</div><div class="src" data-l="en">Slides pp. 24–25 · Boylestad Example 4.8 (Fig. 4.35) with the slide's β = 140</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch4/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 24, Voltage-Divider Bias, Ex.4: determine the dc bias voltage V_CE and the current I_C for the voltage-divider configuration of the figure: +22 V, R_1 = 39 kΩ, R_2 = 3.9 kΩ, R_C = 10 kΩ, R_E = 1.5 kΩ with a 50 µF bypass capacitor, 10 µF coupling capacitors, β = 140.">
+    <figcaption data-l="th">สไลด์หน้า 24: Ex.4 (β = 140) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 24: Ex.4 (β = 140) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch4/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 25, Voltage-Divider Bias, transistor saturation: the resulting equation for the saturation current (when V_CE is set to zero volts on the schematic) is therefore the same as obtained for the emitter-biased configuration, I_Csat = I_Cmax = V_CC/(R_C + R_E). Load-line analysis: the same intersections, I_C = V_CC/(R_C + R_E) at V_CE = 0 V and V_CE = V_CC at I_C = 0 mA.">
+    <figcaption data-l="th">สไลด์หน้า 25: การอิ่มตัวและเส้นโหลด · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 25: saturation and the load line · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 22 V, \(R_1\) = 39 kΩ, \(R_2\) = 3.9 kΩ, \(R_C\) = 10 kΩ, \(R_E\) = 1.5 kΩ, β = 140 จงหา \(V_{CE}\) และ \(I_C\) ด้วยวิธีแม่นยำ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 22 V, \(R_1\) = 39 kΩ, \(R_2\) = 3.9 kΩ, \(R_C\) = 10 kΩ, \(R_E\) = 1.5 kΩ, β = 140. Determine \(V_{CE}\) and \(I_C\) exactly.</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพแสดงแรงดันของโหนดในสองขั้นแรก (\(V_B\) ต่ำกว่า \(E_{Th}\) เล็กน้อยเพราะ \(I_BR_{Th}\)) แล้วสลับเป็นเส้นโหลด <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The side panel shows the node voltages during the first two steps (\(V_B\) is a little below \(E_{Th}\) because of \(I_BR_{Th}\)), then switches to the load line. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">วิธีโดยประมาณ และเมื่อ β ลดลงครึ่งหนึ่ง</h2><h2 data-l="en">The approximate method, and β halved</h2>
+    <div class="src" data-l="th">Boylestad Examples 4.9–4.10 (รูป 4.36)</div><div class="src" data-l="en">Boylestad Examples 4.9–4.10 (Fig. 4.36)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรของ Ex.4 (a) ตรวจเงื่อนไข \(\beta R_E \ge 10R_2\) แล้วหา \(I_{CQ}\), \(V_{CEQ}\) ด้วยวิธีโดยประมาณ เทียบกับวิธีแม่นยำ (b) ถ้า β ลดเหลือ 50 จงหา \(I_{CQ}\), \(V_{CEQ}\) ด้วยวิธีแม่นยำ แล้วเทียบ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The circuit of Ex.4. (a) Check \(\beta R_E \ge 10R_2\), then find \(I_{CQ}\), \(V_{CEQ}\) approximately and compare with the exact values. (b) With β reduced to 50, find \(I_{CQ}\), \(V_{CEQ}\) exactly and compare.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเปลี่ยนเป็นทรานซิสเตอร์ β = 50 ในขั้นที่ 3 <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation switches to a β = 50 transistor at step 3. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">เมื่อเงื่อนไข \(\beta R_E \ge 10R_2\) ไม่ผ่าน</h2><h2 data-l="en">When the criterion \(\beta R_E \ge 10R_2\) fails</h2>
+    <div class="src" data-l="th">Boylestad Example 4.11 (รูป 4.37)</div><div class="src" data-l="en">Boylestad Example 4.11 (Fig. 4.37)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 18 V, \(R_1\) = 82 kΩ, \(R_2\) = 22 kΩ, \(R_C\) = 5.6 kΩ, \(R_E\) = 1.2 kΩ, β = 50 จงหา \(I_{CQ}\), \(V_{CEQ}\) ทั้งวิธีแม่นยำและโดยประมาณ แล้วเทียบ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 18 V, \(R_1\) = 82 kΩ, \(R_2\) = 22 kΩ, \(R_C\) = 5.6 kΩ, \(R_E\) = 1.2 kΩ, β = 50. Determine \(I_{CQ}\), \(V_{CEQ}\) both exactly and approximately, and compare.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(V_{BE}\) = 0.7 V · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(V_{BE}\) = 0.7 V · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — เงื่อนไข 10 เท่า</h3>
+    <ol><li>ส่วน A เลื่อน β จาก 140 ลงถึง 25: \(I_C\) แม่นยำลดจาก 0.85 เหลือราว 0.73 mA ขณะที่ค่าโดยประมาณคงที่ 0.867 mA ตัวชี้เงื่อนไขเปลี่ยนเป็นไม่ผ่านเมื่อ β ต่ำกว่า 26</li>
+    <li>เพิ่ม \(R_2\) เป็น 20 kΩ (คง β = 140): \(E_{Th}\) เพิ่ม จุด Q ขยับขึ้น และเงื่อนไขไม่ผ่าน (\(\beta R_E\) = 210 kΩ < 200 kΩ?) ดูว่าสองวิธีต่างกันเท่าใด</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ทำไม β จึงหายไป</h3>
+    <ol><li>ข้อ 2: ในวิธีโดยประมาณ \(V_B\) ถูกตรึงด้วยตัวแบ่ง จึง \(V_E = V_B - 0.7\) และ \(I_E = V_E/R_E\) ถูกตรึงตาม ทรานซิสเตอร์จะ "หา" \(I_B\) ที่ให้กระแสนี้เอง ไม่ว่า β จะเป็นเท่าใด</li>
+    <li>ข้อ 3: ถ้าเพิ่ม β เป็น 150 (เงื่อนไขผ่าน: 180 kΩ < 220 kΩ ยังไม่ถึง) ค่าแม่นยำจะขยับเข้าหาค่าโดยประมาณ ลองคิดด้วยสูตรแม่นยำ: \(I_B\) = 3.11/(17.35k + 151×1.2k) = 15.7 µA, \(I_C\) = 2.36 mA</li></ol>
+    <div class="book">สไลด์บทที่ 4 หน้า 20–25 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 4.5 (Examples 4.8–4.11, รูป 4.28–4.37)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the factor-of-10 criterion</h3>
+    <ol><li>In section A slide β from 140 down to 25: the exact \(I_C\) falls from 0.85 to about 0.73 mA while the approximate value stays at 0.867 mA; the indicator turns to "fails" below β = 26.</li>
+    <li>Raise \(R_2\) to 20 kΩ (β = 140): \(E_{Th}\) rises, Q moves up, and the criterion fails (\(\beta R_E\) = 210 kΩ against 200 kΩ, barely); see how far apart the two methods are.</li></ol></div>
+  <div class="card"><h3>Try this 2 — why β disappears</h3>
+    <ol><li>Problem 2: in the approximate method \(V_B\) is pinned by the divider, so \(V_E = V_B - 0.7\) and \(I_E = V_E/R_E\) are pinned too; the transistor finds whatever \(I_B\) gives that current, whatever β is.</li>
+    <li>Problem 3: with β = 150 (180 kΩ, still short of 220 kΩ) the exact values move toward the approximate ones; try the exact formula: \(I_B\) = 3.11/(17.35k + 151 × 1.2k) = 15.7 µA, \(I_C\) = 2.36 mA.</li></ol>
+    <div class="book">Chapter 4 slides pp. 20–25 · Boylestad &amp; Nashelsky, 11th ed., section 4.5 (Examples 4.8–4.11, Figs. 4.28–4.37)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  CH4.problem(1, 'ex4'); CH4.problem(2, 'vd9'); CH4.problem(3, 'vd11');
+
+  /* =================================================================== A: exact against approximate */
+  const reg = r => CH3.reg(r), logR = (id, label, lo, hi, get, set, p, build, step = 100) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  const apx = S => { const VB = S.R2 * S.VCC / (S.R1 + S.R2), VE = VB - 0.7, IC = Math.max(0, VE / S.RE); return { VB, VE, IC, VCE: S.VCC - IC * (S.RC + S.RE), ok: S.beta * S.RE >= 10 * S.R2, RTh: S.R1 * S.R2 / (S.R1 + S.R2) }; };
+  CH4.explorer({ init: { VCC: 22, R1: 39e3, R2: 3.9e3, RC: 10e3, RE: 1500, beta: 140 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      ui.slider(p, { id: 'aVCC', label: 'V_{CC}', min: 5, max: 30, step: 0.5, value: S.VCC, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VCC = v; build(); } });
+      logR('aR1', 'R_1', 5e3, 200e3, () => S.R1, v => { S.R1 = v; }, p, build, 1000); logR('aR2', 'R_2', 1e3, 50e3, () => S.R2, v => { S.R2 = v; }, p, build, 100);
+      ui.slider(p, { id: 'aRC', label: 'R_C', min: 1000, max: 12000, step: 100, value: S.RC, fmt: v => CK.eng(v, 'Ω'), oninput: v => { S.RC = v; build(); } });
+      ui.slider(p, { id: 'aRE', label: 'R_E', min: 100, max: 5000, step: 100, value: S.RE, fmt: v => CK.eng(v, 'Ω'), oninput: v => { S.RE = v; build(); } });
+      ui.slider(p, { id: 'aB', label: 'β', min: 25, max: 400, step: 5, value: S.beta, fmt: v => `${v}`, oninput: v => { S.beta = v; build(); } }); },
+    spec: S => CH4.net({ VCC: S.VCC, R1: S.R1, R2: S.R2, RC: S.RC, RE: S.RE, beta: S.beta }),
+    side: (ctx, b, bd, c, S) => { const z = CH3.q(c), r = S.RC + S.RE, a = apx(S); CH4.llPlot(ctx, b, bd, { beta: S.beta, ibs: CH4.ibs(S.beta, S.VCC / r * 1e3), vcc: S.VCC, r, q: { v: z.VCE, i: z.ic, ib: z.IB, label: bd.short ? 'Q' : t('Q แม่นยำ', 'Q exact') }, labels: !bd.short,
+      pts: [{ v: a.VCE, i: a.IC, color: IE.COL.tan, r: 5, label: bd.short ? '' : t('โดยประมาณ', 'approximate'), side: -1, dy: 16 }], title: t('เส้นโหลด: จุด Q แม่นยำ (เหลือง) กับโดยประมาณ (เขียว)', 'load line: Q exact (yellow) and approximate (green)') }); },
+    waves: [(ctx, b, bd, c, S) => CH4.betaPlot(ctx, b, bd, B => ({ VCC: S.VCC, R1: S.R1, R2: S.R2, RC: S.RC, RE: S.RE, beta: B }), S.beta, { icsat: S.VCC / (S.RC + S.RE) * 1e3 })],
+    badge: (c, S) => { const z = CH3.q(c), a = apx(S); return [[`${a.ok ? 'βR_E ≥ 10R_2 ✓' : 'βR_E < 10R_2 ✗'} · I_C = ${fd(z.ic, 3)} mA (โดยประมาณ ${fd(a.IC, 3)})`, `${a.ok ? 'βR_E ≥ 10R_2 ✓' : 'βR_E < 10R_2 ✗'} · I_C = ${fd(z.ic, 3)} mA (approx. ${fd(a.IC, 3)})`], a.ok && z.region === 'active' ? 'ok' : 'wait']; },
+    rows: (c, z, S) => { const a = apx(S); return [['R_Th = R_1 ∥ R_2', CK.eng(a.RTh, 'Ω')], ['E_Th', `${fd(a.VB, 3)} V`], [t('I_B แม่นยำ', 'I_B exact'), `${fd(z.uA, 2)} µA`], [t('I_C แม่นยำ', 'I_C exact'), `${fd(z.ic, 3)} mA`], [t('V_CE แม่นยำ', 'V_CE exact'), `${fd(z.VCE, 2)} V`],
+      [t('I_C โดยประมาณ', 'I_C approximate'), `${fd(a.IC, 3)} mA`], [t('V_CE โดยประมาณ', 'V_CE approximate'), `${fd(a.VCE, 2)} V`], ['βR_E : 10R_2', `${CK.eng(S.beta * S.RE, 'Ω')} : ${CK.eng(10 * S.R2, 'Ω')}`]]; },
+    text: (c, z, S) => { const a = apx(S), d = Math.abs(z.ic - a.IC) / Math.max(z.ic, 1e-9) * 100;
+      return a.ok ? t(`เงื่อนไขผ่าน (\\(\\beta R_E\\) = ${CK.eng(S.beta * S.RE, 'Ω')} ≥ ${CK.eng(10 * S.R2, 'Ω')}): สองวิธีต่างกัน ${fd(d, 1)} % ใน \\(I_C\\) วิธีโดยประมาณใช้ได้ และจุด Q แทบไม่ขึ้นกับ β`, `The criterion holds (\\(\\beta R_E\\) = ${CK.eng(S.beta * S.RE, 'Ω')} ≥ ${CK.eng(10 * S.R2, 'Ω')}): the two methods differ by ${fd(d, 1)} % in \\(I_C\\); the approximation is fine and Q hardly depends on β.`)
+        : t(`เงื่อนไขไม่ผ่าน (\\(\\beta R_E\\) = ${CK.eng(S.beta * S.RE, 'Ω')} < ${CK.eng(10 * S.R2, 'Ω')}): กระแสเบสดึงแรงดันเบสลงจาก \\(E_{Th}\\) อย่างมีนัย สองวิธีต่างกัน ${fd(d, 1)} % ต้องใช้วิธีแม่นยำ`, `The criterion fails (\\(\\beta R_E\\) = ${CK.eng(S.beta * S.RE, 'Ω')} < ${CK.eng(10 * S.R2, 'Ω')}): the base current pulls the base noticeably below \\(E_{Th}\\); the methods differ by ${fd(d, 1)} %, so use the exact one.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, o1 = { VCC: 20, R1: 62e3, R2: 9.1e3, RC: 3900, RE: 1500, beta: 100 }, s1 = CH4.sol(o1), a1 = { VB: 9.1 * 20 / 71.1 };
+  a1.VE = a1.VB - 0.7; a1.IC = a1.VE / 1500; a1.VCE = 20 - a1.IC * 5400;
+  CH6.quiz('quiz', [
+    { q: t('1) \\(V_{CC}\\) = 20 V, \\(R_1\\) = 62 kΩ, \\(R_2\\) = 9.1 kΩ, \\(R_C\\) = 3.9 kΩ, \\(R_E\\) = 1.5 kΩ, β = 100 ตรวจเงื่อนไขแล้วหา \\(I_C\\) และ \\(V_{CE}\\) ด้วยวิธีโดยประมาณ', '1) \\(V_{CC}\\) = 20 V, \\(R_1\\) = 62 kΩ, \\(R_2\\) = 9.1 kΩ, \\(R_C\\) = 3.9 kΩ, \\(R_E\\) = 1.5 kΩ, β = 100. Check the criterion, then find \\(I_C\\) and \\(V_{CE}\\) approximately.'),
+      fields: [{ key: 'x', lab: 'I_C ≅', ans: a1.IC * 1e3, unit: 'mA', tol: 0.01 }, { key: 'y', lab: 'V_CE ≅', ans: a1.VCE, unit: 'V', tol: 0.05 }],
+      work: work(R`150\ \text{k}\Omega \ge 91\ \text{k}\Omega\ \checkmark,\ V_B = \frac{(9.1)(20)}{71.1} = ${fd(a1.VB, 2)}\ \text{V},\ V_E = ${fd(a1.VE, 2)}\ \text{V},\ I_C \cong \frac{${fd(a1.VE, 2)}}{1.5} = ${fd(a1.IC * 1e3, 2)}\ \text{mA},\ V_{CE} = 20 - (${fd(a1.IC * 1e3, 2)})(5.4) = ${fd(a1.VCE, 2)}\ \text{V}`) },
+    { q: t('2) วงจรข้อ 1 ด้วยวิธีแม่นยำ: \\(R_{Th}\\), \\(E_{Th}\\), \\(I_B\\) และ \\(I_C\\)', '2) The circuit of question 1 exactly: \\(R_{Th}\\), \\(E_{Th}\\), \\(I_B\\) and \\(I_C\\).'),
+      fields: [{ key: 'x', lab: 'R_Th =', ans: 62 * 9.1 / 71.1, unit: 'kΩ', tol: 0.02 }, { key: 'y', lab: 'I_B =', ans: s1.IB * 1e6, unit: 'µA', tol: 0.05 }, { key: 'z', lab: 'I_C =', ans: s1.IC * 1e3, unit: 'mA', tol: 0.01 }],
+      work: work(R`R_{Th} = \frac{(62)(9.1)}{71.1} = ${fd(62 * 9.1 / 71.1, 2)}\ \text{k}\Omega,\ E_{Th} = ${fd(a1.VB, 2)}\ \text{V},\ I_B = \frac{${fd(a1.VE, 2)}}{${fd(62 * 9.1 / 71.1, 2)}\ \text{k}\Omega + (101)(1.5\ \text{k}\Omega)} = ${fd(s1.IB * 1e6, 2)}\ \mu\text{A},\ I_C = ${fd(s1.IC * 1e3, 2)}\ \text{mA}`) },
+    { q: t('3) วงจรข้อ 1 แต่ β = 50 เงื่อนไขยังผ่านหรือไม่ และ \\(I_C\\) แม่นยำเท่าใด', '3) The circuit of question 1 with β = 50: does the criterion still hold, and what is the exact \\(I_C\\)?'),
+      fields: [{ key: 'x', lab: 'βR_E =', ans: 75, unit: 'kΩ' }, { key: 'y', lab: 'I_C =', ans: CH4.sol({ ...o1, beta: 50 }).IC * 1e3, unit: 'mA', tol: 0.01 }],
+      work: work(R`\beta R_E = 75\ \text{k}\Omega < 10R_2 = 91\ \text{k}\Omega\ (\text{fails}),\ I_B = \frac{${fd(a1.VE, 2)}}{${fd(62 * 9.1 / 71.1, 2)}\ \text{k}\Omega + (51)(1.5\ \text{k}\Omega)} = ${fd(CH4.sol({ ...o1, beta: 50 }).IB * 1e6, 2)}\ \mu\text{A},\ I_C = ${fd(CH4.sol({ ...o1, beta: 50 }).IC * 1e3, 2)}\ \text{mA}`) },
+    { q: t('4) \\(V_{CC}\\) = 15 V, \\(R_1\\) = 33 kΩ, \\(R_2\\) = 10 kΩ, \\(R_E\\) = 1.2 kΩ (เงื่อนไขผ่าน) จงหา \\(V_B\\), \\(V_E\\) และ \\(I_E\\)', '4) \\(V_{CC}\\) = 15 V, \\(R_1\\) = 33 kΩ, \\(R_2\\) = 10 kΩ, \\(R_E\\) = 1.2 kΩ (the criterion holds). Find \\(V_B\\), \\(V_E\\) and \\(I_E\\).'),
+      fields: [{ key: 'x', lab: 'V_B =', ans: 150 / 43, unit: 'V', tol: 0.02 }, { key: 'y', lab: 'I_E =', ans: (150 / 43 - 0.7) / 1.2, unit: 'mA', tol: 0.01 }],
+      work: work(R`V_B = \frac{(10)(15)}{43} = ${fd(150 / 43, 2)}\ \text{V},\ V_E = ${fd(150 / 43 - 0.7, 2)}\ \text{V},\ I_E = \frac{${fd(150 / 43 - 0.7, 2)}}{1.2\ \text{k}\Omega} = ${fd((150 / 43 - 0.7) / 1.2, 2)}\ \text{mA}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

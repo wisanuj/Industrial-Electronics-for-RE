@@ -8,15 +8,15 @@
 <link rel="stylesheet" href="assets/ee.css?v=3">
 <script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
 <script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script>
-<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script>
+<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
 <div class="wrap">
 <header class="topbar" id="mc-top"></header>
 <h1><span data-l="th">ชุดทดสอบตัวเลข </span><span class="en">Numeric tests — the circuit engine, its diodes and transistors against hand calculations and the textbook</span></h1>
-<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และทรานซิสเตอร์ และตัวเลขของโจทย์ทุกข้อในบทที่ 1–3 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
-<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the transistor, and the numbers of every chapter 1–3 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
+<p class="sub" data-l="th">ทุกหน้าใช้ตัวแก้วงจร (circuit.js) ชุดเดียวกัน หน้านี้ตรวจตัวแก้วงจร ไดโอดทุกแบบ เส้นโค้งที่อ่านจากรูปในตำรา และทรานซิสเตอร์ และตัวเลขของโจทย์ทุกข้อในบทที่ 1–4 กับการคำนวณด้วยมือและตัวอย่างในตำรา Boylestad &amp; Nashelsky เปิดแล้วต้องขึ้น ALL PASS</p>
+<p class="sub" data-l="en">Every page uses the same circuit solver (circuit.js). This page checks the solver, every diode model, the curves read off the textbook figures and the transistor, and the numbers of every chapter 1–4 problem against hand calculations and the examples of Boylestad &amp; Nashelsky. It must show ALL PASS.</p>
 <div id="sum" class="status"></div>
 <div style="overflow-x:auto"><table class="tbl" id="tbl"><thead><tr><th>#</th><th>test</th><th>got</th><th>expected</th><th></th></tr></thead><tbody></tbody></table></div>
 <div id="box8" style="position:absolute;left:-4000px;top:0;width:900px"></div>
@@ -178,6 +178,42 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
     `${f(av, 3)} ${f(ie, 2)} ${cy.min('ie') > 0.3}`, '0.95 1.9 true');
   T('BJT helpers: BJT.cb (Fig. 3.8 curve) at I_E = 3 mA, V_CB = 10 V gives the circuit\'s 2.985 mA; BJT.icAt on Fig. 3.13 at 30 µA, 10 V gives 3.406 mA; BJT.vbeAt gives 0.700 V at 20 µA and 15 V',
     `${f(BJT.cb(CH3.QCB, 3e-3, 10).IC * 1e3, 3)} ${f(BJT.icAt(CH3.Q313, 30e-6, 10) * 1e3, 3)} ${f(BJT.vbeAt(CH3.Q313, 20e-6, 15), 3)}`, '2.985 3.406 0.7'); }
+
+/* --- chapter 4: every bias configuration of the slides through the engine (0.7 V, I_C = β I_B, I_E = (β + 1) I_B exactly) against the book --- */
+{ const run = o => { const c = new Circuit(CH4.net(o)); c.solve(); return c; }, q = c => CH3.q(c), V = (c, n) => c.V(n).re;
+  const c1 = run({ VCC: 12, RB: 240e3, RC: 2200, beta: 50 }), z1 = q(c1), c1b = run({ VCC: 12, RB: 240e3, RC: 2200, beta: 100 }), z1b = q(c1b);
+  T('Ex.1 (Example 4.1): fixed bias 12 V, 240 kΩ, 2.2 kΩ, β = 50 → I_B = 47.08 µA, I_C = 2.354 mA, V_CE = 6.82 V (book 6.83 with I_C rounded), V_B = 0.7, V_BC = −6.12 V · Example 4.5: β = 100 → 4.708 mA, 1.64 V',
+    `${f(z1.uA, 2)} ${f(z1.ic, 3)} ${f(z1.VCE, 2)} ${f(V(c1, 'b'), 3)} ${f(V(c1, 'b') - V(c1, 'c'), 2)} | ${f(z1b.ic, 3)} ${f(z1b.VCE, 2)}`, '47.08 2.354 6.82 0.7 -6.12 | 4.708 1.64');
+  const c2 = run({ VCC: 20, RB: 772e3, RC: 2000, beta: 200 }), z2 = q(c2);
+  T('Ex.2 (Example 4.3): the circuit built from the answers (20 V, 2 kΩ, 772 kΩ, β = 200) lands on the figure\'s Q: I_B = 25 µA, I_C = 5 mA, V_CE = 10 V', `${f(z2.uA, 2)} ${f(z2.ic, 3)} ${f(z2.VCE, 3)}`, '25 5 10');
+  const c3 = run({ VCC: 20, RB: 430e3, RC: 2000, RE: 1000, beta: 50 }), z3 = q(c3), c3b = run({ VCC: 20, RB: 430e3, RC: 2000, RE: 1000, beta: 100 }), z3b = q(c3b);
+  T('Ex.3 (Example 4.4): emitter bias → I_B = 40.12 µA, I_C = 2.006 mA, V_C = 15.99 V, V_E = 2.046 V (I_E R_E exactly; book 2.01), V_B = 2.746 V, V_CE = 13.94 V (book 13.97 with I_E ≅ I_C) · Example 4.5: β = 100 → 3.63 mA, 9.06 V (book 9.11)',
+    `${f(z3.uA, 2)} ${f(z3.ic, 3)} ${f(V(c3, 'c'), 2)} ${f(V(c3, 'e'), 3)} ${f(V(c3, 'b'), 3)} ${f(z3.VCE, 2)} | ${f(z3b.ic, 2)} ${f(z3b.VCE, 2)}`, '40.12 2.006 15.99 2.046 2.746 13.94 | 3.63 9.06');
+  const c7 = run({ VCC: 18, RB: 910e3, RC: 2200, RE: 1100, beta: 220 }), z7 = q(c7);
+  T('Example 4.7: R_B = 910 kΩ with β = 220 gives the Q read off Fig. 4.27, I_B = 15 µA, I_C = 3.3 mA, V_CE ≅ 7.5 V (7.09 exact: the book\'s 7.5 is a graph reading)', `${f(z7.uA, 2)} ${f(z7.ic, 2)} ${Math.abs(z7.VCE - 7.09) < 0.02}`, '15 3.3 true');
+  const c4 = run({ VCC: 22, R1: 39e3, R2: 3.9e3, RC: 10e3, RE: 1500, beta: 140 }), z4 = q(c4), c4b = run({ VCC: 22, R1: 39e3, R2: 3.9e3, RC: 10e3, RE: 1500, beta: 100 }), z4b = q(c4b), c4c = run({ VCC: 22, R1: 39e3, R2: 3.9e3, RC: 10e3, RE: 1500, beta: 50 }), z4c = q(c4c);
+  T('Ex.4 (Example 4.8): voltage divider, slide β = 140 → I_B = 6.05 µA, I_C = 0.846 mA, V_CE = 12.26 V · book β = 100 → 8.38 µA, 0.838 mA, 12.3 V (book 12.34 with I_C = 0.84) · Example 4.10 β = 50 → 0.812 mA, 12.64 V (book 12.69)',
+    `${f(z4.uA, 2)} ${f(z4.ic, 3)} ${f(z4.VCE, 2)} | ${f(z4b.uA, 2)} ${f(z4b.ic, 3)} ${f(z4b.VCE, 1)} | ${f(z4c.ic, 3)} ${f(z4c.VCE, 2)}`, '6.05 0.846 12.26 | 8.38 0.838 12.3 | 0.812 12.64');
+  const c11 = run({ VCC: 18, R1: 82e3, R2: 22e3, RC: 5600, RE: 1200, beta: 50 }), z11 = q(c11);
+  T('Example 4.11 (criterion fails): exact I_B = 39.6 µA, I_C = 1.98 mA, V_CE = 4.50 V (book 4.54 with I_E ≅ I_C); the approximate 2.59 mA is 31 % high', `${f(z11.uA, 1)} ${f(z11.ic, 2)} ${f(z11.VCE, 2)} ${f((2.59 - z11.ic) / z11.ic * 100, 0)}`, '39.6 1.98 4.5 31');
+  const c5 = run({ VCC: 10, RF: 250e3, RC: 4700, RE: 1200, beta: 90 }), z5 = q(c5), c5b = run({ VCC: 10, RF: 250e3, RC: 4700, RE: 1200, beta: 135 }), z5b = q(c5b);
+  T('Ex.5 (Examples 4.12–4.13): collector feedback, exact I_C\' = I_C + I_B → I_B = 11.82 µA (book 11.91 with I_C\' ≅ I_C), I_C = 1.064 mA (1.07), V_CE = 3.65 V (3.69) · β = 135 → 1.19 mA (1.2), 2.91 V (2.92)',
+    `${f(z5.uA, 2)} ${f(z5.ic, 3)} ${f(z5.VCE, 2)} | ${f(z5b.ic, 2)} ${f(z5b.VCE, 2)}`, '11.82 1.064 3.65 | 1.19 2.91');
+  const c6 = run({ VCC: 18, RF1: 91e3, RF2: 110e3, RC: 3300, RE: 510, beta: 75 }), z6 = q(c6);
+  T('Ex.6 (Example 4.14): R_F1 + R_F2 = 201 kΩ in series for dc → I_B = 35.3 µA (book 35.5), V_C = 9.16 V (book 9.22 with I_C\' ≅ I_C)', `${f(z6.uA, 1)} ${f(V(c6, 'c'), 2)}`, '35.3 9.16');
+  const c9 = run({ VCC: 0, VEE: 20, RB: 240e3, RC: 0, RE: 2000, beta: 90 }), z9 = q(c9);
+  T('Ex.9 (Example 4.16): emitter follower, collector at 0 V, V_EE = −20 V → I_B = 45.73 µA, I_E = 4.16 mA, V_CE = 11.68 V, V_B = −10.98 V, V_E = −11.68 V', `${f(z9.uA, 2)} ${f(z9.ie, 2)} ${f(z9.VCE, 2)} ${f(V(c9, 'b'), 2)} ${f(V(c9, 'e'), 2)} ${f(V(c9, 'c'), 4)}`, '45.73 4.16 11.68 -10.98 -11.68 0');
+  const c10 = new Circuit(CH3.cb({ VEE: 4, RE: 1200, VCC: 10, RC: 2400, q: { beta: 60, be: CH3.SIMPLE } })); c10.solve(); const z10 = q(c10);
+  T('Ex.10 (Example 4.17): common base, V_EE = 4 V → I_E = 2.75 mA, I_B = 45.08 µA, V_CB = 3.51 V, V_CE = 4.21 V (book 4.1 with I_C ≅ I_E)', `${f(z10.ie, 3)} ${f(z10.uA, 2)} ${f(z10.VCB, 2)} ${f(z10.VCE, 2)}`, '2.75 45.08 3.51 4.21');
+  const c7m = run({ VCC: 20, RF: 680e3, RC: 4700, RE: 0, beta: 120 }), z7m = q(c7m), c8 = run({ VCC: 0, VEE: 9, RB: 100e3, RC: 1200, RE: 0, beta: 45 }), z8 = q(c8), c11s = run({ VCC: 20, VEE: 20, R1: 8.2e3, R2: 2.2e3, RC: 2700, RE: 1800, beta: 120 }), z11s = q(c11s);
+  T('Ex.7 (Example 4.18): I_B = 15.5 µA (book 15.51), I_C = 1.85 mA, V_CE = 11.21 V (11.26) · Ex.8 (Example 4.19): I_B = 83 µA, V_C = −4.48 V, V_B = −8.3 V · Ex.11 (Example 4.20): I_B = 35.4 µA, V_C = 8.55 V (8.53), V_B = −11.60 V (−11.59)',
+    `${f(z7m.uA, 1)} ${f(z7m.ic, 2)} ${f(z7m.VCE, 2)} | ${f(z8.uA, 1)} ${f(V(c8, 'c'), 2)} ${f(V(c8, 'b'), 2)} | ${f(z11s.uA, 1)} ${f(V(c11s, 'c'), 2)} ${f(V(c11s, 'b'), 2)}`, '15.5 1.85 11.21 | 83 -4.48 -8.3 | 35.4 8.55 -11.6');
+  const c12 = run({ VCC: 20, RB: 470e3, RC: 2400, beta: 100 }), z12 = q(c12), c13 = run({ VCC: 18, R1: 86.52e3, R2: 18e3, RC: 2800, RE: 1200, beta: 200 }), z13 = q(c13), c14 = run({ VCC: 28, RB: 620e3, RC: 2400, RE: 1000, beta: 110 }), z14 = q(c14);
+  T('Designs: Ex.12 (Example 4.21) standard 470 kΩ, 2.4 kΩ → I_B = 41.1 µA · Ex.13 (Example 4.22) R_1 = 86.52 kΩ, R_C = 2.8 kΩ with β = 200 → I_C = 1.87 mA, V_CE = 10.5 V (targets 2 mA, 10 V: the approximate design ignores I_B, and βR_E = 240 kΩ barely clears 10R_2 = 180 kΩ) · Ex.14 (Example 4.23) standard 620 kΩ, 2.4 kΩ, 1 kΩ → I_B = 37.3 µA, I_C = 4.11 mA',
+    `${f(z12.uA, 1)} | ${f(z13.ic, 2)} ${f(z13.VCE, 1)} | ${f(z14.uA, 1)} ${f(z14.ic, 2)}`, '41.1 | 1.87 10.5 | 37.3 4.11');
+  const s = CH4.sol({ VCC: 10, RF: 250e3, RC: 4700, RE: 1200, beta: 90 }), s2 = CH4.sol({ VCC: 20, VEE: 20, R1: 8.2e3, R2: 2.2e3, RC: 2700, RE: 1800, beta: 120 });
+  T('CH4.sol reproduces the book\'s hand arithmetic (I_C\' ≅ I_C, I_E ≅ I_C) before its rounding: Example 4.12 I_B = 11.91 µA, V_CE = 3.68 V (book 3.69 from I_C = 1.07); Example 4.20 I_B = 35.35 µA (35.39), V_C = 8.55 V (8.53) · CH4.std: 86520 → 91 kΩ, 482500 → 470 kΩ, 639800 → 620 kΩ, 2.5 kΩ → 2.4 kΩ',
+    `${f(s.IB * 1e6, 2)} ${f(s.VCE, 2)} ${f(s2.IB * 1e6, 2)} ${f(s2.VC, 2)} | ${CH4.std(86520)} ${CH4.std(482500)} ${CH4.std(639800)} ${CH4.std(2500)}`, '11.91 3.68 35.35 8.55 | 91000 470000 620000 2400'); }
 
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');

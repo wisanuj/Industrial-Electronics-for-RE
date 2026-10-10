@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="4.5 — Emitter Follower and Common Base">4.5 — ตัวตามแรงดันที่อิมิตเตอร์และวงจรเบสร่วม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์และวงจรเบสร่วม <span class="en">Emitter follower and common base</span></h1>
+<h1 data-l="en">Emitter follower and common base <span class="en">Biasing with the output at the emitter, and with two supplies</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 35–36 สองวงจรที่ไม่ได้เอาสัญญาณออกที่คอลเล็กเตอร์: ตัวตามแรงดันที่อิมิตเตอร์ (emitter follower หรือคอลเล็กเตอร์ร่วม) ต่อคอลเล็กเตอร์ลงกราวด์และใช้แหล่งจ่ายลบ \(V_{EE}\) ใต้ \(R_E\) และวงจรเบสร่วม (common base) ที่ป้อนสัญญาณเข้าที่อิมิตเตอร์ ใช้สองแหล่งจ่าย และหากระแสอิมิตเตอร์ได้ตรง ๆ จากวงอิมิตเตอร์ หน้านี้มีภาพจำลองตัวตามแรงดันที่ปรับ \(V_{EE}\), \(R_B\), \(R_E\), β ได้ (ส่วน A) Ex.9 Ex.10 และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 4 slides pp. 35–36. Two circuits that do not take the signal off the collector: the emitter follower (common collector), with the collector grounded and a negative supply \(V_{EE}\) under \(R_E\), and the common-base circuit, fed at the emitter from two supplies, whose emitter current comes straight from the emitter loop. This page has an emitter follower whose \(V_{EE}\), \(R_B\), \(R_E\), β you can change (section A), Ex.9, Ex.10, and more practice.</p>
+<div class="equation-box eqwrap">$$ \text{follower:}\quad I_B = \frac{V_{EE} - V_{BE}}{R_B + (\beta + 1)R_E},\quad V_{CE} = V_{EE} - I_ER_E $$ $$ \text{common base:}\quad I_E = \frac{V_{EE} - V_{BE}}{R_E},\quad I_B = \frac{I_E}{\beta + 1} $$ $$ V_{CE} = V_{EE} + V_{CC} - I_E(R_C + R_E),\quad V_{CB} = V_{CC} - I_CR_C $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ตัวตามแรงดัน</b> (รูป 4.46–4.47): วงเบสจากกราวด์ผ่าน \(R_B\) รอยต่อ และ \(R_E\) ลงไปถึง \(-V_{EE}\) ให้ \(I_B = (V_{EE} - V_{BE})/(R_B + (\beta + 1)R_E)\) (สมการ 4.44) รูปแบบเดียวกับไบแอสอิมิตเตอร์ที่ \(V_{EE}\) แทน \(V_{CC}\)</li>
+  <li><b>ด้านออกของตัวตามแรงดัน</b>: คอลเล็กเตอร์อยู่ที่กราวด์ \(V_{CE} = V_{EE} - I_ER_E\) (สมการ 4.45) ขาออกคืออิมิตเตอร์ ซึ่งต่ำกว่าเบส 0.7 V เสมอ</li>
+  <li><b>วงจรเบสร่วม</b> (รูป 4.49–4.51): วงอิมิตเตอร์ \(-V_{EE} + I_ER_E + V_{BE} = 0\) ให้ \(I_E\) โดยไม่ต้องรู้ β (สมการ 4.46) จากนั้น \(I_B = I_E/(\beta + 1)\)</li>
+  <li><b>ด้านออกของเบสร่วม</b>: กฎแรงดันรอบขอบนอกให้ \(V_{CE} = V_{EE} + V_{CC} - I_E(R_C + R_E)\) (สมการ 4.47) และวงด้านออกให้ \(V_{CB} = V_{CC} - I_CR_C\) (สมการ 4.48)</li>
+  <li><b>ข้อสังเกต</b>: ทั้งสองวงจรยังคงเริ่มด้วยกฎแรงดันรอบวงที่มีรอยต่อเบส–อิมิตเตอร์ 0.7 V เหมือนเดิม</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The emitter follower</b> (Figs. 4.46–4.47): the base loop from ground through \(R_B\), the junction and \(R_E\) down to \(-V_{EE}\) gives \(I_B = (V_{EE} - V_{BE})/(R_B + (\beta + 1)R_E)\) (Eq. 4.44), the emitter-bias form with \(V_{EE}\) in place of \(V_{CC}\).</li>
+  <li><b>Its output</b>: the collector is at ground, \(V_{CE} = V_{EE} - I_ER_E\) (Eq. 4.45); the output is the emitter, always 0.7 V below the base.</li>
+  <li><b>Common base</b> (Figs. 4.49–4.51): the emitter loop \(-V_{EE} + I_ER_E + V_{BE} = 0\) gives \(I_E\) without β (Eq. 4.46); then \(I_B = I_E/(\beta + 1)\).</li>
+  <li><b>Its output</b>: the loop round the outside gives \(V_{CE} = V_{EE} + V_{CC} - I_E(R_C + R_E)\) (Eq. 4.47) and the output loop \(V_{CB} = V_{CC} - I_CR_C\) (Eq. 4.48).</li>
+  <li><b>Note</b>: both circuits still start with a voltage-law loop through the 0.7 V base–emitter junction, as before.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ตัวตามแรงดัน</a><a href="#ex1"><b>1</b>Ex.9</a><a href="#ex2"><b>2</b>Ex.10 เบสร่วม</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The emitter follower</a><a href="#ex1"><b>1</b>Ex.9</a><a href="#ex2"><b>2</b>Ex.10 common base</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">The emitter follower</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 4.7 (รูป 4.46–4.47)</div><div class="src" data-l="en">Boylestad, section 4.7 (Figs. 4.46–4.47)</div></div></div>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.9: คอลเล็กเตอร์ต่อกราวด์ตรง ๆ (ไม่มี \(R_C\)) ส่วนล่างของวงจรอยู่ที่ \(-V_{EE}\) แรงดันทุกโหนดจึงติดลบ เลื่อน \(R_B\) หรือ β แล้วดูว่าอิมิตเตอร์ตามเบสอยู่ห่าง 0.7 V เสมอ กราฟล่างคือ \(I_C\) เทียบกับ β ซึ่งราบลงเมื่อ \((\beta + 1)R_E\) ใหญ่กว่า \(R_B\)</p>
+  <p class="lead" data-l="en">Start from the circuit of Ex.9: the collector goes straight to ground (no \(R_C\)) and the bottom of the circuit sits at \(-V_{EE}\), so every node voltage is negative. Move \(R_B\) or β and watch the emitter follow the base, always 0.7 V below it. The lower graph is \(I_C\) against β, which flattens once \((\beta + 1)R_E\) exceeds \(R_B\).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.9: ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">Ex.9: an emitter follower</h2>
+    <div class="src" data-l="th">สไลด์หน้า 35 · Boylestad Example 4.16 (รูป 4.48)</div><div class="src" data-l="en">Slide p. 35 · Boylestad Example 4.16 (Fig. 4.48)</div></div></div>
+  <figure class="slide q"><img src="slides/ch4/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 35, Miscellaneous Bias Configurations, Ex.9: determine V_CEQ and I_E for the network of the figure: the collector to ground, R_B = 240 kΩ from the base to ground, β = 90, R_E = 2 kΩ from the emitter to V_EE = −20 V, 10 µF coupling capacitors at the base and the emitter.">
+    <figcaption data-l="th">สไลด์หน้า 35: Ex.9 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: Ex.9 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>คอลเล็กเตอร์ต่อกราวด์ \(R_B\) = 240 kΩ จากเบสลงกราวด์ \(R_E\) = 2 kΩ จากอิมิตเตอร์ไป \(V_{EE}\) = −20 V, β = 90 จงหา \(V_{CEQ}\) และ \(I_{EQ}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Collector grounded, \(R_B\) = 240 kΩ from base to ground, \(R_E\) = 2 kΩ from the emitter to \(V_{EE}\) = −20 V, β = 90. Determine \(V_{CEQ}\) and \(I_{EQ}\).</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพคือแรงดันเทียบกราวด์ของสามขา <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The side panel shows the three terminal voltages to ground. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.10: วงจรเบสร่วม</h2><h2 data-l="en">Ex.10: a common-base circuit</h2>
+    <div class="src" data-l="th">สไลด์หน้า 36 · Boylestad Example 4.17 (รูป 4.52)</div><div class="src" data-l="en">Slide p. 36 · Boylestad Example 4.17 (Fig. 4.52)</div></div></div>
+  <figure class="slide q"><img src="slides/ch4/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 36, Miscellaneous Bias Configurations, Ex.10: determine the voltage V_CBQ and the current I_BQ for the common-base configuration of the figure: the emitter through R_E = 1.2 kΩ to V_EE = 4 V, the collector through R_C = 2.4 kΩ to V_CC = 10 V, the base grounded, β = 60, coupling capacitors at the emitter and the collector.">
+    <figcaption data-l="th">สไลด์หน้า 36: Ex.10 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 36: Ex.10 · tap to enlarge</figcaption></figure>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรเบสร่วม \(V_{EE}\) = 4 V, \(R_E\) = 1.2 kΩ, \(V_{CC}\) = 10 V, \(R_C\) = 2.4 kΩ, β = 60 จงหา \(I_E\), \(I_{BQ}\), \(V_{CE}\) และ \(V_{CBQ}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A common-base circuit with \(V_{EE}\) = 4 V, \(R_E\) = 1.2 kΩ, \(V_{CC}\) = 10 V, \(R_C\) = 2.4 kΩ, β = 60. Determine \(I_E\), \(I_{BQ}\), \(V_{CE}\) and \(V_{CBQ}\).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองคือวงจรเบสร่วมของหน้า 3.2 กับทรานซิสเตอร์แบบ 0.7 V, β = 60 (สไลด์ถามเฉพาะ \(V_{CBQ}\) และ \(I_{BQ}\) ตำราถามครบสี่ค่า) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is the common-base circuit of page 3.2 with a 0.7 V, β = 60 transistor (the slide asks only for \(V_{CBQ}\) and \(I_{BQ}\); the book asks for all four). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(V_{BE}\) = 0.7 V · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(V_{BE}\) = 0.7 V · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — อิมิตเตอร์ตามเบส</h3>
+    <ol><li>ส่วน A เลื่อน \(R_B\) จาก 10 kΩ ถึง 1 MΩ: \(V_B\) ลดจากเกือบ 0 V ลงไปหลายโวลต์ และ \(V_E\) ตามลงไปโดยต่ำกว่า 0.7 V เสมอ</li>
+    <li>ลด \(V_{EE}\) ลงต่ำ ๆ: \(V_{CE}\) ลดลงจนทรานซิสเตอร์อิ่มตัวเมื่อ \(I_ER_E\) เกือบเท่า \(V_{EE}\)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เบสร่วมไม่ต้องใช้ β</h3>
+    <ol><li>ข้อ 2: \(I_E\) ได้จาก \(V_{EE}\) และ \(R_E\) เท่านั้น ลองเปลี่ยน β เป็น 120 ในใจ: \(I_E\) เท่าเดิม 2.75 mA, \(I_B\) ลดเหลือ 22.7 µA, \(I_C\) เพิ่มจาก 2.705 เป็น 2.727 mA ไม่ถึง 1 %</li>
+    <li>ตำราพิมพ์ "(24 kΩ)" ในบรรทัดของ \(V_{CB}\) ที่ถูกคือ 2.4 kΩ</li></ol>
+    <div class="book">สไลด์บทที่ 4 หน้า 35–36 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 4.7–4.8 (Examples 4.16–4.17, รูป 4.46–4.52)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the emitter follows the base</h3>
+    <ol><li>In section A move \(R_B\) from 10 kΩ to 1 MΩ: \(V_B\) falls from nearly 0 V to several volts below, and \(V_E\) follows, always 0.7 V lower.</li>
+    <li>Lower \(V_{EE}\): \(V_{CE}\) falls until the transistor saturates when \(I_ER_E\) nearly equals \(V_{EE}\).</li></ol></div>
+  <div class="card"><h3>Try this 2 — common base needs no β</h3>
+    <ol><li>Problem 2: \(I_E\) comes from \(V_{EE}\) and \(R_E\) alone. Change β to 120 in your head: \(I_E\) stays 2.75 mA, \(I_B\) drops to 22.7 µA, \(I_C\) rises from 2.705 to 2.727 mA, under 1 %.</li>
+    <li>The book prints "(24 kΩ)" on the \(V_{CB}\) line; 2.4 kΩ is meant.</li></ol>
+    <div class="book">Chapter 4 slides pp. 35–36 · Boylestad &amp; Nashelsky, 11th ed., sections 4.7–4.8 (Examples 4.16–4.17, Figs. 4.46–4.52)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  CH4.problem(1, 'ex9'); CH4.problem(2, 'ex10');
+
+  /* =================================================================== A: the emitter follower */
+  const reg = r => CH3.reg(r), logR = (id, label, lo, hi, get, set, p, build, step = 1000) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  CH4.explorer({ init: { VEE: 20, RB: 240e3, RE: 2000, beta: 90 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      ui.slider(p, { id: 'aVEE', label: 'V_{EE}', min: 2, max: 30, step: 0.5, value: S.VEE, fmt: v => `−${fd(v, 1)} V`, oninput: v => { S.VEE = v; build(); } });
+      logR('aRB', 'R_B', 10e3, 1e6, () => S.RB, v => { S.RB = v; }, p, build, 1000);
+      ui.slider(p, { id: 'aRE', label: 'R_E', min: 200, max: 5000, step: 100, value: S.RE, fmt: v => CK.eng(v, 'Ω'), oninput: v => { S.RE = v; build(); } });
+      ui.slider(p, { id: 'aB', label: 'β', min: 25, max: 400, step: 5, value: S.beta, fmt: v => `${v}`, oninput: v => { S.beta = v; build(); } }); },
+    spec: S => CH4.net({ VCC: 0, VEE: S.VEE, RB: S.RB, RC: 0, RE: S.RE, beta: S.beta }),
+    side: (ctx, b, bd, c, S) => CH4.vbars(ctx, b, bd, c, { title: t('แรงดันเทียบกราวด์ (V): คอลเล็กเตอร์ที่ 0 V', 'voltages to ground (V): the collector at 0 V') }),
+    waves: [(ctx, b, bd, c, S) => CH4.betaPlot(ctx, b, bd, B => ({ VCC: 0, VEE: S.VEE, RB: S.RB, RC: 0, RE: S.RE, beta: B }), S.beta, { icsat: S.VEE / S.RE * 1e3 })],
+    badge: (c, S) => { const z = CH3.q(c), r = reg(z.region); return [[`${r[0]}: V_E = ${fd(c.V('e').re, 2)} V, I_E = ${fd(z.ie, 2)} mA`, `${r[1]}: V_E = ${fd(c.V('e').re, 2)} V, I_E = ${fd(z.ie, 2)} mA`], z.region === 'active' ? 'ok' : 'wait']; },
+    rows: (c, z, S) => [['(β + 1)R_E', CK.eng((S.beta + 1) * S.RE, 'Ω')], ['I_B', `${fd(z.uA, 2)} µA`], ['I_E', `${fd(z.ie, 3)} mA`], ['V_B', `${fd(c.V('b').re, 2)} V`], ['V_E', `${fd(c.V('e').re, 2)} V`], ['V_CE', `${fd(z.VCE, 2)} V`], [t('ย่าน', 'region'), t(...reg(z.region))]],
+    text: (c, z, S) => (z.region === 'saturation' ? t('อิ่มตัว: \\(I_ER_E\\) กินแรงดันเกือบทั้ง \\(V_{EE}\\) เหลือ \\(V_{CE}\\) ไม่ถึง 0.1 V', 'Saturated: \\(I_ER_E\\) takes nearly all of \\(V_{EE}\\), leaving under 0.1 V for \\(V_{CE}\\).')
+      : t(`\\(I_B = (V_{EE} - 0.7)/(R_B + (\\beta + 1)R_E)\\) = ${fd(z.uA, 2)} µA, \\(I_E\\) = ${fd(z.ie, 2)} mA, \\(V_E = -V_{EE} + I_ER_E\\) = ${fd(c.V('e').re, 2)} V และ \\(V_B = V_E + 0.7\\) = ${fd(c.V('b').re, 2)} V (= \\(-I_BR_B\\)) \\(V_{CE} = V_{EE} - I_ER_E\\) = ${fd(z.VCE, 2)} V`, `\\(I_B = (V_{EE} - 0.7)/(R_B + (\\beta + 1)R_E)\\) = ${fd(z.uA, 2)} µA, \\(I_E\\) = ${fd(z.ie, 2)} mA, \\(V_E = -V_{EE} + I_ER_E\\) = ${fd(c.V('e').re, 2)} V and \\(V_B = V_E + 0.7\\) = ${fd(c.V('b').re, 2)} V (= \\(-I_BR_B\\)); \\(V_{CE} = V_{EE} - I_ER_E\\) = ${fd(z.VCE, 2)} V.`)) });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, s1 = CH4.sol({ VCC: 0, VEE: 12, RB: 100e3, RC: 0, RE: 1000, beta: 100 });
+  const ie2 = 5.3 / 2.2, ib2 = ie2 / 81, ic2 = 80 * ib2, vce2 = 18 - ie2 * 5.5, vcb2 = 12 - ic2 * 3.3;
+  CH6.quiz('quiz', [
+    { q: t('1) ตัวตามแรงดัน \\(V_{EE}\\) = −12 V, \\(R_B\\) = 100 kΩ, \\(R_E\\) = 1 kΩ, β = 100 จงหา \\(I_B\\), \\(I_E\\) และ \\(V_{CE}\\)', '1) An emitter follower with \\(V_{EE}\\) = −12 V, \\(R_B\\) = 100 kΩ, \\(R_E\\) = 1 kΩ, β = 100. Find \\(I_B\\), \\(I_E\\) and \\(V_{CE}\\).'),
+      fields: [{ key: 'x', lab: 'I_B =', ans: s1.IB * 1e6, unit: 'µA', tol: 0.1 }, { key: 'y', lab: 'I_E =', ans: s1.IE * 1e3, unit: 'mA', tol: 0.01 }, { key: 'z', lab: 'V_CE =', ans: 12 - s1.IE * 1000, unit: 'V', tol: 0.03 }],
+      work: work(R`I_B = \frac{11.3\ \text{V}}{100\ \text{k}\Omega + (101)(1\ \text{k}\Omega)} = ${fd(s1.IB * 1e6, 2)}\ \mu\text{A},\ I_E = 101I_B = ${fd(s1.IE * 1e3, 2)}\ \text{mA},\ V_{CE} = 12 - (${fd(s1.IE * 1e3, 2)})(1) = ${fd(12 - s1.IE * 1000, 2)}\ \text{V}`) },
+    { q: t('2) วงจรข้อ 1: \\(V_B\\) และ \\(V_E\\) เทียบกราวด์', '2) The circuit of question 1: \\(V_B\\) and \\(V_E\\) to ground.'),
+      fields: [{ key: 'x', lab: 'V_B =', ans: -s1.IB * 100e3, unit: 'V', tol: 0.02 }, { key: 'y', lab: 'V_E =', ans: -s1.IB * 100e3 - 0.7, unit: 'V', tol: 0.02 }],
+      work: work(R`V_B = -I_BR_B = ${fd(-s1.IB * 100e3, 2)}\ \text{V},\ V_E = V_B - 0.7 = ${fd(-s1.IB * 100e3 - 0.7, 2)}\ \text{V}\ (= -12 + I_ER_E)`) },
+    { q: t('3) วงจรเบสร่วม \\(V_{EE}\\) = 6 V, \\(R_E\\) = 2.2 kΩ, \\(V_{CC}\\) = 12 V, \\(R_C\\) = 3.3 kΩ, β = 80 จงหา \\(I_E\\), \\(I_B\\) และ \\(V_{CE}\\)', '3) A common-base circuit with \\(V_{EE}\\) = 6 V, \\(R_E\\) = 2.2 kΩ, \\(V_{CC}\\) = 12 V, \\(R_C\\) = 3.3 kΩ, β = 80. Find \\(I_E\\), \\(I_B\\) and \\(V_{CE}\\).'),
+      fields: [{ key: 'x', lab: 'I_E =', ans: ie2, unit: 'mA', tol: 0.01 }, { key: 'y', lab: 'I_B =', ans: ib2 * 1e3, unit: 'µA', tol: 0.1 }, { key: 'z', lab: 'V_CE =', ans: vce2, unit: 'V', tol: 0.03 }],
+      work: work(R`I_E = \frac{6 - 0.7}{2.2\ \text{k}\Omega} = ${fd(ie2, 2)}\ \text{mA},\ I_B = \frac{${fd(ie2, 2)}}{81} = ${fd(ib2 * 1e3, 1)}\ \mu\text{A},\ V_{CE} = 18 - (${fd(ie2, 2)})(5.5) = ${fd(vce2, 2)}\ \text{V}`) },
+    { q: t('4) วงจรข้อ 3: \\(V_{CB}\\)', '4) The circuit of question 3: \\(V_{CB}\\).'),
+      fields: [{ key: 'x', lab: 'V_CB =', ans: vcb2, unit: 'V', tol: 0.03 }],
+      work: work(R`I_C = \beta I_B = ${fd(ic2, 3)}\ \text{mA},\ V_{CB} = 12 - (${fd(ic2, 3)})(3.3) = ${fd(vcb2, 2)}\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
