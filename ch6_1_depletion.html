@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="6.1 — Depletion-Type MOSFET">6.1 — มอสเฟตแบบดีพลีชัน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">มอสเฟตแบบดีพลีชัน <span class="en">Depletion-type MOSFET</span></h1>
+<h1 data-l="en">Depletion-type MOSFET <span class="en">An insulated gate over a built-in channel: Shockley's curve on both sides of zero</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 6 หน้า 2–8 มอสเฟต (metal-oxide-semiconductor field-effect transistor, MOSFET) ต่างจาก JFET ตรงที่เกตเป็น<b>แผ่นโลหะบนชั้นฉนวน</b>ซิลิคอนไดออกไซด์ (SiO₂) ไม่มีรอยต่อ p–n กับช่องเลย อิมพีแดนซ์ขาเข้าจึงสูงมากและ \(V_{GS}\) จะเป็นบวกก็ได้ แบบดีพลีชัน (depletion type) มีช่องสร้างมาแต่แรก: \(V_{GS}\) ลบทำให้ช่องแคบลง (ดีพลีชันโหมด เหมือน JFET) \(V_{GS}\) บวกดึงอิเล็กตรอนเพิ่มเข้าช่อง (เอนแฮนซ์เมนต์โหมด) กระแสเกิน \(I_{DSS}\) ได้ โดยสมการของ Shockley ยังใช้ได้ทั้งสองฝั่ง หน้านี้มีภาพตัดขวางของช่องใต้เกตที่ปรับ \(V_{GS}\), \(V_{DS}\) ได้ (ส่วน A) Example 6.3 การอ่านรูป 6.26 ใบข้อมูล 2N3797 อุปกรณ์ p-channel และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 6 slides pp. 2–8. The metal-oxide-semiconductor field-effect transistor (MOSFET) differs from the JFET in its gate: a <b>metal plate on an insulating layer</b> of silicon dioxide (SiO₂), with no p–n junction to the channel at all, so the input impedance is very high and \(V_{GS}\) may be positive. The depletion type has a channel built in: a negative \(V_{GS}\) narrows it (the depletion mode, as in a JFET), a positive one draws extra electrons into it (the enhancement mode) and the current exceeds \(I_{DSS}\), with Shockley's equation holding on both sides. This page has a cross-section of the channel under the gate with adjustable \(V_{GS}\), \(V_{DS}\) (section A), Example 6.3, a reading of Fig. 6.26, the 2N3797 data sheet, the p-channel device, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_D = I_{DSS}\left(1 - \frac{V_{GS}}{V_P}\right)^2\quad (V_{GS} < 0\ \text{and}\ V_{GS} > 0) $$ $$ I_G \cong 0,\quad I_D = I_S $$ $$ V_{GS} = 0:\ I_{DSS};\quad V_{GS} = V_P:\ 0;\quad V_{GS} > 0:\ I_D > I_{DSS} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>โครงสร้าง</b> (สไลด์หน้า 3–4, รูป 6.24): สารฐาน (substrate) ชนิด p มีบ่อสาร n สองบ่อใต้ขั้วซอร์สและเดรน เชื่อมด้วยช่องสาร n ที่สร้างมาแต่แรก เกตเป็นแผ่นโลหะบนชั้น SiO₂ บางมาก: "ไม่มีการต่อทางไฟฟ้าระหว่างเกตกับช่อง" ชั้นฉนวนนี้คือที่มาของอิมพีแดนซ์ขาเข้าที่สูงกว่า JFET อีก และ \(I_G\) = 0 สำหรับกระแสตรง ขั้วที่สี่ SS คือสารฐาน ปกติต่อกับซอร์ส</li>
+  <li><b>\(V_{GS}\) = 0</b> (สไลด์หน้า 5, รูป 6.25–6.26): อิเล็กตรอนในช่องถูกดึงไปเดรน กระแสคือ \(I_{DSS}\) เหมือน JFET · <b>\(V_{GS}\) &lt; 0</b> (ดีพลีชันโหมด): ศักย์ลบที่เกตผลักอิเล็กตรอนลงไปรวมตัวกับโฮลของสารฐาน พาหะน้อยลง กระแสลดจนศูนย์ที่ \(V_P\) · <b>\(V_{GS}\) &gt; 0</b> (เอนแฮนซ์เมนต์โหมด): ศักย์บวกดึงอิเล็กตรอน (พาหะข้างน้อยของสารฐาน) เข้ามาเพิ่ม กระแสเกิน \(I_{DSS}\) และพุ่งเร็ว (รูป 6.26: +1 V ให้ 10.9 mA, +4 V ให้ 22.2 mA) ต้องระวังพิกัดกระแสสูงสุด</li>
+  <li><b>สมการเดิม</b>: สมการของ Shockley ใช้ได้ทั้งสองฝั่ง แค่ใส่เครื่องหมายของ \(V_{GS}\) ให้ถูก ร่างเส้นโค้งด้วยจุดของตาราง 6.1 แล้วเติมจุดฝั่งบวกอย่างระมัดระวัง (Example 6.3)</li>
+  <li><b>p-channel</b> (สไลด์หน้า 6, รูป 6.29): สลับสาร ขั้วแรงดันและทิศกระแสกลับหมด \(V_P\) บวก ฝั่ง \(V_{GS}\) ลบคือเอนแฮนซ์เมนต์</li>
+  <li><b>สัญลักษณ์</b> (สไลด์หน้า 7, รูป 6.30): ช่องว่างระหว่างเกตกับส่วนอื่นแทนฉนวน แท่งทึบแทนช่องที่มีอยู่ ลูกศรที่สารฐานชี้เข้า (n-channel) หรือออก (p-channel) มีแบบสี่ขา (SS แยก) และสามขา (SS ต่อซอร์ส ใช้ในบทที่ 7)</li>
+  <li><b>ใบข้อมูล</b> (สไลด์หน้า 8, 2N3797): ให้ \(I_{DSS}\), \(V_{GS(\text{off})}\) เหมือน JFET และเพิ่มจุด \(I_{D(\text{on})}\) ที่ \(V_{GS}\) บวก เพราะกระแสเกิน \(I_{DSS}\) ได้ · <b>การจับต้อง</b> (ตำราหัวข้อ 6.9): ชั้นฉนวนบางมากพังได้ด้วยไฟฟ้าสถิต จึงมีวงแหวนลัดขา ควรแตะกราวด์ก่อนจับ และหลายรุ่นมีซีเนอร์ไดโอดป้องกันที่เกต</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Construction</b> (slides pp. 3–4, Fig. 6.24): a p-type substrate with two n-doped wells under the source and drain contacts, linked by an n-channel built in from the start. The gate is a metal plate on a very thin SiO₂ layer: "there is no direct electrical connection between the gate and the channel". That insulating layer gives an input impedance even higher than a JFET's, and \(I_G\) = 0 for dc. The fourth terminal SS is the substrate, normally tied to the source.</li>
+  <li><b>\(V_{GS}\) = 0</b> (slide p. 5, Figs. 6.25–6.26): channel electrons are drawn to the drain and the current is \(I_{DSS}\), as for a JFET. <b>\(V_{GS}\) &lt; 0</b> (depletion mode): the negative gate pushes electrons down to recombine with substrate holes; fewer carriers, and the current falls to zero at \(V_P\). <b>\(V_{GS}\) &gt; 0</b> (enhancement mode): the positive gate draws extra electrons (the substrate's minority carriers) in; the current exceeds \(I_{DSS}\) and rises fast (Fig. 6.26: +1 V gives 10.9 mA, +4 V 22.2 mA), so mind the maximum current rating.</li>
+  <li><b>The same equation</b>: Shockley's equation holds on both sides as long as the sign of \(V_{GS}\) is kept; sketch the curve from the points of Table 6.1 and add a conservative point on the positive side (Example 6.3).</li>
+  <li><b>p-channel</b> (slide p. 6, Fig. 6.29): the materials swap and every polarity and current direction turns round; \(V_P\) is positive and the negative \(V_{GS}\) side is the enhancement side.</li>
+  <li><b>Symbols</b> (slide p. 7, Fig. 6.30): a gap between the gate and the rest for the insulation, a solid bar for the existing channel, the substrate arrow in (n-channel) or out (p-channel); four-terminal (SS separate) and three-terminal (SS tied to the source, used in chapter 7) versions.</li>
+  <li><b>Data sheet</b> (slide p. 8, 2N3797): \(I_{DSS}\) and \(V_{GS(\text{off})}\) as for a JFET, plus an \(I_{D(\text{on})}\) point at a positive \(V_{GS}\), since the current can exceed \(I_{DSS}\). <b>Handling</b> (book §6.9): the very thin insulator breaks down under static charge, hence the shorting ring on the leads, touching ground before handling, and the Zener protection built into many devices.</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch6/p02.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 2, Contents: Introduction; Depletion-Type MOSFET; Depletion-Type MOSFET Circuit; Enhancement-Type MOSFET; Enhancement-Type MOSFET Circuit; Summary Table.">
+  <figcaption data-l="th">สไลด์บทที่ 6 หน้า 2: สารบัญ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 6 slide p. 2: contents · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch6/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 3, Depletion-Type MOSFET: there are two types of FETs, JFETs and MOSFETs; MOSFETs are further broken down into depletion type and enhancement type; MOSFET stands for metal-oxide-semiconductor field-effect transistor. Figure 6.24: the n-channel depletion-type MOSFET with the drain and source contacts on n-doped regions, the n-channel, the SiO2 layer under the gate, the p-substrate and the SS terminal.">
+  <figcaption data-l="th">สไลด์หน้า 3: สองชนิดของ FET และโครงสร้างมอสเฟตแบบดีพลีชัน (รูป 6.24) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 3: the two kinds of FET and the depletion MOSFET's construction (Fig. 6.24) · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch6/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 4, Depletion-Type MOSFET, basic construction: the source and drain terminals are connected through metallic contacts to n-doped regions linked by an n-channel as shown in the figure; the gate is also connected to a metal contact surface but remains insulated from the n-channel by a very thin silicon dioxide (SiO2) layer; there is no direct electrical connection between the gate terminal and the channel of a MOSFET; it is the insulating layer of SiO2 in the MOSFET construction that accounts for the very desirable high input impedance of the device. Figure 6.24 repeated.">
+  <figcaption data-l="th">สไลด์หน้า 4: เกตฉนวน SiO₂ และอิมพีแดนซ์ขาเข้าสูง · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 4: the SiO₂-insulated gate and the high input impedance · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ช่องใต้เกตฉนวน</a><a href="#ex1"><b>1</b>Example 6.3</a><a href="#ex2"><b>2</b>อ่านรูป 6.26</a><a href="#ex3"><b>3</b>ใบข้อมูล 2N3797</a><a href="#ex4"><b>4</b>p-channel</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The channel under the insulated gate</a><a href="#ex1"><b>1</b>Example 6.3</a><a href="#ex2"><b>2</b>Reading Fig. 6.26</a><a href="#ex3"><b>3</b>The 2N3797 sheet</a><a href="#ex4"><b>4</b>p-channel</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ช่องใต้เกตฉนวน: ดีพลีชันโหมดและเอนแฮนซ์เมนต์โหมด</h2><h2 data-l="en">The channel under the insulated gate: depletion and enhancement modes</h2>
+    <div class="src" data-l="th">สไลด์หน้า 5, 7 · Boylestad หัวข้อ 6.7 (รูป 6.24–6.27, 6.30)</div><div class="src" data-l="en">Slides pp. 5, 7 · Boylestad, section 6.7 (Figs. 6.24–6.27, 6.30)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 5, Depletion-Type MOSFET, basic operation and characteristics: in the figure the gate-to-source voltage is set to zero volts by the direct connection from one terminal to the other, and a voltage V_DS is applied across the drain-to-source terminals. Figure 6.26: the transfer curve from V_P = −6 V through I_DSS = 8 mA up to 10.9 mA at +1 V with the depletion mode and enhancement mode marked, and the drain characteristics for V_GS = +1, 0, −1, −2, −3, −4, −5, −6 V; Fig. 6.25: the device with V_GS = 0 V and V_DD.">
+    <figcaption data-l="th">สไลด์หน้า 5: ลักษณะสมบัติด้านเดรนและถ่ายโอน (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V) ทั้งสองโหมด (รูป 6.25–6.26) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 5: the drain and transfer characteristics (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V) in both modes (Figs. 6.25–6.26) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 7, Depletion-Type MOSFET, symbols: the graphic symbols for an n- and p-channel depletion-type MOSFET are provided in the figure. Figure 6.30: four symbols, n-channel and p-channel, each with a separate SS terminal and with SS tied to the source; the gate is separated from the solid channel bar, the substrate arrow points in for n-channel and out for p-channel.">
+    <figcaption data-l="th">สไลด์หน้า 7: สัญลักษณ์สี่แบบ (รูป 6.30) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 7: the four symbols (Fig. 6.30) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพตัดขวางคือรูป 6.24: สารฐาน p (ชมพู) บ่อ n ของซอร์สและเดรน ชั้น SiO₂ (เหลือง) ใต้แผ่นเกต และช่อง n (ฟ้า) ใต้ฉนวน เลื่อน \(V_{GS}\) ไปทางลบแล้วช่องแคบลง (ดีพลีชันโหมด) ไปทางบวกแล้วกว้างขึ้นและมีอิเล็กตรอนมากขึ้น (เอนแฮนซ์เมนต์โหมด) โดยไม่มีกระแสเกตเลยเพราะมีฉนวนกั้น \(V_{DS}\) ทำให้ช่องแคบลงทางด้านเดรนจนพินช์ออฟเหมือน JFET กราฟขวาคือรูป 6.26 ของอุปกรณ์ตัวเดียวกัน (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V) พร้อมเส้น \(V_{GS}\) = +1 V ที่ JFET ไม่มี</p>
+  <p class="lead" data-l="en">The cross-section is Fig. 6.24: the p-substrate (pink), the n-wells of the source and drain, the SiO₂ layer (yellow) under the gate plate, and the n-channel (blue) under the insulator. Move \(V_{GS}\) negative and the channel narrows (depletion mode); move it positive and it widens with more electrons (enhancement mode), with no gate current at all because of the insulator. \(V_{DS}\) narrows the channel at the drain end until it pinches off, as in a JFET. The right graph is Fig. 6.26 for the same device (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V), with the \(V_{GS}\) = +1 V curve a JFET does not have.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 6.3: เส้นโค้งถ่ายโอนที่ต่อเข้าฝั่งบวก</h2><h2 data-l="en">Example 6.3: a transfer curve continued into the positive side</h2>
+    <div class="src" data-l="th">Boylestad Example 6.3 (รูป 6.28)</div><div class="src" data-l="en">Boylestad Example 6.3 (Fig. 6.28)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงร่างลักษณะสมบัติถ่ายโอนของมอสเฟตแบบดีพลีชัน n-channel ที่มี \(I_{DSS}\) = 10 mA และ \(V_P\) = −4 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Sketch the transfer characteristics of an n-channel depletion-type MOSFET with \(I_{DSS}\) = 10 mA and \(V_P\) = −4 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองคือมอสเฟตที่มี \(V_{GG}\) ตั้ง \(V_{GS}\) ผ่าน \(R_G\) และ \(V_{DD}\) = 20 V คร่อมเดรน–ซอร์ส ในขั้นสุดท้ายแหล่งจ่ายที่เกตกลับขั้วให้ \(V_{GS}\) = +1 V <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is a MOSFET whose \(V_{GS}\) is set by \(V_{GG}\) through \(R_G\), with \(V_{DD}\) = 20 V across drain–source; in the last step the gate supply is turned round for \(V_{GS}\) = +1 V. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">อ่านรูป 6.26: สองโหมดของอุปกรณ์เดียวกัน</h2><h2 data-l="en">Reading Fig. 6.26: the two modes of one device</h2>
+    <div class="src" data-l="th">สไลด์หน้า 5 · Boylestad หัวข้อ 6.7 (รูป 6.26–6.27)</div><div class="src" data-l="en">Slide p. 5 · Boylestad, section 6.7 (Figs. 6.26–6.27)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อุปกรณ์ของรูป 6.26 (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V) จงหา \(I_D\) เมื่อ \(V_{GS}\) = −1 V, +1 V และ +4 V แล้วบอกว่าแต่ละค่าอยู่ในโหมดใด</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the device of Fig. 6.26 (\(I_{DSS}\) = 8 mA, \(V_P\) = −6 V) find \(I_D\) at \(V_{GS}\) = −1 V, +1 V and +4 V, and name the mode in each case.</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพคือรูป 6.26 พร้อมจุดทำงาน <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The side panel is Fig. 6.26 with the operating point. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ใบข้อมูล 2N3797: สมการของ Shockley กับจุด \(I_{D(\text{on})}\)</h2><h2 data-l="en">The 2N3797 sheet: Shockley's equation against the \(I_{D(\text{on})}\) point</h2>
+    <div class="src" data-l="th">สไลด์หน้า 8 · Boylestad รูป 6.31</div><div class="src" data-l="en">Slide p. 8 · Boylestad Fig. 6.31</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 8, Depletion-Type MOSFET, datasheet: the 2N3797 Motorola n-channel depletion MOSFET for low-power audio, with maximum ratings (V_DS 20 V, V_GS ±10 V, I_D 20 mA, P_D 200 mW), off characteristics (drain–source breakdown 20 V min, gate reverse current, gate–source cutoff voltage V_GS(off) −5 V typ, −7 V max) and on characteristics (zero-gate-voltage drain current I_DSS 2.0 min, 2.9 typ, 6.0 max mA; on-state drain current I_D(on) at V_GS = +3.5 V: 9.0 min, 14 typ, 18 max mA), and the case drawing.">
+    <figcaption data-l="th">สไลด์หน้า 8: ใบข้อมูล 2N3797 (รูป 6.31) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 8: the 2N3797 data sheet (Fig. 6.31) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ใบข้อมูล 2N3797 ให้ \(I_{DSS}\) ค่าตัวแบบ 2.9 mA (2–6 mA), \(V_{GS(\text{off})}\) ค่าตัวแบบ −5 V (−7 V สูงสุด) และ \(I_{D(\text{on})}\) ที่ \(V_{GS}\) = +3.5 V เท่ากับ 9–18 mA (ค่าตัวแบบ 14 mA) จงใช้สมการของ Shockley กับค่าตัวแบบทำนาย \(I_D\) ที่ +3.5 V แล้วเทียบกับใบข้อมูล</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The 2N3797 sheet gives \(I_{DSS}\) typically 2.9 mA (2–6 mA), \(V_{GS(\text{off})}\) typically −5 V (−7 V max) and \(I_{D(\text{on})}\) at \(V_{GS}\) = +3.5 V of 9–18 mA (typically 14 mA). Use Shockley's equation with the typical values to predict \(I_D\) at +3.5 V and compare with the sheet.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">มอสเฟตแบบดีพลีชัน p-channel</h2><h2 data-l="en">The p-channel depletion-type MOSFET</h2>
+    <div class="src" data-l="th">สไลด์หน้า 6 · Boylestad หัวข้อ 6.7 (รูป 6.29)</div><div class="src" data-l="en">Slide p. 6 · Boylestad, section 6.7 (Fig. 6.29)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 6, Depletion-Type MOSFET, p-channel depletion-type MOSFET: the construction of a p-channel depletion-type MOSFET is exactly the reverse of n-channel. Figure 6.29: (a) the device with an n-substrate and p-channel, (b) the transfer curve from V_P = +6 V through I_DSS = 6 mA into negative V_GS, (c) the drain characteristics for V_GS = −1, 0, +1, +2, +3, +4, +5 V and V_GS = V_P = +6 V.">
+    <figcaption data-l="th">สไลด์หน้า 6: p-channel, \(I_{DSS}\) = 6 mA, \(V_P\) = +6 V (รูป 6.29) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 6: p-channel, \(I_{DSS}\) = 6 mA, \(V_P\) = +6 V (Fig. 6.29) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อุปกรณ์ของรูป 6.29 (p-channel, \(I_{DSS}\) = 6 mA, \(V_P\) = +6 V) จงหา \(I_D\) ที่ \(V_{GS}\) = +3 V และ −1 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the device of Fig. 6.29 (p-channel, \(I_{DSS}\) = 6 mA, \(V_P\) = +6 V) find \(I_D\) at \(V_{GS}\) = +3 V and −1 V.</p></div>
+  <p class="lead" data-l="th">ในภาพจำลองแหล่งจ่ายทั้งสองกลับขั้วและลูกศรสารฐานชี้ออก <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">In the simulation both supplies are turned round and the substrate arrow points out. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ข้ามศูนย์</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{DS}\) = 15 V แล้วเลื่อน \(V_{GS}\) จาก −6 V ถึง +2 V ช้า ๆ: ช่องเปิดที่ −6 V (\(V_P\)) กว้างเต็มที่ 0 V และกว้างเกินนั้นในฝั่งบวก กระแสผ่าน 8 mA ที่ 0 V โดยไม่มีอะไรพิเศษเกิดขึ้น นี่คือความต่างจาก JFET ซึ่งรอยต่อเกตจะนำกระแสที่ +0.7 V</li>
+    <li>ที่ \(V_{GS}\) = +2 V ลด \(V_{DS}\) จาก 15 V ลงมา: พินช์ออฟเกิดที่ \(V_{DS} = V_{GS} - V_P\) = 8 V สูงกว่าที่ \(V_{GS}\) = 0 (6 V) การไบแอสฝั่งบวกต้องการ \(V_{DS}\) มากขึ้นเพื่ออยู่ในย่านอิ่มตัว</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ใบข้อมูลกับแบบจำลอง</h3>
+    <ol><li>ข้อ 3: ค่าต่ำสุดของใบข้อมูล (\(I_{DSS}\) = 2 mA, \(V_P\) = −5 V) ให้ 2(1.7)² = 5.8 mA ที่ +3.5 V ต่ำกว่า \(I_{D(\text{on})}\) ขั้นต่ำ 9 mA ทุกชุดค่าของ Shockley ทำนายต่ำกว่าใบข้อมูล: ในฝั่งเอนแฮนซ์เมนต์เส้นโค้งจริงชันกว่าพาราโบลา</li>
+    <li>ข้อ 4: เขียนรูป 6.29b ด้วยสี่จุดของตาราง 6.1 แล้วเติม (−1 V, 8.17 mA): ภาพสะท้อนของ Example 6.3</li></ol>
+    <div class="book">สไลด์บทที่ 6 หน้า 2–8 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 6.7 (รูป 6.24–6.31, Example 6.3) และ 6.9</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — across zero</h3>
+    <ol><li>In section A set \(V_{DS}\) = 15 V and slide \(V_{GS}\) slowly from −6 V to +2 V: the channel opens at −6 V (\(V_P\)), is full width at 0 V, and wider still on the positive side; the current passes 8 mA at 0 V with nothing special happening. This is the difference from a JFET, whose gate junction would conduct at +0.7 V.</li>
+    <li>At \(V_{GS}\) = +2 V lower \(V_{DS}\) from 15 V: pinch-off comes at \(V_{DS} = V_{GS} - V_P\) = 8 V, higher than at \(V_{GS}\) = 0 (6 V); biasing on the positive side needs more \(V_{DS}\) to stay in saturation.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the sheet against the model</h3>
+    <ol><li>Problem 3: the sheet's minimum values (\(I_{DSS}\) = 2 mA, \(V_P\) = −5 V) give 2(1.7)² = 5.8 mA at +3.5 V, below the 9 mA minimum \(I_{D(\text{on})}\). Every set of values makes Shockley predict less than the sheet: on the enhancement side the real curve is steeper than the parabola.</li>
+    <li>Problem 4: draw Fig. 6.29b from the four points of Table 6.1 and add (−1 V, 8.17 mA): the mirror image of Example 6.3.</li></ol>
+    <div class="book">Chapter 6 slides pp. 2–8 · Boylestad &amp; Nashelsky, 11th ed., sections 6.7 (Figs. 6.24–6.31, Example 6.3) and 6.9</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET;
+  MOS.problem(1, 'ex63'); MOS.problem(2, 'f626'); MOS.problem(3, 'n3797'); MOS.problem(4, 'p629');
+
+  /* =================================================================== A: the cross-section beside Fig. 6.26 */
+  const dev = MOS.DEV.d826, mos = new MOS.Mos(dev), S = { vgs: 0, vds: 15 }, pane = IE.pane($('cvA'), W => (W >= 640 ? Math.max(380, Math.min(440, W * 0.62)) : 640)), sg = x => (x < 0 ? '−' : x > 0 ? '+' : '') + fd(Math.abs(x), 1);
+  mos.set({ vgs: S.vgs, vds: S.vds });
+  LS.anim($('cvA'), dt => { mos.step(dt); const { ctx, W, H } = pane; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); const m = mos.cur(), wide = W >= 640;
+    const bL = wide ? { x: 0, y: 0, w: Math.round(W * 0.5), h: H } : { x: 0, y: 0, w: W, h: 340 }, bR = wide ? { x: bL.w, y: 0, w: W - bL.w, h: H } : { x: 0, y: 340, w: W, h: H - 340 };
+    mos.draw(ctx, bL, { short: bL.w < 400 });
+    CH5.dPlot(ctx, bR, { short: bR.w < 420 }, { dev, vgs: [2, 1, 0, -1, -2, -3, -4, -5, -6], imax: 18, vmax: 25, yt: [3, 6, 9, 12, 15, 18], q: { v: Math.min(mos.vds, 24.5), i: Math.min(m.i * 1e3, 17.8), label: bR.w < 420 ? '' : `(${fd(mos.vds, 1)} V, ${fd(m.i * 1e3, 2)} mA)`, side: mos.vds > 13 ? -1 : 1, dy: 16 }, labels: bR.w >= 420, title: t('รูป 6.26: I_DSS = 8 mA, V_P = −6 V', 'Fig. 6.26: I_DSS = 8 mA, V_P = −6 V') });
+    const reg = CH5.reg(m.region); CK.badge(ctx, `${reg[0]} · I_D = ${fd(m.i * 1e3, 2)} mA`, m.i * 1e3 > 20 ? 'wait' : reg[1]); });
+  const pA = $('pA'); ui.h2(pA, t('แรงดันทั้งสอง', 'The two voltages'));
+  ui.slider(pA, { id: 'aVGS', label: 'V_GS', min: -7, max: 2.5, step: 0.1, value: 0, fmt: v => `${sg(v)} V`, oninput: v => { S.vgs = v; mos.set({ vgs: v }); showA(); } });
+  ui.slider(pA, { id: 'aVDS', label: 'V_DS', min: 0, max: 25, step: 0.1, value: 15, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.vds = v; mos.set({ vds: v }); showA(); } });
+  const mA_ = document.createElement('div'); mA_.className = 'metrics'; pA.appendChild(mA_);
+  function showA() { const m = mos.cur(), vov = mos.vgs - dev.vp, mode = mos.vgs < -1e-9 ? t('ดีพลีชันโหมด', 'depletion mode') : mos.vgs > 1e-9 ? t('เอนแฮนซ์เมนต์โหมด', 'enhancement mode') : 'I_DSS';
+    mA_.innerHTML = ui.kv([['I_D', `${fd(m.i * 1e3, 3)} mA`], [t('โหมด', 'mode'), mode], [t('ย่าน', 'region'), CH5.reg(m.region)[0]], ['(1 − V_GS/V_P)²', fd((1 - mos.vgs / dev.vp) ** 2, 3)], ['V_GS − V_P', `${fd(vov, 1)} V`], ['I_G', '0']]);
+    const s = m.region === 'cutoff' ? t('\\(V_{GS} \\le V_P\\) = −6 V: ศักย์ลบที่เกตผลักอิเล็กตรอนออกจากช่องจนหมด ไม่มีกระแส', '\\(V_{GS} \\le V_P\\) = −6 V: the negative gate has pushed every electron out of the channel and there is no current.')
+      : mos.vgs < 0 ? t(`ดีพลีชันโหมด: อิเล็กตรอนบางส่วนถูกผลักลงไปรวมตัวกับโฮลของสารฐาน ช่องแคบลง \\(I_D = 8(1 - ${sg(mos.vgs)}/(-6))^2\\) = ${fd(m.i * 1e3, 2)} mA${m.region === 'ohmic' ? ' (ย่านโอห์มิก: ช่องยังไม่พินช์ออฟ)' : ''}`, `Depletion mode: some electrons are pushed down to recombine with substrate holes and the channel narrows; \\(I_D = 8(1 - ${sg(mos.vgs)}/(-6))^2\\) = ${fd(m.i * 1e3, 2)} mA${m.region === 'ohmic' ? ' (ohmic region: the channel is not yet pinched off)' : ''}.`)
+      : mos.vgs > 0 ? t(`เอนแฮนซ์เมนต์โหมด: ศักย์บวกดึงอิเล็กตรอนเพิ่มจากสารฐานเข้าช่องผ่านฉนวนไม่ได้ จึงสะสมใต้ SiO₂ ช่องกว้างขึ้น กระแสเกิน \\(I_{DSS}\\): ${fd(m.i * 1e3, 2)} mA (ที่ +4 V จะถึง 22 mA ต้องตรวจพิกัดกระแสสูงสุดของอุปกรณ์ เช่น 2N3797 รับได้ 20 mA) พินช์ออฟต้องการ \\(V_{DS} \\ge\\) ${fd(vov, 1)} V`, `Enhancement mode: the positive gate draws extra electrons from the substrate; they cannot cross the insulator and pile up under the SiO₂, the channel widens and the current exceeds \\(I_{DSS}\\): ${fd(m.i * 1e3, 2)} mA (at +4 V it would reach 22 mA, so check the device's maximum current rating: a 2N3797 takes 20 mA). Pinch-off needs \\(V_{DS} \\ge\\) ${fd(vov, 1)} V.`)
+      : t('\\(V_{GS}\\) = 0: ช่องที่สร้างมาแต่แรกนำกระแส \\(I_{DSS}\\) = 8 mA เมื่อ \\(V_{DS} \\ge |V_P|\\)', '\\(V_{GS}\\) = 0: the built-in channel carries \\(I_{DSS}\\) = 8 mA once \\(V_{DS} \\ge |V_P|\\).');
+    $('wA').innerHTML = `<div class="answer">${s}</div>`; MC.renderMath($('wA')); }
+  showA();
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, v3 = -6 * (1 - Math.SQRT2);
+  CH6.quiz('quiz', [
+    { q: t('1) มอสเฟตแบบดีพลีชัน \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −6 V จงหา \\(I_D\\) ที่ \\(V_{GS}\\) = +2 V', '1) A depletion MOSFET, \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −6 V. Find \\(I_D\\) at \\(V_{GS}\\) = +2 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 12 * (4 / 3) ** 2, unit: 'mA', tol: 0.03 }], work: work(R`I_D = 12\ \text{mA}\left(1 - \frac{+2}{-6}\right)^2 = 12(1.333)^2 = ${fd(12 * (4 / 3) ** 2, 2)}\ \text{mA}`) },
+    { q: t('2) อุปกรณ์ข้อ 1 ที่ \\(V_{GS}\\) = −3 V', '2) The device of question 1 at \\(V_{GS}\\) = −3 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 3, unit: 'mA', tol: 0.02 }], work: work(R`V_{GS} = \frac{V_P}{2} \Rightarrow I_D = \frac{I_{DSS}}{4} = 3\ \text{mA}`) },
+    { q: t('3) อุปกรณ์ข้อ 1: \\(V_{GS}\\) ใดให้ \\(I_D = 2I_{DSS}\\) = 24 mA', '3) The device of question 1: which \\(V_{GS}\\) gives \\(I_D = 2I_{DSS}\\) = 24 mA?'),
+      fields: [{ key: 'x', lab: 'V_GS =', ans: v3, unit: 'V', tol: 0.02 }], work: work(R`\left(1 - \frac{V_{GS}}{V_P}\right)^2 = 2 \Rightarrow V_{GS} = V_P(1 - \sqrt 2) = -6(-0.414) = +${fd(v3, 2)}\ \text{V}`) },
+    { q: t('4) มอสเฟตแบบดีพลีชัน p-channel \\(I_{DSS}\\) = 4 mA, \\(V_P\\) = +3 V จงหา \\(I_D\\) ที่ \\(V_{GS}\\) = −1.5 V', '4) A p-channel depletion MOSFET, \\(I_{DSS}\\) = 4 mA, \\(V_P\\) = +3 V. Find \\(I_D\\) at \\(V_{GS}\\) = −1.5 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: 9, unit: 'mA', tol: 0.03 }], work: work(R`I_D = 4\ \text{mA}\left(1 - \frac{-1.5}{+3}\right)^2 = 4(1.5)^2 = 9\ \text{mA}`, t('<div class="sub2">ฝั่ง V<sub>GS</sub> ลบคือเอนแฮนซ์เมนต์โหมดของ p-channel</div>', '<div class="sub2">The negative-V<sub>GS</sub> side is the enhancement mode of a p-channel.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

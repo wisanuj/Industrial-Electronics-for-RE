@@ -35,7 +35,8 @@
      J   field-effect transistor (chapter 5, Oct 2026): drain D, gate G, source S (node names; D straight above or below S, G to one side, level
          with the middle of the symbol); pch: true for a p-channel; see FET below for the model (idss, vp; kind 'jfet' | 'dmos' | 'emos' with k, vt;
          gate: the gate-junction diode). pins: true writes D, G, S beside the leads. Results: I[id] = I_D from D to S, I[id + ':g'] = I_G from G to S;
-         circuit.J(id) gives them in n-channel terms
+         circuit.J(id) gives them in n-channel terms. Drawn as a JFET (Fig. 6.14) or, for kind 'dmos' / 'emos', as a MOSFET with an insulated gate
+         and the substrate tied to the source (Figs. 6.30, 6.39; the enhancement type's channel bar is broken)
    Sign convention for results: I[id] is the current through the part from a to b. */
 (function (global) {
 'use strict';
@@ -217,6 +218,9 @@ FET.vgs = (idss, vp, id) => vp * (1 - Math.sqrt(Math.max(0, id) / idss));
 /* the Q-point of a bias line v_GS = vg − I_D R_S (Eq. 7.16; vg = 0: self bias, Eq. 7.10) on Shockley's curve: { id, vgs } (n-channel) */
 FET.bias = (idss, vp, rs, vg = 0) => { if (!(rs > 0)) return { id: FET.id(idss, vp, vg), vgs: vg }; let lo = 0, hi = Math.max(idss, vg / rs) * 2 + 1e-9;
   for (let k = 0; k < 90; k++) { const m = (lo + hi) / 2; if (m - FET.id(idss, vp, vg - m * rs) < 0) lo = m; else hi = m; } const id = (lo + hi) / 2; return { id, vgs: vg - id * rs }; };
+/* the Q-point of a bias line v_GS = vg − I_D R (Eqs. 7.16, 7.36, 7.40) on the transfer curve of any kind of FET (n-channel terms): { id, vgs } */
+FET.biasOf = (p, rs, vg = 0) => { const { vt, b } = FET.kb(p), f = v => (v > vt ? b * (v - vt) * (v - vt) : 0); if (!(rs > 0)) return { id: f(vg), vgs: vg };
+  let lo = 0, hi = 2 * f(vg) + 1e-9; for (let k = 0; k < 90; k++) { const m = (lo + hi) / 2; if (m - f(vg - m * rs) < 0) lo = m; else hi = m; } const id = (lo + hi) / 2; return { id, vgs: vg - id * rs }; };
 CK.FET = FET;
 
 /* ---------------- the circuit ---------------- */
@@ -797,18 +801,24 @@ class View {
     if (nl < 1e-6) { nx = ay; ny = -ax; nl = 1; } nx /= nl; ny /= nl;
     const at = (t, sd) => [m[0] + (ax * t + nx * sd) * u, m[1] + (ay * t + ny * sd) * u];
     return { D, S, G, m, at, n: [nx, ny], dT: at(-0.3, 0), dB: at(-0.3, 0.3), sB: at(0.3, 0.3), sT: at(0.3, 0), gB: at(0, 0.3), b1: at(-0.42, 0.3), b2: at(0.42, 0.3), cc: at(0, 0.12), r: 0.55 * u }; }
-  /* the gate arrow (drawn again over the dots, so that it stays visible) */
-  jArrow(p, col, g) { g = g || this.jGeom(p); const ctx = this.ctx, u = this.u, [ax, ay] = g.G, [bx, by] = g.gB, into = !p.pch, f = into ? 0.82 : 0.45, tx = ax + (bx - ax) * f, ty = ay + (by - ay) * f;
-    const an = Math.atan2(by - ay, bx - ax) + (into ? 0 : Math.PI), hl = Math.max(9, u * 0.22);
-    ctx.save(); ctx.fillStyle = col || (this.hover === p || this.sel === p || p.highlight ? PAL.sel : (p.color || PAL.body)); ctx.strokeStyle = '#0f1220'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(tx, ty);
+  /* the arrow (drawn again over the dots, so that it stays visible): a JFET's on the gate lead (Fig. 6.14), a MOSFET's on the substrate line
+     from the middle of the channel bar to the source lead (Figs. 6.30, 6.39); into the channel for an n-channel, out of it for a p-channel */
+  jArrow(p, col, g) { g = g || this.jGeom(p); const ctx = this.ctx, u = this.u, mos = FET.kind(p) !== 'jfet', [ax, ay] = mos ? g.at(0, 0) : g.G, [bx, by] = mos ? g.at(0, 0.3) : g.gB, into = !p.pch, f = into ? (mos ? 0.9 : 0.82) : (mos ? 0.3 : 0.45);
+    const tx = ax + (bx - ax) * f, ty = ay + (by - ay) * f, an = Math.atan2(by - ay, bx - ax) + (into ? 0 : Math.PI), hl = Math.max(9, u * 0.22), c = col || (this.hover === p || this.sel === p || p.highlight ? PAL.sel : (p.color || PAL.body));
+    if (mos) this.stroke([[ax, ay], [bx, by]], c, Math.max(2, u * 0.055));
+    ctx.save(); ctx.fillStyle = c; ctx.strokeStyle = '#0f1220'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(tx, ty);
     ctx.lineTo(tx - hl * Math.cos(an - 0.42), ty - hl * Math.sin(an - 0.42)); ctx.lineTo(tx - hl * Math.cos(an + 0.42), ty - hl * Math.sin(an + 0.42)); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); }
   jGatePath(p) { const g = this.jGeom(p); return [g.G, g.gB, g.sB, g.sT, g.S]; }
   drawJ(p, vcol, hi) {
     const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055), g = this.jGeom(p), col = hi ? PAL.sel : (p.color || PAL.body);
     ctx.save(); ctx.fillStyle = 'rgba(90,209,255,.08)'; ctx.strokeStyle = hi ? PAL.sel : 'rgba(154,163,199,.6)'; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.arc(g.cc[0], g.cc[1], g.r, 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); ctx.restore();
-    this.stroke([g.D, g.dT], hi ? PAL.sel : vcol(p.D), lw); this.stroke([g.sT, g.S], hi ? PAL.sel : vcol(p.S), lw); this.stroke([g.G, g.gB], hi ? PAL.sel : vcol(p.G), lw);
+    const kind = FET.kind(p), mos = kind !== 'jfet';
+    this.stroke([g.D, g.dT], hi ? PAL.sel : vcol(p.D), lw); this.stroke([g.sT, g.S], hi ? PAL.sel : vcol(p.S), lw); this.stroke([g.G, mos ? g.at(0, 0.46) : g.gB], hi ? PAL.sel : vcol(p.G), lw);
     this.stroke([g.dT, g.dB], col, lw); this.stroke([g.sB, g.sT], col, lw);
-    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw * 2.2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(g.b1[0], g.b1[1]); ctx.lineTo(g.b2[0], g.b2[1]); ctx.stroke(); ctx.restore();
+    if (mos) { this.stroke([g.at(-0.3, 0.46), g.at(0.3, 0.46)], col, lw * 1.6); this.stroke([g.at(0, 0), g.sT], col, lw); }   // the insulated gate plate, and the substrate tied to the source
+    ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw * 2.2; ctx.lineCap = 'round'; ctx.beginPath();
+    (kind === 'emos' ? [[-0.42, -0.2], [-0.1, 0.1], [0.2, 0.42]] : [[-0.42, 0.42]]).forEach(([a, b]) => { const A = g.at(a, 0.3), B = g.at(b, 0.3); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); });   // a broken bar: no channel until the gate induces one
+    ctx.stroke(); ctx.restore();
     this.jArrow(p, col, g);
     const sz = Math.max(11.5, u * 0.31), side = Math.abs(g.n[0]) > 0.7;   // side: the gate comes in from the left or right
     if (p.pins) { const ps = Math.max(10.5, u * 0.25), o = g.at(0, -0.2), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';

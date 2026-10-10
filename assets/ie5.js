@@ -4,7 +4,7 @@
    chapters 6 (§6.2–6.3, 6.6; Examples 6.1–6.2) and 7 (§7.2–7.4; Examples 7.1–7.4). The slides state the four bias problems without solving them.
    The simulation solves the circuits exactly: Shockley's equation in the saturation region, the square-law ohmic region to the left of the
    pinch-off locus V_DS = V_GS − V_P (which the book draws but never checks: Example 7.1 and Example 7.3(a) land in it; the notes say so).
-   CH5.net(o) builds any of the circuits: o = { dev: { idss, vp, pch }, VDD, VGG (gate supply: V_GS = −V_GG), RG, RD, RS, R1 + R2, qText };
+   CH5.net(o) builds any of the circuits: o = { dev: { idss, vp, pch }, VDD, VGG (the gate supply that constricts the channel: V_GS = −V_GG for an n-channel, +V_GG for a p-channel; a negative VGG gives the opposite polarity), RG, RD, RS, R1 + R2, fb (R_G from gate to drain), qText };
    CH5.sol(o) gives the book's answer from the transfer curve; CH5.DEF: f611, rd, f615, sh, ex61, ex62, ex71, fb2, ex72, ex73, ex74, rs720 */
 (function (global) {
 'use strict';
@@ -22,9 +22,11 @@ CH5.LAY = LAY;
    1) the devices of the slides and the book: { idss (A), vp (V; negative for an n-channel), pch (p-channel) } */
 CH5.DEV = { f611: { idss: 8e-3, vp: -4 }, ex71: { idss: 10e-3, vp: -8 }, ex72: { idss: 8e-3, vp: -6 }, ex61: { idss: 12e-3, vp: -6 }, ex62: { idss: 4e-3, vp: 3, pch: true },
   f613: { idss: 6e-3, vp: 6, pch: true }, rd: { idss: 0.3e-3, vp: -6 } };
-CH5.devText = d => `I_DSS = ${CK.eng(d.idss, 'A')}\nV_P = ${sg(d.vp)} V`;   // two lines beside the symbol
-/* Shockley's equation in mA for the plots (n-channel: v ≤ 0; the curve stops at v = 0 unless ext) */
-CH5.sh = (d, v) => mA(FET.id(d.idss, d.vp, v));
+CH5.devText = d => (d.kind === 'emos' ? `k = ${fd(d.k * 1e3, 3)} mA/V²\nV_T = ${sg(d.pch ? -d.vt : d.vt)} V` : `I_DSS = ${CK.eng(d.idss, 'A')}\nV_P = ${sg(d.vp)} V`);   // two lines beside the symbol
+/* the transfer curve of any kind of FET in mA against the book's V_GS (a p-channel's turned round): Shockley's equation, or k(V_GS − V_T)² */
+CH5.sh = (d, vb) => { const v = d.pch ? -vb : vb, { vt, b } = FET.kb(d); return v > vt ? mA(b * (v - vt) * (v - vt)) : 0; };
+/* the book's V_P or V_T of a device, and the kind */
+const vpOf = d => (d.kind === 'emos' ? (d.pch ? -d.vt : d.vt) : d.vp), kindOf = d => d.kind || 'jfet';
 
 /* =====================================================================================================================
    2) the circuit. Grid: top rail y = −1.2 (V_DD), the transistor's drain and source on x = 3.1 with the gate at (2.3, 1.6), the bottom rail y = 4
@@ -33,22 +35,26 @@ CH5.sh = (d, v) => mA(FET.id(d.idss, d.vp, v));
 CH5.net = (o = {}) => {
   const d = o.dev || CH5.DEV.f611, s = d.pch ? -1 : 1, VDD = o.VDD || 0, parts = [];
   const nodes = { tL: [0.6, -1.2], gL: [0.6, 1.6], bL: [0.6, 4], g: [2.3, 1.6], tD: [3.1, -1.2], d: [3.1, 0.75], s: [3.1, 2.45], gs: [3.1, 4], tV: [5.9, -1.2], gV: [5.9, 4] };   // the supply stands further right than in CH4.net: room for the device's two-line label
+  if (o.fb) { delete nodes.tL; delete nodes.gL; nodes.fa = [2.3, 0.1]; nodes.dr = [3.1, 0.1]; }   // feedback bias (Fig. 7.37): R_G from the gate up to the drain, nothing on the left
   if (VDD) parts.push({ id: 'VDD', type: 'V', a: s > 0 ? 'tV' : 'gV', b: s > 0 ? 'gV' : 'tV', value: VDD, name: 'V_DD', valText: `${sg(s * VDD)} V` }); else parts.push(W_('tV', 'gV'));
   parts.push(W_('tD', 'tV'), W_('gs', 'gV'), W_('bL', 'gs'));
-  if (o.R1) parts.push(W_('tL', 'tD'), { id: 'R1', type: 'R', a: 'tL', b: 'gL', value: o.R1, name: 'R_1', valText: kO(o.R1), side: -1 }, { id: 'R2', type: 'R', a: 'gL', b: 'bL', value: o.R2, name: 'R_2', valText: kO(o.R2), side: -1 }, W_('gL', 'g'));
+  if (o.fb) parts.push({ id: 'RG', type: 'R', a: 'g', b: 'fa', value: o.RG, name: 'R_G', valText: kO(o.RG), side: -1 }, W_('fa', 'dr'), W_('dr', 'd'));
+  else if (o.R1) parts.push(W_('tL', 'tD'), { id: 'R1', type: 'R', a: 'tL', b: 'gL', value: o.R1, name: 'R_1', valText: kO(o.R1), side: -1 }, { id: 'R2', type: 'R', a: 'gL', b: 'bL', value: o.R2, name: 'R_2', valText: kO(o.R2), side: -1 }, W_('gL', 'g'));
   else { if (o.RG) parts.push({ id: 'RG', type: 'R', a: 'g', b: 'gL', value: o.RG, name: 'R_G', valText: kO(o.RG), side: -1, labelOff: 0.1 }); else parts.push(W_('g', 'gL'));
-    if (o.VGG) parts.push({ id: 'VGG', type: 'V', a: s > 0 ? 'bL' : 'gL', b: s > 0 ? 'gL' : 'bL', value: o.VGG, name: o.VGGname || 'V_GG', valText: `${sg(o.VGG)} V`, side: -1 }); else parts.push(W_('gL', 'bL')); }
-  parts.push(o.RD ? { id: 'RD', type: 'R', a: 'tD', b: 'd', value: o.RD, name: 'R_D', valText: kO(o.RD) } : W_('tD', 'd'));
+    if (o.VGG) { const plusDown = (s > 0) === (o.VGG > 0);   // V_GS = −V_GG (book signs): + at ground for an n-channel; a negative V_GG (a positive V_GS, the enhancement mode of a depletion MOSFET) turns it round
+      parts.push({ id: 'VGG', type: 'V', a: plusDown ? 'bL' : 'gL', b: plusDown ? 'gL' : 'bL', value: Math.abs(o.VGG), name: o.VGGname || 'V_GG', valText: `${fd(Math.abs(o.VGG), Number.isInteger(o.VGG) ? 0 : 1)} V`, side: -1 }); } else parts.push(W_('gL', 'bL')); }
+  parts.push(o.RD ? { id: 'RD', type: 'R', a: 'tD', b: o.fb ? 'dr' : 'd', value: o.RD, name: 'R_D', valText: kO(o.RD) } : W_('tD', o.fb ? 'dr' : 'd'));
   parts.push(o.RS ? { id: 'RS', type: 'R', a: 's', b: 'gs', value: o.RS, name: 'R_S', valText: kO(o.RS) } : W_('s', 'gs'));
-  parts.push({ id: 'Q', type: 'J', D: 'd', G: 'g', S: 's', idss: d.idss, vp: d.vp, pch: !!d.pch, name: o.qName ?? 'Q', valText: o.qText ?? CH5.devText(d), pins: true });
+  parts.push({ id: 'Q', type: 'J', D: 'd', G: 'g', S: 's', idss: d.idss, vp: d.vp, kind: d.kind, k: d.k, vt: d.vt, pch: !!d.pch, name: o.qName ?? 'Q', valText: o.qText ?? CH5.devText(d), pins: true });
   return { ground: 'bL', nodes, parts, o };
 };
 /* the book's answer (the transfer curve only, V_DS taken from the output loop afterwards): { ID, VGS, VG, VS, VD, VDS, VDG, vov, sat } (n-channel) */
 CH5.sol = o => { const d = o.dev || CH5.DEV.f611, VDD = o.VDD || 0, RD = o.RD || 0, RS = o.RS || 0; let VG = 0, q;
-  if (o.R1) { VG = o.R2 * VDD / (o.R1 + o.R2); q = FET.bias(d.idss, d.vp, RS, VG); }
-  else if (!RS) { VG = -(o.VGG || 0); q = { vgs: VG, id: FET.id(d.idss, d.vp, VG) }; }
-  else q = FET.bias(d.idss, d.vp, RS, 0);
-  const ID = q.id, VGS = q.vgs, VS = ID * RS, VD = VDD - ID * RD, VDS = VD - VS, vov = VGS - d.vp;
+  if (o.fb) { q = FET.biasOf(d, RD, VDD); VG = q.vgs; }   // V_GS = V_DS = V_DD − I_D R_D (Eq. 7.36)
+  else if (o.R1) { VG = o.R2 * VDD / (o.R1 + o.R2); q = FET.biasOf(d, RS, VG); }
+  else if (!RS) { VG = -(o.VGG || 0); q = FET.biasOf(d, 0, VG); }
+  else q = FET.biasOf(d, RS, 0);
+  const ID = q.id, VGS = q.vgs, VS = ID * RS, VD = VDD - ID * RD, VDS = VD - VS, vov = VGS - FET.kb(d).vt;
   return { ID, VGS, VG, VS, VD, VDS, VDG: VD - VG, IRR: o.R1 ? VDD / (o.R1 + o.R2) : 0, vov, sat: VDS >= vov }; };
 /* the readout of a solved circuit: circuit.J plus mA and µA */
 CH5.j = c => { const j = c.J('Q'); return { ...j, id: mA(j.ID), ig: j.IG * 1e6, rdk: j.rd / 1e3 }; };
@@ -61,7 +67,7 @@ CH5.reg = r => REG[r];
    curve), lines: [{ a: [v, i], b: [v, i], color, w, dash, ext, label, at }] (bias lines), vl: [{ v, label, color }], hl: [{ i, label }],
    pts: [{ v, i, label, color, side, dy, r }], guides: [{ v, i }], title, xl, yl, yLabels, ml, mr } → { X, Y, L, R, Tp, Bt } */
 CH5.tPlot = (ctx, b, bd, o = {}) => {
-  CH6.bg(ctx, b); const d = o.dev || CH5.DEV.f611, sh = !!(bd && bd.short), vp = d.vp, idss = mA(d.idss);
+  CH6.bg(ctx, b); const d = o.dev || CH5.DEV.f611, sh = !!(bd && bd.short), vp = vpOf(d), idss = mA(d.idss || 0), kind = kindOf(d);
   const vmin = o.vmin ?? (vp < 0 ? Math.floor(vp * 1.12) : -0.5), vmax = o.vmax ?? (vp < 0 ? 0 : Math.ceil(vp * 1.12)), imax = o.imax ?? Math.ceil(idss * 1.25);
   const ml = o.ml ?? 44, mr = o.mr ?? 18, L = b.x + ml, Rr = b.x + b.w - mr, Tp = b.y + (o.title ? 30 : 12) + 16, Bt = b.y + b.h - 36;
   const X = v => L + (Rr - L) * (v - vmin) / (vmax - vmin), Y = i => Bt - (Bt - Tp) * i / imax, x0 = X(Math.max(vmin, Math.min(vmax, 0)));
@@ -78,7 +84,8 @@ CH5.tPlot = (ctx, b, bd, o = {}) => {
   ctx.save(); ctx.beginPath(); ctx.rect(L - 2, Tp - 6, Rr - L + 4, Bt - Tp + 8); ctx.clip();
   (o.hl || []).forEach(q => { ctx.save(); ctx.strokeStyle = q.color || C.guide; ctx.lineWidth = 1.3; ctx.setLineDash([6, 5]); ctx.beginPath(); ctx.moveTo(L, Y(q.i)); ctx.lineTo(Rr, Y(q.i)); ctx.stroke(); ctx.restore(); });
   (o.vl || []).forEach(q => { ctx.save(); ctx.strokeStyle = q.color || C.guide; ctx.lineWidth = q.w || 1.6; ctx.setLineDash(q.dash || [6, 5]); ctx.beginPath(); ctx.moveTo(X(q.v), Tp); ctx.lineTo(X(q.v), Bt); ctx.stroke(); ctx.restore(); });
-  if (o.curve !== false) { const va = Math.max(vmin, Math.min(vp, 0)), vb = o.ext ? vmax : Math.min(vmax, Math.max(0, vp)); ctx.save(); ctx.strokeStyle = o.color || C.curve; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.beginPath();
+  if (o.curve !== false) { const lo0 = kind === 'emos' || d.pch ? -Infinity : vp, hi0 = kind === 'emos' || !d.pch ? Infinity : vp;   // Shockley's curve runs from V_P; a JFET's stops at V_GS = 0 (the gate junction), a depletion MOSFET's goes on
+    const va = Math.max(vmin, lo0, kind === 'jfet' && d.pch && !o.ext ? 0 : -Infinity), vb = Math.min(vmax, hi0, kind === 'jfet' && !d.pch && !o.ext ? 0 : Infinity); ctx.save(); ctx.strokeStyle = o.color || C.curve; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.beginPath();
     for (let k = 0; k <= 200; k++) { const v = va + (vb - va) * k / 200, i = CH5.sh(d, v); k ? ctx.lineTo(X(v), Y(i)) : ctx.moveTo(X(v), Y(i)); } ctx.stroke(); ctx.restore(); }
   (o.lines || []).forEach(s => { let [va, ia] = s.a, [vb, ib] = s.b; if (s.ext) { const dv = vb - va, di = ib - ia; va -= dv * s.ext; ia -= di * s.ext; vb += dv * s.ext; ib += di * s.ext; }
     ctx.save(); ctx.strokeStyle = s.color || C.tan; ctx.lineWidth = s.w || 2.4; ctx.lineCap = 'round'; if (s.dash) ctx.setLineDash(s.dash); ctx.beginPath(); ctx.moveTo(X(va), Y(ia)); ctx.lineTo(X(vb), Y(ib)); ctx.stroke(); ctx.restore(); });
@@ -100,11 +107,11 @@ CH5.tPlot = (ctx, b, bd, o = {}) => {
    origin to (|V_P|, I_DSS)), a load line and an operating point. o = { dev, vgs: [V, …], vmax, imax, xt, yt, locus, load: { vdd, r }, q: { v, i, label,
    side, dy }, pts, segs, vl, hl, labels, title, ml, mr } */
 CH5.dPlot = (ctx, b, bd, o = {}) => {
-  const d = o.dev || CH5.DEV.f611, sh = !!(bd && bd.short), vp = Math.abs(d.vp), idss = mA(d.idss), n = d.pch ? -1 : 1;
-  const vmax = o.vmax ?? Math.max(20, Math.ceil(vp * 2.5)), imax = o.imax ?? Math.ceil(idss * 1.25), vs = o.vgs || [0, 1, 2, 3, 4].map(k => -k * vp / 4);
+  const d = o.dev || CH5.DEV.f611, sh = !!(bd && bd.short), kb = FET.kb(d), vt = kb.vt, kB = kb.b, vp = Math.abs(vt), n = d.pch ? -1 : 1, pl = v => (v > 0 ? '+' : '') + sg(v);   // kB: the square-law coefficient (b is the box)
+  const vs = o.vgs || [0, 1, 2, 3, 4].map(k => -k * vp / 4), vovMax = Math.max(...vs) - vt, vmax = o.vmax ?? Math.max(20, Math.ceil(vp * 2.5)), imax = o.imax ?? Math.ceil(mA(kB * vovMax * vovMax) * 1.25);
   const curves = vs.map((vgs, k) => ({ f: v => mA(FET.iv(d, vgs, v).i), n: 200, w: 2, color: o.muted && o.muted(k) ? 'rgba(79,179,255,.45)' : C.curve,
-    label: o.labels === false || (sh && k % 2 && k !== vs.length - 1) ? '' : (sh ? `${sg(n * vgs)} V` : `V_GS = ${sg(n * vgs)} V`), labelAt: vmax }));
-  if (o.locus !== false) curves.push({ f: v => idss * v * v / (vp * vp), to: vp, n: 80, color: C.avg, w: 1.6, dash: [5, 4], label: sh ? '' : t('แนวพินช์ออฟ', 'pinch-off locus'), labelAt: vp * 0.78 });
+    label: o.labels === false || (sh && k % 2 && k !== vs.length - 1) ? '' : (sh ? `${pl(n * vgs)} V` : `V_GS = ${pl(n * vgs)} V`), labelAt: vmax }));
+  if (o.locus !== false) curves.push({ f: v => mA(kB * v * v), to: vovMax, n: 80, color: C.avg, w: 1.6, dash: [5, 4], label: sh ? '' : (o.locusLabel ?? t('แนวพินช์ออฟ', 'pinch-off locus')), labelAt: vovMax * 0.78 });
   const segs = [...(o.segs || [])], pts = [...(o.pts || [])], guides = [];
   if (o.load) segs.push({ a: [0, o.load.vdd / o.load.r * 1e3], b: [o.load.vdd, 0], color: C.chord, w: 2.2 });
   if (o.q) { pts.push({ v: o.q.v, i: o.q.i, color: C.q, label: o.q.label ?? 'Q', side: o.q.side, dy: o.q.dy }); if (o.q.guide !== false) guides.push({ v: o.q.v, i: o.q.i }); }
@@ -115,14 +122,15 @@ CH5.dPlot = (ctx, b, bd, o = {}) => {
    V_GS carries the saturation level across to the transfer curve. o = { dev, vgs, vmaxD, imax, tbl, short } */
 CH5.fig617 = (ctx, b, o = {}) => {
   const d = o.dev || CH5.DEV.f611, wL = Math.round(b.w * 0.42), bl = { x: b.x, y: b.y, w: wL, h: b.h }, br = { x: b.x + wL, y: b.y, w: b.w - wL, h: b.h }, imax = o.imax ?? Math.ceil(mA(d.idss) * 1.25), sh = !!o.short;
-  const vgs = Math.max(d.vp, Math.min(0, o.vgs ?? -1)), id = CH5.sh(d, vgs), vmaxD = o.vmaxD ?? 25;
-  const tl = CH5.tPlot(ctx, bl, { short: sh }, { dev: d, imax, mr: 40, ml: 12, yLabels: false, yl: '', tbl: o.tbl, title: sh ? '' : t('เส้นโค้งถ่ายโอน', 'transfer curve'), pts: [{ v: vgs, i: id, label: `${fd(id, 2)} mA`, side: -1, dy: 14 }] });
-  const dr = CH5.dPlot(ctx, br, { short: sh }, { dev: d, vgs: [0, 1, 2, 3, 4].map(k => -k * Math.abs(d.vp) / 4).filter(v => v > d.vp - 1e-9).concat(d.vp === -4 ? [] : [d.vp]).filter((v, k, a) => a.indexOf(v) === k), vmax: vmaxD, imax, ml: 40, mr: sh ? 24 : 60, locus: false,
-    title: sh ? '' : t('ลักษณะสมบัติด้านเดรน', 'drain characteristics'), muted: k => Math.abs([0, 1, 2, 3, 4][k] * -Math.abs(d.vp) / 4 - vgs) > 1e-6 && o.mute !== false });
+  const list = o.list || [0, 1, 2, 3, 4].map(k => -k * Math.abs(d.vp) / 4).filter(v => v > d.vp - 1e-9).concat(d.vp === -4 ? [] : [d.vp]).filter((v, k, a) => a.indexOf(v) === k);   // the V_GS curves (n-channel terms)
+  const vgs = o.list ? (o.vgs ?? list[0]) : Math.max(d.vp, Math.min(0, o.vgs ?? -1)), id = CH5.sh(d, vgs), vmaxD = o.vmaxD ?? 25;
+  const tl = CH5.tPlot(ctx, bl, { short: sh }, { dev: d, imax, mr: 40, ml: 12, yLabels: false, yl: '', tbl: o.tbl, title: sh ? '' : t('เส้นโค้งถ่ายโอน', 'transfer curve'), pts: [{ v: vgs, i: id, label: `${fd(id, 2)} mA`, side: -1, dy: 14 }], ...(o.tp || {}) });
+  const dr = CH5.dPlot(ctx, br, { short: sh }, { dev: d, vgs: list, vmax: vmaxD, imax, ml: 40, mr: sh ? 24 : 60, locus: false,
+    title: sh ? '' : t('ลักษณะสมบัติด้านเดรน', 'drain characteristics'), muted: k => Math.abs(list[k] - vgs) > 1e-6 && o.mute !== false, ...(o.dp || {}) });
   /* the chosen V_GS: its own curve highlighted, the saturation level carried across to the transfer curve (Fig. 6.17's arrow) */
   ctx.save(); ctx.strokeStyle = C.q; ctx.lineWidth = 2.6; ctx.beginPath(); for (let k = 0; k <= 160; k++) { const v = vmaxD * k / 160, i = mA(FET.iv(d, vgs, v).i); k ? ctx.lineTo(dr.X(v), dr.Y(i)) : ctx.moveTo(dr.X(v), dr.Y(i)); } ctx.stroke();
   ctx.setLineDash([6, 5]); ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(dr.X(vmaxD * 0.55), dr.Y(id)); ctx.lineTo(tl.X(vgs), tl.Y(id)); ctx.stroke(); ctx.setLineDash([5, 4]); ctx.strokeStyle = C.guide; ctx.beginPath(); ctx.moveTo(tl.X(vgs), tl.Y(id)); ctx.lineTo(tl.X(vgs), tl.Bt); ctx.stroke(); ctx.restore();
-  CH8.lab(ctx, `V_GS = ${sg(vgs)} V`, tl.X(vgs) + 4, tl.Bt - 10, vgs > d.vp * 0.5 ? 'right' : 'left', C.q, 12, b, '700');
+  CH8.lab(ctx, `V_GS = ${(vgs > 0 ? '+' : '') + sg(vgs)} V`, tl.X(vgs) + 4, tl.Bt - 10, (tl.X(vgs) - tl.L) / (tl.R - tl.L) > 0.55 ? 'right' : 'left', C.q, 12, b, '700');
   return { tl, dr, id, vgs };
 };
 

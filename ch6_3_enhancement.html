@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="6.3 — Enhancement-Type MOSFET">6.3 — มอสเฟตแบบเอนแฮนซ์เมนต์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">มอสเฟตแบบเอนแฮนซ์เมนต์ <span class="en">Enhancement-type MOSFET</span></h1>
+<h1 data-l="en">Enhancement-type MOSFET <span class="en">No channel until the gate induces one: \(I_D = k(V_{GS} - V_T)^2\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 6 หน้า 16–21 มอสเฟตแบบเอนแฮนซ์เมนต์ (enhancement type) สร้างเหมือนแบบดีพลีชันทุกอย่าง<b>ยกเว้นไม่มีช่อง</b>ระหว่างบ่อเดรนกับซอร์ส ที่ \(V_{GS}\) = 0 จึงไม่มีกระแสเลย ต้องให้แรงดันเกตบวกเกินแรงดันขีดเริ่ม (threshold) \(V_T\) ดึงอิเล็กตรอนจากสารฐานมาสร้างช่องเหนี่ยวนำ (induced channel) ขึ้นใต้ฉนวน เส้นโค้งถ่ายโอนจึงไม่ใช่สมการของ Shockley แต่เป็น \(I_D = k(V_{GS} - V_T)^2\) ซึ่งอยู่ทางขวาของ \(V_T\) ทั้งเส้น หน้านี้มีภาพตัดขวางของช่องเหนี่ยวนำที่ปรับ \(V_{GS}\), \(V_{DS}\), \(V_T\), \(k\) ได้ (ส่วน A) การหา \(k\) และ \(V_{DS_\text{sat}}\) จากรูป 6.35 การวาดรูป 6.37 Example 6.4 จากใบข้อมูล 2N4351 อุปกรณ์ p-channel และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 6 slides pp. 16–21. The enhancement-type MOSFET is built like the depletion type <b>except that it has no channel</b> between the drain and source wells, so at \(V_{GS}\) = 0 there is no current at all. A positive gate voltage above the threshold \(V_T\) must draw electrons from the substrate to form an induced channel under the insulator. The transfer curve is therefore not Shockley's equation but \(I_D = k(V_{GS} - V_T)^2\), lying entirely to the right of \(V_T\). This page has a cross-section of the induced channel with adjustable \(V_{GS}\), \(V_{DS}\), \(V_T\), \(k\) (section A), \(k\) and \(V_{DS_\text{sat}}\) from Fig. 6.35, the plotting of Fig. 6.37, Example 6.4 from the 2N4351 sheet, the p-channel device, and more practice.</p>
+<div class="equation-box eqwrap">$$ I_D = k(V_{GS} - V_T)^2\quad (V_{GS} > V_T) $$ $$ I_D = 0\quad (V_{GS} \le V_T) $$ $$ k = \frac{I_{D(\text{on})}}{(V_{GS(\text{on})} - V_T)^2} $$ $$ V_{DS_\text{sat}} = V_{GS} - V_T,\qquad V_{DG} = V_{DS} - V_{GS} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ไม่มีช่อง</b> (สไลด์หน้า 16–17, รูป 6.32): สารฐาน p กับบ่อ n สองบ่อ แต่ไม่มีช่องเชื่อม ที่ \(V_{GS}\) = 0 มีรอยต่อ p–n ไบแอสกลับสองรอยต่อขวางทาง กระแสเป็นศูนย์ (ต่างจาก JFET และแบบดีพลีชันที่ให้ \(I_{DSS}\))</li>
+  <li><b>ช่องเหนี่ยวนำ</b> (รูป 6.33): ศักย์บวกที่เกตผลักโฮลของสารฐานลงไปและดึงอิเล็กตรอน (พาหะข้างน้อย) มาสะสมใต้ชั้น SiO₂ ซึ่งกั้นไม่ให้ไหลเข้าเกต เมื่อ \(V_{GS}\) ถึง<b>แรงดันขีดเริ่ม \(V_T\)</b> (ใบข้อมูลเรียก \(V_{GS(\text{Th})}\)) ชั้นสาร n ที่เหนี่ยวนำขึ้นก็นำกระแสได้ ยิ่ง \(V_{GS}\) สูง พาหะยิ่งมาก</li>
+  <li><b>พินช์ออฟ</b> (สมการ 6.13–6.14): เมื่อ \(V_{DS}\) เพิ่ม \(V_{DG} = V_{DS} - V_{GS}\) ลบน้อยลง เกตดึงพาหะทางด้านเดรนได้น้อยลง ช่องแคบลงจนอิ่มตัวที่ \(V_{DS_\text{sat}} = V_{GS} - V_T\) (รูป 6.34–6.35: \(V_{GS}\) = 8 V อิ่มตัวที่ 6 V)</li>
+  <li><b>สมการ</b> (สไลด์หน้า 18, สมการ 6.15–6.16): \(I_D = k(V_{GS} - V_T)^2\) กำลังสองเหมือนเดิมแต่เริ่มจาก \(V_T\) ไม่ใช่จาก \(I_{DSS}\) ค่าคงที่ \(k\) ขึ้นกับโครงสร้าง หาได้จากจุดหนึ่งบนลักษณะสมบัติหรือจุด \(I_{D(\text{on})}\) ที่ \(V_{GS(\text{on})}\) ของใบข้อมูล (รูป 6.35: 10 mA ที่ 8 V, \(V_T\) = 2 V ให้ \(k\) = 0.278 mA/V²)</li>
+  <li><b>เส้นโค้งถ่ายโอน</b> (สไลด์หน้า 19, รูป 6.36–6.37): ได้จากระดับอิ่มตัวของเส้น \(V_{GS}\) แต่ละเส้นเหมือนเดิม แต่อยู่ในฝั่ง \(V_{GS}\) บวกทั้งหมดและเป็นศูนย์จนถึง \(V_T\) ร่างจาก \(V_T\) แล้วแทนค่า \(V_{GS}\) สองสามค่า</li>
+  <li><b>p-channel และสัญลักษณ์</b> (สไลด์หน้า 20–21, รูป 6.38–6.39): สลับสาร \(V_T\) ลบ กระแสเพิ่มเมื่อ \(V_{GS}\) ลบกว่า \(V_T\) สัญลักษณ์เหมือนแบบดีพลีชันแต่<b>แท่งช่องเป็นเส้นประ</b> เพราะไม่มีช่องเมื่อไม่ไบแอส · ใบข้อมูล 2N4351: \(I_{DSS}\) ขณะปิดเพียง 10 nA, \(V_{GS(\text{Th})}\) 1–5 V, \(I_{D(\text{on})}\) = 3 mA ที่ 10 V · มอสเฟตกำลัง (VMOS/UMOS) และ CMOS อยู่ในตำราหัวข้อ 6.10–6.11 (ไม่อยู่ในสไลด์)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>No channel</b> (slides pp. 16–17, Fig. 6.32): a p-substrate with two n-wells but nothing linking them; at \(V_{GS}\) = 0 two reverse-biased p–n junctions block the path and the current is zero (unlike the JFET and the depletion type, which give \(I_{DSS}\)).</li>
+  <li><b>The induced channel</b> (Fig. 6.33): a positive gate pushes the substrate's holes down and draws electrons (its minority carriers) up to pile under the SiO₂ layer, which keeps them out of the gate. Once \(V_{GS}\) reaches the <b>threshold voltage \(V_T\)</b> (\(V_{GS(\text{Th})}\) on data sheets) the induced n-layer conducts; the higher \(V_{GS}\), the more carriers.</li>
+  <li><b>Pinch-off</b> (Eqs. 6.13–6.14): as \(V_{DS}\) rises, \(V_{DG} = V_{DS} - V_{GS}\) becomes less negative, the gate attracts fewer carriers at the drain end, and the channel narrows until it saturates at \(V_{DS_\text{sat}} = V_{GS} - V_T\) (Figs. 6.34–6.35: \(V_{GS}\) = 8 V saturates at 6 V).</li>
+  <li><b>The equation</b> (slide p. 18, Eqs. 6.15–6.16): \(I_D = k(V_{GS} - V_T)^2\), a square as before but starting from \(V_T\), not from \(I_{DSS}\). The constant \(k\) depends on the construction and comes from one point of the characteristics or the sheet's \(I_{D(\text{on})}\) at \(V_{GS(\text{on})}\) (Fig. 6.35: 10 mA at 8 V with \(V_T\) = 2 V gives \(k\) = 0.278 mA/V²).</li>
+  <li><b>The transfer curve</b> (slide p. 19, Figs. 6.36–6.37): from the saturation level of each \(V_{GS}\) curve as before, but entirely on the positive side and zero up to \(V_T\); sketch it from \(V_T\) by substituting a few values of \(V_{GS}\).</li>
+  <li><b>p-channel and symbols</b> (slides pp. 20–21, Figs. 6.38–6.39): the materials swap, \(V_T\) is negative and the current grows as \(V_{GS}\) goes more negative than \(V_T\). The symbol is the depletion type's with a <b>broken channel bar</b>, since no channel exists without bias. The 2N4351 sheet: an off-state \(I_{DSS}\) of only 10 nA, \(V_{GS(\text{Th})}\) 1–5 V, \(I_{D(\text{on})}\) = 3 mA at 10 V. Power MOSFETs (VMOS/UMOS) and CMOS are in the book's §6.10–6.11 (not on the slides).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch6/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 16, Enhancement-Type MOSFET: the characteristics of the enhancement-type MOSFET are quite different from anything obtained thus far; the transfer curve is not defined by Shockley's equation, and the drain current is now cut off until the gate-to-source voltage reaches a specific magnitude; the current control in an n-channel device is now effected by a positive gate-to-source voltage rather than the range of negative voltages encountered for n-channel JFETs and n-channel depletion-type MOSFETs.">
+  <figcaption data-l="th">สไลด์บทที่ 6 หน้า 16: ต่างจากทุกอุปกรณ์ที่ผ่านมา · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 6 slide p. 16: different from every device so far · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch6/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 17, Enhancement-Type MOSFET, basic construction: the level of V_GS that results in the significant increase in drain current is called the threshold voltage and is given the symbol V_T; as V_GS is increased beyond the threshold level, the density of free carriers in the induced channel will increase, resulting in an increased level of drain current. Figure 6.33: channel formation, electrons attracted to the positive gate forming the induced n-channel, the region depleted of holes, the insulating layer, I_G = 0 A, V_GS and V_DS.">
+  <figcaption data-l="th">สไลด์หน้า 17: การเกิดช่องเหนี่ยวนำและแรงดันขีดเริ่ม \(V_T\) (รูป 6.33) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 17: channel formation and the threshold voltage \(V_T\) (Fig. 6.33) · tap to enlarge</figcaption></figure></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ช่องเหนี่ยวนำ</a><a href="#ex1"><b>1</b>k และ V<sub>DSsat</sub> (รูป 6.35)</a><a href="#ex2"><b>2</b>วาดรูป 6.37</a><a href="#ex3"><b>3</b>Example 6.4</a><a href="#ex4"><b>4</b>p-channel</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The induced channel</a><a href="#ex1"><b>1</b>k and V<sub>DSsat</sub> (Fig. 6.35)</a><a href="#ex2"><b>2</b>Plotting Fig. 6.37</a><a href="#ex3"><b>3</b>Example 6.4</a><a href="#ex4"><b>4</b>p-channel</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ช่องเหนี่ยวนำ: ไม่มีกระแสจนกว่า \(V_{GS}\) จะเกิน \(V_T\)</h2><h2 data-l="en">The induced channel: no current until \(V_{GS}\) exceeds \(V_T\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18–19, 21 · Boylestad หัวข้อ 6.8 (รูป 6.32–6.37, 6.39)</div><div class="src" data-l="en">Slides pp. 18–19, 21 · Boylestad, section 6.8 (Figs. 6.32–6.37, 6.39)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 18, Enhancement-Type MOSFET, basic construction: for levels of V_GS > V_T, the drain current is related to the applied gate-to-source voltage by the following nonlinear relationship, I_D = k(V_GS − V_T)²; the value of k can be determined from the following equation, k = I_D(on)/(V_GS(on) − V_T)². Figure 6.35: drain characteristics for V_GS = 3, 4, 5, 6, 7, 8 V with V_T = 2 V, the locus of V_DSsat, and 6 V marked at V_GS = 8 V.">
+    <figcaption data-l="th">สไลด์หน้า 18: สมการ 6.15–6.16 และรูป 6.35 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 18: Eqs. 6.15–6.16 and Fig. 6.35 · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 19, Enhancement-Type MOSFET, basic construction: sketching the transfer characteristics for an n-channel enhancement-type MOSFET from the drain characteristics. Figure 6.36: the transfer curve from V_T = 2 V rising to 10 mA at 8 V on the left, the drain characteristics on the right with an arrow carrying a saturation level across.">
+    <figcaption data-l="th">สไลด์หน้า 19: เส้นโค้งถ่ายโอนจากลักษณะสมบัติด้านเดรน (รูป 6.36) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the transfer curve from the drain characteristics (Fig. 6.36) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 21, Enhancement-Type MOSFET, symbols: the graphic symbols for the n- and p-channel enhancement-type MOSFETs are provided as the figure. Figure 6.39: four symbols with a broken channel bar, n-channel and p-channel, with a separate SS terminal and with SS tied to the source.">
+    <figcaption data-l="th">สไลด์หน้า 21: สัญลักษณ์ที่แท่งช่องเป็นเส้นประ (รูป 6.39) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 21: the symbols with a broken channel bar (Fig. 6.39) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">ภาพตัดขวางคือรูป 6.32–6.33: บ่อ n สองบ่อในสารฐาน p ไม่มีช่องเชื่อม เลื่อน \(V_{GS}\) ขึ้นจากศูนย์: ต่ำกว่า \(V_T\) ไม่มีอะไรเกิดขึ้น พอเกิน \(V_T\) อิเล็กตรอนมาสะสมใต้ฉนวนเป็นช่องเหนี่ยวนำ (ฟ้า) ที่หนาขึ้นตาม \(V_{GS} - V_T\) และกระแสเพิ่มตามกำลังสอง \(V_{DS}\) ทำให้ช่องบางลงทางด้านเดรนจนพินช์ออฟที่ \(V_{GS} - V_T\) กราฟขวาคือรูป 6.35 ปรับ \(V_T\) และ \(k\) ได้เพื่อดูว่าอุปกรณ์แต่ละตัวต่างกันอย่างไร</p>
+  <p class="lead" data-l="en">The cross-section is Figs. 6.32–6.33: two n-wells in a p-substrate with nothing linking them. Raise \(V_{GS}\) from zero: below \(V_T\) nothing happens; above it electrons pile under the insulator as an induced channel (blue) that thickens with \(V_{GS} - V_T\), and the current grows as its square. \(V_{DS}\) thins the channel at the drain end until it pinches off at \(V_{GS} - V_T\). The right graph is Fig. 6.35; change \(V_T\) and \(k\) to see how devices differ.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">\(k\) และ \(V_{DS_\text{sat}}\) จากรูป 6.35</h2><h2 data-l="en">\(k\) and \(V_{DS_\text{sat}}\) from Fig. 6.35</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18 · Boylestad หัวข้อ 6.8 (สมการ 6.13–6.16, รูป 6.34–6.35)</div><div class="src" data-l="en">Slide p. 18 · Boylestad, section 6.8 (Eqs. 6.13–6.16, Figs. 6.34–6.35)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จากรูป 6.35 (\(V_T\) = 2 V, เส้น \(V_{GS}\) = 8 V อิ่มตัวที่ 10 mA) จงหา \(k\) เขียนสมการของอุปกรณ์ แล้วหา \(I_D\) ที่ \(V_{GS}\) = 4 V และ \(V_{DS_\text{sat}}\) ที่ \(V_{GS}\) = 8 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>From Fig. 6.35 (\(V_T\) = 2 V, the \(V_{GS}\) = 8 V curve saturating at 10 mA) find \(k\), write the device equation, then find \(I_D\) at \(V_{GS}\) = 4 V and \(V_{DS_\text{sat}}\) at \(V_{GS}\) = 8 V.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองคือมอสเฟตที่มี \(V_{GG}\) ตั้ง \(V_{GS}\) บวกผ่าน \(R_G\) และ \(V_{DD}\) = 20 V คร่อมเดรน–ซอร์ส สังเกตว่าที่ \(V_{GS}\) = 2 V (= \(V_T\)) ไม่มีจุดวิ่งเลย <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation is a MOSFET whose positive \(V_{GS}\) is set by \(V_{GG}\) through \(R_G\), with \(V_{DD}\) = 20 V across drain–source; note that at \(V_{GS}\) = 2 V (= \(V_T\)) no dots move at all. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">วาดเส้นโค้งถ่ายโอนจาก \(k\) และ \(V_T\)</h2><h2 data-l="en">Plotting the transfer curve from \(k\) and \(V_T\)</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 6.8 (รูป 6.37)</div><div class="src" data-l="en">Boylestad, section 6.8 (Fig. 6.37)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>มอสเฟตแบบเอนแฮนซ์เมนต์มี \(I_D = 0.5 \times 10^{-3}(V_{GS} - 4\ \text{V})^2\) จงหา \(I_D\) ที่ \(V_{GS}\) = 5, 6, 7 และ 8 V แล้วร่างเส้นโค้ง</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An enhancement MOSFET has \(I_D = 0.5 \times 10^{-3}(V_{GS} - 4\ \text{V})^2\). Find \(I_D\) at \(V_{GS}\) = 5, 6, 7 and 8 V and sketch the curve.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 6.4: จากใบข้อมูล 2N4351</h2><h2 data-l="en">Example 6.4: from the 2N4351 data sheet</h2>
+    <div class="src" data-l="th">Boylestad Example 6.4 (รูป 6.40–6.41)</div><div class="src" data-l="en">Boylestad Example 6.4 (Figs. 6.40–6.41)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ใบข้อมูล 2N4351 ให้ \(I_{D(\text{on})}\) = 3 mA ที่ \(V_{GS(\text{on})}\) = 10 V และ \(V_{GS(\text{Th})}\) เฉลี่ย 3 V จงหา (a) \(k\) (b) ลักษณะสมบัติถ่ายโอน (\(I_D\) ที่ 5, 8, 10, 12, 14 V)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The 2N4351 sheet gives \(I_{D(\text{on})}\) = 3 mA at \(V_{GS(\text{on})}\) = 10 V and an average \(V_{GS(\text{Th})}\) = 3 V. Determine (a) \(k\) (b) the transfer characteristics (\(I_D\) at 5, 8, 10, 12, 14 V).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">มอสเฟตแบบเอนแฮนซ์เมนต์ p-channel</h2><h2 data-l="en">The p-channel enhancement-type MOSFET</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad หัวข้อ 6.8 (รูป 6.38)</div><div class="src" data-l="en">Slide p. 20 · Boylestad, section 6.8 (Fig. 6.38)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 20, Enhancement-Type MOSFET, p-channel enhancement-type MOSFETs: the construction of a p-channel enhancement-type MOSFET is exactly the reverse of n-channel, as shown in the figure. Figure 6.38: the device with an n-substrate and p-wells, the transfer curve rising to the left of V_T = −2 V, and the drain characteristics for V_GS = −3, −4, −5, −6 V; p-channel enhancement-type MOSFET with V_T = 2 V and k = 0.5 × 10⁻³ A/V².">
+    <figcaption data-l="th">สไลด์หน้า 20: p-channel, \(V_T\) = −2 V, \(k\) = 0.5 mA/V² (รูป 6.38) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 20: p-channel, \(V_T\) = −2 V, \(k\) = 0.5 mA/V² (Fig. 6.38) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อุปกรณ์ของรูป 6.38 (p-channel, \(V_T\) = −2 V, \(k\) = 0.5 mA/V²) จงหา \(I_D\) ที่ \(V_{GS}\) = −4 V และ −6 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>For the device of Fig. 6.38 (p-channel, \(V_T\) = −2 V, \(k\) = 0.5 mA/V²) find \(I_D\) at \(V_{GS}\) = −4 V and −6 V.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ขีดเริ่ม</h3>
+    <ol><li>ส่วน A ตั้ง \(V_{DS}\) = 15 V แล้วเลื่อน \(V_{GS}\) จาก 0 ถึง 8 V: ไม่มีอะไรเกิดขึ้นจนถึง 2 V จากนั้นช่องฟ้าปรากฏและหนาขึ้น กระแส 0, 1.1, 4.4, 10 mA ที่ 2, 4, 6, 8 V (ขั้น 2 V ให้ 1.1, 3.3, 5.6 mA เพิ่มขึ้นเรื่อย ๆ)</li>
+    <li>เพิ่ม \(V_T\) เป็น 4 V (คง \(k\)): เส้นโค้งทั้งเส้นเลื่อนไปทางขวา 2 V อุปกรณ์ "เปิดยากขึ้น" ที่ \(V_{GS}\) = 8 V เหลือ 4.4 mA</li>
+    <li>ที่ \(V_{GS}\) = 8 V ลด \(V_{DS}\) จาก 15 V ลงมา: พินช์ออฟหายไปที่ 6 V (= 8 − 2) ป้ายเปลี่ยนเป็นย่านโอห์มิก และช่องเปิดตลอดความยาว</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ค่าคงที่ k</h3>
+    <ol><li>ข้อ 1: ถ้าใบข้อมูลให้ \(I_{D(\text{on})}\) ที่จุดอื่นของอุปกรณ์เดียวกัน เช่น 4.4 mA ที่ 6 V ค่า \(k\) ต้องออกมาเท่าเดิม 0.278 ลองตรวจ: 4.4/(6 − 2)² = 0.275 (ต่างเพราะปัดเศษ)</li>
+    <li>ข้อ 3: \(V_{GS(\text{Th})}\) ของ 2N4351 มีช่วง 1–5 V ถ้าอุปกรณ์จริงมี \(V_T\) = 5 V แทน 3 V ค่า \(k\) จะเป็น 3/25 = 0.12 mA/V² และ \(I_D\) ที่ 8 V เหลือ 1.08 mA แทน 1.53 mA: ความไม่แน่นอนของ \(V_T\) ใหญ่มาก นี่คือเหตุที่วงจรไบแอสในหน้า 6.4 ต้องมีตัวต้านทานป้อนกลับหรือ \(R_S\)</li></ol>
+    <div class="book">สไลด์บทที่ 6 หน้า 16–21 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 6.8 (รูป 6.32–6.41, สมการ 6.13–6.16, Example 6.4)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the threshold</h3>
+    <ol><li>In section A set \(V_{DS}\) = 15 V and slide \(V_{GS}\) from 0 to 8 V: nothing happens up to 2 V, then the blue channel appears and thickens, with 0, 1.1, 4.4, 10 mA at 2, 4, 6, 8 V (the 2 V steps give 1.1, 3.3, 5.6 mA more each time).</li>
+    <li>Raise \(V_T\) to 4 V (same \(k\)): the whole curve shifts 2 V to the right, the device is "harder to turn on", and at \(V_{GS}\) = 8 V only 4.4 mA is left.</li>
+    <li>At \(V_{GS}\) = 8 V lower \(V_{DS}\) from 15 V: pinch-off is lost at 6 V (= 8 − 2), the badge turns to the ohmic region, and the channel is open along its length.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the constant k</h3>
+    <ol><li>Problem 1: if the sheet gave \(I_{D(\text{on})}\) at another point of the same device, say 4.4 mA at 6 V, \(k\) must come out the same 0.278; check: 4.4/(6 − 2)² = 0.275 (rounding).</li>
+    <li>Problem 3: the 2N4351's \(V_{GS(\text{Th})}\) ranges 1–5 V. If a real device had \(V_T\) = 5 V instead of 3 V, \(k\) would be 3/25 = 0.12 mA/V² and \(I_D\) at 8 V 1.08 mA instead of 1.53 mA: the uncertainty of \(V_T\) is large, which is why the bias circuits of page 6.4 need a feedback resistor or \(R_S\).</li></ol>
+    <div class="book">Chapter 6 slides pp. 16–21 · Boylestad &amp; Nashelsky, 11th ed., section 6.8 (Figs. 6.32–6.41, Eqs. 6.13–6.16, Example 6.4)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET;
+  MOS.problem(1, 'e635'); MOS.problem(2, 'e637'); MOS.problem(3, 'ex64'); MOS.problem(4, 'p638');
+
+  /* =================================================================== A: the induced channel beside Fig. 6.35 */
+  const S = { vgs: 5, vds: 15, vt: 2, k: 0.278 }, dev = () => ({ kind: 'emos', k: S.k * 1e-3, vt: S.vt }), mos = new MOS.Mos(dev()), pane = IE.pane($('cvA'), W => (W >= 640 ? Math.max(380, Math.min(440, W * 0.62)) : 640));
+  const sync = () => mos.set({ dev: dev(), vgs: S.vgs, vds: S.vds }); sync();
+  LS.anim($('cvA'), dt => { mos.step(dt); const { ctx, W, H } = pane; ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, W, H); const m = mos.cur(), d = dev(), wide = W >= 640;
+    const bL = wide ? { x: 0, y: 0, w: Math.round(W * 0.5), h: H } : { x: 0, y: 0, w: W, h: 340 }, bR = wide ? { x: bL.w, y: 0, w: W - bL.w, h: H } : { x: 0, y: 340, w: W, h: H - 340 };
+    mos.draw(ctx, bL, { short: bL.w < 400 });
+    const list = [8, 7, 6, 5, 4, 3, 2].map(v => S.vt + (v - 2)).filter(v => v <= 10), imax = Math.max(4, Math.ceil(S.k * (8 - 2) * (8 - 2) * 1.2));
+    CH5.dPlot(ctx, bR, { short: bR.w < 420 }, { dev: d, vgs: list, imax, vmax: 25, q: { v: Math.min(mos.vds, 24.5), i: Math.min(m.i * 1e3, imax * 0.98), label: bR.w < 420 ? '' : `(${fd(mos.vds, 1)} V, ${fd(m.i * 1e3, 2)} mA)`, side: mos.vds > 13 ? -1 : 1, dy: 16 }, labels: bR.w >= 420, locusLabel: 'V_DSsat', title: t(`V_T = ${fd(S.vt, 1)} V, k = ${fd(S.k, 3)} mA/V²`, `V_T = ${fd(S.vt, 1)} V, k = ${fd(S.k, 3)} mA/V²`) });
+    const reg = CH5.reg(m.region); CK.badge(ctx, `${reg[0]} · I_D = ${fd(m.i * 1e3, 2)} mA`, reg[1]); });
+  const pA = $('pA'); ui.h2(pA, t('แรงดันและอุปกรณ์', 'Voltages and the device'));
+  ui.slider(pA, { id: 'aVGS', label: 'V_GS', min: 0, max: 10, step: 0.1, value: S.vgs, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.vgs = v; sync(); showA(); } });
+  ui.slider(pA, { id: 'aVDS', label: 'V_DS', min: 0, max: 25, step: 0.1, value: S.vds, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.vds = v; sync(); showA(); } });
+  ui.slider(pA, { id: 'aVT', label: 'V_T', min: 1, max: 5, step: 0.5, value: S.vt, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.vt = v; sync(); showA(); } });
+  ui.slider(pA, { id: 'aK', label: 'k', min: 0.05, max: 1, step: 0.01, value: S.k, fmt: v => `${fd(v, 2)} mA/V²`, oninput: v => { S.k = v; sync(); showA(); } });
+  const mA_ = document.createElement('div'); mA_.className = 'metrics'; pA.appendChild(mA_);
+  function showA() { const m = mos.cur(), vov = S.vgs - S.vt;
+    mA_.innerHTML = ui.kv([['I_D', `${fd(m.i * 1e3, 3)} mA`], ['V_GS − V_T', `${fd(vov, 1)} V`], ['(V_GS − V_T)²', `${fd(Math.max(0, vov) ** 2, 2)} V²`], [t('ย่าน', 'region'), CH5.reg(m.region)[0]], ['V_DSsat = V_GS − V_T', vov > 0 ? `${fd(vov, 1)} V` : '—'], ['V_DG = V_DS − V_GS', `${fd(S.vds - S.vgs, 1)} V`]]);
+    const s = vov <= 0 ? t(`\\(V_{GS}\\) = ${fd(S.vgs, 1)} V ≤ \\(V_T\\) = ${fd(S.vt, 1)} V: ยังไม่มีช่อง รอยต่อ p–n ของบ่อทั้งสองไบแอสกลับ กระแสเป็นศูนย์ (ใบข้อมูลให้ \\(I_{DSS}\\) ระดับนาโนแอมแปร์)`, `\\(V_{GS}\\) = ${fd(S.vgs, 1)} V ≤ \\(V_T\\) = ${fd(S.vt, 1)} V: no channel yet; the p–n junctions of both wells are reverse-biased and the current is zero (the sheet's \\(I_{DSS}\\) is nanoamperes).`)
+      : m.region === 'ohmic' ? t(`ช่องเหนี่ยวนำเปิดตลอดความยาว เพราะ \\(V_{DS}\\) = ${fd(S.vds, 1)} V < \\(V_{GS} - V_T\\) = ${fd(vov, 1)} V: ย่านโอห์มิก กระแสยังขึ้นกับ \\(V_{DS}\\)`, `The induced channel is open along its length because \\(V_{DS}\\) = ${fd(S.vds, 1)} V < \\(V_{GS} - V_T\\) = ${fd(vov, 1)} V: the ohmic region, where the current still depends on \\(V_{DS}\\).`)
+      : t(`\\(I_D = k(V_{GS} - V_T)^2 = ${fd(S.k, 3)}(${fd(vov, 1)})^2\\) = ${fd(m.i * 1e3, 2)} mA ช่องบางลงทางด้านเดรน (\\(V_{DG}\\) = ${fd(S.vds - S.vgs, 1)} V) จนพินช์ออฟที่ \\(V_{DS_\\text{sat}}\\) = ${fd(vov, 1)} V กระแสคงที่ในย่านอิ่มตัว`, `\\(I_D = k(V_{GS} - V_T)^2 = ${fd(S.k, 3)}(${fd(vov, 1)})^2\\) = ${fd(m.i * 1e3, 2)} mA. The channel thins at the drain end (\\(V_{DG}\\) = ${fd(S.vds - S.vgs, 1)} V) and pinches off at \\(V_{DS_\\text{sat}}\\) = ${fd(vov, 1)} V; the current is constant in saturation.`);
+    $('wA').innerHTML = `<div class="answer">${s}</div>`; MC.renderMath($('wA')); }
+  showA();
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, k1 = 8 / 4.5 ** 2;
+  CH6.quiz('quiz', [
+    { q: t('1) ใบข้อมูลให้ \\(V_{GS(\\text{Th})}\\) = 2.5 V และ \\(I_{D(\\text{on})}\\) = 8 mA ที่ \\(V_{GS(\\text{on})}\\) = 7 V จงหา \\(k\\)', '1) A sheet gives \\(V_{GS(\\text{Th})}\\) = 2.5 V and \\(I_{D(\\text{on})}\\) = 8 mA at \\(V_{GS(\\text{on})}\\) = 7 V. Find \\(k\\).'),
+      fields: [{ key: 'x', lab: 'k =', ans: k1, unit: 'mA/V²', tol: 0.005 }], work: work(R`k = \frac{8\ \text{mA}}{(7 - 2.5)^2} = \frac{8}{20.25} = ${fd(k1, 3)}\ \text{mA/V}^2`) },
+    { q: t('2) อุปกรณ์ข้อ 1 ที่ \\(V_{GS}\\) = 5 V', '2) The device of question 1 at \\(V_{GS}\\) = 5 V.'),
+      fields: [{ key: 'x', lab: 'I_D =', ans: k1 * 6.25, unit: 'mA', tol: 0.03 }], work: work(R`I_D = ${fd(k1, 3)}(5 - 2.5)^2 = ${fd(k1, 3)}(6.25) = ${fd(k1 * 6.25, 2)}\ \text{mA}`) },
+    { q: t('3) อุปกรณ์ข้อ 1 ที่ \\(V_{GS}\\) = 7 V ต้องมี \\(V_{DS}\\) อย่างน้อยเท่าใดจึงอยู่ในย่านอิ่มตัว', '3) The device of question 1 at \\(V_{GS}\\) = 7 V: what minimum \\(V_{DS}\\) keeps it in saturation?'),
+      fields: [{ key: 'x', lab: 'V_DSsat =', ans: 4.5, unit: 'V', tol: 0.02 }], work: work(R`V_{DS_\text{sat}} = V_{GS} - V_T = 7 - 2.5 = 4.5\ \text{V}`) },
+    { q: t('4) p-channel \\(V_T\\) = −3 V, \\(k\\) = 0.3 mA/V² จงหา \\(I_D\\) ที่ \\(V_{GS}\\) = −7 V และที่ −2 V', '4) A p-channel with \\(V_T\\) = −3 V, \\(k\\) = 0.3 mA/V². Find \\(I_D\\) at \\(V_{GS}\\) = −7 V and at −2 V.'),
+      fields: [{ key: 'x', lab: 'I_D(−7 V) =', ans: 4.8, unit: 'mA', tol: 0.02 }, { key: 'y', lab: 'I_D(−2 V) =', ans: 0, unit: 'mA', tol: 0.001 }], work: work(R`I_D(-7\ \text{V}) = 0.3(-7 - (-3))^2 = 0.3(16) = 4.8\ \text{mA}`, t('<div class="sub2">−2 V ยังไม่เลย V<sub>T</sub> = −3 V: ไม่มีช่อง I<sub>D</sub> = 0</div>', '<div class="sub2">−2 V is not beyond V<sub>T</sub> = −3 V: no channel, I<sub>D</sub> = 0.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

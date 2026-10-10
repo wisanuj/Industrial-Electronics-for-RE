@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="6.2 — Depletion-Type MOSFET Circuits">6.2 — วงจรไบแอสของมอสเฟตแบบดีพลีชัน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรไบแอสของมอสเฟตแบบดีพลีชัน <span class="en">Depletion-type MOSFET circuits</span></h1>
+<h1 data-l="en">Depletion-type MOSFET circuits <span class="en">The JFET analysis, with the curve continued past \(V_{GS} = 0\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 6 หน้า 9–15 เส้นโค้งถ่ายโอนของมอสเฟตแบบดีพลีชันหน้าตาเหมือนของ JFET การวิเคราะห์กระแสตรงจึงเหมือนกันทุกวงจรในบทที่ 5 ต่างกันข้อเดียว: จุดทำงานอาจอยู่ที่ \(V_{GS}\) บวกและ \(I_D\) เกิน \(I_{DSS}\) ได้ ดังนั้นต้องต่อเส้นโค้งเข้าฝั่งบวกให้ไกลพอ (แค่ไหนขึ้นกับเส้นของวงจร) หน้านี้มีวงจรตัวแบ่งแรงดันที่ปรับได้ (ส่วน A) Example 7.6 และ 7.7 ที่ \(R_S\) เล็กลงจนจุด Q ข้ามไปฝั่งบวก Example 7.8 ไบแอสตัวเอง Example 7.9 ที่เกตต่อตรงกับซอร์ส และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 6 slides pp. 9–15. The transfer curve of a depletion MOSFET looks like a JFET's, so the dc analysis is the same for every circuit of chapter 5, with one difference: the operating point may lie at a positive \(V_{GS}\) with \(I_D\) above \(I_{DSS}\), so the curve must be continued far enough into the positive side (how far depends on the network line). This page has an adjustable voltage-divider circuit (section A), Example 7.6 and Example 7.7 where a smaller \(R_S\) pushes Q across to the positive side, Example 7.8 with self bias, Example 7.9 with the gate tied to the source, and more practice.</p>
+<div class="equation-box eqwrap">$$ V_G = \frac{R_2V_{DD}}{R_1 + R_2},\quad V_{GS} = V_G - I_DR_S $$ $$ V_{DS} = V_{DD} - I_D(R_D + R_S) $$ $$ \text{self bias: } V_{GS} = -I_DR_S\ (V_{GS} < 0\ \text{always}) $$ $$ \text{fixed bias: } V_{GS_Q} = \pm V_{GG} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>เหมือน JFET</b> (สไลด์หน้า 9): \(I_G\) = 0 และสมการของ Shockley เหมือนเดิม ทุกวงจรของบทที่ 5 (ไบแอสคงที่ ตัวเอง ตัวแบ่งแรงดัน) วิเคราะห์เหมือนเดิมถ้าแทน JFET ด้วยมอสเฟตแบบดีพลีชัน</li>
+  <li><b>ที่ต่าง</b>: จุดทำงานอาจมี \(V_{GS}\) &gt; 0 และ \(I_D\) &gt; \(I_{DSS}\) ส่วนเดียวที่ยังไม่นิยามคือจะวาดเส้นโค้งเข้าฝั่งบวกไปไกลแค่ไหน: ปกติดูจากเส้นของวงจร แล้วเลือกจุดเดียวฝั่งบวกอย่างระมัดระวัง (Example 7.6 เลือก +1 V ได้ 10.67 mA)</li>
+  <li><b>ตัวแบ่งแรงดัน</b> (Examples 7.6–7.7): เส้น \(V_{GS} = V_G - I_DR_S\) หมุนรอบ \(V_G\) บนแกนนอน \(R_S\) ใหญ่ให้ Q ฝั่งลบ (7.6: −0.8 V, 3.1 mA) \(R_S\) เล็กให้ Q ฝั่งบวก (7.7: +0.35 V, 7.6 mA เกิน \(I_{DSS}\) = 6 mA)</li>
+  <li><b>ไบแอสตัวเอง</b> (Example 7.8): \(V_{GS} = -I_DR_S\) ลบเสมอ จึงใช้แค่ฝั่งดีพลีชัน ไม่จำเป็นต้องวาดฝั่งบวก (ตำราวาดให้ครบเฉย ๆ)</li>
+  <li><b>เกตต่อซอร์ส</b> (Example 7.9, ตาราง 7.1): \(V_{GS}\) = 0 บังคับ \(I_D = I_{DSS}\) ทันที ไม่ต้องวาดเส้นโค้ง · <b>ไบแอสคงที่</b> (ตาราง 7.1): \(V_{GS_Q} = +V_{GG}\) ได้ เพราะเกตฉนวนรับแรงดันบวกได้</li>
+  <li><b>ตรวจย่านเสมอ</b>: \(V_{DS} \ge V_{GS} - V_P\) ยิ่งจุด Q อยู่ฝั่งบวก \(V_{GS} - V_P\) ยิ่งใหญ่ และ \(I_D\) ที่มากขึ้นก็กิน \(V_{DD}\) มากขึ้น (Example 7.7 ตกไปอยู่ย่านโอห์มิกเล็กน้อย)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>As for a JFET</b> (slide p. 9): \(I_G\) = 0 and Shockley's equation as before; every circuit of chapter 5 (fixed, self, voltage-divider bias) is analysed the same way when a depletion MOSFET replaces the JFET.</li>
+  <li><b>What differs</b>: the operating point may have \(V_{GS}\) &gt; 0 and \(I_D\) &gt; \(I_{DSS}\). The only undefined part is how far to draw the curve into the positive side: judge it from the network line and choose one conservative positive point (Example 7.6 takes +1 V, 10.67 mA).</li>
+  <li><b>Voltage divider</b> (Examples 7.6–7.7): the line \(V_{GS} = V_G - I_DR_S\) pivots about \(V_G\) on the horizontal axis; a large \(R_S\) puts Q on the negative side (7.6: −0.8 V, 3.1 mA), a small one on the positive side (7.7: +0.35 V, 7.6 mA, above \(I_{DSS}\) = 6 mA).</li>
+  <li><b>Self bias</b> (Example 7.8): \(V_{GS} = -I_DR_S\) is always negative, so only the depletion side is used and the positive side need not be drawn (the book draws it for completeness).</li>
+  <li><b>Gate tied to the source</b> (Example 7.9, Table 7.1): \(V_{GS}\) = 0 forces \(I_D = I_{DSS}\) at once, no curve needed. <b>Fixed bias</b> (Table 7.1): \(V_{GS_Q} = +V_{GG}\) is allowed, since the insulated gate accepts a positive voltage.</li>
+  <li><b>Always check the region</b>: \(V_{DS} \ge V_{GS} - V_P\). The further Q lies on the positive side, the larger \(V_{GS} - V_P\), and the larger \(I_D\) eats more of \(V_{DD}\) (Example 7.7 slips slightly into the ohmic region).</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch6/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 9, Depletion-Type MOSFET Circuit: the similarities in appearance between the transfer curves of JFETs and depletion-type MOSFETs permit a similar analysis of each in the dc domain; the primary difference between the two is the fact that depletion-type MOSFETs permit operating points with positive values of V_GS and levels of I_D that exceed I_DSS; in fact, for all the configurations discussed thus far, the analysis is the same if the JFET is replaced by a depletion-type MOSFET.">
+  <figcaption data-l="th">สไลด์บทที่ 6 หน้า 9: วิเคราะห์เหมือน JFET แต่ \(V_{GS}\) บวกได้ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 6 slide p. 9: the JFET analysis, but \(V_{GS}\) may be positive · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 10, 11, 12 เหมือนกันทุกประการ</b> (โจทย์ Example 7.6) และ<b>หน้า 13, 14, 15 เหมือนกัน</b> (โจทย์ Example 7.8) ไม่มีเฉลยในสไลด์ หน้านี้แสดงหน้า 10 และ 13 หน้าละครั้ง · ค่า \(R_1\) = 110 MΩ, \(R_2\) = 10 MΩ ของ Example 7.6 สูงมากจนในภาพจำลองกระแสในตัวแบ่ง (0.15 µA) แทบไม่เห็นจุดวิ่ง</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 10, 11 and 12 are identical</b> (the statement of Example 7.6) and <b>pp. 13, 14, 15 are identical</b> (Example 7.8); the slides give no solutions. This page shows pp. 10 and 13 once each. The \(R_1\) = 110 MΩ, \(R_2\) = 10 MΩ of Example 7.6 are so large that the divider current (0.15 µA) hardly shows as moving dots.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรปรับได้</a><a href="#ex1"><b>1</b>Example 7.6</a><a href="#ex2"><b>2</b>Example 7.7</a><a href="#ex3"><b>3</b>Example 7.8</a><a href="#ex4"><b>4</b>Example 7.9</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The adjustable circuit</a><a href="#ex1"><b>1</b>Example 7.6</a><a href="#ex2"><b>2</b>Example 7.7</a><a href="#ex3"><b>3</b>Example 7.8</a><a href="#ex4"><b>4</b>Example 7.9</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวแบ่งแรงดันกับมอสเฟตแบบดีพลีชัน: จุด Q ข้ามศูนย์ได้</h2><h2 data-l="en">The voltage divider with a depletion MOSFET: Q may cross zero</h2>
+    <div class="src" data-l="th">สไลด์หน้า 9–10 · Boylestad หัวข้อ 7.7 (รูป 7.30–7.32)</div><div class="src" data-l="en">Slides pp. 9–10 · Boylestad, section 7.7 (Figs. 7.30–7.32)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 10, Depletion-Type MOSFET Circuit: for the n-channel depletion-type MOSFET of the figure, determine (a) I_DQ and V_GSQ, (b) V_DS. Figure 7.30: 18 V supply, R_1 = 110 MΩ, R_2 = 10 MΩ, R_D = 1.8 kΩ, R_S = 750 Ω, C_1 and C_2, I_DSS = 6 mA, V_P = −3 V.">
+    <figcaption data-l="th">สไลด์หน้า 10: โจทย์ Example 7.6 (รูป 7.30) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 10: Example 7.6 (Fig. 7.30) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Example 7.6 กราฟบนคือเส้นโค้งถ่ายโอนที่ต่อเข้าฝั่งบวกแล้ว กับเส้นของวงจรจาก (\(V_G\), 0) ผ่าน (0, \(V_G/R_S\)) กราฟล่างคือเส้นโหลดบนลักษณะสมบัติด้านเดรนที่มีเส้น \(V_{GS}\) บวกด้วย ลองลด \(R_S\) จาก 750 Ω ลงเรื่อย ๆ: เส้นชันขึ้น จุด Q ไต่ขึ้นตามเส้นโค้ง ข้ามแกนตั้งที่ \(I_D = I_{DSS}\) แล้วเข้าฝั่งบวก (Example 7.7 ที่ 150 Ω) ป้ายบอกโหมดและย่าน</p>
+  <p class="lead" data-l="en">Start from the circuit of Example 7.6. The upper graph is the transfer curve continued into the positive side, with the network line from (\(V_G\), 0) through (0, \(V_G/R_S\)). The lower graph is the load line on drain characteristics that include positive-\(V_{GS}\) curves. Lower \(R_S\) from 750 Ω: the line steepens, Q climbs the curve, crosses the vertical axis at \(I_D = I_{DSS}\) and enters the positive side (Example 7.7 at 150 Ω). The badge names the mode and the region.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 7.6: ตัวแบ่งแรงดัน \(R_S\) = 750 Ω</h2><h2 data-l="en">Example 7.6: the voltage divider with \(R_S\) = 750 Ω</h2>
+    <div class="src" data-l="th">สไลด์หน้า 10–12 · Boylestad Example 7.6 (รูป 7.30–7.31)</div><div class="src" data-l="en">Slides pp. 10–12 · Boylestad Example 7.6 (Figs. 7.30–7.31)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ, \(R_2\) = 10 MΩ, \(R_D\) = 1.8 kΩ, \(R_S\) = 750 Ω, \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V จงหา (a) \(I_{D_Q}\) และ \(V_{GS_Q}\) (b) \(V_{DS}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ, \(R_2\) = 10 MΩ, \(R_D\) = 1.8 kΩ, \(R_S\) = 750 Ω, \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V. Determine (a) \(I_{D_Q}\) and \(V_{GS_Q}\) (b) \(V_{DS}\).</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพสร้างรูป 7.31 ทีละขั้น แล้วแสดงเส้นโหลดในขั้นสุดท้าย <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The side panel builds Fig. 7.31 step by step, with the load line at the end. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 7.7: \(R_S\) = 150 Ω และจุด Q ฝั่งบวก</h2><h2 data-l="en">Example 7.7: \(R_S\) = 150 Ω and a Q on the positive side</h2>
+    <div class="src" data-l="th">Boylestad Example 7.7 (รูป 7.32)</div><div class="src" data-l="en">Boylestad Example 7.7 (Fig. 7.32)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทำ Example 7.6 ซ้ำด้วย \(R_S\) = 150 Ω</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Repeat Example 7.6 with \(R_S\) = 150 Ω.</p></div>
+  <p class="lead" data-l="th">จุดสีเขียวในกราฟคือคำตอบจากเส้นโค้งตามตำรา จุดสีเหลืองคือจุด Q จริงของวงจร <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The green point is the book's answer from the curve, the yellow one the circuit's actual Q. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 7.8: ไบแอสตัวเอง</h2><h2 data-l="en">Example 7.8: self bias</h2>
+    <div class="src" data-l="th">สไลด์หน้า 13–15 · Boylestad Example 7.8 (รูป 7.33–7.34)</div><div class="src" data-l="en">Slides pp. 13–15 · Boylestad Example 7.8 (Figs. 7.33–7.34)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 13, Depletion-Type MOSFET Circuit: determine the following for the network of the figure: (a) I_DQ and V_GSQ, (b) V_D. Figure 7.33: 20 V supply, R_D = 6.2 kΩ, R_G = 1 MΩ, R_S = 2.4 kΩ, I_DSS = 8 mA, V_P = −8 V.">
+    <figcaption data-l="th">สไลด์หน้า 13: โจทย์ Example 7.8 (รูป 7.33) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 13: Example 7.8 (Fig. 7.33) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 20 V, \(R_D\) = 6.2 kΩ, \(R_G\) = 1 MΩ, \(R_S\) = 2.4 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −8 V จงหา (a) \(I_{D_Q}\) และ \(V_{GS_Q}\) (b) \(V_D\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 20 V, \(R_D\) = 6.2 kΩ, \(R_G\) = 1 MΩ, \(R_S\) = 2.4 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −8 V. Determine (a) \(I_{D_Q}\) and \(V_{GS_Q}\) (b) \(V_D\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">Example 7.9: เกตต่อตรงกับซอร์ส</h2><h2 data-l="en">Example 7.9: the gate tied to the source</h2>
+    <div class="src" data-l="th">Boylestad Example 7.9 (รูป 7.35) · ตาราง 7.1 แถว "V_GSQ = 0 V"</div><div class="src" data-l="en">Boylestad Example 7.9 (Fig. 7.35) · Table 7.1, the "V_GSQ = 0 V" row</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>มอสเฟตแบบดีพลีชัน \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V ต่อเกตกับซอร์สโดยตรง \(V_{DD}\) = 20 V, \(R_D\) = 1.5 kΩ จงหา \(V_{DS}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A depletion MOSFET with \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V has its gate tied directly to the source; \(V_{DD}\) = 20 V, \(R_D\) = 1.5 kΩ. Determine \(V_{DS}\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(I_G\) = 0 · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(I_G\) = 0 · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — จาก 7.6 ถึง 7.7</h3>
+    <ol><li>ส่วน A ลด \(R_S\) จาก 750 Ω ลงถึง 150 Ω: จุด Q ไต่จาก (−0.8 V, 3.1 mA) ข้ามแกนตั้งที่ 6 mA ไปถึง (+0.35 V, 7.6 mA) ป้ายเปลี่ยนจากดีพลีชันโหมดเป็นเอนแฮนซ์เมนต์โหมด แล้วเป็นย่านโอห์มิกเมื่อ \(V_{DS}\) ตกต่ำกว่า \(V_{GS} - V_P\)</li>
+    <li>คง \(R_S\) = 150 Ω แล้วลด \(R_D\) เหลือ 1 kΩ: \(V_{DS}\) กลับขึ้นเหนือ 3.35 V ป้ายกลับเป็นย่านอิ่มตัว และ \(I_D\) ตรงกับเส้นโค้งอีกครั้ง</li>
+    <li>เพิ่ม \(R_2\) เป็น 30 MΩ: \(V_G\) = 3.9 V จุดหมุนเลื่อนขวา Q ขึ้นสูงจน \(I_D\) ไปไกลกว่า \(I_{DSS}\) มาก นี่คือเหตุที่ตำราบอกให้เลือกจุดฝั่งบวกตามเส้นของวงจร</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ทำไมไบแอสตัวเองไม่ข้ามศูนย์</h3>
+    <ol><li>ข้อ 3: เส้น \(V_{GS} = -I_DR_S\) ผ่านจุดกำเนิดและมีความชันลบ มันอยู่ในจตุภาค \(V_{GS}\) &lt; 0, \(I_D\) &gt; 0 เท่านั้น ไม่ว่า \(R_S\) จะเป็นเท่าใด การเข้าฝั่งบวกต้องมี \(V_G\) บวกจากตัวแบ่ง (ข้อ 1–2) หรือ \(V_{GG}\) (ตาราง 7.1)</li>
+    <li>ข้อ 4: ถ้าเพิ่ม \(R_D\) เป็น 2 kΩ: \(V_{DS}\) = 0 V? ไม่ได้ — กระแสจะถูกจำกัดโดยย่านโอห์มิก ตรวจด้วยส่วน A ของหน้า 5.3 หรือภาพจำลองข้อนี้ (ชี้ที่ทรานซิสเตอร์)</li></ol>
+    <div class="book">สไลด์บทที่ 6 หน้า 9–15 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 7.7 (รูป 7.30–7.35, Examples 7.6–7.9) และตาราง 7.1</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — from 7.6 to 7.7</h3>
+    <ol><li>In section A lower \(R_S\) from 750 Ω to 150 Ω: Q climbs from (−0.8 V, 3.1 mA), crosses the vertical axis at 6 mA and reaches (+0.35 V, 7.6 mA); the badge changes from depletion mode to enhancement mode, then to the ohmic region once \(V_{DS}\) falls below \(V_{GS} - V_P\).</li>
+    <li>Keep \(R_S\) = 150 Ω and lower \(R_D\) to 1 kΩ: \(V_{DS}\) climbs back above 3.35 V, the badge returns to saturation, and \(I_D\) agrees with the curve again.</li>
+    <li>Raise \(R_2\) to 30 MΩ: \(V_G\) = 3.9 V, the pivot moves right and Q climbs far above \(I_{DSS}\). This is why the book says to choose the positive-side point according to the network line.</li></ol></div>
+  <div class="card"><h3>Try this 2 — why self bias cannot cross zero</h3>
+    <ol><li>Problem 3: the line \(V_{GS} = -I_DR_S\) passes through the origin with a negative slope, so it lives only in the quadrant \(V_{GS}\) &lt; 0, \(I_D\) &gt; 0, whatever \(R_S\). Reaching the positive side needs a positive \(V_G\) from a divider (problems 1–2) or \(V_{GG}\) (Table 7.1).</li>
+    <li>Problem 4: with \(R_D\) raised to 2 kΩ, \(V_{DS}\) = 0 V? No: the current would be limited by the ohmic region; check with section A of page 5.3 or this problem's simulation (hover over the transistor).</li></ol>
+    <div class="book">Chapter 6 slides pp. 9–15 · Boylestad &amp; Nashelsky, 11th ed., section 7.7 (Figs. 7.30–7.35, Examples 7.6–7.9) and Table 7.1</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET, C = IE.COL;
+  MOS.problem(1, 'ex76'); MOS.problem(2, 'ex77'); MOS.problem(3, 'ex78'); MOS.problem(4, 'ex79');
+
+  /* =================================================================== A: the adjustable divider with a depletion MOSFET */
+  const sg = x => (x < 0 ? '−' : x > 0 ? '+' : '') + fd(Math.abs(x), 2), DEV = MOS.DEV.ex76, logR = (id, label, lo, hi, get, set, p, build, step = 10) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  const vg = S => S.R2 * S.VDD / (S.R1 + S.R2);
+  CH5.explorer({ init: { R1: 110e6, R2: 10e6, RS: 750, RD: 1800, VDD: 18 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      logR('aR1', 'R_1', 1e6, 500e6, () => S.R1, v => { S.R1 = v; }, p, build, 1e6); logR('aR2', 'R_2', 1e6, 100e6, () => S.R2, v => { S.R2 = v; }, p, build, 1e6);
+      logR('aRS', 'R_S', 50, 5e3, () => S.RS, v => { S.RS = v; }, p, build, 10); logR('aRD', 'R_D', 200, 10e3, () => S.RD, v => { S.RD = v; }, p, build, 100);
+      ui.slider(p, { id: 'aVDD', label: 'V_DD', min: 5, max: 30, step: 0.5, value: S.VDD, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VDD = v; build(); } }); },
+    spec: S => CH5.net({ dev: DEV, VDD: S.VDD, R1: S.R1, R2: S.R2, RD: S.RD, RS: S.RS }),
+    side: (ctx, b, bd, c, S) => { const z = CH5.j(c), VG = vg(S), q = FET.biasOf(DEV, S.RS, VG), vmax = Math.max(2, Math.ceil(VG + 0.5));
+      CH5.tPlot(ctx, b, bd, { dev: DEV, imax: 14, vmin: -4, vmax, yt: [2, 4, 6, 8, 10, 12, 14], lines: [{ a: [VG, 0], b: [VG - 14 * S.RS / 1e3, 14], label: bd.short ? '' : 'V_GS = V_G − I_D R_S', at: 0.12 }], tbl: !bd.short,
+        pts: [{ v: VG, i: 0, color: C.tan, r: 5, label: bd.short ? '' : `V_G = ${fd(VG, 2)} V`, side: 1, dy: 16 }, { v: 0, i: VG / S.RS * 1e3, color: C.tan, r: 5, label: bd.short ? '' : `V_G/R_S = ${fd(VG / S.RS * 1e3, 2)} mA`, side: 1, dy: 14 }, { v: z.VGS, i: z.id, label: bd.short ? 'Q' : `Q (${sg(z.VGS)} V, ${fd(z.id, 2)} mA)`, side: -1, dy: -14 }].concat(Math.abs(q.id * 1e3 - z.id) > 0.02 ? [{ v: q.vgs, i: q.id * 1e3, color: C.tan, r: 5, label: bd.short ? '' : t(`จากเส้นโค้ง ${fd(q.id * 1e3, 2)} mA`, `curve: ${fd(q.id * 1e3, 2)} mA`), side: 1, dy: 16 }] : []),
+        guides: [{ v: z.VGS, i: z.id }], vl: [{ v: 0, color: 'rgba(232,236,247,.25)', w: 1, dash: [3, 3] }], title: t('รูป 7.31: เส้นโค้งต่อเข้าฝั่งบวก ตัดเส้นของวงจร', 'Fig. 7.31: the curve continued into V_GS > 0 meets the network line') }); },
+    waves: [(ctx, b, bd, c, S) => { const z = CH5.j(c), r = S.RD + S.RS; CH5.dPlot(ctx, b, bd, { dev: DEV, vgs: [1.5, 1, 0.5, 0, -1, -2, -3], imax: 14, vmax: Math.max(10, Math.ceil(S.VDD * 1.15)), xt: [5, 10, 15, 20, 25, 30, 35].filter(x => x <= S.VDD * 1.15), yt: [2, 4, 6, 8, 10, 12, 14], load: { vdd: S.VDD, r }, q: { v: z.VDS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.VDS, 2)} V, ${fd(z.id, 2)} mA)`, side: z.VDS > S.VDD * 0.55 ? -1 : 1, dy: -18 }, labels: !bd.short,
+      title: t('เส้นโหลด V_DS = V_DD − I_D(R_D + R_S)', 'load line V_DS = V_DD − I_D(R_D + R_S)') }); }],
+    badge: (c, S) => { const z = CH5.j(c), reg = CH5.reg(z.region), mode = z.VGS > 1e-3 ? t('เอนแฮนซ์เมนต์', 'enhancement') : t('ดีพลีชัน', 'depletion'); return [[`${reg[0]} · ${mode} · I_D = ${fd(z.id, 2)} mA, V_GS = ${sg(z.VGS)} V`, `${reg[0]} · ${mode} · I_D = ${fd(z.id, 2)} mA, V_GS = ${sg(z.VGS)} V`], reg[1]]; },
+    rows: (c, z, S) => { const VG = vg(S); return [['V_G', `${fd(VG, 3)} V`], ['V_G/R_S', `${fd(VG / S.RS * 1e3, 2)} mA`], ['I_D', `${fd(z.id, 3)} mA`], ['I_D / I_DSS', fd(z.id / 6, 2)], ['V_GS', `${sg(z.VGS)} V`], ['V_DS', `${fd(z.VDS, 2)} V`], ['V_GS − V_P', `${fd(z.vov, 2)} V`], [t('ย่าน', 'region'), CH5.reg(z.region)[0]]]; },
+    text: (c, z, S) => { const VG = vg(S);
+      return z.region !== 'saturation' && z.region !== 'cutoff' ? t(`\\(V_{DS}\\) = ${fd(z.VDS, 2)} V น้อยกว่า \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: จุด Q หลุดเข้าย่านโอห์มิก กระแสจริง ${fd(z.id, 2)} mA ต่ำกว่าที่เส้นโค้งบอก ลด \\(R_D\\) หรือเพิ่ม \\(V_{DD}\\)`, `\\(V_{DS}\\) = ${fd(z.VDS, 2)} V is below \\(V_{GS} - V_P\\) = ${fd(z.vov, 2)} V: Q has slipped into the ohmic region and the actual ${fd(z.id, 2)} mA is below what the curve says; lower \\(R_D\\) or raise \\(V_{DD}\\).`)
+        : z.VGS > 1e-3 ? t(`\\(V_G\\) = ${fd(VG, 2)} V กับ \\(R_S\\) = ${CK.eng(S.RS, 'Ω')} ให้จุดตัดที่ \\(V_{GS}\\) = ${sg(z.VGS)} V (เอนแฮนซ์เมนต์โหมด): \\(I_D\\) = ${fd(z.id, 2)} mA เกิน \\(I_{DSS}\\) = 6 mA ซึ่ง JFET ทำไม่ได้ \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ ${fd(z.vov, 2)} V ย่านอิ่มตัว`, `\\(V_G\\) = ${fd(VG, 2)} V with \\(R_S\\) = ${CK.eng(S.RS, 'Ω')} puts the intersection at \\(V_{GS}\\) = ${sg(z.VGS)} V (enhancement mode): \\(I_D\\) = ${fd(z.id, 2)} mA exceeds \\(I_{DSS}\\) = 6 mA, which a JFET cannot do; \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ ${fd(z.vov, 2)} V, saturation.`)
+        : t(`\\(V_G\\) = ${fd(VG, 2)} V กับ \\(R_S\\) = ${CK.eng(S.RS, 'Ω')} ให้จุดตัดที่ \\(V_{GS}\\) = ${sg(z.VGS)} V (ดีพลีชันโหมด เหมือน JFET ทุกประการ): \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{DS}\\) = ${fd(z.VDS, 2)} V`, `\\(V_G\\) = ${fd(VG, 2)} V with \\(R_S\\) = ${CK.eng(S.RS, 'Ω')} puts the intersection at \\(V_{GS}\\) = ${sg(z.VGS)} V (depletion mode, exactly as for a JFET): \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{DS}\\) = ${fd(z.VDS, 2)} V.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, d84 = { kind: 'dmos', idss: 8e-3, vp: -4 }, VG1 = 16 / 3, q1 = FET.biasOf(d84, 300, VG1), q2 = FET.biasOf(d84, 2000, VG1), sideOf = q => (q.vgs > 0 ? R`\ (V_{GS} > 0:\ I_D > I_{DSS})` : R`\ (V_{GS} < 0:\ \text{depletion side})`), q3 = FET.biasOf(MOS.DEV.ex76, 680, 0);
+  CH6.quiz('quiz', [
+    { q: t('1) มอสเฟตแบบดีพลีชัน \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V ในวงจรตัวแบ่งแรงดัน \\(V_{DD}\\) = 16 V, \\(R_1\\) = 2 MΩ, \\(R_2\\) = 1 MΩ, \\(R_S\\) = 300 Ω จงหา \\(V_G\\), \\(I_{D_Q}\\) และ \\(V_{GS_Q}\\)', '1) A depletion MOSFET, \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4 V, in a divider circuit with \\(V_{DD}\\) = 16 V, \\(R_1\\) = 2 MΩ, \\(R_2\\) = 1 MΩ, \\(R_S\\) = 300 Ω. Find \\(V_G\\), \\(I_{D_Q}\\) and \\(V_{GS_Q}\\).'),
+      fields: [{ key: 'x', lab: 'V_G =', ans: VG1, unit: 'V', tol: 0.02 }, { key: 'y', lab: 'I_DQ =', ans: q1.id * 1e3, unit: 'mA', tol: 0.1 }, { key: 'z', lab: 'V_GSQ =', ans: q1.vgs, unit: 'V', tol: 0.1 }],
+      work: work(R`V_G = \frac{(1)(16)}{3} = ${fd(VG1, 2)}\ \text{V};\quad I_D = 8\left(1 - \frac{${fd(VG1, 2)} - 0.3I_D}{-4}\right)^2 \Rightarrow I_{D_Q} = ${fd(q1.id * 1e3, 2)}\ \text{mA},\ V_{GS_Q} = ${fd(q1.vgs, 2)}\ \text{V}${sideOf(q1)}`) },
+    { q: t('2) วงจรข้อ 1 กับ \\(R_S\\) = 2 kΩ', '2) The circuit of question 1 with \\(R_S\\) = 2 kΩ.'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: q2.id * 1e3, unit: 'mA', tol: 0.1 }, { key: 'y', lab: 'V_GSQ =', ans: q2.vgs, unit: 'V', tol: 0.1 }],
+      work: work(R`I_D = 8\left(1 - \frac{${fd(VG1, 2)} - 2I_D}{-4}\right)^2 \Rightarrow I_{D_Q} = ${fd(q2.id * 1e3, 2)}\ \text{mA},\ V_{GS_Q} = ${fd(q2.vgs, 2)}\ \text{V}${sideOf(q2)}`) },
+    { q: t('3) ไบแอสตัวเอง: มอสเฟต \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V, \\(R_S\\) = 680 Ω จงหา \\(I_{D_Q}\\) และบอกว่า \\(V_{GS}\\) เป็นบวกได้หรือไม่', '3) Self bias: a MOSFET with \\(I_{DSS}\\) = 6 mA, \\(V_P\\) = −3 V, \\(R_S\\) = 680 Ω. Find \\(I_{D_Q}\\) and say whether \\(V_{GS}\\) can be positive.'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: q3.id * 1e3, unit: 'mA', tol: 0.08 }], work: work(R`V_{GS} = -0.68I_D < 0\ \text{always};\quad I_D = 6\left(1 - \frac{0.68I_D}{3}\right)^2 \Rightarrow I_{D_Q} = ${fd(q3.id * 1e3, 2)}\ \text{mA},\ V_{GS_Q} = ${fd(q3.vgs, 2)}\ \text{V}`) },
+    { q: t('4) เกตต่อซอร์ส: \\(I_{DSS}\\) = 5 mA, \\(V_P\\) = −2 V, \\(V_{DD}\\) = 15 V, \\(R_D\\) = 1.8 kΩ จงหา \\(V_D\\) แล้วตรวจว่าอยู่ในย่านอิ่มตัวหรือไม่ (ตอบ \\(V_{DS} - |V_P|\\))', '4) Gate tied to source: \\(I_{DSS}\\) = 5 mA, \\(V_P\\) = −2 V, \\(V_{DD}\\) = 15 V, \\(R_D\\) = 1.8 kΩ. Find \\(V_D\\) and check saturation (give \\(V_{DS} - |V_P|\\)).'),
+      fields: [{ key: 'x', lab: 'V_D =', ans: 6, unit: 'V', tol: 0.02 }, { key: 'y', lab: 'V_DS − |V_P| =', ans: 4, unit: 'V', tol: 0.02 }], work: work(R`I_D = I_{DSS} = 5\ \text{mA},\quad V_D = 15 - (5)(1.8) = 6\ \text{V},\quad V_{DS} - |V_P| = 6 - 2 = 4\ \text{V} \ge 0\ \checkmark`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

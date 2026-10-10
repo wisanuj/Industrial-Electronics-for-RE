@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="6.4 — Enhancement-Type MOSFET Circuits">6.4 — วงจรไบแอสของมอสเฟตแบบเอนแฮนซ์เมนต์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรไบแอสของมอสเฟตแบบเอนแฮนซ์เมนต์ <span class="en">Enhancement-type MOSFET circuits</span></h1>
+<h1 data-l="en">Enhancement-type MOSFET circuits <span class="en">Feedback bias with \(V_{GS} = V_{DS}\), the divider, and the summary table</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 6 หน้า 22–35 เส้นโค้งถ่ายโอนของมอสเฟตแบบเอนแฮนซ์เมนต์อยู่ในฝั่ง \(V_{GS}\) บวกและเริ่มที่ \(V_{GS(\text{Th})}\) วิธีกราฟจึงหน้าตาต่างออกไป แต่หลักเดิม: วาดเส้นโค้งของอุปกรณ์จากใบข้อมูล ลากเส้นของวงจรทับ จุดตัดคือ Q วงจรยอดนิยมสองแบบ: <b>ไบแอสป้อนกลับ</b> (\(R_G\) จากเดรนมาเกต ทำให้ \(V_{GS} = V_{DS}\) และเส้นของวงจรคือ \(V_{GS} = V_{DD} - I_DR_D\)) และ<b>ตัวแบ่งแรงดัน</b>เหมือนบทที่ 5 หน้านี้มีวงจรปรับได้ทั้งสองแบบ (ส่วน A) Examples 7.10–7.11 ตารางสรุปวงจรไบแอส FET ทุกแบบ (ตาราง 7.1) และแบบฝึกเพิ่ม</p>
+<p class="sub" data-l="en">Chapter 6 slides pp. 22–35. The transfer curve of an enhancement MOSFET lies on the positive side and starts at \(V_{GS(\text{Th})}\), so the graphical solution looks different, but the principle is the same: draw the device curve from the data sheet, superimpose the network line, and Q is the intersection. Two popular circuits: <b>feedback bias</b> (\(R_G\) from drain to gate makes \(V_{GS} = V_{DS}\), and the network line is \(V_{GS} = V_{DD} - I_DR_D\)) and the <b>voltage divider</b> of chapter 5. This page has both circuits adjustable (section A), Examples 7.10–7.11, the summary table of every FET bias circuit (Table 7.1), and more practice.</p>
+<div class="equation-box eqwrap">$$ I_D = k(V_{GS} - V_{GS(\text{Th})})^2,\qquad k = \frac{I_{D(\text{on})}}{(V_{GS(\text{on})} - V_{GS(\text{Th})})^2} $$ $$ \text{feedback: } V_{GS} = V_{DS} = V_{DD} - I_DR_D $$ $$ \text{divider: } V_G = \frac{R_2V_{DD}}{R_1 + R_2},\quad V_{GS} = V_G - I_DR_S $$ $$ V_{DS} = V_{DD} - I_D(R_S + R_D) $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>เส้นโค้งจากใบข้อมูล</b> (สไลด์หน้า 22, รูป 7.36): สองจุดได้ทันที (\(V_{GS(\text{Th})}\), 0) และ (\(V_{GS(\text{on})}\), \(I_{D(\text{on})}\)) หา \(k\) จากสมการ 7.34 แล้วเติมจุดหนึ่งระหว่างกับจุดหนึ่งเลย \(V_{GS(\text{on})}\) ก็พอ</li>
+  <li><b>ไบแอสป้อนกลับ</b> (สไลด์หน้า 23–24, รูป 7.37–7.39): \(R_G\) นำแรงดันเดรนที่สูงพอมาเปิดมอสเฟต เพราะ \(I_G\) = 0 จึง \(V_{R_G}\) = 0, \(V_D = V_G\) และ \(V_{GS} = V_{DS}\) (สมการ 7.35) แทนในวงเดรนได้เส้นของวงจร \(V_{GS} = V_{DD} - I_DR_D\) (สมการ 7.36) ผ่าน (\(V_{DD}\), 0) และ (0, \(V_{DD}/R_D\)) — หน้าตาเหมือนเส้นโหลด แต่อยู่บนกราฟถ่ายโอน</li>
+  <li><b>อยู่ในย่านอิ่มตัวเสมอ</b>: \(V_{DS} = V_{GS} > V_{GS} - V_T\) ทุกกรณี (\(V_{DG}\) = 0) วงจรป้อนกลับจึงไม่มีทางหลุดเข้าย่านโอห์มิก และต้านการเปลี่ยนของ \(k\), \(V_T\) ได้ดี (Example 7.10)</li>
+  <li><b>ตัวแบ่งแรงดัน</b> (สไลด์หน้า 28, รูป 7.43, สมการ 7.39–7.41): เหมือนหน้า 5.5 ทุกประการ \(V_G\) จากตัวแบ่ง เส้น \(V_{GS} = V_G - I_DR_S\) ตัดเส้นโค้งทางขวาของ \(V_{GS(\text{Th})}\) (Example 7.11)</li>
+  <li><b>ตารางสรุป</b> (สไลด์หน้า 32–35, ตาราง 7.1): ทุกวงจรไบแอส FET ใช้วิธีเดียวกัน: เส้นโค้งของอุปกรณ์ + เส้นของวงจร → Q → กฎของวงจร ส่วน B รวมไว้ในหน้านี้</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The curve from the sheet</b> (slide p. 22, Fig. 7.36): two points at once, (\(V_{GS(\text{Th})}\), 0) and (\(V_{GS(\text{on})}\), \(I_{D(\text{on})}\)); find \(k\) from Eq. 7.34, then one point between and one beyond \(V_{GS(\text{on})}\) suffice.</li>
+  <li><b>Feedback bias</b> (slides pp. 23–24, Figs. 7.37–7.39): \(R_G\) brings a drain voltage large enough to turn the MOSFET on; with \(I_G\) = 0, \(V_{R_G}\) = 0, \(V_D = V_G\) and \(V_{GS} = V_{DS}\) (Eq. 7.35). Substituting in the drain loop gives the network line \(V_{GS} = V_{DD} - I_DR_D\) (Eq. 7.36) through (\(V_{DD}\), 0) and (0, \(V_{DD}/R_D\)), which looks like a load line but lives on the transfer graph.</li>
+  <li><b>Always in saturation</b>: \(V_{DS} = V_{GS} > V_{GS} - V_T\) in every case (\(V_{DG}\) = 0), so the feedback circuit can never slip into the ohmic region, and it resists changes of \(k\), \(V_T\) well (Example 7.10).</li>
+  <li><b>Voltage divider</b> (slide p. 28, Fig. 7.43, Eqs. 7.39–7.41): exactly as on page 5.5; \(V_G\) from the divider, the line \(V_{GS} = V_G - I_DR_S\) meets the curve to the right of \(V_{GS(\text{Th})}\) (Example 7.11).</li>
+  <li><b>The summary table</b> (slides pp. 32–35, Table 7.1): every FET bias circuit uses the same method, device curve + network line → Q → the circuit laws; section B collects it on this page.</li></ul></section>
+
+<div class="slides"><figure class="slide"><img src="slides/ch6/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 22, Enhancement-Type MOSFET Circuit: the transfer characteristics of the enhancement-type MOSFET are quite different from those encountered for the JFET and depletion-type MOSFETs, resulting in a graphical solution quite different from the preceding sections; the drain current is zero for levels of gate-to-source voltage less than the threshold level V_GS(Th), as shown in the figure; I_D = k(V_GS − V_GS(Th))², I_D(on) = k(V_GS(on) − V_GS(Th))², k = I_D(on)/(V_GS(on) − V_GS(Th))². Figure 7.36: the transfer curve with I_D(on), I_D1, I_D2 at V_GS(Th), V_GS1, V_GS(on), V_GS2.">
+  <figcaption data-l="th">สไลด์บทที่ 6 หน้า 22: เส้นโค้งถ่ายโอนจากใบข้อมูล (รูป 7.36) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 6 slide p. 22: the transfer curve from the data sheet (Fig. 7.36) · tap to enlarge</figcaption></figure></div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 25, 26, 27 เหมือนกันทุกประการ</b> (โจทย์ Example 7.10) และ<b>หน้า 29, 30 เหมือนกัน</b> (โจทย์ Example 7.11) หน้านี้แสดงหน้า 25 และ 29 หน้าละครั้ง · ตาราง 7.1 บนสไลด์หน้า 34 แถว "Depletion-type MOSFET fixed-bias" เขียน \(V_{DS} = V_{DD} - I_DR_S\) ที่ถูกคือ \(I_DR_D\) (วงจรนั้นไม่มี \(R_S\)) ส่วน B ของหน้านี้แก้แล้ว</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 25, 26 and 27 are identical</b> (the statement of Example 7.10) and <b>pp. 29, 30 are identical</b> (Example 7.11); this page shows pp. 25 and 29 once each. In Table 7.1 on slide p. 34 the "Depletion-type MOSFET fixed-bias" row reads \(V_{DS} = V_{DD} - I_DR_S\); \(I_DR_D\) is meant (that circuit has no \(R_S\)); section B of this page has it corrected.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรปรับได้</a><a href="#ex1"><b>1</b>Example 7.10</a><a href="#ex2"><b>2</b>Example 7.11</a><a href="#tB"><b>B</b>ตารางสรุป 7.1</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The adjustable circuits</a><a href="#ex1"><b>1</b>Example 7.10</a><a href="#ex2"><b>2</b>Example 7.11</a><a href="#tB"><b>B</b>Summary Table 7.1</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ป้อนกลับหรือตัวแบ่งแรงดัน: เส้นของวงจรตัดเส้นโค้ง \(k(V_{GS} - V_T)^2\)</h2><h2 data-l="en">Feedback or divider: the network line meets the curve \(k(V_{GS} - V_T)^2\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 23–24, 28 · Boylestad หัวข้อ 7.8 (รูป 7.37–7.39, 7.43)</div><div class="src" data-l="en">Slides pp. 23–24, 28 · Boylestad, section 7.8 (Figs. 7.37–7.39, 7.43)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 23, Enhancement-Type MOSFET Circuit, feedback biasing arrangement: Fig. 7.37 with V_DD, R_D, R_G from drain to gate, C_1, C_2; an arrow to the dc equivalent Fig. 7.38 with I_G = 0 A, V_DS and V_GS; V_D = V_G, V_DS = V_GS, V_GS = V_DD − I_D R_D, V_GS = V_DD at I_D = 0 mA, I_D = V_DD/R_D at V_GS = 0 V.">
+    <figcaption data-l="th">สไลด์หน้า 23: วงจรป้อนกลับและสมการ 7.35–7.38 (รูป 7.37–7.38) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 23: the feedback circuit and Eqs. 7.35–7.38 (Figs. 7.37–7.38) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 24, Enhancement-Type MOSFET Circuit, feedback biasing arrangement: the dc equivalent and Fig. 7.39, the transfer curve with the network line from V_DD on the horizontal axis to V_DD/R_D on the vertical axis, the Q-point at I_DQ, V_GSQ, and V_GS(Th).">
+    <figcaption data-l="th">สไลด์หน้า 24: จุด Q ของวงจรป้อนกลับ (รูป 7.39) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 24: the feedback circuit's Q (Fig. 7.39) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 28, Enhancement-Type MOSFET Circuit, voltage-divider biasing arrangement: Fig. 7.43 with V_DD, R_1, R_2, R_D, R_S, I_G = 0 A and the gate–source loop; V_G = R_2 V_DD/(R_1 + R_2); +V_G − V_GS − V_RS = 0, V_GS = V_G − V_RS, V_GS = V_G − I_D R_S; V_RS + V_DS + V_RD − V_DD = 0, V_DS = V_DD − V_RS − V_RD, V_DS = V_DD − I_D(R_S + R_D).">
+    <figcaption data-l="th">สไลด์หน้า 28: วงจรตัวแบ่งแรงดันและสมการ 7.39–7.41 (รูป 7.43) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 28: the divider circuit and Eqs. 7.39–7.41 (Fig. 7.43) · tap to enlarge</figcaption></figure></div>
+  <p class="lead" data-l="th">เลือกวงจรด้วยปุ่ม เริ่มจากวงจรป้อนกลับของ Example 7.10 (\(k\) = 0.24 mA/V², \(V_T\) = 3 V) กราฟบนคือเส้นโค้งถ่ายโอนกับเส้นของวงจร กราฟล่างคือเส้นโหลดกับแนว \(V_{DS_\text{sat}}\) ในวงจรป้อนกลับลองเปลี่ยน \(R_D\) และ \(V_{DD}\): ป้ายไม่เคยขึ้นย่านโอห์มิก สลับเป็นตัวแบ่งแรงดัน (Example 7.11) แล้วลด \(R_D\)... เพิ่ม \(R_D\) จนจุด Q หลุดเข้าย่านโอห์มิกได้</p>
+  <p class="lead" data-l="en">Choose the circuit with the buttons. Start from the feedback circuit of Example 7.10 (\(k\) = 0.24 mA/V², \(V_T\) = 3 V): the upper graph is the transfer curve with the network line, the lower one the load line with the \(V_{DS_\text{sat}}\) locus. In the feedback circuit change \(R_D\) and \(V_{DD}\): the badge never says ohmic region. Switch to the divider (Example 7.11) and raise \(R_D\) until Q does slip into the ohmic region.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 7.10: ไบแอสป้อนกลับ</h2><h2 data-l="en">Example 7.10: feedback bias</h2>
+    <div class="src" data-l="th">สไลด์หน้า 25–27 · Boylestad Example 7.10 (รูป 7.40–7.42)</div><div class="src" data-l="en">Slides pp. 25–27 · Boylestad Example 7.10 (Figs. 7.40–7.42)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 25, Enhancement-Type MOSFET Circuit: determine I_DQ and V_DSQ for the enhancement-type MOSFET of the figure. Figure 7.40: 12 V supply, R_D = 2 kΩ, R_G = 10 MΩ from drain to gate, 1 µF coupling capacitors, I_D(on) = 6 mA, V_GS(on) = 8 V, V_GS(Th) = 3 V.">
+    <figcaption data-l="th">สไลด์หน้า 25: โจทย์ Example 7.10 (รูป 7.40) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 25: Example 7.10 (Fig. 7.40) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 12 V, \(R_D\) = 2 kΩ, \(R_G\) = 10 MΩ, \(I_{D(\text{on})}\) = 6 mA ที่ \(V_{GS(\text{on})}\) = 8 V, \(V_{GS(\text{Th})}\) = 3 V จงหา \(I_{D_Q}\) และ \(V_{DS_Q}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 12 V, \(R_D\) = 2 kΩ, \(R_G\) = 10 MΩ, \(I_{D(\text{on})}\) = 6 mA at \(V_{GS(\text{on})}\) = 8 V, \(V_{GS(\text{Th})}\) = 3 V. Determine \(I_{D_Q}\) and \(V_{DS_Q}\).</p></div>
+  <p class="lead" data-l="th">แผงข้างภาพสร้างรูป 7.41–7.42 ทีละขั้น สังเกตในวงจรว่าไม่มีจุดวิ่งใน \(R_G\) เลย <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The side panel builds Figs. 7.41–7.42 step by step; notice that no dots run through \(R_G\) in the circuit. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 7.11: ตัวแบ่งแรงดัน</h2><h2 data-l="en">Example 7.11: voltage-divider bias</h2>
+    <div class="src" data-l="th">สไลด์หน้า 29–31 · Boylestad Example 7.11 (รูป 7.44–7.45)</div><div class="src" data-l="en">Slides pp. 29–31 · Boylestad Example 7.11 (Figs. 7.44–7.45)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 29, Enhancement-Type MOSFET Circuit: determine I_DQ, V_GSQ and V_DS for the network of the figure. Figure 7.44: 40 V supply, R_1 = 22 MΩ, R_2 = 18 MΩ, R_D = 3 kΩ, R_S = 0.82 kΩ, I_D(on) = 3 mA, V_GS(on) = 10 V, V_GS(Th) = 5 V, with I_DQ, V_GSQ and V_DS marked.">
+    <figcaption data-l="th">สไลด์หน้า 29: โจทย์ Example 7.11 (รูป 7.44) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: Example 7.11 (Fig. 7.44) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p31.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 31, Enhancement-Type MOSFET Circuit: Fig. 7.45, the graphical solution of Example 7.11: the transfer curve from V_GS(Th) = 5 V, the network line from V_G = 18 V on the horizontal axis to V_G/R_S = 21.95 mA on the vertical axis, and the Q-point at I_DQ ≅ 6.7 mA, V_GSQ = 12.5 V.">
+    <figcaption data-l="th">สไลด์หน้า 31: เฉลยด้วยกราฟ (รูป 7.45) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: the graphical solution (Fig. 7.45) · tap to enlarge</figcaption></figure></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 40 V, \(R_1\) = 22 MΩ, \(R_2\) = 18 MΩ, \(R_D\) = 3 kΩ, \(R_S\) = 0.82 kΩ, \(I_{D(\text{on})}\) = 3 mA ที่ \(V_{GS(\text{on})}\) = 10 V, \(V_{GS(\text{Th})}\) = 5 V จงหา \(I_{D_Q}\), \(V_{GS_Q}\) และ \(V_{DS}\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 40 V, \(R_1\) = 22 MΩ, \(R_2\) = 18 MΩ, \(R_D\) = 3 kΩ, \(R_S\) = 0.82 kΩ, \(I_{D(\text{on})}\) = 3 mA at \(V_{GS(\text{on})}\) = 10 V, \(V_{GS(\text{Th})}\) = 5 V. Determine \(I_{D_Q}\), \(V_{GS_Q}\) and \(V_{DS}\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">ตารางสรุปวงจรไบแอส FET (ตาราง 7.1)</h2><h2 data-l="en">The summary table of FET bias circuits (Table 7.1)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 32–35 · Boylestad หัวข้อ 7.9 (ตาราง 7.1)</div><div class="src" data-l="en">Slides pp. 32–35 · Boylestad, section 7.9 (Table 7.1)</div></div></div>
+  <div class="slides"><figure class="slide"><img src="slides/ch6/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 32, Summary Table: rows for JFET fixed-bias (V_GSQ = −V_GG, V_DS = V_DD − I_D R_D), JFET self-bias (V_GS = −I_D R_S, V_DS = V_DD − I_D(R_D + R_S)) and JFET voltage-divider bias (V_G = R_2 V_DD/(R_1 + R_2), V_GS = V_G − I_D R_S, V_DS = V_DD − I_D(R_D + R_S)), each with its configuration and graphical solution.">
+    <figcaption data-l="th">สไลด์หน้า 32: ตาราง 7.1 ส่วนที่ 1 (JFET ไบแอสคงที่ ตัวเอง ตัวแบ่งแรงดัน) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: Table 7.1, part 1 (JFET fixed, self and divider bias) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 33, Summary Table: rows for JFET common-gate (V_GS = V_SS − I_D R_S, V_DS = V_DD + V_SS − I_D(R_D + R_S)), JFET with V_GSQ = 0 V (I_DQ = I_DSS) and JFET with R_D = 0 Ω (V_GS = −I_D R_S, V_D = V_DD, V_S = I_D R_S, V_DS = V_DD − I_S R_S).">
+    <figcaption data-l="th">สไลด์หน้า 33: ตาราง 7.1 ส่วนที่ 2 (เกตร่วม, \(V_{GS_Q}\) = 0, \(R_D\) = 0) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: Table 7.1, part 2 (common gate, \(V_{GS_Q}\) = 0, \(R_D\) = 0) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 34, Summary Table: rows for depletion-type MOSFET fixed-bias (V_GSQ = +V_GG, V_DS = V_DD − I_D R_S as printed) and depletion-type MOSFET voltage-divider bias (V_G = R_2 V_DD/(R_1 + R_2), V_GS = V_G − I_S R_S, V_DS = V_DD − I_D(R_D + R_S)), with the Q-point on the positive side of the transfer curve.">
+    <figcaption data-l="th">สไลด์หน้า 34: ตาราง 7.1 ส่วนที่ 3 (มอสเฟตแบบดีพลีชัน) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 34: Table 7.1, part 3 (depletion-type MOSFET) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch6/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 6 slide 35, Summary Table: rows for the enhancement-type MOSFET feedback configuration (V_GS = V_DS, V_GS = V_DD − I_D R_D) and enhancement-type MOSFET voltage-divider bias (V_G = R_2 V_DD/(R_1 + R_2), V_GS = V_G − I_D R_S), each with its graphical solution starting at V_GS(Th).">
+    <figcaption data-l="th">สไลด์หน้า 35: ตาราง 7.1 ส่วนที่ 4 (มอสเฟตแบบเอนแฮนซ์เมนต์) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: Table 7.1, part 4 (enhancement-type MOSFET) · tap to enlarge</figcaption></figure></div>
+  <div class="card" style="overflow-x:auto"><table class="tbl" data-l="th"><thead><tr><th>วงจร</th><th>สมการของวงจร</th><th>วิธีกราฟ</th><th>หน้า</th></tr></thead><tbody>
+    <tr><td>JFET ไบแอสคงที่</td><td>\(V_{GS_Q} = -V_{GG}\), \(V_{DS} = V_{DD} - I_DR_D\)</td><td>เส้นตั้งที่ \(-V_{GG}\)</td><td>5.3</td></tr>
+    <tr><td>JFET ไบแอสตัวเอง</td><td>\(V_{GS} = -I_DR_S\), \(V_{DS} = V_{DD} - I_D(R_D + R_S)\)</td><td>เส้นผ่านจุดกำเนิด</td><td>5.4</td></tr>
+    <tr><td>JFET ตัวแบ่งแรงดัน</td><td>\(V_G = \dfrac{R_2V_{DD}}{R_1 + R_2}\), \(V_{GS} = V_G - I_DR_S\), \(V_{DS} = V_{DD} - I_D(R_D + R_S)\)</td><td>เส้นจาก (\(V_G\), 0) ถึง (0, \(V_G/R_S\))</td><td>5.5</td></tr>
+    <tr><td>JFET เกตร่วม</td><td>\(V_{GS} = V_{SS} - I_DR_S\), \(V_{DS} = V_{DD} + V_{SS} - I_D(R_D + R_S)\)</td><td>เส้นจาก (\(V_{SS}\), 0) ถึง (0, \(V_{SS}/R_S\))</td><td>ตำรา §7.5</td></tr>
+    <tr><td>JFET \(V_{GS_Q}\) = 0</td><td>\(I_{D_Q} = I_{DSS}\)</td><td>ไม่ต้องวาด</td><td>6.2 ข้อ 4</td></tr>
+    <tr><td>JFET \(R_D\) = 0</td><td>\(V_{GS} = -I_DR_S\), \(V_D = V_{DD}\), \(V_S = I_DR_S\), \(V_{DS} = V_{DD} - I_SR_S\)</td><td>เส้นผ่านจุดกำเนิด</td><td>5.4</td></tr>
+    <tr><td>มอสเฟตดีพลีชัน ไบแอสคงที่</td><td>\(V_{GS_Q} = +V_{GG}\) ได้, \(V_{DS} = V_{DD} - I_DR_D\) (สไลด์พิมพ์ \(R_S\))</td><td>เส้นตั้งฝั่งบวก</td><td>6.1–6.2</td></tr>
+    <tr><td>มอสเฟตดีพลีชัน ตัวแบ่งแรงดัน</td><td>เหมือน JFET</td><td>เส้นโค้งต่อเข้าฝั่งบวก</td><td>6.2</td></tr>
+    <tr><td>มอสเฟตเอนแฮนซ์เมนต์ ป้อนกลับ</td><td>\(V_{GS} = V_{DS} = V_{DD} - I_DR_D\)</td><td>เส้นจาก (\(V_{DD}\), 0) ถึง (0, \(V_{DD}/R_D\))</td><td>6.4 ข้อ 1</td></tr>
+    <tr><td>มอสเฟตเอนแฮนซ์เมนต์ ตัวแบ่งแรงดัน</td><td>\(V_G = \dfrac{R_2V_{DD}}{R_1 + R_2}\), \(V_{GS} = V_G - I_DR_S\)</td><td>เส้นจาก (\(V_G\), 0) ถึง (0, \(V_G/R_S\)) ตัดเส้นโค้งขวาของ \(V_{GS(\text{Th})}\)</td><td>6.4 ข้อ 2</td></tr></tbody></table>
+  <table class="tbl" data-l="en"><thead><tr><th>Circuit</th><th>Network equations</th><th>Graphical solution</th><th>Page</th></tr></thead><tbody>
+    <tr><td>JFET fixed bias</td><td>\(V_{GS_Q} = -V_{GG}\), \(V_{DS} = V_{DD} - I_DR_D\)</td><td>a vertical line at \(-V_{GG}\)</td><td>5.3</td></tr>
+    <tr><td>JFET self bias</td><td>\(V_{GS} = -I_DR_S\), \(V_{DS} = V_{DD} - I_D(R_D + R_S)\)</td><td>a line through the origin</td><td>5.4</td></tr>
+    <tr><td>JFET voltage divider</td><td>\(V_G = \dfrac{R_2V_{DD}}{R_1 + R_2}\), \(V_{GS} = V_G - I_DR_S\), \(V_{DS} = V_{DD} - I_D(R_D + R_S)\)</td><td>a line from (\(V_G\), 0) to (0, \(V_G/R_S\))</td><td>5.5</td></tr>
+    <tr><td>JFET common gate</td><td>\(V_{GS} = V_{SS} - I_DR_S\), \(V_{DS} = V_{DD} + V_{SS} - I_D(R_D + R_S)\)</td><td>a line from (\(V_{SS}\), 0) to (0, \(V_{SS}/R_S\))</td><td>book §7.5</td></tr>
+    <tr><td>JFET with \(V_{GS_Q}\) = 0</td><td>\(I_{D_Q} = I_{DSS}\)</td><td>no graph needed</td><td>6.2 problem 4</td></tr>
+    <tr><td>JFET with \(R_D\) = 0</td><td>\(V_{GS} = -I_DR_S\), \(V_D = V_{DD}\), \(V_S = I_DR_S\), \(V_{DS} = V_{DD} - I_SR_S\)</td><td>a line through the origin</td><td>5.4</td></tr>
+    <tr><td>Depletion MOSFET, fixed bias</td><td>\(V_{GS_Q} = +V_{GG}\) allowed, \(V_{DS} = V_{DD} - I_DR_D\) (the slide prints \(R_S\))</td><td>a vertical line on the positive side</td><td>6.1–6.2</td></tr>
+    <tr><td>Depletion MOSFET, voltage divider</td><td>as for the JFET</td><td>the curve continued into the positive side</td><td>6.2</td></tr>
+    <tr><td>Enhancement MOSFET, feedback</td><td>\(V_{GS} = V_{DS} = V_{DD} - I_DR_D\)</td><td>a line from (\(V_{DD}\), 0) to (0, \(V_{DD}/R_D\))</td><td>6.4 problem 1</td></tr>
+    <tr><td>Enhancement MOSFET, voltage divider</td><td>\(V_G = \dfrac{R_2V_{DD}}{R_1 + R_2}\), \(V_{GS} = V_G - I_DR_S\)</td><td>a line from (\(V_G\), 0) to (0, \(V_G/R_S\)) meeting the curve right of \(V_{GS(\text{Th})}\)</td><td>6.4 problem 2</td></tr></tbody></table></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(I_G\) = 0 · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(I_G\) = 0 · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ป้อนกลับไม่เคยหลุด</h3>
+    <ol><li>ส่วน A (ป้อนกลับ) เลื่อน \(R_D\) จาก 500 Ω ถึง 10 kΩ: จุด Q ไถลลงตามเส้นโค้งแต่ \(V_{DS} = V_{GS}\) เสมอ ป้ายคงเป็นย่านอิ่มตัวตลอด เพราะ \(V_{DS} - (V_{GS} - V_T) = V_T\) &gt; 0 เสมอ</li>
+    <li>เปลี่ยน \(V_T\) ของอุปกรณ์ (แถบเลื่อน) จาก 3 เป็น 5 V: จุด Q เลื่อนไปตามเส้นของวงจร \(I_D\) ลดจาก 2.8 เหลือราว 1.9 mA (ไม่ถึงครึ่ง) วงจรป้อนกลับต้านการกระจายของ \(V_T\) ได้พอสมควร</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ตัวแบ่งแรงดัน</h3>
+    <ol><li>สลับเป็นตัวแบ่งแรงดัน (Example 7.11) แล้วเพิ่ม \(R_D\) เป็น 5 kΩ: \(V_{DS}\) = 40 − 6.7(5.82) = 1 V ต่ำกว่า \(V_{GS} - V_T\) = 7.5 V มาก ป้ายขึ้นย่านโอห์มิก และ \(I_D\) ลดลง ต่างจากป้อนกลับ</li>
+    <li>ข้อ 2 ของแบบฝึก: ลองตรวจผลด้วยส่วน A โดยตั้งค่าตาม</li></ol>
+    <div class="book">สไลด์บทที่ 6 หน้า 22–35 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 7.8 (รูป 7.36–7.45, สมการ 7.33–7.41, Examples 7.10–7.11) และ 7.9 (ตาราง 7.1)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — feedback never slips</h3>
+    <ol><li>In section A (feedback) move \(R_D\) from 500 Ω to 10 kΩ: Q slides down the curve but \(V_{DS} = V_{GS}\) always, and the badge stays in saturation, since \(V_{DS} - (V_{GS} - V_T) = V_T\) &gt; 0 always.</li>
+    <li>Change the device's \(V_T\) (slider) from 3 to 5 V: Q moves along the network line and \(I_D\) falls from 2.8 to about 1.9 mA (less than half): feedback bias resists the spread of \(V_T\) reasonably well.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the divider</h3>
+    <ol><li>Switch to the divider (Example 7.11) and raise \(R_D\) to 5 kΩ: \(V_{DS}\) = 40 − 6.7(5.82) = 1 V, far below \(V_{GS} - V_T\) = 7.5 V; the badge says ohmic region and \(I_D\) falls, unlike the feedback circuit.</li>
+    <li>Practice question 2: check the result in section A by setting the values.</li></ol>
+    <div class="book">Chapter 6 slides pp. 22–35 · Boylestad &amp; Nashelsky, 11th ed., sections 7.8 (Figs. 7.36–7.45, Eqs. 7.33–7.41, Examples 7.10–7.11) and 7.9 (Table 7.1)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), FET = CK.FET, C = IE.COL;
+  MOS.problem(1, 'ex710'); MOS.problem(2, 'ex711');
+
+  /* =================================================================== A: feedback or divider, with the enhancement MOSFET of Example 7.10 */
+  const sg = x => (x < 0 ? '−' : '') + fd(Math.abs(x), 2), logR = (id, label, lo, hi, get, set, p, build, step = 10) => ui.slider(p, { id, label, min: Math.log10(lo), max: Math.log10(hi), step: 0.01, value: Math.log10(Math.max(get(), lo)), fmt: () => CK.eng(get(), 'Ω'), oninput: v => { set(Math.round(Math.pow(10, v) / step) * step); build(); } });
+  const dev = S => ({ kind: 'emos', k: S.k * 1e-3, vt: S.vt }), vg = S => (S.fb ? S.VDD : S.R2 * S.VDD / (S.R1 + S.R2)), rs = S => (S.fb ? S.RD : S.RS);
+  const blocks = {};
+  CH5.explorer({ init: { fb: true, RD: 2000, VDD: 12, R1: 22e6, R2: 18e6, RS: 820, k: 0.24, vt: 3 }, title: t('วงจร', 'The circuit'),
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'aFB', label: t('ป้อนกลับ (Ex. 7.10)', 'feedback (Ex. 7.10)'), on: true }, { id: 'aVD', label: t('ตัวแบ่งแรงดัน (Ex. 7.11)', 'divider (Ex. 7.11)') }], id => { S.fb = id === 'aFB'; if (S.fb) { S.RD = 2000; S.VDD = 12; S.k = 0.24; S.vt = 3; } else { S.RD = 3000; S.VDD = 40; S.k = 0.12; S.vt = 5; }
+        Object.values(blocks).forEach(b => { b.set(b.get()); }); blocks.RD.set(Math.log10(S.RD)); blocks.VDD.set(S.VDD); blocks.k.set(S.k); blocks.vt.set(S.vt); ['R1', 'R2', 'RS'].forEach(k => { blocks[k].block.style.display = S.fb ? 'none' : ''; }); build(); });
+      blocks.RD = logR('aRD', 'R_D', 200, 10e3, () => S.RD, v => { S.RD = v; }, p, build, 100);
+      blocks.VDD = ui.slider(p, { id: 'aVDD', label: 'V_DD', min: 5, max: 40, step: 0.5, value: S.VDD, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.VDD = v; build(); } });
+      blocks.R1 = logR('aR1', 'R_1', 1e6, 100e6, () => S.R1, v => { S.R1 = v; }, p, build, 1e6); blocks.R2 = logR('aR2', 'R_2', 1e6, 100e6, () => S.R2, v => { S.R2 = v; }, p, build, 1e6);
+      blocks.RS = logR('aRS', 'R_S', 100, 5e3, () => S.RS, v => { S.RS = v; }, p, build, 10);
+      blocks.k = ui.slider(p, { id: 'aK', label: 'k', min: 0.05, max: 1, step: 0.01, value: S.k, fmt: v => `${fd(v, 2)} mA/V²`, oninput: v => { S.k = v; build(); } });
+      blocks.vt = ui.slider(p, { id: 'aVT', label: 'V_GS(Th)', min: 1, max: 6, step: 0.5, value: S.vt, fmt: v => `${fd(v, 1)} V`, oninput: v => { S.vt = v; build(); } });
+      ['R1', 'R2', 'RS'].forEach(k => { blocks[k].block.style.display = 'none'; }); },
+    spec: S => (S.fb ? CH5.net({ dev: dev(S), VDD: S.VDD, RG: 10e6, RD: S.RD, fb: true }) : CH5.net({ dev: dev(S), VDD: S.VDD, R1: S.R1, R2: S.R2, RD: S.RD, RS: S.RS })),
+    side: (ctx, b, bd, c, S) => { const z = CH5.j(c), d = dev(S), VG = vg(S), r = rs(S), q = FET.biasOf(d, r, VG), vmax = Math.ceil(VG * 1.1 + 1), top = Math.max(6, Math.ceil(Math.min(VG / r * 1e3, S.k * (vmax - S.vt) ** 2) * 1.15));
+      CH5.tPlot(ctx, b, bd, { dev: d, imax: top, vmin: -0.5, vmax, lines: [{ a: [VG, 0], b: [0, VG / r * 1e3], label: bd.short ? '' : (S.fb ? 'V_GS = V_DD − I_D R_D' : 'V_GS = V_G − I_D R_S'), at: 0.25 }],
+        pts: [{ v: VG, i: 0, color: C.tan, r: 5, label: bd.short ? '' : (S.fb ? `V_DD = ${fd(VG, 1)} V` : `V_G = ${fd(VG, 2)} V`), side: -1, dy: 16 }, { v: 0, i: VG / r * 1e3, color: C.tan, r: 5, label: bd.short ? '' : `${fd(VG / r * 1e3, 2)} mA`, side: 1, dy: 14 }, { v: z.VGS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.VGS, 2)} V, ${fd(z.id, 2)} mA)`, side: -1, dy: -14 }].concat(Math.abs(q.id * 1e3 - z.id) > 0.02 ? [{ v: q.vgs, i: q.id * 1e3, color: C.tan, r: 5, label: bd.short ? '' : t(`จากเส้นโค้ง ${fd(q.id * 1e3, 2)} mA`, `curve: ${fd(q.id * 1e3, 2)} mA`), side: 1, dy: 16 }] : []),
+        guides: [{ v: z.VGS, i: z.id }], vl: [{ v: S.vt, label: bd.short ? '' : `V_GS(Th) = ${fd(S.vt, 1)} V` }], title: S.fb ? t('รูป 7.39: เส้นป้อนกลับตัดเส้นโค้ง', 'Fig. 7.39: the feedback line meets the curve') : t('รูป 7.45: เส้นของตัวแบ่งตัดเส้นโค้ง', 'Fig. 7.45: the divider line meets the curve') }); },
+    waves: [(ctx, b, bd, c, S) => { const z = CH5.j(c), d = dev(S), r = S.fb ? S.RD : S.RD + S.RS, st = Math.max(0.5, Math.ceil(Math.max(z.vov, 1) / 2.5 * 2) / 2), list = [5, 4, 3, 2, 1, 0].map(k => S.vt + k * st);   // V_GS curves from V_T upward, in steps that put Q's curve near the middle
+      CH5.dPlot(ctx, b, bd, { dev: d, vgs: list, imax: Math.max(4, Math.ceil(Math.max(z.id, S.VDD / r * 1e3) * 1.25)), vmax: Math.max(10, Math.ceil(S.VDD * 1.15)), xt: [5, 10, 15, 20, 25, 30, 35, 40, 45].filter(x => x <= S.VDD * 1.15), load: { vdd: S.VDD, r }, q: { v: z.VDS, i: z.id, label: bd.short ? 'Q' : `Q (${fd(z.VDS, 2)} V, ${fd(z.id, 2)} mA)`, side: z.VDS > S.VDD * 0.55 ? -1 : 1, dy: -18 }, labels: !bd.short, locusLabel: 'V_DSsat',
+        title: S.fb ? t('เส้นโหลด V_DS = V_DD − I_D R_D', 'load line V_DS = V_DD − I_D R_D') : t('เส้นโหลด V_DS = V_DD − I_D(R_S + R_D)', 'load line V_DS = V_DD − I_D(R_S + R_D)') }); }],
+    badge: (c, S) => { const z = CH5.j(c), reg = CH5.reg(z.region); return [[`${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_GS = ${fd(z.VGS, 2)} V`, `${reg[0]} · I_D = ${fd(z.id, 2)} mA, V_GS = ${fd(z.VGS, 2)} V`], reg[1]]; },
+    rows: (c, z, S) => [[S.fb ? 'V_DD' : 'V_G', `${fd(vg(S), 2)} V`], [S.fb ? 'V_DD/R_D' : 'V_G/R_S', `${fd(vg(S) / rs(S) * 1e3, 2)} mA`], ['I_D', `${fd(z.id, 3)} mA`], ['V_GS', `${fd(z.VGS, 2)} V`], ['V_DS', `${fd(z.VDS, 2)} V`], ['V_GS − V_T', `${fd(z.vov, 2)} V`], [t('ย่าน', 'region'), CH5.reg(z.region)[0]], ['I_G', '0']],
+    text: (c, z, S) => (z.region === 'cutoff' ? t(`\\(V_{GS}\\) = ${fd(z.VGS, 2)} V ≤ \\(V_{GS(\\text{Th})}\\): ไม่มีช่อง ไม่มีกระแส (ตัวแบ่งให้ \\(V_G\\) ต่ำเกินไป)`, `\\(V_{GS}\\) = ${fd(z.VGS, 2)} V ≤ \\(V_{GS(\\text{Th})}\\): no channel, no current (the divider's \\(V_G\\) is too low).`)
+      : S.fb ? t(`\\(I_G\\) = 0 จึง \\(V_{GS} = V_{DS}\\) เส้น \\(V_{GS} = V_{DD} - I_DR_D\\) ตัดเส้นโค้ง \\(${fd(S.k, 2)}(V_{GS} - ${fd(S.vt, 1)})^2\\) ที่ \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS} = V_{DS}\\) = ${fd(z.VGS, 2)} V ย่านอิ่มตัวเสมอเพราะ \\(V_{DS} - (V_{GS} - V_T) = V_T\\) = ${fd(S.vt, 1)} V > 0`, `\\(I_G\\) = 0, so \\(V_{GS} = V_{DS}\\); the line \\(V_{GS} = V_{DD} - I_DR_D\\) meets the curve \\(${fd(S.k, 2)}(V_{GS} - ${fd(S.vt, 1)})^2\\) at \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS} = V_{DS}\\) = ${fd(z.VGS, 2)} V. Always saturation, since \\(V_{DS} - (V_{GS} - V_T) = V_T\\) = ${fd(S.vt, 1)} V > 0.`)
+      : z.region === 'saturation' ? t(`\\(V_G\\) = ${fd(vg(S), 2)} V เส้น \\(V_{GS} = V_G - I_DR_S\\) ตัดเส้นโค้งที่ \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS}\\) = ${fd(z.VGS, 2)} V และ \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_T\\) = ${fd(z.vov, 2)} V: ย่านอิ่มตัว`, `\\(V_G\\) = ${fd(vg(S), 2)} V; the line \\(V_{GS} = V_G - I_DR_S\\) meets the curve at \\(I_D\\) = ${fd(z.id, 2)} mA, \\(V_{GS}\\) = ${fd(z.VGS, 2)} V, and \\(V_{DS}\\) = ${fd(z.VDS, 2)} V ≥ \\(V_{GS} - V_T\\) = ${fd(z.vov, 2)} V: saturation.`)
+      : t(`\\(V_{DS}\\) = ${fd(z.VDS, 2)} V น้อยกว่า \\(V_{GS} - V_T\\) = ${fd(z.vov, 2)} V: \\(R_D + R_S\\) กิน \\(V_{DD}\\) จนช่องไม่พินช์ออฟ จุด Q อยู่ในย่านโอห์มิก กระแสจริง ${fd(z.id, 2)} mA ต่ำกว่าที่เส้นโค้งบอก ต่างจากวงจรป้อนกลับที่หลุดไม่ได้`, `\\(V_{DS}\\) = ${fd(z.VDS, 2)} V is below \\(V_{GS} - V_T\\) = ${fd(z.vov, 2)} V: \\(R_D + R_S\\) use up \\(V_{DD}\\) before the channel pinches off; Q is in the ohmic region and the actual ${fd(z.id, 2)} mA is below what the curve says, unlike the feedback circuit, which cannot slip.`)) });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, d1 = { kind: 'emos', k: 0.3e-3, vt: 2 }, q1 = FET.biasOf(d1, 2200, 15), VG2 = 6.8 * 24 / 16.8, d2 = { kind: 'emos', k: 0.2e-3, vt: 3 }, q2 = FET.biasOf(d2, 1000, VG2);
+  CH6.quiz('quiz', [
+    { q: t('1) ไบแอสป้อนกลับ: \\(k\\) = 0.3 mA/V², \\(V_{GS(\\text{Th})}\\) = 2 V, \\(V_{DD}\\) = 15 V, \\(R_D\\) = 2.2 kΩ จงหา \\(I_{D_Q}\\) และ \\(V_{DS_Q}\\)', '1) Feedback bias: \\(k\\) = 0.3 mA/V², \\(V_{GS(\\text{Th})}\\) = 2 V, \\(V_{DD}\\) = 15 V, \\(R_D\\) = 2.2 kΩ. Find \\(I_{D_Q}\\) and \\(V_{DS_Q}\\).'),
+      fields: [{ key: 'x', lab: 'I_DQ =', ans: q1.id * 1e3, unit: 'mA', tol: 0.08 }, { key: 'y', lab: 'V_DSQ =', ans: q1.vgs, unit: 'V', tol: 0.15 }],
+      work: work(R`V_{GS} = 15 - 2.2I_D;\quad I_D = 0.3(15 - 2.2I_D - 2)^2 \Rightarrow I_{D_Q} = ${fd(q1.id * 1e3, 2)}\ \text{mA},\ V_{DS_Q} = V_{GS_Q} = ${fd(q1.vgs, 2)}\ \text{V}`) },
+    { q: t('2) ตัวแบ่งแรงดัน: \\(V_{DD}\\) = 24 V, \\(R_1\\) = 10 MΩ, \\(R_2\\) = 6.8 MΩ, \\(R_S\\) = 1 kΩ, \\(k\\) = 0.2 mA/V², \\(V_{GS(\\text{Th})}\\) = 3 V จงหา \\(V_G\\), \\(I_{D_Q}\\) และ \\(V_{GS_Q}\\)', '2) Voltage divider: \\(V_{DD}\\) = 24 V, \\(R_1\\) = 10 MΩ, \\(R_2\\) = 6.8 MΩ, \\(R_S\\) = 1 kΩ, \\(k\\) = 0.2 mA/V², \\(V_{GS(\\text{Th})}\\) = 3 V. Find \\(V_G\\), \\(I_{D_Q}\\) and \\(V_{GS_Q}\\).'),
+      fields: [{ key: 'x', lab: 'V_G =', ans: VG2, unit: 'V', tol: 0.03 }, { key: 'y', lab: 'I_DQ =', ans: q2.id * 1e3, unit: 'mA', tol: 0.08 }, { key: 'z', lab: 'V_GSQ =', ans: q2.vgs, unit: 'V', tol: 0.15 }],
+      work: work(R`V_G = \frac{(6.8)(24)}{16.8} = ${fd(VG2, 2)}\ \text{V};\quad I_D = 0.2(${fd(VG2, 2)} - I_D - 3)^2 \Rightarrow I_{D_Q} = ${fd(q2.id * 1e3, 2)}\ \text{mA},\ V_{GS_Q} = ${fd(q2.vgs, 2)}\ \text{V}`) },
+    { q: t('3) ใบข้อมูลให้ \\(V_{GS(\\text{Th})}\\) = 4 V และ \\(I_{D(\\text{on})}\\) = 5 mA ที่ 9 V จงหา \\(k\\) และ \\(I_D\\) ที่ \\(V_{GS}\\) = 7 V', '3) A sheet gives \\(V_{GS(\\text{Th})}\\) = 4 V and \\(I_{D(\\text{on})}\\) = 5 mA at 9 V. Find \\(k\\) and \\(I_D\\) at \\(V_{GS}\\) = 7 V.'),
+      fields: [{ key: 'x', lab: 'k =', ans: 0.2, unit: 'mA/V²', tol: 0.003 }, { key: 'y', lab: 'I_D(7 V) =', ans: 1.8, unit: 'mA', tol: 0.02 }], work: work(R`k = \frac{5}{(9 - 4)^2} = 0.2\ \text{mA/V}^2;\quad I_D(7\ \text{V}) = 0.2(3)^2 = 1.8\ \text{mA}`) },
+    { q: t('4) วงจรข้อ 2 กับ \\(R_D\\) = 2.2 kΩ จงหา \\(V_{DS}\\) แล้วตรวจย่านอิ่มตัว (ตอบ \\(V_{GS} - V_T\\))', '4) The circuit of question 2 with \\(R_D\\) = 2.2 kΩ. Find \\(V_{DS}\\) and check saturation (give \\(V_{GS} - V_T\\)).'),
+      fields: [{ key: 'x', lab: 'V_DS =', ans: 24 - q2.id * 3200, unit: 'V', tol: 0.3 }, { key: 'y', lab: 'V_GS − V_T =', ans: q2.vgs - 3, unit: 'V', tol: 0.15 }],
+      work: work(R`V_{DS} = 24 - (${fd(q2.id * 1e3, 2)})(1 + 2.2) = ${fd(24 - q2.id * 3200, 2)}\ \text{V} \ge V_{GS} - V_T = ${fd(q2.vgs - 3, 2)}\ \text{V}\ \checkmark`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
