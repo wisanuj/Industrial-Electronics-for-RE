@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=5">
-<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
-<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
-<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+<link rel="stylesheet" href="assets/ee.css?v=6">
+<script src="assets/stops.js?v=6"></script><script src="assets/shell.js?v=6"></script>
+<script src="assets/circuit.js?v=6"></script><script src="assets/alg.js?v=6"></script><script src="assets/lesson.js?v=6"></script><script src="assets/ch6.js?v=6"></script>
+<script src="assets/ch8.js?v=6"></script><script src="assets/ie.js?v=6"></script><script src="assets/ie1.js?v=6"></script><script src="assets/ie2.js?v=6"></script><script src="assets/ie3.js?v=6"></script><script src="assets/ie4.js?v=6"></script><script src="assets/ie5.js?v=6"></script><script src="assets/ie6.js?v=6"></script><script src="assets/ie7.js?v=6"></script><script src="assets/ie9.js?v=6"></script>
 </head>
 <body>
 <div class="wrap">
@@ -90,8 +90,8 @@
     <div class="src" data-l="th">Boylestad Example 5.1 (รูป 5.25) · หัวข้อ 5.5</div><div class="src" data-l="en">Boylestad Example 5.1 (Fig. 5.25) · section 5.5</div></div></div>
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ จาก \(V_{CC}\) ถึงเบส, \(R_C\) = 3 kΩ จาก \(V_{CC}\) ถึงคอลเล็กเตอร์ อิมิตเตอร์ลงกราวด์ ตัวเก็บประจุคัปปลิง 10 µF, β = 100, \(r_o\) = 50 kΩ (a) จงหา \(r_e\) (b) \(Z_i\) (\(r_o = \infty\)) (c) \(Z_o\) (\(r_o = \infty\)) (d) \(A_v\) (\(r_o = \infty\)) (e) ทำ (c) และ (d) ใหม่โดยรวม \(r_o\) = 50 kΩ</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ from \(V_{CC}\) to the base, \(R_C\) = 3 kΩ from \(V_{CC}\) to the collector, emitter grounded, 10 µF coupling capacitors, β = 100, \(r_o\) = 50 kΩ. (a) Determine \(r_e\). (b) Find \(Z_i\) (\(r_o = \infty\)). (c) Calculate \(Z_o\) (\(r_o = \infty\)). (d) Determine \(A_v\) (\(r_o = \infty\)). (e) Repeat (c) and (d) including \(r_o\) = 50 kΩ.</p></div>
-  <p class="lead" data-l="th">ขั้น dc แสดงวงจรจริงกับกระแสไฟตรง จากนั้นภาพเปลี่ยนเป็นวงจรสมมูล ac แผงซ้ายล่างเทียบค่าคำนวณมือกับภาพจำลอง แผงขวาล่างคือออสซิลโลสโคปของวงจรจริงที่ขาเข้า 10 mV <b>ลองตอบก่อน</b></p>
-  <p class="lead" data-l="en">The dc steps show the real circuit with its dc currents; then the picture turns into the ac equivalent circuit. The lower left panel compares the hand values with the simulator; the lower right one is the oscilloscope of the real circuit at a 10 mV input. <b>Try it first.</b></p>
+  <p class="lead" data-l="th">รูปบนคือวงจรจริงกับกระแสไฟตรง อยู่ตลอดเฉลย ตั้งแต่ขั้นที่วาดวงจรสมมูล ac รูปนั้นจะอยู่ใต้วงจรจริง ให้เทียบได้ว่าแต่ละส่วนมาจากไหน แผงซ้ายล่างเทียบค่าคำนวณมือกับภาพจำลอง แผงขวาล่างคือออสซิลโลสโคปของวงจรจริงที่ขาเข้า 10 mV <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The upper picture is the real circuit with its dc currents, kept through the whole solution; from the step that draws the ac equivalent circuit, that one appears under it, so each part can be traced back to where it comes from. The lower left panel compares the hand values with the simulator; the lower right one is the oscilloscope of the real circuit at a 10 mV input. <b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
 </section>
 

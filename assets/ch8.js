@@ -34,7 +34,9 @@ CH8.pSigs = (f, o = {}) => { const g = o.g || 'p', mag = o.mag ?? 1, unit = o.un
        waveMin, cktAspN, sideAspN, view (extra View options), shortSpec(spec) (phone labels; default CH6.shortLabels), dotSpeed,
        mid (layout for a column beside a solution: circuit on top, side panel + first wave panel side by side), midMin, cktAspM, rowAsp, rowMin,
        slimAt (side panels narrower than this get board.slim → short labels), wideAt (width from which the wide layout is used, default 760;
-       a very wide circuit sets it high to keep the full-width circuit of the mid layout), badge(board) → [text, kind] (default: the clock state)} */
+       a very wide circuit sets it high to keep the full-width circuit of the mid layout), badge(board) → [text, kind] (default: the clock state),
+       two (a second circuit box right under the first, e.g. the real circuit above its ac equivalent: set2(spec) fills it, a null spec leaves
+       it to empty2(ctx, box, board)), ckt2AspM, ckt2AspN, ckt2AspW (its height over the width), after2(view2, board)} */
 /* wide screens: invisible margin nodes so that the labels of the outermost vertical parts stay inside the circuit box
    (CH6.shortLabels does this on phones together with shorter labels) */
 CH8.margins = (spec, pad = 1.2) => {
@@ -64,19 +66,33 @@ CH8.Board = class {
     const o = this.o, W = Math.max(300, Math.floor(this.cv.parentElement.clientWidth - 12)), wide = W >= (o.wideAt ?? 760), mid = !wide && !!o.mid && W >= (o.midMin ?? 420), B = { waves: [] }, nW = (o.waves || []).length; let y;
     if (wide) { const top = Math.round(W * (o.topAsp ?? 0.4)), cw = o.side ? Math.round(W * (o.cktFrac ?? 0.52)) : W;
       B.ckt = { x: 0, y: 34, w: cw, h: top - 34 }; if (o.side) B.side = { x: cw + 6, y: 0, w: W - cw - 6, h: top }; y = top + 6;
+      if (o.two) { const h = Math.round(W * (o.ckt2AspW ?? 0.3)); B.ckt2 = { x: 0, y: y + 18, w: W, h }; y += h + 24; }
       for (let k = 0; k < nW; k++) { const h = Math.max(o.waveMin ?? 170, Math.round(W * (o.waveAsp ?? 0.2))); B.waves.push({ x: 0, y, w: W, h }); y += h + 6; } }
     else if (mid) { const ch = Math.round(W * (o.cktAspM ?? 0.52)); B.ckt = { x: 0, y: 34, w: W, h: ch }; y = ch + 40;
+      if (o.two) { const h = Math.round(W * (o.ckt2AspM ?? o.cktAspM ?? 0.52)); B.ckt2 = { x: 0, y: y + 18, w: W, h }; y += h + 24; }   // an 18 px band over it for its name
       const pan = (o.side ? ['s'] : []).concat([...Array(nW).keys()]), rowH = Math.round(Math.max(o.rowMin ?? 230, W * (o.rowAsp ?? 0.48)));
       const put = (p, box) => { if (p === 's') B.side = box; else B.waves[p] = box; };
       if (pan.length >= 2) { const w2 = Math.floor((W - 6) / 2); put(pan[0], { x: 0, y, w: w2, h: rowH }); put(pan[1], { x: w2 + 6, y, w: W - w2 - 6, h: rowH }); y += rowH + 6; }
       else if (pan.length === 1) { put(pan[0], { x: 0, y, w: W, h: rowH }); y += rowH + 6; }
       pan.slice(2).forEach(p => { const h = Math.round(Math.max(o.waveMin ?? 170, W * 0.34)); put(p, { x: 0, y, w: W, h }); y += h + 6; }); }
     else { const ch = Math.round(W * (o.cktAspN ?? 0.72)); B.ckt = { x: 0, y: 34, w: W, h: ch }; y = ch + 40;
+      if (o.two) { const h = Math.round(W * (o.ckt2AspN ?? o.cktAspN ?? 0.72)); B.ckt2 = { x: 0, y: y + 18, w: W, h }; y += h + 24; }
       if (o.side) { const h = Math.round(W * (o.sideAspN ?? 0.8)); B.side = { x: 0, y, w: W, h }; y += h + 6; }
       for (let k = 0; k < nW; k++) { const h = Math.round(Math.max(190, W * 0.6)); B.waves.push({ x: 0, y, w: W, h }); y += h + 6; } }
     this.W = W; this.H = y - 6; this.box = B; this.wide = wide; this.mid = mid; this.slim = !!(B.side && B.side.w < (o.slimAt ?? 360)); this.ctx = CK.setup(this.cv, W, this.H);
-    const nw = W < 640; if (nw !== !!this.narrow) { this.narrow = nw; if (this.spec) this.set(this.spec, this.vo); }
+    const nw = W < 640; if (nw !== !!this.narrow) { this.narrow = nw; if (this.spec) this.set(this.spec, this.vo); if (this.spec2) this.set2(this.spec2); }
     if (this.view) { this.view.ctx = this.ctx; this.view.fit(B.ckt); }
+    if (this.view2 && B.ckt2) { this.view2.ctx = this.ctx; this.view2.fit(B.ckt2); }
+  }
+  /* the second circuit (option two): its own View on the same canvas, without the meter (the first circuit has it) */
+  set2(spec) {
+    this.spec2 = spec; const o = this.o; if (!spec) { this.view2 = null; return null; }
+    const sp = this.narrow ? (o.shortSpec ? o.shortSpec(spec) : CH6.shortLabels(spec, o.pad ?? 1.2)) : CH8.margins(spec, o.pad ?? 1.2);
+    const c = new CK.Circuit(sp); c.solve(); const im = CH6.imax(c);
+    this.view2 = new CK.View(this.cv, c, Object.assign({ speed: (o.dotSpeed || 95) / Math.max(im, 1e-12), ground: false, showI: false, pad: o.pad ?? 1.2, tips: true,
+      acPeak: true, acPower: true, dotRef: im, acTime: () => this.clk.at(c.w), grounds: sp.grounds }, o.view || {}, { meter: false }));
+    if (this.ctx && this.box && this.box.ckt2) { this.view2.ctx = this.ctx; this.view2.fit(this.box.ckt2); }
+    return c;
   }
   /* short labels wanted in the side panel and on the waves (phones, or a half-width panel) */
   get short() { return !!(this.narrow || this.slim); }
@@ -84,6 +100,7 @@ CH8.Board = class {
     if (!this.ctx || !this.view) return; const ctx = this.ctx, o = this.o; this.clk.tick(dt);
     ctx.fillStyle = CK.PAL.bg; ctx.fillRect(0, 0, this.W, this.H);
     if (this.clk.run) this.view.advance(dt); this.view.draw(); if (o.after) o.after(this.view, this);
+    if (this.box.ckt2) { const v2 = this.view2; if (v2) { if (this.clk.run) v2.advance(dt); v2.draw(); if (o.after2) o.after2(v2, this); } else if (o.empty2) o.empty2(ctx, this.box.ckt2, this); }
     if (this.box.side && o.side) o.side(ctx, this.box.side, this);
     (o.waves || []).forEach((w, k) => { if (!this.box.waves[k]) return; if (w.draw) { w.draw(ctx, this.box.waves[k], this); return; }   // draw: any other picture in a wave panel (chapter 10)
       CH6.waves(ctx, this.box.waves[k], w.sigs(this), Object.assign({ now: this.clk.ph, title: tt(typeof w.title === 'function' ? w.title(this) : w.title) }, w.opts ? w.opts(this) : {})); });
@@ -185,6 +202,8 @@ CH8.Prob = class {
     this.B = new (o.Board || CH8.Board)(cv, { ...(o.boardOpts || {}), T: 4, mid: true, midMin: o.midMin ?? 420, cktAspM: o.cktAspM, rowAsp: o.rowAsp, rowMin: o.rowMin, pad: o.pad ?? 1.35,
       core: o.core ? (ctx, b, bd) => o.core(ctx, b, bd, self.k, self) : undefined,
       cktFrac: o.cktFrac ?? 0.52, topAsp: o.topAsp ?? 0.42, wideAt: o.wideAt, cktAspN: o.cktAspN, sideAspN: o.sideAspN, waveAsp: o.waveAsp, waveMin: o.waveMin, dotSpeed: o.dotSpeed,
+      two: !!o.spec2, ckt2AspM: o.ckt2AspM, ckt2AspN: o.ckt2AspN, ckt2AspW: o.ckt2AspW,   // spec2(k, self): a second circuit under the first (null: empty2 draws the box)
+      after2: v => { if (o.after2) o.after2(v, self.k, self); }, empty2: (ctx, b) => { if (o.empty2) o.empty2(ctx, b, self.k, self); },
       view: Object.assign({ glowColor: 'rgba(255,126,182,.4)' }, o.view || {}), shortSpec: o.shortSpec ? sp => o.shortSpec(sp, self) : undefined,
       side: o.side ? (ctx, b, bd) => o.side(ctx, b, bd, self.k, self) : undefined,
       waves: (o.waves || []).map(w => ({ title: bd => (w.title ? w.title(bd, self.k, self) : ''), sigs: bd => w.sigs(bd, self.k, self), opts: w.opts ? bd => w.opts(bd, self.k, self) : undefined,
@@ -193,11 +212,13 @@ CH8.Prob = class {
       badge: () => o.badge ? o.badge(self.k, self) : self.solved ? [['แก้แล้ว: กระแสไหล', 'solved: the current flows'], 'ok'] : [['ยังไม่ได้แก้วงจร', 'not solved yet'], 'wait'] });
     this.B.resize(); this.build(true); window.addEventListener('resize', () => this.B.resize());
     LS.anim(cv, dt => { const v = this.B.view; if (!v) return; v.o.dots = this.solved; v.o.tips = this.solved; const g = o.glow ? o.glow(this.k, this) : null;
-      v.o.glow = g && g.length ? new Set(g) : null; if (o.tick) o.tick(dt, this); this.B.frame(dt); }); }
+      v.o.glow = g && g.length ? new Set(g) : null; const v2 = this.B.view2; if (v2) { v2.o.dots = this.solved; v2.o.tips = this.solved; v2.o.glow = v.o.glow; }   // a part glows in both pictures
+      if (o.tick) o.tick(dt, this); this.B.frame(dt); }); }
   get solved() { return this.k >= (this.o.solvedAt ?? 0); }
   get ckt() { return this.B.ckt; }
   build(force) { const sp = typeof this.o.spec === 'function' ? this.o.spec(this.k, this) : this.o.spec;
-    if (force || sp !== this.spec) { this.spec = sp; this.B.set(sp, this.o.vo ? this.o.vo(this) : {}); } }
+    if (force || sp !== this.spec) { this.spec = sp; this.B.set(sp, this.o.vo ? this.o.vo(this) : {}); }
+    if (this.o.spec2) { const s2 = this.o.spec2(this.k, this); if (force || s2 !== this.spec2) { this.spec2 = s2; this.B.set2(s2); } } }
   set(k) { this.k = k; if (this.o.onSet) this.o.onSet(k, this); this.build(); }
   refresh() { this.list = null; this.build(true); if (this.stepper) this.stepper.refresh(true); }
   get steps() { return this.list || (this.list = LS.withCol(this.colW, () => this.o.steps(this))); }

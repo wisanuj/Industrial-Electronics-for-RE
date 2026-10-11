@@ -1180,8 +1180,9 @@ CK.View = View;
 CK.badge = (ctx, msg, kind = 'wait', x = 8, y = 6) => {
   /* "V_m", "I_DQ", "V_{dc}": the part after "_" is drawn as a subscript, as in the circuit labels */
   const ok = kind === 'ok', parts = []; String(msg).replace(/_\{([^}]*)\}|_([A-Za-z0-9]+)|([^_]+|_)/g, (m, b1, b2, tx) => { parts.push(tx !== undefined ? { s: tx, sub: false } : { s: b1 ?? b2, sub: true }); return m; });
-  ctx.save(); const font = q => { ctx.font = `600 ${q.sub ? 10.5 : 14.5}px ${FONT_TH}`; };
-  let w = 20; parts.forEach(q => { font(q); w += ctx.measureText(q.s).width; });
+  ctx.save(); let k = 1; const font = q => { ctx.font = `600 ${(q.sub ? 10.5 : 14.5) * k}px ${FONT_TH}`; };
+  const width = () => parts.reduce((a, q) => { font(q); return a + ctx.measureText(q.s).width; }, 20); let w = width();
+  const avail = (parseFloat(ctx.canvas.style.width) || ctx.canvas.width) - x - 8; if (w > avail) { k = Math.max(0.68, (avail - 20) / (w - 20)); w = width(); }   // a long message on a phone: a smaller font, not a clipped pill
   ctx.fillStyle = ok ? 'rgba(126,231,135,.16)' : 'rgba(255,209,102,.14)'; ctx.strokeStyle = ok ? '#7ee787' : '#ffd166'; ctx.lineWidth = 1;
   ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, 27, 6); else ctx.rect(x, y, w, 27); ctx.fill(); ctx.stroke();
   ctx.fillStyle = ok ? '#7ee787' : '#ffd166'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; let cx = x + 10;

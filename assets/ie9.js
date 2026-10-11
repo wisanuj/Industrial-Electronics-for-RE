@@ -474,6 +474,9 @@ const num = (label, ans, o = {}) => ({ label, w: o.w || 5, ok: x => near(x, ans,
 const bdg = (th, en, ok = true) => [[th, en ?? th], ok === true ? 'ok' : ok === false ? 'wait' : ok];
 const LAY = { cktAspM: 0.5, rowAsp: 0.66, rowMin: 260, cktAspN: 0.62, sideAspN: 0.7 };
 AC.LAY = LAY;
+const LAY2 = { ckt2AspM: 0.4, ckt2AspN: 0.48, ckt2AspW: 0.3 };   // the second circuit box (the ac equivalent under the real circuit)
+/* a name in the top-left corner of a circuit box */
+AC.caption = (v, text, above) => { const b = v.box; if (b) T(v.ctx, tt(text), b.x + 8, above ? b.y - 8 : b.y + 11, { align: 'left', color: COL.muted, size: 12 }); };   // above: in the band the board leaves over the second box
 const DEF = {};
 /* one amplifier, tuned and measured: { o, sp, m, dc (the same circuit in dc mode, for the bias view) } */
 AC.mk = o => { const sp = AC.tune(AC.amp(o)); return { o, sp, m: AC.measure(sp), dc: { ...sp, mode: 'dc', dcFirst: false } }; };
@@ -494,10 +497,20 @@ const ampDef = c => { let M = null; const fetQ = c.o.dev && c.o.dev !== 'bjt';
     EQ: AC.eq(c.o, c.p), EQr: c.ro ? AC.eq(c.o, { ...c.p, [fetQ ? 'rd' : 'ro']: c.ro }) : null, EQa: c.alt ? (c.alt.eq ? c.alt.eq() : AC.eq(c.alt.o, c.alt.p || c.p)) : null });
   const altOn = k => c.alt && k >= c.alt.from, roOn = k => c.ro && k >= c.roFrom;
   const cur = k => { const m = mk(); return altOn(k) ? m.A : roOn(k) ? m.Xr : m.X; };
-  return { ...LAY, solvedAt: 1, probe: mk,
-    spec: k => { const m = mk(); if (k < c.eqFrom) return m.X.dc; if (altOn(k)) return c.alt.real ? m.A.dc : m.EQa; return roOn(k) ? m.EQr : m.EQ; },   // alt.real: the second version as the real circuit
-    after: (v, k) => { const m = mk(); if (k < c.eqFrom) { AC.ampTags(v, m.X.sp); return; } if (altOn(k) && c.alt.real) { AC.ampTags(v, m.A.sp); return; } const e = altOn(k) ? m.EQa : m.EQ; if (e.boxes) AC.boxes(v, e.boxes);
-      AC.zArrows(v, { inN: 'i', outN: e.zoN || e.out, outDx: 0.25, inDy: e.parts.some(q => q.id === 'Rs') ? 0.62 : undefined }); },   // with R_s the Z_i arrow goes under the line (R_s's label is above)
+  /* the real circuit stays in the first box for the whole solution (dc view: the dots are the dc currents, where the bias comes from); the ac
+     equivalent appears in the second box from the step that draws it (eqFrom), so each of its parts can be traced back. A second version with a
+     circuit of its own (alt.o: C_E connected, the book's values) replaces the real circuit from alt.from */
+  const realOf = k => { const m = mk(); return altOn(k) && c.alt.o ? m.A : m.X; };
+  const eqOf = k => { const m = mk(); return altOn(k) && !c.alt.real ? m.EQa : roOn(k) ? m.EQr : m.EQ; };
+  return { ...LAY, ...LAY2, solvedAt: 1, probe: mk,
+    spec: k => realOf(k).dc,
+    spec2: k => (k < c.eqFrom ? null : eqOf(k)),
+    after: (v, k) => { AC.ampTags(v, realOf(k).sp); AC.caption(v, t('วงจรจริง · จุดคือกระแสไฟตรง (dc)', 'the real circuit · dots: dc currents')); },
+    after2: (v, k) => { const e = eqOf(k); if (e.boxes) AC.boxes(v, e.boxes);
+      AC.zArrows(v, { inN: 'i', outN: e.zoN || e.out, outDx: 0.25, inDy: e.parts.some(q => q.id === 'Rs') ? 0.62 : undefined });   // with R_s the Z_i arrow goes under the line (R_s's label is above)
+      AC.caption(v, t('วงจรสมมูล ac · จุดคือกระแสสัญญาณ', 'ac equivalent · dots: signal currents'), true); },
+    empty2: (ctx, b) => { CH8.empty(ctx, b, [`ขั้นที่ ${c.eqFrom} วาดวงจรสมมูล ac ของวงจรข้างบนที่นี่`, `Step ${c.eqFrom} draws the ac equivalent of the circuit above here`]);
+      T(ctx, t('วงจรสมมูล ac', 'ac equivalent'), b.x + 8, b.y - 8, { align: 'left', color: COL.muted, size: 12 }); },
     glow: k => (c.glow && c.glow[k]) || null,
     badge: k => { const b = c.badge ? c.badge(k, mk()) : null; return b ? (Array.isArray(b) ? bdg(b[0], b[1]) : bdg(b)) : null; },
     side: (ctx, b, bd, k) => { const m = mk(); tbl(ctx, b, bd, c.rows.filter(r => k >= r[0]).map(r => [r[1], r[2], r[3](m)]), c.title); },
@@ -523,7 +536,7 @@ DEF.ex51 = ampDef({ o: O51, ro: 50e3, roFrom: 7, p: { re: 0.026 / 2.428e-3, beta
     step(t('<b>(a) \\(r_e\\)</b>: ความต้านทาน ac ของรอยต่อเบส–อิมิตเตอร์ที่กระแส \\(I_E\\) เหมือน \\(r_D = 26\\ \\text{mV}/I_D\\) ของไดโอด (หน้า 1.5 · ส่วน B ข้างบน)', '<b>(a) \\(r_e\\)</b>: the ac resistance of the base–emitter junction at the current \\(I_E\\), like a diode\'s \\(r_D = 26\\ \\text{mV}/I_D\\) (page 1.5 · section B above)'),
       block([R`r_e &= \frac{26\ \text{mV}}{I_E} = \frac{26\ \text{mV}}{2.428\ \text{mA}} = \boxed{10.71\ \Omega}`])),
     step(t('<b>วงจรสมมูล ac</b> (รูป 5.22): ตัวเก็บประจุ 10 µF เป็นลัดวงจรที่ความถี่สัญญาณ (ที่ 100 kHz มีรีแอกแตนซ์ 0.16 Ω) \\(V_{CC}\\) เป็นกราวด์ของสัญญาณ \\(R_B\\) และ \\(R_C\\) จึงต่อลงกราวด์ แล้วแทนทรานซิสเตอร์ด้วยแบบจำลอง \\(r_e\\): \\(\\beta r_e\\) ระหว่างเบสกับอิมิตเตอร์ และแหล่งกระแส \\(\\beta I_b\\) จากคอลเล็กเตอร์ลงอิมิตเตอร์', '<b>The ac equivalent circuit</b> (Fig. 5.22): the 10 µF capacitors are shorts at the signal frequency (0.16 Ω of reactance at 100 kHz), \\(V_{CC}\\) is an ac ground so \\(R_B\\) and \\(R_C\\) go to ground, and the transistor becomes its \\(r_e\\) model: \\(\\beta r_e\\) from base to emitter and a current source \\(\\beta I_b\\) from collector to emitter.'),
-      block([R`\beta r_e &= (100)(10.71\ \Omega) = 1.071\ \text{k}\Omega`]), t('ภาพจำลองเปลี่ยนเป็นวงจรสมมูล จุดที่เคลื่อนที่ตอนนี้คือกระแสสัญญาณ ac ไม่มีไฟตรงแล้ว', 'The simulation switches to the equivalent circuit: the moving dots are now the ac signal currents, with no dc left.')),
+      block([R`\beta r_e &= (100)(10.71\ \Omega) = 1.071\ \text{k}\Omega`]), t('วงจรสมมูลปรากฏใต้วงจรจริง: ในรูปล่างจุดที่เคลื่อนที่คือกระแสสัญญาณ ac ไม่มีไฟตรง ส่วนรูปบนยังเป็นกระแสไฟตรง ไล่ดูได้ว่า \\(R_B\\) กับ \\(R_C\\) ไปลงกราวด์ได้อย่างไร', 'The equivalent circuit appears under the real one: in the lower picture the moving dots are the ac signal currents, with no dc, while the upper picture still shows the dc currents. Trace how \\(R_B\\) and \\(R_C\\) end up at ground.')),
     step(t('<b>(b) \\(Z_i\\)</b> (สมการ 5.5–5.6): มองเข้าที่ขาเข้าเห็น \\(R_B\\) ขนานกับ \\(\\beta r_e\\) และเพราะ \\(R_B\\) ใหญ่กว่ามาก \\(Z_i \\cong \\beta r_e\\)', '<b>(b) \\(Z_i\\)</b> (Eqs. 5.5–5.6): looking into the input one sees \\(R_B\\) in parallel with \\(\\beta r_e\\), and since \\(R_B\\) is far larger, \\(Z_i \\cong \\beta r_e\\)'),
       block([R`Z_i &= R_B \parallel \beta r_e = 470\ \text{k}\Omega \parallel 1.071\ \text{k}\Omega = \boxed{1.07\ \text{k}\Omega}`])),
     step(t('<b>(c) \\(Z_o\\)</b> (สมการ 5.8): ปิดแหล่งสัญญาณ (\\(V_i\\) = 0) แล้ว \\(I_b\\) = 0 แหล่งกระแส \\(\\beta I_b\\) จึงเป็นเปิดวงจร มองเข้าที่ขาออกเหลือ \\(R_C\\)', '<b>(c) \\(Z_o\\)</b> (Eq. 5.8): switch the signal off (\\(V_i\\) = 0); then \\(I_b\\) = 0 and the source \\(\\beta I_b\\) is an open circuit, so looking into the output leaves \\(R_C\\)'),
