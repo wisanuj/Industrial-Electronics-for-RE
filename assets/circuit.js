@@ -201,7 +201,8 @@ CK.BJT = BJT;
    squares the bracket; it is a first approximation). kind 'jfet' (default; idss A, vp V < 0; gate: a diode model from G to S, default
    { model: 'simple', vk: 0.7 }, gate: false for none), 'dmos' (depletion MOSFET: the same equation on both sides of v_GS = 0, no gate diode), 'emos'
    (enhancement MOSFET: I_D = k (v_GS − V_T)² with k A/V², vt V > 0, and v_GS − V_T in place of v_GS − V_P). Negative v_DS: the straight line through
-   the origin with the ohmic slope. DC and transients: Newton–Raphson on (v_GS, v_DS) with the drain current linearised (g_m, g_ds) and the gate diode
+   the origin with the ohmic slope. lam (λ, 1/V; supplement B): I_D × (1 + λ v_DS) in both regions, the SPICE form, for the r_d = 1/y_os of the ac
+   examples. DC and transients: Newton–Raphson on (v_GS, v_DS) with the drain current linearised (g_m, g_ds) and the gate diode
    as any diode; AC uses the slopes at the last DC point */
 const FET = { GATE: { model: 'simple', vk: 0.7 } };
 FET.kind = p => p.kind || 'jfet';
@@ -209,9 +210,12 @@ FET.gate = p => (FET.kind(p) === 'jfet' ? (p.gate === false ? null : (p.gate || 
 /* the threshold (V_P or V_T) and the coefficient b = I_DSS/V_P² or k, n-channel terms */
 FET.kb = p => { if (FET.kind(p) === 'emos') return { vt: p.vt ?? 2, b: p.k ?? 1e-3 }; const vp = -Math.abs(p.vp ?? -4); return { vt: vp, b: (p.idss ?? 8e-3) / (vp * vp) }; };
 /* the drain current and its slopes { i, gm = ∂I_D/∂v_GS, gds = ∂I_D/∂v_DS, region } at (v_GS, v_DS), n-channel terms */
-FET.iv = (p, vgs, vds) => { const { vt, b } = FET.kb(p), vov = vgs - vt, va = p.va;
+FET.iv = (p, vgs, vds) => { const { vt, b } = FET.kb(p), vov = vgs - vt, va = p.va, lam = p.lam || 0;
   if (vov <= 0) return { i: 0, gm: 0, gds: 0, region: 'cutoff' };
   if (vds < 0) { const g = 2 * b * vov; return { i: g * vds, gm: 2 * b * vds, gds: g, region: 'ohmic' }; }
+  if (lam) { const E = 1 + lam * vds;   // lam: channel-length modulation in the SPICE form I_D (1 + λ v_DS), ohmic and saturation alike (r_d = 1/(λ I_D') at the Q-point; the slope g_m is unchanged by it)
+    if (vds < vov) { const i0 = b * (2 * vov * vds - vds * vds); return { i: i0 * E, gm: 2 * b * vds * E, gds: 2 * b * (vov - vds) * E + i0 * lam, region: 'ohmic' }; }
+    const i0 = b * vov * vov; return { i: i0 * E, gm: 2 * b * vov * E, gds: i0 * lam, region: 'saturation' }; }
   if (vds < vov) return { i: b * (2 * vov * vds - vds * vds), gm: 2 * b * vds, gds: 2 * b * (vov - vds), region: 'ohmic' };
   const i0 = b * vov * vov, E = va ? 1 + (vds - vov) / va : 1;
   return { i: i0 * E, gm: 2 * b * vov * E - (va ? i0 / va : 0), gds: va ? i0 / va : 0, region: 'saturation' }; };
@@ -247,7 +251,7 @@ class Circuit {
     this.byId = {}; this.parts.forEach(p => { this.byId[p.id] = p; });
     this.mode = spec.mode || 'dc';                // 'dc' | 'ac' | 'tran'
     this.w = spec.w || 2 * Math.PI * 50;          // AC angular frequency (rad/s)
-    this.t = 0; this.result = null;
+    this.t = 0; this.result = null; this.dcFirst = !!spec.dcFirst; this.dc = null;
     this.parts.forEach(p => { if (p.type === 'C') p.vc = p.v0 || 0; if (p.type === 'L') p.il = p.i0 || 0; });
   }
   part(id) { return this.byId[id]; }
@@ -262,6 +266,9 @@ class Circuit {
      Newton–Raphson: each diode is replaced by its slope g and an offset current at the voltage guessed so far (p.vd), the linear
      circuit is solved, the diode voltages are updated (limited on the exponential), until they stop moving. result.iters counts the solves */
   solve(dt) {
+    if (this.mode === 'ac' && this.dcFirst && !this.dc) {   // dcFirst (spec flag, supplements A/B): an ac solve of a transistor amplifier is linearised at its operating point, so the dc point is found once first (kept in this.dc) with the ac sources off
+      const acs = this.parts.filter(p => p.type === 'VAC' || p.type === 'IAC'), amps = acs.map(p => p.amp); acs.forEach(p => { p.amp = 0; });
+      this.mode = 'dc'; this.dc = this.solve(); this.mode = 'ac'; acs.forEach((p, k) => { p.amp = amps[k]; }); }
     if (this.mode === 'tran' && !(dt > 0)) dt = 1e-6;   // a board solves once without a step: look 1 µs ahead (capacitor voltages are only updated by step)
     const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'), js = this.parts.filter(p => p.type === 'J'), oas = this.parts.filter(p => p.type === 'OA');
     if ((!ds.length && !qs.length && !js.length && !oas.length) || this.mode === 'ac') return this.solve1(dt);
@@ -765,7 +772,7 @@ class View {
     const u = this.u; const vertical = Math.abs(Math.sin(ang)) > 0.7; const side = p.side || 1; const off = (p.labelOff || 0.62) * u;
     let lx = cx_, ly = cy_, align = 'center';
     if (vertical) { lx = cx_ + side * off; align = side > 0 ? 'left' : 'right'; } else { ly = cy_ - side * off; }
-    const name = p.name ?? p.id.replace(/_\d+$/, ''); const v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : this.valueText(p);
+    const name = p.name ?? p.id.replace(/_\d+$/, ''); const v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p, this) : p.valText) : this.valueText(p);
     const sz = Math.max(11.5, u * 0.31);
     if (vertical) { this.text(name, lx, ly - sz * 0.62, { align, color: PAL.ink, size: sz, weight: '600' }); if (v) this.text(v, lx, ly + sz * 0.62, { align, color: PAL.muted, size: sz * 0.92 }); }
     else { const yy = side > 0 ? ly - sz * 0.6 : ly + sz * 0.6;
@@ -827,7 +834,7 @@ class View {
       const mid = (q, r) => [(q[0] + r[0]) / 2, (q[1] + r[1]) / 2], pc = mid(g.C, g.cT), pe = mid(g.E, g.eT), sh = [o[0] - g.m[0], o[1] - g.m[1]], pb = mid(g.B, g.bJ);
       this.text('C', pc[0] + sh[0], pc[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al }); this.text('E', pe[0] + sh[0], pe[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al });
       this.text('B', pb[0] + (side ? 0 : 0.2 * u), pb[1] - (side ? 0.22 * u : 0), { color: PAL.muted, size: ps, weight: '700', align: side ? 'center' : 'left' }); }
-    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : (p.fam ? '' : `β = ${p.beta ?? 100}`);
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p, this) : p.valText) : (p.fam ? '' : `β = ${p.beta ?? 100}`);
       const [lx, ly] = g.at(0, -(0.36 + 0.34 + (side ? 0 : 0.16))), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
       if (side) { this.text(name, lx, ly - (v ? sz * 0.62 : 0), { align: al, color: PAL.ink, size: sz, weight: '600' }); if (v) this.text(v, lx, ly + sz * 0.62, { align: al, color: PAL.muted, size: sz * 0.92 }); }
       else this.text(v ? `${name}  ${v}` : name, lx, ly, { align: al, color: PAL.ink, size: sz, weight: '600' }); }
@@ -864,7 +871,7 @@ class View {
       const mid = (q, r) => [(q[0] + r[0]) / 2, (q[1] + r[1]) / 2], pd = mid(g.D, g.dT), ps2 = mid(g.S, g.sT), sh = [o[0] - g.m[0], o[1] - g.m[1]], pg = mid(g.G, g.gB);
       this.text('D', pd[0] + sh[0], pd[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al }); this.text('S', ps2[0] + sh[0], ps2[1] + sh[1], { color: PAL.muted, size: ps, weight: '700', align: al });
       this.text('G', pg[0] + (side ? 0 : 0.2 * u), pg[1] - (side ? 0.22 * u : 0), { color: PAL.muted, size: ps, weight: '700', align: side ? 'center' : 'left' }); }
-    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : '';
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p, this) : p.valText) : '';
       const [lx, ly] = g.at(0, -(0.36 + 0.34 + (side ? 0 : 0.16))), al = !side ? 'center' : g.n[0] < 0 ? 'left' : 'right';
       if (side) { const lines = [name].concat(v ? String(v).split('\n') : []), n = lines.length;   // a value with line breaks stacks beside the symbol
         lines.forEach((s, k) => this.text(s, lx, ly + (k - (n - 1) / 2) * sz * 1.08, { align: al, color: k ? PAL.muted : PAL.ink, size: k ? sz * 0.92 : sz, weight: k ? '' : '600' })); }
@@ -882,7 +889,7 @@ class View {
     ctx.save(); ctx.fillStyle = 'rgba(90,209,255,.12)'; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(g.b1[0], g.b1[1]); ctx.lineTo(g.apex[0], g.apex[1]); ctx.lineTo(g.b2[0], g.b2[1]); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
     const sgn = (pt, s) => { const q = [pt[0] + g.ax * 0.2 * u, pt[1] + g.ay * 0.2 * u]; this.text(s, q[0], q[1], { color: PAL.ink, size: sz * 1.05, weight: '700' }); };
     sgn(g.bP, '+'); sgn(g.bN, '−');
-    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : '';
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p, this) : p.valText) : '';
       const top = g.at((g.base + g.apexD) / 2, -(p.labelSide || 1) * (g.h * 0.55 + 0.3 * u)), vert = Math.abs(g.ay) > 0.7;   // above the body of a rightward op-amp (labelSide: −1 below; beside it when the op-amp points up or down)
       this.text(v ? `${name}  ${v}` : name, top[0], top[1] - (vert ? 0 : sz * 0.2), { color: PAL.ink, size: sz, weight: '600', align: vert ? 'left' : 'center' }); }
   }

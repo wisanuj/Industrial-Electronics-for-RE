@@ -5,10 +5,10 @@
 <title data-en="Numeric Tests">ชุดทดสอบตัวเลข</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=4">
-<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
-<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script>
-<script src="assets/draw.js?v=4"></script><script src="assets/ch6.js?v=4"></script><script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script><script src="assets/ie8.js?v=4"></script><script src="assets/review.js?v=4"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script>
+<script src="assets/draw.js?v=5"></script><script src="assets/ch6.js?v=5"></script><script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie8.js?v=5"></script><script src="assets/review.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
@@ -357,6 +357,61 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
   const cons = Object.entries(RV.CONCEPTS), nq = cons.reduce((a, [, q]) => a + q.length, 0), okq = cons.every(([, q]) => q.every(x => x.o.length === 4 && x.a >= 0 && x.a < 4 && x.q.length === 2 && x.why.length === 2 && x.o.every(o => o.length === 2)));
   const okCh = Object.keys(RV.CH).length === 8 && Object.values(RV.CH).every(C => C.formulas.length >= 5 && C.recipe.length >= 4 && C.traps.length >= 4 && C.formulas.every(f => f.length === 3));
   T('review page data: 8 chapters with ≥ 5 formulas, ≥ 4 recipe steps and ≥ 4 traps, every concept question with 4 two-language options and a reason', `${okCh} ${okq} ${nq >= 24}`, 'true true true'); }
+
+/* --- supplements A and B (ie9.js): the engine's small-signal answers against the book's formulas evaluated at the engine's own dc point,
+   and the examples whose book numbers were re-derived exactly --- */
+{ const P = (x, y) => 1 / (1 / x + 1 / y), rel = (a, b) => Math.abs(a / b - 1), M = k => AC.DEF[k].probe();
+  const ok = (a, b, tol = 3e-3) => (rel(a, b) < tol ? 'ok' : `${(100 * rel(a, b)).toFixed(2)}%`), gmJ = (idss, vp, v) => 2 * idss / Math.abs(vp) * (1 - v / vp);
+  { const m = M('ex51'), re = 0.026 / m.X.m.Q.IE;
+    T('A.1 Example 5.1 (fixed bias): engine Z_i, A_v (r_o = ∞), A_v and Z_o (r_o = 50 kΩ) against R_B ‖ βr_e, −R_C/r_e, −(R_C ‖ r_o)/r_e, R_C ‖ r_o at the engine\'s I_E (0.3 %)',
+      [ok(m.X.m.Zi, P(470e3, 100 * re)), ok(m.X.m.Av, -3000 / re), ok(m.Xr.m.Av, -P(3000, 50e3) / re), ok(m.Xr.m.Zo, P(3000, 50e3))].join(' '), 'ok ok ok ok'); }
+  { const m = M('ex52'), re = 0.026 / m.X.m.Q.IE;
+    T('A.2 Example 5.2 (divider, C_E): Z_i = R_1 ‖ R_2 ‖ βr_e, A_v = −R_C/r_e, with r_o −(R_C ‖ r_o)/r_e; exact dc I_E = 1.3366 mA',
+      [ok(m.X.m.Zi, P(P(56e3, 8.2e3), 90 * re)), ok(m.X.m.Av, -6800 / re), ok(m.Xr.m.Av, -P(6800, 50e3) / re), ok(m.X.m.Q.IE, 1.3366e-3, 1e-3)].join(' '), 'ok ok ok ok'); }
+  { const m = M('ex53'), re = 0.026 / m.X.m.Q.IE, Zb = 120 * re + 121 * 560, reA = 0.026 / m.A.m.Q.IE;
+    T('A.2 Examples 5.3–5.4 (R_E unbypassed, then bypassed): Z_i = R_B ‖ Z_b with Z_b = βr_e + (β + 1)R_E, A_v = −βR_C/Z_b; bypassed −R_C/r_e',
+      [ok(m.X.m.Zi, P(470e3, Zb)), ok(m.X.m.Av, -120 * 2200 / Zb), ok(m.A.m.Av, -2200 / reA)].join(' '), 'ok ok ok'); }
+  { const m = M('ex57'), re = 0.026 / m.X.m.Q.IE;
+    T('A.3 Example 5.7 (emitter follower): Z_i = R_B ‖ (β + 1)(r_e + R_E), Z_o = R_E ‖ r_e, A_v = R_E/(R_E + r_e)',
+      [ok(m.X.m.Zi, P(220e3, 101 * (re + 3300))), ok(m.X.m.Zo, P(3300, re)), ok(m.X.m.Av, 3300 / (3300 + re), 1e-4)].join(' '), 'ok ok ok'); }
+  { const m = M('ex58'), re = 0.026 / m.X.m.Q.IE;
+    T('A.3 Example 5.8 (common base, pnp): Z_i = R_E ‖ r_e, A_v = αR_C/r_e with α = 0.98', [ok(m.X.m.Zi, P(1000, re)), ok(m.X.m.Av, 0.98 * 5000 / re)].join(' '), 'ok ok'); }
+  { const m = M('ex59');
+    T('A.3 Example 5.9 (collector feedback, exact dc): Z_i 567.7 Ω, A_v −236.16; with r_o = 20 kΩ: Z_i 622.09 Ω, Z_o 2347.8 Ω, A_v −208.44',
+      [ok(m.X.m.Zi, 567.7), ok(m.X.m.Av, -236.16), ok(m.Xr.m.Zi, 622.09), ok(m.Xr.m.Zo, 2347.8), ok(m.Xr.m.Av, -208.44)].join(' '), 'ok ok ok ok ok'); }
+  { const m = M('ex511'), re = 0.026 / m.X.m.Q.IE, AvL = -P(3000, 4700) / re;
+    T('A.4 Example 5.11 (R_s = 0.3 kΩ, R_L = 4.7 kΩ): A_vL = −(R_C ‖ R_L)/r_e, A_vs = A_vL Z_i/(Z_i + R_s)', [ok(m.X.m.Av, AvL), ok(m.X.m.Avs, AvL * m.X.m.Zi / (m.X.m.Zi + 300))].join(' '), 'ok ok'); }
+  { const m = AC.DEF.ex515.probe();
+    T('A.4 Example 5.15 (two BJT stages, exact dc): I_E = 4.000 mA, A_v1 −102.35, A_v2 −338.46, A_vT 34 641, with R_L 23 596, Z_i 953.6 Ω',
+      [ok(m.Q1.IE, 4.0e-3), ok(m.Av1, -102.35), ok(m.Av2, -338.46), ok(m.AvT, 34641), ok(m.AvTL, 23596), ok(m.m.Zi, 953.6)].join(' '), 'ok ok ok ok ok ok'); }
+  { const m = M('ex87'), g = gmJ(10e-3, -8, m.X.m.Q.VGS);
+    T('B.2 Example 8.7 (fixed bias, V_DD = 20 V): V_GS = −2 V, A_v = −g_mR_D = −3.75, with r_d = 25 kΩ −g_m(R_D ‖ r_d) = −3.472',
+      [ok(m.X.m.Q.VGS, -2, 1e-4), ok(m.X.m.Av, -g * 2000), ok(m.Xr.m.Av, -g * P(2000, 25e3)), ok(m.Xr.m.Zo, P(2000, 25e3))].join(' '), 'ok ok ok ok'); }
+  { const m = M('ex88'), g = gmJ(8e-3, -6, m.X.m.Q.VGS), RD = 3300, RS = 1000, rd = 50e3;
+    T('B.2 Example 8.8 (R_S unbypassed): A_v = −g_mR_D/(1 + g_mR_S); with r_d = 50 kΩ −g_mR_D/[1 + g_mR_S + (R_D + R_S)/r_d] and Z_o of Eq. 8.25a',
+      [ok(m.X.m.Av, -g * RD / (1 + g * RS)), ok(m.Xr.m.Av, -g * RD / (1 + g * RS + (RD + RS) / rd)), ok(m.Xr.m.Zo, RD * (1 + g * RS + RS / rd) / (1 + g * RS + RS / rd + RD / rd))].join(' '), 'ok ok ok'); }
+  { const m = M('exvd'), g = gmJ(8e-3, -4, m.X.m.Q.VGS);
+    T('B.2 JFET voltage divider (Example 7.4 values): V_GS = −1.802 V, Z_i = R_1 ‖ R_2 = 239.2 kΩ, A_v = −g_mR_D = −5.28',
+      [ok(m.X.m.Q.VGS, -1.802, 1e-3), ok(m.X.m.Zi, P(2.1e6, 270e3)), ok(m.X.m.Av, -g * 2400)].join(' '), 'ok ok ok'); }
+  { const m = M('ex89'), g = gmJ(10e-3, -4, m.X.m.Q.VGS), RS = 1100, RD = 3600, rd = 20e3;
+    T('B.3 Example 8.9 (common gate): Z_i = R_S ‖ 1/g_m, A_v = g_mR_D; with r_d = 20 kΩ Z_i = R_S ‖ (r_d + R_D)/(1 + g_mr_d), A_v = (g_mR_D + R_D/r_d)/(1 + R_D/r_d)',
+      [ok(m.X.m.Zi, P(RS, 1 / g)), ok(m.X.m.Av, g * RD), ok(m.Xr.m.Zi, P(RS, (rd + RD) / (1 + g * rd))), ok(m.Xr.m.Av, (g * RD + RD / rd) / (1 + RD / rd))].join(' '), 'ok ok ok ok'); }
+  { const m = M('ex810'), g = gmJ(16e-3, -4, m.X.m.Q.VGS), RS = 2200, Rp = P(40e3, RS);
+    T('B.3 Example 8.10 (source follower): I_DQ = 1.30 mA (the book prints 4.56 mA), A_v = g_mR_S/(1 + g_mR_S), with r_d = 40 kΩ g_m(r_d ‖ R_S)/[1 + g_m(r_d ‖ R_S)]',
+      [ok(Math.abs(m.X.m.Q.ID), 1.30e-3, 3e-3), ok(m.X.m.Av, g * RS / (1 + g * RS), 1e-3), ok(m.Xr.m.Av, g * Rp / (1 + g * Rp), 1e-3)].join(' '), 'ok ok ok'); }
+  { const m = M('ex811'), gX = 2 * 6e-3 / 3 * (1 + m.X.m.Q.VGS / 3);
+    T('B.4 Example 8.11 (D-MOSFET divider) corrected to 24 V and R_1 = 150 MΩ: saturated, A_v = −g_m(r_d ‖ R_D) ≈ −7.94; with the book\'s 18 V and 110 MΩ the same V_GS but ohmic, |A_v| ≈ 6.3 instead of 8.05',
+      `${m.X.m.Q.region} ${ok(m.X.m.Av, -gX * P(100e3, 1800))} ${m.A.m.Q.region} ${ok(m.A.m.Q.VGS, m.X.m.Q.VGS, 3e-3)} ${Math.abs(m.A.m.Av) < 6.6}`, 'saturation ok ohmic ok true'); }
+  { const m = M('ex812'), g = 2 * 0.24e-3 * (m.X.m.Q.VGS - 3), RF = 10e6, RD = 2000, Rr = P(2000, 50e3);
+    T('B.4 Example 8.12 (E-MOSFET drain feedback): exact V_GS = V_DS = 6.412 V; Z_i = (R_F + R_D′)/(1 + g_mR_D′), A_v = (1/R_F − g_m)/(1/R_F + 1/R_D′) with R_D′ = R_D, then R_D ‖ r_d',
+      [ok(m.X.m.Q.VGS, 6.412, 1e-3), ok(m.X.m.Zi, (RF + RD) / (1 + g * RD)), ok(m.X.m.Av, (1 / RF - g) / (1 / RF + 1 / RD)), ok(m.Xr.m.Zi, (RF + Rr) / (1 + g * Rr)), ok(m.Xr.m.Av, (1 / RF - g) / (1 / RF + 1 / Rr))].join(' '), 'ok ok ok ok ok'); }
+  { const m = AC.mk816(), g = gmJ(10e-3, -4, m.J1.VGS);
+    T('B.4 Example 8.16 (two JFET stages): V_GS = −1.891 V, A_v = g_m²(R_D ‖ R_G)R_D ≈ 40.0 (the book rounds to 38.4), Z_i = R_G = 3.3 MΩ, Z_o = R_D = 2.4 kΩ',
+      [ok(m.J1.VGS, -1.891, 1e-3), ok(m.AvT, g * g * P(2400, 3.3e6) * 2400), ok(m.m.Zi, 3.3e6), ok(m.m.Zo, 2400)].join(' '), 'ok ok ok ok'); }
+  { const sp = AC.eq({ dev: 'bjt', cfg: 'vdb', R1: 56e3, R2: 8.2e3, RC: 6.8e3, RL: 10e3 }, { re: 20, beta: 90, ro: 50e3 }), ctx = document.createElement('canvas').getContext('2d');
+    const lab = (u, id) => { const q = sp.parts.find(x => x.id === id); return typeof q.valText === 'function' ? q.valText(q, { u, ctx }) : q.valText; };
+    T('equivalent circuits: a resistor\'s value is written only where it fits before the next part (R_1 next to R_2: name only; r_o with its wider gap: value at u = 34 px, name only at u = 20 px)',
+      `${lab(34, 'R1')}|${lab(34, 'ro')}|${lab(20, 'ro')}`, '|50 kΩ|'); } }
 
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');

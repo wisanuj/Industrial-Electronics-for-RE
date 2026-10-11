@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="B.3 — Common Gate and the Source Follower">B.3 — เกตร่วมและตัวตามแรงดันที่ซอร์ส</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">เกตร่วมและตัวตามแรงดันที่ซอร์ส <span class="en">Common gate and the source follower</span></h1>
+<h1 data-l="en">Common gate and the source follower <span class="en">The FET twins of the common base and the emitter follower</span></h1>
+
+<p class="sub" data-l="th">หน้า A.3 พบว่า BJT ตัวเดียวกันให้คุณสมบัติต่างกันมากตามขาที่ใช้ร่วม FET ก็เช่นกัน วงจรเกตร่วม (common gate) รับสัญญาณที่ซอร์ส อิมพีแดนซ์ขาเข้าต่ำราว \(1/g_m\) และขยายแรงดันโดยไม่กลับเฟส เหมือนวงจรเบสร่วม ตัวตามแรงดันที่ซอร์ส (source follower หรือ common drain) ขยายแรงดันต่ำกว่าหนึ่งเล็กน้อยแต่มีอิมพีแดนซ์ขาเข้าสูงมากและขาออกต่ำ เหมือนตัวตามแรงดันที่อิมิตเตอร์ ความต่างคือ \(g_m\) ของ FET เล็กกว่า BJT มาก ตัวเลขจึงไม่สุดขั้วเท่า (Boylestad หัวข้อ 8.6–8.7 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">Page A.3 found that the same BJT behaves very differently depending on which terminal is common, and so does a FET. The common-gate amplifier takes its signal at the source, has a low input impedance of about \(1/g_m\) and a noninverting voltage gain, like the common base. The source follower (common drain) has a voltage gain just under one, a very high input impedance and a low output impedance, like the emitter follower. The difference is that a FET's \(g_m\) is much smaller than a BJT's, so the numbers are less extreme (Boylestad sections 8.6–8.7 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ \text{CG: } Z_i \cong R_S \parallel \frac{1}{g_m},\ A_v \cong g_mR_D $$ $$ \text{SF: } Z_o \cong R_S \parallel \frac{1}{g_m} $$ $$ A_v = \frac{g_mR_S}{1 + g_mR_S} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>เกตร่วม</b> (หัวข้อ 8.6): เกตเป็นกราวด์ \(V_{gs} = -V_i\) อิมพีแดนซ์ขาเข้า \(Z_i \cong R_S \parallel 1/g_m\) ต่ำ \(Z_o \cong R_D\) และ \(A_v \cong +g_mR_D\) ไม่กลับเฟส (สมการ 8.33–8.39)</li>
+  <li><b>\(r_d\) ในเกตร่วม</b>: \(r_d\) เชื่อมเดรนกับซอร์ส จึงอยู่ทั้งในสูตร \(Z_i\) และ \(A_v\) ถ้า \(r_d < 10R_D\) ต้องใช้สูตรเต็ม</li>
+  <li><b>ตัวตามแรงดันที่ซอร์ส</b> (หัวข้อ 8.7): \(Z_i = R_G\) สูงมาก, \(Z_o = r_d \parallel R_S \parallel 1/g_m \cong R_S \parallel 1/g_m\), \(A_v = g_m(r_d \parallel R_S)/[1 + g_m(r_d \parallel R_S)] < 1\) ไม่กลับเฟส (สมการ 8.40–8.44)</li>
+  <li><b>เทียบกับ BJT</b>: \(1/g_m\) ของ FET (หลายร้อยโอห์ม) ใหญ่กว่า \(r_e\) (สิบกว่าโอห์ม) มาก \(Z_i\) ของเกตร่วมและ \(Z_o\) ของตัวตามแรงดันจึงสูงกว่าของ BJT</li>
+  <li><b>ตรวจตัวเลขของตำรา</b>: Example 8.10 พิมพ์ \(I_{DQ}\) = 4.56 mA ซึ่งเป็นไปไม่ได้ ค่าที่ถูกคือ 1.30 mA</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Common gate</b> (section 8.6): the gate is ground, \(V_{gs} = -V_i\); a low input impedance \(Z_i \cong R_S \parallel 1/g_m\), \(Z_o \cong R_D\), and \(A_v \cong +g_mR_D\), noninverting (Eqs. 8.33–8.39).</li>
+  <li><b>\(r_d\) in a common gate</b>: \(r_d\) links drain and source, so it appears in both \(Z_i\) and \(A_v\); when \(r_d < 10R_D\) the full formulas are needed.</li>
+  <li><b>Source follower</b> (section 8.7): a very high \(Z_i = R_G\), \(Z_o = r_d \parallel R_S \parallel 1/g_m \cong R_S \parallel 1/g_m\), and \(A_v = g_m(r_d \parallel R_S)/[1 + g_m(r_d \parallel R_S)] < 1\), noninverting (Eqs. 8.40–8.44).</li>
+  <li><b>Against the BJT</b>: a FET's \(1/g_m\) (hundreds of ohms) is far larger than \(r_e\) (a dozen ohms or so), so the common gate's \(Z_i\) and the follower's \(Z_o\) are higher than a BJT's.</li>
+  <li><b>Check the book's numbers</b>: Example 8.10 prints \(I_{DQ}\) = 4.56 mA, which is impossible; 1.30 mA is correct.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ตัวตามแรงดันกับโหลด</a><a href="#ex1"><b>1</b>Example 8.9</a><a href="#ex2"><b>2</b>Example 8.10</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The follower and its load</a><a href="#ex1"><b>1</b>Example 8.9</a><a href="#ex2"><b>2</b>Example 8.10</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ขาออกที่ซอร์ส</div><div class="story-k" data-l="en">Part 1 · The output at the source</div>
+    <h2 data-l="th">ตัวตามแรงดันที่ซอร์ส</h2><h2 data-l="en">The source follower</h2>
+    <div class="story-p" data-l="th"><p>ต่อเดรนเข้า \(V_{DD}\) ตรง ๆ แล้วรับขาออกที่ซอร์ส (รูป 8.32) เมื่อเกตขึ้น กระแสเพิ่ม แรงดันที่ \(R_S\) ก็ขึ้นตาม ซอร์สจึงตามเกต แต่ตามไม่ทันทั้งหมด เพราะต้องเหลือ \(V_{gs}\) ไว้คุมกระแส อัตราขยายจึงต่ำกว่าหนึ่งเสมอ</p>
+      <p>หน้า A.3 พบว่าตัวตามแรงดันที่อิมิตเตอร์มี \(Z_o\) ราว 12 Ω ลองเดาก่อนว่าตัวตามแรงดันที่ซอร์สของ Example 8.10 (\(g_m\) ≈ 2.3 mS) มี \(Z_o\) ราวเท่าใด</p></div>
+    <div class="story-p" data-l="en"><p>Tie the drain straight to \(V_{DD}\) and take the output at the source (Fig. 8.32). When the gate rises the current grows and so does the voltage across \(R_S\): the source follows the gate, but not all the way, since some \(V_{gs}\) must remain to control the current. The gain is therefore always below one.</p>
+      <p>Page A.3 found that the emitter follower has a \(Z_o\) of about 12 Ω. Guess first: what is the \(Z_o\) of the source follower of Example 8.10 (\(g_m\) ≈ 2.3 mS)?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ลด \(R_L\) ดูอัตราขยาย</p><p class="story-next" data-l="en">↓ Section A: lower \(R_L\) and watch the gain</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวตามแรงดันที่ซอร์สกับโหลด</h2><h2 data-l="en">The source follower and its load</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 8.7 และ 8.14 (รูป 8.32, Example 8.10)</div><div class="src" data-l="en">Boylestad, sections 8.7 and 8.14 (Fig. 8.32, Example 8.10)</div></div></div>
+  <p class="lead" data-l="th">วงจรของ Example 8.10 (\(r_d\) = 40 kΩ) กับโหลด \(R_L\) กราฟคืออัตราขยายที่ภาพจำลองแก้ทีละค่าของ \(R_L\) เทียบกับตัวตามแรงดันที่อิมิตเตอร์ในส่วน A ของหน้า A.3: อัตราขยายตกเร็วกว่ามากเมื่อโหลดเหลือไม่กี่ร้อยโอห์ม</p>
+  <p class="lead" data-l="en">The circuit of Example 8.10 (\(r_d\) = 40 kΩ) with a load \(R_L\); the graph is the gain the simulator solves for each \(R_L\). Compare with the emitter follower in section A of page A.3: the gain falls much sooner once the load is down to a few hundred ohms.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · เข้าทางซอร์ส</div><div class="story-k" data-l="en">Part 2 · In through the source</div>
+    <h2 data-l="th">Example 8.9: เกตร่วมที่วาดซ่อนไว้</h2><h2 data-l="en">Example 8.9: a common gate in disguise</h2>
+    <div class="story-p" data-l="th"><p>ตำราวาดรูป 8.27 จนดูไม่ออกในทีแรกว่าเป็นวงจรเกตร่วม: เกตต่อกราวด์ สัญญาณ 40 mV เข้าที่ซอร์สผ่านตัวเก็บประจุ ขาออกเอาจากเดรน ภาพจำลองของหน้านี้วาด JFET ตั้งตรงโดยหันเกตไปทางขวาลงกราวด์</p>
+      <p>เพราะเกตอยู่ที่กราวด์ \(V_{gs} = -V_i\) เมื่อขาเข้าขึ้น \(V_{gs}\) ติดลบมากขึ้น กระแสลด แรงดันที่เดรนจึงขึ้น ขาออกไม่กลับเฟส ลองเดาก่อนว่า \(r_d\) = 20 kΩ ที่ไม่ใหญ่กว่า \(R_D\) = 3.6 kΩ มากนัก ลดอัตราขยายไปกี่เปอร์เซ็นต์</p></div>
+    <div class="story-p" data-l="en"><p>The book draws Fig. 8.27 so that it does not look like a common gate at first: the gate goes to ground, the 40 mV signal enters the source through a capacitor, and the output comes off the drain. This page's simulation draws the JFET upright with its gate turned to the right, down to ground.</p>
+      <p>Because the gate is at ground, \(V_{gs} = -V_i\): when the input rises, \(V_{gs}\) gets more negative, the current falls and the drain voltage rises, so the output is not inverted. Guess first by what percentage an \(r_d\) of 20 kΩ, not much larger than \(R_D\) = 3.6 kΩ, lowers the gain.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: Example 8.9</p><p class="story-next" data-l="en">↓ Problem 1: Example 8.9</p>
+</div>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 8.9: เกตร่วม</h2><h2 data-l="en">Example 8.9: common gate</h2>
+    <div class="src" data-l="th">Boylestad Example 8.9 (รูป 8.27) · หัวข้อ 8.6</div><div class="src" data-l="en">Boylestad Example 8.9 (Fig. 8.27) · section 8.6</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>JFET มี \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V, \(g_{os}\) = 50 µS เกตต่อกราวด์ \(V_i\) = 40 mV เข้าที่ซอร์สผ่าน 10 µF, \(R_S\) = 1.1 kΩ จากซอร์สลงกราวด์, \(R_D\) = 3.6 kΩ ไปที่ +12 V จุดทำงาน \(V_{GSQ}\) = −2.2 V, \(I_{DQ}\) = 2.03 mA จงหา \(g_m\), \(r_d\), \(Z_i\) และ \(Z_o\) ทั้งรวมและไม่รวม \(r_d\) และ \(V_o\) ทั้งสองกรณี</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A JFET with \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V, \(g_{os}\) = 50 µS; the gate grounded, \(V_i\) = 40 mV into the source through 10 µF, \(R_S\) = 1.1 kΩ from source to ground, \(R_D\) = 3.6 kΩ to +12 V; the operating point \(V_{GSQ}\) = −2.2 V, \(I_{DQ}\) = 2.03 mA. Determine \(g_m\), \(r_d\), \(Z_i\) and \(Z_o\) with and without \(r_d\), and \(V_o\) in both cases.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ตัวเลขที่เป็นไปไม่ได้</div><div class="story-k" data-l="en">Part 3 · An impossible number</div>
+    <h2 data-l="th">Example 8.10: ตัวตามแรงดันที่ซอร์ส</h2><h2 data-l="en">Example 8.10: the source follower</h2>
+    <div class="story-p" data-l="th"><p>ตำราให้จุดทำงาน \(V_{GSQ}\) = −2.86 V กับ \(I_{DQ}\) = 4.56 mA ก่อนเปิดเฉลย ลองตรวจเองด้วยกฎของโอห์ม: กระแส 4.56 mA ไหลผ่าน \(R_S\) = 2.2 kΩ ต้องมีแรงดันคร่อมเท่าใด แล้วแหล่งจ่าย 9 V จ่ายได้หรือไม่</p>
+      <p>ข่าวดีคือผลทาง ac ไม่ได้ใช้ \(I_{DQ}\) เลย \(g_m\) หาจาก \(V_{GSQ}\) ตำแหน่งที่ผิดจึงไม่ลามไปถึงคำตอบ</p></div>
+    <div class="story-p" data-l="en"><p>The book gives the operating point \(V_{GSQ}\) = −2.86 V and \(I_{DQ}\) = 4.56 mA. Before opening the solution, check it with Ohm's law: 4.56 mA through \(R_S\) = 2.2 kΩ needs how many volts, and can a 9 V supply give them?</p>
+      <p>The good news is that the ac results never use \(I_{DQ}\): \(g_m\) comes from \(V_{GSQ}\), so the slip does not spread to the answers.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Example 8.10</p><p class="story-next" data-l="en">↓ Problem 2: Example 8.10</p>
+</div>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 8.10: ตัวตามแรงดันที่ซอร์ส</h2><h2 data-l="en">Example 8.10: a source follower</h2>
+    <div class="src" data-l="th">Boylestad Example 8.10 (รูป 8.32) · หัวข้อ 8.7</div><div class="src" data-l="en">Boylestad Example 8.10 (Fig. 8.32) · section 8.7</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>JFET มี \(I_{DSS}\) = 16 mA, \(V_P\) = −4 V, \(g_{os}\) = 25 µS เดรนต่อ +9 V, \(R_G\) = 1 MΩ จากเกตลงกราวด์, \(R_S\) = 2.2 kΩ จากซอร์สลงกราวด์ ขาออกที่ซอร์สผ่าน 0.05 µF จุดทำงาน \(V_{GSQ}\) = −2.86 V จงหา \(g_m\), \(r_d\), \(Z_i\), \(Z_o\) และ \(A_v\) ทั้งรวมและไม่รวม \(r_d\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A JFET with \(I_{DSS}\) = 16 mA, \(V_P\) = −4 V, \(g_{os}\) = 25 µS; the drain at +9 V, \(R_G\) = 1 MΩ from gate to ground, \(R_S\) = 2.2 kΩ from source to ground, the output at the source through 0.05 µF; the operating point \(V_{GSQ}\) = −2.86 V. Determine \(g_m\), \(r_d\), \(Z_i\), \(Z_o\) and \(A_v\), with and without \(r_d\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 29 และ 32 ท้ายบทที่ 8 (หาจุดทำงานเองก่อน)</div><div class="src" data-l="en">Boylestad Problems 29 and 32 of chapter 8 (find the operating point first)</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — 1/g<sub>m</sub> คือ r<sub>e</sub> ของ FET</h3>
+    <ol><li>ในวงจรเกตร่วมและตัวตามแรงดันที่ซอร์ส \(1/g_m\) อยู่ในตำแหน่งเดียวกับ \(r_e\) ของ BJT: ข้อ 1 ได้ \(1/g_m\) = 444 Ω ข้อ 2 ได้ 439 Ω</li>
+    <li>BJT ที่กระแสใกล้กันมี \(r_e\) ราว 13–20 Ω FET จึงให้ \(Z_i\) ของเกตร่วมและ \(Z_o\) ของตัวตามแรงดันที่สูงกว่าราวยี่สิบเท่า</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ส่วน A กับหน้า A.3</h3>
+    <ol><li>ตั้ง \(R_L\) = 1 kΩ ทั้งสองหน้า: ตัวตามแรงดันที่อิมิตเตอร์ได้ราว 0.98 ส่วนตัวตามแรงดันที่ซอร์สได้ราว 0.58</li>
+    <li>ข้อดีที่ FET ยังเหนือกว่าคือ \(Z_i\) = 1 MΩ ไม่ลดลงตาม \(R_L\) ต่างจากตัวตามแรงดันที่อิมิตเตอร์ที่ \(Z_i \cong \beta(R_E \parallel R_L)\)</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 8 หัวข้อ 8.6–8.7 (Examples 8.9–8.10, รูป 8.24–8.32, ข้อ 29, 32) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 8.9 (หน้า 501)</td><td data-h="ตำราพิมพ์">\(Z_i\) (ละ \(r_d\)) = 0.31 kΩ</td><td data-h="ที่ถูก">0.32 kΩ (0.3165 kΩ)</td></tr>
+      <tr><td data-h="ตำแหน่ง">หัวข้อ 8.6 (หน้า 500) การพิสูจน์ \(A_v\) ของเกตร่วม</td><td data-h="ตำราพิมพ์">บรรทัดหนึ่งขาดพจน์ \(g_mV_iR_D\)</td><td data-h="ที่ถูก">บรรทัดถัดไปถูก ผลลัพธ์ (สมการ 8.38) ถูก</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.10 (หน้า 504)</td><td data-h="ตำราพิมพ์">\(I_{DQ}\) = 4.56 mA</td><td data-h="ที่ถูก">1.30 mA (4.56 mA บน 2.2 kΩ ต้องใช้ 10 V จากแหล่ง 9 V)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.10 (หน้า 504)</td><td data-h="ตำราพิมพ์">\(Z_o\) (รวม \(r_d\)) = 362.52 Ω</td><td data-h="ที่ถูก">362.4 Ω (ตำราปัด \(r_d \parallel R_S\) เป็น 2.09 kΩ)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ตาราง 8.1 (หน้า 515) แถวตัวตามแรงดัน</td><td data-h="ตำราพิมพ์">\(Z_o\) "Low (100 kΩ)"</td><td data-h="ที่ถูก">ราว 100 Ω (Example 8.10: 362 Ω)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ตาราง 8.1 (หน้า 515) แถวเกตร่วม</td><td data-h="ตำราพิมพ์">เงื่อนไข "Rd ≥ 10RD"</td><td data-h="ที่ถูก">\(r_d \ge 10R_D\)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ข้อ 29 คู่มือคำตอบ</td><td data-h="ตำราพิมพ์">356.3 Ω, 28.24 mV</td><td data-h="ที่ถูก">370.8 Ω, 26.8 mV (คู่มือละ \(r_d\) ที่โจทย์ให้)</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — 1/g<sub>m</sub> is the FET's r<sub>e</sub></h3>
+    <ol><li>In the common gate and the source follower, \(1/g_m\) sits where \(r_e\) sits for a BJT: problem 1 has \(1/g_m\) = 444 Ω, problem 2 has 439 Ω.</li>
+    <li>A BJT at a similar current has an \(r_e\) of about 13–20 Ω, so the FET's common-gate \(Z_i\) and follower \(Z_o\) are about twenty times higher.</li></ol></div>
+  <div class="card"><h3>Try this 2 — section A against page A.3</h3>
+    <ol><li>Set \(R_L\) = 1 kΩ on both pages: the emitter follower gives about 0.98, the source follower about 0.58.</li>
+    <li>Where the FET still wins is \(Z_i\) = 1 MΩ, which does not fall with \(R_L\), unlike the emitter follower's \(Z_i \cong \beta(R_E \parallel R_L)\).</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 8, sections 8.6–8.7 (Examples 8.9–8.10, Figs. 8.24–8.32, Problems 29, 32) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 8.9 (p. 501)</td><td data-h="Printed">\(Z_i\) (no \(r_d\)) = 0.31 kΩ</td><td data-h="Correct">0.32 kΩ (0.3165 kΩ)</td></tr>
+      <tr><td data-h="Where">Section 8.6 (p. 500), the common-gate gain derivation</td><td data-h="Printed">one line drops the term \(g_mV_iR_D\)</td><td data-h="Correct">the next line is right, and so is the result (Eq. 8.38)</td></tr>
+      <tr><td data-h="Where">Example 8.10 (p. 504)</td><td data-h="Printed">\(I_{DQ}\) = 4.56 mA</td><td data-h="Correct">1.30 mA (4.56 mA through 2.2 kΩ would need 10 V from a 9 V supply)</td></tr>
+      <tr><td data-h="Where">Example 8.10 (p. 504)</td><td data-h="Printed">\(Z_o\) (with \(r_d\)) = 362.52 Ω</td><td data-h="Correct">362.4 Ω (the book rounds \(r_d \parallel R_S\) to 2.09 kΩ)</td></tr>
+      <tr><td data-h="Where">Table 8.1 (p. 515), source-follower row</td><td data-h="Printed">\(Z_o\) "Low (100 kΩ)"</td><td data-h="Correct">about 100 Ω (Example 8.10: 362 Ω)</td></tr>
+      <tr><td data-h="Where">Table 8.1 (p. 515), common-gate row</td><td data-h="Printed">the condition "Rd ≥ 10RD"</td><td data-h="Correct">\(r_d \ge 10R_D\)</td></tr>
+      <tr><td data-h="Where">Problem 29, answer key</td><td data-h="Printed">356.3 Ω, 28.24 mV</td><td data-h="Correct">370.8 Ω, 26.8 mV (the key ignores the given \(r_d\))</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.sf({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.problem(1, 'ex89'); AC.problem(2, 'ex810');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 29: เกตร่วม \\(V_i\\) = 4 mV เข้าที่ซอร์ส \\(R_S\\) = 1.5 kΩ, \\(R_D\\) = 3.3 kΩ ไปที่ +15 V, \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −2.8 V, \\(r_d\\) = 40 kΩ จุดทำงาน \\(V_{GSQ}\\) = −1.735 V จงหา \\(g_m\\), \\(Z_i\\), \\(A_v\\) และ \\(V_o\\)', '1) Problem 29: a common gate with \\(V_i\\) = 4 mV into the source, \\(R_S\\) = 1.5 kΩ, \\(R_D\\) = 3.3 kΩ to +15 V, \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −2.8 V, \\(r_d\\) = 40 kΩ; the operating point \\(V_{GSQ}\\) = −1.735 V. Find \\(g_m\\), \\(Z_i\\), \\(A_v\\) and \\(V_o\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 2.173, unit: 'mS', tol: 0.015 }, { key: 'y', lab: 'Z_i =', ans: 370.8, unit: 'Ω', tol: 3 }, { key: 'z', lab: 'A_v =', ans: 6.70, unit: '', tol: 0.05 }, { key: 'w', lab: 'V_o =', ans: 26.8, unit: 'mV', tol: 0.2 }],
+      work: work(R`g_m = \frac{2(8\ \text{mA})}{2.8\ \text{V}}\left(1 - \frac{1.735}{2.8}\right) = 2.173\ \text{mS},\ Z_i = 1.5\ \text{k}\Omega \parallel \frac{40 + 3.3}{1 + 86.9}\ \text{k}\Omega = 370.8\ \Omega,\ A_v = \frac{g_mR_D + R_D/r_d}{1 + R_D/r_d} = 6.70,\ V_o = 26.8\ \text{mV}`,
+        t('<p>คู่มือคำตอบของตำราละ \\(r_d\\) ที่โจทย์ให้ (356.3 Ω, 28.24 mV)</p>', '<p>The book\'s answer key ignores the \\(r_d\\) the problem gives (356.3 Ω, 28.24 mV).</p>')) },
+    { q: t('2) ข้อ 32: ตัวตามแรงดันที่ซอร์ส เดรนต่อ +20 V, \\(R_G\\) = 10 MΩ, \\(R_S\\) = 2.2 kΩ, \\(I_{DSS}\\) = 9 mA, \\(V_P\\) = −4.5 V, \\(r_d\\) = 40 kΩ จุดทำงาน \\(V_{GSQ}\\) = −2.806 V จงหา \\(g_m\\), \\(Z_o\\) และ \\(A_v\\)', '2) Problem 32: a source follower with the drain at +20 V, \\(R_G\\) = 10 MΩ, \\(R_S\\) = 2.2 kΩ, \\(I_{DSS}\\) = 9 mA, \\(V_P\\) = −4.5 V, \\(r_d\\) = 40 kΩ; the operating point \\(V_{GSQ}\\) = −2.806 V. Find \\(g_m\\), \\(Z_o\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 1.506, unit: 'mS', tol: 0.012 }, { key: 'y', lab: 'Z_o =', ans: 503.7, unit: 'Ω', tol: 4 }, { key: 'z', lab: 'A_v =', ans: 0.758, unit: '', tol: 0.005 }],
+      work: work(R`g_m = 4\ \text{mS}\left(1 - \frac{2.806}{4.5}\right) = 1.506\ \text{mS},\ Z_o = 40\ \text{k}\Omega \parallel 2.2\ \text{k}\Omega \parallel 664\ \Omega = 503.7\ \Omega,\ A_v = \frac{g_m(r_d \parallel R_S)}{1 + g_m(r_d \parallel R_S)} = 0.758`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

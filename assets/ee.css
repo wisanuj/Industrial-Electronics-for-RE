@@ -192,6 +192,11 @@ details.derive summary::marker{color:var(--accent)}
 .milestone.s5 .pin{border-color:var(--good);color:var(--good)}
 .node.rev .dot{border-color:var(--good);color:var(--good)}
 .node.s5 .step,.stop .type.rev{color:var(--good)}
+/* ---- roadmap: the supplement on ac analysis (stage 6) ---- */
+.milestone.s6 .pin{border-color:var(--purple);color:var(--purple)}
+.node.s6 .dot{border-color:var(--purple)}
+.node.s6 .step{color:var(--purple)}
+.node.s6 .dot span{font-size:11px}
 /* hero demo on the roadmap */
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:center;margin-top:8px}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}

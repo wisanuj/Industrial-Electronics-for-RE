@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="A.3 — Emitter Follower, Common Base and Collector Feedback">A.3 — ตัวตามแรงดัน เบสร่วม และป้อนกลับคอลเล็กเตอร์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ตัวตามแรงดัน เบสร่วม และป้อนกลับคอลเล็กเตอร์ <span class="en">Emitter follower, common base and collector feedback</span></h1>
+<h1 data-l="en">Emitter follower, common base and collector feedback <span class="en">Three more ways to use one transistor</span></h1>
+
+<p class="sub" data-l="th">ทรานซิสเตอร์ตัวเดียวกันให้ผลต่างกันมากตามขาที่ใช้รับและส่งสัญญาณ อิมิตเตอร์ร่วมของหน้า A.1–A.2 ขยายแรงดันได้มากแต่อิมพีแดนซ์ขาออกสูง ตัวตามแรงดันที่อิมิตเตอร์ (คอลเล็กเตอร์ร่วม) ไม่ขยายแรงดันเลย แต่อิมพีแดนซ์ขาเข้าสูงและขาออกต่ำมาก จึงใช้เป็นบัฟเฟอร์คั่นระหว่างวงจร วงจรเบสร่วมกลับกัน: รับสัญญาณที่อิมพีแดนซ์ต่ำมากและขยายแรงดันได้มากโดยไม่กลับเฟส และวงจรป้อนกลับคอลเล็กเตอร์แลกอิมพีแดนซ์ขาเข้ากับความนิ่งของจุดทำงาน (Boylestad หัวข้อ 5.8–5.10 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">The same transistor behaves very differently depending on which terminals take the signal in and out. The common emitter of pages A.1–A.2 has a large voltage gain but a high output impedance. The emitter follower (common collector) gives no voltage gain at all, but a high input impedance and a very low output impedance, so it serves as a buffer between circuits. The common base is the opposite: it takes the signal at a very low impedance and gives a large voltage gain without inversion. And the collector-feedback stage trades input impedance for a steadier operating point (Boylestad sections 5.8–5.10 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ \text{CC: } Z_o \cong r_e,\ A_v \cong 1 $$ $$ \text{CB: } Z_i \cong r_e,\ A_v = \frac{\alpha R_C}{r_e} $$ $$ \text{CF: } Z_i = \frac{r_e}{1/\beta + R_C/(R_C + R_F)} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ตัวตามแรงดัน</b> (หัวข้อ 5.8): \(Z_i = R_B \parallel Z_b\) โดย \(Z_b \cong \beta(r_e + R_E)\) สูง, \(Z_o = R_E \parallel r_e \cong r_e\) ต่ำมาก, \(A_v = R_E/(R_E + r_e) \cong 1\) ไม่กลับเฟส (สมการ 5.31–5.39)</li>
+  <li><b>เบสร่วม</b> (หัวข้อ 5.9): \(Z_i = R_E \parallel r_e \cong r_e\) ไม่กี่สิบโอห์ม, \(Z_o = R_C\), \(A_v = \alpha R_C/r_e \cong R_C/r_e\) ไม่กลับเฟส, \(A_i = -\alpha \cong -1\) (สมการ 5.46–5.49)</li>
+  <li><b>ป้อนกลับคอลเล็กเตอร์</b> (หัวข้อ 5.10): \(R_F\) นำขาออกที่กลับเฟสและใหญ่กลับมาดึงกระแสจากเบส \(Z_i\) จึงต่ำกว่า \(\beta r_e\) ส่วน \(Z_o = R_C \parallel R_F\) และ \(A_v \cong -R_C/r_e\) (สมการ 5.50–5.53)</li>
+  <li><b>ผลของ \(r_o\)</b>: ตัวตามแรงดันเห็น \(r_o\) ขนาน \(R_E\) (มีผลกับ \(Z_i\) เท่านั้น) ส่วนวงจรป้อนกลับเห็น \(r_o\) ขนาน \(R_C\) (อัตราขยายลดลง)</li>
+  <li><b>pnp กับ npn</b>: แบบจำลอง ac เหมือนกันทุกประการ ต่างกันแค่ทิศของไฟตรง</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Emitter follower</b> (section 5.8): \(Z_i = R_B \parallel Z_b\) with a high \(Z_b \cong \beta(r_e + R_E)\), a very low \(Z_o = R_E \parallel r_e \cong r_e\), and \(A_v = R_E/(R_E + r_e) \cong 1\) without inversion (Eqs. 5.31–5.39).</li>
+  <li><b>Common base</b> (section 5.9): \(Z_i = R_E \parallel r_e \cong r_e\), a few tens of ohms; \(Z_o = R_C\); \(A_v = \alpha R_C/r_e \cong R_C/r_e\) without inversion; \(A_i = -\alpha \cong -1\) (Eqs. 5.46–5.49).</li>
+  <li><b>Collector feedback</b> (section 5.10): \(R_F\) brings the large inverted output back to pull current from the base, so \(Z_i\) is below \(\beta r_e\); \(Z_o = R_C \parallel R_F\) and \(A_v \cong -R_C/r_e\) (Eqs. 5.50–5.53).</li>
+  <li><b>The effect of \(r_o\)</b>: the follower sees \(r_o\) in parallel with \(R_E\) (it only changes \(Z_i\)); the feedback stage sees \(r_o\) in parallel with \(R_C\) (the gain drops).</li>
+  <li><b>pnp and npn</b>: exactly the same ac model; only the dc directions differ.</li></ul></section>
+
+<div class="card" style="overflow-x:auto"><table class="tbl stack" data-l="th"><thead><tr><th>วงจร</th><th>\(Z_i\)</th><th>\(Z_o\)</th><th>\(A_v\)</th><th>เฟส</th><th>ใช้ทำอะไร</th></tr></thead><tbody>
+  <tr><td>อิมิตเตอร์ร่วม (A.1)</td><td data-h="Zi">ปานกลาง ≈ 1 kΩ</td><td data-h="Zo">ปานกลาง ≈ \(R_C\)</td><td data-h="Av">สูง ≈ −250</td><td data-h="เฟส">กลับ 180°</td><td data-h="ใช้">ขยายแรงดัน</td></tr>
+  <tr><td>ตัวตามแรงดัน (ข้อ 1)</td><td data-h="Zi">สูง ≈ 130 kΩ</td><td data-h="Zo">ต่ำมาก ≈ 12 Ω</td><td data-h="Av">≈ 1</td><td data-h="เฟส">ไม่กลับ</td><td data-h="ใช้">บัฟเฟอร์ ขับโหลดหนัก</td></tr>
+  <tr><td>เบสร่วม (ข้อ 2)</td><td data-h="Zi">ต่ำมาก ≈ 20 Ω</td><td data-h="Zo">ปานกลาง ≈ \(R_C\)</td><td data-h="Av">สูง ≈ +245</td><td data-h="เฟส">ไม่กลับ</td><td data-h="ใช้">รับแหล่งสัญญาณอิมพีแดนซ์ต่ำ ความถี่สูง</td></tr>
+  <tr><td>ป้อนกลับคอลเล็กเตอร์ (ข้อ 3)</td><td data-h="Zi">ต่ำลง ≈ 0.57 kΩ</td><td data-h="Zo">\(R_C \parallel R_F\)</td><td data-h="Av">สูง ≈ −240</td><td data-h="เฟส">กลับ 180°</td><td data-h="ใช้">ขยายแรงดันโดยจุดทำงานนิ่งขึ้น</td></tr></tbody></table>
+  <table class="tbl stack" data-l="en"><thead><tr><th>Stage</th><th>\(Z_i\)</th><th>\(Z_o\)</th><th>\(A_v\)</th><th>Phase</th><th>Used for</th></tr></thead><tbody>
+  <tr><td>Common emitter (A.1)</td><td data-h="Zi">medium ≈ 1 kΩ</td><td data-h="Zo">medium ≈ \(R_C\)</td><td data-h="Av">high ≈ −250</td><td data-h="Phase">inverted 180°</td><td data-h="Use">voltage gain</td></tr>
+  <tr><td>Emitter follower (problem 1)</td><td data-h="Zi">high ≈ 130 kΩ</td><td data-h="Zo">very low ≈ 12 Ω</td><td data-h="Av">≈ 1</td><td data-h="Phase">in phase</td><td data-h="Use">buffer, heavy loads</td></tr>
+  <tr><td>Common base (problem 2)</td><td data-h="Zi">very low ≈ 20 Ω</td><td data-h="Zo">medium ≈ \(R_C\)</td><td data-h="Av">high ≈ +245</td><td data-h="Phase">in phase</td><td data-h="Use">low-impedance sources, high frequencies</td></tr>
+  <tr><td>Collector feedback (problem 3)</td><td data-h="Zi">lowered ≈ 0.57 kΩ</td><td data-h="Zo">\(R_C \parallel R_F\)</td><td data-h="Av">high ≈ −240</td><td data-h="Phase">inverted 180°</td><td data-h="Use">gain with a steadier Q-point</td></tr></tbody></table></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ตัวตามแรงดันเป็นบัฟเฟอร์</a><a href="#ex1"><b>1</b>Example 5.7</a><a href="#ex2"><b>2</b>Example 5.8</a><a href="#ex3"><b>3</b>Example 5.9</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The follower as a buffer</a><a href="#ex1"><b>1</b>Example 5.7</a><a href="#ex2"><b>2</b>Example 5.8</a><a href="#ex3"><b>3</b>Example 5.9</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ไม่ขยายแรงดัน แต่มีประโยชน์</div><div class="story-k" data-l="en">Part 1 · No voltage gain, yet useful</div>
+    <h2 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">The emitter follower</h2>
+    <div class="story-p" data-l="th"><p>ย้ายขาออกจากคอลเล็กเตอร์ไปที่อิมิตเตอร์ แล้วต่อคอลเล็กเตอร์เข้า \(V_{CC}\) ตรง ๆ (รูป 5.39) อิมิตเตอร์อยู่ต่ำกว่าเบส 0.7 V เสมอ สัญญาณที่อิมิตเตอร์จึงเท่ากับที่เบส: อัตราขยายเกือบหนึ่ง ฟังดูไม่มีประโยชน์ จนกว่าจะดูอิมพีแดนซ์ เบสมองเห็น \(R_E\) ใหญ่ขึ้น β เท่า ส่วนโหลดที่อิมิตเตอร์มองย้อนเข้าไปเห็นแค่ \(r_e\) ราวสิบกว่าโอห์ม</p>
+      <p>ลองเดาก่อน: ถ้าต่อลำโพง 8 Ω เข้าที่ขาออกของวงจรอิมิตเตอร์ร่วมของหน้า A.1 (\(Z_o\) = 3 kΩ) โดยตรง กับต่อผ่านตัวตามแรงดันนี้ แรงดันที่ลำโพงจะต่างกันกี่เท่า</p></div>
+    <div class="story-p" data-l="en"><p>Move the output from the collector to the emitter and tie the collector straight to \(V_{CC}\) (Fig. 5.39). The emitter always sits 0.7 V below the base, so the signal at the emitter equals the one at the base: a gain of almost one. It sounds useless until you look at the impedances: the base sees \(R_E\) β times larger, while a load at the emitter looking back sees only \(r_e\), a dozen ohms or so.</p>
+      <p>Guess first: connect an 8 Ω loudspeaker directly to the output of the common-emitter stage of page A.1 (\(Z_o\) = 3 kΩ), or through this follower. How many times more voltage does the speaker get the second way?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ลด \(R_L\) จนเหลือไม่กี่สิบโอห์ม</p><p class="story-next" data-l="en">↓ Section A: bring \(R_L\) down to a few tens of ohms</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวตามแรงดันเป็นบัฟเฟอร์</h2><h2 data-l="en">The follower as a buffer</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 5.8 และ 5.12 (รูป 5.39, ตาราง 5.2)</div><div class="src" data-l="en">Boylestad, sections 5.8 and 5.12 (Fig. 5.39, Table 5.2)</div></div></div>
+  <p class="lead" data-l="th">วงจรของ Example 5.7 กับโหลด \(R_L\) ที่ขาออก กราฟคืออัตราขยายที่ภาพจำลองแก้ทีละค่าของ \(R_L\) ลองลด \(R_L\) ลงเรื่อย ๆ แล้วเพิ่ม \(R_s\) ดูว่า \(Z_o\) และ \(Z_i\) เปลี่ยนตามกันอย่างไร</p>
+  <p class="lead" data-l="en">The circuit of Example 5.7 with a load \(R_L\) at the output; the graph is the gain the simulator solves for each value of \(R_L\). Lower \(R_L\) step by step, then raise \(R_s\) and watch how \(Z_o\) and \(Z_i\) move together.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 5.7: ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">Example 5.7: an emitter follower</h2>
+    <div class="src" data-l="th">Boylestad Example 5.7 (รูป 5.39) · หัวข้อ 5.8</div><div class="src" data-l="en">Boylestad Example 5.7 (Fig. 5.39) · section 5.8</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 220 kΩ จาก \(V_{CC}\) ถึงเบส คอลเล็กเตอร์ต่อ \(V_{CC}\), \(R_E\) = 3.3 kΩ จากอิมิตเตอร์ลงกราวด์ ขาออกที่อิมิตเตอร์ผ่าน 10 µF, β = 100 (a) จงหา \(r_e\) (b) \(Z_i\) (c) \(Z_o\) (d) \(A_v\) (e) ทำ (b)–(d) ใหม่เมื่อ \(r_o\) = 25 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 220 kΩ from \(V_{CC}\) to the base, the collector at \(V_{CC}\), \(R_E\) = 3.3 kΩ from the emitter to ground, the output taken at the emitter through 10 µF, β = 100. Determine (a) \(r_e\), (b) \(Z_i\), (c) \(Z_o\), (d) \(A_v\); (e) repeat (b)–(d) with \(r_o\) = 25 kΩ.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · เข้าทางอิมิตเตอร์</div><div class="story-k" data-l="en">Part 2 · In through the emitter</div>
+    <h2 data-l="th">วงจรเบสร่วม</h2><h2 data-l="en">The common-base stage</h2>
+    <div class="story-p" data-l="th"><p>ต่อเบสลงกราวด์แล้วป้อนสัญญาณเข้าที่อิมิตเตอร์ (รูป 5.44 ของตำราใช้ทรานซิสเตอร์ pnp กับแหล่งจ่ายสองตัว) สัญญาณเห็น \(r_e\) ตรง ๆ ไม่ถูกคูณด้วย β อิมพีแดนซ์ขาเข้าจึงเหลือราว 20 Ω กระแสที่ไหลเข้าอิมิตเตอร์เกือบทั้งหมดออกที่คอลเล็กเตอร์ แล้วไหลผ่าน \(R_C\) ที่ใหญ่กว่า \(r_e\) หลายร้อยเท่า</p>
+      <p>ก่อนเปิดเฉลย ลองตอบว่าขาออกกลับเฟสหรือไม่: เมื่อแรงดันที่อิมิตเตอร์ของ pnp สูงขึ้น กระแสอิมิตเตอร์เพิ่มหรือลด แล้วแรงดันที่คอลเล็กเตอร์ขยับไปทางไหน</p></div>
+    <div class="story-p" data-l="en"><p>Ground the base and feed the signal into the emitter (the book's Fig. 5.44 uses a pnp transistor with two supplies). The signal sees \(r_e\) itself, not multiplied by β, so the input impedance is only about 20 Ω. Nearly all the current that enters the emitter comes out of the collector and flows through an \(R_C\) hundreds of times larger than \(r_e\).</p>
+      <p>Before opening the solution, decide whether the output is inverted: when the emitter voltage of the pnp rises, does the emitter current grow or shrink, and which way does the collector voltage move?</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Example 5.8</p><p class="story-next" data-l="en">↓ Problem 2: Example 5.8</p>
+</div>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 5.8: เบสร่วม (pnp)</h2><h2 data-l="en">Example 5.8: common base (pnp)</h2>
+    <div class="src" data-l="th">Boylestad Example 5.8 (รูป 5.44) · หัวข้อ 5.9</div><div class="src" data-l="en">Boylestad Example 5.8 (Fig. 5.44) · section 5.9</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ทรานซิสเตอร์ pnp เบสต่อกราวด์ อิมิตเตอร์ผ่าน \(R_E\) = 1 kΩ ไปที่ \(V_{EE}\) = +2 V คอลเล็กเตอร์ผ่าน \(R_C\) = 5 kΩ ไปที่ −8 V ตัวเก็บประจุ 10 µF, α = 0.98, \(r_o\) = 1 MΩ จงหา (a) \(r_e\) (b) \(Z_i\) (c) \(Z_o\) (d) \(A_v\) (e) \(A_i\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A pnp transistor with its base grounded; the emitter through \(R_E\) = 1 kΩ to \(V_{EE}\) = +2 V, the collector through \(R_C\) = 5 kΩ to −8 V; 10 µF capacitors, α = 0.98, \(r_o\) = 1 MΩ. Determine (a) \(r_e\), (b) \(Z_i\), (c) \(Z_o\), (d) \(A_v\), (e) \(A_i\).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองใช้ α = 0.98 จริง และละ \(r_o\) = 1 MΩ เหมือนตำรา <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation uses the actual α = 0.98 and drops \(r_o\) = 1 MΩ as the book does. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ขาออกพูดกับขาเข้า</div><div class="story-k" data-l="en">Part 3 · The output talks to the input</div>
+    <h2 data-l="th">ป้อนกลับคอลเล็กเตอร์</h2><h2 data-l="en">Collector feedback</h2>
+    <div class="story-p" data-l="th"><p>หน้า 4.4 ใช้ \(R_F\) จากคอลเล็กเตอร์ไปเบสเพื่อให้จุดทำงานนิ่ง: ถ้า \(I_C\) เพิ่ม \(V_C\) ลด กระแสผ่าน \(R_F\) ก็ลดลงเอง ในวงจร ac \(R_F\) ยังอยู่ (ไม่มีตัวเก็บประจุลัดมัน) ขาออกที่กลับเฟสและใหญ่กว่าขาเข้าราว 240 เท่าจึงอยู่ที่ปลายหนึ่งของ \(R_F\) ส่วนเบสอยู่อีกปลาย</p>
+      <p>แรงดันคร่อม \(R_F\) จึงใหญ่กว่าแรงดันขาเข้าหลายร้อยเท่า กระแสที่ไหลผ่าน \(R_F\) ไปขาออกต้องมาจากแหล่งสัญญาณ: อิมพีแดนซ์ขาเข้าจึงต่ำกว่า \(\beta r_e\) มาก ลองเดาก่อนว่าต่ำลงกี่เท่า</p></div>
+    <div class="story-p" data-l="en"><p>Page 4.4 used \(R_F\) from collector to base to steady the operating point: if \(I_C\) rises, \(V_C\) falls and the current through \(R_F\) falls by itself. In the ac circuit \(R_F\) is still there (no capacitor shorts it), so the inverted output, about 240 times the input, sits at one end of \(R_F\) and the base at the other.</p>
+      <p>The voltage across \(R_F\) is therefore hundreds of times the input voltage, and the current that flows through \(R_F\) into the output has to come from the source: the input impedance falls well below \(\beta r_e\). Guess first by how much.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3: Example 5.9</p><p class="story-next" data-l="en">↓ Problem 3: Example 5.9</p>
+</div>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 5.9: ป้อนกลับคอลเล็กเตอร์</h2><h2 data-l="en">Example 5.9: collector feedback</h2>
+    <div class="src" data-l="th">Boylestad Example 5.9 (รูป 5.48) · หัวข้อ 5.10</div><div class="src" data-l="en">Boylestad Example 5.9 (Fig. 5.48) · section 5.10</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 9 V, \(R_C\) = 2.7 kΩ, \(R_F\) = 180 kΩ จากคอลเล็กเตอร์ถึงเบส อิมิตเตอร์ลงกราวด์ ตัวเก็บประจุ 10 µF, β = 200 (a) จงหา \(r_e\) (b) \(Z_i\) (c) \(Z_o\) (d) \(A_v\) (e) ทำ (b)–(d) ใหม่เมื่อ \(r_o\) = 20 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 9 V, \(R_C\) = 2.7 kΩ, \(R_F\) = 180 kΩ from collector to base, emitter grounded, 10 µF capacitors, β = 200. Determine (a) \(r_e\), (b) \(Z_i\), (c) \(Z_o\), (d) \(A_v\); (e) repeat (b)–(d) with \(r_o\) = 20 kΩ.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองใช้วงจร dc แบบละเอียด (\((\beta + 1)R_C\)) และสมการเต็มของวงจร ac ค่าจึงต่างจากตำราราว 1–2 % <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation uses the exact dc loop (\((\beta + 1)R_C\)) and the full ac circuit, so its values differ from the book by about 1–2 %. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 25, 27, 29 ท้ายบทที่ 5</div><div class="src" data-l="en">Boylestad Problems 25, 27, 29 of chapter 5</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ลำโพง 8 Ω</h3>
+    <ol><li>วงจรอิมิตเตอร์ร่วมของหน้า A.1 (\(Z_o\) = 3 kΩ, \(A_{v_{NL}}\) = −280) ต่อ 8 Ω ตรง ๆ: \(A_{v_L} = -280 \times 8/3008\) ≈ −0.75 สัญญาณหายเกือบหมด</li>
+    <li>ส่วน A ตั้ง \(R_L\) = 8 Ω (เลื่อนสุดซ้ายแล้วอ่าน) ตัวตามแรงดันยังให้ราว 0.4 เพราะ \(Z_o\) ≈ 12.6 Ω เทียบกับ 8 Ω: ต่ออิมิตเตอร์ร่วมก่อนแล้วตามด้วยตัวตามแรงดัน แรงดันที่ลำโพงมากกว่าต่อตรงหลายร้อยเท่า (หน้า A.4 ต่อหลายภาค)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เบสร่วมต้องการแหล่งสัญญาณแบบไหน</h3>
+    <ol><li>ข้อ 2 \(Z_i\) ≈ 20 Ω: แหล่งสัญญาณ 600 Ω จะส่งสัญญาณเข้าได้แค่ 20/620 ≈ 3 %</li>
+    <li>ตำราจึงวางตัวตามแรงดันไว้หน้าวงจรเบสร่วม (Example 5.14 ในหน้า A.4) หรือใช้กับแหล่งที่อิมพีแดนซ์ต่ำโดยธรรมชาติ</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 5 หัวข้อ 5.8–5.10 (Examples 5.7–5.9, รูป 5.36–5.48, ตาราง 5.1, ข้อ 25, 27, 29) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 5.8 (หน้า 279)</td><td data-h="ตำราพิมพ์">\(A_v \cong R_C/r_e\) = 250</td><td data-h="ที่ถูก">245: โจทย์ให้ α = 0.98 จึงได้ \(\alpha R_C/r_e\) = 245</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.8 (หน้า 279)</td><td data-h="ตำราพิมพ์">\(A_i\) = −0.98</td><td data-h="ที่ถูก">−0.961: \(R_E\) รับกระแสขาเข้าไป 2 % (\(A_i = -\alpha R_E/(R_E + r_e)\))</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.9 (หน้า 282)</td><td data-h="ตำราพิมพ์">\(Z_i\) = 566.16 Ω</td><td data-h="ที่ถูก">566.8 Ω (ตำราปัดตัวหารเป็น 0.0198)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.9 (หน้า 283)</td><td data-h="ตำราพิมพ์">รวม \(r_o\): \(Z_i\) = 617.7 Ω, \(A_v\) = −209.54</td><td data-h="ที่ถูก">619.2 Ω, −209.4 (ตำราใช้พจน์ที่ปัดแล้ว)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ตาราง 5.2 (หน้า 294) แถวเบสร่วม</td><td data-h="ตำราพิมพ์">\(A_{v_L} \cong -(R_L \parallel R_C)/r_e\)</td><td data-h="ที่ถูก">\(+(R_L \parallel R_C)/r_e\): วงจรเบสร่วมไม่กลับเฟส</td></tr>
+      <tr><td data-h="ตำแหน่ง">ข้อ 29 คู่มือคำตอบ</td><td data-h="ตำราพิมพ์">\(Z_i\) = 501.98 Ω</td><td data-h="ที่ถูก">508 Ω ตามสมการ 5.50 (คู่มือใช้รูปย่อในตาราง 5.1)</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — an 8 Ω loudspeaker</h3>
+    <ol><li>The common-emitter stage of page A.1 (\(Z_o\) = 3 kΩ, \(A_{v_{NL}}\) = −280) driving 8 Ω directly: \(A_{v_L} = -280 \times 8/3008\) ≈ −0.75; almost all of the signal is lost.</li>
+    <li>In section A set \(R_L\) = 8 Ω (slide to the far left and read): the follower still gives about 0.4, because its \(Z_o\) ≈ 12.6 Ω is comparable with 8 Ω. A common emitter followed by a follower puts hundreds of times more voltage on the speaker than the direct connection (page A.4 puts stages in cascade).</li></ol></div>
+  <div class="card"><h3>Try this 2 — what source suits a common base</h3>
+    <ol><li>Problem 2 has \(Z_i\) ≈ 20 Ω: a 600 Ω source would get only 20/620 ≈ 3 % of its signal in.</li>
+    <li>That is why the book puts a follower in front of a common-base stage (Example 5.14 on page A.4), or uses it with sources that have a low impedance of their own.</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 5, sections 5.8–5.10 (Examples 5.7–5.9, Figs. 5.36–5.48, Table 5.1, Problems 25, 27, 29) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 5.8 (p. 279)</td><td data-h="Printed">\(A_v \cong R_C/r_e\) = 250</td><td data-h="Correct">245: the problem gives α = 0.98, so \(\alpha R_C/r_e\) = 245</td></tr>
+      <tr><td data-h="Where">Example 5.8 (p. 279)</td><td data-h="Printed">\(A_i\) = −0.98</td><td data-h="Correct">−0.961: \(R_E\) takes 2 % of the input current (\(A_i = -\alpha R_E/(R_E + r_e)\))</td></tr>
+      <tr><td data-h="Where">Example 5.9 (p. 282)</td><td data-h="Printed">\(Z_i\) = 566.16 Ω</td><td data-h="Correct">566.8 Ω (the book rounds the denominator to 0.0198)</td></tr>
+      <tr><td data-h="Where">Example 5.9 (p. 283)</td><td data-h="Printed">with \(r_o\): \(Z_i\) = 617.7 Ω, \(A_v\) = −209.54</td><td data-h="Correct">619.2 Ω, −209.4 (the book uses rounded terms)</td></tr>
+      <tr><td data-h="Where">Table 5.2 (p. 294), common-base row</td><td data-h="Printed">\(A_{v_L} \cong -(R_L \parallel R_C)/r_e\)</td><td data-h="Correct">\(+(R_L \parallel R_C)/r_e\): a common base does not invert</td></tr>
+      <tr><td data-h="Where">Problem 29, answer key</td><td data-h="Printed">\(Z_i\) = 501.98 Ω</td><td data-h="Correct">508 Ω from Eq. 5.50 (the key uses the short form of Table 5.1)</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.follower({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.problem(1, 'ex57'); AC.problem(2, 'ex58'); AC.problem(3, 'ex59');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 25: ตัวตามแรงดันใช้สองแหล่งจ่าย คอลเล็กเตอร์ต่อ +12 V, \\(R_B\\) = 390 kΩ จากเบสลงกราวด์, \\(R_E\\) = 5.6 kΩ จากอิมิตเตอร์ไป −8 V, β = 120, \\(r_o\\) = 40 kΩ จงหา \\(r_e\\), \\(Z_i\\) (รวม \\(r_o\\)), \\(Z_o\\) และ \\(A_v\\)', '1) Problem 25: a follower on two supplies: the collector at +12 V, \\(R_B\\) = 390 kΩ from the base to ground, \\(R_E\\) = 5.6 kΩ from the emitter to −8 V, β = 120, \\(r_o\\) = 40 kΩ. Find \\(r_e\\), \\(Z_i\\) (with \\(r_o\\)), \\(Z_o\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 31.42, unit: 'Ω', tol: 0.2 }, { key: 'y', lab: 'Z_i =', ans: 236.1, unit: 'kΩ', tol: 2.5 }, { key: 'z', lab: 'Z_o =', ans: 31.0, unit: 'Ω', tol: 0.4 }, { key: 'w', lab: 'A_v =', ans: 0.994, unit: '', tol: 0.003 }],
+      work: work(R`I_B = \frac{8 - 0.7}{390\ \text{k}\Omega + (121)(5.6\ \text{k}\Omega)} = 6.84\ \mu\text{A},\ I_E = 0.827\ \text{mA},\ r_e = 31.42\ \Omega,\ Z_b = \beta r_e + \frac{(\beta + 1)R_E}{1 + R_E/r_o} = 598.2\ \text{k}\Omega,\ Z_i = 390\ \text{k}\Omega \parallel 598.2\ \text{k}\Omega = 236.1\ \text{k}\Omega,\ Z_o \cong R_E \parallel r_e = 31.0\ \Omega,\ A_v \cong 0.994`) },
+    { q: t('2) ข้อ 27: เบสร่วม pnp อิมิตเตอร์ผ่าน 6.8 kΩ ไป +6 V คอลเล็กเตอร์ผ่าน 4.7 kΩ ไป −10 V, α = 0.998 (ละ \\(r_o\\)) จงหา \\(r_e\\), \\(Z_i\\) และ \\(A_v\\)', '2) Problem 27: a pnp common base, the emitter through 6.8 kΩ to +6 V, the collector through 4.7 kΩ to −10 V, α = 0.998 (ignore \\(r_o\\)). Find \\(r_e\\), \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 33.36, unit: 'Ω', tol: 0.2 }, { key: 'y', lab: 'Z_i =', ans: 33.20, unit: 'Ω', tol: 0.2 }, { key: 'z', lab: 'A_v =', ans: 140.6, unit: '', tol: 0.8 }],
+      work: work(R`I_E = \frac{6 - 0.7}{6.8\ \text{k}\Omega} = 0.779\ \text{mA},\ r_e = 33.36\ \Omega,\ Z_i = 6.8\ \text{k}\Omega \parallel 33.36\ \Omega = 33.20\ \Omega,\ A_v = \frac{\alpha R_C}{r_e} = \frac{(0.998)(4.7\ \text{k}\Omega)}{33.36\ \Omega} = 140.6`) },
+    { q: t('3) ข้อ 29: ป้อนกลับคอลเล็กเตอร์ \\(V_{CC}\\) = 12 V, \\(R_F\\) = 220 kΩ, \\(R_C\\) = 3.9 kΩ, β = 120 (ละ \\(r_o\\)) จงหา \\(r_e\\), \\(Z_i\\) (สมการ 5.50), \\(Z_o\\) และ \\(A_v\\) (สมการ 5.52)', '3) Problem 29: collector feedback with \\(V_{CC}\\) = 12 V, \\(R_F\\) = 220 kΩ, \\(R_C\\) = 3.9 kΩ, β = 120 (ignore \\(r_o\\)). Find \\(r_e\\), \\(Z_i\\) (Eq. 5.50), \\(Z_o\\) and \\(A_v\\) (Eq. 5.52).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 13.08, unit: 'Ω', tol: 0.1, alt: 13.16 }, { key: 'y', lab: 'Z_i =', ans: 508, unit: 'Ω', tol: 6 }, { key: 'z', lab: 'Z_o =', ans: 3.83, unit: 'kΩ', tol: 0.02 }, { key: 'w', lab: 'A_v =', ans: -292.9, unit: '', tol: 2.5, alt: -298.1 }],
+      work: work(R`I_B = \frac{11.3}{220\ \text{k}\Omega + (120)(3.9\ \text{k}\Omega)} = 16.42\ \mu\text{A},\ I_E = 1.988\ \text{mA},\ r_e = 13.08\ \Omega,\ Z_i = \frac{13.08}{1/120 + 3.9/223.9} = 508\ \Omega,\ Z_o = 3.9\ \text{k}\Omega \parallel 220\ \text{k}\Omega = 3.83\ \text{k}\Omega,\ A_v = -\frac{220}{223.9}\cdot\frac{3.9\ \text{k}\Omega}{13.08\ \Omega} = -292.9`,
+        t('<p>รูปประมาณ \\(-R_C/r_e\\) = −298.1 ก็รับได้</p>', '<p>The approximate \\(-R_C/r_e\\) = −298.1 is accepted too.</p>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

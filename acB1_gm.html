@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="B.1 — gₘ: the Slope of the Transfer Curve">B.1 — gₘ: ความชันของเส้นโค้งถ่ายโอน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">g<sub>m</sub>: ความชันของเส้นโค้งถ่ายโอน <span class="en">g<sub>m</sub>: the slope of the transfer curve</span></h1>
+<h1 data-l="en">g<sub>m</sub>: the slope of the transfer curve <span class="en">The small-signal model of a FET</span></h1>
+
+<p class="sub" data-l="th">ใน BJT กระแสเบสเล็ก ๆ คุมกระแสคอลเล็กเตอร์ที่ใหญ่กว่า β เท่า FET ไม่มีกระแสเกตเลย สิ่งที่คุมกระแสเดรนคือแรงดันเกต ตัวเลขที่บอกว่าแรงดันเกตแกว่ง 1 mV แล้วกระแสเดรนแกว่งกี่ไมโครแอมแปร์คือ transconductance \(g_m\) ซึ่งทำหน้าที่เดียวกับ β ของ BJT บทที่ 5–6 ตั้งจุดทำงานบนเส้นโค้งถ่ายโอนไว้แล้ว หน้านี้หาความชันของเส้นโค้งที่จุดนั้น ทั้งจากกราฟและจากสูตร หา \(r_d\) จากเส้นเดรน แล้วประกอบเป็นแบบจำลองสัญญาณเล็กของ FET ที่หน้า B.2–B.4 จะใช้ (Boylestad หัวข้อ 8.1–8.2 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">In a BJT a small base current controls a collector current β times larger. A FET has no gate current at all: its drain current is controlled by the gate voltage. The number that says how many microamps the drain current swings for each millivolt at the gate is the transconductance \(g_m\), which plays the role β plays for a BJT. Chapters 5–6 set the operating point on the transfer curve; this page finds the curve's slope there, from the graph and from the formula, finds \(r_d\) from the drain curves, and assembles the FET small-signal model that pages B.2–B.4 use (Boylestad sections 8.1–8.2 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ g_m = \frac{\Delta I_D}{\Delta V_{GS}} $$ $$ g_{m0} = \frac{2I_{DSS}}{|V_P|} $$ $$ g_m = g_{m0}\left(1 - \frac{V_{GS}}{V_P}\right) = g_{m0}\sqrt{\frac{I_D}{I_{DSS}}} $$ $$ r_d = \frac{1}{y_{os}} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>\(g_m\) คือความชัน</b> (หัวข้อ 8.2, สมการ 8.1–8.3): \(\Delta I_D = g_m\Delta V_{GS}\) จึงหา \(g_m\) ได้จากเส้นสัมผัสเส้นโค้งถ่ายโอนที่จุดทำงาน หน่วยเป็นซีเมนส์ (มักเป็น mS)</li>
+  <li><b>จากสมการของ Shockley</b> (สมการ 8.4–8.6): \(g_{m0} = 2I_{DSS}/|V_P|\) คือค่าสูงสุดที่ \(V_{GS}\) = 0 และ \(g_m = g_{m0}(1 - V_{GS}/V_P)\) ลดลงเป็นเส้นตรงจนเป็นศูนย์ที่ \(V_P\)</li>
+  <li><b>ในรูปของกระแส</b> (สมการ 8.9): \(g_m = g_{m0}\sqrt{I_D/I_{DSS}}\) ใบข้อมูลเรียก \(g_m\) ว่า \(g_{fs}\) หรือ \(y_{fs}\) (สมการ 8.7)</li>
+  <li><b>\(r_d\)</b> (สมการ 8.11–8.12): ส่วนกลับของความชันของเส้นเดรนที่ \(V_{GS}\) คงที่ \(r_d = 1/g_{os} = 1/y_{os}\) ยิ่ง \(I_D\) น้อย \(r_d\) ยิ่งสูง</li>
+  <li><b>แบบจำลอง ac ของ FET</b> (รูป 8.8): เกตเปิดวงจร (\(Z_i \approx \infty\)) และแหล่งกระแส \(g_mV_{gs}\) จากเดรนลงซอร์สขนานกับ \(r_d\)</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>\(g_m\) is a slope</b> (section 8.2, Eqs. 8.1–8.3): \(\Delta I_D = g_m\Delta V_{GS}\), so \(g_m\) is the slope of the tangent to the transfer curve at the operating point, in siemens (usually mS).</li>
+  <li><b>From Shockley's equation</b> (Eqs. 8.4–8.6): \(g_{m0} = 2I_{DSS}/|V_P|\) is the largest value, at \(V_{GS}\) = 0, and \(g_m = g_{m0}(1 - V_{GS}/V_P)\) falls in a straight line to zero at \(V_P\).</li>
+  <li><b>In terms of the current</b> (Eq. 8.9): \(g_m = g_{m0}\sqrt{I_D/I_{DSS}}\). Data sheets call \(g_m\) \(g_{fs}\) or \(y_{fs}\) (Eq. 8.7).</li>
+  <li><b>\(r_d\)</b> (Eqs. 8.11–8.12): the inverse slope of a drain curve at constant \(V_{GS}\), \(r_d = 1/g_{os} = 1/y_{os}\); the smaller \(I_D\), the higher \(r_d\).</li>
+  <li><b>The FET ac model</b> (Fig. 8.8): an open gate (\(Z_i \approx \infty\)) and a current source \(g_mV_{gs}\) from drain to source in parallel with \(r_d\).</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>g<sub>m</sub> ที่จุดทำงาน</a><a href="#ex1"><b>1</b>Examples 8.1–8.4</a><a href="#tB"><b>B</b>r<sub>d</sub> จากเส้นเดรน</a><a href="#ex2"><b>2</b>Examples 8.5–8.6</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>g<sub>m</sub> at the operating point</a><a href="#ex1"><b>1</b>Examples 8.1–8.4</a><a href="#tB"><b>B</b>r<sub>d</sub> from the drain curves</a><a href="#ex2"><b>2</b>Examples 8.5–8.6</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · แรงดันคุมกระแส</div><div class="story-k" data-l="en">Part 1 · A voltage controls a current</div>
+    <h2 data-l="th">ความชันที่จุดทำงาน</h2><h2 data-l="en">The slope at the operating point</h2>
+    <div class="story-p" data-l="th"><p>เส้นโค้งถ่ายโอนของหน้า 5.2 บอกว่า \(V_{GS}\) ค่าหนึ่งให้ \(I_D\) เท่าใด เมื่อสัญญาณเล็ก ๆ \(v_{gs}\) ขี่อยู่บน \(V_{GSQ}\) จุดทำงานเลื่อนไปมาบนเส้นโค้งเพียงนิดเดียว ช่วงสั้น ๆ นั้นดูเหมือนเส้นตรงที่มีความชันเท่ากับเส้นสัมผัส กระแสสัญญาณจึงเป็น \(i_d = g_mv_{gs}\)</p>
+      <p>เส้นโค้งนี้เป็นพาราโบลา ชันที่สุดที่ \(V_{GS}\) = 0 แล้วราบลงเรื่อย ๆ จนราบสนิทที่ \(V_P\) ลองเดาก่อนว่าที่ \(V_{GS} = V_P/2\) ความชันเหลือกี่เปอร์เซ็นต์ของความชันสูงสุด</p></div>
+    <div class="story-p" data-l="en"><p>The transfer curve of page 5.2 says what \(I_D\) a given \(V_{GS}\) produces. When a small signal \(v_{gs}\) rides on \(V_{GSQ}\), the operating point moves only a little along the curve, and that short stretch looks like a straight line with the slope of the tangent. The signal current is therefore \(i_d = g_mv_{gs}\).</p>
+      <p>The curve is a parabola: steepest at \(V_{GS}\) = 0, flatter and flatter until it is level at \(V_P\). Guess first: at \(V_{GS} = V_P/2\), what percentage of the largest slope is left?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อน \(V_{GS}\) ดูเส้นสัมผัสและเส้นคอร์ด</p><p class="story-next" data-l="en">↓ Section A: move \(V_{GS}\) and watch the tangent and the chord</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">\(g_m\) ที่จุดทำงาน</h2><h2 data-l="en">\(g_m\) at the operating point</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 8.2 (รูป 8.1–8.5)</div><div class="src" data-l="en">Boylestad, section 8.2 (Figs. 8.1–8.5)</div></div></div>
+  <p class="lead" data-l="th">วงจรคือ JFET ที่ตรึงเกตไว้ที่ \(V_{GS}\) ด้วยแบตเตอรี่ บวกสัญญาณเล็ก \(v_{gs}\) จุดในวงจรคือกระแสสัญญาณ \(i_d\) แผงซ้ายคือเส้นโค้งถ่ายโอนกับเส้นสัมผัส (เหลือง) และเส้นคอร์ด (ม่วง) ที่ชันเท่ากัน แผงขวาคือ \(g_m\) เทียบ \(V_{GS}\) ค่า "ภาพจำลอง" ในตารางคือ \(i_d/v_{gs}\) ที่ตัวแก้วงจรคำนวณได้จริง</p>
+  <p class="lead" data-l="en">The circuit is a JFET with its gate held at \(V_{GS}\) by a battery, plus a small signal \(v_{gs}\); the dots are the signal current \(i_d\). The left panel is the transfer curve with the tangent (amber) and the equally steep chord (purple); the right panel is \(g_m\) against \(V_{GS}\). The "simulator" row is the \(i_d/v_{gs}\) the solver actually computes.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Examples 8.1–8.4: \(g_m\) จากกราฟและจากสูตร</h2><h2 data-l="en">Examples 8.1–8.4: \(g_m\) from the graph and from the formula</h2>
+    <div class="src" data-l="th">Boylestad Examples 8.1–8.4 (รูป 8.2–8.5)</div><div class="src" data-l="en">Boylestad Examples 8.1–8.4 (Figs. 8.2–8.5)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>JFET มี \(I_{DSS}\) = 8 mA และ \(V_P\) = −4 V (a) จงหา \(g_m\) จากกราฟที่ \(V_{GS}\) = −0.5, −1.5 และ −2.5 V (b) หา \(g_{m0}\) และ \(g_m\) ที่สามจุดเดิมด้วยสมการ 8.6 แล้วเขียน \(g_m\) เป็นฟังก์ชันของ \(I_D\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A JFET with \(I_{DSS}\) = 8 mA and \(V_P\) = −4 V. (a) Find \(g_m\) graphically at \(V_{GS}\) = −0.5, −1.5 and −2.5 V. (b) Find \(g_{m0}\) and \(g_m\) at the same points with Eq. 8.6, then write \(g_m\) as a function of \(I_D\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · เส้นเดรนไม่ราบสนิท</div><div class="story-k" data-l="en">Part 2 · The drain curves are not quite flat</div>
+    <h2 data-l="th">\(r_d\) และแบบจำลองของ FET</h2><h2 data-l="en">\(r_d\) and the FET model</h2>
+    <div class="story-p" data-l="th"><p>ในย่านอิ่มตัว เส้นเดรนของหน้า 5.1 วาดเป็นเส้นราบ ของจริงเอียงขึ้นเล็กน้อย: \(V_{DS}\) มากขึ้น กระแสเพิ่มนิดหน่อย ความเอียงนี้คือความนำ \(g_{os}\) และส่วนกลับของมันคือความต้านทานขาออกของ FET \(r_d\) ซึ่งทำหน้าที่เดียวกับ \(r_o\) ของ BJT</p>
+      <p>เมื่อรวม \(g_m\) กับ \(r_d\) จะได้แบบจำลอง ac ของ FET ที่ง่ายกว่าของ BJT: ไม่มีอะไรระหว่างเกตกับซอร์สเลย ลองเดาก่อนว่า FET ที่มี \(g_m\) = 3.8 mS และ \(r_d\) = 50 kΩ ขยายแรงดันได้มากที่สุดกี่เท่า</p></div>
+    <div class="story-p" data-l="en"><p>In saturation the drain curves of page 5.1 are drawn flat. Real ones tilt up slightly: more \(V_{DS}\), a little more current. That tilt is a conductance \(g_{os}\), and its inverse is the FET's output resistance \(r_d\), the counterpart of the BJT's \(r_o\).</p>
+      <p>Together, \(g_m\) and \(r_d\) give the FET ac model, simpler than the BJT's: there is nothing at all between gate and source. Guess first: what is the most a FET with \(g_m\) = 3.8 mS and \(r_d\) = 50 kΩ can amplify a voltage?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน B: เลื่อนจุดบนเส้นเดรน</p><p class="story-next" data-l="en">↓ Section B: move the point along the drain curves</p>
+</div>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">\(r_d\) จากเส้นเดรน</h2><h2 data-l="en">\(r_d\) from the drain curves</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 8.2 (รูป 8.6–8.7)</div><div class="src" data-l="en">Boylestad, section 8.2 (Figs. 8.6–8.7)</div></div></div>
+  <p class="lead" data-l="th">ภาพจำลองต่อ JFET เข้ากับแหล่งแรงดันสองตัวเหมือนเครื่องวัดเส้นลักษณะสมบัติ เส้นเดรนเอียงด้วย λ = 0.005 V⁻¹ เส้นประเหลืองคือความชันที่จุดทำงาน ลองเลื่อน \(V_{DS}\) ไปทางซ้ายจนเข้าย่านโอห์มมิก แล้วดูว่า \(r_d\) เปลี่ยนไปเท่าใด</p>
+  <p class="lead" data-l="en">The simulation connects the JFET to two voltage sources like a curve tracer; the drain curves tilt with λ = 0.005 V⁻¹ and the dashed amber line is the slope at the operating point. Move \(V_{DS}\) to the left into the ohmic region and see what happens to \(r_d\).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Examples 8.5–8.6: \(r_d\) และแบบจำลองที่มีตัวเลข</h2><h2 data-l="en">Examples 8.5–8.6: \(r_d\) and the model with numbers</h2>
+    <div class="src" data-l="th">Boylestad Examples 8.5–8.6 (รูป 8.7–8.9)</div><div class="src" data-l="en">Boylestad Examples 8.5–8.6 (Figs. 8.7–8.9)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>(Example 8.5) จากเส้นเดรนของรูป 8.7 จงหา \(r_d\) ที่ \(V_{GS}\) = 0 V และ −2 V รอบ \(V_{DS}\) = 8 V (Example 8.6) ใบข้อมูลให้ \(g_{fs}\) = 3.8 mS, \(g_{os}\) = 20 µS จงวาดแบบจำลอง ac แล้วหาอัตราขยายแรงดันของตัว FET เมื่อไม่มีโหลดภายนอก</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>(Example 8.5) From the drain curves of Fig. 8.7, find \(r_d\) at \(V_{GS}\) = 0 V and −2 V around \(V_{DS}\) = 8 V. (Example 8.6) A data sheet gives \(g_{fs}\) = 3.8 mS, \(g_{os}\) = 20 µS: draw the ac model, then find the FET's own voltage gain with no external load.</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 3 ภาพเปลี่ยนจากเส้นเดรนเป็นแบบจำลอง ac (แหล่งกระแสรูปเพชรขนาน \(r_d\)) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">From step 3 the picture turns from the drain curves into the ac model (the diamond current source in parallel with \(r_d\)). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 1, 4, 6, 7, 9 ท้ายบทที่ 8</div><div class="src" data-l="en">Boylestad Problems 1, 4, 6, 7, 9 of chapter 8</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — g<sub>m</sub> กับ β</h3>
+    <ol><li>BJT ที่ \(I_C\) = 2 mA มี \(g_m = I_C/26\ \text{mV}\) ≈ 77 mS (หน้า A.1 ส่วน B) ส่วน JFET ในส่วน A มีแค่ 1.5–4 mS: FET ขยายแรงดันได้น้อยกว่ามาก</li>
+    <li>แต่ FET ไม่ดึงกระแสจากเกต อิมพีแดนซ์ขาเข้าจึงสูงหลายเมกะโอห์ม ข้อดีนี้คือเหตุผลที่ใช้ FET เป็นภาคแรกของเครื่องมือวัด</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — เส้นคอร์ด</h3>
+    <ol><li>ส่วน A: เลือก \(V_{GS}\) ใดก็ได้ เส้นคอร์ดม่วงที่ห่าง ±0.5 V ขนานกับเส้นสัมผัสเสมอ เพราะเส้นโค้งเป็นพาราโบลา</li>
+    <li>เวลาอ่าน \(g_m\) จากกราฟจริง จึงอ่านกระแสที่ \(V_{GSQ} \pm h\) แล้วหารด้วย \(2h\) ได้ค่าแม่นกว่าลากเส้นสัมผัสด้วยมือ</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 8 หัวข้อ 8.1–8.2 (Examples 8.1–8.6, รูป 8.1–8.9, ข้อ 1–9) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 8.1 (หน้า 483)</td><td data-h="ตำราพิมพ์">\(g_m\) ที่ −1.5 V = 1.8 mA/0.7 V = 2.57 mS</td><td data-h="ที่ถูก">1.75 mA/0.7 V = 2.5 mS (ตำราอ่านกราฟเกิน 0.05 mA)</td></tr>
+      <tr><td data-h="ตำแหน่ง">คำบรรยายรูป 8.5 (หน้า 486)</td><td data-h="ตำราพิมพ์">"\(V_{GS}\) = −4 V"</td><td data-h="ที่ถูก">\(V_P\) = −4 V</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — g<sub>m</sub> and β</h3>
+    <ol><li>A BJT at \(I_C\) = 2 mA has \(g_m = I_C/26\ \text{mV}\) ≈ 77 mS (page A.1, section B); the JFET of section A has only 1.5–4 mS. A FET amplifies voltage far less.</li>
+    <li>But a FET draws no gate current, so its input impedance is many megohms. That advantage is why FETs serve as the first stage of measuring instruments.</li></ol></div>
+  <div class="card"><h3>Try this 2 — the chord</h3>
+    <ol><li>In section A pick any \(V_{GS}\): the purple chord ±0.5 V wide is always parallel to the tangent, because the curve is a parabola.</li>
+    <li>On a real graph, read the currents at \(V_{GSQ} \pm h\) and divide by \(2h\): more accurate than drawing a tangent by hand.</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 8, sections 8.1–8.2 (Examples 8.1–8.6, Figs. 8.1–8.9, Problems 1–9) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 8.1 (p. 483)</td><td data-h="Printed">\(g_m\) at −1.5 V = 1.8 mA/0.7 V = 2.57 mS</td><td data-h="Correct">1.75 mA/0.7 V = 2.5 mS (the book reads the graph 0.05 mA high)</td></tr>
+      <tr><td data-h="Where">Fig. 8.5 caption (p. 486)</td><td data-h="Printed">"\(V_{GS}\) = −4 V"</td><td data-h="Correct">\(V_P\) = −4 V</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.gm({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.EX.rd({ cv: 'cvB', panel: 'pB', text: 'wB', pre: 'b' });
+  AC.problem(1, 'ex81'); AC.problem(2, 'ex85');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 1: JFET มี \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −4 V จงหา \\(g_{m0}\\)', '1) Problem 1: a JFET with \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −4 V. Find \\(g_{m0}\\).'),
+      fields: [{ key: 'x', lab: 'g_m0 =', ans: 6, unit: 'mS', tol: 0.03 }], work: work(R`g_{m0} = \frac{2(12\ \text{mA})}{4\ \text{V}} = 6\ \text{mS}`) },
+    { q: t('2) ข้อ 4: JFET มี \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3 V ไบแอสที่ \\(V_{GS}\\) = −0.5 V จงหา \\(g_m\\)', '2) Problem 4: a JFET with \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3 V biased at \\(V_{GS}\\) = −0.5 V. Find \\(g_m\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 6.667, unit: 'mS', tol: 0.03 }], work: work(R`g_{m0} = \frac{24\ \text{mA}}{3\ \text{V}} = 8\ \text{mS},\ g_m = 8\ \text{mS}\left(1 - \frac{-0.5}{-3}\right) = 6.67\ \text{mS}`) },
+    { q: t('3) ข้อ 6–7: (a) JFET \\(I_{DSS}\\) = 10 mA, \\(V_P\\) = −5 V ไบแอสที่ \\(I_D = I_{DSS}/4\\) (b) JFET \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −5 V ไบแอสที่ \\(V_{GSQ} = V_P/4\\) จงหา \\(g_m\\) ทั้งสองกรณี', '3) Problems 6–7: (a) a JFET with \\(I_{DSS}\\) = 10 mA, \\(V_P\\) = −5 V biased at \\(I_D = I_{DSS}/4\\); (b) a JFET with \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −5 V biased at \\(V_{GSQ} = V_P/4\\). Find \\(g_m\\) in both cases.'),
+      fields: [{ key: 'x', lab: 'g_m (a) =', ans: 2, unit: 'mS', tol: 0.02 }, { key: 'y', lab: 'g_m (b) =', ans: 2.4, unit: 'mS', tol: 0.02 }],
+      work: work(R`\text{(a)}\ g_m = g_{m0}\sqrt{1/4} = (4\ \text{mS})(0.5) = 2\ \text{mS},\ \text{(b)}\ g_m = (3.2\ \text{mS})(1 - 0.25) = 2.4\ \text{mS}`) },
+    { q: t('4) ข้อ 9: ใบข้อมูลให้ \\(g_{fs}\\) = 4.5 mS, \\(g_{os}\\) = 25 µS จงหา \\(Z_{o(\\text{FET})}\\) และ \\(A_{v(\\text{FET})}\\)', '4) Problem 9: a data sheet gives \\(g_{fs}\\) = 4.5 mS, \\(g_{os}\\) = 25 µS. Find \\(Z_{o(\\text{FET})}\\) and \\(A_{v(\\text{FET})}\\).'),
+      fields: [{ key: 'x', lab: 'Z_o =', ans: 40, unit: 'kΩ', tol: 0.2 }, { key: 'y', lab: 'A_v =', ans: -180, unit: '', tol: 1 }], work: work(R`Z_o = r_d = \frac{1}{25\ \mu\text{S}} = 40\ \text{k}\Omega,\ A_{v(\text{FET})} = -g_mr_d = -(4.5\ \text{mS})(40\ \text{k}\Omega) = -180`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

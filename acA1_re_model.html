@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="A.1 — The rₑ Model and the Common-Emitter Amplifier">A.1 — แบบจำลอง rₑ และวงจรขยายอิมิตเตอร์ร่วม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">แบบจำลอง r<sub>e</sub> และวงจรขยายอิมิตเตอร์ร่วม <span class="en">The r<sub>e</sub> model and the common-emitter amplifier</span></h1>
+<h1 data-l="en">The r<sub>e</sub> model and the common-emitter amplifier <span class="en">A small signal on the operating point</span></h1>
+
+<p class="sub" data-l="th">ไมโครโฟนให้แรงดันเพียงไม่กี่มิลลิโวลต์ แต่ลำโพงต้องการหลายโวลต์ วงจรขยายด้วยทรานซิสเตอร์ไม่ได้สร้างพลังงานขึ้นเอง มันดึงพลังงานจากแหล่งจ่ายไฟตรง \(V_{CC}\) แล้วให้สัญญาณเล็ก ๆ ที่ขาเข้าเป็นตัวบอกว่าจะปล่อยพลังงานนั้นออกมาอย่างไร บทที่ 4 ตั้งจุดทำงานไว้แล้ว บทเสริมนี้ดูว่าเกิดอะไรขึ้นเมื่อสัญญาณ ac ขนาดเล็กขี่อยู่บนจุดนั้น และใช้แบบจำลอง \(r_e\) หาอัตราขยายแรงดัน \(A_v\) อิมพีแดนซ์ขาเข้า \(Z_i\) และอิมพีแดนซ์ขาออก \(Z_o\) สไลด์ของรายวิชาไม่มีเนื้อหานี้ ตัวอย่างทั้งหมดมาจากตำรา (Boylestad บทที่ 5 หัวข้อ 5.1–5.5)</p>
+<p class="sub" data-l="en">A microphone gives only a few millivolts, but a loudspeaker needs several volts. A transistor amplifier does not create energy: it draws power from the dc supply \(V_{CC}\) and lets the small input signal decide how that power is released. Chapter 4 set the operating point; this supplement looks at what happens when a small ac signal rides on it, and uses the \(r_e\) model to find the voltage gain \(A_v\), the input impedance \(Z_i\) and the output impedance \(Z_o\). The course slides do not cover this; every example comes from the textbook (Boylestad, chapter 5, sections 5.1–5.5).</p>
+<div class="equation-box eqwrap">$$ r_e = \frac{26\ \text{mV}}{I_E} $$ $$ Z_i = R_B \parallel \beta r_e $$ $$ Z_o = R_C \parallel r_o $$ $$ A_v = -\frac{R_C \parallel r_o}{r_e} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>วิเคราะห์สองรอบแล้วรวมกัน</b> (หัวข้อ 5.2): รอบ dc หาจุดทำงาน (ตัวเก็บประจุเปิดวงจร) รอบ ac หาสัญญาณ (ตัวเก็บประจุลัดวงจร และ \(V_{CC}\) เป็นกราวด์) แรงดันและกระแสจริงคือผลรวมของสองรอบ</li>
+  <li><b>\(r_e = 26\ \text{mV}/I_E\)</b> (หัวข้อ 5.4): รอยต่อเบส–อิมิตเตอร์คือไดโอดที่ไบแอสตรง ความต้านทาน ac ของมันขึ้นกับกระแสอิมิตเตอร์ที่จุดทำงาน เหมือน \(r_D = 26\ \text{mV}/I_D\) ของหน้า 1.5</li>
+  <li><b>แบบจำลอง \(r_e\)</b>: เบสมองเห็น \((\beta + 1)r_e \cong \beta r_e\) (สมการ 5.1) คอลเล็กเตอร์เป็นแหล่งกระแส \(\beta I_b\) ขนานกับ \(r_o\) ซึ่งมาจากความชันเล็ก ๆ ของเส้นลักษณะสมบัติขาออก</li>
+  <li><b>ไบแอสคงที่</b> (หัวข้อ 5.5): \(Z_i = R_B \parallel \beta r_e\), \(Z_o = R_C \parallel r_o\), \(A_v = -(R_C \parallel r_o)/r_e\) (สมการ 5.5–5.10) เครื่องหมายลบคือขาออกกลับเฟส 180° และถ้า \(r_o \ge 10R_C\) ละ \(r_o\) ได้</li>
+  <li><b>สัญญาณต้องเล็ก</b>: แบบจำลองใช้ได้เมื่อการแกว่งเล็กพอที่เส้นโค้งดูเหมือนเส้นตรง และขาออกไม่แกว่งไปชนย่านอิ่มตัวหรือคัตออฟ</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Two analyses, then add them</b> (section 5.2): the dc analysis finds the operating point (capacitors open), the ac analysis finds the signal (capacitors shorted, \(V_{CC}\) at ground); the real voltages and currents are the sum of the two.</li>
+  <li><b>\(r_e = 26\ \text{mV}/I_E\)</b> (section 5.4): the base–emitter junction is a forward-biased diode, whose ac resistance depends on the emitter current at the operating point, as \(r_D = 26\ \text{mV}/I_D\) on page 1.5.</li>
+  <li><b>The \(r_e\) model</b>: the base sees \((\beta + 1)r_e \cong \beta r_e\) (Eq. 5.1); the collector is a current source \(\beta I_b\) in parallel with \(r_o\), which comes from the slight slope of the output characteristics.</li>
+  <li><b>Fixed bias</b> (section 5.5): \(Z_i = R_B \parallel \beta r_e\), \(Z_o = R_C \parallel r_o\), \(A_v = -(R_C \parallel r_o)/r_e\) (Eqs. 5.5–5.10). The minus sign is a 180° phase inversion, and \(r_o\) can be dropped when \(r_o \ge 10R_C\).</li>
+  <li><b>The signal must be small</b>: the model holds while the swing is small enough for the curve to look straight and the output stays clear of saturation and cutoff.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรขยายกำลังทำงาน</a><a href="#tB"><b>B</b>r<sub>e</sub> จากเส้นโค้ง</a><a href="#ex1"><b>1</b>Example 5.1</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The amplifier at work</a><a href="#tB"><b>B</b>r<sub>e</sub> from the curve</a><a href="#ex1"><b>1</b>Example 5.1</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ไฟตรงกับสัญญาณ</div><div class="story-k" data-l="en">Part 1 · DC and signal</div>
+    <h2 data-l="th">สัญญาณเล็กขี่อยู่บนจุดทำงาน</h2><h2 data-l="en">A small signal rides on the operating point</h2>
+    <div class="story-p" data-l="th"><p>วงจรในส่วน A คือวงจรไบแอสคงที่ของหน้า 4.1 ที่เพิ่มของสามอย่าง: แหล่งสัญญาณ \(v_s\) ตัวเก็บประจุ \(C_1\) ที่ส่งสัญญาณเข้าเบส และ \(C_2\) ที่ส่งสัญญาณออกจากคอลเล็กเตอร์ ตัวเก็บประจุกั้นไฟตรง จุดทำงานที่ตั้งไว้จึงไม่ถูกแหล่งสัญญาณหรือโหลดดึงเพี้ยน แต่ยอมให้สัญญาณ ac ผ่าน (หัวข้อ 5.2)</p>
+      <p>เมื่อสัญญาณเล็ก วงจรแทบเป็นเชิงเส้น จึงแยกคิดได้สองรอบ: รอบ dc หาจุดทำงานเหมือนบทที่ 4 รอบ ac หาว่าสัญญาณถูกขยายเท่าใด ในรอบ ac ตัวเก็บประจุเป็นลัดวงจร และ \(V_{CC}\) เป็นกราวด์ เพราะแรงดันของมันไม่แกว่งเลย ลองเดาก่อนว่าถ้าขาเข้าแกว่ง ±5 mV ขาออกจะแกว่งกี่โวลต์</p></div>
+    <div class="story-p" data-l="en"><p>The circuit of section A is the fixed-bias circuit of page 4.1 with three things added: a signal source \(v_s\), a capacitor \(C_1\) that carries the signal into the base, and \(C_2\) that carries it out of the collector. The capacitors block dc, so neither the source nor the load can pull the operating point away, yet they let the ac signal through (section 5.2).</p>
+      <p>With a small signal the circuit is nearly linear, so it can be worked in two passes: a dc pass finds the operating point as in chapter 4, an ac pass finds how much the signal is amplified. In the ac pass the capacitors are shorts and \(V_{CC}\) is a ground, because its voltage does not swing at all. Guess first: if the input swings ±5 mV, how many volts does the output swing?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เพิ่มสัญญาณขาเข้าจนขาออกถูกตัด</p><p class="story-next" data-l="en">↓ Section A: raise the input until the output clips</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรขยายอิมิตเตอร์ร่วมกำลังทำงาน</h2><h2 data-l="en">A common-emitter amplifier at work</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 5.2 และรูป 5.25 (วงจรของ Example 5.1)</div><div class="src" data-l="en">Boylestad, section 5.2 and Fig. 5.25 (the circuit of Example 5.1)</div></div></div>
+  <p class="lead" data-l="th">ภาพจำลองแก้วงจรจริงทีละก้าวเวลา ทรานซิสเตอร์มี \(V_{BE}\) = 0.7 V ที่จุดทำงาน และ \(r_o\) = 50 kΩ สัญญาณมีความถี่ 100 kHz ซึ่งตัวเก็บประจุ 10 µF เป็นลัดวงจร (ทรานซิสเตอร์ในภาพจำลองไม่มีความจุภายใน จึงยังอยู่ในย่านความถี่กลางของตำรา) จุดในวงจรคือกระแสสัญญาณ ac เลื่อน \(v_s\) จาก 1 mV ขึ้นไป: ขาออกเป็นไซน์ที่กลับเฟสและใหญ่ขึ้นราว 264 เท่า แต่เมื่อสัญญาณใหญ่ขึ้น จุดทำงาน (จุดฟ้าบนเส้นโหลด) แกว่งไปชนย่านอิ่มตัว ยอดล่างของ \(v_C\) แบน ขาออกถูกตัด ลองเปลี่ยน β แล้วดูว่าจุด Q เลื่อนไปไหน</p>
+  <p class="lead" data-l="en">The simulation solves the real circuit in time steps, with a transistor that has \(V_{BE}\) = 0.7 V at the operating point and \(r_o\) = 50 kΩ. The signal is at 100 kHz, where the 10 µF capacitors are shorts (the simulated transistor has no internal capacitances, so it is still in the book's mid band); the dots in the circuit are the ac signal currents. Raise \(v_s\) from 1 mV: the output is an inverted sine about 264 times larger, but as the signal grows the operating point (the cyan dot on the load line) swings into saturation, the bottom of \(v_C\) flattens and the output clips. Change β and watch where Q moves.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ไดโอดในทรานซิสเตอร์</div><div class="story-k" data-l="en">Part 2 · The diode inside the transistor</div>
+    <h2 data-l="th">ทำไม \(r_e = 26\ \text{mV}/I_E\)</h2><h2 data-l="en">Why \(r_e = 26\ \text{mV}/I_E\)</h2>
+    <div class="story-p" data-l="th"><p>รอยต่อเบส–อิมิตเตอร์คือไดโอดที่ไบแอสตรง สัญญาณเล็กที่ขี่บน \(V_{BE}\) จึงเห็นความต้านทานเท่ากับส่วนกลับของความชันของเส้นโค้งที่จุดทำงาน หน้า 1.5 ได้ \(r_D = 26\ \text{mV}/I_D\) ไว้แล้ว กระแสที่ผ่านรอยต่อนี้คือ \(I_E\) จึงได้ \(r_e = 26\ \text{mV}/I_E\) (หัวข้อ 5.4 รูป 5.13)</p>
+      <p>แต่สัญญาณป้อนที่เบส ซึ่งรับกระแสเพียง \(I_b = I_e/(\beta + 1)\) แรงดันเท่าเดิมแต่กระแสน้อยลง β + 1 เท่า เบสจึงมองเห็นความต้านทานใหญ่ขึ้นเป็น \((\beta + 1)r_e \cong \beta r_e\) (สมการ 5.1) ฝั่งคอลเล็กเตอร์ กระแส \(I_c = \beta I_b\) แทบไม่ขึ้นกับแรงดันคอลเล็กเตอร์ จึงแทนด้วยแหล่งกระแส \(\beta I_b\) ขนานกับ \(r_o\) รวมกันคือแบบจำลอง \(r_e\)</p></div>
+    <div class="story-p" data-l="en"><p>The base–emitter junction is a forward-biased diode, so a small signal riding on \(V_{BE}\) sees a resistance equal to the inverse of the curve's slope at the operating point. Page 1.5 found \(r_D = 26\ \text{mV}/I_D\); the current through this junction is \(I_E\), hence \(r_e = 26\ \text{mV}/I_E\) (section 5.4, Fig. 5.13).</p>
+      <p>The signal, however, is applied to the base, which takes only \(I_b = I_e/(\beta + 1)\): the same voltage with β + 1 times less current, so the base sees \((\beta + 1)r_e \cong \beta r_e\) (Eq. 5.1). On the collector side \(I_c = \beta I_b\) hardly depends on the collector voltage, so it becomes a current source \(\beta I_b\) in parallel with \(r_o\). Together they are the \(r_e\) model.</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน B: เลื่อน \(I_E\) ดูเส้นสัมผัสที่จุดทำงาน</p><p class="story-next" data-l="en">↓ Section B: move \(I_E\) and watch the tangent at the operating point</p>
+</div>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">\(r_e\) จากความชันของเส้นโค้งรอยต่อ</h2><h2 data-l="en">\(r_e\) from the slope of the junction's curve</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 1.8 และ 5.4 (รูป 5.9–5.13)</div><div class="src" data-l="en">Boylestad, sections 1.8 and 5.4 (Figs. 5.9–5.13)</div></div></div>
+  <p class="lead" data-l="th">เส้นโค้งคือกระแสอิมิตเตอร์ตามสมการของ Shockley ที่ \(V_T\) = 26 mV เส้นประสีเหลืองคือเส้นสัมผัสที่จุดทำงาน มันตัดแกนแรงดันห่างจากจุดทำงานไปทางซ้าย 26 mV เสมอ ไม่ว่า \(I_E\) จะเท่าใด ความชันจึงเป็น \(I_E/26\ \text{mV}\) และความต้านทาน ac คือ \(r_e = 26\ \text{mV}/I_E\)</p>
+  <p class="lead" data-l="en">The curve is the emitter current from Shockley's equation at \(V_T\) = 26 mV; the dashed amber line is the tangent at the operating point. It always meets the voltage axis 26 mV to the left of the operating point, whatever \(I_E\) is, so its slope is \(I_E/26\ \text{mV}\) and the ac resistance is \(r_e = 26\ \text{mV}/I_E\).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ลงมือคำนวณ</div><div class="story-k" data-l="en">Part 3 · Work it out</div>
+    <h2 data-l="th">Example 5.1: วงจรไบแอสคงที่ทั้งวง</h2><h2 data-l="en">Example 5.1: the whole fixed-bias amplifier</h2>
+    <div class="story-p" data-l="th"><p>รูป 5.25 ของตำราคือวงจรเดียวกับส่วน A ขั้นตอนที่ใช้เป็นแบบแผนของทุกวงจรในบทเสริมนี้: วิเคราะห์ dc หา \(I_E\) แล้ว \(r_e\) วาดวงจรสมมูล ac แล้วหา \(Z_i\), \(Z_o\) และ \(A_v\)</p>
+      <p>ก่อนเปิดเฉลย ลองเดาว่า \(Z_i\) ใกล้ 470 kΩ ของ \(R_B\) หรือใกล้ 1 kΩ และ \(Z_o\) ใกล้ค่าของตัวต้านทานตัวใด</p></div>
+    <div class="story-p" data-l="en"><p>Fig. 5.25 of the book is the circuit of section A. The steps are the pattern for every circuit in this supplement: a dc analysis for \(I_E\), then \(r_e\); the ac equivalent circuit; then \(Z_i\), \(Z_o\) and \(A_v\).</p>
+      <p>Before opening the solution, guess whether \(Z_i\) is near the 470 kΩ of \(R_B\) or near 1 kΩ, and which resistor \(Z_o\) is close to.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: ภาพจำลองเปลี่ยนจากวงจรจริงเป็นวงจรสมมูลตามขั้น</p><p class="story-next" data-l="en">↓ Problem 1: the simulation turns from the real circuit into the equivalent circuit as the steps open</p>
+</div>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 5.1: ไบแอสคงที่</h2><h2 data-l="en">Example 5.1: fixed bias</h2>
+    <div class="src" data-l="th">Boylestad Example 5.1 (รูป 5.25) · หัวข้อ 5.5</div><div class="src" data-l="en">Boylestad Example 5.1 (Fig. 5.25) · section 5.5</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ จาก \(V_{CC}\) ถึงเบส, \(R_C\) = 3 kΩ จาก \(V_{CC}\) ถึงคอลเล็กเตอร์ อิมิตเตอร์ลงกราวด์ ตัวเก็บประจุคัปปลิง 10 µF, β = 100, \(r_o\) = 50 kΩ (a) จงหา \(r_e\) (b) \(Z_i\) (\(r_o = \infty\)) (c) \(Z_o\) (\(r_o = \infty\)) (d) \(A_v\) (\(r_o = \infty\)) (e) ทำ (c) และ (d) ใหม่โดยรวม \(r_o\) = 50 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ from \(V_{CC}\) to the base, \(R_C\) = 3 kΩ from \(V_{CC}\) to the collector, emitter grounded, 10 µF coupling capacitors, β = 100, \(r_o\) = 50 kΩ. (a) Determine \(r_e\). (b) Find \(Z_i\) (\(r_o = \infty\)). (c) Calculate \(Z_o\) (\(r_o = \infty\)). (d) Determine \(A_v\) (\(r_o = \infty\)). (e) Repeat (c) and (d) including \(r_o\) = 50 kΩ.</p></div>
+  <p class="lead" data-l="th">ขั้น dc แสดงวงจรจริงกับกระแสไฟตรง จากนั้นภาพเปลี่ยนเป็นวงจรสมมูล ac แผงซ้ายล่างเทียบค่าคำนวณมือกับภาพจำลอง แผงขวาล่างคือออสซิลโลสโคปของวงจรจริงที่ขาเข้า 10 mV <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The dc steps show the real circuit with its dc currents; then the picture turns into the ac equivalent circuit. The lower left panel compares the hand values with the simulator; the lower right one is the oscilloscope of the real circuit at a 10 mV input. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">\(V_{BE}\) = 0.7 V, \(r_e = 26\ \text{mV}/I_E\) · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">\(V_{BE}\) = 0.7 V, \(r_e = 26\ \text{mV}/I_E\) · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — สัญญาณเล็กแค่ไหนจึงพอ</h3>
+    <ol><li>ส่วน A ตั้ง \(v_s\) = 1 mV แล้วค่อย ๆ เพิ่ม: ยอดบนและยอดล่างของ \(v_o\) เริ่มต่างกันก่อนที่ขาออกจะถูกตัด เพราะเส้นโค้งของรอยต่อเป็นเอกซ์โพเนนเชียล ไม่ใช่เส้นตรง</li>
+    <li>ราว 18–20 mV จุดฟ้าบนเส้นโหลดแตะย่านอิ่มตัว: ขาออกแกว่งลงได้ไม่เกิน \(V_{CEQ}\) ราว 4.8 V</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — β ไม่อยู่ในสูตร แต่อยู่ในจุดทำงาน</h3>
+    <ol><li>สูตร \(A_v = -R_C/r_e\) ไม่มี β แต่ในวงจรไบแอสคงที่ \(I_E = (\beta + 1)I_B\) β = 150 จึงให้ \(I_E\) = 3.63 mA, \(r_e\) = 7.16 Ω และ \(A_v\) ≈ −419</li>
+    <li>ในขณะเดียวกัน \(V_{CEQ}\) เหลือแค่ 1.18 V ขาออกแกว่งลงได้นิดเดียว และ β = 200 ทำให้ทรานซิสเตอร์อิ่มตัวไปเลย ส่วน \(\beta r_e \cong 26\ \text{mV}/I_B\) แทบไม่เปลี่ยน (≈ 1.07 kΩ)</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 5 หัวข้อ 5.1–5.5 (Example 5.1, รูป 5.9–5.25) · ไม่มีในสไลด์ของรายวิชา</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — how small is small enough</h3>
+    <ol><li>In section A set \(v_s\) = 1 mV and raise it slowly: the top and bottom peaks of \(v_o\) start to differ before the output clips, because the junction's curve is an exponential, not a straight line.</li>
+    <li>At about 18–20 mV the cyan dot reaches saturation: the output can swing down by no more than \(V_{CEQ}\), about 4.8 V.</li></ol></div>
+  <div class="card"><h3>Try this 2 — β is not in the formula, but it is in the operating point</h3>
+    <ol><li>\(A_v = -R_C/r_e\) has no β in it, but with fixed bias \(I_E = (\beta + 1)I_B\): β = 150 gives \(I_E\) = 3.63 mA, \(r_e\) = 7.16 Ω and \(A_v\) ≈ −419.</li>
+    <li>At the same time \(V_{CEQ}\) drops to 1.18 V, leaving hardly any room to swing down, and β = 200 saturates the transistor outright. Meanwhile \(\beta r_e \cong 26\ \text{mV}/I_B\) barely moves (≈ 1.07 kΩ).</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 5, sections 5.1–5.5 (Example 5.1, Figs. 5.9–5.25) · not in the course slides</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.swing({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.EX.re({ cv: 'cvB', panel: 'pB', text: 'wB', pre: 'b' });
+  AC.problem(1, 'ex51');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ทรานซิสเตอร์ที่ \\(I_E\\) = 1.5 mA, β = 120 จงหา \\(r_e\\) และ \\(\\beta r_e\\)', '1) A transistor at \\(I_E\\) = 1.5 mA with β = 120. Find \\(r_e\\) and \\(\\beta r_e\\).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 17.333, unit: 'Ω', tol: 0.05 }, { key: 'y', lab: 'βr_e =', ans: 2.08, unit: 'kΩ', tol: 0.01 }],
+      work: work(R`r_e = \frac{26\ \text{mV}}{1.5\ \text{mA}} = 17.33\ \Omega,\ \beta r_e = (120)(17.33\ \Omega) = 2.08\ \text{k}\Omega`) },
+    { q: t('2) วงจรไบแอสคงที่ \\(V_{CC}\\) = 15 V, \\(R_B\\) = 560 kΩ, \\(R_C\\) = 2.2 kΩ, β = 120, \\(r_o = \\infty\\) จงหา \\(I_E\\), \\(Z_i\\) และ \\(A_v\\)', '2) A fixed-bias amplifier with \\(V_{CC}\\) = 15 V, \\(R_B\\) = 560 kΩ, \\(R_C\\) = 2.2 kΩ, β = 120, \\(r_o = \\infty\\). Find \\(I_E\\), \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'I_E =', ans: 3.0898, unit: 'mA', tol: 0.01 }, { key: 'y', lab: 'Z_i =', ans: 1.008, unit: 'kΩ', tol: 0.01 }, { key: 'z', lab: 'A_v =', ans: -261.45, unit: '', tol: 1.5 }],
+      work: work(R`I_B = \frac{15 - 0.7}{560\ \text{k}\Omega} = 25.54\ \mu\text{A},\ I_E = (121)(25.54\ \mu\text{A}) = 3.09\ \text{mA},\ r_e = 8.41\ \Omega,\ Z_i = 560\ \text{k}\Omega \parallel 1.01\ \text{k}\Omega = 1.008\ \text{k}\Omega,\ A_v = -\frac{2.2\ \text{k}\Omega}{8.41\ \Omega} = -261.4`) },
+    { q: t('3) วงจรข้อ 2 เมื่อรวม \\(r_o\\) = 40 kΩ: \\(Z_o\\) และ \\(A_v\\)', '3) The circuit of question 2 including \\(r_o\\) = 40 kΩ: \\(Z_o\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'Z_o =', ans: 2.0853, unit: 'kΩ', tol: 0.01 }, { key: 'y', lab: 'A_v =', ans: -247.82, unit: '', tol: 1.5 }],
+      work: work(R`Z_o = 2.2\ \text{k}\Omega \parallel 40\ \text{k}\Omega = 2.085\ \text{k}\Omega,\ A_v = -\frac{2.085\ \text{k}\Omega}{8.41\ \Omega} = -247.8`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

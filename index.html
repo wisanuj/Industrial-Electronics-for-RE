@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=4">
-<script src="assets/stops.js?v=4"></script>
-<script src="assets/shell.js?v=4"></script>
-<script src="assets/circuit.js?v=4"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script>
+<script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script>
 </head>
 <body>
 <div class="wrap">
@@ -68,7 +68,7 @@
   let html='', lastStage=null;
   for(const s of stops){
     if(s.stage!==lastStage){ lastStage=s.stage; const st=stages[s.stage];
-      const live=stops.some(x=>x.stage===s.stage&&!x.soon); const pinTxt=({1:'1–2',2:'3–4',3:'5–6',4:'7–8',5:'★'})[s.stage]||'·';
+      const live=stops.some(x=>x.stage===s.stage&&!x.soon); const pinTxt=({1:'1–2',2:'3–4',3:'5–6',4:'7–8',5:'★',6:'ac'})[s.stage]||'·';
       html+=`<div class="milestone s${s.stage}${live?'':' soon'}"><div class="pin"${pinTxt.length>2?' style="font-size:13px"':''}>${pinTxt}</div><h2>${esc(pick(st.title,st.title_en))}</h2><p>${esc(pick(st.blurb,st.blurb_en))}</p></div>`; }
     const titleMain=L==='en'?s.en:s.title, titleSub=L==='en'?'':s.en;   // English mode shows no Thai subtitle
     if(s.soon){

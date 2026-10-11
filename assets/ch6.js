@@ -164,7 +164,7 @@ CH6.shortLabels = (spec, pad = 1.2) => {
   const N = spec.nodes, xs = Object.values(N).map(q => q[0]), x0 = Math.min(...xs), x1 = Math.max(...xs), ys = Object.values(N).map(q => q[1]), ym = (Math.min(...ys) + Math.max(...ys)) / 2;
   const len = s => String(s ?? '').replace(/_\{([^}]*)\}/g, '$1').replace(/_/g, '').length; let needL = 0, needR = 0;
   parts.forEach(p => { if (p.type === 'W' || p.label === false || p.hidden || !N[p.a] || !N[p.b] || Math.abs(N[p.a][0] - N[p.b][0]) > 1e-9) return;
-    const w = (p.labelOff || 0.62) + 0.31 * Math.max(len(p.name ?? ''), len(p.valText)), x = N[p.a][0], side = p.side || 1;
+    const w = (p.labelOff || 0.62) + 0.31 * Math.max(len(p.name ?? ''), len(typeof p.valText === 'string' ? p.valText : '')), x = N[p.a][0], side = p.side || 1;   // a fitted (function) label counts as its name only
     if (side > 0 && Math.abs(x - x1) < 1e-9) needR = Math.max(needR, w); if (side < 0 && Math.abs(x - x0) < 1e-9) needL = Math.max(needL, w); });
   const nodes = { ...N }; if (needR > pad) nodes._padR = [x1 + needR - pad, ym]; if (needL > pad) nodes._padL = [x0 - (needL - pad), ym];
   return { ...spec, nodes, parts };
@@ -230,7 +230,7 @@ CH6.quiz = (el, rows, o = {}) => {
     if (r.cz) { const m = num(`${id0}_${k}_m`), a = num(`${id0}_${k}_a`); const z = CH6.polar(m, a); const good = isFinite(m) && isFinite(a) && Cx.abs(Cx.sub(z, r.cz)) <= Math.max(0.011, 0.006 * Cx.abs(r.cz));
       mark(`${id0}_${k}_m`, good); mark(`${id0}_${k}_a`, good); if (!good) ok = false; }
     r.fields.forEach(f => { if (r.cz && (f.key === 'm' || f.key === 'a')) return; const id = `${id0}_${k}_${f.key}`, x = num(id);
-      const good = isFinite(x) && (f.ang ? Math.abs(CH6.wrap(x - f.ans)) <= (f.tol ?? 0.6) : near(x, f.ans, f.tol)); mark(id, good); if (!good) ok = false; });
+      const good = isFinite(x) && (f.ang ? Math.abs(CH6.wrap(x - f.ans)) <= (f.tol ?? 0.6) : near(x, f.ans, f.tol) || (f.alt !== undefined && near(x, f.alt, f.tol))); mark(id, good); if (!good) ok = false; });   // alt: a second accepted answer (e.g. the exact dc next to the book's approximate one)
     document.getElementById(`${id0}_${k}_res`).innerHTML = ok ? '<span class="pill good">✓</span>' : `<span class="pill bad">✗</span> ${MC.t('ลองอีกครั้ง', 'try again')}`;
     score[k] = ok; const n = Object.values(score).filter(Boolean).length;
     document.getElementById(id0 + '_s').innerHTML = MC.t(`ถูกแล้ว <b>${n}</b> จาก ${rows.length} ข้อ`, `<b>${n}</b> of ${rows.length} correct`); };

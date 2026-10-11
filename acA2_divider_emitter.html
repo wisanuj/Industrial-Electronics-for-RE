@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="A.2 — Voltage-Divider Bias and the Bypass Capacitor">A.2 — ไบแอสตัวแบ่งแรงดันและตัวเก็บประจุบายพาส</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ไบแอสตัวแบ่งแรงดันและตัวเก็บประจุบายพาส <span class="en">Voltage-divider bias and the bypass capacitor</span></h1>
+<h1 data-l="en">Voltage-divider bias and the bypass capacitor <span class="en">What R<sub>E</sub> gives to dc and takes from ac</span></h1>
+
+<p class="sub" data-l="th">หน้า 4.2–4.3 ใส่ \(R_E\) ที่อิมิตเตอร์เพื่อให้จุดทำงานนิ่ง: ถ้า \(I_E\) เพิ่ม แรงดันที่ \(R_E\) ก็เพิ่ม และดัน \(V_{BE}\) ให้ลดลงเอง แต่กลไกเดียวกันนี้ทำงานกับสัญญาณด้วย สัญญาณที่เบสต้องดันอิมิตเตอร์ไปพร้อมกัน อัตราขยายจึงเหลือแค่ราว \(R_C/R_E\) ทางออกที่วงจรจริงเกือบทุกวงใช้คือตัวเก็บประจุบายพาส \(C_E\) ขนานกับ \(R_E\): ไฟตรงยังเห็น \(R_E\) ครบ แต่สัญญาณ ac วิ่งผ่านตัวเก็บประจุลงกราวด์ หน้านี้วิเคราะห์วงจรตัวแบ่งแรงดันที่บายพาส \(R_E\) แล้ว ดูว่าเกิดอะไรขึ้นเมื่อถอด \(C_E\) ออก และเมื่อความถี่ต่ำจนตัวเก็บประจุไม่เป็นลัดวงจรอีกต่อไป (Boylestad หัวข้อ 5.6–5.7 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">Pages 4.2–4.3 put \(R_E\) in the emitter to steady the operating point: if \(I_E\) rises, the voltage across \(R_E\) rises and pushes \(V_{BE}\) back down by itself. But the same mechanism acts on the signal: the signal at the base has to push the emitter along, so the gain drops to about \(R_C/R_E\). The cure used in almost every real circuit is a bypass capacitor \(C_E\) across \(R_E\): dc still sees all of \(R_E\), while the ac signal goes through the capacitor to ground. This page analyses the voltage-divider amplifier with \(R_E\) bypassed, then sees what happens when \(C_E\) is removed, and when the frequency is so low that the capacitor stops being a short (Boylestad sections 5.6–5.7 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ Z_i = R_1 \parallel R_2 \parallel \beta r_e $$ $$ A_v = -\frac{R_C \parallel r_o}{r_e}\quad (C_E) $$ $$ Z_b \cong \beta(r_e + R_E) $$ $$ A_v \cong -\frac{R_C}{R_E}\quad (\text{no } C_E) $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ตัวแบ่งแรงดันใน ac</b> (หัวข้อ 5.6): \(V_{CC}\) เป็นกราวด์ \(R_1\) และ \(R_2\) จึงขนานกันเป็น \(R' = R_1 \parallel R_2\) (สมการ 5.11) และ \(Z_i = R' \parallel \beta r_e\) (สมการ 5.12) ซึ่งมักต่ำกว่าวงจรไบแอสคงที่เพราะ \(R'\) ไม่ใหญ่</li>
+  <li><b>บายพาส \(R_E\)</b>: ตัวเก็บประจุลัด \(R_E\) สำหรับ ac วงจรกลับเป็นไบแอสคงที่ \(A_v = -(R_C \parallel r_o)/r_e\) (สมการ 5.15–5.16)</li>
+  <li><b>ไม่บายพาส</b> (หัวข้อ 5.7): \(Z_b = \beta r_e + (\beta + 1)R_E \cong \beta(r_e + R_E)\) (สมการ 5.17–5.18) อิมพีแดนซ์ขาเข้าสูงขึ้นมาก และ \(A_v = -\beta R_C/Z_b \cong -R_C/R_E\) (สมการ 5.22–5.24) ซึ่งแทบไม่ขึ้นกับ β</li>
+  <li><b>วิธี dc แบบประมาณส่งผลถึง ac</b>: \(r_e\) มาจาก \(I_E\) วิธีประมาณที่คลาด 5 % ทำให้อัตราขยายแบบบายพาสคลาด 5 % ด้วย (Example 5.2)</li>
+  <li><b>ตัวเก็บประจุต้องใหญ่พอ</b>: \(C_E\) เป็นลัดวงจรได้เมื่อรีแอกแตนซ์ของมันเล็กกว่า \(r_e\) มาก ซึ่ง \(r_e\) มีแค่ไม่กี่โอห์ม</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The divider in ac</b> (section 5.6): \(V_{CC}\) is a ground, so \(R_1\) and \(R_2\) are in parallel as \(R' = R_1 \parallel R_2\) (Eq. 5.11), and \(Z_i = R' \parallel \beta r_e\) (Eq. 5.12), often lower than with fixed bias because \(R'\) is not large.</li>
+  <li><b>\(R_E\) bypassed</b>: the capacitor shorts \(R_E\) for ac and the circuit is back to fixed bias, \(A_v = -(R_C \parallel r_o)/r_e\) (Eqs. 5.15–5.16).</li>
+  <li><b>Not bypassed</b> (section 5.7): \(Z_b = \beta r_e + (\beta + 1)R_E \cong \beta(r_e + R_E)\) (Eqs. 5.17–5.18), a much higher input impedance, and \(A_v = -\beta R_C/Z_b \cong -R_C/R_E\) (Eqs. 5.22–5.24), which hardly depends on β.</li>
+  <li><b>The approximate dc method reaches the ac result</b>: \(r_e\) comes from \(I_E\), so a 5 % error of the approximate method is a 5 % error in the bypassed gain (Example 5.2).</li>
+  <li><b>The capacitor must be big enough</b>: \(C_E\) acts as a short only where its reactance is far below \(r_e\), which is just a few ohms.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>บายพาสและความถี่</a><a href="#ex1"><b>1</b>Example 5.2</a><a href="#ex2"><b>2</b>Examples 5.3–5.4</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Bypass and frequency</a><a href="#ex1"><b>1</b>Example 5.2</a><a href="#ex2"><b>2</b>Examples 5.3–5.4</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · เพื่อนของไฟตรง ศัตรูของสัญญาณ</div><div class="story-k" data-l="en">Part 1 · A friend of dc, an enemy of the signal</div>
+    <h2 data-l="th">\(R_E\) กับตัวเก็บประจุที่ขนานกับมัน</h2><h2 data-l="en">\(R_E\) and the capacitor across it</h2>
+    <div class="story-p" data-l="th"><p>วงจรในส่วน A คือ Example 5.3 ของตำรา: ไบแอสอิมิตเตอร์ที่มี \(R_B\) = 470 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 0.56 kΩ และ β = 120 ตำราวาด \(C_E\) ไว้พร้อมสวิตช์ จะต่อหรือไม่ต่อก็ได้ ไฟตรงไม่สนใจตัวเก็บประจุ จุดทำงานจึงเหมือนเดิมทั้งสองกรณี แต่สำหรับสัญญาณ ac ทั้งสองกรณีเป็นวงจรคนละวง</p>
+      <p>เมื่อไม่ต่อ \(C_E\) กระแสสัญญาณ \(i_e\) ไหลผ่าน \(R_E\) แรงดันที่อิมิตเตอร์จึงแกว่งตามเบสไปเกือบทั้งหมด เหลือแรงดันสัญญาณคร่อมรอยต่อนิดเดียว ลองเดาก่อนว่าอัตราขยาย −367 ของกรณีที่ต่อ \(C_E\) จะลดลงเหลือเท่าใดเมื่อถอดออก</p></div>
+    <div class="story-p" data-l="en"><p>The circuit of section A is the book's Example 5.3: emitter bias with \(R_B\) = 470 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 0.56 kΩ and β = 120. The book draws \(C_E\) with a switch: connected or not. Dc ignores the capacitor, so the operating point is the same in both cases, but for the ac signal they are two different circuits.</p>
+      <p>Without \(C_E\) the signal current \(i_e\) flows through \(R_E\), so the emitter swings almost as much as the base and very little signal voltage is left across the junction. Guess first: the gain of −367 with \(C_E\) connected falls to what when it is removed?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: สลับ \(C_E\) เลื่อน β และลดความถี่</p><p class="story-next" data-l="en">↓ Section A: switch \(C_E\), move β and lower the frequency</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">บายพาสหรือไม่บายพาส และที่ความถี่ใด</h2><h2 data-l="en">Bypassed or not, and at what frequency</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 5.7 รูป 5.32 (Examples 5.3–5.4)</div><div class="src" data-l="en">Boylestad, section 5.7, Fig. 5.32 (Examples 5.3–5.4)</div></div></div>
+  <p class="lead" data-l="th">กราฟคืออัตราขยายเป็นเดซิเบลที่ภาพจำลองกวาดความถี่จาก 20 Hz ถึง 200 kHz ทั้งสองกรณี จุดชมพูคือความถี่ที่เลือก ลอง: (1) สลับ \(C_E\) ที่ 100 kHz (2) ต่อ \(C_E\) แล้วลดความถี่ลงเหลือ 1 kHz (3) ไม่ต่อ \(C_E\) แล้วเลื่อน β จาก 60 ถึง 240</p>
+  <p class="lead" data-l="en">The graph is the gain in decibels as the simulator sweeps the frequency from 20 Hz to 200 kHz, for both cases; the pink dot is the chosen frequency. Try: (1) switch \(C_E\) at 100 kHz; (2) connect \(C_E\) and lower the frequency to 1 kHz; (3) leave \(C_E\) out and move β from 60 to 240.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ตัวแบ่งแรงดัน</div><div class="story-k" data-l="en">Part 2 · The voltage divider</div>
+    <h2 data-l="th">Example 5.2: \(R_1\) กับ \(R_2\) ขนานกันในวงจร ac</h2><h2 data-l="en">Example 5.2: \(R_1\) and \(R_2\) in parallel in the ac circuit</h2>
+    <div class="story-p" data-l="th"><p>วงจรตัวแบ่งแรงดันของหน้า 4.3 (รูป 5.28) มี \(R_E\) บายพาสด้วย \(C_E\) = 20 µF ในวงจร ac \(V_{CC}\) เป็นกราวด์ \(R_1\) จึงห้อยจากเบสลงกราวด์เหมือน \(R_2\) ทั้งคู่จึงขนานกัน และเพราะ \(C_E\) ลัด \(R_E\) วงจรที่เหลือคือวงจรไบแอสคงที่ของหน้า A.1 ที่ใช้ \(R' = R_1 \parallel R_2\) แทน \(R_B\)</p>
+      <p>สิ่งที่ต้องระวังคือ \(r_e\): ตำราหา \(I_E\) ด้วยวิธีประมาณของหน้า 4.3 ส่วนภาพจำลองแก้วงจรแบบละเอียด ลองดูว่าความต่างราว 5 % ของ \(I_E\) ไปปรากฏที่ค่าใดบ้าง</p></div>
+    <div class="story-p" data-l="en"><p>The voltage-divider circuit of page 4.3 (Fig. 5.28) has \(R_E\) bypassed by \(C_E\) = 20 µF. In the ac circuit \(V_{CC}\) is a ground, so \(R_1\) hangs from the base to ground just like \(R_2\) and the two are in parallel; and since \(C_E\) shorts \(R_E\), what is left is the fixed-bias circuit of page A.1 with \(R' = R_1 \parallel R_2\) in place of \(R_B\).</p>
+      <p>The thing to watch is \(r_e\): the book finds \(I_E\) with the approximate method of page 4.3, while the simulator solves the circuit exactly. See where the 5 % difference in \(I_E\) shows up.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: Example 5.2</p><p class="story-next" data-l="en">↓ Problem 1: Example 5.2</p>
+</div>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 5.2: ตัวแบ่งแรงดันที่บายพาส \(R_E\)</h2><h2 data-l="en">Example 5.2: voltage divider with \(R_E\) bypassed</h2>
+    <div class="src" data-l="th">Boylestad Example 5.2 (รูป 5.28) · หัวข้อ 5.6</div><div class="src" data-l="en">Boylestad Example 5.2 (Fig. 5.28) · section 5.6</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 22 V, \(R_1\) = 56 kΩ, \(R_2\) = 8.2 kΩ, \(R_C\) = 6.8 kΩ, \(R_E\) = 1.5 kΩ ขนานกับ \(C_E\) = 20 µF, ตัวเก็บประจุคัปปลิง 10 µF, β = 90 (a) จงหา \(r_e\) (b) \(Z_i\) (c) \(Z_o\) (\(r_o = \infty\)) (d) \(A_v\) (\(r_o = \infty\)) (e) ทำ (b)–(d) ใหม่เมื่อ \(r_o\) = 50 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 22 V, \(R_1\) = 56 kΩ, \(R_2\) = 8.2 kΩ, \(R_C\) = 6.8 kΩ, \(R_E\) = 1.5 kΩ with \(C_E\) = 20 µF across it, 10 µF coupling capacitors, β = 90. Determine (a) \(r_e\), (b) \(Z_i\), (c) \(Z_o\) (\(r_o = \infty\)), (d) \(A_v\) (\(r_o = \infty\)); (e) repeat (b)–(d) with \(r_o\) = 50 kΩ.</p></div>
+  <p class="lead" data-l="th">ตารางแผงซ้ายล่างเทียบค่าของตำรา (วิธี dc แบบประมาณ) กับภาพจำลอง (แบบละเอียด) ช่องตอบรับได้ทั้งสองแบบ <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The lower left table compares the book's values (approximate dc) with the simulator (exact). The answer boxes accept either. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ถอดตัวเก็บประจุ</div><div class="story-k" data-l="en">Part 3 · Take the capacitor out</div>
+    <h2 data-l="th">ทำไมเบสมองเห็น \(R_E\) ใหญ่ขึ้น β เท่า</h2><h2 data-l="en">Why the base sees \(R_E\) β times larger</h2>
+    <div class="story-p" data-l="th"><p>เมื่อ \(R_E\) อยู่ในวงจร ac กระแสที่ผ่านมันคือ \(I_e = (\beta + 1)I_b\) แต่แหล่งสัญญาณจ่ายแค่ \(I_b\) แรงดัน \(I_eR_E\) ที่เบสต้องดันจึงเท่ากับ \(I_b\) ไหลผ่านตัวต้านทานขนาด \((\beta + 1)R_E\) นี่คือการคูณอิมพีแดนซ์ด้วย β ที่ทำให้ \(Z_i\) ของ Example 5.3 สูงหลายสิบกิโลโอห์ม</p>
+      <p>ในทางกลับกัน แรงดันขาเข้าเกือบทั้งหมดไปตกที่ \(R_E\) กระแส \(I_e \cong V_i/R_E\) และ \(V_o = -I_cR_C\) อัตราขยายจึงราว \(-R_C/R_E\) ไม่ขึ้นกับ \(r_e\) หรือ β ข้อ 2 ทำทั้งสองกรณีต่อกัน: ไม่ต่อ \(C_E\) (Example 5.3) แล้วต่อ (Example 5.4)</p></div>
+    <div class="story-p" data-l="en"><p>With \(R_E\) in the ac circuit, the current through it is \(I_e = (\beta + 1)I_b\), yet the source supplies only \(I_b\). The voltage \(I_eR_E\) that the base has to drive is therefore that of \(I_b\) through a resistor of \((\beta + 1)R_E\). This multiplication of an impedance by β is what makes the \(Z_i\) of Example 5.3 tens of kilohms.</p>
+      <p>Seen the other way, almost all of the input voltage appears across \(R_E\): \(I_e \cong V_i/R_E\) and \(V_o = -I_cR_C\), so the gain is about \(-R_C/R_E\), independent of \(r_e\) and β. Problem 2 does both cases in a row: without \(C_E\) (Example 5.3), then with it (Example 5.4).</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Examples 5.3–5.4 ภาพจำลองต่อ \(C_E\) ในขั้นสุดท้าย</p><p class="story-next" data-l="en">↓ Problem 2: Examples 5.3–5.4; the simulation connects \(C_E\) in the last step</p>
+</div>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Examples 5.3–5.4: ไบแอสอิมิตเตอร์ ไม่บายพาสและบายพาส</h2><h2 data-l="en">Examples 5.3–5.4: emitter bias, unbypassed and bypassed</h2>
+    <div class="src" data-l="th">Boylestad Examples 5.3–5.4 (รูป 5.32) · หัวข้อ 5.7</div><div class="src" data-l="en">Boylestad Examples 5.3–5.4 (Fig. 5.32) · section 5.7</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 20 V, \(R_B\) = 470 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 0.56 kΩ, β = 120, \(r_o\) = 40 kΩ, ตัวเก็บประจุ 10 µF จงหา \(r_e\), \(Z_i\), \(Z_o\) และ \(A_v\) เมื่อไม่ต่อ \(C_E\) (Example 5.3) แล้วทำใหม่เมื่อต่อ \(C_E\) (Example 5.4)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 20 V, \(R_B\) = 470 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 0.56 kΩ, β = 120, \(r_o\) = 40 kΩ, 10 µF capacitors. Determine \(r_e\), \(Z_i\), \(Z_o\) and \(A_v\) with \(C_E\) disconnected (Example 5.3), then repeat with \(C_E\) connected (Example 5.4).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองละ \(r_o\) เหมือนตำรา (เงื่อนไข \(r_o \ge 10(R_C + R_E)\) ผ่าน) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation drops \(r_o\) as the book does (the condition \(r_o \ge 10(R_C + R_E)\) holds). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 15, 19, 20 ท้ายบทที่ 5 · \(r_o = \infty\) · ใช้วิธี dc แบบประมาณหรือละเอียดก็ได้</div><div class="src" data-l="en">Boylestad Problems 15, 19, 20 of chapter 5 · \(r_o = \infty\) · approximate or exact dc both accepted</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ตัวเก็บประจุบายพาสต้องใหญ่แค่ไหน</h3>
+    <ol><li>ส่วน A ต่อ \(C_E\) แล้วลดความถี่ลงเหลือ 1 kHz: อัตราขยายเหลือราว 126 จาก 367 เพราะ \(X_{C_E}\) = 16 Ω ยังใหญ่กว่า \(r_e\) = 6 Ω</li>
+    <li>กฎคร่าว ๆ: \(C_E\) เป็นลัดวงจรเมื่อ \(X_{C_E}\) เล็กกว่า \(r_e\) ราวสิบเท่า ที่ 1 kHz ต้องใช้ราว 300 µF ตำราจึงย้ายเรื่องนี้ไปบทที่ 9 (การตอบสนองความถี่)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ใครไวต่อ β</h3>
+    <ol><li>ไม่ต่อ \(C_E\): β จาก 60 เป็น 240 อัตราขยายเปลี่ยนจาก −3.79 เป็น −3.89 (ไม่ถึง 3 %)</li>
+    <li>ต่อ \(C_E\): β เดียวกันทำให้ \(I_E\) เปลี่ยนจาก 2.3 เป็น 7.7 mA และอัตราขยายจาก −198 เป็น −651 คือราว 3.3 เท่า วงจรจริงจึงมักแบ่ง \(R_E\) เป็นสองส่วน บายพาสส่วนเดียว เพื่อแลกอัตราขยายกับความนิ่ง (หัวข้อ 5.7)</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 5 หัวข้อ 5.6–5.7 (Examples 5.2–5.4, รูป 5.26–5.32, ข้อ 15, 19, 20) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 5.3 (หน้า 271)</td><td data-h="ตำราพิมพ์">"using Eq. (5.20): \(A_v \cong -R_C/R_E\)"</td><td data-h="ที่ถูก">สมการ (5.24)</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — how big a bypass capacitor</h3>
+    <ol><li>In section A connect \(C_E\) and lower the frequency to 1 kHz: the gain falls to about 126 from 367, because \(X_{C_E}\) = 16 Ω is still larger than \(r_e\) = 6 Ω.</li>
+    <li>Rule of thumb: \(C_E\) acts as a short when \(X_{C_E}\) is about ten times smaller than \(r_e\); at 1 kHz that takes about 300 µF. The book leaves this to chapter 9 (frequency response).</li></ol></div>
+  <div class="card"><h3>Try this 2 — who is sensitive to β</h3>
+    <ol><li>Without \(C_E\): β from 60 to 240 changes the gain from −3.79 to −3.89 (under 3 %).</li>
+    <li>With \(C_E\): the same β change moves \(I_E\) from 2.3 to 7.7 mA and the gain from −198 to −651, about 3.3 times. Real circuits therefore often split \(R_E\) in two and bypass only one part, trading gain for stability (section 5.7).</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 5, sections 5.6–5.7 (Examples 5.2–5.4, Figs. 5.26–5.32, Problems 15, 19, 20) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 5.3 (p. 271)</td><td data-h="Printed">"using Eq. (5.20): \(A_v \cong -R_C/R_E\)"</td><td data-h="Correct">Eq. (5.24)</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.bypass({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.problem(1, 'ex52'); AC.problem(2, 'ex53');
+
+  /* =================================================================== C: more practice (answers: book method; the exact dc is accepted too) */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 15: ตัวแบ่งแรงดัน \\(V_{CC}\\) = 16 V, \\(R_1\\) = 39 kΩ, \\(R_2\\) = 4.7 kΩ, \\(R_C\\) = 3.9 kΩ, \\(R_E\\) = 1.2 kΩ บายพาสด้วย \\(C_E\\), β = 100, \\(r_o = \\infty\\) จงหา \\(r_e\\), \\(Z_i\\) และ \\(A_v\\)', '1) Problem 15: a voltage divider with \\(V_{CC}\\) = 16 V, \\(R_1\\) = 39 kΩ, \\(R_2\\) = 4.7 kΩ, \\(R_C\\) = 3.9 kΩ, \\(R_E\\) = 1.2 kΩ bypassed by \\(C_E\\), β = 100, \\(r_o = \\infty\\). Find \\(r_e\\), \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 30.56, unit: 'Ω', tol: 0.15, alt: 31.62 }, { key: 'y', lab: 'Z_i =', ans: 1.768, unit: 'kΩ', tol: 0.02, alt: 1.803 }, { key: 'z', lab: 'A_v =', ans: -127.6, unit: '', tol: 1, alt: -123.3 }],
+      work: work(R`\beta R_E = 120\ \text{k}\Omega \ge 10R_2 = 47\ \text{k}\Omega,\ V_B = \frac{(4.7)(16)}{43.7} = 1.72\ \text{V},\ I_E = \frac{1.02\ \text{V}}{1.2\ \text{k}\Omega} = 0.851\ \text{mA},\ r_e = 30.56\ \Omega,\ Z_i = 4.195\ \text{k}\Omega \parallel 3.056\ \text{k}\Omega = 1.768\ \text{k}\Omega,\ A_v = -\frac{3.9\ \text{k}\Omega}{30.56\ \Omega} = -127.6`,
+        t('<p>วิธีละเอียด: \\(I_E\\) = 0.822 mA, \\(r_e\\) = 31.62 Ω, \\(Z_i\\) = 1.803 kΩ, \\(A_v\\) = −123.3</p>', '<p>Exact dc: \\(I_E\\) = 0.822 mA, \\(r_e\\) = 31.62 Ω, \\(Z_i\\) = 1.803 kΩ, \\(A_v\\) = −123.3.</p>')) },
+    { q: t('2) ข้อ 19: ไบแอสอิมิตเตอร์ \\(V_{CC}\\) = 20 V, \\(R_B\\) = 390 kΩ, \\(R_C\\) = 2.2 kΩ, \\(R_E\\) = 1.2 kΩ ไม่บายพาส, β = 140 จงหา \\(r_e\\), \\(Z_i\\) และ \\(A_v\\)', '2) Problem 19: emitter bias with \\(V_{CC}\\) = 20 V, \\(R_B\\) = 390 kΩ, \\(R_C\\) = 2.2 kΩ, \\(R_E\\) = 1.2 kΩ unbypassed, β = 140. Find \\(r_e\\), \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'r_e =', ans: 5.343, unit: 'Ω', tol: 0.03 }, { key: 'y', lab: 'Z_i =', ans: 118.37, unit: 'kΩ', tol: 1.5 }, { key: 'z', lab: 'A_v =', ans: -1.812, unit: '', tol: 0.025 }],
+      work: work(R`I_B = \frac{19.3}{390\ \text{k}\Omega + (141)(1.2\ \text{k}\Omega)} = 34.51\ \mu\text{A},\ I_E = 4.866\ \text{mA},\ r_e = 5.34\ \Omega,\ Z_b = \beta r_e + (\beta + 1)R_E = 169.9\ \text{k}\Omega,\ Z_i = 390\ \text{k}\Omega \parallel 169.9\ \text{k}\Omega = 118.4\ \text{k}\Omega,\ A_v = -\frac{\beta R_C}{Z_b} = -1.81`) },
+    { q: t('3) ข้อ 20: วงจรข้อ 2 เมื่อบายพาส \\(R_E\\): \\(Z_i\\) และ \\(A_v\\)', '3) Problem 20: the circuit of question 2 with \\(R_E\\) bypassed: \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'Z_i =', ans: 746.6, unit: 'Ω', tol: 4 }, { key: 'y', lab: 'A_v =', ans: -411.8, unit: '', tol: 2.5 }],
+      work: work(R`Z_i = R_B \parallel \beta r_e = 390\ \text{k}\Omega \parallel 748\ \Omega = 746.6\ \Omega,\ A_v = -\frac{2.2\ \text{k}\Omega}{5.34\ \Omega} = -411.8`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

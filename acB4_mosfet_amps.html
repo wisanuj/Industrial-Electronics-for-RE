@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="B.4 — MOSFET Amplifiers and a Two-Stage Amplifier">B.4 — วงจรขยายมอสเฟตและวงจรขยายสองภาค</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรขยายมอสเฟตและวงจรขยายสองภาค <span class="en">MOSFET amplifiers and a two-stage amplifier</span></h1>
+<h1 data-l="en">MOSFET amplifiers and a two-stage amplifier <span class="en">The same g<sub>m</sub> model, two new kinds of device, and stages in a chain</span></h1>
+
+<p class="sub" data-l="th">ชิปประมวลผลในโทรศัพท์มีมอสเฟต (MOSFET) หลายพันล้านตัว และมอสเฟตกำลังคือสวิตช์ที่ขับมอเตอร์ในงานอุตสาหกรรม เมื่อใช้เป็นวงจรขยาย มอสเฟตใช้แบบจำลอง \(g_m\) เดียวกับ JFET ในหน้า B.1–B.3 ต่างกันแค่สองเรื่อง: มอสเฟตแบบดีพลีชัน (D-MOSFET) รับ \(V_{GS}\) เป็นบวกได้ จึงมี \(g_m\) เกิน \(g_{m0}\) ได้ ส่วนมอสเฟตแบบเอนแฮนซ์เมนต์ (E-MOSFET) มี \(g_m = 2k(V_{GS} - V_T)\) หน้านี้ยังแก้ตัวเลขของตำราที่วงจรจริงไม่ทำตาม และปิดท้ายด้วยการต่อวงจรขยาย FET สองภาค (Boylestad หัวข้อ 8.8–8.10, 8.15 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">The processor in a phone holds billions of MOSFETs, and power MOSFETs are the switches that drive industrial motors. As amplifiers, MOSFETs use the same \(g_m\) model as the JFETs of pages B.1–B.3, with two differences: a depletion MOSFET (D-MOSFET) accepts a positive \(V_{GS}\), so its \(g_m\) can exceed \(g_{m0}\), and an enhancement MOSFET (E-MOSFET) has \(g_m = 2k(V_{GS} - V_T)\). This page also corrects textbook values that the real circuit does not follow, and ends by cascading two FET stages (Boylestad sections 8.8–8.10, 8.15 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ g_m = g_{m0}\left(1 - \frac{V_{GS}}{V_P}\right) $$ $$ g_m = 2k(V_{GS} - V_T) $$ $$ Z_i \cong \frac{R_F}{1 + g_mR_D} $$ $$ A_v = A_{v_1}A_{v_2} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>มอสเฟตแบบดีพลีชัน</b> (หัวข้อ 8.8): แบบจำลองและสูตร \(g_m = g_{m0}(1 - V_{GS}/V_P)\) เหมือน JFET ทุกอย่าง แต่ \(V_{GSQ}\) เป็นบวกได้ แล้ว \(g_m > g_{m0}\)</li>
+  <li><b>มอสเฟตแบบเอนแฮนซ์เมนต์</b> (หัวข้อ 8.9): จาก \(I_D = k(V_{GS} - V_T)^2\) ได้ \(g_m = 2k(V_{GSQ} - V_T)\) (สมการ 8.48) โดย \(k = I_{D(on)}/(V_{GS(on)} - V_T)^2\) จากแผ่นข้อมูล</li>
+  <li><b>ป้อนกลับจากเดรน</b> (หัวข้อ 8.10): \(R_F\) ไม่มีกระแสไฟตรง (\(V_{GS} = V_{DS}\)) แต่เป็นทางป้อนกลับของ ac: \(Z_i \cong R_F/(1 + g_mR_D)\), \(Z_o \cong R_D\), \(A_v \cong -g_mR_D\)</li>
+  <li><b>ตรวจย่านอิ่มตัวก่อนเชื่อแบบจำลอง</b>: ต้องมี \(V_{DS} \ge V_{GS} - V_P\) (หรือ \(V_{GS} - V_T\)) ค่าของตำราใน Example 8.11 (18 V) ไม่ผ่าน โจทย์ 1 จึงใช้ 24 V กับ \(R_1\) = 150 MΩ ซึ่งให้จุดทำงานเดิม</li>
+  <li><b>วงจรหลายภาค</b> (หัวข้อ 8.15): \(A_v = A_{v_1}A_{v_2}\) โดยคิดโหลดของแต่ละภาค \(Z_i = R_{G_1}\), \(Z_o = R_{D_2}\) และเพราะ \(R_G\) สูงมาก ภาค FET แทบไม่เป็นโหลดให้กัน</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Depletion MOSFET</b> (section 8.8): the same model and the same \(g_m = g_{m0}(1 - V_{GS}/V_P)\) as a JFET, but \(V_{GSQ}\) may be positive, and then \(g_m > g_{m0}\).</li>
+  <li><b>Enhancement MOSFET</b> (section 8.9): from \(I_D = k(V_{GS} - V_T)^2\), \(g_m = 2k(V_{GSQ} - V_T)\) (Eq. 8.48), with \(k = I_{D(on)}/(V_{GS(on)} - V_T)^2\) from the data sheet.</li>
+  <li><b>Drain feedback</b> (section 8.10): \(R_F\) carries no dc current (\(V_{GS} = V_{DS}\)) but is an ac feedback path: \(Z_i \cong R_F/(1 + g_mR_D)\), \(Z_o \cong R_D\), \(A_v \cong -g_mR_D\).</li>
+  <li><b>Check saturation before trusting the model</b>: \(V_{DS} \ge V_{GS} - V_P\) (or \(V_{GS} - V_T\)) is required. The book's values in Example 8.11 (18 V) fail it, so problem 1 uses 24 V and \(R_1\) = 150 MΩ, which keep the same operating point.</li>
+  <li><b>Cascades</b> (section 8.15): \(A_v = A_{v_1}A_{v_2}\) with each stage loaded by the next; \(Z_i = R_{G_1}\), \(Z_o = R_{D_2}\). With \(R_G\) so high, FET stages hardly load each other.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>มอสเฟตสองชนิด</a><a href="#ex1"><b>1</b>Example 8.11</a><a href="#ex2"><b>2</b>Example 8.12</a><a href="#ex3"><b>3</b>Example 8.16</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Two kinds of MOSFET</a><a href="#ex1"><b>1</b>Example 8.11</a><a href="#ex2"><b>2</b>Example 8.12</a><a href="#ex3"><b>3</b>Example 8.16</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · เลยศูนย์ไปได้</div><div class="story-k" data-l="en">Part 1 · Past zero</div>
+    <h2 data-l="th">\(g_m\) ของมอสเฟตสองชนิด</h2><h2 data-l="en">The \(g_m\) of two kinds of MOSFET</h2>
+    <div class="story-p" data-l="th"><p>หน้า B.1 พบว่า \(g_m\) ของ JFET คือความชันของเส้นโค้งถ่ายโอน และสูงสุดที่ \(g_{m0}\) เมื่อ \(V_{GS}\) = 0 เพราะเกตของ JFET เป็นรอยต่อ pn ที่ห้ามไบแอสตรง มอสเฟตมีชั้นออกไซด์กั้นเกตไว้ จึงไม่มีข้อห้ามนี้: เส้นโค้งของมอสเฟตแบบดีพลีชันเลย \(V_{GS}\) = 0 ต่อไปทางบวกได้ ส่วนมอสเฟตแบบเอนแฮนซ์เมนต์ไม่มีกระแสเลยจนกว่า \(V_{GS}\) จะเกิน \(V_T\)</p>
+      <p>ลองเดาก่อน: มอสเฟตแบบดีพลีชันของ Example 8.11 (\(g_{m0}\) = 4 mS) ทำงานที่ \(V_{GS}\) = +0.35 V \(g_m\) จะมากกว่าหรือน้อยกว่า 4 mS</p></div>
+    <div class="story-p" data-l="en"><p>Page B.1 found that a JFET's \(g_m\) is the slope of its transfer curve, at most \(g_{m0}\) at \(V_{GS}\) = 0, because a JFET's gate is a pn junction that must not be forward biased. A MOSFET's gate is insulated by an oxide layer, so there is no such limit: a depletion MOSFET's curve carries on past \(V_{GS}\) = 0 into positive values, while an enhancement MOSFET has no current at all until \(V_{GS}\) exceeds \(V_T\).</p>
+      <p>Guess first: the depletion MOSFET of Example 8.11 (\(g_{m0}\) = 4 mS) works at \(V_{GS}\) = +0.35 V. Is its \(g_m\) above or below 4 mS?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อน \(V_{GS}\) ของมอสเฟตทั้งสองชนิด</p><p class="story-next" data-l="en">↓ Section A: move \(V_{GS}\) on both kinds</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">มอสเฟตสองชนิดและ \(g_m\)</h2><h2 data-l="en">Two kinds of MOSFET and \(g_m\)</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 8.8–8.9 (อุปกรณ์ของ Examples 8.11–8.12)</div><div class="src" data-l="en">Boylestad, sections 8.8–8.9 (the devices of Examples 8.11–8.12)</div></div></div>
+  <p class="lead" data-l="th">มอสเฟตแบบดีพลีชัน \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V และแบบเอนแฮนซ์เมนต์ \(k\) = 0.24 mA/V², \(V_T\) = 3 V เกตถูกตรึงไว้ที่ \(V_{GS}\) ด้วย \(V_{GG}\) ผ่าน \(R_G\) กราฟบนคือเส้นโค้งถ่ายโอนกับเส้นสัมผัสที่จุดทำงาน กราฟล่างคือ \(g_m\) เทียบ \(V_{GS}\) ส่วน "ภาพจำลอง \(i_d/v_{gs}\)" คือ \(g_m\) ที่วัดจากสัญญาณจริงในวงจร</p>
+  <p class="lead" data-l="en">A depletion MOSFET with \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V, and an enhancement MOSFET with \(k\) = 0.24 mA/V², \(V_T\) = 3 V. The gate is held at \(V_{GS}\) by \(V_{GG}\) through \(R_G\). The upper graph is the transfer curve with the tangent at the operating point, the lower one \(g_m\) against \(V_{GS}\); "simulator \(i_d/v_{gs}\)" is the \(g_m\) measured from the signal in the circuit.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ตัวเลขที่ต้องแก้ก่อน</div><div class="story-k" data-l="en">Part 2 · Numbers to fix first</div>
+    <h2 data-l="th">Example 8.11: มอสเฟตแบบดีพลีชันกับตัวแบ่งแรงดัน</h2><h2 data-l="en">Example 8.11: a depletion MOSFET with a voltage divider</h2>
+    <div class="story-p" data-l="th"><p>วงจรนี้คือวงจรแบ่งแรงดันของหน้า B.2 ที่เปลี่ยน JFET เป็นมอสเฟต การวิเคราะห์ ac จึงเหมือนเดิมทุกขั้น แต่ค่าในตำรา (\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ) มีปัญหาที่ตำราไม่ได้ตรวจ: ต้องแก้ก่อนจึงจะใช้แบบจำลอง \(g_m\) ได้</p>
+      <p>ลองเดาก่อน: ที่ \(I_{DQ}\) = 7.6 mA แรงดันตกบน \(R_D + R_S\) = 1.95 kΩ เท่าใด จาก 18 V เหลือ \(V_{DS}\) เท่าใด และเกิน \(V_{GS} - V_P\) = 3.35 V หรือไม่</p></div>
+    <div class="story-p" data-l="en"><p>This is the voltage divider of page B.2 with the JFET swapped for a MOSFET, so the ac analysis is the same at every step. But the book's values (\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ) hide a problem the book never checks, and it must be fixed before the \(g_m\) model can be used.</p>
+      <p>Guess first: at \(I_{DQ}\) = 7.6 mA, how much drops across \(R_D + R_S\) = 1.95 kΩ, how much of the 18 V is left for \(V_{DS}\), and is it more than \(V_{GS} - V_P\) = 3.35 V?</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: Example 8.11 (ค่าที่แก้แล้ว)</p><p class="story-next" data-l="en">↓ Problem 1: Example 8.11 (corrected values)</p>
+</div>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 8.11: มอสเฟตแบบดีพลีชัน ตัวแบ่งแรงดัน</h2><h2 data-l="en">Example 8.11: a depletion MOSFET, voltage divider</h2>
+    <div class="src" data-l="th">Boylestad Example 8.11 (รูป 8.34–8.35; dc จาก Example 7.7) · หัวข้อ 8.8</div><div class="src" data-l="en">Boylestad Example 8.11 (Figs. 8.34–8.35; dc from Example 7.7) · section 8.8</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>มอสเฟตแบบดีพลีชัน \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V, \(g_{os}\) = 10 µS, \(V_{DD}\) = 24 V, \(R_1\) = 150 MΩ, \(R_2\) = 10 MΩ, \(R_D\) = 1.8 kΩ, \(R_S\) = 150 Ω ขนานกับ \(C_S\) จุดทำงาน (Example 7.7) \(V_{GSQ}\) = +0.35 V, \(I_{DQ}\) = 7.6 mA ตรวจย่านอิ่มตัว แล้วหา (a) \(g_m\) เทียบกับ \(g_{m0}\) (b) \(r_d\) (c) วงจรสมมูล ac (d) \(Z_i\) (e) \(Z_o\) (f) \(A_v\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A depletion MOSFET with \(I_{DSS}\) = 6 mA, \(V_P\) = −3 V, \(g_{os}\) = 10 µS; \(V_{DD}\) = 24 V, \(R_1\) = 150 MΩ, \(R_2\) = 10 MΩ, \(R_D\) = 1.8 kΩ, \(R_S\) = 150 Ω in parallel with \(C_S\); the operating point (Example 7.7) \(V_{GSQ}\) = +0.35 V, \(I_{DQ}\) = 7.6 mA. Check saturation, then determine (a) \(g_m\) and compare it with \(g_{m0}\), (b) \(r_d\), (c) the ac equivalent circuit, (d) \(Z_i\), (e) \(Z_o\), (f) \(A_v\).</p></div>
+  <div class="warnbox" data-l="th"><b>แก้ค่าของตำรา</b>: ตำราใช้ \(V_{DD}\) = 18 V กับ \(R_1\) = 110 MΩ ซึ่งให้จุดทำงานเดียวกันนี้ แต่เหลือ \(V_{DS}\) = 3.18 V ต่ำกว่า \(V_{GS} - V_P\) = 3.35 V มอสเฟตจึงอยู่ในย่านโอห์มมิก แบบจำลอง \(g_m\) ใช้ไม่ได้ และคำตอบ \(A_v\) = −8.05 ของตำราไม่เกิดขึ้นจริง (วงจรจริงได้ราว −6.3) โจทย์นี้จึงใช้ 24 V กับ 150 MΩ ซึ่งยังให้ \(V_G\) = 1.5 V จุดทำงานจึงเดิม ผลทาง ac ที่เปลี่ยนมีแค่ \(Z_i\) (9.17 → 9.375 MΩ) ขั้นสุดท้ายของเฉลยลองค่าของตำราในภาพจำลอง</div>
+  <div class="warnbox" data-l="en"><b>The book's values corrected</b>: the book uses \(V_{DD}\) = 18 V and \(R_1\) = 110 MΩ, which give this same operating point but leave \(V_{DS}\) = 3.18 V, below \(V_{GS} - V_P\) = 3.35 V. The MOSFET is then in the ohmic region, the \(g_m\) model does not apply, and the book's \(A_v\) = −8.05 never happens (the real circuit gives about −6.3). This problem therefore uses 24 V and 150 MΩ, which still give \(V_G\) = 1.5 V and so the same operating point; the only ac result that changes is \(Z_i\) (9.17 → 9.375 MΩ). The last step of the solution tries the book's values in the simulator.</div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b> (ค่าที่แก้แล้ว)</p><p class="lead" data-l="en"><b>Try it first</b> (corrected values).</p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ตัวต้านทานที่หดได้</div><div class="story-k" data-l="en">Part 3 · A resistor that shrinks</div>
+    <h2 data-l="th">Example 8.12: ป้อนกลับจากเดรน</h2><h2 data-l="en">Example 8.12: drain feedback</h2>
+    <div class="story-p" data-l="th"><p>มอสเฟตแบบเอนแฮนซ์เมนต์ต้องการ \(V_{GS}\) เป็นบวกเกิน \(V_T\) วิธีง่ายที่สุดคือต่อ \(R_F\) จากเดรนกลับมาที่เกต (รูป 8.40) เกตไม่กินกระแส ไฟตรงจึงไม่ตกบน \(R_F\) และ \(V_{GS} = V_{DS}\) เสมอ ดังนั้นวงจรนี้อยู่ในย่านอิ่มตัวเสมอ ต่างจากโจทย์ 1</p>
+      <p>แต่สำหรับสัญญาณ \(R_F\) เชื่อมขาเข้ากับขาออกที่แกว่งกลับเฟสและใหญ่กว่าราวสามเท่า ลองเดาก่อน: \(R_F\) = 10 MΩ เมื่อมองจากขาเข้าจะดูเหมือนตัวต้านทานราวกี่ MΩ</p></div>
+    <div class="story-p" data-l="en"><p>An enhancement MOSFET needs a positive \(V_{GS}\) above \(V_T\). The simplest way is \(R_F\) from the drain back to the gate (Fig. 8.40): the gate draws no current, so no dc drops across \(R_F\) and \(V_{GS} = V_{DS}\) always. This circuit is therefore always in saturation, unlike problem 1.</p>
+      <p>For the signal, though, \(R_F\) links the input to an output that swings the other way and about three times larger. Guess first: seen from the input, what resistance does the 10 MΩ \(R_F\) look like?</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Example 8.12</p><p class="story-next" data-l="en">↓ Problem 2: Example 8.12</p>
+</div>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 8.12: มอสเฟตแบบเอนแฮนซ์เมนต์ ป้อนกลับจากเดรน</h2><h2 data-l="en">Example 8.12: an enhancement MOSFET, drain feedback</h2>
+    <div class="src" data-l="th">Boylestad Example 8.12 (รูป 8.40; dc จาก Example 7.10) · หัวข้อ 8.10</div><div class="src" data-l="en">Boylestad Example 8.12 (Fig. 8.40; dc from Example 7.10) · section 8.10</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>มอสเฟตแบบเอนแฮนซ์เมนต์ \(V_T\) = 3 V, \(I_{D(on)}\) = 6 mA ที่ \(V_{GS(on)}\) = 8 V, \(g_{os}\) = 20 µS, \(V_{DD}\) = 12 V, \(R_D\) = 2 kΩ, \(R_F\) = 10 MΩ จากเดรนไปเกต ซอร์สต่อกราวด์ ตัวเก็บประจุคัปปลิง 1 µF จุดทำงาน (Example 7.10) \(V_{GSQ}\) = 6.4 V, \(I_{DQ}\) = 2.75 mA จงหา \(g_m\), \(r_d\), \(Z_i\), \(Z_o\) และ \(A_v\) ทั้งรวมและไม่รวม \(r_d\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An enhancement MOSFET with \(V_T\) = 3 V, \(I_{D(on)}\) = 6 mA at \(V_{GS(on)}\) = 8 V, \(g_{os}\) = 20 µS; \(V_{DD}\) = 12 V, \(R_D\) = 2 kΩ, \(R_F\) = 10 MΩ from drain to gate, the source grounded, 1 µF coupling capacitors; the operating point (Example 7.10) \(V_{GSQ}\) = 6.4 V, \(I_{DQ}\) = 2.75 mA. Determine \(g_m\), \(r_d\), \(Z_i\), \(Z_o\) and \(A_v\), with and without \(r_d\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b> ตำราพิมพ์ผิดสองจุดในข้อนี้ ช่องตอบรับค่าที่ถูก</p><p class="lead" data-l="en"><b>Try it first.</b> The book has two slips in this example; the fields take the correct values.</p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 4 · ต่อเป็นทอด</div><div class="story-k" data-l="en">Part 4 · In a chain</div>
+    <h2 data-l="th">Example 8.16: วงจรขยาย JFET สองภาค</h2><h2 data-l="en">Example 8.16: two JFET stages</h2>
+    <div class="story-p" data-l="th"><p>หน้า A.4 ต่อวงจรขยาย BJT สองภาค (Example 5.15) แล้วพบว่าภาคที่สองดึงอัตราขยายของภาคแรกลงเหลือราวหนึ่งในสาม เพราะ \(Z_i\) ของ BJT ต่ำแค่ราว 1 kΩ ภาค FET มี \(Z_i = R_G\) = 3.3 MΩ เป็นโหลดที่แทบมองไม่เห็น</p>
+      <p>ลองเดาก่อน: ถ้าแต่ละภาคให้อัตราขยายราว −6.3 อัตราขยายรวมเป็นเท่าใด และขาออกกลับเฟสเทียบกับขาเข้าหรือไม่</p></div>
+    <div class="story-p" data-l="en"><p>Page A.4 cascaded two BJT stages (Example 5.15) and found that the second stage cut the first stage's gain to about a third, because a BJT stage's \(Z_i\) is only about 1 kΩ. A FET stage has \(Z_i = R_G\) = 3.3 MΩ, a load that is almost invisible.</p>
+      <p>Guess first: if each stage gives a gain of about −6.3, what is the overall gain, and is the output inverted with respect to the input?</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3: Example 8.16</p><p class="story-next" data-l="en">↓ Problem 3: Example 8.16</p>
+</div>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 8.16: JFET สองภาคต่อกัน</h2><h2 data-l="en">Example 8.16: two JFET stages in cascade</h2>
+    <div class="src" data-l="th">Boylestad Example 8.16 (รูป 8.48) · หัวข้อ 8.15</div><div class="src" data-l="en">Boylestad Example 8.16 (Fig. 8.48) · section 8.15</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>สองภาคเหมือนกัน แต่ละภาคเป็นไบแอสตัวเอง: JFET \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V, \(R_G\) = 3.3 MΩ, \(R_D\) = 2.4 kΩ, \(R_S\) = 680 Ω ขนานกับ 100 µF, \(V_{DD}\) = 20 V, ตัวเก็บประจุคัปปลิง 0.05 µF ทุกตัว \(V_i\) = 10 mV ไม่มีโหลด จงหาจุดทำงาน อัตราขยายแรงดัน \(Z_i\), \(Z_o\) และ \(V_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Two identical self-bias stages: JFETs with \(I_{DSS}\) = 10 mA, \(V_P\) = −4 V; \(R_G\) = 3.3 MΩ, \(R_D\) = 2.4 kΩ, \(R_S\) = 680 Ω in parallel with 100 µF; \(V_{DD}\) = 20 V; 0.05 µF coupling capacitors; \(V_i\) = 10 mV and no load. Find the dc bias, the voltage gain, \(Z_i\), \(Z_o\) and \(V_o\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 36, 39, 41, 45 และ 51–52 ท้ายบทที่ 8 (จุดทำงานให้มาแล้ว)</div><div class="src" data-l="en">Boylestad Problems 36, 39, 41, 45 and 51–52 of chapter 8 (operating points given)</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — g<sub>m</sub> ของมอสเฟตสองชนิด</h3>
+    <ol><li>ในส่วน A ตั้งมอสเฟตแบบดีพลีชันที่ \(V_{GS}\) = 0: \(g_m = g_{m0}\) = 4 mS แล้วเลื่อนไปที่ +0.35 V ได้ 4.47 mS ตรงกับโจทย์ 1</li>
+    <li>สลับเป็นแบบเอนแฮนซ์เมนต์ที่ 6.4 V ได้ 1.63 mS ตรงกับโจทย์ 2 แล้วตั้ง 5 V (สูงกว่า \(V_T\) 2 V) ได้ 0.96 mS และ 7 V (สูงกว่า 4 V) ได้ 1.92 mS: \(V_{GS} - V_T\) เป็นสองเท่า \(g_m\) ก็เป็นสองเท่า</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ตรวจย่านอิ่มตัวทุกครั้ง</h3>
+    <ol><li>โจทย์ 1: \(V_{DS}\) ต้องไม่ต่ำกว่า \(V_{GS} - V_P\) ค่าที่แก้แล้ว (24 V) ผ่าน และภาพจำลองได้ราว −7.9 ตรงกับมือ ขั้นสุดท้ายลองค่าของตำรา (18 V) ซึ่งไม่ผ่าน ภาพจำลองได้แค่ราว −6.3</li>
+    <li>โจทย์ 2 ผ่านเสมอเพราะ \(V_{DS} = V_{GS}\) โจทย์ 3 มี \(V_{DS}\) = 11.4 V เหลือเฟือ</li></ol></div>
+  <div class="card"><h3>ลองทำดู 3 — ต่อภาคด้วย FET กับ BJT</h3>
+    <ol><li>Example 5.15 (BJT): ภาคแรกได้ −103.6 จาก −347 ที่ควรได้ถ้าไม่มีโหลด เพราะ \(Z_{i_2}\) = 0.94 kΩ</li>
+    <li>Example 8.16 (JFET): ภาคแรกได้ −6.32 เกือบเท่าภาคที่สอง (−6.33) เพราะ \(Z_{i_2}\) = 3.3 MΩ แต่อัตราขยายต่อภาคของ FET ต่ำกว่ามาก ตำราจึงต่อ JFET นำหน้า BJT ใน Example 8.17 เพื่อเอา \(Z_i\) สูงจาก FET และอัตราขยายสูงจาก BJT</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 8 หัวข้อ 8.8–8.10 และ 8.15 (Examples 8.11, 8.12, 8.16, รูป 8.34–8.40, 8.48, ข้อ 36, 39, 41, 45, 51–52) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 8.11 (หน้า 505)</td><td data-h="ตำราพิมพ์">\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ</td><td data-h="ที่ถูก">ให้ \(V_{DS}\) = 3.18 V < \(V_{GS} - V_P\) = 3.35 V (ย่านโอห์มมิก) หน้านี้ใช้ 24 V, 150 MΩ ซึ่งให้จุดทำงานเดิม</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.11 (หน้า 506)</td><td data-h="ตำราพิมพ์">\(A_v\) = "8.05"</td><td data-h="ที่ถูก">−8.05 (รูปประมาณ), รวม \(r_d\): −7.90</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.12 (หน้า 509)</td><td data-h="ตำราพิมพ์">\(Z_i\) (ละ \(r_d\)) = 2.53 MΩ</td><td data-h="ที่ถูก">2.35 MΩ (10 MΩ/4.26)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.12 (หน้า 510)</td><td data-h="ตำราพิมพ์">\(A_v\) (รวม \(r_d\)) = −3.21</td><td data-h="ที่ถูก">−3.13 (1.63 × 1.92)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.12 และรูป 8.40</td><td data-h="ตำราพิมพ์">ข้อ (c) เขียน "results for Zo"; คำบรรยายรูป 8.40 อ้าง "Example 8.11"</td><td data-h="ที่ถูก">\(Z_i\); Example 7.10</td></tr>
+      <tr><td data-h="ตำแหน่ง">สมการ (8.54) (หน้า 510)</td><td data-h="ตำราพิมพ์">\(Z_o \cong R_d\)</td><td data-h="ที่ถูก">\(Z_o \cong R_D\)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 8.16 (หน้า 520)</td><td data-h="ตำราพิมพ์">\(A_v\) = (−6.2)(−6.2) = 38.4, \(V_o\) = 384 mV</td><td data-h="ที่ถูก">40.0, 400 mV จากจุดทำงานที่แก้สมการ (ค่าของตำราเองถ้าไม่ปัดได้ 38.9)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ข้อ 41 คู่มือคำตอบ</td><td data-h="ตำราพิมพ์">1.73 MΩ, −4.77</td><td data-h="ที่ถูก">1.71 MΩ, −4.84 (คู่มือใช้จุดทำงานจากกราฟ)</td></tr>
+      <tr><td data-h="ตำแหน่ง">ข้อ 45 คู่มือคำตอบ</td><td data-h="ตำราพิมพ์">\(V_o\) = 3.51 mV</td><td data-h="ที่ถูก">3.25 mV (คู่มือละ \(r_d\) ที่โจทย์ให้)</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — the g<sub>m</sub> of two kinds of MOSFET</h3>
+    <ol><li>In section A, set the depletion MOSFET to \(V_{GS}\) = 0: \(g_m = g_{m0}\) = 4 mS. Move it to +0.35 V: 4.47 mS, as in problem 1.</li>
+    <li>Switch to the enhancement MOSFET at 6.4 V: 1.63 mS, as in problem 2. Then set 5 V (2 V above \(V_T\)): 0.96 mS, and 7 V (4 V above): 1.92 mS. Double \(V_{GS} - V_T\) and \(g_m\) doubles too.</li></ol></div>
+  <div class="card"><h3>Try this 2 — always check saturation</h3>
+    <ol><li>Problem 1: \(V_{DS}\) must not fall below \(V_{GS} - V_P\). The corrected values (24 V) pass and the simulator gets about −7.9, matching the hand result; the last step tries the book's values (18 V), which fail, and the simulator gets only about −6.3.</li>
+    <li>Problem 2 always passes, since \(V_{DS} = V_{GS}\); problem 3 has \(V_{DS}\) = 11.4 V to spare.</li></ol></div>
+  <div class="card"><h3>Try this 3 — cascading FETs and BJTs</h3>
+    <ol><li>Example 5.15 (BJT): the first stage gives −103.6 instead of the −347 it would give unloaded, because \(Z_{i_2}\) = 0.94 kΩ.</li>
+    <li>Example 8.16 (JFET): the first stage gives −6.32, almost the second stage's −6.33, because \(Z_{i_2}\) = 3.3 MΩ, but a FET stage gains far less. That is why the book's Example 8.17 puts a JFET in front of a BJT: the high \(Z_i\) of the FET and the high gain of the BJT.</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 8, sections 8.8–8.10 and 8.15 (Examples 8.11, 8.12, 8.16, Figs. 8.34–8.40, 8.48, Problems 36, 39, 41, 45, 51–52) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 8.11 (p. 505)</td><td data-h="Printed">\(V_{DD}\) = 18 V, \(R_1\) = 110 MΩ</td><td data-h="Correct">they give \(V_{DS}\) = 3.18 V < \(V_{GS} - V_P\) = 3.35 V (ohmic); this page uses 24 V and 150 MΩ, which keep the operating point</td></tr>
+      <tr><td data-h="Where">Example 8.11 (p. 506)</td><td data-h="Printed">\(A_v\) = "8.05"</td><td data-h="Correct">−8.05 (approximate form); with \(r_d\): −7.90</td></tr>
+      <tr><td data-h="Where">Example 8.12 (p. 509)</td><td data-h="Printed">\(Z_i\) (no \(r_d\)) = 2.53 MΩ</td><td data-h="Correct">2.35 MΩ (10 MΩ/4.26)</td></tr>
+      <tr><td data-h="Where">Example 8.12 (p. 510)</td><td data-h="Printed">\(A_v\) (with \(r_d\)) = −3.21</td><td data-h="Correct">−3.13 (1.63 × 1.92)</td></tr>
+      <tr><td data-h="Where">Example 8.12 and Fig. 8.40</td><td data-h="Printed">part (c) says "results for Zo"; the Fig. 8.40 caption cites "Example 8.11"</td><td data-h="Correct">\(Z_i\); Example 7.10</td></tr>
+      <tr><td data-h="Where">Eq. (8.54) (p. 510)</td><td data-h="Printed">\(Z_o \cong R_d\)</td><td data-h="Correct">\(Z_o \cong R_D\)</td></tr>
+      <tr><td data-h="Where">Example 8.16 (p. 520)</td><td data-h="Printed">\(A_v\) = (−6.2)(−6.2) = 38.4, \(V_o\) = 384 mV</td><td data-h="Correct">40.0, 400 mV from the solved operating point (the book's own numbers unrounded give 38.9)</td></tr>
+      <tr><td data-h="Where">Problem 41, answer key</td><td data-h="Printed">1.73 MΩ, −4.77</td><td data-h="Correct">1.71 MΩ, −4.84 (the key uses a graph operating point)</td></tr>
+      <tr><td data-h="Where">Problem 45, answer key</td><td data-h="Printed">\(V_o\) = 3.51 mV</td><td data-h="Correct">3.25 mV (the key ignores the given \(r_d\))</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.mos({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.problem(1, 'ex811'); AC.problem(2, 'ex812'); AC.problem(3, 'ex816');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 36: มอสเฟตแบบดีพลีชัน ไบแอสตัวเอง \\(R_G\\) = 10 MΩ, \\(R_D\\) = 1.8 kΩ ไปที่ +22 V, \\(R_S\\) = 100 Ω ขนานกับตัวเก็บประจุ \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3.5 V, \\(r_d\\) = 60 kΩ จุดทำงาน \\(V_{GSQ}\\) = −0.744 V จงหา \\(g_m\\), \\(Z_o\\) และ \\(A_v\\)', '1) Problem 36: a depletion MOSFET with self bias, \\(R_G\\) = 10 MΩ, \\(R_D\\) = 1.8 kΩ to +22 V, \\(R_S\\) = 100 Ω in parallel with a capacitor, \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3.5 V, \\(r_d\\) = 60 kΩ; the operating point \\(V_{GSQ}\\) = −0.744 V. Find \\(g_m\\), \\(Z_o\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 5.40, unit: 'mS', tol: 0.03 }, { key: 'y', lab: 'Z_o =', ans: 1.748, unit: 'kΩ', tol: 0.01 }, { key: 'z', lab: 'A_v =', ans: -9.44, unit: '', tol: 0.06 }],
+      work: work(R`g_m = \frac{2(12\ \text{mA})}{3.5\ \text{V}}\left(1 - \frac{0.744}{3.5}\right) = 5.40\ \text{mS},\ Z_o = 60\ \text{k}\Omega \parallel 1.8\ \text{k}\Omega = 1.748\ \text{k}\Omega,\ A_v = -g_m(r_d \parallel R_D) = -9.44`) },
+    { q: t('2) ข้อ 39: ตัวตามแรงดันที่ซอร์สใช้มอสเฟตแบบดีพลีชัน เดรนต่อ +20 V, \\(R_1\\) = 91 MΩ, \\(R_2\\) = 10 MΩ, \\(R_S\\) = 1.1 kΩ, \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3 V, \\(r_d\\) = 45 kΩ จุดทำงาน \\(V_{GSQ}\\) = −1.467 V จงหา \\(Z_i\\), \\(Z_o\\) และ \\(A_v\\)', '2) Problem 39: a source follower with a depletion MOSFET, the drain at +20 V, \\(R_1\\) = 91 MΩ, \\(R_2\\) = 10 MΩ, \\(R_S\\) = 1.1 kΩ, \\(I_{DSS}\\) = 12 mA, \\(V_P\\) = −3 V, \\(r_d\\) = 45 kΩ; the operating point \\(V_{GSQ}\\) = −1.467 V. Find \\(Z_i\\), \\(Z_o\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'Z_i =', ans: 9.01, unit: 'MΩ', tol: 0.02 }, { key: 'y', lab: 'Z_o =', ans: 199.2, unit: 'Ω', tol: 2, alt: 197.6 }, { key: 'z', lab: 'A_v =', ans: 0.815, unit: '', tol: 0.004 }],
+      work: work(R`Z_i = 91\ \text{M}\Omega \parallel 10\ \text{M}\Omega = 9.01\ \text{M}\Omega,\ g_m = 8\ \text{mS}\left(1 - \frac{1.467}{3}\right) = 4.088\ \text{mS},\ Z_o = r_d \parallel R_S \parallel \frac{1}{g_m} = 199.2\ \Omega,\ A_v = \frac{g_m(r_d \parallel R_S)}{1 + g_m(r_d \parallel R_S)} = 0.815`) },
+    { q: t('3) ข้อ 41: มอสเฟตแบบเอนแฮนซ์เมนต์ ป้อนกลับจากเดรน \\(R_D\\) = 2.2 kΩ ไปที่ +16 V, \\(R_F\\) = 10 MΩ, \\(V_T\\) = 3 V, \\(k\\) = 0.3 mA/V², \\(r_d\\) = 100 kΩ จุดทำงาน \\(V_{GSQ}\\) = 6.745 V จงหา \\(g_m\\), \\(Z_i\\) และ \\(A_v\\)', '3) Problem 41: an enhancement MOSFET with drain feedback, \\(R_D\\) = 2.2 kΩ to +16 V, \\(R_F\\) = 10 MΩ, \\(V_T\\) = 3 V, \\(k\\) = 0.3 mA/V², \\(r_d\\) = 100 kΩ; the operating point \\(V_{GSQ}\\) = 6.745 V. Find \\(g_m\\), \\(Z_i\\) and \\(A_v\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 2.247, unit: 'mS', tol: 0.015 }, { key: 'y', lab: 'Z_i =', ans: 1.714, unit: 'MΩ', tol: 0.012, alt: 1.73 }, { key: 'z', lab: 'A_v =', ans: -4.84, unit: '', tol: 0.03, alt: -4.77 }],
+      work: work(R`g_m = 2(0.3)(6.745 - 3) = 2.247\ \text{mS},\ r_d \parallel R_D = 2.153\ \text{k}\Omega,\ Z_i = \frac{10\ \text{M}\Omega + 2.153\ \text{k}\Omega}{1 + 4.837} = 1.714\ \text{M}\Omega,\ A_v = -g_m(R_F \parallel r_d \parallel R_D) = -4.84`,
+        t('<p>คู่มือคำตอบของตำราได้ 1.73 MΩ และ −4.77 จากจุดทำงานที่อ่านจากกราฟ</p>', '<p>The book\'s answer key gets 1.73 MΩ and −4.77 from an operating point read off a graph.</p>')) },
+    { q: t('4) ข้อ 45: มอสเฟตแบบเอนแฮนซ์เมนต์ ตัวแบ่งแรงดัน \\(R_1\\) = 40 MΩ จาก +30 V, \\(R_2\\) = 10 MΩ, \\(R_D\\) = 3.3 kΩ, \\(R_S\\) = 1.2 kΩ ขนานกับตัวเก็บประจุ \\(V_T\\) = 3 V, \\(k\\) = 0.4 mA/V², \\(r_d\\) = 40 kΩ, \\(V_i\\) = 0.8 mV จุดทำงาน \\(V_{GSQ}\\) = 4.667 V จงหา \\(g_m\\), \\(A_v\\) และ \\(V_o\\)', '4) Problem 45: an enhancement MOSFET with a voltage divider, \\(R_1\\) = 40 MΩ from +30 V, \\(R_2\\) = 10 MΩ, \\(R_D\\) = 3.3 kΩ, \\(R_S\\) = 1.2 kΩ in parallel with a capacitor, \\(V_T\\) = 3 V, \\(k\\) = 0.4 mA/V², \\(r_d\\) = 40 kΩ, \\(V_i\\) = 0.8 mV; the operating point \\(V_{GSQ}\\) = 4.667 V. Find \\(g_m\\), \\(A_v\\) and \\(V_o\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 1.333, unit: 'mS', tol: 0.01 }, { key: 'y', lab: 'A_v =', ans: -4.06, unit: '', tol: 0.03 }, { key: 'z', lab: 'V_o =', ans: 3.25, unit: 'mV', tol: 0.03 }],
+      work: work(R`g_m = 2(0.4)(4.667 - 3) = 1.333\ \text{mS},\ A_v = -g_m(r_d \parallel R_D) = -(1.333)(3.048) = -4.06,\ V_o = (4.06)(0.8\ \text{mV}) = 3.25\ \text{mV}`,
+        t('<p>คู่มือคำตอบของตำรา (3.51 mV) ละ \\(r_d\\) ที่โจทย์ให้</p>', '<p>The book\'s answer key (3.51 mV) ignores the \\(r_d\\) the problem gives.</p>')) },
+    { q: t('5) ข้อ 51–52: JFET สองภาคเหมือนกัน \\(V_{DD}\\) = 18 V แต่ละภาค \\(R_G\\) = 10 MΩ, \\(R_D\\) = 2.2 kΩ, \\(R_S\\) = 390 Ω ขนานกับตัวเก็บประจุ \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4.5 V, \\(V_i\\) = 20 mV จุดทำงาน \\(V_{GSQ}\\) = −1.441 V จงหา \\(g_m\\), อัตราขยายรวม \\(A_v\\) และ \\(V_o\\)', '5) Problems 51–52: two identical JFET stages, \\(V_{DD}\\) = 18 V; each with \\(R_G\\) = 10 MΩ, \\(R_D\\) = 2.2 kΩ, \\(R_S\\) = 390 Ω in parallel with a capacitor, \\(I_{DSS}\\) = 8 mA, \\(V_P\\) = −4.5 V; \\(V_i\\) = 20 mV; the operating point \\(V_{GSQ}\\) = −1.441 V. Find \\(g_m\\), the overall gain \\(A_v\\) and \\(V_o\\).'),
+      fields: [{ key: 'x', lab: 'g_m =', ans: 2.417, unit: 'mS', tol: 0.015 }, { key: 'y', lab: 'A_v =', ans: 28.3, unit: '', tol: 0.3 }, { key: 'z', lab: 'V_o =', ans: 565, unit: 'mV', tol: 6 }],
+      work: work(R`g_m = \frac{2(8\ \text{mA})}{4.5\ \text{V}}\left(1 - \frac{1.441}{4.5}\right) = 2.417\ \text{mS},\ A_{v_1} = A_{v_2} = -g_m(R_D \parallel R_G) = -5.32,\ A_v = (-5.32)^2 = 28.3,\ V_o = 565\ \text{mV}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

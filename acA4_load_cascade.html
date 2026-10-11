@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="A.4 — Load, Source Resistance and Cascaded Stages">A.4 — โหลด ความต้านทานแหล่งจ่าย และวงจรหลายภาค</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=5">
+<script src="assets/stops.js?v=5"></script><script src="assets/shell.js?v=5"></script>
+<script src="assets/circuit.js?v=5"></script><script src="assets/alg.js?v=5"></script><script src="assets/lesson.js?v=5"></script><script src="assets/ch6.js?v=5"></script>
+<script src="assets/ch8.js?v=5"></script><script src="assets/ie.js?v=5"></script><script src="assets/ie1.js?v=5"></script><script src="assets/ie2.js?v=5"></script><script src="assets/ie3.js?v=5"></script><script src="assets/ie4.js?v=5"></script><script src="assets/ie5.js?v=5"></script><script src="assets/ie6.js?v=5"></script><script src="assets/ie7.js?v=5"></script><script src="assets/ie9.js?v=5"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">โหลด ความต้านทานแหล่งจ่าย และวงจรหลายภาค <span class="en">Load, source resistance and cascaded stages</span></h1>
+<h1 data-l="en">Load, source resistance and cascaded stages <span class="en">The amplifier as a two-port box</span></h1>
+
+<p class="sub" data-l="th">อัตราขยายที่หาในหน้า A.1–A.3 เป็นอัตราขยายตอนไม่มีโหลด และป้อนด้วยแหล่งสัญญาณในอุดมคติ วงจรจริงไม่เป็นแบบนั้น: ไมโครโฟนมีความต้านทานภายใน ลำโพงหรือภาคขยายถัดไปดึงกระแสจากขาออก ผลคือสองปลายของวงจรขยายกลายเป็นตัวแบ่งแรงดัน หน้านี้มองวงจรขยายเป็นกล่องสองพอร์ตที่มีแค่สามตัวเลข \(Z_i\), \(Z_o\) และ \(A_{v_{NL}}\) แล้วใช้มันคำนวณอัตราขยายเมื่อมีโหลดและแหล่งสัญญาณจริง จนถึงวงจรหลายภาคที่ภาคหนึ่งเป็นโหลดของภาคก่อนหน้า (Boylestad หัวข้อ 5.12–5.16 · ไม่มีในสไลด์)</p>
+<p class="sub" data-l="en">The gains of pages A.1–A.3 are no-load gains with an ideal signal source. Real circuits are not like that: a microphone has an internal resistance, and a loudspeaker or the next stage draws current from the output. Both ends of the amplifier become voltage dividers. This page treats the amplifier as a two-port box with just three numbers, \(Z_i\), \(Z_o\) and \(A_{v_{NL}}\), and uses them for the gain with a real load and a real source, up to cascaded stages where each stage is the load of the one before (Boylestad sections 5.12–5.16 · not in the slides).</p>
+<div class="equation-box eqwrap">$$ A_{v_L} = \frac{R_L}{R_L + Z_o}A_{v_{NL}} $$ $$ A_{v_s} = \frac{Z_i}{Z_i + R_s}A_{v_L} $$ $$ A_{v_T} = A_{v_1}A_{v_2}\cdots $$ $$ A_{i_L} = -A_{v_L}\frac{Z_i}{R_L} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>กล่องสองพอร์ต</b> (หัวข้อ 5.15, รูป 5.62): ขาเข้าคือ \(R_i = Z_i\) ขาออกคือแหล่งแรงดัน \(A_{v_{NL}}V_i\) อนุกรมกับ \(R_o = Z_o\) (เทวินินของขาออก)</li>
+  <li><b>โหลด</b> (สมการ 5.89): \(R_o\) กับ \(R_L\) แบ่งแรงดัน \(A_{v_L} = A_{v_{NL}}R_L/(R_L + R_o)\) ยิ่ง \(R_L\) ต่ำเมื่อเทียบกับ \(Z_o\) อัตราขยายยิ่งตก</li>
+  <li><b>แหล่งสัญญาณ</b> (สมการ 5.91–5.96): \(R_s\) กับ \(Z_i\) แบ่งแรงดัน \(V_i = Z_iV_s/(Z_i + R_s)\) ลำดับขนาดคือ \(|A_{v_{NL}}| > |A_{v_L}| > |A_{v_s}|\) เสมอ</li>
+  <li><b>หลายภาค</b> (หัวข้อ 5.16, สมการ 5.99–5.100): อัตราขยายรวมคือผลคูณของอัตราขยายแต่ละภาค <i>เมื่อมีโหลด</i> โดยโหลดของภาคหนึ่งคือ \(Z_i\) ของภาคถัดไป \(Z_i\) รวมคือของภาคแรก \(Z_o\) รวมคือของภาคสุดท้าย</li>
+  <li><b>ข้อควรระวัง</b>: ตัวตามแรงดันและวงจรป้อนกลับมี \(Z_i\) ที่ขึ้นกับ \(R_L\) และ \(Z_o\) ที่ขึ้นกับ \(R_s\) ต้องหาค่าที่ \(R_s\), \(R_L\) จริงก่อนใช้กล่องสองพอร์ต</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The two-port box</b> (section 5.15, Fig. 5.62): the input is \(R_i = Z_i\); the output is a voltage source \(A_{v_{NL}}V_i\) in series with \(R_o = Z_o\) (the Thevenin equivalent of the output).</li>
+  <li><b>The load</b> (Eq. 5.89): \(R_o\) and \(R_L\) divide the voltage, \(A_{v_L} = A_{v_{NL}}R_L/(R_L + R_o)\); the lower \(R_L\) is next to \(Z_o\), the more the gain drops.</li>
+  <li><b>The source</b> (Eqs. 5.91–5.96): \(R_s\) and \(Z_i\) divide the voltage, \(V_i = Z_iV_s/(Z_i + R_s)\). The order is always \(|A_{v_{NL}}| > |A_{v_L}| > |A_{v_s}|\).</li>
+  <li><b>Cascades</b> (section 5.16, Eqs. 5.99–5.100): the overall gain is the product of the stage gains <i>with their loads</i>, the load of one stage being the \(Z_i\) of the next; the overall \(Z_i\) is the first stage's, the overall \(Z_o\) the last stage's.</li>
+  <li><b>A caution</b>: the follower and the feedback stage have a \(Z_i\) that depends on \(R_L\) and a \(Z_o\) that depends on \(R_s\); find them for the actual \(R_s\) and \(R_L\) before using the box.</li></ul></section>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>กล่องสองพอร์ต</a><a href="#ex1"><b>1</b>Examples 5.11–5.12</a><a href="#ex2"><b>2</b>Example 5.14</a><a href="#ex3"><b>3</b>Example 5.15</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The two-port box</a><a href="#ex1"><b>1</b>Examples 5.11–5.12</a><a href="#ex2"><b>2</b>Example 5.14</a><a href="#ex3"><b>3</b>Example 5.15</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ตัวแบ่งแรงดันสองตัว</div><div class="story-k" data-l="en">Part 1 · Two voltage dividers</div>
+    <h2 data-l="th">วงจรขยายเป็นกล่องที่มีสามตัวเลข</h2><h2 data-l="en">An amplifier is a box with three numbers</h2>
+    <div class="story-p" data-l="th"><p>ไม่ว่าข้างในจะมีทรานซิสเตอร์กี่ตัว คนที่ใช้วงจรขยายสนใจแค่สามอย่าง: ขาเข้าดึงกระแสแค่ไหน (\(Z_i\)) ขาออกอ่อนแค่ไหนเมื่อมีโหลด (\(Z_o\)) และขยายเท่าไรตอนไม่มีโหลด (\(A_{v_{NL}}\)) Example 5.13 ของตำราให้ "วงจรขยายสำเร็จรูป" ที่มีแค่สามค่านี้: −480, 4 kΩ และ 2 kΩ</p>
+      <p>ที่ขาเข้า \(R_s\) กับ \(Z_i\) เป็นตัวแบ่งแรงดัน ที่ขาออก \(Z_o\) กับ \(R_L\) เป็นตัวแบ่งแรงดันอีกตัว ลองเดาก่อน: โหลด 1.2 kΩ ทำให้อัตราขยาย −480 เหลือเท่าใด</p></div>
+    <div class="story-p" data-l="en"><p>However many transistors are inside, the user of an amplifier cares about three things: how much current the input draws (\(Z_i\)), how weak the output is under load (\(Z_o\)), and how much it amplifies with no load (\(A_{v_{NL}}\)). The book's Example 5.13 gives a "packaged amplifier" with just these three values: −480, 4 kΩ and 2 kΩ.</p>
+      <p>At the input, \(R_s\) and \(Z_i\) form a voltage divider; at the output, \(Z_o\) and \(R_L\) form another. Guess first: a 1.2 kΩ load leaves how much of the gain of −480?</p></div></div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อน \(R_s\) และ \(R_L\)</p><p class="story-next" data-l="en">↓ Section A: move \(R_s\) and \(R_L\)</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">กล่องสองพอร์ตระหว่างแหล่งสัญญาณกับโหลด</h2><h2 data-l="en">A two-port box between a source and a load</h2>
+    <div class="src" data-l="th">Boylestad หัวข้อ 5.15 (รูป 5.62, Example 5.13)</div><div class="src" data-l="en">Boylestad, section 5.15 (Fig. 5.62, Example 5.13)</div></div></div>
+  <p class="lead" data-l="th">กรอบเส้นประคือวงจรขยาย: \(Z_i\) = 4 kΩ ที่ขาเข้า แหล่งแรงดัน \(A_{v_{NL}}V_i\) (เพชร) กับ \(Z_o\) = 2 kΩ ที่ขาออก แท่งสามแท่งคือขนาดของอัตราขยายสามแบบ ตั้ง \(R_L\) = 1.2 kΩ และ 5.6 kΩ ตามโจทย์ของตำรา แล้วลองเพิ่ม \(R_s\)</p>
+  <p class="lead" data-l="en">The dashed outline is the amplifier: \(Z_i\) = 4 kΩ at the input, the voltage source \(A_{v_{NL}}V_i\) (the diamond) and \(Z_o\) = 2 kΩ at the output. The three bars are the sizes of the three gains. Set \(R_L\) = 1.2 kΩ and 5.6 kΩ as in the book's problem, then raise \(R_s\).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · วงจรเดิม แหล่งและโหลดจริง</div><div class="story-k" data-l="en">Part 2 · The same circuit, a real source and load</div>
+    <h2 data-l="th">Examples 5.11–5.12: สองวิธี ผลเดียวกัน</h2><h2 data-l="en">Examples 5.11–5.12: two methods, one result</h2>
+    <div class="story-p" data-l="th"><p>เอาวงจรไบแอสคงที่ของ Example 5.1 (หน้า A.1) มาต่อแหล่งสัญญาณที่มี \(R_s\) = 0.3 kΩ และโหลด \(R_L\) = 4.7 kΩ ตำราทำสองวิธี: วิธีแรกใส่ \(R_s\), \(R_L\) ลงในวงจรสมมูลตรง ๆ วิธีที่สองใช้กล่องสองพอร์ตที่สร้างจาก \(Z_i\), \(Z_o\), \(A_{v_{NL}}\) ของ Example 5.1</p>
+      <p>ก่อนเปิดเฉลย ลองตอบว่า \(Z_i\) และ \(Z_o\) เปลี่ยนไปหรือไม่เมื่อต่อ \(R_s\) และ \(R_L\)</p></div>
+    <div class="story-p" data-l="en"><p>Take the fixed-bias circuit of Example 5.1 (page A.1) and drive it from a source with \(R_s\) = 0.3 kΩ into a load \(R_L\) = 4.7 kΩ. The book works it two ways: first by putting \(R_s\) and \(R_L\) into the equivalent circuit directly, then with the two-port box built from the \(Z_i\), \(Z_o\) and \(A_{v_{NL}}\) of Example 5.1.</p>
+      <p>Before opening the solution, decide whether \(Z_i\) and \(Z_o\) change when \(R_s\) and \(R_L\) are connected.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: Examples 5.11–5.12 ภาพจำลองเปลี่ยนเป็นกล่องสองพอร์ตในขั้นที่ 5</p><p class="story-next" data-l="en">↓ Problem 1: Examples 5.11–5.12; the simulation turns into the two-port box at step 5</p>
+</div>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Examples 5.11–5.12: Example 5.1 กับ \(R_s\) และ \(R_L\)</h2><h2 data-l="en">Examples 5.11–5.12: Example 5.1 with \(R_s\) and \(R_L\)</h2>
+    <div class="src" data-l="th">Boylestad Examples 5.11–5.12 (รูป 5.54c, 5.55, 5.62) · หัวข้อ 5.12, 5.15</div><div class="src" data-l="en">Boylestad Examples 5.11–5.12 (Figs. 5.54c, 5.55, 5.62) · sections 5.12, 5.15</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรของ Example 5.1 (\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ, \(R_C\) = 3 kΩ, β = 100, \(r_o = \infty\)) ต่อแหล่งสัญญาณที่มี \(R_s\) = 0.3 kΩ และโหลด \(R_L\) = 4.7 kΩ จงหา \(A_{v_L}\), \(A_{v_s}\), \(Z_i\) และ \(Z_o\) แล้วทำซ้ำด้วยแบบจำลองสองพอร์ต</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The circuit of Example 5.1 (\(V_{CC}\) = 12 V, \(R_B\) = 470 kΩ, \(R_C\) = 3 kΩ, β = 100, \(r_o = \infty\)) driven from a source with \(R_s\) = 0.3 kΩ into a load \(R_L\) = 4.7 kΩ. Determine \(A_{v_L}\), \(A_{v_s}\), \(Z_i\) and \(Z_o\), then repeat with the two-port model.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ภาคหนึ่งคือโหลดของอีกภาค</div><div class="story-k" data-l="en">Part 3 · One stage is the load of the next</div>
+    <h2 data-l="th">Example 5.14: บัฟเฟอร์ช่วยวงจรเบสร่วม</h2><h2 data-l="en">Example 5.14: a buffer rescues a common base</h2>
+    <div class="story-p" data-l="th"><p>หน้า A.3 พบว่าวงจรเบสร่วมขยายได้ราว 240 เท่า แต่อิมพีแดนซ์ขาเข้าแค่ราว 26 Ω แหล่งสัญญาณที่มี \(R_s\) = 1 kΩ จึงส่งสัญญาณเข้าได้ไม่ถึงสามเปอร์เซ็นต์ ตำรา (รูป 5.68) วางตัวตามแรงดันไว้ข้างหน้า: ขาเข้าสูง 10 kΩ ขาออกต่ำ 12 Ω</p>
+      <p>เมื่อต่อหลายภาค อัตราขยายของแต่ละภาคต้องคิดโดยมีโหลดของมันจริง ๆ โหลดของภาค 1 คือ \(Z_i\) ของภาค 2 ลองเดาว่าตัวตามแรงดันที่ "ไม่ขยาย" จะเพิ่มอัตราขยายรวมได้กี่เท่า</p></div>
+    <div class="story-p" data-l="en"><p>Page A.3 found that a common-base stage amplifies about 240 times but has an input impedance of only about 26 Ω, so a source with \(R_s\) = 1 kΩ gets under three percent of its signal in. The book (Fig. 5.68) puts an emitter follower in front: 10 kΩ in, 12 Ω out.</p>
+      <p>In a cascade every stage gain has to be taken with its actual load, and the load of stage 1 is the \(Z_i\) of stage 2. Guess by how many times a follower that "does not amplify" raises the overall gain.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Example 5.14 สองกล่องต่อกัน</p><p class="story-next" data-l="en">↓ Problem 2: Example 5.14, two boxes in a row</p>
+</div>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 5.14: ตัวตามแรงดันต่อด้วยเบสร่วม</h2><h2 data-l="en">Example 5.14: an emitter follower, then a common base</h2>
+    <div class="src" data-l="th">Boylestad Example 5.14 (รูป 5.68) · หัวข้อ 5.16</div><div class="src" data-l="en">Boylestad Example 5.14 (Fig. 5.68) · section 5.16</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ภาค 1 ตัวตามแรงดัน: \(Z_i\) = 10 kΩ, \(Z_o\) = 12 Ω, \(A_{v_{NL}}\) = 1 · ภาค 2 เบสร่วม: \(Z_i\) = 26 Ω, \(Z_o\) = 5.1 kΩ, \(A_{v_{NL}}\) = 240 · \(R_s\) = 1 kΩ, \(R_L\) = 8.2 kΩ (a) จงหาอัตราขยายแรงดันของแต่ละภาคเมื่อมีโหลด (b) \(A_{v_T}\) และ \(A_{v_s}\) (c) \(A_{i_T}\) (d) \(A_{v_s}\) เมื่อถอดตัวตามแรงดันออก</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Stage 1, an emitter follower: \(Z_i\) = 10 kΩ, \(Z_o\) = 12 Ω, \(A_{v_{NL}}\) = 1 · stage 2, a common base: \(Z_i\) = 26 Ω, \(Z_o\) = 5.1 kΩ, \(A_{v_{NL}}\) = 240 · \(R_s\) = 1 kΩ, \(R_L\) = 8.2 kΩ. Determine (a) the loaded voltage gain of each stage, (b) \(A_{v_T}\) and \(A_{v_s}\), (c) \(A_{i_T}\), (d) \(A_{v_s}\) with the follower removed.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองแก้วงจรของสองกล่องจริง ๆ (แหล่งแรงดันควบคุมรูปเพชร) <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation solves the circuit of the two boxes (the diamonds are controlled voltage sources). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<div class="story n0">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 4 · ทรานซิสเตอร์สองตัวจริง</div><div class="story-k" data-l="en">Part 4 · Two real transistors</div>
+    <h2 data-l="th">Example 5.15: ขยายสองภาคต่อด้วยตัวเก็บประจุ</h2><h2 data-l="en">Example 5.15: two stages coupled by a capacitor</h2>
+    <div class="story-p" data-l="th"><p>วงจรตัวแบ่งแรงดันสองภาคที่เหมือนกันทุกอย่าง (รูป 5.69) ต่อกันผ่านตัวเก็บประจุ \(C_C\) ซึ่งกั้นไฟตรงให้จุดทำงานของสองภาคเป็นอิสระ แต่ให้สัญญาณผ่าน สัญญาณขาเข้าเพียง 25 µV</p>
+      <p>ภาคเดียวขยายได้ราว −347 เท่า แต่ภาคแรกมีภาคที่สองเป็นโหลด ซึ่ง \(Z_i\) ต่ำไม่ถึง 1 kΩ ลองเดาก่อนว่าอัตราขยายรวมใกล้ (347)² ≈ 120,000 หรือต่ำกว่านั้นมาก</p></div>
+    <div class="story-p" data-l="en"><p>Two identical voltage-divider stages (Fig. 5.69) joined through a capacitor \(C_C\), which blocks dc so that the two operating points stay independent, yet passes the signal. The input is just 25 µV.</p>
+      <p>One stage alone amplifies about −347 times, but the first stage has the second as its load, with a \(Z_i\) below 1 kΩ. Guess first whether the overall gain is near (347)² ≈ 120 000 or far below.</p></div></div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3: Example 5.15 ออสซิลโลสโคปแสดง 25 µV เทียบกับเกือบ 1 V</p><p class="story-next" data-l="en">↓ Problem 3: Example 5.15; the oscilloscope shows 25 µV against almost 1 V</p>
+</div>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 5.15: อิมิตเตอร์ร่วมสองภาค</h2><h2 data-l="en">Example 5.15: two common-emitter stages</h2>
+    <div class="src" data-l="th">Boylestad Example 5.15 (รูป 5.69) · หัวข้อ 5.16</div><div class="src" data-l="en">Boylestad Example 5.15 (Fig. 5.69) · section 5.16</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>สองภาคเหมือนกัน \(V_{CC}\) = 20 V แต่ละภาค \(R_1\) = 15 kΩ, \(R_2\) = 4.7 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 1 kΩ บายพาสด้วย 20 µF, β = 200 ตัวเก็บประจุคัปปลิง 10 µF, \(V_i\) = 25 µV (a) จงหาอัตราขยายรวมเมื่อไม่มีโหลดและ \(V_o\) (b) ทำใหม่เมื่อมีโหลด 4.7 kΩ (c) \(Z_i\) ของภาคแรกและ \(Z_o\) ของภาคที่สอง</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Two identical stages on \(V_{CC}\) = 20 V, each with \(R_1\) = 15 kΩ, \(R_2\) = 4.7 kΩ, \(R_C\) = 2.2 kΩ, \(R_E\) = 1 kΩ bypassed by 20 µF, β = 200; 10 µF coupling capacitors, \(V_i\) = 25 µV. Determine (a) the no-load overall gain and \(V_o\), (b) the same with a 4.7 kΩ load, (c) the \(Z_i\) of the first stage and the \(Z_o\) of the second.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองแก้ทรานซิสเตอร์ทั้งสองตัวด้วย dc แบบละเอียด อัตราขยายจึงต่ำกว่าตำราราว 4 % <b>ลองตอบก่อน</b></p>
+  <p class="lead" data-l="en">The simulation solves both transistors with the exact dc, so its gain is about 4 % below the book's. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 35, 37, 43 ท้ายบทที่ 5</div><div class="src" data-l="en">Boylestad Problems 35, 37, 43 of chapter 5</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — โหลดหนักแค่ไหนจึงหนัก</h3>
+    <ol><li>ส่วน A: เมื่อ \(R_L = Z_o\) = 2 kΩ อัตราขยายเหลือครึ่งหนึ่งพอดี เมื่อ \(R_L = 10Z_o\) เหลือ 91 %</li>
+    <li>ฝั่งขาเข้าก็เหมือนกัน: \(R_s = Z_i\) เสียสัญญาณครึ่งหนึ่ง วงจรที่ดีจึงต้องการ \(Z_i\) สูงและ \(Z_o\) ต่ำ ซึ่งคือคุณสมบัติของตัวตามแรงดัน</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ทำไมไม่ได้ 120,000</h3>
+    <ol><li>ข้อ 3: \(Z_{i_2}\) = 0.94 kΩ ขนานกับ \(R_C\) = 2.2 kΩ เหลือ 656.8 Ω ภาคแรกจึงขยายแค่ −103.6 ไม่ใช่ −347</li>
+    <li>ถ้าวางตัวตามแรงดันคั่นสองภาค (\(Z_i\) สูง) ภาคแรกจะกลับไปใกล้ −347 นี่คือเหตุผลเดียวกับข้อ 2</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 บทที่ 5 หัวข้อ 5.12–5.16 (Examples 5.11–5.15, รูป 5.54–5.69, ข้อ 35, 37, 43) · ไม่มีในสไลด์ของรายวิชา</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>ข้อผิดพลาดของตำราที่หน้านี้แก้แล้ว</h3>
+    <p>เฉลยในหน้านี้ใช้ค่าที่ถูกแล้ว ตารางนี้รวมจุดที่ตำรา (Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11) พิมพ์ต่างไว้ เผื่อเทียบกับหนังสือ</p>
+    <table class="tbl stack"><thead><tr><th>ตำแหน่ง</th><th>ตำราพิมพ์</th><th>ที่ถูก</th></tr></thead><tbody>
+      <tr><td data-h="ตำแหน่ง">Example 5.12 (หน้า 299)</td><td data-h="ตำราพิมพ์">\(A_{v_s}\) = −133.45</td><td data-h="ที่ถูก">−133.54 (ตำราปัด 0.6104 เป็น 0.610)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.14 (หน้า 302)</td><td data-h="ตำราพิมพ์">(c) \(A_{i_T}\) = −123.41</td><td data-h="ที่ถูก">−123.5 (ใช้ \(A_{v_T}\) = 101.24 ที่ไม่ปัด)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.14 (หน้า 302)</td><td data-h="ตำราพิมพ์">(d) \(A_{v_s}\) ≅ 3.7, "about 25 times"</td><td data-h="ที่ถูก">3.75 และ 24.5 เท่า (\(V_i/V_s\) = 0.0253)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.15 (หน้า 303)</td><td data-h="ตำราพิมพ์">"with the 10-kΩ load applied"</td><td data-h="ที่ถูก">4.7 kΩ (การคำนวณใช้ 4.7 kΩ)</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.15 (หน้า 303)</td><td data-h="ตำราพิมพ์">\(R_C \parallel Z_{i_2}\) = 659.2 Ω, \(A_{v_1}\) = −104</td><td data-h="ที่ถูก">656.8 Ω, −103.6</td></tr>
+      <tr><td data-h="ตำแหน่ง">Example 5.15 (หน้า 303)</td><td data-h="ตำราพิมพ์">\(A_{v_T}\) = 36.1 × 10³, \(V_o\) = 902.5 mV; มีโหลด 24.6 × 10³, 615 mV</td><td data-h="ที่ถูก">35.9 × 10³, 898.6 mV; มีโหลด 24.5 × 10³, 612 mV</td></tr>
+    </tbody></table></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — how heavy is a heavy load</h3>
+    <ol><li>Section A: with \(R_L = Z_o\) = 2 kΩ the gain is exactly halved; with \(R_L = 10Z_o\) it keeps 91 %.</li>
+    <li>The input side is the same: \(R_s = Z_i\) loses half the signal. A good amplifier therefore wants a high \(Z_i\) and a low \(Z_o\), which is what a follower offers.</li></ol></div>
+  <div class="card"><h3>Try this 2 — why not 120 000</h3>
+    <ol><li>Problem 3: \(Z_{i_2}\) = 0.94 kΩ in parallel with \(R_C\) = 2.2 kΩ leaves 656.8 Ω, so the first stage gives only −103.6, not −347.</li>
+    <li>A follower between the two stages (a high \(Z_i\)) would bring the first stage back near −347, for the same reason as in problem 2.</li></ol>
+    <div class="book">Boylestad &amp; Nashelsky, 11th ed., chapter 5, sections 5.12–5.16 (Examples 5.11–5.15, Figs. 5.54–5.69, Problems 35, 37, 43) · not in the course slides</div></div>
+  <div class="card errata" style="overflow-x:auto"><h3>Textbook errors corrected on this page</h3>
+    <p>The solutions on this page use the corrected values. This table lists where the book (Boylestad &amp; Nashelsky, 11th ed.) prints something else, for checking against the printed text.</p>
+    <table class="tbl stack"><thead><tr><th>Where</th><th>Printed</th><th>Correct</th></tr></thead><tbody>
+      <tr><td data-h="Where">Example 5.12 (p. 299)</td><td data-h="Printed">\(A_{v_s}\) = −133.45</td><td data-h="Correct">−133.54 (the book rounds 0.6104 to 0.610)</td></tr>
+      <tr><td data-h="Where">Example 5.14 (p. 302)</td><td data-h="Printed">(c) \(A_{i_T}\) = −123.41</td><td data-h="Correct">−123.5 (with the unrounded \(A_{v_T}\) = 101.24)</td></tr>
+      <tr><td data-h="Where">Example 5.14 (p. 302)</td><td data-h="Printed">(d) \(A_{v_s}\) ≅ 3.7, "about 25 times"</td><td data-h="Correct">3.75 and 24.5 times (\(V_i/V_s\) = 0.0253)</td></tr>
+      <tr><td data-h="Where">Example 5.15 (p. 303)</td><td data-h="Printed">"with the 10-kΩ load applied"</td><td data-h="Correct">4.7 kΩ (the calculation uses 4.7 kΩ)</td></tr>
+      <tr><td data-h="Where">Example 5.15 (p. 303)</td><td data-h="Printed">\(R_C \parallel Z_{i_2}\) = 659.2 Ω, \(A_{v_1}\) = −104</td><td data-h="Correct">656.8 Ω, −103.6</td></tr>
+      <tr><td data-h="Where">Example 5.15 (p. 303)</td><td data-h="Printed">\(A_{v_T}\) = 36.1 × 10³, \(V_o\) = 902.5 mV; loaded 24.6 × 10³, 615 mV</td><td data-h="Correct">35.9 × 10³, 898.6 mV; loaded 24.5 × 10³, 612 mV</td></tr>
+    </tbody></table></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), R = String.raw, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id);
+  AC.EX.twoport({ cv: 'cvA', panel: 'pA', text: 'wA', pre: 'a' });
+  AC.problem(1, 'ex511'); AC.problem(2, 'ex514'); AC.problem(3, 'ex515');
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 35: ไบแอสคงที่ \\(V_{CC}\\) = 18 V, \\(R_B\\) = 680 kΩ, \\(R_C\\) = 3.3 kΩ, β = 100 จงหา \\(A_{v_{NL}}\\) และ \\(A_{v_L}\\) เมื่อ \\(R_L\\) = 4.7 kΩ และ 0.5 kΩ', '1) Problem 35: fixed bias with \\(V_{CC}\\) = 18 V, \\(R_B\\) = 680 kΩ, \\(R_C\\) = 3.3 kΩ, β = 100. Find \\(A_{v_{NL}}\\), and \\(A_{v_L}\\) for \\(R_L\\) = 4.7 kΩ and 0.5 kΩ.'),
+      fields: [{ key: 'x', lab: 'A_vNL =', ans: -326.1, unit: '', tol: 2 }, { key: 'y', lab: 'A_vL (4.7 kΩ) =', ans: -191.6, unit: '', tol: 1.2 }, { key: 'z', lab: 'A_vL (0.5 kΩ) =', ans: -42.91, unit: '', tol: 0.3 }],
+      work: work(R`I_B = \frac{17.3}{680\ \text{k}\Omega} = 25.44\ \mu\text{A},\ I_E = 2.57\ \text{mA},\ r_e = 10.12\ \Omega,\ A_{v_{NL}} = -\frac{3.3\ \text{k}\Omega}{10.12\ \Omega} = -326.1,\ A_{v_L} = A_{v_{NL}}\frac{R_L}{R_L + 3.3\ \text{k}\Omega} = -191.6,\ -42.9`) },
+    { q: t('2) ข้อ 37: ไบแอสคงที่ \\(V_{CC}\\) = 24 V, \\(R_B\\) = 560 kΩ, \\(R_C\\) = 4.3 kΩ, β = 80, \\(R_s\\) = 1 kΩ, \\(R_L\\) = 2.7 kΩ จงหา \\(Z_i\\), \\(A_{v_L}\\) และ \\(A_{v_s}\\)', '2) Problem 37: fixed bias with \\(V_{CC}\\) = 24 V, \\(R_B\\) = 560 kΩ, \\(R_C\\) = 4.3 kΩ, β = 80, \\(R_s\\) = 1 kΩ, \\(R_L\\) = 2.7 kΩ. Find \\(Z_i\\), \\(A_{v_L}\\) and \\(A_{v_s}\\).'),
+      fields: [{ key: 'x', lab: 'Z_i =', ans: 616.5, unit: 'Ω', tol: 4 }, { key: 'y', lab: 'A_vL =', ans: -215.0, unit: '', tol: 1.5 }, { key: 'z', lab: 'A_vs =', ans: -81.99, unit: '', tol: 0.7 }],
+      work: work(R`I_E = (81)\frac{23.3}{560\ \text{k}\Omega} = 3.37\ \text{mA},\ r_e = 7.715\ \Omega,\ Z_i = 560\ \text{k}\Omega \parallel 617\ \Omega = 616.5\ \Omega,\ A_{v_L} = -\frac{4.3\ \text{k}\Omega \parallel 2.7\ \text{k}\Omega}{7.715\ \Omega} = -215.0,\ A_{v_s} = \frac{616.5}{1616.5}(-215.0) = -82.0`) },
+    { q: t('3) ข้อ 43: สองกล่องเหมือนกันต่อกัน แต่ละกล่อง \\(Z_i\\) = 1 kΩ, \\(Z_o\\) = 3.3 kΩ, \\(A_{v_{NL}}\\) = −420 แหล่งมี \\(R_s\\) = 0.6 kΩ โหลด \\(R_L\\) = 2.7 kΩ จงหา \\(A_{v_1}\\), \\(A_{v_T}\\) และ \\(A_{v_s}\\)', '3) Problem 43: two identical boxes in cascade, each with \\(Z_i\\) = 1 kΩ, \\(Z_o\\) = 3.3 kΩ, \\(A_{v_{NL}}\\) = −420; the source has \\(R_s\\) = 0.6 kΩ and the load is \\(R_L\\) = 2.7 kΩ. Find \\(A_{v_1}\\), \\(A_{v_T}\\) and \\(A_{v_s}\\).'),
+      fields: [{ key: 'x', lab: 'A_v1 =', ans: -97.67, unit: '', tol: 0.6 }, { key: 'y', lab: 'A_vT =', ans: 18460, unit: '', tol: 120 }, { key: 'z', lab: 'A_vs =', ans: 11538, unit: '', tol: 80 }],
+      work: work(R`A_{v_1} = \frac{1\ \text{k}\Omega}{4.3\ \text{k}\Omega}(-420) = -97.67,\ A_{v_2} = \frac{2.7\ \text{k}\Omega}{6\ \text{k}\Omega}(-420) = -189,\ A_{v_T} = 18\,460,\ A_{v_s} = \frac{1}{1.6}(18\,460) = 11\,538`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
