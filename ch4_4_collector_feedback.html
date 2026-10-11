@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรไบแอสแบบป้อนกลับจากคอลเล็กเตอร์ <span class="en">Collector-feedback bias</span></h1>
 <h1 data-l="en">Collector-feedback bias <span class="en">\(R_C\) and \(R_E\) reflected into the base loop by β</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 26–32 ต่อตัวต้านทาน \(R_F\) จากคอลเล็กเตอร์มาที่เบสแทนที่จะต่อจาก \(V_{CC}\): ถ้า \(I_C\) เพิ่ม แรงดันคอลเล็กเตอร์ลด กระแสเบสที่ไหลผ่าน \(R_F\) ก็ลดตาม นี่คือการป้อนกลับ (feedback) ที่ทำให้จุด Q ไวต่อ β น้อยกว่าวงจรไบแอสคงที่และไบแอสอิมิตเตอร์ หน้านี้มีภาพจำลองที่ปรับ \(R_F\), \(R_C\), \(R_E\) และ β ได้ (ส่วน A) Ex.5 กับผลของ β ที่เพิ่ม 50 % Ex.6 ที่มีตัวต้านทานป้อนกลับสองตัว และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Chapter 4 slides pp. 26–32. Connect the resistor \(R_F\) from the collector to the base instead of from \(V_{CC}\): if \(I_C\) rises, the collector voltage falls and so does the base current through \(R_F\). This feedback makes Q less sensitive to β than fixed or emitter bias. This page has a circuit whose \(R_F\), \(R_C\), \(R_E\) and β you can change (section A), Ex.5 with a 50 % rise in β, Ex.6 with two feedback resistors, and more practice.</p>
+<p class="sub" data-l="th">นึกถึงคนขับรถที่ผ่อนคันเร่งทันทีที่เข็มความเร็วเกินกำหนด วงจรหน้านี้ทำแบบเดียวกัน: ย้ายปลายบนของตัวต้านทานเบสจาก \(V_{CC}\) มาต่อที่คอลเล็กเตอร์ เมื่อ \(I_C\) เพิ่ม แรงดันคอลเล็กเตอร์ตก กระแสเบสที่ไหลผ่าน \(R_F\) ก็ลดตาม การป้อนกลับ (feedback) นี้ทำให้จุด Q ไวต่อ β น้อยกว่าวงจรไบแอสคงที่และไบแอสอิมิตเตอร์ หน้านี้มีภาพจำลองที่ปรับ \(R_F\), \(R_C\), \(R_E\) และ β ได้ (ส่วน A) Ex.5 กับผลของ β ที่เพิ่ม 50 % Ex.6 ที่มีตัวต้านทานป้อนกลับสองตัว และแบบฝึกเพิ่ม (สไลด์บทที่ 4 หน้า 26–32 · Boylestad หัวข้อ 4.6)</p>
+<p class="sub" data-l="en">Think of a driver who eases off the accelerator the moment the needle passes the limit. The circuit on this page does the same: move the top end of the base resistor from \(V_{CC}\) to the collector, and when \(I_C\) rises the collector voltage drops, so the base current through \(R_F\) drops too. This feedback makes Q less sensitive to β than fixed bias or emitter bias. The page has a circuit whose \(R_F\), \(R_C\), \(R_E\) and β you can change (section A), Ex.5 with a 50 % rise in β, Ex.6 with two feedback resistors, and more practice (chapter 4 slides, pp. 26–32; Boylestad section 4.6).</p>
 <div class="equation-box eqwrap">$$ I_B = \frac{V_{CC} - V_{BE}}{R_F + \beta(R_C + R_E)} $$ $$ V_{CE} = V_{CC} - I_C(R_C + R_E) $$ $$ I_{CQ} = \frac{V'}{R_F/\beta + R'} \cong \frac{V'}{R'}\ \ (R' = R_C + R_E) $$ $$ I_{C\text{sat}} = \frac{V_{CC}}{R_C + R_E} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -38,21 +38,40 @@
   <li><b>A capacitor in the middle of \(R_F\)</b> (Ex.6): it reduces the ac feedback, but for dc it is open and \(R_B = R_{F1} + R_{F2}\).</li>
   <li><b>Saturation and the load line</b> (slide p. 31): as for the two previous circuits, \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\).</li></ul></section>
 
-<div class="slides"><figure class="slide"><img src="slides/ch4/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 26, DC Bias with Voltage Feedback: an improved level of stability can also be obtained by introducing a feedback path from collector to base as shown in the figure; the sensitivity to changes in beta or temperature variations is normally less than encountered for the fixed-bias or emitter-biased configurations. Figure 4.38: V_CC, R_C with I_C', R_B from the collector to the base with I_B, C_1, C_2, I_C into the collector, I_E through R_E.">
-  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 26: วงจรป้อนกลับจากคอลเล็กเตอร์ (รูป 4.38) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 26: the collector-feedback circuit (Fig. 4.38) · tap to enlarge</figcaption></figure></div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>การป้อนกลับ</a><a href="#ex1"><b>1</b>Ex.5</a><a href="#ex2"><b>2</b>Ex.6</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The feedback</a><a href="#ex1"><b>1</b>Ex.5</a><a href="#ex2"><b>2</b>Ex.6</a><a href="#tC"><b>C</b>More practice</a></nav>
 
-<section class="prob" id="tA">
-  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">การป้อนกลับจากคอลเล็กเตอร์</h2><h2 data-l="en">Feedback from the collector</h2>
-    <div class="src" data-l="th">สไลด์หน้า 27–29 · Boylestad หัวข้อ 4.6 (รูป 4.39–4.40)</div><div class="src" data-l="en">Slides pp. 27–29 · Boylestad, section 4.6 (Figs. 4.39–4.40)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch4/p27.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 27, DC Bias with Voltage Feedback, base–emitter loop: the circuit and its redrawn loop through V_CC, R_C (I_C'), R_B (I_B), V_BE and R_E (I_E); V_CC − I_C' R_C − I_B R_B − V_BE − I_E R_E = 0.">
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ให้คอลเล็กเตอร์คุมเบส</div><div class="story-k" data-l="en">Part 1 · Let the collector govern the base</div>
+    <h2 data-l="th">ย้ายตัวต้านทานเพียงตัวเดียว</h2><h2 data-l="en">Move just one resistor</h2>
+    <div class="story-p" data-l="th"><p>รูป 4.38 ในสไลด์หน้า 26 ต่างจากวงจรไบแอสอิมิตเตอร์เพียงจุดเดียว: ตัวต้านทานเบส (สไลด์เรียก \(R_B\) หน้านี้เรียก \(R_F\)) ต่อจากคอลเล็กเตอร์ ไม่ใช่จาก \(V_{CC}\) แรงดันที่ดันกระแสเข้าเบสจึงเป็นแรงดันคอลเล็กเตอร์ ซึ่งตกลงทุกครั้งที่ \(I_C\) เพิ่ม สไลด์สรุปผลไว้ว่า ทางป้อนกลับนี้ทำให้ความไวต่อ β และต่ออุณหภูมิโดยปกติน้อยกว่าวงจรไบแอสคงที่และไบแอสอิมิตเตอร์</p></div><div class="story-p" data-l="en"><p>Fig. 4.38 on slide p. 26 differs from emitter bias in one place only: the base resistor (\(R_B\) on the slides, \(R_F\) on this page) comes from the collector instead of \(V_{CC}\). The voltage that drives current into the base is therefore the collector voltage, which falls whenever \(I_C\) rises. As the slide puts it, this feedback path normally makes the circuit less sensitive to β and to temperature than fixed bias or emitter bias.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 26, DC Bias with Voltage Feedback: an improved level of stability can also be obtained by introducing a feedback path from collector to base as shown in the figure; the sensitivity to changes in beta or temperature variations is normally less than encountered for the fixed-bias or emitter-biased configurations. Figure 4.38: V_CC, R_C with I_C', R_B from the collector to the base with I_B, C_1, C_2, I_C into the collector, I_E through R_E.">
+  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 26: วงจรป้อนกลับจากคอลเล็กเตอร์ (รูป 4.38) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 26: the collector-feedback circuit (Fig. 4.38) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
+<div class="story n3">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · สองวงเดิม พจน์ใหม่หนึ่งพจน์</div><div class="story-k" data-l="en">Part 2 · The same two loops, one new term</div>
+    <h2 data-l="th">\(R_C\) เข้าไปอยู่ในตัวส่วนด้วย</h2><h2 data-l="en">\(R_C\) joins the denominator</h2>
+    <div class="story-p" data-l="th"><p>กฎแรงดันรอบวงเบส–อิมิตเตอร์ (สไลด์หน้า 27) ผ่าน \(R_C\), \(R_F\), รอยต่อ และ \(R_E\) จุดที่ต้องระวังคือกระแสใน \(R_C\) ไม่ใช่ \(I_C\) แต่เป็น \(I_C' = I_C + I_B\) เพราะกระแสเบสก็มาทางนี้ด้วย แต่ \(I_B\) เล็กมาก จึงถือ \(I_C' \cong I_C = \beta I_B\) และ \(I_E \cong I_C\) ได้ \(I_B = (V_{CC} - V_{BE})/(R_F + \beta(R_C + R_E))\) (สไลด์หน้า 28): ทั้ง \(R_C\) และ \(R_E\) สะท้อนเข้าวงเบสด้วย β</p><p>วงคอลเล็กเตอร์–อิมิตเตอร์ (สไลด์หน้า 29) ให้ \(V_{CE} = V_{CC} - I_C(R_C + R_E)\) เหมือนสองวงจรก่อนหน้า ถ้าวาง \(I_B\) ของทุกวงจรที่ผ่านมาเรียงกัน จะเห็นรูปเดียวกัน \(V'/(R_F + \beta R')\) โดย \(V'\) คือแรงดันสุทธิที่ดันกระแสเข้าเบส และ \(R'\) เป็น 0 สำหรับไบแอสคงที่ \(R_E\) สำหรับไบแอสอิมิตเตอร์ และ \(R_C + R_E\) สำหรับวงจรนี้ ยิ่ง \(\beta R'\) ใหญ่กว่า \(R_F\) มาก \(I_C\) ยิ่งเข้าใกล้ \(V'/R'\) ซึ่งไม่มี β อยู่เลย</p></div><div class="story-p" data-l="en"><p>The voltage law round the base–emitter loop (slide p. 27) passes \(R_C\), \(R_F\), the junction and \(R_E\). The catch is that the current in \(R_C\) is not \(I_C\) but \(I_C' = I_C + I_B\), since the base current also comes this way. \(I_B\) is tiny, though, so with \(I_C' \cong I_C = \beta I_B\) and \(I_E \cong I_C\) the loop gives \(I_B = (V_{CC} - V_{BE})/(R_F + \beta(R_C + R_E))\) (slide p. 28): both \(R_C\) and \(R_E\) are reflected into the base loop by β.</p><p>The collector–emitter loop (slide p. 29) gives \(V_{CE} = V_{CC} - I_C(R_C + R_E)\), as in the two circuits before. Line up the \(I_B\) of every circuit so far and one shape appears, \(V'/(R_F + \beta R')\), where \(V'\) is the net voltage driving the base and \(R'\) is 0 for fixed bias, \(R_E\) for emitter bias and \(R_C + R_E\) here. The larger \(\beta R'\) is next to \(R_F\), the closer \(I_C\) comes to \(V'/R'\), which has no β in it at all.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p27.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 27, DC Bias with Voltage Feedback, base–emitter loop: the circuit and its redrawn loop through V_CC, R_C (I_C'), R_B (I_B), V_BE and R_E (I_E); V_CC − I_C' R_C − I_B R_B − V_BE − I_E R_E = 0.">
     <figcaption data-l="th">สไลด์หน้า 27: วงเบส–อิมิตเตอร์ (รูป 4.39) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 27: the base–emitter loop (Fig. 4.39) · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch4/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 28, DC Bias with Voltage Feedback, base–emitter loop: it is important to note that the current through R_C is not I_C but I_C' (where I_C' = I_C + I_B); however, the level of I_C and I_C' far exceeds the usual level of I_B and the approximation I_C' ≅ I_C is normally employed. Substituting I_C' ≅ I_C = β I_B and I_E ≅ I_C gives I_B = (V_CC − V_BE)/(R_B + β (R_C + R_E)).">
     <figcaption data-l="th">สไลด์หน้า 28: สมการของ \(I_B\) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 28: the equation for \(I_B\) · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch4/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 29, DC Bias with Voltage Feedback, collector–emitter loop: applying Kirchhoff's voltage law around the indicated loop in the clockwise direction will result in I_E R_E + V_CE + I_C' R_C − V_CC = 0; since I_C' ≅ I_C and I_E ≅ I_C, V_CE = V_CC − I_C (R_C + R_E).">
-    <figcaption data-l="th">สไลด์หน้า 29: วงคอลเล็กเตอร์–อิมิตเตอร์ (รูป 4.40) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: the collector–emitter loop (Fig. 4.40) · tap to enlarge</figcaption></figure></div>
+    <figcaption data-l="th">สไลด์หน้า 29: วงคอลเล็กเตอร์–อิมิตเตอร์ (รูป 4.40) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: the collector–emitter loop (Fig. 4.40) · tap to enlarge</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 28</b> พิมพ์ตัวไพรม์สลับที่: ข้อความบนสไลด์บอกว่ากระแสใน \(R_C\) "is not \(I_C'\) but \(I_C\)" ที่ถูกคือกลับกัน กระแสใน \(R_C\) คือ \(I_C' = I_C + I_B\) และการประมาณที่ใช้คือ \(I_C' \cong I_C\) (สมการที่พิมพ์บนสไลด์ถูกต้อง)</div><div class="warnbox" data-l="en"><b>Slide p. 28</b> swaps the primes: its text says the current through \(R_C\) "is not \(I_C'\) but \(I_C\)". It is the other way round: the current in \(R_C\) is \(I_C' = I_C + I_B\), and the approximation used is \(I_C' \cong I_C\) (the typeset equations on the slide are right).</div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ลด \(R_F\) ลงมาก ๆ แล้วดู \(I_C\) วิ่งเข้าหาแถว \(V'/R'\) ในแผงค่า</p><p class="story-next" data-l="en">↓ Section A: bring \(R_F\) right down and watch \(I_C\) close in on the \(V'/R'\) row of the readings</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">การป้อนกลับจากคอลเล็กเตอร์</h2><h2 data-l="en">Feedback from the collector</h2>
+    <div class="src" data-l="th">สไลด์หน้า 27–29 · Boylestad หัวข้อ 4.6 (รูป 4.39–4.40)</div><div class="src" data-l="en">Slides pp. 27–29 · Boylestad, section 4.6 (Figs. 4.39–4.40)</div></div></div>
   <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.5 แผงค่าแสดงพจน์ทั้งสองของตัวส่วน \(R_F\) กับ \(\beta(R_C + R_E)\): ยิ่งพจน์หลังใหญ่กว่า กราฟล่าง (\(I_C\) เทียบกับ β) ยิ่งราบ ลองลด \(R_F\) ลงมาก ๆ แล้วดูว่าจุด Q เข้าใกล้ \((V_{CC} - V_{BE})/(R_C + R_E)\) ซึ่งไม่มี β เลย (ภาพจำลองแก้วงจรโดยไม่ประมาณ \(I_C' = I_C + I_B\))</p>
   <p class="lead" data-l="en">Start from the circuit of Ex.5. The reading list shows the two terms of the denominator, \(R_F\) and \(\beta(R_C + R_E)\): the more the second dominates, the flatter the lower graph (\(I_C\) against β). Lower \(R_F\) a lot and watch Q approach \((V_{CC} - V_{BE})/(R_C + R_E)\), which has no β in it (the simulation solves the circuit without approximation, \(I_C' = I_C + I_B\)).</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
@@ -61,10 +80,16 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.5: จุด Q และผลของ β ที่เพิ่ม 50 %</h2><h2 data-l="en">Ex.5: the Q-point, and a 50 % rise in β</h2>
     <div class="src" data-l="th">สไลด์หน้า 30–31 · Boylestad Examples 4.12–4.13 (รูป 4.41)</div><div class="src" data-l="en">Slides pp. 30–31 · Boylestad Examples 4.12–4.13 (Fig. 4.41)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch4/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 30, DC Bias with Voltage Feedback, Ex.5: determine the quiescent levels of I_CQ and V_CEQ for the network of the figure: 10 V, R_C = 4.7 kΩ, R_F = 250 kΩ from the collector to the base, 10 µF coupling capacitors, β = 90, R_E = 1.2 kΩ.">
+  <div class="story in n2">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.5 (สไลด์หน้า 30) ใช้ \(R_F\) = 250 kΩ, \(R_C\) = 4.7 kΩ, \(R_E\) = 1.2 kΩ และ β = 90 ก่อนเปิดเฉลย ลองเทียบสองพจน์ในตัวส่วนว่าพจน์ไหนใหญ่กว่า แล้วเดาว่าเมื่อ β เพิ่ม 50 % \(I_{CQ}\) จะเพิ่มมากหรือน้อย ส่วนสไลด์หน้า 31 ยืนยันว่าเมื่อถือ \(I_C' = I_C\) กระแสอิ่มตัวและเส้นโหลดเหมือนวงจรตัวแบ่งแรงดันและไบแอสอิมิตเตอร์: \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\)</p></div><div class="story-p" data-l="en"><p>Ex.5 (slide p. 30) uses \(R_F\) = 250 kΩ, \(R_C\) = 4.7 kΩ, \(R_E\) = 1.2 kΩ and β = 90. Before opening the solution, compare the two terms of the denominator, then guess whether a 50 % rise in β will move \(I_{CQ}\) a lot or a little. Slide p. 31 confirms that, with \(I_C' = I_C\), the saturation current and the load line are those of the voltage-divider and emitter-bias circuits: \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 30, DC Bias with Voltage Feedback, Ex.5: determine the quiescent levels of I_CQ and V_CEQ for the network of the figure: 10 V, R_C = 4.7 kΩ, R_F = 250 kΩ from the collector to the base, 10 µF coupling capacitors, β = 90, R_E = 1.2 kΩ.">
     <figcaption data-l="th">สไลด์หน้า 30: Ex.5 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 30: Ex.5 · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch4/p31.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 31, DC Bias with Voltage Feedback, saturation conditions: using the approximation I_C' = I_C, the equation for the saturation current is the same as obtained for the voltage-divider and emitter-bias configurations, I_Csat = I_Cmax = V_CC/(R_C + R_E). Load-line analysis: continuing with the approximation I_C' = I_C will result in the same load line; the level of I_BQ will be defined by the chosen bias configuration; V_CE = V_CC at I_C = 0 mA.">
-    <figcaption data-l="th">สไลด์หน้า 31: การอิ่มตัวและเส้นโหลด · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: saturation and the load line · tap to enlarge</figcaption></figure></div>
+    <figcaption data-l="th">สไลด์หน้า 31: การอิ่มตัวและเส้นโหลด · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: saturation and the load line · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 10 V, \(R_F\) = 250 kΩ, \(R_C\) = 4.7 kΩ, \(R_E\) = 1.2 kΩ, β = 90 จงหา \(I_{CQ}\) และ \(V_{CEQ}\) แล้วทำซ้ำเมื่อ β = 135 (เพิ่ม 50 %)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 10 V, \(R_F\) = 250 kΩ, \(R_C\) = 4.7 kΩ, \(R_E\) = 1.2 kΩ, β = 90. Determine \(I_{CQ}\) and \(V_{CEQ}\), then repeat with β = 135 (50 % more).</p></div>
   <p class="lead" data-l="th">ภาพจำลองเปลี่ยนเป็นทรานซิสเตอร์ β = 135 ในขั้นที่ 3 โดยยังวาดจุด Q เดิมไว้ <b>ลองตอบก่อน</b></p>
@@ -75,8 +100,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.6: ตัวต้านทานป้อนกลับสองตัว</h2><h2 data-l="en">Ex.6: two feedback resistors</h2>
     <div class="src" data-l="th">สไลด์หน้า 32 · Boylestad Example 4.14 (รูป 4.42)</div><div class="src" data-l="en">Slide p. 32 · Boylestad Example 4.14 (Fig. 4.42)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 32, DC Bias with Voltage Feedback, Ex.6: determine the dc level of I_BQ and V_CQ for the network of the figure: 18 V, R_C = 3.3 kΩ, R_F1 = 91 kΩ and R_F2 = 110 kΩ in series from the collector to the base with a 10 µF capacitor from their junction to ground, β = 75, R_E = 510 Ω with a 50 µF bypass capacitor.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.6 (สไลด์หน้า 32) แบ่งทางป้อนกลับเป็นสองตัว 91 kΩ กับ 110 kΩ (สไลด์เขียนชื่อ \(R_1\), \(R_2\) หน้านี้เรียก \(R_{F1}\), \(R_{F2}\)) และมีตัวเก็บประจุ 10 µF จากจุดต่อลงกราวด์ ถามตัวเองก่อน: สำหรับไฟตรง ตัวเก็บประจุนี้เป็นอะไร แล้ว \(R_{F1}\) กับ \(R_{F2}\) ต่อกันแบบไหน</p></div><div class="story-p" data-l="en"><p>Ex.6 (slide p. 32) splits the feedback path into 91 kΩ and 110 kΩ (labelled \(R_1\), \(R_2\) on the slide, \(R_{F1}\), \(R_{F2}\) on this page), with a 10 µF capacitor from their junction to ground. Ask yourself first: what is that capacitor for dc, and how are \(R_{F1}\) and \(R_{F2}\) then connected?</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 32, DC Bias with Voltage Feedback, Ex.6: determine the dc level of I_BQ and V_CQ for the network of the figure: 18 V, R_C = 3.3 kΩ, R_F1 = 91 kΩ and R_F2 = 110 kΩ in series from the collector to the base with a 10 µF capacitor from their junction to ground, β = 75, R_E = 510 Ω with a 50 µF bypass capacitor.">
     <figcaption data-l="th">สไลด์หน้า 32: Ex.6 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: Ex.6 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 18 V, \(R_C\) = 3.3 kΩ, \(R_{F1}\) = 91 kΩ, \(R_{F2}\) = 110 kΩ (มีตัวเก็บประจุ 10 µF จากจุดต่อลงกราวด์), \(R_E\) = 510 Ω, β = 75 จงหา \(I_{BQ}\) และ \(V_{CQ}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 18 V, \(R_C\) = 3.3 kΩ, \(R_{F1}\) = 91 kΩ, \(R_{F2}\) = 110 kΩ (a 10 µF capacitor from their junction to ground), \(R_E\) = 510 Ω, β = 75. Determine \(I_{BQ}\) and \(V_{CQ}\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองวาดเฉพาะส่วนไฟตรง (ตัวเก็บประจุถอดออก จุดต่อระหว่าง \(R_{F1}\) กับ \(R_{F2}\) ลอยอยู่) <b>ลองตอบก่อน</b></p>
@@ -92,7 +123,7 @@
 
 <section class="notes" data-l="th">
   <div class="card"><h3>ลองทำดู 1 — \(R_F\) เล็กหรือใหญ่</h3>
-    <ol><li>ส่วน A เลื่อน \(R_F\) ลงถึง 50 kΩ: \(\beta(R_C + R_E)\) = 531 kΩ ใหญ่กว่ามาก กราฟล่างแทบราบ แต่จุด Q ขึ้นไปใกล้อิ่มตัว (\(I_C\) ≈ 1.5 mA, \(V_{CE}\) ≈ 1 V) เพราะ \(I_B\) ถูกกำหนดโดย \(R'\) เกือบทั้งหมด</li>
+    <ol><li>ส่วน A เลื่อน \(R_F\) ลงถึง 50 kΩ: \(\beta(R_C + R_E)\) = 531 kΩ ใหญ่กว่ามาก กราฟล่างแทบราบ แต่จุด Q ขึ้นไปใกล้อิ่มตัว (\(I_C\) ≈ 1.4 mA, \(V_{CE}\) ≈ 1.5 V) เพราะ \(I_B\) ถูกกำหนดโดย \(R'\) เกือบทั้งหมด</li>
     <li>เพิ่ม \(R_F\) ถึง 2 MΩ: พจน์ \(R_F\) ครอบงำ วงจรกลายเป็นคล้ายไบแอสคงที่ กราฟล่างชัน</li></ol></div>
   <div class="card"><h3>ลองทำดู 2 — การประมาณ \(I_C' \cong I_C\)</h3>
     <ol><li>ข้อ 1: ตัวแก้วงจรให้ 11.82 µA แทน 11.91 µA เพราะ \(I_B\) ไหลผ่าน \(R_C\) ด้วย ต่างกันไม่ถึง 1 % ซึ่งน้อยกว่าความไม่แน่นอนของ β มาก</li>
@@ -101,7 +132,7 @@
 </section>
 <section class="notes" data-l="en">
   <div class="card"><h3>Try this 1 — a small or a large \(R_F\)</h3>
-    <ol><li>In section A move \(R_F\) down to 50 kΩ: \(\beta(R_C + R_E)\) = 531 kΩ dominates, the lower graph is almost flat, but Q moves up near saturation (\(I_C\) ≈ 1.5 mA, \(V_{CE}\) ≈ 1 V), because \(I_B\) is set almost entirely by \(R'\).</li>
+    <ol><li>In section A move \(R_F\) down to 50 kΩ: \(\beta(R_C + R_E)\) = 531 kΩ dominates, the lower graph is almost flat, but Q moves up near saturation (\(I_C\) ≈ 1.4 mA, \(V_{CE}\) ≈ 1.5 V), because \(I_B\) is set almost entirely by \(R'\).</li>
     <li>Raise \(R_F\) to 2 MΩ: the \(R_F\) term dominates, the circuit behaves like fixed bias and the lower graph is steep.</li></ol></div>
   <div class="card"><h3>Try this 2 — the approximation \(I_C' \cong I_C\)</h3>
     <ol><li>Problem 1: the solver gives 11.82 µA instead of 11.91 µA because \(I_B\) also flows through \(R_C\): under 1 % apart, far less than the uncertainty of β.</li>

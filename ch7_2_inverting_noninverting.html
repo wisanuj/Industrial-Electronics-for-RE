@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรขยายกลับเฟส ไม่กลับเฟส และตัวตามแรงดัน <span class="en">Inverting and noninverting amplifiers, the unity follower</span></h1>
 <h1 data-l="en">Inverting and noninverting amplifiers, the unity follower <span class="en">Feedback turns a gain of 200 000 into exactly \(-R_f/R_1\)</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 1 หน้า 13–18 และแบบฝึกหัดหน้า 21–22 ออปแอมป์มีอัตราขยายสูงเกินใช้ จึงต่อตัวต้านทานป้อนขาออกกลับเข้าขั้ว − (ป้อนกลับลบ): ขาออกจะปรับตัวจนแรงดันระหว่างขั้วเข้า \(V_i = V_o/A\) แทบเป็นศูนย์ ขั้ว − จึงเป็น<b>กราวด์เสมือน</b> (วงจรกลับเฟส) หรือตาม \(V_1\) (วงจรไม่กลับเฟส) และอัตราขยายถูกกำหนดด้วยตัวต้านทานสองตัวเท่านั้น หน้านี้มีวงจรทั้งสามแบบที่ปรับค่าได้พร้อมกราฟถ่ายโอน (ส่วน A) Examples 10.5–10.6 โจทย์หน้า 21–22 ที่มีโพเทนชิออมิเตอร์ และตัวตามแรงดันที่ทำหน้าที่บัฟเฟอร์</p>
-<p class="sub" data-l="en">Chapter 7 slide set I, pp. 13–18 and the exercises on pp. 21–22. The op-amp's gain is far too high to use as it is, so a resistor feeds the output back to the − input (negative feedback): the output adjusts itself until the voltage between the inputs, \(V_i = V_o/A\), is nearly zero. The − input then sits at a <b>virtual ground</b> (inverting circuit) or follows \(V_1\) (noninverting circuit), and the gain is set by two resistors alone. This page has all three circuits with adjustable values and the transfer graph (section A), Examples 10.5–10.6, the potentiometer problems of pp. 21–22, and the unity follower acting as a buffer.</p>
+<p class="sub" data-l="th">อัตราขยายสองแสนเท่าฟังดูดี จนกว่าจะพบว่าขาเข้าแค่ 100 µV ก็พาขาออกชนรางแล้ว และอัตราขยายนี้ยังเปลี่ยนไปตามอุณหภูมิและตามไอซีแต่ละตัว ทางออกคือยอมทิ้งอัตราขยายส่วนใหญ่: ป้อนขาออกกลับเข้าขั้ว − ผ่านตัวต้านทาน (ป้อนกลับลบ) แล้วอัตราขยายจะเหลือเพียงอัตราส่วนของตัวต้านทานสองตัว ซึ่งแม่นและคงที่ หน้านี้สร้างวงจรกลับเฟส ไม่กลับเฟส และตัวตามแรงดัน แล้วใส่ปุ่มปรับให้มัน (สไลด์บทที่ 7 ชุดที่ 1 หน้า 14–18 และแบบฝึกหัดหน้า 21–22 · Boylestad หัวข้อ 10.4–10.5)</p>
+<p class="sub" data-l="en">A gain of two hundred thousand sounds great until you find that an input of only 100 µV already drives the output into a rail, and that this gain drifts with temperature and from one IC to the next. The way out is to give most of it away: feed the output back to the − input through a resistor (negative feedback), and the gain shrinks to the ratio of two resistors, which is accurate and steady. This page builds the inverting amplifier, the noninverting amplifier and the unity follower, then gives them a tuning knob (chapter 7 slides, set 1, pp. 14–18 and exercises pp. 21–22; Boylestad sections 10.4–10.5).</p>
 <div class="equation-box eqwrap">$$ V_i = \frac{V_o}{A} \approx 0 $$ $$ \text{inverting: } V_o = -\frac{R_f}{R_1}V_1 $$ $$ \text{noninverting: } V_o = \left(1 + \frac{R_f}{R_1}\right)V_1 $$ $$ \text{follower: } V_o = V_1 $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -38,27 +38,22 @@
   <li><b>Limits</b>: the formulas hold only while \(|V_o| < V_{sat}\) ≈ 13 V; beyond that the output clips (section A: the transfer graph bends flat). The true closed-loop gain is \(-\frac{R_f/R_1}{1 + (1 + R_f/R_1)/A}\), closer to the formula the larger \(A\).</li>
   <li><b>A potentiometer in \(R_1\)</b> (pp. 21–22): the inverting circuit adjusts from −50 to −25, the noninverting one gives 10.5 down to 5.5 V.</li></ul></section>
 
-<div class="slides">
-  <figure class="slide"><img src="slides/ch7a/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 14, Op-Amp Basics: the basic circuit connection using an op-amp provides operation as a constant-gain multiplier; an input signal V_1 is applied through resistor R_1 to the minus input, the output is connected back to the same minus input through resistor R_f, the plus input is connected to ground; the resulting output is opposite in phase to the input signal; V_o/V_1 = −R_f/R_1.">
-    <figcaption data-l="th">สไลด์หน้า 14: การต่อพื้นฐาน \(V_o/V_1 = -R_f/R_1\) (รูป 10.33)</figcaption><figcaption data-l="en">Slide p. 14: the basic connection, \(V_o/V_1 = -R_f/R_1\) (Fig. 10.33)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 15, Practical Op-Amp Circuits, Inverting Amplifier Circuit: the most widely used constant-gain amplifier circuit is the inverting amplifier (Figure 10.34, V_o = −(R_f/R_1)V_1); if the circuit has R_1 = 100 kΩ and R_f = 500 kΩ, what output voltage results for an input of V_1 = 2 V?">
-    <figcaption data-l="th">สไลด์หน้า 15: วงจรกลับเฟสและโจทย์ Example 10.5</figcaption><figcaption data-l="en">Slide p. 15: the inverting amplifier and Example 10.5</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 16, Noninverting Amplifier Circuit: the connection of the figure works as a noninverting amplifier or constant-gain multiplier; the inverting amplifier connection is more widely used because it has better frequency stability; the virtual-ground equivalent with V_i ≈ 0 gives V_o/V_1 = (R_1 + R_f)/R_1 = 1 + R_f/R_1 (Figure 10.35).">
-    <figcaption data-l="th">สไลด์หน้า 16: วงจรไม่กลับเฟส \(V_o/V_1 = 1 + R_f/R_1\) (รูป 10.35)</figcaption><figcaption data-l="en">Slide p. 16: the noninverting amplifier, \(V_o/V_1 = 1 + R_f/R_1\) (Fig. 10.35)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 17, Noninverting Amplifier Circuit: calculate the output voltage of a noninverting amplifier for values of V_1 = 2 V, R_f = 500 kΩ and R_1 = 100 kΩ (Example 10.6).">
-    <figcaption data-l="th">สไลด์หน้า 17: โจทย์ Example 10.6</figcaption><figcaption data-l="en">Slide p. 17: Example 10.6</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 18, Unity Follower Circuit: the unity-follower circuit provides a gain of unity with no polarity or phase reversal; from the equivalent circuit it is clear that V_o = V_1 and that the output is the same polarity and magnitude as the input (Figure 10.36).">
-    <figcaption data-l="th">สไลด์หน้า 18: ตัวตามแรงดัน \(V_o = V_1\) (รูป 10.36)</figcaption><figcaption data-l="en">Slide p. 18: the unity follower, \(V_o = V_1\) (Fig. 10.36)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 21, Exercises of Op-Amp: what is the range of the voltage-gain adjustment in the circuit of the figure? An inverting amplifier with V_1 through 10 kΩ in series with a 10 kΩ potentiometer into the minus input, R_f = 500 kΩ (Problem 2, Fig. 10.63).">
-    <figcaption data-l="th">สไลด์หน้า 21: โจทย์ข้อ 2 (รูป 10.63)</figcaption><figcaption data-l="en">Slide p. 21: Problem 2 (Fig. 10.63)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 22, Exercises of Op-Amp: what range of output voltage is developed in the circuit of the figure? A noninverting amplifier with V_1 = 0.5 V at the plus input, R_f = 200 kΩ from the output to the minus input, and 10 kΩ in series with a 10 kΩ potentiometer from the minus input to ground (Problem 7, Fig. 10.67).">
-    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ข้อ 7 (รูป 10.67)</figcaption><figcaption data-l="en">Slide p. 22: Problem 7 (Fig. 10.67)</figcaption></figure>
-</div>
-<div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 15 และ 17 คือ Examples 10.5–10.6 หน้า 21–22 คือข้อ 2 และ 7 ท้ายบทที่ 10 ของตำรา (แบบฝึกเพิ่มใช้ข้อ 4–6) · ข้อ 3 ของหน้านี้ต้องการแหล่งจ่ายเพื่อให้เห็นขาออก จึงเลือก \(V_1\) = 0.2 V เอง (โจทย์ถามแค่ช่วงอัตราขยาย) · ภาพจำลองใช้ออปแอมป์ \(A\) = 2 × 10⁵, \(V_{sat}\) = ±13 V จุดกระแสหายเข้าออปแอมป์ที่ขาออกเพราะกระแสนั้นกลับทางแหล่งจ่ายไฟเลี้ยงซึ่งไม่ได้วาด</div>
-<div class="warnbox" data-l="en"><b>The slides give no solutions</b>: pp. 15 and 17 are Examples 10.5–10.6, pp. 21–22 are Problems 2 and 7 at the end of the book's chapter 10 (the practice box uses Problems 4–6). Problem 3 on this page needs a source for an output to show, so \(V_1\) = 0.2 V is this page's choice (the problem asks only for the gain range). The simulations use an op-amp with \(A\) = 2 × 10⁵ and \(V_{sat}\) = ±13 V; the current dots vanish into the op-amp at its output because that current returns through the supply rails, which are not drawn.</div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สามวงจร</a><a href="#ex1"><b>1</b>Example 10.5</a><a href="#ex2"><b>2</b>Example 10.6</a><a href="#ex3"><b>3</b>ข้อ 2</a><a href="#ex4"><b>4</b>ข้อ 7</a><a href="#ex5"><b>5</b>บัฟเฟอร์</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Three circuits</a><a href="#ex1"><b>1</b>Example 10.5</a><a href="#ex2"><b>2</b>Example 10.6</a><a href="#ex3"><b>3</b>Problem 2</a><a href="#ex4"><b>4</b>Problem 7</a><a href="#ex5"><b>5</b>Buffer</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ปราบอัตราขยายที่มากเกินไป</div><div class="story-k" data-l="en">Part 1 · Taming too much gain</div>
+    <h2 data-l="th">ตัวต้านทานสองตัวกำหนดอัตราขยาย</h2><h2 data-l="en">Two resistors set the gain</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 14 ป้อน \(V_1\) ผ่าน \(R_1\) เข้าขั้ว − แล้วต่อ \(R_f\) จากขาออกกลับมาที่ขั้วเดียวกัน ขาออกจะปรับตัวเองจนแรงดันระหว่างขั้วเข้าเหลือเพียง \(V_o/A\) ซึ่งแทบเป็นศูนย์ ขั้ว − จึงเป็นกราวด์เสมือน แม้ไม่ได้ต่อลงกราวด์จริง</p><p>ผลคือ \(V_o/V_1 = -R_f/R_1\): ตัวเลขของออปแอมป์หายไปจากสูตร เหลือแค่ตัวต้านทานสองตัว และเครื่องหมายลบบอกว่าขาออกกลับขั้ว</p></div><div class="story-p" data-l="en"><p>Slide p. 14 feeds \(V_1\) through \(R_1\) into the − input and connects \(R_f\) from the output back to the same input. The output adjusts itself until the voltage between the inputs is only \(V_o/A\), practically zero, so the − input becomes a virtual ground although it is not tied to ground.</p><p>The result is \(V_o/V_1 = -R_f/R_1\): the op-amp's own number drops out of the formula, leaving two resistors, and the minus sign says the output is inverted.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 14, Op-Amp Basics: the basic circuit connection using an op-amp provides operation as a constant-gain multiplier; an input signal V_1 is applied through resistor R_1 to the minus input, the output is connected back to the same minus input through resistor R_f, the plus input is connected to ground; the resulting output is opposite in phase to the input signal; V_o/V_1 = −R_f/R_1.">
+    <figcaption data-l="th">สไลด์หน้า 14: การต่อพื้นฐาน \(V_o/V_1 = -R_f/R_1\) (รูป 10.33)</figcaption><figcaption data-l="en">Slide p. 14: the basic connection, \(V_o/V_1 = -R_f/R_1\) (Fig. 10.33)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th">ภาพจำลองใช้ออปแอมป์ \(A\) = 2 × 10⁵, \(V_{sat}\) = ±13 V จุดกระแสหายเข้าออปแอมป์ที่ขาออกเพราะกระแสนั้นกลับทางแหล่งจ่ายไฟเลี้ยงซึ่งไม่ได้วาด</div><div class="warnbox" data-l="en">The simulations use an op-amp with \(A\) = 2 × 10⁵ and \(V_{sat}\) = ±13 V; the current dots vanish into the op-amp at its output because that current returns through the supply rails, which are not drawn.</div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลือกวงจรแล้วลด \(A\) ลงเหลือ 100 ดูว่าอัตราขยายเปลี่ยนน้อยแค่ไหน</p><p class="story-next" data-l="en">↓ Section A: pick a circuit and lower \(A\) to 100 to see how little the gain changes</p>
+</div>
 
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรปรับได้ทั้งสามแบบ กับกราฟถ่ายโอน \(V_o\)–\(V_1\)</h2><h2 data-l="en">The three adjustable circuits, with the \(V_o\)–\(V_1\) transfer graph</h2>
@@ -67,6 +62,17 @@
   <p class="lead" data-l="en">Choose a circuit, then move \(V_1\), \(R_1\), \(R_f\) and the open-loop gain \(A\). The lower graph is the output against the input from the engine: a line of slope \(-R_f/R_1\) or \(1 + R_f/R_1\) that bends flat at the ±13 V rails. Lower \(A\) to 100 and see how far the real gain falls short of the formula. Hover over the op-amp to read \(V_d\), and notice that in the noninverting circuit the source carries no dots.</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · วงจรกลับเฟส</div><div class="story-k" data-l="en">Part 2 · The inverting amplifier</div>
+    <h2 data-l="th">เดินตามกระแส</h2><h2 data-l="en">Follow the current</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 15 เรียกวงจรนี้ว่าวงจรขยายอัตราขยายคงที่ที่ใช้มากที่สุด แล้วถามว่า \(R_1\) = 100 kΩ, \(R_f\) = 500 kΩ กับ \(V_1\) = 2 V ให้ขาออกเท่าใด</p><p>วิธีคิดที่ไม่ต้องจำสูตร: ขั้ว − อยู่ที่ศูนย์โวลต์ กระแสใน \(R_1\) จึงหาได้ทันที ขาเข้าของออปแอมป์ไม่รับกระแส กระแสทั้งหมดจึงต้องไหลต่อผ่าน \(R_f\) ก่อนเปิดเฉลย ลองเดาว่าขาออกเป็นบวกหรือลบ และใหญ่กว่าขาเข้ากี่เท่า</p></div><div class="story-p" data-l="en"><p>Slide p. 15 calls this the most widely used constant-gain amplifier and asks what output \(R_1\) = 100 kΩ, \(R_f\) = 500 kΩ and \(V_1\) = 2 V give.</p><p>A way to think that needs no formula: the − input sits at zero volts, so the current in \(R_1\) follows at once; the op-amp input takes no current, so all of it must continue through \(R_f\). Before opening the solution, guess whether the output is positive or negative, and how many times larger than the input.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 15, Practical Op-Amp Circuits, Inverting Amplifier Circuit: the most widely used constant-gain amplifier circuit is the inverting amplifier (Figure 10.34, V_o = −(R_f/R_1)V_1); if the circuit has R_1 = 100 kΩ and R_f = 500 kΩ, what output voltage results for an input of V_1 = 2 V?">
+    <figcaption data-l="th">สไลด์หน้า 15: วงจรกลับเฟสและโจทย์ Example 10.5</figcaption><figcaption data-l="en">Slide p. 15: the inverting amplifier and Example 10.5</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: Example 10.5</p><p class="story-next" data-l="en">↓ Problem 1: Example 10.5</p>
+</div>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 10.5: วงจรกลับเฟส</h2><h2 data-l="en">Example 10.5: the inverting amplifier</h2>
@@ -77,6 +83,19 @@
   <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
 </section>
 
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ไม่กลับเฟส</div><div class="story-k" data-l="en">Part 3 · The noninverting amplifier</div>
+    <h2 data-l="th">สัญญาณเข้าทางขั้ว +</h2><h2 data-l="en">The signal enters at the + input</h2>
+    <div class="story-p" data-l="th"><p>ย้ายสัญญาณไปเข้าขั้ว + แล้วให้ \(R_1\) กับ \(R_f\) แบ่งขาออกกลับมาที่ขั้ว − (สไลด์หน้า 16) ขั้ว − ต้องตามขั้ว + ให้ทัน จึงได้ \(V_o/V_1 = 1 + R_f/R_1\) ขาออกไม่กลับขั้ว และอัตราขยายไม่มีทางต่ำกว่าหนึ่ง สไลด์ยังบอกว่าวงจรกลับเฟสนิยมกว่าเพราะเสถียรทางความถี่ดีกว่า</p><p>สไลด์หน้า 17 ใช้ตัวต้านทานชุดเดิมของ Example 10.5 ลองเทียบในใจก่อนว่าคำตอบจะต่างจากวงจรกลับเฟสอย่างไรทั้งขนาดและเครื่องหมาย</p></div><div class="story-p" data-l="en"><p>Move the signal to the + input and let \(R_1\) and \(R_f\) divide the output back to the − input (slide p. 16). The − input must keep up with the + input, which gives \(V_o/V_1 = 1 + R_f/R_1\): the output is not inverted and the gain can never fall below one. The slide adds that the inverting connection is more widely used because of its better frequency stability.</p><p>Slide p. 17 uses the same resistors as Example 10.5. Compare in your head first how the answer will differ from the inverting one, in size and in sign.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 16, Noninverting Amplifier Circuit: the connection of the figure works as a noninverting amplifier or constant-gain multiplier; the inverting amplifier connection is more widely used because it has better frequency stability; the virtual-ground equivalent with V_i ≈ 0 gives V_o/V_1 = (R_1 + R_f)/R_1 = 1 + R_f/R_1 (Figure 10.35).">
+    <figcaption data-l="th">สไลด์หน้า 16: วงจรไม่กลับเฟส \(V_o/V_1 = 1 + R_f/R_1\) (รูป 10.35)</figcaption><figcaption data-l="en">Slide p. 16: the noninverting amplifier, \(V_o/V_1 = 1 + R_f/R_1\) (Fig. 10.35)</figcaption></figure>
+    <figure class="slide"><img src="slides/ch7a/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 17, Noninverting Amplifier Circuit: calculate the output voltage of a noninverting amplifier for values of V_1 = 2 V, R_f = 500 kΩ and R_1 = 100 kΩ (Example 10.6).">
+    <figcaption data-l="th">สไลด์หน้า 17: โจทย์ Example 10.6</figcaption><figcaption data-l="en">Slide p. 17: Example 10.6</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: Example 10.6</p><p class="story-next" data-l="en">↓ Problem 2: Example 10.6</p>
+</div>
+
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 10.6: วงจรไม่กลับเฟส</h2><h2 data-l="en">Example 10.6: the noninverting amplifier</h2>
     <div class="src" data-l="th">สไลด์หน้า 16–17 · Boylestad Example 10.6 (รูป 10.35, สมการ 10.9)</div><div class="src" data-l="en">Slides pp. 16–17 · Boylestad Example 10.6 (Fig. 10.35, Eq. 10.9)</div></div></div>
@@ -85,6 +104,20 @@
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
 </section>
+
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 4 · ใส่ปุ่มปรับ</div><div class="story-k" data-l="en">Part 4 · Adding a knob</div>
+    <h2 data-l="th">โพเทนชิออมิเตอร์ในตำแหน่งของ \(R_1\)</h2><h2 data-l="en">A potentiometer in place of \(R_1\)</h2>
+    <div class="story-p" data-l="th"><p>แบบฝึกหัดสองข้อในสไลด์หน้า 21–22 ใส่โพเทนชิออมิเตอร์ 10 kΩ อนุกรมกับ \(R_1\) = 10 kΩ ข้อ 2 เป็นวงจรกลับเฟสที่มี \(R_f\) = 500 kΩ ถามช่วงของอัตราขยาย ข้อ 7 เป็นวงจรไม่กลับเฟสที่มี \(R_f\) = 200 kΩ กับ \(V_1\) = 0.5 V ถามช่วงของขาออก</p><p>เคล็ดลับคือคิดแค่สองปลาย: หมุนสุดทางหนึ่ง \(R_1\) รวมเป็น 10 kΩ หมุนสุดอีกทางเป็น 20 kΩ ลองหาก่อนว่าปลายไหนให้อัตราขยายมากกว่า</p></div><div class="story-p" data-l="en"><p>The two exercises of slides pp. 21–22 put a 10 kΩ potentiometer in series with \(R_1\) = 10 kΩ. Problem 2 is an inverting amplifier with \(R_f\) = 500 kΩ and asks for the range of gain; Problem 7 is a noninverting one with \(R_f\) = 200 kΩ and \(V_1\) = 0.5 V and asks for the range of output.</p><p>The trick is to think only of the two ends: at one end the total \(R_1\) is 10 kΩ, at the other 20 kΩ. Find first which end gives the larger gain.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 21, Exercises of Op-Amp: what is the range of the voltage-gain adjustment in the circuit of the figure? An inverting amplifier with V_1 through 10 kΩ in series with a 10 kΩ potentiometer into the minus input, R_f = 500 kΩ (Problem 2, Fig. 10.63).">
+    <figcaption data-l="th">สไลด์หน้า 21: โจทย์ข้อ 2 (รูป 10.63)</figcaption><figcaption data-l="en">Slide p. 21: Problem 2 (Fig. 10.63)</figcaption></figure>
+    <figure class="slide"><img src="slides/ch7a/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 22, Exercises of Op-Amp: what range of output voltage is developed in the circuit of the figure? A noninverting amplifier with V_1 = 0.5 V at the plus input, R_f = 200 kΩ from the output to the minus input, and 10 kΩ in series with a 10 kΩ potentiometer from the minus input to ground (Problem 7, Fig. 10.67).">
+    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ข้อ 7 (รูป 10.67)</figcaption><figcaption data-l="en">Slide p. 22: Problem 7 (Fig. 10.67)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 15 และ 17 คือ Examples 10.5–10.6 หน้า 21–22 คือข้อ 2 และ 7 ท้ายบทที่ 10 ของตำรา (แบบฝึกเพิ่มใช้ข้อ 4–6) · ข้อ 3 ของหน้านี้ต้องการแหล่งจ่ายเพื่อให้เห็นขาออก จึงเลือก \(V_1\) = 0.2 V เอง (โจทย์ถามแค่ช่วงอัตราขยาย)</div><div class="warnbox" data-l="en"><b>The slides give no solutions</b>: pp. 15 and 17 are Examples 10.5–10.6, pp. 21–22 are Problems 2 and 7 at the end of the book's chapter 10 (the practice box uses Problems 4–6). Problem 3 on this page needs a source for an output to show, so \(V_1\) = 0.2 V is this page's choice (the problem asks only for the gain range).</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3–4: หมุนโพเทนชิออมิเตอร์ด้วยแถบเลื่อนใต้ภาพ</p><p class="story-next" data-l="en">↓ Problems 3–4: turn the potentiometer with the slider under the picture</p>
+</div>
 
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ข้อ 2: ช่วงอัตราขยายเมื่อ \(R_1\) มีโพเทนชิออมิเตอร์</h2><h2 data-l="en">Problem 2: the gain range with a potentiometer in \(R_1\)</h2>
@@ -103,6 +136,17 @@
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv4"></canvas><div class="panel" id="ctl4"></div></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 5 · อัตราขยายหนึ่งที่มีประโยชน์</div><div class="story-k" data-l="en">Part 5 · A gain of one that earns its keep</div>
+    <h2 data-l="th">ตัวตามแรงดัน</h2><h2 data-l="en">The unity follower</h2>
+    <div class="story-p" data-l="th"><p>ต่อขาออกกลับเข้าขั้ว − ตรง ๆ (สไลด์หน้า 18) ได้ \(V_o = V_1\) ขนาดและขั้วเท่าเดิมทุกประการ ฟังดูไร้ประโยชน์ แต่ขาเข้าไม่ดึงกระแสเลย ขณะที่ขาออกจ่ายกระแสได้เต็มที่</p><p>โจทย์ 5 แสดงว่าทำไมสำคัญ: แหล่งจ่ายที่มีความต้านทานภายใน 10 kΩ ขับโหลด 1 kΩ โดยตรงแล้วแรงดันหายไปเกือบหมด ลองเดาก่อนว่าเหลือเท่าใด แล้วดูว่าตัวตามแรงดันคั่นกลางแล้วโหลดได้แรงดันเต็ม</p></div><div class="story-p" data-l="en"><p>Connect the output straight back to the − input (slide p. 18) and \(V_o = V_1\): the same size and polarity in every respect. It sounds useless, but the input draws no current while the output can deliver all the current the load needs.</p><p>Problem 5 shows why that matters: a source with 10 kΩ inside driving a 1 kΩ load directly loses most of its voltage. Guess how much is left, then see the follower in between give the load the full voltage.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 18, Unity Follower Circuit: the unity-follower circuit provides a gain of unity with no polarity or phase reversal; from the equivalent circuit it is clear that V_o = V_1 and that the output is the same polarity and magnitude as the input (Figure 10.36).">
+    <figcaption data-l="th">สไลด์หน้า 18: ตัวตามแรงดัน \(V_o = V_1\) (รูป 10.36)</figcaption><figcaption data-l="en">Slide p. 18: the unity follower, \(V_o = V_1\) (Fig. 10.36)</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ โจทย์ 5: บัฟเฟอร์ระหว่างแหล่งจ่าย 10 kΩ กับโหลด 1 kΩ</p><p class="story-next" data-l="en">↓ Problem 5: a buffer between a 10 kΩ source and a 1 kΩ load</p>
+</div>
 
 <section class="prob" id="ex5">
   <div class="prob-head"><span class="prob-no">5</span><div><h2 data-l="th">ตัวตามแรงดันเป็นบัฟเฟอร์: แหล่งจ่าย 10 kΩ ขับโหลด 1 kΩ</h2><h2 data-l="en">The unity follower as a buffer: a 10 kΩ source driving a 1 kΩ load</h2>

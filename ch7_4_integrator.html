@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรอินทิเกรเตอร์และดิฟเฟอเรนชิเอเตอร์ <span class="en">The integrator and the differentiator</span></h1>
 <h1 data-l="en">The integrator and the differentiator <span class="en">A capacitor in place of a resistor turns the summer into calculus</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 2 หน้า 3–6 ถ้าแทน \(R_f\) ของวงจรกลับเฟสด้วยตัวเก็บประจุ กระแสคงที่ \(v_1/R\) จากกราวด์เสมือนจะเติมประจุให้ C ด้วยอัตราคงที่ ขาออกจึงเป็นเส้นตรงลาดลง: อินทิกรัลของขาเข้าคูณ \(-1/RC\) (สมการ 10.13) ถ้าสลับให้ C อยู่ด้านขาเข้าและ R ป้อนกลับ กระแสของ C คือ \(C\,dv_1/dt\) ขาออกจึงเป็นอนุพันธ์ (สมการ 10.15) หน้านี้จำลองตามเวลาจริง: วงจรปรับได้กับคลื่นขาเข้าสี่แบบ (ส่วน A) รูป 10.39 ที่ R = 1 MΩ แล้ว 100 kΩ ข้อ 10 ของตำรา อินทิเกรเตอร์รวมสัญญาณ (รูป 10.40) และดิฟเฟอเรนชิเอเตอร์กับคลื่นสามเหลี่ยม</p>
-<p class="sub" data-l="en">Chapter 7 slide set II, pp. 3–6. Replace the \(R_f\) of the inverting amplifier by a capacitor: the constant current \(v_1/R\) from the virtual ground charges C at a constant rate, so the output is a straight falling ramp: the integral of the input times \(-1/RC\) (Eq. 10.13). Swap them, C at the input and R in the feedback: C's current is \(C\,dv_1/dt\) and the output is the derivative (Eq. 10.15). This page simulates in real time: an adjustable circuit with four input waveforms (section A), Fig. 10.39 with R = 1 MΩ then 100 kΩ, the book's Problem 10, the summing integrator (Fig. 10.40) and the differentiator with a triangle wave.</p>
+<p class="sub" data-l="th">เปิดก๊อกน้ำค้างไว้ ระดับน้ำในถังคือผลรวมของน้ำทั้งหมดที่ไหลเข้ามาตั้งแต่ต้น ตัวเก็บประจุทำแบบเดียวกันกับประจุ: แรงดันของมันคือผลรวมของกระแสที่ไหลเข้า ใส่ตัวเก็บประจุในตำแหน่งของ \(R_f\) แล้วออปแอมป์จะกลายเป็นอินทิเกรเตอร์ (integrator) ที่บวกสะสมขาเข้าไปตามเวลา สลับตำแหน่ง R กับ C จะได้ดิฟเฟอเรนชิเอเตอร์ (differentiator) ที่บอกว่าขาเข้าเปลี่ยนเร็วแค่ไหน ภาพจำลองทุกภาพในหน้านี้เดินตามเวลาจริง (สไลด์บทที่ 7 ชุดที่ 2 หน้า 3–6 · Boylestad หัวข้อ 10.5)</p>
+<p class="sub" data-l="en">Leave a tap running and the water level in the bucket is the total of everything that has flowed in since the start. A capacitor does the same with charge: its voltage is the total of the current that has flowed into it. Put a capacitor where \(R_f\) was and the op-amp becomes an integrator that keeps adding up its input over time; swap R and C and it becomes a differentiator that tells how fast the input changes. Every simulation on this page runs in real time steps (chapter 7 slides, set 2, pp. 3–6; Boylestad section 10.5).</p>
 <div class="equation-box eqwrap">$$ v_o(t) = -\frac{1}{RC}\int v_1(t)\,dt $$ $$ v_o(t) = -\left[\frac{1}{R_1C}\int v_1\,dt + \frac{1}{R_2C}\int v_2\,dt + \frac{1}{R_3C}\int v_3\,dt\right] $$ $$ v_o(t) = -RC\frac{dv_1(t)}{dt} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,21 +36,24 @@
   <li><b>The differentiator</b> (p. 6, Fig. 10.41): \(i = C\,dv_1/dt\) through R gives \(v_o = -RC\,dv_1/dt\). A triangle gives a square wave, a sine a cosine (90° ahead), a step a spike to the rail. Less used, because it amplifies high-frequency noise.</li>
   <li><b>The time constant RC</b> is the single number that sets the scale: the integrator divides by it, the differentiator multiplies.</li></ul></section>
 
-<div class="slides">
-  <figure class="slide"><img src="slides/ch7b/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 3, Integrator Circuit: if the feedback component used is a capacitor, the resulting connection is called an integrator; the virtual-ground equivalent circuit shows that an expression for the voltage between input and output can be derived in terms of the current I from input to output; Figure 10.38 with the integrator and its virtual-ground equivalent, X_C = 1/jωC = 1/sC.">
-    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 3: อินทิเกรเตอร์และวงจรสมมูลกราวด์เสมือน (รูป 10.38)</figcaption><figcaption data-l="en">Set II slide p. 3: the integrator and its virtual-ground equivalent (Fig. 10.38)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7b/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 4, Integrator Circuit: where s = jω is in the Laplace notation; solving for V_o/V_1 yields I = V_1/R = −V_o/X_C = −V_o/(1/sC) = −sCV_o, V_o/V_1 = −1/sCR; the expression can be rewritten in the time domain as v_o(t) = −(1/RC) ∫ v_1(t) dt.">
-    <figcaption data-l="th">สไลด์หน้า 4: จาก \(V_o/V_1 = -1/sCR\) ถึงสมการ 10.13</figcaption><figcaption data-l="en">Slide p. 4: from \(V_o/V_1 = -1/sCR\) to Eq. 10.13</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7b/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 5, Integrator Circuit: as an example, consider an input voltage V_1 = 1 V to the integrator circuit of the figure; the scale factor of 1/RC is to be found; the circuit has R = 1 MΩ and C = 1 µF (Figure 10.39a).">
-    <figcaption data-l="th">สไลด์หน้า 5: ขั้น 1 V เข้า 1 MΩ, 1 µF (รูป 10.39a)</figcaption><figcaption data-l="en">Slide p. 5: a 1 V step into 1 MΩ, 1 µF (Fig. 10.39a)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7b/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 6, Differentiator Circuit: a differentiator circuit is shown in the figure; while not as useful as the circuit forms covered above, the differentiator does provide a useful operation, the resulting relation for the circuit being v_o(t) = −RC dv_1(t)/dt (Figure 10.41, C at the input and R in the feedback).">
-    <figcaption data-l="th">สไลด์หน้า 6: ดิฟเฟอเรนชิเอเตอร์ (รูป 10.41, สมการ 10.15)</figcaption><figcaption data-l="en">Slide p. 6: the differentiator (Fig. 10.41, Eq. 10.15)</figcaption></figure>
-</div>
-<div class="warnbox" data-l="th"><b>สไลด์หน้า 5 ตัดจบก่อนคำตอบ</b> ("The scale factor of 1/RC is" แล้วว่าง): −1/RC = −1 V/s และกรณี R = 100 kΩ ให้ −10 V/s อยู่ในตำราหน้า 626–627 (รูป 10.39b–c) · สไลด์หน้า 3 ขึ้นต้นด้วย "PRACTICAL OP-AMP CIRCUITS" ต่อจากชุดที่ 1 · ภาพจำลองของหน้านี้เดินตามเวลาจริงทีละก้าว (ตัวเก็บประจุจำประจุไว้) แล้วเล่นช้าลงให้ดูทัน: ป้ายบอกเวลาของวงจร เมื่อครบหน้าต่างจะเริ่มใหม่ · ขั้นเข้าดิฟเฟอเรนชิเอเตอร์ให้อนุพันธ์เป็นอนันต์ ขาออกจึงกระชากชนรางหนึ่งก้าวเวลาแล้วกลับ</div>
-<div class="warnbox" data-l="en"><b>Slide p. 5 breaks off before the answer</b> ("The scale factor of 1/RC is", then nothing): −1/RC = −1 V/s, and R = 100 kΩ gives −10 V/s, on pp. 626–627 of the book (Fig. 10.39b–c). Slide p. 3 opens with "PRACTICAL OP-AMP CIRCUITS", continuing set I. The simulations on this page step through real time (the capacitor remembers its charge) and are slowed down to be watchable: the badge gives the circuit time, and the window restarts when it ends. A step into the differentiator has an infinite derivative, so the output spikes to the rail for one time step and returns.</div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ตามเวลา</a><a href="#ex1"><b>1</b>รูป 10.39</a><a href="#ex2"><b>2</b>ข้อ 10</a><a href="#ex3"><b>3</b>รูป 10.40</a><a href="#ex4"><b>4</b>ดิฟเฟอเรนชิเอเตอร์</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>In time</a><a href="#ex1"><b>1</b>Fig. 10.39</a><a href="#ex2"><b>2</b>Problem 10</a><a href="#ex3"><b>3</b>Fig. 10.40</a><a href="#ex4"><b>4</b>Differentiator</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · เปลี่ยน \(R_f\) เป็นตัวเก็บประจุ</div><div class="story-k" data-l="en">Part 1 · Replace \(R_f\) with a capacitor</div>
+    <h2 data-l="th">อินทิเกรเตอร์: ขาออกจำทุกอย่างที่ผ่านมา</h2><h2 data-l="en">The integrator: an output that remembers everything</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 3 ใส่ตัวเก็บประจุในเส้นป้อนกลับ ขั้ว − ยังเป็นกราวด์เสมือน กระแส \(V_1/R\) จึงไหลเข้า R แล้วต้องไปชาร์จตัวเก็บประจุทั้งหมด เพราะขาเข้าของออปแอมป์ไม่รับกระแส</p><p>สไลด์หน้า 4 แก้สมการในรูป \(V_o/V_1 = -1/sCR\) แล้วเขียนกลับเป็นเวลา: \(v_o(t) = -\dfrac{1}{RC}\displaystyle\int v_1(t)\,dt\) ขาออกจึงเป็นผลรวมสะสมของขาเข้า กลับขั้ว และคูณด้วย \(1/RC\)</p></div><div class="story-p" data-l="en"><p>Slide p. 3 puts a capacitor in the feedback path. The − input is still a virtual ground, so the current \(V_1/R\) flowing in through R must all go on to charge the capacitor, since the op-amp input takes none.</p><p>Slide p. 4 solves for \(V_o/V_1 = -1/sCR\) and turns it back into time: \(v_o(t) = -\dfrac{1}{RC}\displaystyle\int v_1(t)\,dt\). The output is the running total of the input, inverted and scaled by \(1/RC\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7b/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 3, Integrator Circuit: if the feedback component used is a capacitor, the resulting connection is called an integrator; the virtual-ground equivalent circuit shows that an expression for the voltage between input and output can be derived in terms of the current I from input to output; Figure 10.38 with the integrator and its virtual-ground equivalent, X_C = 1/jωC = 1/sC.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 3: อินทิเกรเตอร์และวงจรสมมูลกราวด์เสมือน (รูป 10.38)</figcaption><figcaption data-l="en">Set II slide p. 3: the integrator and its virtual-ground equivalent (Fig. 10.38)</figcaption></figure>
+    <figure class="slide"><img src="slides/ch7b/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 4, Integrator Circuit: where s = jω is in the Laplace notation; solving for V_o/V_1 yields I = V_1/R = −V_o/X_C = −V_o/(1/sC) = −sCV_o, V_o/V_1 = −1/sCR; the expression can be rewritten in the time domain as v_o(t) = −(1/RC) ∫ v_1(t) dt.">
+    <figcaption data-l="th">สไลด์หน้า 4: จาก \(V_o/V_1 = -1/sCR\) ถึงสมการ 10.13</figcaption><figcaption data-l="en">Slide p. 4: from \(V_o/V_1 = -1/sCR\) to Eq. 10.13</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th">สไลด์หน้า 3 ขึ้นต้นด้วย "PRACTICAL OP-AMP CIRCUITS" ต่อจากชุดที่ 1 · ภาพจำลองของหน้านี้เดินตามเวลาจริงทีละก้าว (ตัวเก็บประจุจำประจุไว้) แล้วเล่นช้าลงให้ดูทัน: ป้ายบอกเวลาของวงจร เมื่อครบหน้าต่างจะเริ่มใหม่</div><div class="warnbox" data-l="en">Slide p. 3 opens with "PRACTICAL OP-AMP CIRCUITS", continuing set I. The simulations on this page step through real time (the capacitor remembers its charge) and are slowed down to be watchable: the badge gives the circuit time, and the window restarts when it ends.</div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลือกคลื่นขาเข้าสี่แบบ ดูว่าอินทิเกรเตอร์เปลี่ยนสี่เหลี่ยมเป็นสามเหลี่ยมอย่างไร</p><p class="story-next" data-l="en">↓ Section A: choose one of four input waveforms and see how the integrator turns a square wave into a triangle</p>
+</div>
 
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">อินทิเกรเตอร์หรือดิฟเฟอเรนชิเอเตอร์ กับคลื่นขาเข้าสี่แบบ</h2><h2 data-l="en">Integrator or differentiator, with four input waveforms</h2>
@@ -59,6 +62,18 @@
   <p class="lead" data-l="en">Choose the circuit and the input (step, square, triangle, sine), then set the amplitude, the frequency, R and C. The lower left graph is \(v_1(t)\), the lower right \(v_o(t)\) from the time simulation. Integrator: square → triangle, sine → minus cosine, step → a ramp to the rail. Differentiator: triangle → square, sine → minus cosine growing with frequency, step → a spike. Raise the frequency of the integrator: the output shrinks as 1/f.</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ขาเข้าคงที่ ขาออกเป็นทางลาด</div><div class="story-k" data-l="en">Part 2 · A steady input, a ramp out</div>
+    <h2 data-l="th">รูป 10.39: ตัวคูณสเกล \(1/RC\)</h2><h2 data-l="en">Fig. 10.39: the scale factor \(1/RC\)</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 5 ป้อนขั้น 1 V เข้าอินทิเกรเตอร์ที่มี R = 1 MΩ และ C = 1 µF กระแส 1 µA ไหลเข้าตัวเก็บประจุไม่หยุด แรงดันของมันจึงโตขึ้นเป็นเส้นตรง และขาออกลาดลงด้วยความชันคงที่</p><p>ก่อนเปิดเฉลย ลองเดาความชันเป็นโวลต์ต่อวินาที แล้วคิดต่อว่าถ้าลด R เหลือ 100 kΩ ขาออกจะไปชนราง −13 V เร็วขึ้นกี่เท่า</p></div><div class="story-p" data-l="en"><p>Slide p. 5 applies a 1 V step to an integrator with R = 1 MΩ and C = 1 µF. A current of 1 µA flows into the capacitor without stopping, so its voltage grows in a straight line and the output ramps down at a constant slope.</p><p>Before opening the solution, guess the slope in volts per second, then how many times sooner the output reaches the −13 V rail when R drops to 100 kΩ.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7b/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 5, Integrator Circuit: as an example, consider an input voltage V_1 = 1 V to the integrator circuit of the figure; the scale factor of 1/RC is to be found; the circuit has R = 1 MΩ and C = 1 µF (Figure 10.39a).">
+    <figcaption data-l="th">สไลด์หน้า 5: ขั้น 1 V เข้า 1 MΩ, 1 µF (รูป 10.39a)</figcaption><figcaption data-l="en">Slide p. 5: a 1 V step into 1 MΩ, 1 µF (Fig. 10.39a)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 5 ตัดจบก่อนคำตอบ</b> ("The scale factor of 1/RC is" แล้วว่าง): −1/RC = −1 V/s และกรณี R = 100 kΩ ให้ −10 V/s อยู่ในตำราหน้า 626–627 (รูป 10.39b–c)</div><div class="warnbox" data-l="en"><b>Slide p. 5 breaks off before the answer</b> ("The scale factor of 1/RC is", then nothing): −1/RC = −1 V/s, and R = 100 kΩ gives −10 V/s, on pp. 626–627 of the book (Fig. 10.39b–c).</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: ขั้น 1 V แล้วลด R เหลือ 100 kΩ</p><p class="story-next" data-l="en">↓ Problem 1: a 1 V step, then R reduced to 100 kΩ</p>
+</div>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 10.39: ขั้น 1 V ลาด −1 V/s แล้ว −10 V/s</h2><h2 data-l="en">Fig. 10.39: a 1 V step, a −1 V/s ramp, then −10 V/s</h2>
@@ -86,6 +101,18 @@
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · กลับด้าน</div><div class="story-k" data-l="en">Part 3 · The other way round</div>
+    <h2 data-l="th">ดิฟเฟอเรนชิเอเตอร์: ขาออกบอกความเร็วของการเปลี่ยนแปลง</h2><h2 data-l="en">The differentiator: an output that measures how fast things change</h2>
+    <div class="story-p" data-l="th"><p>สลับตำแหน่งให้ C อยู่ขาเข้าและ R อยู่เส้นป้อนกลับ (สไลด์หน้า 6) กระแสที่ผ่าน C แปรตามความเร็วที่แรงดันขาเข้าเปลี่ยน จึงได้ \(v_o(t) = -RC\,\dfrac{dv_1(t)}{dt}\)</p><p>สไลด์บอกตรง ๆ ว่ามันมีประโยชน์น้อยกว่าวงจรก่อนหน้า เพราะยิ่งสัญญาณเปลี่ยนเร็ว ขาออกยิ่งใหญ่ สัญญาณรบกวนความถี่สูงจึงถูกขยายตามไปด้วย แต่กับคลื่นสามเหลี่ยมมันทำสิ่งที่สวยงาม: ความชันของแต่ละขาคงที่ ขาออกจึงเป็นคลื่นสี่เหลี่ยม</p></div><div class="story-p" data-l="en"><p>Swap the places so that C is at the input and R in the feedback (slide p. 6). The current through C follows how fast the input voltage changes, which gives \(v_o(t) = -RC\,\dfrac{dv_1(t)}{dt}\).</p><p>The slide admits it is less useful than the circuits before it: the faster a signal changes, the bigger the output, so high-frequency noise is amplified too. With a triangle wave, though, it does something neat: each edge has a constant slope, so the output is a square wave.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7b/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 6, Differentiator Circuit: a differentiator circuit is shown in the figure; while not as useful as the circuit forms covered above, the differentiator does provide a useful operation, the resulting relation for the circuit being v_o(t) = −RC dv_1(t)/dt (Figure 10.41, C at the input and R in the feedback).">
+    <figcaption data-l="th">สไลด์หน้า 6: ดิฟเฟอเรนชิเอเตอร์ (รูป 10.41, สมการ 10.15)</figcaption><figcaption data-l="en">Slide p. 6: the differentiator (Fig. 10.41, Eq. 10.15)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th">ขั้นเข้าดิฟเฟอเรนชิเอเตอร์ให้อนุพันธ์เป็นอนันต์ ขาออกในภาพจำลองจึงกระชากชนรางหนึ่งก้าวเวลาแล้วกลับ</div><div class="warnbox" data-l="en">A step into the differentiator has an infinite derivative, so the simulated output spikes to the rail for one time step and returns.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 4: คลื่นสามเหลี่ยม ±1 V ความถี่ 100 Hz เข้าดิฟเฟอเรนชิเอเตอร์</p><p class="story-next" data-l="en">↓ Problem 4: a ±1 V, 100 Hz triangle into a differentiator</p>
+</div>
 
 <section class="prob" id="ex4">
   <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">ดิฟเฟอเรนชิเอเตอร์: คลื่นสามเหลี่ยมให้คลื่นสี่เหลี่ยม</h2><h2 data-l="en">The differentiator: a triangle gives a square wave</h2>

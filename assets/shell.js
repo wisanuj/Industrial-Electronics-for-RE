@@ -32,7 +32,7 @@ function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 function topbar() {
   const el = document.getElementById('mc-top'); if (!el) return; const here = MC.here();
   el.innerHTML = `<a class="hub" href="index.html">← ${MC.t('แผนที่การเรียน', 'Roadmap')}</a>` +
-    (here ? `<span class="crumb">· ${MC.t('บทที่', 'Chapter')} ${here.ch} · ${MC.t('หน้า', 'page')} ${here.step}</span>` : '') +
+    (here ? `<span class="crumb">· ${here.crumb ? MC.t(here.crumb, here.crumb_en) : `${MC.t('บทที่', 'Chapter')} ${here.ch} · ${MC.t('หน้า', 'page')} ${here.step}`}</span>` : '') +
     `<span class="spacer"></span>` +
     `<span class="langsw" role="group" aria-label="language"><button type="button" class="${lang === 'th' ? 'on' : ''}" data-lang="th">ไทย</button><button type="button" class="${lang === 'en' ? 'on' : ''}" data-lang="en">EN</button></span>` +
     `<label class="theme">${MC.t('ธีมการอ่าน', 'Theme')} <select id="mc-theme-select" aria-label="theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}"${k === theme ? ' selected' : ''}>${MC.t(v[0], v[1])}</option>`).join('')}</select></label>`;

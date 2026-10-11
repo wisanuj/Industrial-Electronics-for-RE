@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script><script src="assets/ie8.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรเปรียบเทียบแรงดัน <span class="en">Comparators</span></h1>
 <h1 data-l="en">Comparators <span class="en">An op-amp without feedback: the input is linear, the output is digital</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 3–7 ไอซีที่มีทั้งส่วนเชิงเส้นและดิจิทัล (linear-digital IC) ชนิดแรกคือวงจรเปรียบเทียบ (comparator): ออปแอมป์ที่ไม่มีป้อนกลับ อัตราขยายเต็มหลายแสนทำให้ขาออกมีได้แค่สองค่า \(+V_{sat}\) เมื่อขั้ว + สูงกว่าขั้ว − และ \(-V_{sat}\) เมื่อต่ำกว่า เทียบสัญญาณขาเข้ากับแรงดันอ้างอิง \(V_{ref}\) แล้วได้คำตอบดิจิทัลว่า "เกินหรือไม่เกิน" หน้านี้มีวงจรเปรียบเทียบที่ป้อนไซน์ได้ (ส่วน A) วงจรรูป 13.3 ทั้งสองแบบที่ขับ LED ตัวตรวจจับการข้ามศูนย์ (รูป 13.2) และตัวตรวจจับหน้าต่างจากไอซี 339 สองตัว (รูป 13.11)</p>
-<p class="sub" data-l="en">Chapter 8 slides pp. 3–7. The first linear-digital IC is the comparator: an op-amp without feedback, whose full gain of hundreds of thousands leaves the output only two values, \(+V_{sat}\) when the + input is above the − input and \(-V_{sat}\) when below. It compares an input signal with a reference \(V_{ref}\) and answers digitally, "above or not". This page has a comparator that can be driven by a sine (section A), both circuits of Fig. 13.3 driving an LED, the zero-crossing detector (Fig. 13.2) and the window detector built from two 339 comparators (Fig. 13.11).</p>
+<p class="sub" data-l="th">ไฟทางเดินที่ติดเองเมื่อฟ้ามืด ตู้เย็นที่ตัดคอมเพรสเซอร์เมื่อเย็นพอ เครื่องชาร์จที่หยุดเมื่อแบตเตอรี่เต็ม ทุกเครื่องถามคำถามเดียวกัน: แรงดันนี้เกินค่าที่ตั้งไว้หรือยัง วงจรที่ตอบคำถามนี้คือวงจรเปรียบเทียบ (comparator) ไอซีชนิดแรกที่มีทั้งส่วนเชิงเส้นและส่วนดิจิทัล (linear-digital IC): ขาเข้ารับแรงดันได้ทุกค่า แต่ขาออกตอบได้แค่สองคำ หน้านี้เริ่มจากไซน์ที่ผ่านวงจรเปรียบเทียบ ต่อ LED ตามรูป 13.3 ทั้งสองแบบ ดูตัวตรวจจับการข้ามศูนย์ แล้วจบที่ตัวตรวจจับหน้าต่างจากไอซี 339 สองตัว (สไลด์บทที่ 8 หน้า 3–7 · Boylestad หัวข้อ 13.2)</p>
+<p class="sub" data-l="en">A hallway light that switches on at dusk, a fridge that stops its compressor when cold enough, a charger that stops when the battery is full: they all ask the same question, has this voltage passed the set value yet? The circuit that answers is the comparator, the first linear-digital IC: its input accepts any voltage, but its output can say only one of two words. This page starts with a sine wave through a comparator, drives an LED with both versions of Fig. 13.3, looks at the zero-crossing detector, and ends with a window detector built from two 339 ICs (chapter 8 slides, pp. 3–7; Boylestad section 13.2).</p>
 <div class="equation-box eqwrap">$$ V_+ > V_-:\ V_o = +V_{sat},\qquad V_+ < V_-:\ V_o = -V_{sat} $$ $$ V_{ref} = \frac{R_2}{R_1 + R_2}V^+ $$ $$ \text{window: output high only for } V_{ref2} < V_{in} < V_{ref1} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,23 +36,21 @@
   <li><b>The window detector</b> (p. 6, Fig. 13.11): two comparators with a common input and a common output through a pull-up; one pulls low when the input exceeds +5 V, the other when it drops below +1 V, so the output is high only inside the 1–5 V window.</li>
   <li><b>The simulation</b>: chapter 7's op-amp with single-supply rails (0 to +9 V) for the 339, and the open-collector transistor represented by an ideal diode with its cathode at the output.</li></ul></section>
 
-<div class="slides">
-  <figure class="slide"><img src="slides/ch8/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 3, Comparator Circuit: the operation is a basic comparison; the output swings between its maximum and minimum voltage depending on whether one input (V_in) is greater or less than the other (V_ref); the output is always a square wave where the maximum high output voltage is +V_SAT and the minimum low output voltage is −V_SAT; Figure 13.1 with a sine input and a square output.">
-    <figcaption data-l="th">สไลด์หน้า 3: ขาเข้าไซน์ ขาออกสี่เหลี่ยม (รูป 13.1–13.2)</figcaption><figcaption data-l="en">Slide p. 3: a sine in, a square wave out (Figs. 13.1–13.2)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 4, Noninverting Op-Amp Comparator: the output goes to +V_SAT when the input V_i is greater than the reference voltage and to −V_SAT when less; the example circuit with a 741, +12 V and −12 V supplies, a 10 kΩ/10 kΩ divider giving V_ref = +6 V at the minus input, V_i at the plus input, 470 Ω and an LED at the output.">
-    <figcaption data-l="th">สไลด์หน้า 4: วงจรเปรียบเทียบไม่กลับเฟส (รูป 13.3a)</figcaption><figcaption data-l="en">Slide p. 4: the noninverting comparator (Fig. 13.3a)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 5, Inverting Op-Amp Comparator: the output goes to −V_SAT when the input V_i is greater than the reference voltage and to +V_SAT when less; the same circuit with V_i at the minus input and V_ref = +6 V at the plus input.">
-    <figcaption data-l="th">สไลด์หน้า 5: วงจรเปรียบเทียบกลับเฟส (รูป 13.3b)</figcaption><figcaption data-l="en">Slide p. 5: the inverting comparator (Fig. 13.3b)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 6, Comparator Circuit: two comparator circuits connected with common output and also with common input; +9 V supply, comparator 1 with V_ref1 ≅ +5 V from 7.5 kΩ and 9.1 kΩ, comparator 2 with V_ref2 ≅ +1 V from 8.2 kΩ and 1 kΩ, a 5.1 kΩ pull-up on the common output; output low above +5 V and below +1 V, high between (Figure 13.11).">
-    <figcaption data-l="th">สไลด์หน้า 6: ตัวตรวจจับหน้าต่าง (รูป 13.11)</figcaption><figcaption data-l="en">Slide p. 6: the window detector (Fig. 13.11)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 7, Comparator Circuit, advantages of comparator ICs: faster switching, built-in noise immunity, outputs capable of directly driving loads.">
-    <figcaption data-l="th">สไลด์หน้า 7: ข้อดีของไอซีเปรียบเทียบ</figcaption><figcaption data-l="en">Slide p. 7: the advantages of comparator ICs</figcaption></figure>
-</div>
-<div class="warnbox" data-l="th"><b>สไลด์หน้า 6 (และรูป 13.11 ของตำรา)</b> ให้แค่ "≅ +5 V" และ "≅ +1 V" ค่าจริงของตัวแบ่งคือ 4.93 V และ 0.98 V ซึ่งภาพจำลองใช้ · สไลด์ไม่มีโจทย์คำนวณในหัวข้อนี้ หน้านี้ใช้รูป 13.2–13.3 และ 13.11 กับโปรแกรม PSpice ของตำรา (โปรแกรม 13.1–13.2) เป็นโจทย์ · ไอซี 741 ในภาพจำลองสลับทันที ของจริงมีสลูว์เรต 0.5 V/µs จึงใช้ได้ถึงไม่กี่กิโลเฮิรตซ์ นี่คือเหตุผลหนึ่งของไอซีเปรียบเทียบเฉพาะทาง (หน้า 7)</div>
-<div class="warnbox" data-l="en"><b>Slide p. 6 (and the book's Fig. 13.11)</b> only says "≅ +5 V" and "≅ +1 V"; the dividers actually give 4.93 V and 0.98 V, which the simulation uses. The slides pose no numerical problems on this topic; this page turns Figs. 13.2–13.3 and 13.11 and the book's PSpice runs (Programs 13.1–13.2) into problems. The simulated 741 switches instantly; a real one has a slew rate of 0.5 V/µs and is good only to a few kilohertz, one reason for dedicated comparator ICs (p. 7).</div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ป้อนไซน์</a><a href="#ex1"><b>1</b>ไม่กลับเฟส</a><a href="#ex2"><b>2</b>กลับเฟส</a><a href="#ex3"><b>3</b>ข้ามศูนย์</a><a href="#ex4"><b>4</b>หน้าต่าง</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Sine input</a><a href="#ex1"><b>1</b>Noninverting</a><a href="#ex2"><b>2</b>Inverting</a><a href="#ex3"><b>3</b>Zero crossing</a><a href="#ex4"><b>4</b>Window</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · คำถามเดียว คำตอบสองคำ</div><div class="story-k" data-l="en">Part 1 · One question, two answers</div>
+    <h2 data-l="th">ออปแอมป์ที่ไม่มีป้อนกลับ</h2><h2 data-l="en">An op-amp with no feedback</h2>
+    <div class="story-p" data-l="th"><p>ในบทที่ 7 ป้อนกลับลบทำให้ออปแอมป์ทำงานเชิงเส้น ถ้าตัดป้อนกลับทิ้ง อัตราขยายเต็มหลายแสนเท่าจะขยายผลต่างระหว่างขาเข้าทั้งสองจนขาออกชนรางทันที แค่ขั้ว + สูงกว่าขั้ว − ไม่ถึงหนึ่งมิลลิโวลต์ ขาออกก็ไปที่ \(+V_{sat}\) ต่ำกว่าเมื่อใดก็ไปที่ \(-V_{sat}\)</p><p>สไลด์หน้า 3 จึงได้ภาพที่น่าจดจำ: ไซน์เข้า สี่เหลี่ยมออก ขาออกสลับทุกครั้งที่ไซน์ข้ามแรงดันอ้างอิง \(V_{ref}\)</p></div><div class="story-p" data-l="en"><p>In chapter 7 negative feedback kept the op-amp linear. Remove the feedback and the full gain of hundreds of thousands drives the output straight into a rail: let the + input sit less than a millivolt above the − input and the output goes to \(+V_{sat}\); a little below, and it goes to \(-V_{sat}\).</p><p>Hence the memorable picture of slide p. 3: a sine goes in and a square wave comes out, switching every time the sine crosses the reference \(V_{ref}\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 3, Comparator Circuit: the operation is a basic comparison; the output swings between its maximum and minimum voltage depending on whether one input (V_in) is greater or less than the other (V_ref); the output is always a square wave where the maximum high output voltage is +V_SAT and the minimum low output voltage is −V_SAT; Figure 13.1 with a sine input and a square output.">
+    <figcaption data-l="th">สไลด์หน้า 3: ขาเข้าไซน์ ขาออกสี่เหลี่ยม (รูป 13.1–13.2)</figcaption><figcaption data-l="en">Slide p. 3: a sine in, a square wave out (Figs. 13.1–13.2)</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อน \(V_{ref}\) ขึ้นลง แล้วดูว่าพัลส์ขาออกกว้างหรือแคบลง</p><p class="story-next" data-l="en">↓ Section A: move \(V_{ref}\) up and down and watch the output pulses widen and narrow</p>
+</div>
 
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรเปรียบเทียบกับสัญญาณไซน์: เลื่อน \(V_{ref}\) ดูความกว้างพัลส์</h2><h2 data-l="en">The comparator with a sine: move \(V_{ref}\), watch the pulse width</h2>
@@ -61,6 +59,20 @@
   <p class="lead" data-l="en">The input is a sine with adjustable amplitude and dc level; \(V_{ref}\) comes from a divider with an adjustable \(R_2\). Choose noninverting or inverting. The lower graph shows \(v_i\), the \(V_{ref}\) line and \(v_o\) in time (slowed 250×). The output stays high as long as \(v_i\) is above \(V_{ref}\): the higher \(V_{ref}\), the narrower the pulse. The LED blinks with the output (at 100 Hz a real eye sees a steady glow).</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
 </section>
+
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ให้วงจรพูดออกมาเป็นแสง</div><div class="story-k" data-l="en">Part 2 · Let the circuit answer with light</div>
+    <h2 data-l="th">อุปกรณ์ชุดเดียว คำตอบตรงข้ามกัน</h2><h2 data-l="en">The same parts, opposite answers</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 4 ตั้ง \(V_{ref}\) = +6 V ด้วยตัวแบ่ง 10 kΩ/10 kΩ บนแหล่งจ่าย +12 V แล้วป้อน \(V_i\) ที่ขั้ว + LED ที่ขาออกจึงติดเมื่อ \(V_i\) เกิน 6 V สไลด์หน้า 5 แค่สลับขาเข้าสองขา LED กลับติดเมื่อ \(V_i\) ต่ำกว่า 6 V</p><p>ไม่ต้องเปลี่ยนอุปกรณ์สักตัว แค่เลือกว่าอยากให้สัญญาณเตือนเมื่อ "สูงเกิน" หรือ "ต่ำเกิน" ก่อนเปิดเฉลย ลองตอบว่าที่ \(V_i\) = 4 V และ 8 V ขาออกของแต่ละแบบอยู่รางไหน</p></div><div class="story-p" data-l="en"><p>Slide p. 4 sets \(V_{ref}\) = +6 V with a 10 kΩ/10 kΩ divider on +12 V and feeds \(V_i\) to the + input, so the LED at the output lights when \(V_i\) exceeds 6 V. Slide p. 5 simply swaps the two inputs, and the LED lights when \(V_i\) is below 6 V.</p><p>Not one part changes: you only choose whether the alarm should mean "too high" or "too low". Before opening the solutions, say which rail each version sits at for \(V_i\) = 4 V and 8 V.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 4, Noninverting Op-Amp Comparator: the output goes to +V_SAT when the input V_i is greater than the reference voltage and to −V_SAT when less; the example circuit with a 741, +12 V and −12 V supplies, a 10 kΩ/10 kΩ divider giving V_ref = +6 V at the minus input, V_i at the plus input, 470 Ω and an LED at the output.">
+    <figcaption data-l="th">สไลด์หน้า 4: วงจรเปรียบเทียบไม่กลับเฟส (รูป 13.3a)</figcaption><figcaption data-l="en">Slide p. 4: the noninverting comparator (Fig. 13.3a)</figcaption></figure>
+    <figure class="slide"><img src="slides/ch8/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 5, Inverting Op-Amp Comparator: the output goes to −V_SAT when the input V_i is greater than the reference voltage and to +V_SAT when less; the same circuit with V_i at the minus input and V_ref = +6 V at the plus input.">
+    <figcaption data-l="th">สไลด์หน้า 5: วงจรเปรียบเทียบกลับเฟส (รูป 13.3b)</figcaption><figcaption data-l="en">Slide p. 5: the inverting comparator (Fig. 13.3b)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์ไม่มีโจทย์คำนวณในหัวข้อนี้</b> หน้านี้ใช้รูป 13.2–13.3 และ 13.11 กับโปรแกรม PSpice ของตำรา (โปรแกรม 13.1–13.2) เป็นโจทย์</div><div class="warnbox" data-l="en"><b>The slides pose no numerical problems on this topic</b>; this page turns Figs. 13.2–13.3 and 13.11 and the book's PSpice runs (Programs 13.1–13.2) into problems.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1–3: ไม่กลับเฟส กลับเฟส แล้วตั้ง \(V_{ref}\) = 0 ให้เป็นตัวตรวจจับการข้ามศูนย์</p><p class="story-next" data-l="en">↓ Problems 1–3: noninverting, inverting, then \(V_{ref}\) = 0 for a zero-crossing detector</p>
+</div>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.3a: วงจรเปรียบเทียบไม่กลับเฟสขับ LED</h2><h2 data-l="en">Fig. 13.3a: the noninverting comparator driving an LED</h2>
@@ -88,6 +100,20 @@
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
 </section>
+
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · สองตัวช่วยกันเฝ้าหน้าต่าง</div><div class="story-k" data-l="en">Part 3 · Two comparators guard a window</div>
+    <h2 data-l="th">ไอซีเปรียบเทียบตัวจริง และตัวตรวจจับหน้าต่าง</h2><h2 data-l="en">Real comparator ICs, and the window detector</h2>
+    <div class="story-p" data-l="th"><p>741 ตัวจริงสลับช้า สลูว์เรตเพียง 0.5 V/µs ใช้ได้แค่ไม่กี่กิโลเฮิรตซ์ ไอซีเปรียบเทียบเฉพาะทางอย่าง 311 และ 339 จึงเกิดขึ้น (สไลด์หน้า 7): สลับเร็วกว่า ทนสัญญาณรบกวน และขาออกเป็นทรานซิสเตอร์คอลเล็กเตอร์เปิด (open collector) ที่ขับโหลดได้เอง</p><p>คอลเล็กเตอร์เปิดทำให้ต่อขาออกสองตัวเข้าด้วยกันได้ สไลด์หน้า 6 ใช้ความสามารถนี้สร้างตัวตรวจจับหน้าต่าง: ตัวหนึ่งดึงขาออกลงเมื่อขาเข้าเกินราว +5 V อีกตัวดึงลงเมื่อต่ำกว่าราว +1 V ขาออกจึงสูงได้เฉพาะเมื่อขาเข้าอยู่ในหน้าต่างระหว่างสองค่านี้</p></div><div class="story-p" data-l="en"><p>A real 741 switches slowly: with a slew rate of only 0.5 V/µs it is good to a few kilohertz. Hence dedicated comparator ICs such as the 311 and 339 (slide p. 7): faster switching, built-in noise immunity, and open-collector outputs that drive loads by themselves.</p><p>Open collectors also let two outputs be tied together. Slide p. 6 uses that to build a window detector: one comparator pulls the output low when the input rises above about +5 V, the other when it falls below about +1 V, so the output can be high only while the input stays inside the window between them.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 7, Comparator Circuit, advantages of comparator ICs: faster switching, built-in noise immunity, outputs capable of directly driving loads.">
+    <figcaption data-l="th">สไลด์หน้า 7: ข้อดีของไอซีเปรียบเทียบ</figcaption><figcaption data-l="en">Slide p. 7: the advantages of comparator ICs</figcaption></figure>
+    <figure class="slide"><img src="slides/ch8/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 6, Comparator Circuit: two comparator circuits connected with common output and also with common input; +9 V supply, comparator 1 with V_ref1 ≅ +5 V from 7.5 kΩ and 9.1 kΩ, comparator 2 with V_ref2 ≅ +1 V from 8.2 kΩ and 1 kΩ, a 5.1 kΩ pull-up on the common output; output low above +5 V and below +1 V, high between (Figure 13.11).">
+    <figcaption data-l="th">สไลด์หน้า 6: ตัวตรวจจับหน้าต่าง (รูป 13.11)</figcaption><figcaption data-l="en">Slide p. 6: the window detector (Fig. 13.11)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 6 (และรูป 13.11 ของตำรา)</b> ให้แค่ "≅ +5 V" และ "≅ +1 V" ค่าจริงของตัวแบ่งคือ 4.93 V และ 0.98 V ซึ่งภาพจำลองใช้ · ไอซี 741 ในภาพจำลองของส่วน A สลับทันที ไม่มีขีดจำกัดสลูว์เรตของตัวจริง</div><div class="warnbox" data-l="en"><b>Slide p. 6 (and the book's Fig. 13.11)</b> only says "≅ +5 V" and "≅ +1 V"; the dividers actually give 4.93 V and 0.98 V, which the simulation uses. The simulated 741 of section A switches instantly, without the slew-rate limit of a real one.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 4: เลื่อนขาเข้าผ่านหน้าต่าง แล้วชี้ที่ไดโอดดูว่าตัวใดดึงขาออกลง</p><p class="story-next" data-l="en">↓ Problem 4: slide the input through the window and hover over the diodes to see which one pulls the output low</p>
+</div>
 
 <section class="prob" id="ex4">
   <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">รูป 13.11: ตัวตรวจจับหน้าต่าง 1–5 V จาก 339 สองตัว</h2><h2 data-l="en">Fig. 13.11: a 1–5 V window detector from two 339s</h2>

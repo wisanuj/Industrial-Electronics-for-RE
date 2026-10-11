@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรไดโอดแบบขนานและอนุกรม–ขนาน <span class="en">Parallel and series–parallel diode circuits</span></h1>
 <h1 data-l="en">Parallel and series–parallel diode circuits <span class="en">One voltage across parallel diodes</span></h1>
 
-<p class="sub" data-l="th">สไลด์หน้า 26–30 ขยายขั้นตอนของวงจรอนุกรมไปใช้กับวงจรขนานและอนุกรม–ขนาน (series–parallel) สิ่งที่เพิ่มเข้ามามีข้อเดียว คือสิ่งที่ต่อขนานกันมีแรงดันเท่ากันเสมอ ไดโอดที่ขนานกันจึงต้องตกลงกันที่แรงดันเดียว หน้านี้มีภาพจำลองไดโอดสองตัวขนานกันที่เทียบแบบจำลองโดยประมาณกับเส้นโค้งจริงของรูป 1.18 (ส่วน A) โจทย์ Ex.9–Ex.12 และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Slides pp. 26–30 extend the series procedure to parallel and series–parallel networks. Only one thing is new: elements in parallel always share one voltage, so parallel diodes have to agree on a single voltage. This page has two diodes in parallel, comparing the approximate models with the actual curves of Fig. 1.18 (section A), Ex.9–Ex.12, and more practice.</p>
+<p class="sub" data-l="th">ถ้าไดโอดตัวเดียวรับกระแสไม่ไหว ต่อสองตัวขนานกันจะช่วยแบ่งกระแสได้ไหม และถ้าสองตัวนั้นต่างชนิดกัน ตัวไหนจะรับไป คำตอบมาจากกฎข้อเดียว: สิ่งที่ต่อขนานกันมีแรงดันเท่ากันเสมอ ไดโอดที่ขนานกันจึงต้องตกลงกันที่แรงดันเดียว หน้านี้ขยายขั้นตอนของวงจรอนุกรมไปยังวงจรขนานและอนุกรม–ขนาน (series–parallel) มีภาพจำลองไดโอดสองตัวขนานกันที่เทียบแบบจำลองโดยประมาณกับเส้นโค้งจริงของรูป 1.18 (ส่วน A) โจทย์ Ex.9–Ex.12 และแบบฝึกเพิ่ม (สไลด์บทที่ 2 ชุดที่ 1 หน้า 26–30 · Boylestad หัวข้อ 2.5)</p>
+<p class="sub" data-l="en">If one diode cannot carry the current, will two in parallel share it? And if the two are of different kinds, which one takes it? The answers come from a single rule: elements in parallel always share one voltage, so parallel diodes have to agree on a single voltage. This page extends the series procedure to parallel and series–parallel networks, with two parallel diodes comparing the approximate models against the actual curves of Fig. 1.18 (section A), Ex.9–Ex.12, and more practice (chapter 2 slides, Part I, pp. 26–30 · Boylestad section 2.5).</p>
 <div class="equation-box eqwrap">$$ V_o = V_K $$ $$ I_1 = \frac{E - V_K}{R} $$ $$ I_{D_1} = I_{D_2} = \frac{I_1}{2} $$ $$ I_{D_2} = I_2 - I_1 $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -48,8 +48,14 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.9: ไดโอดซิลิคอนสองตัวขนานกัน</h2><h2 data-l="en">Ex.9: two silicon diodes in parallel</h2>
     <div class="src" data-l="th">สไลด์หน้า 26–27 · Boylestad Example 2.10 (รูป 2.28–2.29)</div><div class="src" data-l="en">Slides pp. 26–27 · Boylestad Example 2.10 (Figs. 2.28–2.29)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 26, Parallel and Series-Parallel Configurations: the methods applied in the previous section can be extended to the analysis of parallel and series-parallel configurations; for each area of application, simply match the sequential series of steps applied to series diode configurations. Ex. 9: determine V_o, I_1, I_D1, and I_D2 for the parallel diode configuration of the figure: E = 10 V, R = 0.33 kΩ with I_1, two silicon diodes D_1 and D_2 down to ground with I_D1 and I_D2, and V_o across them. Slide 27 repeats the problem.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 26 บอกว่าวงจรขนานใช้ขั้นตอนเดียวกับวงจรอนุกรมได้ทุกขั้น แล้วให้ Ex.9: ไดโอดซิลิคอนสองตัวเหมือนกันขนานกันหลังตัวต้านทาน 0.33 kΩ ก่อนเปิดเฉลย ลองเดาว่ากระแสจะแบ่งกันอย่างไร และแต่ละตัวรับเท่าใดเมื่อเทียบกับไดโอดตัวเดียว</p></div><div class="story-p" data-l="en"><p>Slide p. 26 says that parallel networks follow the same steps as series ones, then gives Ex.9: two identical silicon diodes in parallel after a 0.33 kΩ resistor. Before opening the solution, guess how the current splits and what each diode carries compared with a single diode.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 26, Parallel and Series-Parallel Configurations: the methods applied in the previous section can be extended to the analysis of parallel and series-parallel configurations; for each area of application, simply match the sequential series of steps applied to series diode configurations. Ex. 9: determine V_o, I_1, I_D1, and I_D2 for the parallel diode configuration of the figure: E = 10 V, R = 0.33 kΩ with I_1, two silicon diodes D_1 and D_2 down to ground with I_D1 and I_D2, and V_o across them. Slide 27 repeats the problem.">
     <figcaption data-l="th">สไลด์หน้า 26: Ex.9 (หน้า 27 ซ้ำโจทย์เดิม) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 26: Ex.9 (p. 27 repeats it) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>E = 10 V จ่ายผ่าน R = 0.33 kΩ ให้ไดโอดซิลิคอน D<sub>1</sub> และ D<sub>2</sub> ที่ขนานกันลงกราวด์ จงหา \(V_o\), \(I_1\), \(I_{D_1}\) และ \(I_{D_2}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>E = 10 V feeds two parallel silicon diodes, D<sub>1</sub> and D<sub>2</sub>, to ground through R = 0.33 kΩ. Determine \(V_o\), \(I_1\), \(I_{D_1}\) and \(I_{D_2}\).</p></div>
   <p class="lead" data-l="th">ขั้นที่ 2 แทนไดโอดทั้งสองด้วยแบตเตอรี 0.7 V ที่ขนานกัน แผงข้างภาพแสดงการแบ่งกระแส <b>ลองตอบก่อน</b></p>
@@ -60,8 +66,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.10: ไดโอดขนานที่หันสวนกัน</h2><h2 data-l="en">Ex.10: parallel diodes facing opposite ways</h2>
     <div class="src" data-l="th">สไลด์หน้า 28 · ตัวอย่างจากตำราฉบับก่อน ไม่มีในฉบับที่ 11</div><div class="src" data-l="en">Slide p. 28 · an example from an earlier edition, not in the 11th</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 28, Parallel and Series-Parallel Configurations, Ex. 10: determine the current I for the network of the figure. The figure: a terminal E_1 = 20 V, R = 2.2 kΩ with the current I, then two silicon diodes in parallel, D_1 on top pointing right and D_2 below pointing left, then a terminal E_2 = 4 V.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.10 (สไลด์หน้า 28) วางไดโอดขนานกันแต่หันสวนกัน ระหว่างจุด 20 V กับจุด 4 V ไดโอดตัวหนึ่งต้องนำ อีกตัวต้องไม่นำ ก่อนเปิดเฉลย ลองหาว่าเป็นตัวไหน และตัวที่ไม่นำรับแรงดันย้อนกลับเท่าใด</p></div><div class="story-p" data-l="en"><p>Ex.10 (slide p. 28) puts the two parallel diodes facing opposite ways between a 20 V point and a 4 V point. One must conduct and the other must not: before opening the solution, work out which, and what reverse voltage the off diode sees.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 28, Parallel and Series-Parallel Configurations, Ex. 10: determine the current I for the network of the figure. The figure: a terminal E_1 = 20 V, R = 2.2 kΩ with the current I, then two silicon diodes in parallel, D_1 on top pointing right and D_2 below pointing left, then a terminal E_2 = 4 V.">
     <figcaption data-l="th">สไลด์หน้า 28: Ex.10 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 28: Ex.10 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จุด \(E_1\) = 20 V ต่อผ่าน R = 2.2 kΩ ไปยังไดโอดซิลิคอนสองตัวที่ขนานกันแต่หันสวนกัน แล้วไปยังจุด \(E_2\) = 4 V (ทั้งสองเทียบกราวด์) จงหากระแส \(I\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>The point \(E_1\) = 20 V feeds, through R = 2.2 kΩ, two silicon diodes in parallel facing opposite ways, which lead to the point \(E_2\) = 4 V (both to ground). Determine the current \(I\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองวาดแหล่งจ่ายทั้งสองที่ต่อกราวด์ให้ครบวง <b>ลองตอบก่อน</b></p>
@@ -72,8 +84,14 @@
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Ex.11: ซิลิคอนขนานกับเจอร์เมเนียม</h2><h2 data-l="en">Ex.11: silicon in parallel with germanium</h2>
     <div class="src" data-l="th">สไลด์หน้า 29 · ตัวอย่างจากตำราฉบับก่อน (ฉบับที่ 11 Example 2.12 ใช้ไดโอดเปล่งแสงสีเขียวแทนเจอร์เมเนียม)</div><div class="src" data-l="en">Slide p. 29 · an example from an earlier edition (the 11th edition's Example 2.12 uses a green LED instead of germanium)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 29, Parallel and Series-Parallel Configurations, Ex. 11: determine the voltage V_o for the network of the figure. The figure: a 12 V terminal at the top feeding two diodes in parallel, both pointing down, silicon on the left and germanium on the right, joined at the output node V_o, with a 2.2 kΩ resistor down to ground.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.11 (สไลด์หน้า 29) ขนานไดโอดซิลิคอนกับเจอร์เมเนียมที่หันลงทั้งคู่ ทั้งสองอยากนำ แต่แรงดันคร่อมคู่มีได้ค่าเดียว ลองคิดว่าตัวไหนถึงแรงดันที่ต้องการก่อน แล้วอีกตัวจะเหลืออะไร ภาพจำลองในส่วน A มีคู่นี้ให้เทียบกับเส้นโค้งจริงด้วย</p></div><div class="story-p" data-l="en"><p>Ex.11 (slide p. 29) puts a silicon and a germanium diode in parallel, both pointing down. Both would like to conduct, but the pair can have only one voltage: work out which one reaches its turn-on voltage first and what is left for the other. The simulation of section A has this pair too, against the actual curves.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 29, Parallel and Series-Parallel Configurations, Ex. 11: determine the voltage V_o for the network of the figure. The figure: a 12 V terminal at the top feeding two diodes in parallel, both pointing down, silicon on the left and germanium on the right, joined at the output node V_o, with a 2.2 kΩ resistor down to ground.">
     <figcaption data-l="th">สไลด์หน้า 29: Ex.11 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: Ex.11 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แหล่งจ่าย 12 V จ่ายให้ไดโอดซิลิคอนและเจอร์เมเนียมที่ขนานกันและหันลงทั้งคู่ ปลายล่างต่อกันเป็นจุดขาออก \(V_o\) ซึ่งมีตัวต้านทาน 2.2 kΩ ลงกราวด์ จงหา \(V_o\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>A 12 V supply feeds a silicon and a germanium diode in parallel, both pointing down; their lower ends form the output node \(V_o\), with a 2.2 kΩ resistor to ground. Determine \(V_o\).</p></div>
   <p class="lead" data-l="th">ขั้นที่ 2 แทนเจอร์เมเนียมด้วยแบตเตอรี 0.3 V และซิลิคอนด้วยช่องเปิด <b>ลองตอบก่อน</b></p>
@@ -84,8 +102,14 @@
 <section class="prob" id="ex4">
   <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">Ex.12: วงจรอนุกรม–ขนาน</h2><h2 data-l="en">Ex.12: a series–parallel network</h2>
     <div class="src" data-l="th">สไลด์หน้า 30 · Boylestad Example 2.13 (รูป 2.37–2.38)</div><div class="src" data-l="en">Slide p. 30 · Boylestad Example 2.13 (Figs. 2.37–2.38)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 30, Parallel and Series-Parallel Configurations, Ex. 12: determine the currents I_1, I_2, and I_D2 for the network of the figure. The figure: E = 20 V on the left; along the top a silicon diode D_1, then R_1 = 3.3 kΩ with I_1 to the right edge; a silicon diode D_2 down from the node after D_1 with I_D2; the right edge returns along the bottom to the lower end of D_2; R_2 = 5.6 kΩ with I_2 along the bottom back to E.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.12 (สไลด์หน้า 30) รวมทุกอย่างเข้าด้วยกัน: D<sub>1</sub> อนุกรมกับแหล่งจ่าย ส่วน D<sub>2</sub> ขนานกับ \(R_1\) แล้วรวมกันผ่าน \(R_2\) หาสถานะของไดโอดทั้งสองก่อน แล้วใช้กฎแรงดันของเคียร์ชอฟฟ์กับแต่ละวง และกฎกระแสของเคียร์ชอฟฟ์ที่จุดต่อ</p></div><div class="story-p" data-l="en"><p>Ex.12 (slide p. 30) brings it all together: D<sub>1</sub> in series with the supply, D<sub>2</sub> in parallel with \(R_1\), both returning through \(R_2\). Find the state of both diodes first, then apply Kirchhoff's voltage law round each loop and Kirchhoff's current law at the junction.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 30, Parallel and Series-Parallel Configurations, Ex. 12: determine the currents I_1, I_2, and I_D2 for the network of the figure. The figure: E = 20 V on the left; along the top a silicon diode D_1, then R_1 = 3.3 kΩ with I_1 to the right edge; a silicon diode D_2 down from the node after D_1 with I_D2; the right edge returns along the bottom to the lower end of D_2; R_2 = 5.6 kΩ with I_2 along the bottom back to E.">
     <figcaption data-l="th">สไลด์หน้า 30: Ex.12 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 30: Ex.12 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>E = 20 V ต่อผ่านไดโอดซิลิคอน D<sub>1</sub> ไปยังจุดที่แยกเป็น \(R_1\) = 3.3 kΩ และไดโอดซิลิคอน D<sub>2</sub> ที่ขนานกัน แล้วรวมกันผ่าน \(R_2\) = 5.6 kΩ กลับไปยังแหล่งจ่าย จงหา \(I_1\), \(I_2\) และ \(I_{D_2}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>E = 20 V feeds, through a silicon diode D<sub>1</sub>, a node that splits into \(R_1\) = 3.3 kΩ and a silicon diode D<sub>2</sub> in parallel; they rejoin and return through \(R_2\) = 5.6 kΩ to the source. Determine \(I_1\), \(I_2\) and \(I_{D_2}\).</p></div>
   <p class="lead" data-l="th">ขั้นที่ 2 เป็นต้นไปไดโอดทั้งสองเป็นแบตเตอรี 0.7 V แผงข้างภาพแสดงกระแสตามกฎกระแสของเคียร์ชอฟฟ์ <b>ลองตอบก่อน</b></p>

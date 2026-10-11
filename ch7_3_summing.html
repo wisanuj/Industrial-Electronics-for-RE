@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรรวมสัญญาณ <span class="en">The summing amplifier</span></h1>
 <h1 data-l="en">The summing amplifier <span class="en">Every input adds its own weighted term, because they all meet at a virtual ground</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 1 หน้า 19–20 และแบบฝึกหัดหน้า 23–24 วงจรที่ใช้มากที่สุดของออปแอมป์: ขาเข้าหลายขาผ่านตัวต้านทานของตัวเองมาพบกันที่ขั้ว − ซึ่งเป็นกราวด์เสมือน กระแสของแต่ละขาจึงไม่ขึ้นต่อกัน รวมกันแล้วไหลผ่าน \(R_f\) ออกไป ขาออกคือผลรวมถ่วงน้ำหนักด้วยอัตราขยาย \(R_f/R_k\) ของแต่ละขา (กลับเครื่องหมาย) หน้านี้มีวงจรสามขาเข้าที่ปรับได้ (ส่วน A) Example 10.7 ทั้งสองข้อ โจทย์หน้า 23 (ข้อ 8–9 ของตำรา รวมกรณีที่ผลรวมเกินราง) และโจทย์หน้า 24 ที่มีออปแอมป์สามตัว</p>
-<p class="sub" data-l="en">Chapter 7 slide set I, pp. 19–20 and the exercises on pp. 23–24. The most used op-amp circuit: several inputs, each through its own resistor, meet at the − input, a virtual ground, so their currents are independent; their sum flows out through \(R_f\). The output is the weighted sum, each input weighted by its gain \(R_f/R_k\), with the sign reversed. This page has an adjustable three-input circuit (section A), both parts of Example 10.7, the problem of p. 23 (the book's Problems 8–9, including the case where the sum exceeds the rail) and the three-op-amp problem of p. 24.</p>
+<p class="sub" data-l="th">มิกเซอร์เสียงบนเวทีรวมไมโครโฟนหลายตัวเข้าเป็นสัญญาณเดียว โดยแต่ละช่องมีปุ่มความดังของตัวเอง หัวใจของมันคือวงจรที่อาจใช้มากที่สุดในบรรดาวงจรออปแอมป์: วงจรรวมสัญญาณ (summing amplifier) ขาเข้าหลายขาไหลมาพบกันที่กราวด์เสมือน กระแสของแต่ละขาไม่รบกวนกัน แล้วรวมกันไหลผ่าน \(R_f\) หน้านี้เริ่มจากวงจรสามขาเข้าที่ปรับได้ ทำตัวอย่างของสไลด์ แล้วไปถึงโจทย์ที่สมการบอกค่าเกินรางและวงจรหลายขั้น (สไลด์บทที่ 7 ชุดที่ 1 หน้า 19–20 และแบบฝึกหัดหน้า 23–24 · Boylestad หัวข้อ 10.5)</p>
+<p class="sub" data-l="en">A stage mixer combines many microphones into one signal, each channel with its own volume knob. At its heart is perhaps the most used op-amp circuit of all, the summing amplifier: several inputs meet at a virtual ground, each input's current undisturbed by the others, and together they flow on through \(R_f\). This page starts with an adjustable three-input summer, works the slide's examples, and goes on to a problem whose equation runs past the rail and to a multi-stage circuit (chapter 7 slides, set 1, pp. 19–20 and exercises pp. 23–24; Boylestad section 10.5).</p>
 <div class="equation-box eqwrap">$$ V_o = -\left(\frac{R_f}{R_1}V_1 + \frac{R_f}{R_2}V_2 + \frac{R_f}{R_3}V_3\right) $$ $$ I_f = I_1 + I_2 + I_3,\qquad I_k = \frac{V_k}{R_k} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,21 +36,21 @@
   <li><b>Cascading stages</b> (p. 24): an op-amp's output resistance is low, so it drives the next stage's input resistor without being loaded. Work from left to right: 21 × 0.1 V = 2.1 V and 0.1 V (follower), then −(5 × 2.1 + 10 × 0.1) = −11.5 V.</li>
   <li><b>What it is for</b>: audio mixers, weighted 1 : 2 : 4 digital-to-analogue converters, and averagers (equal \(R_k\), \(R_f = R/n\)).</li></ul></section>
 
-<div class="slides">
-  <figure class="slide"><img src="slides/ch7a/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 19, Summing Amplifier Circuit: probably the most used of the op-amp circuits is the summing amplifier; the circuit shows a three-input summing amplifier, which provides a means of algebraically summing (adding) three voltages, each multiplied by a constant-gain factor; Figure 10.37 with the virtual-ground equivalent and V_o = −(R_f/R_1 V_1 + R_f/R_2 V_2 + R_f/R_3 V_3).">
-    <figcaption data-l="th">สไลด์หน้า 19: วงจรรวมสัญญาณสามขาเข้า (รูป 10.37, สมการ 10.11)</figcaption><figcaption data-l="en">Slide p. 19: the three-input summing amplifier (Fig. 10.37, Eq. 10.11)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 20, Summing Amplifier Circuit: calculate the output voltage of an op-amp summing amplifier for the following sets of voltages and resistors; use R_f = 1 MΩ in all cases. (a) V_1 = +1 V, V_2 = +2 V, V_3 = +3 V, R_1 = 500 kΩ, R_2 = 1 MΩ, R_3 = 1 MΩ. (b) V_1 = −2 V, V_2 = +3 V, V_3 = +1 V, R_1 = 200 kΩ, R_2 = 500 kΩ, R_3 = 1 MΩ (Example 10.7).">
-    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 10.7</figcaption><figcaption data-l="en">Slide p. 20: Example 10.7</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 23, Exercises of Op-Amp: calculate the output voltage of the circuit in the figure for R_f = 68 kΩ; V_1 = +0.2 V through 33 kΩ, V_2 = −0.5 V through 22 kΩ, V_3 = +0.8 V through 12 kΩ, the three resistors joined at the upper op-amp input marked +, the lower input marked − grounded, R_f from the output to the upper input (Problem 9, Fig. 10.68).">
-    <figcaption data-l="th">สไลด์หน้า 23: โจทย์ข้อ 9 (รูป 10.68) — ดูกรอบเตือน</figcaption><figcaption data-l="en">Slide p. 23: Problem 9 (Fig. 10.68), see the note</figcaption></figure>
-  <figure class="slide"><img src="slides/ch7a/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 24, Exercises of Op-Amp: calculate the output voltage V_o in the circuit of the figure; V_1 = 0.1 V feeds the plus inputs of two op-amps, the upper one a noninverting amplifier with 400 kΩ feedback and 20 kΩ to ground, the lower one a unity follower; their outputs pass through 20 kΩ and 10 kΩ into a third op-amp with R_f = 100 kΩ (Problem 14, Fig. 10.73).">
-    <figcaption data-l="th">สไลด์หน้า 24: โจทย์ข้อ 14 (รูป 10.73)</figcaption><figcaption data-l="en">Slide p. 24: Problem 14 (Fig. 10.73)</figcaption></figure>
-</div>
-<div class="warnbox" data-l="th"><b>สไลด์หน้า 23 (และรูป 10.68 ของตำรา)</b> วาดตัวต้านทานขาเข้าทั้งสามเข้าขั้วบนที่มีเครื่องหมาย + และต่อ \(R_f\) กลับมาที่ขั้วเดียวกัน โดยขั้ว − ต่อกราวด์ นั่นคือป้อนกลับบวก ขาออกจะวิ่งชนรางไม่ใช่รวมสัญญาณ วงจรรวมสัญญาณต้องให้ขาเข้าพบกันที่ขั้ว − และขั้ว + ต่อกราวด์ (เหมือนรูป 10.37) ภาพจำลองข้อ 3 ใช้แบบหลัง · สไลด์ไม่มีเฉลย: หน้า 20 คือ Example 10.7 หน้า 23–24 คือข้อ 9 (และ 8) กับข้อ 14 ท้ายบทที่ 10 · ข้อ 8 (\(R_f\) = 330 kΩ) ให้ −16.5 V ตามสมการ ซึ่งเกิน \(V_{sat}\) ภาพจำลองจึงอิ่มตัวที่ −13 V</div>
-<div class="warnbox" data-l="en"><b>Slide p. 23 (and the book's Fig. 10.68)</b> draws the three input resistors into the upper terminal marked + and returns \(R_f\) to that same terminal, with the − input grounded. That is positive feedback: the output would run to a rail instead of summing. A summing amplifier needs the inputs at the − terminal and the + terminal grounded (as in Fig. 10.37); problem 3's simulation uses the latter. The slides give no solutions: p. 20 is Example 10.7, pp. 23–24 are Problems 9 (and 8) and 14 of chapter 10. Problem 8 (\(R_f\) = 330 kΩ) gives −16.5 V by the equation, beyond \(V_{sat}\), so the simulation saturates at −13 V.</div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สามขาเข้า</a><a href="#ex1"><b>1</b>Example 10.7a</a><a href="#ex2"><b>2</b>Example 10.7b</a><a href="#ex3"><b>3</b>ข้อ 9 และ 8</a><a href="#ex4"><b>4</b>ข้อ 14</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Three inputs</a><a href="#ex1"><b>1</b>Example 10.7a</a><a href="#ex2"><b>2</b>Example 10.7b</a><a href="#ex3"><b>3</b>Problems 9 and 8</a><a href="#ex4"><b>4</b>Problem 14</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · บวกเลขด้วยแรงดัน</div><div class="story-k" data-l="en">Part 1 · Adding with voltages</div>
+    <h2 data-l="th">วงจรรวมสัญญาณสามขาเข้า</h2><h2 data-l="en">The three-input summing amplifier</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 19 ต่อขาเข้าสามขา แต่ละขาผ่านตัวต้านทานของตัวเองเข้าขั้ว − ซึ่งเป็นกราวด์เสมือน กระแสของแต่ละขาจึงหาได้แยกกันเหมือนอีกสองขาไม่มีอยู่ แล้วทั้งหมดรวมกันไหลผ่าน \(R_f\)</p><p>ผลคือ \(V_o = -\left(\dfrac{R_f}{R_1}V_1 + \dfrac{R_f}{R_2}V_2 + \dfrac{R_f}{R_3}V_3\right)\): ขาเข้าแต่ละขามีน้ำหนักของตัวเองเท่ากับ \(R_f/R_k\) เหมือนปุ่มความดังของแต่ละช่องในมิกเซอร์</p></div><div class="story-p" data-l="en"><p>Slide p. 19 connects three inputs, each through its own resistor, to the − input, a virtual ground. Each input current can therefore be found on its own, as if the other two were not there, and all of them flow on together through \(R_f\).</p><p>The result is \(V_o = -\left(\dfrac{R_f}{R_1}V_1 + \dfrac{R_f}{R_2}V_2 + \dfrac{R_f}{R_3}V_3\right)\): every input has its own weight \(R_f/R_k\), like the volume knob of each channel on a mixer.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 19, Summing Amplifier Circuit: probably the most used of the op-amp circuits is the summing amplifier; the circuit shows a three-input summing amplifier, which provides a means of algebraically summing (adding) three voltages, each multiplied by a constant-gain factor; Figure 10.37 with the virtual-ground equivalent and V_o = −(R_f/R_1 V_1 + R_f/R_2 V_2 + R_f/R_3 V_3).">
+    <figcaption data-l="th">สไลด์หน้า 19: วงจรรวมสัญญาณสามขาเข้า (รูป 10.37, สมการ 10.11)</figcaption><figcaption data-l="en">Slide p. 19: the three-input summing amplifier (Fig. 10.37, Eq. 10.11)</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อนขาเข้าทีละขา ดูแท่งของแต่ละส่วนรวมกันเป็นขาออก</p><p class="story-next" data-l="en">↓ Section A: move the inputs one at a time and watch the bars of the three terms add up to the output</p>
+</div>
 
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรรวมสามขาเข้าที่ปรับได้: ดูส่วนของแต่ละขา</h2><h2 data-l="en">The adjustable three-input summer: watch each input's term</h2>
@@ -59,6 +59,18 @@
   <p class="lead" data-l="en">Set \(V_1\), \(V_2\), \(V_3\) and the four resistors. The lower panel shows the three terms \(-(R_f/R_k)V_k\) and the total \(V_o\). Reverse the sign of one input: its term flips while the others stay put. Raise \(R_f\) until the output hits the 13 V rail, and watch the dots: each input's current meets the others at the − input and they flow through \(R_f\) together.</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ตัวอย่างสองชุดของสไลด์</div><div class="story-k" data-l="en">Part 2 · The slide's two sets</div>
+    <h2 data-l="th">Example 10.7: น้ำหนักต่างกัน เครื่องหมายต่างกัน</h2><h2 data-l="en">Example 10.7: different weights, different signs</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 20 ใช้ \(R_f\) = 1 MΩ ทั้งสองชุด ชุด (a) ขาเข้าเป็นบวกทั้งสามขา แต่ \(R_1\) เหลือ 500 kΩ ขาแรกจึงหนักเป็นสองเท่า ชุด (b) มีขาเข้าลบหนึ่งขา ส่วนของมันจึงหักล้างกับขาอื่นบางส่วน</p><p>ก่อนเปิดเฉลย ลองตอบแค่เครื่องหมายของขาออกในแต่ละชุด แล้วค่อยคิดขนาด</p></div><div class="story-p" data-l="en"><p>Slide p. 20 uses \(R_f\) = 1 MΩ in both sets. In set (a) all three inputs are positive, but \(R_1\) is only 500 kΩ, so the first input weighs twice as much. Set (b) has one negative input, whose term partly cancels the others.</p><p>Before opening the solutions, give only the sign of the output in each set, then work out the size.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 20, Summing Amplifier Circuit: calculate the output voltage of an op-amp summing amplifier for the following sets of voltages and resistors; use R_f = 1 MΩ in all cases. (a) V_1 = +1 V, V_2 = +2 V, V_3 = +3 V, R_1 = 500 kΩ, R_2 = 1 MΩ, R_3 = 1 MΩ. (b) V_1 = −2 V, V_2 = +3 V, V_3 = +1 V, R_1 = 200 kΩ, R_2 = 500 kΩ, R_3 = 1 MΩ (Example 10.7).">
+    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 10.7</figcaption><figcaption data-l="en">Slide p. 20: Example 10.7</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 20 คือ Example 10.7 ของตำรา</div><div class="warnbox" data-l="en"><b>The slides give no solutions</b>: p. 20 is the book's Example 10.7.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1–2: Example 10.7 (a) และ (b)</p><p class="story-next" data-l="en">↓ Problems 1–2: Example 10.7 (a) and (b)</p>
+</div>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 10.7(a): ขาเข้าบวกทั้งสาม</h2><h2 data-l="en">Example 10.7(a): three positive inputs</h2>
@@ -78,6 +90,18 @@
   <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
 </section>
 
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · เมื่อสมการบอกเกินราง</div><div class="story-k" data-l="en">Part 3 · When the equation runs past the rail</div>
+    <h2 data-l="th">ข้อ 9 และ 8: ตัวต้านทานเดิม \(R_f\) ต่างกัน</h2><h2 data-l="en">Problems 9 and 8: the same inputs, a different \(R_f\)</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 23 ให้ขาเข้า +0.2 V, −0.5 V, +0.8 V ผ่าน 33 kΩ, 22 kΩ, 12 kΩ ข้อ 9 ใช้ \(R_f\) = 68 kΩ ส่วนข้อ 8 ใช้ 330 kΩ</p><p>สมการรวมสัญญาณไม่รู้จักแหล่งจ่ายไฟเลี้ยง แต่ออปแอมป์รู้: เมื่อผลลัพธ์ตามสมการเกิน \(V_{sat}\) ขาออกจะหยุดอยู่ที่ราง ลองคิดข้อ 9 ก่อน แล้วถามตัวเองว่า \(R_f\) ที่ใหญ่ขึ้นเกือบห้าเท่าจะยังอยู่ในราง ±13 V หรือไม่</p></div><div class="story-p" data-l="en"><p>Slide p. 23 gives inputs of +0.2 V, −0.5 V and +0.8 V through 33 kΩ, 22 kΩ and 12 kΩ. Problem 9 uses \(R_f\) = 68 kΩ; Problem 8 uses 330 kΩ.</p><p>The summing equation knows nothing about the supply, but the op-amp does: when the equation asks for more than \(V_{sat}\), the output stops at the rail. Work Problem 9 first, then ask whether an \(R_f\) almost five times larger still stays inside ±13 V.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 23, Exercises of Op-Amp: calculate the output voltage of the circuit in the figure for R_f = 68 kΩ; V_1 = +0.2 V through 33 kΩ, V_2 = −0.5 V through 22 kΩ, V_3 = +0.8 V through 12 kΩ, the three resistors joined at the upper op-amp input marked +, the lower input marked − grounded, R_f from the output to the upper input (Problem 9, Fig. 10.68).">
+    <figcaption data-l="th">สไลด์หน้า 23: โจทย์ข้อ 9 (รูป 10.68) — ดูกรอบเตือน</figcaption><figcaption data-l="en">Slide p. 23: Problem 9 (Fig. 10.68), see the note</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 23 (และรูป 10.68 ของตำรา)</b> วาดตัวต้านทานขาเข้าทั้งสามเข้าขั้วบนที่มีเครื่องหมาย + และต่อ \(R_f\) กลับมาที่ขั้วเดียวกัน โดยขั้ว − ต่อกราวด์ นั่นคือป้อนกลับบวก ขาออกจะวิ่งชนรางไม่ใช่รวมสัญญาณ วงจรรวมสัญญาณต้องให้ขาเข้าพบกันที่ขั้ว − และขั้ว + ต่อกราวด์ (เหมือนรูป 10.37) ภาพจำลองข้อ 3 ใช้แบบหลัง · ข้อ 8 (\(R_f\) = 330 kΩ) ให้ −16.5 V ตามสมการ ซึ่งเกิน \(V_{sat}\) ภาพจำลองจึงอิ่มตัวที่ −13 V</div><div class="warnbox" data-l="en"><b>Slide p. 23 (and the book's Fig. 10.68)</b> draws the three input resistors into the upper terminal marked + and returns \(R_f\) to that same terminal, with the − input grounded. That is positive feedback: the output would run to a rail instead of summing. A summing amplifier needs the inputs at the − terminal and the + terminal grounded (as in Fig. 10.37); problem 3's simulation uses the latter. Problem 8 (\(R_f\) = 330 kΩ) gives −16.5 V by the equation, beyond \(V_{sat}\), so the simulation saturates at −13 V.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3: ข้อ 9 แล้วข้อ 8</p><p class="story-next" data-l="en">↓ Problem 3: Problem 9, then Problem 8</p>
+</div>
+
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ข้อ 9 และ 8: \(R_f\) = 68 kΩ แล้ว 330 kΩ</h2><h2 data-l="en">Problems 9 and 8: \(R_f\) = 68 kΩ, then 330 kΩ</h2>
     <div class="src" data-l="th">สไลด์หน้า 23 · Boylestad ข้อ 8–9 ท้ายบทที่ 10 (รูป 10.68)</div><div class="src" data-l="en">Slide p. 23 · Boylestad chapter 10 Problems 8–9 (Fig. 10.68)</div></div></div>
@@ -86,6 +110,18 @@
   <p class="lead" data-l="th">ขั้นสุดท้ายเปลี่ยน \(R_f\) เป็น 330 kΩ ให้ดูว่าเกิดอะไรขึ้นเมื่อผลรวมเกินราง <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The last step changes \(R_f\) to 330 kΩ to show what happens when the sum exceeds the rail. <b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
 </section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 4 · ต่อทีละขั้น</div><div class="story-k" data-l="en">Part 4 · One stage at a time</div>
+    <h2 data-l="th">ข้อ 14: สองขั้นแรก แล้วรวม</h2><h2 data-l="en">Problem 14: two first stages, then a summer</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 24 ป้อน \(V_1\) = 0.1 V เข้าออปแอมป์สองตัวพร้อมกัน ตัวบนเป็นวงจรไม่กลับเฟส 400 kΩ/20 kΩ ตัวล่างเป็นตัวตามแรงดัน ขาออกของทั้งสองไหลผ่าน 20 kΩ และ 10 kΩ เข้าวงจรรวมที่มี \(R_f\) = 100 kΩ</p><p>วงจรดูซับซ้อน แต่ออปแอมป์แต่ละตัวมีขาออกแข็งแรงจนขั้นถัดไปไม่ดึงให้เพี้ยน จึงคิดได้ทีละขั้นจากซ้ายไปขวา: หาขาออกของสองขั้นแรกก่อน แล้วค่อยใส่น้ำหนักของวงจรรวม</p></div><div class="story-p" data-l="en"><p>Slide p. 24 feeds \(V_1\) = 0.1 V into two op-amps at once: the upper one a noninverting amplifier with 400 kΩ/20 kΩ, the lower one a unity follower. Their outputs pass through 20 kΩ and 10 kΩ into a summer with \(R_f\) = 100 kΩ.</p><p>The circuit looks involved, but every op-amp output is stiff enough that the next stage does not load it, so it can be worked one stage at a time from left to right: the outputs of the first two stages, then the weights of the summer.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch7a/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 24, Exercises of Op-Amp: calculate the output voltage V_o in the circuit of the figure; V_1 = 0.1 V feeds the plus inputs of two op-amps, the upper one a noninverting amplifier with 400 kΩ feedback and 20 kΩ to ground, the lower one a unity follower; their outputs pass through 20 kΩ and 10 kΩ into a third op-amp with R_f = 100 kΩ (Problem 14, Fig. 10.73).">
+    <figcaption data-l="th">สไลด์หน้า 24: โจทย์ข้อ 14 (รูป 10.73)</figcaption><figcaption data-l="en">Slide p. 24: Problem 14 (Fig. 10.73)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 23–24 คือข้อ 9 (และ 8) กับข้อ 14 ท้ายบทที่ 10 ของตำรา</div><div class="warnbox" data-l="en"><b>The slides give no solutions</b>: pp. 23–24 are Problems 9 (and 8) and 14 at the end of the book's chapter 10.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 4: ข้อ 14</p><p class="story-next" data-l="en">↓ Problem 4: Problem 14</p>
+</div>
 
 <section class="prob" id="ex4">
   <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">ข้อ 14: สองขั้นแรกแล้วรวม</h2><h2 data-l="en">Problem 14: two first stages, then a summer</h2>
@@ -136,7 +172,7 @@ document.addEventListener('mc:ready', () => {
 
   /* =================================================================== A: the adjustable three-input summer */
   const COLS = [C.tan, '#c792ea', C.q];
-  OP.explorer({ init: { V: [1, 2, 3], R: [500e3, 1e6, 1e6], Rf: 1e6 }, title: t('ขาเข้าและตัวต้านทาน', 'Inputs and resistors'),
+  OP.explorer({ init: { V: [1, 2, 3], R: [500e3, 1e6, 1e6], Rf: 1e6 }, title: t('ขาเข้าและตัวต้านทาน', 'Inputs and resistors'), layout: { cktAspN: 0.95 },
     controls: (p, S, build) => {
       [0, 1, 2].forEach(k => ui.slider(p, { id: 'aV' + k, label: `V_${k + 1}`, min: -3, max: 3, step: 0.05, value: S.V[k], fmt: v => vtx(v), oninput: v => { S.V[k] = v; build(); } }));
       [0, 1, 2].forEach(k => OP.logSlider(p, 'aR' + k, `R_${k + 1}`, 10e3, 2e6, () => S.R[k], v => { S.R[k] = v; }, build, kO, OP.rndR));

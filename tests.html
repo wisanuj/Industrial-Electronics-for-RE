@@ -5,10 +5,10 @@
 <title data-en="Numeric Tests">ชุดทดสอบตัวเลข</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script>
-<script src="assets/draw.js?v=3"></script><script src="assets/ch6.js?v=3"></script><script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script>
+<script src="assets/draw.js?v=4"></script><script src="assets/ch6.js?v=4"></script><script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script><script src="assets/ie8.js?v=4"></script><script src="assets/review.js?v=4"></script>
 <style>.t-ok{color:var(--good)}.t-bad{color:var(--bad);font-weight:700}table.tbl td{font-family:"IBM Plex Mono",monospace;font-size:13px}</style>
 </head>
 <body>
@@ -300,8 +300,78 @@ T('temperature: 0.7 V at 10 mA at 20 °C, 0.5 V at 100 °C (−2.5 mV/°C); reve
   T('ADCs: ladder network (Fig. 13.15, 16 V, 1 kHz clock) converting 5.7 V stops at count 6 = 0110 with the staircase at 6 V · dual slope (Fig. 13.14, V_in = 3 V, V_ref = 10 V, RC = 10 ms, N_1 = 10): ramp to −3.000 V, back to 0 in 3.00 ms, N_2 = 3 = N_1 V_in/V_ref',
     `${adc.count} ${adc.done} ${f(rd.last('v'), 2)} | ${f(Math.min(...rs.buf.vo), 3)} ${f((dual.t2 - dual.t1) * 1e3, 2)} ${dual.n}`, '6 true 6 | -3 3 3'); }
 
+/* --- BJT convergence with the β model (bounded steps, Oct 2026): fixed, emitter, voltage-divider and collector-feedback bias over a grid that
+   reaches deep saturation settle (< 60 solves) on the bias equations; before, a divider driven into saturation (page 4.3, R_2 = 20 kΩ) cycled for 400 solves --- */
+{ let n = 0, bad = 0, worst = 0, msg = '';
+  const grid = []; for (const beta of [50, 100, 200]) for (const VCC of [10, 22]) { for (const RB of [47e3, 240e3, 1e6]) for (const RE of [0, 1e3]) grid.push({ VCC, RB, RC: 4.7e3, RE, beta });
+    for (const R2 of [3.9e3, 10e3, 20e3]) for (const RE of [470, 1.5e3]) grid.push({ VCC, R1: 39e3, R2, RC: 10e3, RE, beta });
+    for (const RF of [20e3, 250e3]) grid.push({ VCC, RF, RC: 4.7e3, RE: 1.2e3, beta }); }
+  for (const o of grid) { const c = new Circuit(CH4.net(o)); c.solve(); const q = c.Q('Q'); n++; worst = Math.max(worst, c.result.iters);
+    const VB = c.V('b').re, VE = c.V('e').re, VC = c.V('c').re, IB = q.IB, IE = q.IE;
+    const loopB = o.R1 ? Math.abs((o.VCC - VB) / o.R1 - VB / o.R2 - IB) : o.RF ? Math.abs((VC - VB) / o.RF - IB) : Math.abs((o.VCC - VB) / o.RB - IB);
+    const ok = c.result.iters < 60 && Math.abs(VB - VE - 0.7) < 2e-3 && loopB < 1e-7 && Math.abs(VE - IE * (o.RE || 0)) < 1e-6 && q.VCE > -1e-6 && (q.region !== 'active' || Math.abs(q.IC - o.beta * IB) < 1e-9 + 1e-6 * q.IC);
+    if (!ok) { bad++; if (!msg) msg = `${JSON.stringify(o)}: I_C ${(q.IC * 1e3).toFixed(3)} mA, V_CE ${q.VCE.toFixed(3)}, ${c.result.iters} solves`; } }
+  const z = (() => { const c = new Circuit(CH4.net({ VCC: 22, R1: 39e3, R2: 20e3, RC: 10e3, RE: 1.5e3, beta: 140 })); c.solve(); const q = c.Q('Q'); return `${(q.IC * 1e3).toFixed(2)} ${q.VCE < 0.05} ${q.region}`; })();
+  T(`BJT convergence (β model): ${n} fixed, emitter, voltage-divider and collector-feedback circuits, active and saturated, settle in fewer than 60 solves on the base loop and V_BE = 0.7 V · page 4.3 with R_2 = 20 kΩ saturates at I_C = 1.88 mA`, bad ? `${bad} bad, first ${msg}` : `ok | ${z}`, 'ok | 1.88 true saturation'); }
+
+/* --- FET convergence (bounded Newton steps, Oct 2026): self-bias and voltage-divider JFETs and depletion MOSFETs over a grid of devices and resistors
+   converge (< 400 solves) to a point that satisfies Shockley's equation and the gate loop, as found when the review page drew random circuits --- */
+{ const devs = [{ idss: 6e-3, vp: -3 }, { idss: 8e-3, vp: -4 }, { idss: 10e-3, vp: -5 }, { idss: 12e-3, vp: -6 }, { idss: 10e-3, vp: -8 }, { kind: 'dmos', idss: 8e-3, vp: -4 }];
+  let n = 0, bad = 0, worst = 0, msg = '';
+  for (const dev of devs) for (const RS of [470, 1000, 2200, 4700]) for (const R2 of [0, 220e3, 470e3]) for (const VDD of [12, 20]) {
+    const o = R2 ? { dev, R1: 2.2e6, R2, RS, RD: 1800, VDD } : { dev, RS, RD: 1800, VDD, RG: 1e6 }, c = new Circuit(CH5.net(o)); c.solve(); const j = c.J('Q'); n++; worst = Math.max(worst, c.result.iters);
+    const VG = R2 ? R2 * VDD / (2.2e6 + R2) : 0, Rth = R2 ? 2.2e6 * R2 / (2.2e6 + R2) : 1e6, shock = j.VGS <= dev.vp ? 0 : dev.idss * Math.pow(1 - j.VGS / dev.vp, 2), sat = j.region === 'saturation';
+    const ok = c.result.iters < 400 && Math.abs(VG - j.IG * Rth - j.VGS - (j.ID + j.IG) * RS) < 1e-5 && (!sat || Math.abs(j.ID - shock) < 1e-6 + 1e-4 * shock) && j.ID >= -1e-9;   // the gate loop with the gate current (a gate driven slightly positive leaks a few nA through the junction)
+    if (!ok) { bad++; if (!msg) msg = `${dev.idss * 1e3}/${dev.vp} RS ${RS} R2 ${R2} VDD ${VDD}: I_D ${(j.ID * 1e3).toFixed(3)} mA, V_GS ${j.VGS.toFixed(3)}, ${c.result.iters} solves`; } }
+  T(`FET convergence: ${n} self-bias and voltage-divider circuits (JFETs with V_P from −3 to −8 V and a depletion MOSFET) settle on Shockley's equation (in saturation) and the gate loop (with the gate current), fewer than 400 solves each`, bad ? `${bad} bad, first ${msg}` : `ok, worst ${worst < 60 ? '< 60' : worst} solves`, 'ok, worst < 60 solves'); }
+
+/* --- the exam-review page (review.js): every drill's hand answer against the engine on random numbers, the book's numbers, and the page data --- */
+{ const D = id => RV.DRILLS.find(d => d.id === id), N = 30, bad = {}, cnt = {};
+  const cmp = (id, what, got, exp, tol) => { cnt[id] = (cnt[id] || 0) + 1; if (!(Math.abs(got - exp) <= tol)) (bad[id] = bad[id] || []).push(`${what}: ${(+got).toPrecision(6)} vs ${(+exp).toPrecision(6)}`); };
+  const solve = (d, p) => { const c = new CK.Circuit(d.pic(p)); c.solve(); return c; };
+  const rel = (x, r = 1e-4) => Math.max(Math.abs(x) * r, 1e-9);
+  for (let k = 0; k < N; k++) {
+    { const d = D('ch1_6_equivalent'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'I_D simplified', c.I('D').re * 1e3, F[1].ans, rel(F[1].ans)); }
+    { const d = D('ch2_3_two_diodes'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'I', c.I('R1').re * 1e3, F[0].ans, rel(F[0].ans)); cmp(d.id, 'V_o', c.V('o').re, F[1].ans, 1e-4); }
+    { const d = D('ch2_9_zener'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'V_L', c.V('l').re, F[0].ans, 2e-3); cmp(d.id, 'I_Z', -c.I('DZ').re * 1e3, F[1].ans, 2e-3); }
+    ['ch4_1_fixed_bias', 'ch4_2_emitter_bias', 'ch4_3_voltage_divider', 'ch4_4_collector_feedback'].forEach(id => { const d = D(id), p = d.gen(), e = RV.bq(p), q = solve(d, p).Q('Q');
+      cmp(id, 'I_B', q.IB, e.IB, rel(e.IB, 1e-4)); cmp(id, 'I_C', q.IC, e.IC, rel(e.IC, 1e-4)); cmp(id, 'V_CE', q.VCE, e.VCE, 1e-3); cmp(id, 'active', q.region === 'active' ? 1 : 0, 1, 0); });
+    ['ch5_4_self_bias', 'ch5_5_voltage_divider'].forEach(id => { const d = D(id), p = d.gen(), F = d.fields(p), j = solve(d, p).J('Q'), iI = id === 'ch5_4_self_bias' ? 0 : 1;
+      cmp(id, 'I_D', j.ID * 1e3, F[iI].ans, rel(F[iI].ans, 1e-3)); cmp(id, 'V_DS', j.VDS, F[2].ans, 2e-3); cmp(id, 'saturation', j.region === 'saturation' ? 1 : 0, 1, 0); });
+    { const d = D('ch6_1_depletion'), p = d.gen(), F = d.fields(p), j = solve(d, p).J('Q'); cmp(d.id, 'I_D(+1 V)', j.ID * 1e3, F[0].ans, rel(F[0].ans, 1e-3)); cmp(d.id, 'V_GS', j.VGS, 1, 1e-4); cmp(d.id, 'saturation', j.region === 'saturation' ? 1 : 0, 1, 0); }
+    { const d = D('ch6_4_enhancement_bias'), p = d.gen(), F = d.fields(p), j = solve(d, p).J('Q'); cmp(d.id, 'I_D', j.ID * 1e3, F[1].ans, rel(F[1].ans, 1e-3)); cmp(d.id, 'V_DS', j.VDS, F[2].ans, 2e-3); }
+    { const d = D('ch7_2_inverting_noninverting'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'V_o inverting', c.V('o').re, F[0].ans, 3e-3 * Math.abs(F[0].ans) + 1e-3); }
+    { const d = D('ch7_3_summing'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'V_o', c.V('o').re, F[0].ans, 3e-3 * Math.abs(F[0].ans) + 1e-3); }
+    { const d = D('ch7_5_active_filters'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, '|A| at f_c', CK.Cx.abs(c.V('o')) / CK.Cx.abs(c.V('s')), F[2].ans, 2e-3 * F[2].ans); }
+    { const d = D('ch8_1_comparators'), p = d.gen(), F = d.fields(p), c = solve(d, p); cmp(d.id, 'V_o', c.V('o').re, F[1].ans, 0.02 * p.Vp); }
+    RV.DRILLS.forEach(d => { const p = d.gen(), F = d.fields(p), txt = d.given(p) + d.answer(p) + JSON.stringify(d.steps(p));
+      cmp(d.id, 'text has no NaN/undefined/Infinity', /NaN|undefined|Infinity/.test(txt) ? 1 : 0, 0, 0);
+      F.forEach(f => cmp(d.id, `own answer accepted (${f.label})`, RV.okOf(f)(f.ans) ? 1 : 0, 1, 0)); }); }
+  const ids = Object.keys(cnt), fails = ids.filter(id => bad[id]);
+  T(`review page: ${RV.DRILLS.length} drills × ${N} random problems, hand answers against the engine (BJT bias exact, JFET/MOSFET in saturation, Zener, op-amps, filter at f_c, comparator) and every text free of NaN`, fails.length ? fails.map(id => `${id} → ${bad[id].slice(0, 2).join('; ')}`).join(' | ') : `${ids.length} drills ok`, `${ids.length} drills ok`);
+  const f8 = (id, p) => D(id).fields(p).map(f => +f.ans.toPrecision(4)).join(' ');
+  T('review page, book numbers: 555 astable 7.5 kΩ, 7.5 kΩ, 0.1 µF → T_high 1.05 ms, T_low 0.525 ms, f 640 Hz (Example 13.1) · one-shot 7.5 kΩ, 0.1 µF → 0.825 ms, 566 of Fig. 13.22 → V_C = 10.43 V, f_o = 31.81 kHz (Example 13.2/13.3, V_C unrounded)',
+    f8('ch8_3_timer_555', { RA: 7500, RB: 7500, C: 1e-7, VCC: 5 }) + ' | ' + f8('ch8_4_vco', { RA: 7500, C: 1e-7, Vp: 12, R2: 1500, R3: 10e3, R1: 10e3, C1: 820e-12 }), '1.05 0.525 640 | 0.825 10.43 31.81');
+  T('review page, book numbers: fixed bias Example 4.1 (12 V, 240 kΩ, 2.2 kΩ, β = 50) → 47.08 µA, 2.354 mA, 6.821 V · R-2R 4 bits, 16 V, code 6 → 1 V step, 6 V',
+    f8('ch4_1_fixed_bias', { VCC: 12, RB: 240e3, RC: 2200, beta: 50 }) + ' | ' + f8('ch8_2_dac_adc', { n: 4, Vref: 16, D: 6, fclk: 1e3 }), '47.08 2.354 6.821 | 1000 6 16');
+  const cons = Object.entries(RV.CONCEPTS), nq = cons.reduce((a, [, q]) => a + q.length, 0), okq = cons.every(([, q]) => q.every(x => x.o.length === 4 && x.a >= 0 && x.a < 4 && x.q.length === 2 && x.why.length === 2 && x.o.every(o => o.length === 2)));
+  const okCh = Object.keys(RV.CH).length === 8 && Object.values(RV.CH).every(C => C.formulas.length >= 5 && C.recipe.length >= 4 && C.traps.length >= 4 && C.formulas.every(f => f.length === 3));
+  T('review page data: 8 chapters with ≥ 5 formulas, ≥ 4 recipe steps and ≥ 4 traps, every concept question with 4 two-language options and a reason', `${okCh} ${okq} ${nq >= 24}`, 'true true true'); }
+
 /* --- formatting --- */
 T('eng(0.0024 A)', CK.eng(0.0024, 'A'), '2.4 mA');
+
+/* --- formulas fitted to a column (lesson.js): a chain of separate results breaks into one result per row, never mid-result --- */
+{ const R = String.raw, sc = LS.splitChain;
+  const a = sc(R`V_E = 2\ \text{V},\ R_E = \frac{2}{10\ \text{mA}} = 200\ \Omega,\ I_C \cong \frac{2.06}{0.2} = 10.3\ \text{mA}`).join(' | ');
+  const b = sc(R`V_E &= 2\ \text{V},\ R_E = 200\ \Omega`).join(' | ');
+  const l = R`I_D = 8,\ 4.5,\ 2\ \text{mA at}\ V_{GS} = 0,\ -1`, c = sc(l).join(' | ');
+  const k = LS.splitCases(R`v_i > 6\ \text{V}: \text{on},\ v_o &= 6\ \text{V};\qquad v_i < 6\ \text{V}: \text{off},\ v_o = v_i`).join(' | ');
+  T('fitted formulas: "a = …, b = …, c ≅ …" splits into one result per row aligned at its own relation; an aligned row too; a list of values stays whole; cases split at "; \\qquad" stay whole',
+    `${a} || ${b} || ${c === l} || ${k}`, R`V_E &= 2\ \text{V} | R_E &= \frac{2}{10\ \text{mA}} = 200\ \Omega | I_C &\cong \frac{2.06}{0.2} = 10.3\ \text{mA} || V_E &= 2\ \text{V} | R_E &= 200\ \Omega || true || v_i > 6\ \text{V}: \text{on},\ v_o &= 6\ \text{V} | v_i < 6\ \text{V}: \text{off},\ v_o &= v_i`);
+  const t = R`V_E = 2\ \text{V},\ R_E = \frac{2}{10\ \text{mA}} = 200\ \Omega,\ V_B = 2.7\ \text{V}`, w = LS.texW(t);
+  T('fitted formulas: the same chain in a column 60 % of its width becomes three rows (no name left dangling at the end of a row)',
+    LS.withCol(0.6 * w + 50, () => LS.fit(t)), R`\begin{aligned} V_E &= 2\ \text{V} \\ R_E &= \frac{2}{10\ \text{mA}} = 200\ \Omega \\ V_B &= 2.7\ \text{V} \end{aligned}`); }
 
 document.querySelector('#tbl tbody').innerHTML = rows.join('');
 document.getElementById('sum').innerHTML = bad ? `<span class="pill bad">FAIL</span> ${bad} / ${n} tests failed` : `<span class="pill good">ALL PASS</span> ${n} / ${n} tests`;

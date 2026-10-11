@@ -64,10 +64,10 @@ const kNon = o => {
   load(sp, o, fol ? 3.4 : 4.8); return sp; };
 /* the summing amplifier (Fig. 10.37a): n inputs on rows 1.2 apart (V_1 at the top), each a source and its resistor, joined down a column into the − input; R_f on the rail above */
 const kSum = o => {
-  const n = o.V.length, ys = [1.4, 0.2, -1.0].slice(0, n), rail = ys[n - 1] - 0.8;
+  const n = o.V.length, ys = [1.4, -0.5, -2.4].slice(0, n), rail = ys[n - 1] - 0.8;   // rows 1.9 apart: room for the two-line labels above each row (at 1.2 the labels crowded each other on a phone)
   const nodes = { N: [4, 1.4], P: [4, 2.6], g: [4, 3.4], nf: [4, rail], of: [6.2, rail], O: [6.2, 2], o: [7.4, 2], sg: [0.8, 3.4] }, parts = [], sp = { ground: 'g', nodes, parts, grounds: ['g', 'sg'], mode: 'dc' };
   o.V.forEach((v, k) => { const i = k + 1, y = ys[n - 1 - k]; nodes['g' + i] = [0.2, y]; nodes['s' + i] = [1.6, y]; nodes['r' + i] = [3.4, y]; nodes['j' + i] = [3.7, y];
-    parts.push(src('V' + i, 's' + i, 'g' + i, v, `V_${i}`, { side: -1 }), res('R' + i, 's' + i, 'r' + i, o.R[k], `R_${i}`), W_('r' + i, 'j' + i), W_('j' + i, i < n ? 'j' + (i + 1) : 'N'), W_('g' + i, i < n ? 'g' + (i + 1) : 'sg')); });
+    parts.push(src('V' + i, 's' + i, 'g' + i, v, `V_${i}`, { side: 1, stack: true }), res('R' + i, 's' + i, 'r' + i, o.R[k], `R_${i}`, { stack: true }), W_('r' + i, 'j' + i), W_('j' + i, i < n ? 'j' + (i + 1) : 'N'), W_('g' + i, i < n ? 'g' + (i + 1) : 'sg')); });   // two-line labels above each row: narrow enough to sit side by side on a phone
   nodes.sg = [0.2, 3.4];
   parts.push(W_('N', 'nf'), res('Rf', 'nf', 'of', o.Rf, 'R_f'), W_('of', 'O'), W_('P', 'g'), oa('P', 'N', 'O', o), W_('O', 'o'), hid('sg', 'g'));
   load(sp, o, 3.4); return sp; };
@@ -194,7 +194,7 @@ OP.timePlot = (ctx, b, rec, o = {}) => { const us = !!o.us, ms = !us && !!o.ms, 
    layout: { cktAspM, rowAsp, rowMin } } → { B, S, build, show } */
 OP.explorer = o => {
   const $ = id => document.getElementById(id), ui = MC.ui, S = { ...o.init }, L = o.layout || {}, ID = Object.assign({ cv: 'cvA', panel: 'pA', text: 'wA' }, o.ids || {});   // ids: a second explorer on a page (section B)
-  const B = new CH8.Board(ID.cv, { T: 4, mid: true, midMin: 420, cktAspM: L.cktAspM ?? 0.55, rowAsp: L.rowAsp ?? 0.66, rowMin: L.rowMin ?? 270, pad: 1.2, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
+  const B = new CH8.Board(ID.cv, { T: 4, mid: true, midMin: 420, cktAspM: L.cktAspM ?? 0.55, cktAspN: L.cktAspN, rowAsp: L.rowAsp ?? 0.66, rowMin: L.rowMin ?? 270, pad: 1.2, wideAt: 1e9, dotSpeed: 80, shortSpec: sp => CH8.margins(sp, 1.2),
     view: { acPeak: true, minV: 7, glowColor: 'rgba(255,126,182,.4)' },
     side: o.side ? (ctx, b, bd) => { if (B.ckt) o.side(ctx, b, bd, B.ckt, S); } : undefined,
     waves: (o.waves || []).map(w => ({ draw: (ctx, b, bd) => { if (B.ckt) w(ctx, b, bd, B.ckt, S); } })),
@@ -384,9 +384,9 @@ DEF.follower = { ...LAY, solvedAt: 1, spec: () => spec('fol', FOL),
 const sumBars = (ctx, b, bd, c, title) => { const a = z(c), rf = c.byId.Rf.value, items = []; let k = 1; while (c.byId['V' + k]) { const v = c.byId['V' + k], r = c.byId['R' + k].value, V = (v.a === 's' + k ? 1 : -1) * v.value; items.push({ label: `−(R_f/R_${k})V_${k}`, v: -rf / r * V, color: [C.tan, PURPLE, C.q][(k - 1) % 3], sub: bd.short ? '' : `−${fd(rf / r, 2)} × ${vtx(V)}` }); k++; }
   items.push({ label: 'V_o', v: a.vo, color: a.state === 'lin' ? C.curve : C.red, sub: bd.short ? '' : a.st[0] }); OP.vbars(ctx, b, items, { title: bd.short ? '' : title, short: bd.short }); };
 const O7a = { kind: 'sum', V: [1, 2, 3], R: [500e3, 1e6, 1e6], Rf: 1e6 }, O7b = { kind: 'sum', V: [-2, 3, 1], R: [200e3, 500e3, 1e6], Rf: 1e6 };
-DEF.ex107a = { ...LAY, solvedAt: 2, spec: () => spec('e7a', O7a),
+DEF.ex107a = { ...LAY, cktAspN: 0.95, solvedAt: 2, spec: () => spec('e7a', O7a),
   glow: k => (k === 1 ? ['R1', 'R2', 'R3'] : k === 2 ? ['Rf'] : null),
-  badge: (k, s) => { const a = z(s.ckt); return k >= 2 ? bdg(`V_o = ${vtx(a.vo)}`) : k === 1 ? bdg(`I_1 + I_2 + I_3 = ${itx(-a.io - 0)}`.replace('I_1 + I_2 + I_3 = ', 'ΣI = ')) : bdg('V_1 = 1 V, V_2 = 2 V, V_3 = 3 V · 500 kΩ, 1 MΩ, 1 MΩ · R_f = 1 MΩ', null, false); },
+  badge: (k, s) => { const a = z(s.ckt); return k >= 2 ? bdg(`V_o = ${vtx(a.vo)}`) : k === 1 ? bdg(`I_1 + I_2 + I_3 = ${itx(-a.io - 0)}`.replace('I_1 + I_2 + I_3 = ', 'ΣI = ')) : bdg(t('สามขาเข้า R_f = 1 MΩ: หา V_o', 'three inputs, R_f = 1 MΩ: find V_o'), null, false); },   // the values are on the picture; a long badge was clipped on a phone
   side: (ctx, b, bd, k, s) => sumBars(ctx, b, bd, s.ckt, t('แต่ละขาเข้าให้ส่วนของมันเอง (สมการ 10.11)', 'each input adds its own term (Eq. 10.11)')),
   after: (v, k, s) => { if (k >= 1) OP.tags(v, s.ckt, { vg: 'N' }); },
   steps: () => [
@@ -397,9 +397,9 @@ DEF.ex107a = { ...LAY, solvedAt: 2, spec: () => spec('e7a', O7a),
       t('ขาเข้าแต่ละขามี "อัตราขยาย" ของตัวเอง \\(R_f/R_k\\): 2, 1, 1 เปลี่ยน \\(R_1\\) ไม่กระทบส่วนของ \\(V_2\\), \\(V_3\\)', 'Each input has its own "gain" \\(R_f/R_k\\): 2, 1, 1. Changing \\(R_1\\) leaves the \\(V_2\\) and \\(V_3\\) terms untouched.'))],
   ask: () => ({ fields: [num('V<sub>o</sub> (V) =', -7, { tol: 0.05 })] }),
   answer: () => t('\\(V_o\\) = −[2(1) + 1(2) + 1(3)] = −7 V (Boylestad Example 10.7a)', '\\(V_o\\) = −[2(1) + 1(2) + 1(3)] = −7 V (Boylestad Example 10.7a).') };
-DEF.ex107b = { ...LAY, solvedAt: 1, spec: () => spec('e7b', O7b),
+DEF.ex107b = { ...LAY, cktAspN: 0.95, solvedAt: 1, spec: () => spec('e7b', O7b),
   glow: k => (k === 1 ? ['V1', 'R1'] : k === 2 ? ['Rf'] : null),
-  badge: (k, s) => { const a = z(s.ckt); return k >= 1 ? bdg(`V_o = ${vtx(a.vo)}`) : bdg('V_1 = −2 V, V_2 = 3 V, V_3 = 1 V · 200 kΩ, 500 kΩ, 1 MΩ · R_f = 1 MΩ', null, false); },
+  badge: (k, s) => { const a = z(s.ckt); return k >= 1 ? bdg(`V_o = ${vtx(a.vo)}`) : bdg(t('สามขาเข้า R_f = 1 MΩ: หา V_o', 'three inputs, R_f = 1 MΩ: find V_o'), null, false); },
   side: (ctx, b, bd, k, s) => sumBars(ctx, b, bd, s.ckt, t('ส่วนบวกกับส่วนลบหักล้างกัน', 'positive and negative terms cancel in part')),
   after: (v, k, s) => { if (k >= 1) OP.tags(v, s.ckt, { vg: 'N' }); },
   steps: () => [
@@ -412,7 +412,7 @@ DEF.ex107b = { ...LAY, solvedAt: 1, spec: () => spec('e7b', O7b),
 
 /* Problems 9 and 8 (slide p. 23, Fig. 10.68): 33, 22, 12 kΩ with +0.2, −0.5, +0.8 V; R_f = 68 kΩ, then 330 kΩ. The figure marks the input terminal "+": the simulation uses the inverting connection */
 const P9 = { kind: 'sum', V: [0.2, -0.5, 0.8], R: [33e3, 22e3, 12e3], Rf: 68e3 }, P8 = { ...P9, Rf: 330e3 };
-DEF.p9 = { ...LAY, solvedAt: 1, spec: k => (k >= 3 ? spec('p8', P8) : spec('p9', P9)),
+DEF.p9 = { ...LAY, cktAspN: 0.95, solvedAt: 1, spec: k => (k >= 3 ? spec('p8', P8) : spec('p9', P9)),
   glow: k => (k === 1 ? ['R1', 'R2', 'R3'] : k >= 2 ? ['Rf'] : null),
   badge: (k, s) => { const a = z(s.ckt); return k >= 1 ? bdg(`R_f = ${kO(s.ckt.byId.Rf.value)}: V_o = ${vtx(a.vo)} · ${a.st[0]}`, null, a.state === 'lin') : bdg('+0.2 V, −0.5 V, +0.8 V · 33, 22, 12 kΩ', null, false); },
   side: (ctx, b, bd, k, s) => sumBars(ctx, b, bd, s.ckt, k >= 3 ? t('R_f = 330 kΩ: ผลรวมเกินราง', 'R_f = 330 kΩ: the sum exceeds the rail') : t('R_f = 68 kΩ', 'R_f = 68 kΩ')),

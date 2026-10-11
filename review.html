@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Exam review — every chapter">ทบทวนก่อนสอบ — รวมทุกบท</title>
+<meta name="description" content="หน้าทบทวนก่อนสอบวิชา 010243302 อิเล็กทรอนิกส์อุตสาหกรรม: สูตร ขั้นตอน จุดที่มักพลาด คำถามแนวคิด โจทย์สุ่มตัวเลข ข้อสอบจำลอง และเช็กลิสต์ของทุกบท">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script><script src="assets/ie8.js?v=4"></script>
+<script src="assets/review.js?v=4"></script>
+<style>
+/* ---- the review page (review.js builds the chapters, the mock exam and the checklist) ---- */
+.rv-scopebox{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:16px 0 6px}
+.rv-scopebox .rv-sl{font-weight:700;color:var(--muted)}
+.rv-scopebox .toggles{margin:0}
+.rv-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:10px 0 4px}
+.rv-tile{display:flex;flex-direction:column;gap:3px;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;transition:border-color .14s ease,opacity .14s ease}
+.rv-tile:hover{border-color:var(--accent)}
+.rv-tile.off{opacity:.42}
+.rv-tn{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.rv-tile b{font-size:16px;line-height:1.35}
+.rv-tm{font-size:13.5px;color:var(--muted)}
+.rv-tb{display:block;height:6px;border-radius:99px;background:var(--chip);overflow:hidden;margin-top:4px}
+.rv-tb i{display:block;height:100%;background:var(--good);border-radius:99px}
+.rv-tb.rv-wide{flex:1;min-width:120px;margin:0}
+.rv-pages{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.rv-pg{font-size:14px;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:2px 10px}
+.rv-pg b{color:var(--accent);margin-right:4px}
+.rv-pg:hover{border-color:var(--accent)}
+.rv-pg.seen{border-color:color-mix(in srgb,var(--good) 55%,var(--line))}
+.rv-pg.seen::after{content:" ✓";color:var(--good)}
+.rv-h3{font-size:17px;margin:20px 0 8px;color:var(--accent2)}
+.rv-fgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:820px){.rv-fgrid{grid-template-columns:minmax(0,1fr)}}
+.rv-f{padding:8px 14px;min-width:0}
+.rv-fx{min-width:0}
+.rv-fx .katex-display{margin:4px 0;text-align:left}
+.rv-fx .katex-display>.katex{text-align:left}
+.rv-fn{font-size:14.5px;color:var(--muted);line-height:1.55}
+.rv-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px}
+@media (max-width:820px){.rv-two{grid-template-columns:minmax(0,1fr)}}
+.rv-two .card{padding:10px 16px}
+.rv-two .rv-h3{margin-top:2px}
+.rv-recipe,.rv-traps{margin:4px 0;padding-left:22px}
+.rv-recipe li,.rv-traps li{margin:6px 0;line-height:1.6;font-size:15.5px}
+.rv-tc{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));background:color-mix(in srgb,var(--warn) 6%,var(--panel))}
+.rv-tc .rv-h3{color:var(--warn)}
+.rv-concepts{display:grid;gap:8px}
+.rv-cq{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 12px}
+.rv-cqq{font-size:15.5px;margin-bottom:2px}
+.rv-cq .ask{border:0;padding:4px 0;margin:2px 0}
+.rv-cqw{font-size:14.5px;color:var(--ink);background:color-mix(in srgb,var(--good) 9%,var(--panel));border-radius:8px;padding:6px 10px;margin-top:4px}
+.rv-bar{display:flex;align-items:center;gap:10px;margin:6px 0 2px}
+.rv-bar .btn{margin:0}
+.rv-cnt{font-size:13.5px;color:var(--muted)}
+.rv-one{margin-top:10px}
+.rv-mbar{display:flex;align-items:center;gap:12px;margin:8px 0}
+.rv-mbar .btn{margin:0}
+.rv-timer{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--muted)}
+.prob.rv-mq{margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--line)}
+.rv-mh{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:4px}
+.rv-mg{margin:4px 0 8px;font-size:15.5px}
+.rv-mins{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:15px}
+.rv-mins input.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,var(--panel))}
+.rv-mins input.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--panel))}
+.rv-mduo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:760px){.rv-mduo{grid-template-columns:minmax(0,1fr)}}
+.rv-mcv{padding:4px}
+.rv-mopts{display:grid;gap:6px;font-size:15px}
+.rv-mopts label{display:flex;gap:8px;align-items:baseline;cursor:pointer}
+.rv-msol{margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:6px 12px;background:var(--panel)}
+.rv-msol summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:15.5px}
+.rv-mmore{margin:8px 0 2px;font-size:14.5px}
+.rv-mfoot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:16px 0}
+.rv-mfoot .btn{margin:0}
+.rv-mscore{font-size:16px}
+.rv-ckhead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0}
+.rv-ckhead .btn{margin:0}
+.rv-ck{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:start;padding:7px 4px;border-top:1px dashed var(--line);font-size:15px;cursor:pointer;line-height:1.55}
+.rv-ck input{margin-top:6px;width:17px;height:17px}
+.rv-ck a{font-size:13.5px;white-space:nowrap}
+.rv-ck b{color:var(--accent);margin-right:4px}
+.rv-ckg .rv-h3{margin-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ทบทวนก่อนสอบ: รวมทุกบท <span class="en">Exam review — every chapter on one page</span></h1>
+<h1 data-l="en">Exam review <span class="en">Every chapter on one page: formulas, recipes, traps, random drills and a mock exam</span></h1>
+
+<p class="sub" data-l="th">หน้านี้รวมทุกบทของวิชา (สไลด์บทที่ 1–8) ไว้ที่เดียวสำหรับทบทวนก่อนสอบ: สูตรที่ต้องจำ ขั้นตอนมาตรฐาน จุดที่มักพลาด คำถามแนวคิด และโจทย์ฝึกที่สุ่มตัวเลขใหม่ได้ทุกครั้ง โจทย์แต่ละข้อมีเฉลยทีละขั้น และวงจรของข้อนั้นที่ตัวแก้วงจรแก้ให้ดูเทียบ ท้ายหน้ามีข้อสอบจำลองที่ตรวจให้ทันที และเช็กลิสต์จากหัวข้อ "จะทำได้" ของทุกหน้า ตามตารางเรียนในสไลด์บทที่ 0 สอบกลางภาคอยู่สัปดาห์ที่ 8 หลังเรียนบทที่ 1–6 และสอบปลายภาคอยู่สัปดาห์ที่ 15 หลังเรียนบทที่ 7–8 เลือกขอบเขตด้านล่างเพื่อเหลือเฉพาะบทที่ออกสอบ</p>
+<p class="sub" data-l="en">This page gathers every chapter of the course (slides 1–8) in one place for exam revision: the formulas to know, the standard recipe, the common traps, concept questions, and drills that draw new numbers every time. Each drill has a step-by-step solution and its circuit solved by the engine for comparison. At the end come a mock exam marked on the spot and a checklist built from the "you will be able to" line of every page. By the schedule in the chapter 0 slides, the midterm comes in week 8 after chapters 1–6 and the final in week 15 after chapters 7–8. Choose the scope below to keep only the chapters of your exam.</p>
+
+<section class="keypoints" data-l="th"><h2>วิธีใช้หน้านี้</h2><ul>
+  <li><b>เลือกขอบเขต</b>: ทุกบท สอบกลางภาค หรือสอบปลายภาค หน้าเว็บจะซ่อนบทอื่น และจัดข้อสอบจำลองกับเช็กลิสต์ตามขอบเขตนั้น (จำค่าไว้ในเบราว์เซอร์นี้)</li>
+  <li><b>อ่านสูตรและจุดที่มักพลาด</b> ของแต่ละบทก่อน แล้วลองคำถามแนวคิด กดตัวเลือกที่คิดว่าถูก ถ้าถูกจะขึ้นเหตุผลให้อ่าน</li>
+  <li><b>ทำโจทย์ฝึก</b>: ใส่คำตอบในช่อง "ลองตอบก่อน" แล้วกดตรวจ ถ้ายังไม่ได้ค่อยเปิดเฉลยทีละขั้น กด 🎲 เพื่อได้ตัวเลขชุดใหม่ ช่องตอบรับค่าที่คลาดไม่เกินราว 0.6 % (สามตำแหน่งนัยสำคัญ) และรับวิธีประมาณของตำราด้วยในข้อที่ตำราประมาณ</li>
+  <li><b>วงจรข้างโจทย์</b> ถูกแก้ด้วยตัวแก้วงจรตัวเดียวกับทุกหน้า ชี้เมาส์ที่อุปกรณ์เพื่ออ่านค่า และเมื่อเปิดเฉลยครบจะเห็นค่าที่ตัวแก้วงจรได้ใต้ภาพ เทียบกับคำตอบที่คิดด้วยมือ</li>
+  <li><b>ทำข้อสอบจำลอง</b> ชุดละ 10 ข้อ จับเวลาให้ ส่งแล้วรู้คะแนน เห็นเฉลย และรู้ว่าควรกลับไปทบทวนบทใด</li>
+  <li><b>ติ๊กเช็กลิสต์</b> ข้อที่ทำได้แล้ว ข้อที่ยังไม่ติ๊กมีลิงก์กลับไปหน้าเรียน ความคืบหน้าแสดงบนแผ่นของแต่ละบทด้านล่าง</li></ul></section>
+<section class="keypoints" data-l="en"><h2>How to use this page</h2><ul>
+  <li><b>Choose the scope</b>: all chapters, the midterm or the final. The page hides the other chapters and builds the mock exam and the checklist for that scope (remembered in this browser).</li>
+  <li><b>Read the formulas and the traps</b> of each chapter first, then try the concept questions: pick the option you think is right and, when it is, the reason appears.</li>
+  <li><b>Do the drills</b>: type your answers in the "Try first" boxes and press Check; if you are stuck, open the solution one step at a time. Press 🎲 for a fresh set of numbers. The boxes accept answers within about 0.6 % (three significant figures), and the book's approximation too where the book approximates.</li>
+  <li><b>The circuit beside a drill</b> is solved by the same engine as every page. Hover over a part to read it; once the whole solution is open, the engine's numbers appear under the picture to compare with your hand calculation.</li>
+  <li><b>Sit the mock exam</b>: ten questions a paper, timed. Hand it in to see your score, the worked solutions and the chapters to revise.</li>
+  <li><b>Tick the checklist</b> for what you can already do. Unticked lines link back to their pages, and the progress shows on each chapter's tile below.</li></ul></section>
+
+<div class="rv-scopebox"><span class="rv-sl" data-l="th">ขอบเขต:</span><span class="rv-sl" data-l="en">Scope:</span><div id="rvScope"></div></div>
+<div class="rv-tiles" id="rvTiles"></div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a data-ch="1" href="#rv-ch1"><b>1</b>ไดโอด</a><a data-ch="2" href="#rv-ch2"><b>2</b>การประยุกต์ไดโอด</a><a data-ch="3" href="#rv-ch3"><b>3</b>BJT</a><a data-ch="4" href="#rv-ch4"><b>4</b>ไบแอส BJT</a><a data-ch="5" href="#rv-ch5"><b>5</b>JFET</a><a data-ch="6" href="#rv-ch6"><b>6</b>MOSFET</a><a data-ch="7" href="#rv-ch7"><b>7</b>ออปแอมป์</a><a data-ch="8" href="#rv-ch8"><b>8</b>ไอซีเชิงเส้น-ดิจิทัล</a><a href="#mock"><b>★</b>ข้อสอบจำลอง</a><a href="#check"><b>✓</b>เช็กลิสต์</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a data-ch="1" href="#rv-ch1"><b>1</b>Diodes</a><a data-ch="2" href="#rv-ch2"><b>2</b>Diode applications</a><a data-ch="3" href="#rv-ch3"><b>3</b>BJTs</a><a data-ch="4" href="#rv-ch4"><b>4</b>BJT bias</a><a data-ch="5" href="#rv-ch5"><b>5</b>JFETs</a><a data-ch="6" href="#rv-ch6"><b>6</b>MOSFETs</a><a data-ch="7" href="#rv-ch7"><b>7</b>Op-amps</a><a data-ch="8" href="#rv-ch8"><b>8</b>Linear-digital ICs</a><a href="#mock"><b>★</b>Mock exam</a><a href="#check"><b>✓</b>Checklist</a></nav>
+
+<div id="rvChapters"></div>
+
+<section id="mock">
+  <div class="group-head"><h2 data-l="th">ข้อสอบจำลอง</h2><h2 data-l="en">Mock exam</h2></div>
+  <p class="lead" data-l="th">ชุดละ 10 ข้อ: โจทย์คำนวณ 6 ข้อ (อย่างน้อยบทละข้อเท่าที่จำนวนข้อพอ) และคำถามแนวคิด 4 ข้อ ตัวเลขสุ่มใหม่ทุกชุด วงจรในข้อสอบไม่แสดงค่าจนกว่าจะส่งคำตอบ ใส่คำตอบเป็นตัวเลขในหน่วยที่กำกับไว้</p>
+  <p class="lead" data-l="en">Ten questions a paper: six numerical problems (at least one per chapter where there is room) and four concept questions, with new numbers every time. The circuits show no values until you hand in. Give each answer as a number in the unit shown.</p>
+  <div id="rvMock"></div>
+</section>
+
+<section id="check">
+  <div class="group-head"><h2 data-l="th">เช็กลิสต์ก่อนสอบ</h2><h2 data-l="en">Pre-exam checklist</h2></div>
+  <p class="lead" data-l="th">แต่ละข้อคือสิ่งที่ "จะทำได้" ของหน้าเรียนหนึ่งหน้า ติ๊กเมื่อทำได้โดยไม่ต้องดูเฉลย เครื่องหมายเก็บไว้ในเบราว์เซอร์นี้เท่านั้น ไม่ส่งไปที่ใด</p>
+  <p class="lead" data-l="en">Each line is the "you will be able to" of one page. Tick it once you can do it without the solution. The ticks stay in this browser and are sent nowhere.</p>
+  <div id="rvCheck"></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+<script>
+document.addEventListener('mc:ready', () => { 'use strict'; RV.init(); });
+</script>
+</body>
+</html>

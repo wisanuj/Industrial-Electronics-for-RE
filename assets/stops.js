@@ -15,7 +15,10 @@ window.STAGES = {
        blurb_en: 'The junction field-effect transistor (JFET): a channel whose width the gate voltage controls, the drain characteristics, Shockley\'s equation, and fixed, self and voltage-divider bias; then the metal-oxide-semiconductor field-effect transistor (MOSFET), the depletion type whose \\(V_{GS}\\) may be positive and the enhancement type with \\(I_D = k(V_{GS} - V_T)^2\\), and the bias circuits of both.' },
   4: { title: 'บทที่ 7–8 ออปแอมป์และวงจรรวม', title_en: 'Chapters 7–8 — Op-amps and integrated circuits', short: 'บทที่ 7–8 ออปแอมป์', short_en: 'Ch. 7–8 op-amps',
        blurb: 'ออปแอมป์ (operational amplifier, op-amp): วงจรขยายผลต่างอัตราขยายสูงมากที่ป้อนกลับลบทำให้ \\(V_i\\) ≈ 0 จึงได้อัตราขยายจากตัวต้านทานสองตัว วงจรกลับเฟส ไม่กลับเฟส ตัวตามแรงดัน รวมสัญญาณ อินทิเกรเตอร์ ดิฟเฟอเรนชิเอเตอร์ และตัวกรองแอกทีฟ แล้ววงจรรวม (integrated circuit, IC) ที่มีทั้งส่วนเชิงเส้นและดิจิทัลในบทที่ 8: วงจรเปรียบเทียบ ตัวแปลงดิจิทัล-แอนะล็อกและแอนะล็อก-ดิจิทัล ไอซีจับเวลา 555 และออสซิลเลเตอร์ควบคุมด้วยแรงดัน 566',
-       blurb_en: 'The operational amplifier (op-amp): a differential amplifier of enormous gain whose negative feedback makes \\(V_i\\) ≈ 0, so that two resistors set the gain; inverting, noninverting, follower, summing, integrator, differentiator and active-filter circuits, then the linear-digital integrated circuits (ICs) of chapter 8: comparators, digital-to-analogue and analogue-to-digital converters, the 555 timer and the 566 voltage-controlled oscillator.' }
+       blurb_en: 'The operational amplifier (op-amp): a differential amplifier of enormous gain whose negative feedback makes \\(V_i\\) ≈ 0, so that two resistors set the gain; inverting, noninverting, follower, summing, integrator, differentiator and active-filter circuits, then the linear-digital integrated circuits (ICs) of chapter 8: comparators, digital-to-analogue and analogue-to-digital converters, the 555 timer and the 566 voltage-controlled oscillator.' },
+  5: { title: 'ทบทวนก่อนสอบ', title_en: 'Exam review', short: 'ทบทวนก่อนสอบ', short_en: 'Exam review',
+       blurb: 'ทุกบทในหน้าเดียว: สูตร ขั้นตอน จุดที่มักพลาด โจทย์สุ่มตัวเลข ข้อสอบจำลอง และเช็กลิสต์ เลือกขอบเขตได้ทั้งสอบกลางภาค (บทที่ 1–6) และสอบปลายภาค (บทที่ 7–8)',
+       blurb_en: 'Every chapter on one page: formulas, recipes, traps, random drills, a mock exam and a checklist, for the midterm (chapters 1–6) or the final (chapters 7–8).' }
 };
 
 window.STOPS = [
@@ -379,5 +382,14 @@ window.STOPS = [
     outcome: 'หา \\(V_C\\) จากตัวแบ่ง คำนวณ \\(f_o\\) ของ 566 และตรวจข้อจำกัดของค่าใช้งาน',
     outcome_en: 'find \\(V_C\\) from a divider, compute the 566\'s \\(f_o\\), and check the operating limits',
     book: 'สไลด์บทที่ 8 หน้า 23–26 · Boylestad หัวข้อ 13.5', book_en: 'Chapter 8 slides, pp. 23–26 · Boylestad §13.5',
-    tags: ['\\(f_o\\)', '\\(0.75V^+ \\le V_C \\le V^+\\)', 'รูป 13.22–13.23'], tags_en: ['\\(f_o\\)', '\\(0.75V^+ \\le V_C \\le V^+\\)', 'Figs. 13.22–13.23'] }
+    tags: ['\\(f_o\\)', '\\(0.75V^+ \\le V_C \\le V^+\\)', 'รูป 13.22–13.23'], tags_en: ['\\(f_o\\)', '\\(0.75V^+ \\le V_C \\le V^+\\)', 'Figs. 13.22–13.23'] },
+  /* ---------------- exam review: every chapter on one page (review.html + assets/review.js); ch 'R' keeps it out of the chapter lists ---------------- */
+  { file: 'review.html', step: '★', stage: 5, ch: 'R', type: 'rev', crumb: 'ทบทวนก่อนสอบ', crumb_en: 'Exam review',
+    title: 'ทบทวนก่อนสอบ: รวมทุกบท', en: 'Exam review: every chapter',
+    blurb: 'สูตรที่ต้องจำ ขั้นตอนมาตรฐาน และจุดที่มักพลาดของทั้งแปดบท คำถามแนวคิด โจทย์ฝึก 24 แบบที่สุ่มตัวเลขใหม่ได้ไม่จำกัด พร้อมเฉลยทีละขั้นและวงจรที่ตัวแก้วงจรแก้ให้ดูเทียบ ข้อสอบจำลองที่ตรวจทันที และเช็กลิสต์ก่อนสอบ',
+    blurb_en: 'The formulas, standard recipes and common traps of all eight chapters, concept questions, 24 kinds of drill with endless new numbers, step-by-step solutions and circuits solved by the engine, a mock exam marked on the spot, and a pre-exam checklist.',
+    outcome: 'ทบทวนบทที่ออกสอบ (กลางภาค บทที่ 1–6 หรือปลายภาค บทที่ 7–8) วัดตัวเองด้วยข้อสอบจำลอง และรู้ว่าต้องกลับไปอ่านหน้าใด',
+    outcome_en: 'revise the chapters of your exam (midterm: chapters 1–6, final: chapters 7–8), test yourself with a mock exam, and know which pages to go back to',
+    book: 'ทุกบท · สไลด์บทที่ 1–8 · ตารางเรียนในสไลด์บทที่ 0', book_en: 'All chapters · slides 1–8 · the schedule in the chapter 0 slides',
+    tags: ['สูตร', 'โจทย์สุ่ม', 'ข้อสอบจำลอง', 'เช็กลิสต์'], tags_en: ['formulas', 'random drills', 'mock exam', 'checklist'] }
 ];

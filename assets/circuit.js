@@ -277,10 +277,16 @@ class Circuit {
         if (moved(vn, p.vd)) done = false; p.vd = vn; });
       qs.forEach(p => { const s = p.pnp ? -1 : 1, vb = s * (r.V[p.B].re - r.V[p.E].re), vc = s * (r.V[p.C].re - r.V[p.E].re);
         let nb = DIODE.lim(BJT.beOf(p), vb, p.vbe), nc = vc;
+        if (p.alpha === undefined && !p.fam) {   // the β model (chapter 4), Oct 2026: bounded steps, or a divider driven hard into saturation made the iteration cycle for ever
+          const be = BJT.beOf(p); if (['simple', 'ideal', 'pwl'].includes(be.model)) nb = Math.min(nb, (be.model === 'ideal' ? 0 : (be.vk ?? 0.7)) + 0.1);   // a straight-line junction holds v_BE at its knee
+          if (p.vce > 0.05 && nc < p.vce / 4) nc = p.vce / 4;   // v_CE drops at most to a quarter per step, and never below 0: the knee of BJT.S is 20 mV wide and steep below 0
+          nc = Math.max(nc, 0); }
         if (damp) { nb = p.vbe + Math.max(-0.5, Math.min(0.5, nb - p.vbe)); nc = p.vce + Math.max(-1, Math.min(1, nc - p.vce)); }
-        if (moved(nb, p.vbe) || moved(nc, p.vce)) done = false; p.vbe = nb; p.vce = nc; });
+        if (moved(nb, p.vbe) || Math.abs(nc - p.vce) > 1e-6 + 1e-7 * Math.abs(nc)) done = false; p.vbe = nb; p.vce = nc; });   // v_CE to 1 µV: with a 1 MΩ base resistor against the 1000 S of an on junction the solution wobbles by 0.2 µV in rounding
       js.forEach(p => { const s = p.pch ? -1 : 1, vg = s * (r.V[p.G].re - r.V[p.S].re), vd = s * (r.V[p.D].re - r.V[p.S].re), gd = FET.gate(p);
-        let ng = gd ? DIODE.lim(gd, vg, p.vgs) : vg, nd = vd;   // the square law is smooth: plain Newton, smaller steps only once damping has set in
+        let ng = gd ? DIODE.lim(gd, vg, p.vgs) : vg, nd = vd;   // the square law is smooth: plain Newton for the first steps
+        if (gd && gd.vk !== undefined) ng = Math.min(ng, gd.vk + 0.1);   // a JFET's gate junction holds v_GS near its knee: a step beyond it is not physical (it sent v_GS to tens of volts)
+        if (it >= 2) { const Lg = Math.max(0.5, 0.35 * Math.abs(FET.kb(p).vt)); ng = p.vgs + Math.max(-Lg, Math.min(Lg, ng - p.vgs)); nd = p.vds + Math.max(-4, Math.min(4, nd - p.vds)); }   // like SPICE's fetlim: the linearised device flips between cut off (an open circuit) and fully on; bounded steps stop the swing (review page, voltage-divider JFETs with a 3 V pinch-off)
         if (damp) { ng = p.vgs + Math.max(-0.5, Math.min(0.5, ng - p.vgs)); nd = p.vds + Math.max(-1, Math.min(1, nd - p.vds)); }
         if (moved(ng, p.vgs) || moved(nd, p.vds)) done = false; p.vgs = ng; p.vds = nd; });
       oas.forEach(p => { const Vs = OPAMP.rails(p).Vs, A = p.gain ?? OPAMP.A, v = r.V[p.P].re - r.V[p.N].re, g = OPAMP.f(p, p.vd, p.vc).g; p.vc = (r.V[p.P].re + r.V[p.N].re) / 2;   // the common-mode input follows freely (A_c is small)

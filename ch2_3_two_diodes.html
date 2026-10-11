@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">ไดโอดและแหล่งจ่ายหลายตัวในวงอนุกรม <span class="en">Several diodes and supplies in series</span></h1>
 <h1 data-l="en">Several diodes and supplies in series <span class="en">Every diode must conduct, every supply counts</span></h1>
 
-<p class="sub" data-l="th">สไลด์หน้า 23–25 ใช้ขั้นตอนเดิมของหน้า 2.2 กับวงอนุกรมที่ซับซ้อนขึ้น ไดโอดสองตัวที่ต่ออนุกรมกัน ไดโอดตัวหนึ่งที่หันสวนทาง และวงจรที่มีแหล่งจ่ายสองตัวรวมถึงแหล่งจ่ายแรงดันลบ หน้านี้มีภาพจำลองไดโอดสองตัวอนุกรมที่เลือกวัสดุและทิศได้ (ส่วน A) โจทย์ Ex.6–Ex.8 และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Slides pp. 23–25 apply the procedure of page 2.2 to busier series loops: two diodes in series, one of them turned the wrong way, and a circuit with two supplies, one of them negative. This page has two series diodes whose material and direction you can change (section A), Ex.6–Ex.8, and more practice.</p>
+<p class="sub" data-l="th">ลองนึกถึงทางเดินที่มีประตูทางเดียวหลายบานเรียงกัน คนจะเดินผ่านได้ก็ต่อเมื่อทุกบานเปิดไปทางเดียวกัน และแต่ละบานเก็บค่าผ่านทาง ไดโอดที่ต่ออนุกรมกันก็เป็นแบบนั้น: ทุกตัวต้องนำกระแสจึงไหล แต่ละตัวหักแรงดัน \(V_K\) ของตัวเองออกไป และตัวเดียวที่หันผิดทางทำให้ทั้งวงไม่มีกระแส หน้านี้ใช้ขั้นตอนของหน้า 2.2 กับวงอนุกรมที่ซับซ้อนขึ้น: ไดโอดสองตัวที่เลือกวัสดุและทิศได้ (ส่วน A) ซิลิคอนกับเจอร์เมเนียมที่หันตามกัน (Ex.6) ไดโอดคู่ที่หันสวนกัน (Ex.7) และวงที่มีแหล่งจ่ายสองตัว ตัวหนึ่งเป็นลบ (Ex.8) ปิดท้ายด้วยแบบฝึกเพิ่ม (สไลด์บทที่ 2 ชุดที่ 1 หน้า 23–25 · Boylestad หัวข้อ 2.4)</p>
+<p class="sub" data-l="en">Picture a corridor with several one-way doors in a row: you get through only if every door opens the same way, and each one charges a toll. Diodes in series behave the same way: all of them must conduct for current to flow, each takes off its own \(V_K\), and a single diode facing the wrong way leaves the whole loop without current. This page applies the procedure of page 2.2 to busier series loops: two diodes whose material and direction you choose (section A), silicon and germanium facing the same way (Ex.6), a pair facing each other (Ex.7), and a loop with two supplies, one of them negative (Ex.8), then more practice (chapter 2 slides, Part I, pp. 23–25 · Boylestad section 2.4).</p>
 <div class="equation-box eqwrap">$$ V_o = E - V_{K_1} - V_{K_2} $$ $$ I = \frac{E_1 + E_2 - V_K}{R_1 + R_2} $$ $$ V_o = IR_2 - E_2 $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -48,8 +48,14 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.6: ไดโอดซิลิคอนกับเจอร์เมเนียมอนุกรมกัน</h2><h2 data-l="en">Ex.6: a silicon and a germanium diode in series</h2>
     <div class="src" data-l="th">สไลด์หน้า 23 · ตัวอย่างจากตำราฉบับก่อน (ฉบับที่ 11 Example 2.7 ใช้ไดโอดเปล่งแสงสีแดงแทนเจอร์เมเนียม)</div><div class="src" data-l="en">Slide p. 23 · an example from an earlier edition (the 11th edition's Example 2.7 uses a red LED instead of germanium)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 23, Series Diode Configurations with DC Inputs, Ex.6: determine V_o and I_D for the series circuit of the figure. The figure: a +12 V terminal, a silicon diode and a germanium diode in series pointing to the right with I_D, then the output node V_o with I_R flowing down through a 5.6 kΩ resistor to ground.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.6 (สไลด์หน้า 23) ต่อไดโอดซิลิคอนกับเจอร์เมเนียมอนุกรมกันระหว่างแหล่งจ่าย +12 V กับตัวต้านทาน 5.6 kΩ ทั้งคู่หันตามทิศที่กระแสอยากไหล ก่อนเปิดเฉลย ลองนับว่าแรงดันถูกหักไปเท่าใดก่อนถึงตัวต้านทาน</p></div><div class="story-p" data-l="en"><p>Ex.6 (slide p. 23) puts a silicon and a germanium diode in series between a +12 V supply and a 5.6 kΩ resistor, both pointing the way the current wants to flow. Before opening the solution, count how much voltage is taken off before the resistor.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 23, Series Diode Configurations with DC Inputs, Ex.6: determine V_o and I_D for the series circuit of the figure. The figure: a +12 V terminal, a silicon diode and a germanium diode in series pointing to the right with I_D, then the output node V_o with I_R flowing down through a 5.6 kΩ resistor to ground.">
     <figcaption data-l="th">สไลด์หน้า 23: Ex.6 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 23: Ex.6 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แหล่งจ่าย +12 V ต่อผ่านไดโอดซิลิคอนและไดโอดเจอร์เมเนียมที่หันตามกัน ไปยังจุดขาออก \(V_o\) ซึ่งต่อกับตัวต้านทาน 5.6 kΩ ลงกราวด์ จงหา \(V_o\) และ \(I_D\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>A +12 V supply feeds a silicon and a germanium diode, both pointing the same way, to the output node \(V_o\), which has a 5.6 kΩ resistor to ground. Determine \(V_o\) and \(I_D\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองวาดแหล่งจ่าย +12 V เป็นแบตเตอรีที่ต่อกราวด์ ขั้นที่ 2 แทนไดโอดทั้งสองด้วยแบตเตอรีของตาราง 2.1 <b>ลองตอบก่อน</b></p>
@@ -60,8 +66,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.7: ไดโอดสองตัวหันสวนกัน</h2><h2 data-l="en">Ex.7: two diodes facing each other</h2>
     <div class="src" data-l="th">สไลด์หน้า 24 · Boylestad Example 2.8 (ตำราใช้ +20 V)</div><div class="src" data-l="en">Slide p. 24 · Boylestad Example 2.8 (the book uses +20 V)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 24, Series Diode Configurations with DC Inputs, Ex. 7: determine I_D, V_D2, and V_o for the circuit of the figure. The figure: a +12 V terminal, a silicon diode pointing right and a second silicon diode pointing left, with + V_D2 − marked across the second, then V_o and a 5.6 kΩ resistor to ground with I_R.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.7 (สไลด์หน้า 24) ใช้ไดโอดซิลิคอนทั้งคู่ แต่กลับทิศตัวที่สอง ก่อนเปิดเฉลย ลองตอบสองคำถาม: มีกระแสไหลหรือไม่ และแรงดัน 12 V ไปตกคร่อมไดโอดตัวไหน ตัวแรกที่ยังหันถูกทางได้ส่วนแบ่งด้วยหรือเปล่า</p></div><div class="story-p" data-l="en"><p>Ex.7 (slide p. 24) makes both diodes silicon but turns the second one round. Before opening the solution, answer two questions: does any current flow, and across which diode does the 12 V end up? Does the first one, still facing the right way, get a share?</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 24, Series Diode Configurations with DC Inputs, Ex. 7: determine I_D, V_D2, and V_o for the circuit of the figure. The figure: a +12 V terminal, a silicon diode pointing right and a second silicon diode pointing left, with + V_D2 − marked across the second, then V_o and a 5.6 kΩ resistor to ground with I_R.">
     <figcaption data-l="th">สไลด์หน้า 24: Ex.7 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 24: Ex.7 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรเดียวกับ Ex.6 แต่ไดโอดทั้งสองเป็นซิลิคอน และตัวที่สองกลับทิศ จงหา \(I_D\), \(V_{D_2}\) และ \(V_o\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>The circuit of Ex.6 with two silicon diodes, the second one turned round. Determine \(I_D\), \(V_{D_2}\) and \(V_o\).</p></div>
   <p class="lead" data-l="th">ขั้นที่ 2 แทน D2 ด้วยช่องเปิด แผงข้างภาพแสดงว่าแรงดันทั้งหมดไปอยู่ที่ D2 <b>ลองตอบก่อน</b></p>
@@ -72,8 +84,14 @@
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Ex.8: แหล่งจ่ายสองตัว +10 V และ −5 V</h2><h2 data-l="en">Ex.8: two supplies, +10 V and −5 V</h2>
     <div class="src" data-l="th">สไลด์หน้า 25 · Boylestad Example 2.9 (รูป 2.25–2.27)</div><div class="src" data-l="en">Slide p. 25 · Boylestad Example 2.9 (Figs. 2.25–2.27)</div></div></div>
-  <figure class="slide q"><img src="slides/ch2a/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 25, Series Diode Configurations with DC Inputs, Ex. 8: determine I, V_1, V_2, and V_o for the series dc configuration of the figure. The figure: E_1 = 10 V at the left terminal, R_1 = 4.7 kΩ with + V_1 −, a silicon diode, the output node V_o, R_2 = 2.2 kΩ down with + V_2 − and the current I, ending at a terminal E_2 = −5 V. A blue arrow points to the right towards an empty space for the redrawn circuit.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.8 (สไลด์หน้า 25) บอกแหล่งจ่ายเป็นแรงดันเทียบกราวด์ที่สองจุด คือ +10 V และ −5 V ส่วนลูกศรสีน้ำเงินชี้ไปยังที่ว่างสำหรับวาดวงจรใหม่ ลองวาดแหล่งจ่ายทั้งสองที่ต่อกับกราวด์ให้ครบวงก่อน แล้วถามว่ามันดันกระแสไปทางเดียวกันหรือสวนกัน</p></div><div class="story-p" data-l="en"><p>Ex.8 (slide p. 25) gives its supplies as voltages to ground at two points, +10 V and −5 V, and a blue arrow points to an empty space for the redrawn circuit. Draw both supplies with their ground connections to close the loop first, then ask whether they push current the same way or against each other.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch2a/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Slide 25, Series Diode Configurations with DC Inputs, Ex. 8: determine I, V_1, V_2, and V_o for the series dc configuration of the figure. The figure: E_1 = 10 V at the left terminal, R_1 = 4.7 kΩ with + V_1 −, a silicon diode, the output node V_o, R_2 = 2.2 kΩ down with + V_2 − and the current I, ending at a terminal E_2 = −5 V. A blue arrow points to the right towards an empty space for the redrawn circuit.">
     <figcaption data-l="th">สไลด์หน้า 25: Ex.8 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 25: Ex.8 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จุด \(E_1\) มีแรงดัน +10 V เทียบกราวด์ ต่อผ่าน \(R_1\) = 4.7 kΩ และไดโอดซิลิคอนไปยังจุดขาออก \(V_o\) แล้วผ่าน \(R_2\) = 2.2 kΩ ไปยังจุด \(E_2\) ที่มีแรงดัน −5 V เทียบกราวด์ จงหา \(I\), \(V_1\), \(V_2\) และ \(V_o\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>The point \(E_1\) is at +10 V to ground; it feeds \(R_1\) = 4.7 kΩ and a silicon diode to the output node \(V_o\), which continues through \(R_2\) = 2.2 kΩ to the point \(E_2\) at −5 V to ground. Determine \(I\), \(V_1\), \(V_2\) and \(V_o\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองวาดแหล่งจ่ายทั้งสองให้ครบวงตามลูกศรสีน้ำเงินในสไลด์ (\(E_2\) มีขั้วบวกต่อกราวด์) <b>ลองตอบก่อน</b></p>

@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">การออกแบบวงจรไบแอส <span class="en">Design operations</span></h1>
 <h1 data-l="en">Design operations <span class="en">Given Q, find the resistors: \(R = V_R/I_R\)</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 38–41 การออกแบบคือการย้อนทาง: กำหนดจุดทำงานแล้วหาตัวต้านทาน เครื่องมือหลักคือกฎของโอห์มในรูป \(R = V_R/I_R\) เมื่อรู้แรงดันคร่อมและกระแสของตัวต้านทานแต่ละตัวจากข้อกำหนด แล้วเลือกค่ามาตรฐานที่ใกล้ที่สุด (ค่าคลาดเคลื่อนที่เกิดถือเป็นส่วนหนึ่งของการออกแบบ) ถ้าข้อกำหนดไม่พอต้องใช้ดุลยพินิจ เช่น \(V_E = V_{CC}/10\) และ \(R_2 \le \beta R_E/10\) หน้านี้มีเครื่องมือออกแบบวงจรตัวแบ่งแรงดันที่เลื่อนเป้าหมายแล้วเห็นตัวต้านทาน ค่ามาตรฐาน และจุด Q ที่ได้จริง (ส่วน A) Ex.12–Ex.14 และการออกแบบทั้งวงจร (Examples 4.24–4.25)</p>
-<p class="sub" data-l="en">Chapter 4 slides pp. 38–41. Design runs the other way: given the operating point, find the resistors. The main tool is Ohm's law in the form \(R = V_R/I_R\), once the voltage across and the current through each resistor are known from the specification; then the nearest standard values are chosen (the resulting shift is accepted as part of the design). When the specification is not enough, engineering judgment steps in: \(V_E = V_{CC}/10\) and \(R_2 \le \beta R_E/10\). This page has a voltage-divider design tool where you move the targets and see the resistors, their standard values and the Q actually reached (section A), Ex.12–Ex.14, and the complete designs (Examples 4.24–4.25).</p>
+<p class="sub" data-l="th">ทุกหน้าที่ผ่านมาเริ่มจากวงจรแล้วถามหาจุด Q แต่งานจริงมักมาในทางกลับกัน: มีคนบอกว่าต้องการ \(I_{CQ}\) และ \(V_{CEQ}\) เท่านี้ แล้วให้คุณเลือกตัวต้านทานเอง นี่คือการออกแบบ เครื่องมือหลักกลับเป็นกฎของโอห์มธรรมดาในรูป \(R = V_R/I_R\) ตามด้วยการเลือกค่ามาตรฐานที่ใกล้ที่สุด (จุด Q ที่เลื่อนไปเล็กน้อยถือเป็นส่วนหนึ่งของงาน) และเมื่อข้อกำหนดไม่พอก็ต้องใช้ดุลยพินิจ เช่น \(V_E = V_{CC}/10\) และ \(R_2 \le \beta R_E/10\) หน้านี้มีเครื่องมือออกแบบวงจรตัวแบ่งแรงดันที่เลื่อนเป้าหมายแล้วเห็นตัวต้านทาน ค่ามาตรฐาน และจุด Q ที่ได้จริง (ส่วน A) Ex.12–Ex.14 และการออกแบบทั้งวงจร (Examples 4.24–4.25) (สไลด์บทที่ 4 หน้า 38–41 · Boylestad หัวข้อ 4.11)</p>
+<p class="sub" data-l="en">Every page so far started from a circuit and asked for its Q-point. Real work usually comes the other way round: someone wants this \(I_{CQ}\) and that \(V_{CEQ}\), and you choose the resistors. That is design. Its main tool turns out to be plain Ohm's law, \(R = V_R/I_R\), followed by picking the nearest standard values (the small shift in Q is accepted as part of the job), and when the specification is not enough, engineering judgment steps in: \(V_E = V_{CC}/10\) and \(R_2 \le \beta R_E/10\). This page has a voltage-divider design tool where you move the targets and see the resistors, their standard values and the Q actually reached (section A), Ex.12–Ex.14, and complete designs (Examples 4.24–4.25) (chapter 4 slides, pp. 38–41; Boylestad section 4.11).</p>
 <div class="equation-box eqwrap">$$ R_\text{unknown} = \frac{V_R}{I_R} $$ $$ V_E \cong \tfrac{1}{10}V_{CC},\quad R_E = \frac{V_E}{I_E},\quad R_C = \frac{V_{CC} - V_{CE} - V_E}{I_C} $$ $$ R_B = \frac{V_{CC} - V_{BE} - V_E}{I_B},\quad R_2 \le \frac{\beta R_E}{10},\quad V_B = \frac{R_2V_{CC}}{R_1 + R_2} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,13 +36,21 @@
   <li><b>Standard values</b>: take the nearest E24 value (or two in series, e.g. 82 kΩ + 4.7 kΩ) and check that Q moves no more than is acceptable (about 5 %).</li>
   <li><b>A complete design</b> (Examples 4.24–4.25): choose \(V_E = V_{CC}/10\) (a quarter to a tenth of the supply), giving \(R_E\), then \(R_C\) from the wanted \(V_{CE}\). For a divider use \(R_2 \le \beta R_E/10\), so the divider current is at least 10 times \(I_B\), then \(R_1\) from the divider rule.</li></ul></section>
 
-<div class="slides"><figure class="slide"><img src="slides/ch4/p38.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 38, Design Operations: the design process will simply determine the required resistors for a particular design; once the theoretical values of the resistors are determined, the nearest standard commercial values are normally chosen; one of the most powerful equations is simply Ohm's law in the following form, R_unknown = V_R/I_R. A complete design procedure will then be introduced for two popular configurations.">
-  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 38: หลักของการออกแบบ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 38: the design principle · tap to enlarge</figcaption></figure></div>
-<div class="warnbox" data-l="th"><b>สไลด์หน้า 41 (Ex.14) อ้าง "Fig. 4.49"</b> ตามเลขรูปของตำราฉบับก่อน ในฉบับที่ 11 คือรูป 4.61 · สไลด์หน้า 1 เขียนว่า Part I แต่ไม่มีไฟล์ Part II ของบทนี้</div>
-<div class="warnbox" data-l="en"><b>Slide p. 41 (Ex.14) refers to "Fig. 4.49"</b>, the figure number of an earlier edition; in the 11th it is Fig. 4.61. Slide p. 1 says Part I, but there is no Part II file for this chapter.</div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>เครื่องมือออกแบบ</a><a href="#ex1"><b>1</b>Ex.12</a><a href="#ex2"><b>2</b>Ex.13</a><a href="#ex3"><b>3</b>Ex.14</a><a href="#tC"><b>C</b>ออกแบบทั้งวงจร</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>A design tool</a><a href="#ex1"><b>1</b>Ex.12</a><a href="#ex2"><b>2</b>Ex.13</a><a href="#ex3"><b>3</b>Ex.14</a><a href="#tC"><b>C</b>Complete designs</a></nav>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · เดินย้อนทาง</div><div class="story-k" data-l="en">Part 1 · Walking the other way</div>
+    <h2 data-l="th">ออกแบบด้วยกฎของโอห์ม</h2><h2 data-l="en">Designing with Ohm's law</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 38 บอกว่าการออกแบบก็แค่หาตัวต้านทานที่ต้องใช้ ได้ค่าทางทฤษฎีแล้วจึงเลือกค่ามาตรฐานที่ขายจริงซึ่งใกล้ที่สุด และสมการที่ทรงพลังที่สุดตัวหนึ่งก็คือกฎของโอห์มในรูป \(R = V_R/I_R\) เคล็ดลับคือหาแรงดันคร่อมกับกระแสของตัวต้านทานแต่ละตัวจากข้อกำหนดให้ได้ก่อน เช่น \(V_{R_C} = V_{CC} - V_C\) กับ \(I_C\) แล้วค่าตัวต้านทานจะตามมาเอง สไลด์ยังบอกว่าจะมีขั้นตอนออกแบบครบชุดสำหรับสองวงจรยอดนิยม ส่วน A ทำขั้นตอนนั้นให้ดูกับวงจรตัวแบ่งแรงดัน และส่วน C ท้ายหน้าให้คุณออกแบบเองทั้งสองวงจร</p></div><div class="story-p" data-l="en"><p>Slide p. 38 says design simply finds the resistors a circuit needs: work out their theoretical values, then pick the nearest standard values on sale, and one of the most powerful equations is Ohm's law in the form \(R = V_R/I_R\). The trick is to get the voltage across and the current through each resistor from the specification first, for example \(V_{R_C} = V_{CC} - V_C\) and \(I_C\); the resistor value then follows by itself. The slide also promises a complete design procedure for two popular circuits: section A runs it for the voltage-divider circuit, and section C at the end of the page has you design both yourself.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p38.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 38, Design Operations: the design process will simply determine the required resistors for a particular design; once the theoretical values of the resistors are determined, the nearest standard commercial values are normally chosen; one of the most powerful equations is simply Ohm's law in the following form, R_unknown = V_R/I_R. A complete design procedure will then be introduced for two popular configurations.">
+  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 38: หลักของการออกแบบ · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 38: the design principle · tap to enlarge</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ตั้งเป้าหมายจุด Q แล้วดูตัวต้านทานออกมาทีละตัว ก่อนถูกปัดเป็นค่ามาตรฐาน</p><p class="story-next" data-l="en">↓ Section A: set a target Q and watch the resistors come out one by one, then get rounded to standard values</p>
+</div>
 
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ออกแบบวงจรตัวแบ่งแรงดันให้ได้จุด Q ที่ต้องการ</h2><h2 data-l="en">Designing a voltage-divider circuit for a wanted Q</h2>
@@ -55,8 +63,14 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.12: ไบแอสคงที่จากลักษณะสมบัติ</h2><h2 data-l="en">Ex.12: fixed bias from the characteristics</h2>
     <div class="src" data-l="th">สไลด์หน้า 39 · Boylestad Example 4.21 (รูป 4.59)</div><div class="src" data-l="en">Slide p. 39 · Boylestad Example 4.21 (Fig. 4.59)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p39.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 39, Design Operations, Ex.12: given the device characteristics of Fig. (a), determine V_CC, R_B and R_C for the fixed bias configuration of Fig. (b). Figure (a): a load line from 8 mA on the I_C axis to 20 V on the V_CE axis crossing the I_BQ = 40 µA curve at the Q-point; figure (b): the fixed-bias circuit with R_B, R_C and V_CC.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.12 (สไลด์หน้า 39) คือ Ex.2 ของหน้า 4.1 ที่เปลี่ยนตัวเลข: เส้นโหลดจาก 8 mA ถึง 20 V กับจุด Q บนเส้น \(I_{BQ}\) = 40 µA คราวนี้มีขั้นเพิ่มอีกหนึ่งขั้น: ค่าที่คำนวณได้ต้องเปลี่ยนเป็นค่ามาตรฐาน แล้วดูว่าจุด Q เลื่อนไปเท่าใด</p></div><div class="story-p" data-l="en"><p>Ex.12 (slide p. 39) is Ex.2 of page 4.1 with new numbers: a load line from 8 mA to 20 V with Q on the \(I_{BQ}\) = 40 µA curve. This time there is one more step: the calculated values must become standard values, and you check how far Q moves.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p39.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 39, Design Operations, Ex.12: given the device characteristics of Fig. (a), determine V_CC, R_B and R_C for the fixed bias configuration of Fig. (b). Figure (a): a load line from 8 mA on the I_C axis to 20 V on the V_CE axis crossing the I_BQ = 40 µA curve at the Q-point; figure (b): the fixed-bias circuit with R_B, R_C and V_CC.">
     <figcaption data-l="th">สไลด์หน้า 39: Ex.12 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 39: Ex.12 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>เส้นโหลดในรูป (a) ลากจาก 8 mA ถึง 20 V และจุด Q อยู่บนเส้น \(I_{BQ}\) = 40 µA จงหา \(V_{CC}\), \(R_B\) และ \(R_C\) ของวงจรไบแอสคงที่ในรูป (b)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>The load line of Fig. (a) runs from 8 mA to 20 V, and Q lies on the \(I_{BQ}\) = 40 µA curve. Determine \(V_{CC}\), \(R_B\) and \(R_C\) for the fixed-bias circuit of Fig. (b).</p></div>
   <p class="lead" data-l="th">ภาพจำลองใช้ทรานซิสเตอร์ β = 100 และเปลี่ยนเป็นค่ามาตรฐานในขั้นสุดท้าย <b>ลองตอบก่อน</b></p>
@@ -67,8 +81,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.13: \(R_1\) และ \(R_C\) ของวงจรตัวแบ่งแรงดัน</h2><h2 data-l="en">Ex.13: \(R_1\) and \(R_C\) of a voltage-divider circuit</h2>
     <div class="src" data-l="th">สไลด์หน้า 40 · Boylestad Example 4.22 (รูป 4.60)</div><div class="src" data-l="en">Slide p. 40 · Boylestad Example 4.22 (Fig. 4.60)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p40.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 40, Design Operations, Ex.13: given that I_CQ = 2 mA and V_CEQ = 10 V, determine R_1 and R_C for the network of the figure: 18 V, R_1 unknown, R_2 = 18 kΩ, R_C unknown, R_E = 1.2 kΩ, 10 µF coupling capacitors.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.13 (สไลด์หน้า 40) ให้ \(R_2\) = 18 kΩ กับ \(R_E\) = 1.2 kΩ มาแล้ว และต้องการ \(I_{CQ}\) = 2 mA, \(V_{CEQ}\) = 10 V โจทย์ไม่ให้ β จึงต้องใช้วิธีโดยประมาณของหน้า 4.3: เริ่มจาก \(V_E\) แล้ว \(V_B\) แล้วจึงย้อนหา \(R_1\) จากกฎตัวแบ่งแรงดัน ส่วน \(R_C\) ได้จากกฎของโอห์มตรง ๆ</p></div><div class="story-p" data-l="en"><p>Ex.13 (slide p. 40) gives \(R_2\) = 18 kΩ and \(R_E\) = 1.2 kΩ and wants \(I_{CQ}\) = 2 mA, \(V_{CEQ}\) = 10 V. No β is given, so it has to be the approximate method of page 4.3: first \(V_E\), then \(V_B\), then work back to \(R_1\) through the divider rule; \(R_C\) comes straight from Ohm's law.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p40.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 40, Design Operations, Ex.13: given that I_CQ = 2 mA and V_CEQ = 10 V, determine R_1 and R_C for the network of the figure: 18 V, R_1 unknown, R_2 = 18 kΩ, R_C unknown, R_E = 1.2 kΩ, 10 µF coupling capacitors.">
     <figcaption data-l="th">สไลด์หน้า 40: Ex.13 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 40: Ex.13 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 18 V, \(R_2\) = 18 kΩ, \(R_E\) = 1.2 kΩ ต้องการ \(I_{CQ}\) = 2 mA และ \(V_{CEQ}\) = 10 V จงหา \(R_1\) และ \(R_C\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 18 V, \(R_2\) = 18 kΩ, \(R_E\) = 1.2 kΩ; \(I_{CQ}\) = 2 mA and \(V_{CEQ}\) = 10 V are wanted. Determine \(R_1\) and \(R_C\).</p></div>
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
@@ -78,8 +98,15 @@
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Ex.14: วงจรไบแอสอิมิตเตอร์จากกระแสอิ่มตัว</h2><h2 data-l="en">Ex.14: an emitter-bias circuit from its saturation current</h2>
     <div class="src" data-l="th">สไลด์หน้า 41 · Boylestad Example 4.23 (รูป 4.61)</div><div class="src" data-l="en">Slide p. 41 · Boylestad Example 4.23 (Fig. 4.61)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p41.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 41, Design Operations, Ex.14: the emitter-bias configuration of Fig. 4.49 has the following specifications: I_CQ = 0.5 I_Csat, I_Csat = 8 mA, V_C = 18 V, and β = 110; determine R_C, R_E and R_B. The figure: 28 V, R_B, R_C with V_C = 18 V at the collector, β = 110, R_E.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.14 (สไลด์หน้า 41) ให้ข้อกำหนดในรูปที่ต่างออกไป: \(I_{CQ}\) เป็นครึ่งหนึ่งของ \(I_{C\text{sat}}\) = 8 mA และ \(V_C\) = 18 V จากแหล่งจ่าย 28 V คิดก่อนเปิดเฉลยว่าข้อมูลไหนให้ \(R_C\) ข้อมูลไหนให้ \(R_C + R_E\) แล้ว β = 110 จะใช้ตอนไหน</p></div><div class="story-p" data-l="en"><p>Ex.14 (slide p. 41) states its specification differently: \(I_{CQ}\) is half of \(I_{C\text{sat}}\) = 8 mA, and \(V_C\) = 18 V from a 28 V supply. Before opening the solution, work out which fact gives \(R_C\), which gives \(R_C + R_E\), and where β = 110 comes in.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p41.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 41, Design Operations, Ex.14: the emitter-bias configuration of Fig. 4.49 has the following specifications: I_CQ = 0.5 I_Csat, I_Csat = 8 mA, V_C = 18 V, and β = 110; determine R_C, R_E and R_B. The figure: 28 V, R_B, R_C with V_C = 18 V at the collector, β = 110, R_E.">
     <figcaption data-l="th">สไลด์หน้า 41: Ex.14 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 41: Ex.14 · tap to enlarge</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 41 (Ex.14) อ้าง "Fig. 4.49"</b> ตามเลขรูปของตำราฉบับก่อน ในฉบับที่ 11 คือรูป 4.61 · สไลด์หน้า 1 เขียนว่า Part I แต่ไม่มีไฟล์ Part II ของบทนี้</div><div class="warnbox" data-l="en"><b>Slide p. 41 (Ex.14) refers to "Fig. 4.49"</b>, the figure number of an earlier edition; in the 11th it is Fig. 4.61. Slide p. 1 says Part I, but there is no Part II file for this chapter.</div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 28 V ข้อกำหนด \(I_{CQ} = \tfrac12 I_{C\text{sat}}\), \(I_{C\text{sat}}\) = 8 mA, \(V_C\) = 18 V, β = 110 จงหา \(R_C\), \(R_E\) และ \(R_B\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 28 V; the specifications are \(I_{CQ} = \tfrac12 I_{C\text{sat}}\), \(I_{C\text{sat}}\) = 8 mA, \(V_C\) = 18 V, β = 110. Determine \(R_C\), \(R_E\) and \(R_B\).</p></div>
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>

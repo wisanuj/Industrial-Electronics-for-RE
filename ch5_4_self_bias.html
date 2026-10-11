@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรไบแอสตัวเองของ JFET <span class="en">JFET self bias</span></h1>
 <h1 data-l="en">JFET self bias <span class="en">\(V_{GS} = -I_DR_S\): one supply, a line through the origin</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 5 หน้า 28–33 วงจรไบแอสตัวเอง (self bias) ตัดแหล่งจ่าย \(V_{GG}\) ออก: ตัวต้านทาน \(R_S\) ที่ซอร์สสร้างแรงดัน \(I_DR_S\) ซึ่งทำให้เกต (ที่ 0 V ผ่าน \(R_G\)) ต่ำกว่าซอร์ส \(V_{GS} = -I_DR_S\) จึงขึ้นกับ \(I_D\) เอง สมการของวงจรเป็นเส้นตรงผ่านจุดกำเนิดบนกราฟถ่ายโอน และจุดตัดกับเส้นโค้งของ Shockley คือจุด Q (วิธีกราฟ) หรือจะแทนลงในสมการแล้วแก้สมการกำลังสองก็ได้ หน้านี้มีวงจรที่ปรับ \(R_S\), \(R_D\), \(V_{DD}\) และอุปกรณ์ได้ (ส่วน A) Example 7.2 ทั้งหกข้อย่อย Example 7.3 ผลของ \(R_S\) และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Chapter 5 slides pp. 28–33. Self bias does away with \(V_{GG}\): the source resistor \(R_S\) develops a voltage \(I_DR_S\) that puts the gate (held at 0 V through \(R_G\)) below the source, so \(V_{GS} = -I_DR_S\) depends on \(I_D\) itself. The network equation is a straight line through the origin of the transfer graph, and its intersection with Shockley's curve is Q (graphically), or substitute and solve the quadratic. This page has a circuit whose \(R_S\), \(R_D\), \(V_{DD}\) and device you can change (section A), Example 7.2 in all six parts, Example 7.3 on the effect of \(R_S\), and more practice.</p>
+<p class="sub" data-l="th">วงจรไบแอสคงที่ของหน้า 5.3 ต้องใช้แหล่งจ่ายสองตัว ถ้าตัด \(V_{GG}\) ทิ้งแล้วให้ทรานซิสเตอร์สนามไฟฟ้าแบบรอยต่อ (junction field-effect transistor, JFET) หาแรงดันเกตให้ตัวเองได้จะดีกว่าไหม วงจรไบแอสตัวเอง (self bias) ทำได้ด้วยตัวต้านทานเพียงตัวเดียว: กระแส \(I_D\) ที่ไหลผ่าน \(R_S\) ยกซอร์สให้สูงกว่าเกต (ซึ่งอยู่ที่ 0 V ผ่าน \(R_G\)) ได้ \(V_{GS} = -I_DR_S\) ที่ขึ้นกับ \(I_D\) เอง บนกราฟถ่ายโอนสมการนี้เป็นเส้นตรงผ่านจุดกำเนิด จุดตัดกับเส้นโค้งของ Shockley คือจุด Q (วิธีกราฟ) หรือจะแทนลงในสมการแล้วแก้สมการกำลังสองก็ได้ หน้านี้มีวงจรที่ปรับ \(R_S\), \(R_D\), \(V_{DD}\) และอุปกรณ์ได้ (ส่วน A) Example 7.2 ครบหกข้อย่อย Example 7.3 ผลของ \(R_S\) และแบบฝึกเพิ่ม (สไลด์บทที่ 5 หน้า 28–33 · Boylestad หัวข้อ 7.3)</p>
+<p class="sub" data-l="en">The fixed bias of page 5.3 needs two supplies. Why not drop \(V_{GG}\) and let the junction field-effect transistor (JFET) find its own gate voltage? Self bias does it with a single resistor: the current \(I_D\) through \(R_S\) lifts the source above the gate (held at 0 V through \(R_G\)), giving \(V_{GS} = -I_DR_S\), which depends on \(I_D\) itself. On the transfer graph this is a straight line through the origin; where it crosses Shockley's curve is Q (graphically), or substitute and solve the quadratic. This page has a circuit whose \(R_S\), \(R_D\), \(V_{DD}\) and device you can change (section A), Example 7.2 in all six parts, Example 7.3 on the effect of \(R_S\), and more practice (chapter 5 slides, pp. 28–33; Boylestad section 7.3).</p>
 <div class="equation-box eqwrap">$$ V_{GS} = -I_DR_S $$ $$ I_D = I_{DSS}\left(1 + \frac{I_DR_S}{V_P}\right)^2 \quad\Rightarrow\quad I_D^2 + K_1I_D + K_2 = 0 $$ $$ V_{DS} = V_{DD} - I_D(R_S + R_D) $$ $$ V_S = I_DR_S,\quad V_G = 0,\quad V_D = V_{DD} - I_DR_D $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,21 +36,37 @@
   <li><b>The drain–source loop</b> (slide p. 31): \(V_{DS} = V_{DD} - I_D(R_S + R_D)\) (Eq. 7.11), \(V_S = I_DR_S\), \(V_G = 0\), \(V_D = V_{DS} + V_S = V_{DD} - I_DR_D\) (Eqs. 7.12–7.14).</li>
   <li><b>The effect of \(R_S\)</b> (slide p. 33, Example 7.3): a small \(R_S\) makes the line steep, close to the \(I_D\) axis (Q near \(I_{DSS}\)); a large \(R_S\) makes it flat, close to the \(V_{GS}\) axis (Q near \(V_P\)). Beware: an answer from the curve alone may be impossible in the drain loop (Example 7.3a).</li></ul></section>
 
-<div class="slides"><figure class="slide"><img src="slides/ch5/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 28, Self-Bias Configuration: the self-bias configuration eliminates the need for two dc supplies; the controlling gate-to-source voltage is now determined by the voltage across a resistor R_S introduced in the source leg of the configuration, as shown in the figure. Figure 7.8: V_DD, R_D, C_2 to V_o, C_1 from V_i to the gate, R_G to ground, R_S from the source to ground, V_GS marked plus at the gate.">
-  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 28: วงจรไบแอสตัวเอง (รูป 7.8) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 28: the self-bias circuit (Fig. 7.8) · tap to enlarge</figcaption></figure></div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>วงจรปรับได้</a><a href="#ex1"><b>1</b>Example 7.2</a><a href="#ex2"><b>2</b>Example 7.3: ผลของ R<sub>S</sub></a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>The adjustable circuit</a><a href="#ex1"><b>1</b>Example 7.2</a><a href="#ex2"><b>2</b>Example 7.3: the effect of R<sub>S</sub></a><a href="#tC"><b>C</b>More practice</a></nav>
 
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · แหล่งจ่ายตัวเดียว</div><div class="story-k" data-l="en">Part 1 · One supply</div>
+    <h2 data-l="th">ตัวต้านทานที่ซอร์สทำหน้าที่แทนแบตเตอรี่</h2><h2 data-l="en">A source resistor replaces the gate battery</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 28 (รูป 7.8) หน้าตาเหมือนวงจรไบแอสคงที่ แต่ \(V_{GG}\) หายไป \(R_G\) ต่อลงกราวด์ และมี \(R_S\) เพิ่มเข้ามาที่ขาซอร์ส แรงดันที่คุมเกตตอนนี้มาจากแรงดันคร่อม \(R_S\) เอง: เกตอยู่ที่ 0 V ส่วนซอร์สถูกยกขึ้น \(I_DR_S\) เกตจึงต่ำกว่าซอร์สโดยไม่ต้องมีแบตเตอรี่</p><p>ผลพลอยได้คือวงจรคุมตัวเอง: ถ้า \(I_D\) พยายามโต แรงดันคร่อม \(R_S\) ก็โตตาม \(V_{GS}\) ยิ่งลบ แล้วดึงกระแสกลับลงมา</p></div><div class="story-p" data-l="en"><p>Slide p. 28 (Fig. 7.8) looks like the fixed-bias circuit, but \(V_{GG}\) is gone, \(R_G\) goes to ground, and \(R_S\) appears in the source leg. The controlling voltage now comes from the drop across \(R_S\) itself: the gate sits at 0 V while the source is lifted by \(I_DR_S\), so the gate is below the source without any battery.</p><p>A bonus comes with it: the circuit regulates itself. If \(I_D\) tries to grow, the drop across \(R_S\) grows with it, \(V_{GS}\) goes more negative, and the current is pulled back down.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch5/p28.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 28, Self-Bias Configuration: the self-bias configuration eliminates the need for two dc supplies; the controlling gate-to-source voltage is now determined by the voltage across a resistor R_S introduced in the source leg of the configuration, as shown in the figure. Figure 7.8: V_DD, R_D, C_2 to V_o, C_1 from V_i to the gate, R_G to ground, R_S from the source to ground, V_GS marked plus at the gate.">
+  <figcaption data-l="th">สไลด์บทที่ 5 หน้า 28: วงจรไบแอสตัวเอง (รูป 7.8) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 5 slide p. 28: the self-bias circuit (Fig. 7.8) · tap to enlarge</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ ส่วน A: เลื่อน \(R_S\) แล้วดูเส้นไบแอสหมุนรอบจุดกำเนิด ขณะที่จุด Q ไถลไปตามเส้นโค้ง</p><p class="story-next" data-l="en">↓ Section A: move \(R_S\) and watch the bias line pivot about the origin while Q slides along the curve</p>
+</div>
+
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ไบแอสตัวเอง: เส้นผ่านจุดกำเนิดตัดเส้นโค้งถ่ายโอน</h2><h2 data-l="en">Self bias: a line through the origin meets the transfer curve</h2>
     <div class="src" data-l="th">สไลด์หน้า 29–31 · Boylestad หัวข้อ 7.3 (รูป 7.9–7.11, สมการ 7.10–7.14)</div><div class="src" data-l="en">Slides pp. 29–31 · Boylestad, section 7.3 (Figs. 7.9–7.11, Eqs. 7.10–7.14)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch5/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 29, Self-Bias Configuration: for the dc analysis, the capacitors can again be replaced by open circuits and the resistor R_G replaced by a short-circuit equivalent since I_G = 0 A; the result is the network of the figure for the important dc analysis. Figure 7.9: the dc network with the gate–source loop; V_RS = I_D R_S; −V_GS − V_RS = 0, V_GS = −V_RS, V_GS = −I_D R_S; I_D = I_DSS (1 − V_GS/V_P)² = I_DSS (1 − (−I_D R_S)/V_P)² = I_DSS (1 + I_D R_S/V_P)²; the quadratic equation can then be solved for the appropriate solution for I_D: I_D² + K_1 I_D + K_2 = 0.">
+  <div class="story in n3">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 29 ถอดตัวเก็บประจุ แทน \(R_G\) ด้วยลัดวงจร (\(I_G\) = 0) แล้วเดินรอบวงเกตได้ \(V_{GS} = -I_DR_S\): แทนลงในสมการของ Shockley ได้สมการกำลังสองของ \(I_D\) สไลด์หน้า 30 เลือกทางลัดทางกราฟ เพราะเส้นนี้ผ่านจุดกำเนิดเสมอ จึงต้องการอีกจุดเดียว เช่นที่ \(I_D = I_{DSS}/2\) ส่วนสไลด์หน้า 31 เดินรอบวงเดรนได้ \(V_{DS} = V_{DD} - I_D(R_S + R_D)\) ก่อนเลื่อน \(R_S\) ลองคิดจุดที่สองที่ \(I_{DSS}/2\) ในใจ แล้วเทียบกับจุดที่ภาพจำลองวางไว้</p></div><div class="story-p" data-l="en"><p>Slide p. 29 removes the capacitors, shorts \(R_G\) (\(I_G\) = 0) and walks the gate loop to \(V_{GS} = -I_DR_S\); put into Shockley's equation, that becomes a quadratic in \(I_D\). Slide p. 30 takes the graphical shortcut instead: the line always passes through the origin, so one more point is enough, for instance at \(I_D = I_{DSS}/2\). Slide p. 31 walks the drain loop to \(V_{DS} = V_{DD} - I_D(R_S + R_D)\). Before moving \(R_S\), work out the second point at \(I_{DSS}/2\) in your head and compare it with the point the simulation marks.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch5/p29.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 29, Self-Bias Configuration: for the dc analysis, the capacitors can again be replaced by open circuits and the resistor R_G replaced by a short-circuit equivalent since I_G = 0 A; the result is the network of the figure for the important dc analysis. Figure 7.9: the dc network with the gate–source loop; V_RS = I_D R_S; −V_GS − V_RS = 0, V_GS = −V_RS, V_GS = −I_D R_S; I_D = I_DSS (1 − V_GS/V_P)² = I_DSS (1 − (−I_D R_S)/V_P)² = I_DSS (1 + I_D R_S/V_P)²; the quadratic equation can then be solved for the appropriate solution for I_D: I_D² + K_1 I_D + K_2 = 0.">
     <figcaption data-l="th">สไลด์หน้า 29: \(V_{GS} = -I_DR_S\) และสมการกำลังสอง (รูป 7.9) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 29: \(V_{GS} = -I_DR_S\) and the quadratic (Fig. 7.9) · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch5/p30.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 30, Self-Bias Configuration: suppose, for example, that we choose a level of I_D equal to one-half the saturation level, that is, I_D = I_DSS/2, V_GS = −I_D R_S = −I_DSS R_S/2. Figure 7.11: the transfer curve with the self-bias line from the origin through the point at I_DSS/2, the Q-point at the intersection, I_DQ and V_GSQ marked.">
     <figcaption data-l="th">สไลด์หน้า 30: จุดที่สองของเส้นที่ \(I_{DSS}/2\) และจุด Q (รูป 7.11) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 30: the line's second point at \(I_{DSS}/2\) and Q (Fig. 7.11) · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch5/p31.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 31, Self-Bias Configuration: the level of V_DS can be determined by applying Kirchhoff's voltage law to the output circuit, with the result that V_RS + V_DS + V_RD − V_DD = 0, V_DS = V_DD − V_RS − V_RD = V_DD − I_S R_S − I_D R_D, I_D = I_S, V_DS = V_DD − I_D (R_S + R_D); V_S = I_D R_S; V_G = 0 V; V_D = V_DS + V_S = V_DD − V_RD. Figure: the dc network with the output loop marked.">
-    <figcaption data-l="th">สไลด์หน้า 31: วงเดรน–ซอร์ส (สมการ 7.11–7.14) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: the drain–source loop (Eqs. 7.11–7.14) · tap to enlarge</figcaption></figure></div>
+    <figcaption data-l="th">สไลด์หน้า 31: วงเดรน–ซอร์ส (สมการ 7.11–7.14) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 31: the drain–source loop (Eqs. 7.11–7.14) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <p class="lead" data-l="th">เริ่มจากวงจรของ Example 7.2 กราฟบนคือรูป 7.11: เส้นไบแอสตัวเอง \(V_{GS} = -I_DR_S\) จากจุดกำเนิดตัดเส้นโค้งถ่ายโอนที่ Q กราฟล่างคือเส้นโหลด \(V_{DS} = V_{DD} - I_D(R_S + R_D)\) บนลักษณะสมบัติด้านเดรน ลองเลื่อน \(R_S\) ตลอดช่วง: เส้นหมุนรอบจุดกำเนิด Q ไถลไปตามเส้นโค้ง และ \(V_{GS}\) ปรับตัวเองตาม \(I_D\) เสมอ ลด \(R_S\) จนเล็กมากแล้วดูจุด Q หลุดเข้าย่านโอห์มิก</p>
   <p class="lead" data-l="en">Start from the circuit of Example 7.2. The upper graph is Fig. 7.11: the self-bias line \(V_{GS} = -I_DR_S\) from the origin meets the transfer curve at Q. The lower one is the load line \(V_{DS} = V_{DD} - I_D(R_S + R_D)\) on the drain characteristics. Sweep \(R_S\) over its range: the line pivots about the origin, Q slides along the curve, and \(V_{GS}\) always adjusts itself to \(I_D\). Make \(R_S\) very small and watch Q slip into the ohmic region.</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
@@ -59,8 +75,14 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 7.2: วงจรไบแอสตัวเองครบทุกค่า</h2><h2 data-l="en">Example 7.2: the self-bias circuit, every value</h2>
     <div class="src" data-l="th">สไลด์หน้า 32 · Boylestad Example 7.2 (รูป 7.12–7.15)</div><div class="src" data-l="en">Slide p. 32 · Boylestad Example 7.2 (Figs. 7.12–7.15)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch5/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 32, Self-Bias Configuration: determine the following for the network of the figure: (a) V_GSQ, (b) I_DQ, (c) V_DS, (d) V_S, (e) V_G, (f) V_D. Figure 7.12: 20 V supply, R_D = 3.3 kΩ, R_G = 1 MΩ, R_S = 1 kΩ, I_DSS = 8 mA, V_P = −6 V.">
-    <figcaption data-l="th">สไลด์หน้า 32: โจทย์ Example 7.2 (รูป 7.12) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: Example 7.2 (Fig. 7.12) · tap to enlarge</figcaption></figure></div>
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 32 คือ Example 7.2: หกคำถามแบบเดียวกับ Example 7.1 แต่คราวนี้ \(V_{GS}\) ไม่ได้ให้มา ต้องหาจากจุดตัด ก่อนเปิดเฉลย ลองนึกล่วงหน้า: ถ้าแก้ด้วยสมการกำลังสองจะได้สองราก รากไหนที่ต้องทิ้ง และทิ้งเพราะอะไร</p></div><div class="story-p" data-l="en"><p>Slide p. 32 is Example 7.2: the same six questions as Example 7.1, but this time \(V_{GS}\) is not given; it has to come from the intersection. Before opening the solution, think ahead: solved as a quadratic, the problem has two roots. Which one must be thrown away, and why?</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch5/p32.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 32, Self-Bias Configuration: determine the following for the network of the figure: (a) V_GSQ, (b) I_DQ, (c) V_DS, (d) V_S, (e) V_G, (f) V_D. Figure 7.12: 20 V supply, R_D = 3.3 kΩ, R_G = 1 MΩ, R_S = 1 kΩ, I_DSS = 8 mA, V_P = −6 V.">
+    <figcaption data-l="th">สไลด์หน้า 32: โจทย์ Example 7.2 (รูป 7.12) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 32: Example 7.2 (Fig. 7.12) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{DD}\) = 20 V, \(R_D\) = 3.3 kΩ, \(R_G\) = 1 MΩ, \(R_S\) = 1 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −6 V จงหา (a) \(V_{GS_Q}\) (b) \(I_{D_Q}\) (c) \(V_{DS}\) (d) \(V_S\) (e) \(V_G\) (f) \(V_D\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{DD}\) = 20 V, \(R_D\) = 3.3 kΩ, \(R_G\) = 1 MΩ, \(R_S\) = 1 kΩ, \(I_{DSS}\) = 8 mA, \(V_P\) = −6 V. Determine (a) \(V_{GS_Q}\) (b) \(I_{D_Q}\) (c) \(V_{DS}\) (d) \(V_S\) (e) \(V_G\) (f) \(V_D\).</p></div>
   <p class="lead" data-l="th">แผงข้างภาพสร้างรูป 7.13–7.15 ทีละขั้น (เส้นของวงจร เส้นโค้งของอุปกรณ์ จุดตัด) แล้วแสดงแรงดันของโหนด และเส้นโหลดในขั้นสุดท้าย <b>ลองตอบก่อน</b></p>
@@ -71,8 +93,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 7.3: \(R_S\) = 100 Ω และ 10 kΩ</h2><h2 data-l="en">Example 7.3: \(R_S\) = 100 Ω and 10 kΩ</h2>
     <div class="src" data-l="th">สไลด์หน้า 33 · Boylestad Example 7.3 (รูป 7.16)</div><div class="src" data-l="en">Slide p. 33 · Boylestad Example 7.3 (Fig. 7.16)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch5/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 33, Self-Bias Configuration: find the quiescent point for the network of the figure if (a) R_S = 100 Ω, (b) R_S = 10 kΩ. Figure 7.16: the transfer curve for I_DSS = 8 mA, V_P = −6 V with the two bias lines: R_S = 100 Ω through (−0.4 V, 4 mA) with the Q-point at I_DQ ≅ 6.4 mA, and R_S = 10 kΩ through (−4 V, 0.4 mA) with the Q-point at V_GSQ ≅ −4.6 V.">
-    <figcaption data-l="th">สไลด์หน้า 33: Example 7.3 และรูป 7.16 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: Example 7.3 and Fig. 7.16 · tap to enlarge</figcaption></figure></div>
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 33 ใช้วงจรเดิมกับ \(R_S\) สองค่าที่ห่างกันร้อยเท่า และรูป 7.16 วาดเส้นไบแอสทั้งสองไว้: 100 Ω ได้เส้นเกือบตั้งชิดแกน \(I_D\) ส่วน 10 kΩ ได้เส้นเกือบราบชิดแกน \(V_{GS}\) ก่อนเปิดเฉลย ลองเอาคำตอบของกรณี 100 Ω ที่อ่านจากเส้นโค้ง (\(I_D\) ≅ 6.4 mA) ไปแทนในวงเดรน แล้วดูว่า \(V_{DS}\) ออกมาเป็นบวกหรือไม่</p></div><div class="story-p" data-l="en"><p>Slide p. 33 keeps the circuit and tries two values of \(R_S\) a hundred times apart, and Fig. 7.16 draws both bias lines: 100 Ω gives a nearly vertical line hugging the \(I_D\) axis, 10 kΩ a nearly flat one hugging the \(V_{GS}\) axis. Before opening the solution, put the 100 Ω answer read from the curve (\(I_D\) ≅ 6.4 mA) into the drain loop and see whether \(V_{DS}\) comes out positive.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch5/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 5 slide 33, Self-Bias Configuration: find the quiescent point for the network of the figure if (a) R_S = 100 Ω, (b) R_S = 10 kΩ. Figure 7.16: the transfer curve for I_DSS = 8 mA, V_P = −6 V with the two bias lines: R_S = 100 Ω through (−0.4 V, 4 mA) with the Q-point at I_DQ ≅ 6.4 mA, and R_S = 10 kΩ through (−4 V, 0.4 mA) with the Q-point at V_GSQ ≅ −4.6 V.">
+    <figcaption data-l="th">สไลด์หน้า 33: Example 7.3 และรูป 7.16 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: Example 7.3 and Fig. 7.16 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรของ Example 7.2 จงหาจุด Q เมื่อ (a) \(R_S\) = 100 Ω (b) \(R_S\) = 10 kΩ</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>For the circuit of Example 7.2, find the Q-point when (a) \(R_S\) = 100 Ω, (b) \(R_S\) = 10 kΩ.</p></div>
   <p class="lead" data-l="th">ภาพจำลองเปลี่ยน \(R_S\) ตามขั้น จุดสีเขียวคือคำตอบจากเส้นโค้งถ่ายโอน จุดสีเหลืองคือจุด Q จริงของวงจร สองจุดนี้ไม่ตรงกันในกรณี (a) <b>ลองตอบก่อน</b></p>
@@ -88,7 +116,7 @@
 
 <section class="notes" data-l="th">
   <div class="card"><h3>ลองทำดู 1 — เส้นหมุนรอบจุดกำเนิด</h3>
-    <ol><li>ส่วน A เลื่อน \(R_S\) จาก 1 kΩ ไป 3 kΩ: จุดที่สองของเส้น (ที่ \(I_{DSS}/2\) = 4 mA) เลื่อนจาก −4 V ไป −12 V เส้นราบลง \(I_D\) ลดจาก 2.6 เหลือราว 1.3 mA</li>
+    <ol><li>ส่วน A เลื่อน \(R_S\) จาก 1 kΩ ไป 3 kΩ: จุดที่สองของเส้น (ที่ \(I_{DSS}/2\) = 4 mA) เลื่อนจาก −4 V ไป −12 V เส้นราบลง \(I_D\) ลดจาก 2.6 เหลือราว 1.2 mA</li>
     <li>ลด \(R_S\) เหลือ 100 Ω: เส้นเกือบตั้ง เส้นโค้งบอกว่า 6.4 mA แต่เส้นโหลดในกราฟล่างไปไม่ถึง ป้ายขึ้นย่านโอห์มิก นี่คือ Example 7.3(a)</li>
     <li>ลองแก้ด้วย \(V_{DD}\) = 30 V และ \(R_D\) = 1 kΩ: กลับเข้าย่านอิ่มตัว และ \(I_D\) ตรงกับเส้นโค้งอีกครั้ง</li></ol></div>
   <div class="card"><h3>ลองทำดู 2 — สมการกำลังสอง</h3>
@@ -98,7 +126,7 @@
 </section>
 <section class="notes" data-l="en">
   <div class="card"><h3>Try this 1 — the line pivots about the origin</h3>
-    <ol><li>In section A move \(R_S\) from 1 kΩ to 3 kΩ: the line's second point (at \(I_{DSS}/2\) = 4 mA) moves from −4 V to −12 V, the line flattens, and \(I_D\) falls from 2.6 to about 1.3 mA.</li>
+    <ol><li>In section A move \(R_S\) from 1 kΩ to 3 kΩ: the line's second point (at \(I_{DSS}/2\) = 4 mA) moves from −4 V to −12 V, the line flattens, and \(I_D\) falls from 2.6 to about 1.2 mA.</li>
     <li>Lower \(R_S\) to 100 Ω: the line is nearly vertical, the curve says 6.4 mA, but the load line in the lower graph cannot reach it and the badge says ohmic region: Example 7.3(a).</li>
     <li>Fix it with \(V_{DD}\) = 30 V and \(R_D\) = 1 kΩ: back in saturation, and \(I_D\) agrees with the curve again.</li></ol></div>
   <div class="card"><h3>Try this 2 — the quadratic</h3>

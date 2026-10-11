@@ -128,7 +128,8 @@ LS.choose = (el, o) => {
    "=" itself (V_AB = V_th &= …) is realigned at its first "="; (3) a few budgets for the left sides are tried: left sides
    break before a top-level + or −, right sides "= a = b" before an "=", each into the fewest and most even lines, and the
    layout that fits with the fewest rows wins; (4) a right side still too wide breaks before a top-level + or −. A one-line chain
-   becomes an aligned block at its first "=". */
+   becomes an aligned block at its first relation, and a chain of separate results ("a = 1,\ b = 2") gets one result per row
+   first (splitCases for "; \quad" cases, then splitChain). */
 let probe = null, waiting = false; const WC5 = new Map(), LATE = [];
 LS.onFonts = fn => { LATE.push(fn); };
 const fontsLate = () => { if (waiting || !document.fonts) return; waiting = true;
@@ -182,16 +183,55 @@ const wrapPlus = (r, b) => { const [L, R] = sides(r); if (!R || texW(`{}${R}`) <
   const parts = []; let last = 0; cs.forEach(p => { parts.push(R.slice(last, p.i).trim()); last = p.i; }); parts.push(R.slice(last).trim());
   const line = (P, k) => `{}${k ? '\\quad ' : ''}${P.join(' ')}`;
   return best(parts, line, b).map((P, k) => k ? `&\\quad ${P.join(' ')}` : `${L} &${P.join(' ')}`); };
+/* a chain of separate results "a = 1,\ b = 2,\ c = 3" (a top-level comma before a space command) reads best one result per
+   row, each aligned at its own relation (=, ≅ or ≈). A part whose left side does not look like a quantity (it starts with a
+   digit or holds spaces or words, as in "2\ \text{mA at}\ V_{GS} = 0") stays on the row before it, as does a part with no relation */
+const SP = /^\s*\\(?:qquad|quad|;|:|\s)\s*/;
+const relOf = s => { let d = 0, lr = 0, pd = 0;
+  for (let i = 0; i < s.length; i++) { const c = s[i];
+    if (c === '\\') { const m = /^\\([a-zA-Z]+|[^a-zA-Z])/.exec(s.slice(i)), nm = m ? m[1] : '';
+      if (nm === 'left') lr++; else if (nm === 'right') lr--; else if (!d && !lr && !pd && (nm === 'cong' || nm === 'approx')) return { i, len: m[0].length };
+      i += (m ? m[0].length : 1) - 1; continue; }
+    if (c === '{') d++; else if (c === '}') d--; else if (c === '(' || c === '[') pd++; else if (c === ')' || c === ']') pd--;
+    else if (c === '=' && !d && !lr && !pd) return { i, len: 1 }; }
+  return null; };
+const sepCuts = (s, ch) => { const out = []; let d = 0, lr = 0, pd = 0;
+  for (let i = 0; i < s.length; i++) { const c = s[i];
+    if (c === '\\') { const m = /^\\([a-zA-Z]+|[^a-zA-Z])/.exec(s.slice(i)), nm = m ? m[1] : '';
+      if (nm === 'left') lr++; else if (nm === 'right') lr--;
+      i += (m ? m[0].length : 1) - 1; continue; }
+    if (c === '{') d++; else if (c === '}') d--; else if (c === '(' || c === '[') pd++; else if (c === ')' || c === ']') pd--;
+    else if (c === ch && !d && !lr && !pd && SP.test(s.slice(i + 1))) out.push(i); }
+  return out; };
+const pieces = (s, cs) => { const ps = []; let last = 0; cs.forEach(i => { ps.push(s.slice(last, i)); last = i + 1; }); ps.push(s.slice(last));
+  return ps.map((x, k) => (k ? x.replace(SP, '') : x).trim()); };
+const nameLike = L => L.length > 0 && L.length <= 48 && !/^[\d.+\-−(]/.test(L) && !/\\ |\\quad|\\qquad|\\text\{[^}]*\s/.test(L);
+const atRel = p => { const q = relOf(p), L = q ? p.slice(0, q.i).trim() : '';
+  return q && nameLike(L) ? `${L} &${p.slice(q.i, q.i + q.len)} ${p.slice(q.i + q.len).trim()}` : null; };
+/* cases separated by "; \quad" ("+10: v_o = 0;\quad −10: v_o = −20\ \text{V}") go first, one whole case per row aligned at its
+   first relation; the commas inside a case are split only if the cases still do not fit */
+const splitCases = r => { const [L, R] = sides(r), cs = R ? sepCuts(R, ';') : []; if (!cs.length) return [r];
+  const ps = pieces(R, cs);
+  const out = [`${L} &${ps[0]}`, ...ps.slice(1).map(x => { const q = relOf(x); return q ? `${x.slice(0, q.i).trim()} &${x.slice(q.i, q.i + q.len)} ${x.slice(q.i + q.len).trim()}` : `&${x}`; })];
+  return out; };
+const splitChain = r => { const [L, R] = sides(r), body = R || r, cs = sepCuts(body, ','); if (!cs.length) return [r];
+  const parts = pieces(body, cs), out = [R ? `${L} &${parts[0]}` : atRel(parts[0])];
+  if (!out[0]) return [r];
+  parts.slice(1).forEach(x => { const a = atRel(x); if (a) out.push(a); else out[out.length - 1] += `,\\ ${x}`; });
+  return out.length > 1 ? out : [r]; };
+LS.splitChain = splitChain; LS.splitCases = splitCases;
 const realign = r => { const [L, R] = sides(r); const eq = R && marks(L).find(p => p.c === '='); return eq ? `${L.slice(0, eq.i).trim()} &= ${L.slice(eq.i + 1).trim()} ${R}` : r; };
 LS.fit = tex => {
   if (!tex || typeof katex === 'undefined') return tex; const A = avail(), W = texW;
   if (W(tex) <= A) return tex;
   const m = /^\s*\\begin\{aligned\}([\s\S]*)\\end\{aligned\}\s*$/.exec(tex); let rows;
   if (m) rows = cut(m[1], marks(m[1]).filter(p => p.c === 'row')).filter(Boolean);
-  else { const eq = marks(tex).find(p => p.c === '='); if (!eq) return tex; rows = [`${tex.slice(0, eq.i)}&=${tex.slice(eq.i + 1)}`]; }
+  else { const eq = relOf(tex); if (!eq) return tex; rows = [`${tex.slice(0, eq.i)}&${tex.slice(eq.i, eq.i + eq.len)}${tex.slice(eq.i + eq.len)}`]; }
   rows = rows.flatMap(r => { const ps = marks(r).filter(p => p.c === '&'), j = ps.findIndex((p, k) => ps[k + 1] && ps[k + 1].i === p.i + 1); if (j < 0) return [r];
     const head = r.slice(0, ps[j].i).trim(), tail = r.slice(ps[j].i + 2).trim(), eq = marks(tail).find(p => p.c === '=');
     return [head, eq ? `${tail.slice(0, eq.i).trim()} &= ${tail.slice(eq.i + 1).trim()}` : `&\\quad ${tail}`]; });
+  rows = rows.flatMap(splitCases); if (rows.length > 1 && W(block(rows)) <= A) return block(rows);
+  rows = rows.flatMap(splitChain);
   if (W(block(rows)) <= A) return block(rows);
   rows = rows.map(realign); if (W(block(rows)) <= A) return block(rows);
   let pick = null;

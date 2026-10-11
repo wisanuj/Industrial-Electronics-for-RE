@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,9 +19,9 @@
 <h1 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์และวงจรเบสร่วม <span class="en">Emitter follower and common base</span></h1>
 <h1 data-l="en">Emitter follower and common base <span class="en">Biasing with the output at the emitter, and with two supplies</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 35–36 สองวงจรที่ไม่ได้เอาสัญญาณออกที่คอลเล็กเตอร์: ตัวตามแรงดันที่อิมิตเตอร์ (emitter follower หรือคอลเล็กเตอร์ร่วม) ต่อคอลเล็กเตอร์ลงกราวด์และใช้แหล่งจ่ายลบ \(V_{EE}\) ใต้ \(R_E\) และวงจรเบสร่วม (common base) ที่ป้อนสัญญาณเข้าที่อิมิตเตอร์ ใช้สองแหล่งจ่าย และหากระแสอิมิตเตอร์ได้ตรง ๆ จากวงอิมิตเตอร์ หน้านี้มีภาพจำลองตัวตามแรงดันที่ปรับ \(V_{EE}\), \(R_B\), \(R_E\), β ได้ (ส่วน A) Ex.9 Ex.10 และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Chapter 4 slides pp. 35–36. Two circuits that do not take the signal off the collector: the emitter follower (common collector), with the collector grounded and a negative supply \(V_{EE}\) under \(R_E\), and the common-base circuit, fed at the emitter from two supplies, whose emitter current comes straight from the emitter loop. This page has an emitter follower whose \(V_{EE}\), \(R_B\), \(R_E\), β you can change (section A), Ex.9, Ex.10, and more practice.</p>
-<div class="equation-box eqwrap">$$ \text{follower:}\quad I_B = \frac{V_{EE} - V_{BE}}{R_B + (\beta + 1)R_E},\quad V_{CE} = V_{EE} - I_ER_E $$ $$ \text{common base:}\quad I_E = \frac{V_{EE} - V_{BE}}{R_E},\quad I_B = \frac{I_E}{\beta + 1} $$ $$ V_{CE} = V_{EE} + V_{CC} - I_E(R_C + R_E),\quad V_{CB} = V_{CC} - I_CR_C $$</div>
+<p class="sub" data-l="th">วงจรที่คอลเล็กเตอร์ต่อกราวด์ตรง ๆ แต่เบสกับอิมิตเตอร์อยู่ต่ำกว่ากราวด์ทั้งคู่ และวงจรที่หากระแสอิมิตเตอร์ได้โดยไม่ต้องรู้ β เลย ทั้งสองอยู่ในหน้านี้ และทั้งสองไม่ได้เอาสัญญาณออกที่คอลเล็กเตอร์ วงจรแรกคือตัวตามแรงดันที่อิมิตเตอร์ (emitter follower หรือคอลเล็กเตอร์ร่วม) ที่ใช้แหล่งจ่ายลบ \(V_{EE}\) ใต้ \(R_E\) วงจรที่สองคือวงจรเบสร่วม (common base) ที่ป้อนสัญญาณเข้าที่อิมิตเตอร์และใช้สองแหล่งจ่าย หน้านี้มีภาพจำลองตัวตามแรงดันที่ปรับ \(V_{EE}\), \(R_B\), \(R_E\), β ได้ (ส่วน A) Ex.9 Ex.10 และแบบฝึกเพิ่ม (สไลด์บทที่ 4 หน้า 35–36 · Boylestad หัวข้อ 4.7–4.8)</p>
+<p class="sub" data-l="en">A circuit whose collector is tied straight to ground while its base and emitter both sit below ground, and a circuit whose emitter current you can find without knowing β at all: both are on this page, and neither takes its signal off the collector. The first is the emitter follower (common collector), with a negative supply \(V_{EE}\) under \(R_E\); the second is the common-base circuit, fed at the emitter from two supplies. This page has an emitter follower whose \(V_{EE}\), \(R_B\), \(R_E\), β you can change (section A), Ex.9, Ex.10, and more practice (chapter 4 slides, pp. 35–36; Boylestad sections 4.7–4.8).</p>
+<div class="equation-box eqwrap">$$ \text{follower:}\quad I_B = \frac{V_{EE} - V_{BE}}{R_B + (\beta + 1)R_E},\quad V_{CE} = V_{EE} - I_ER_E $$ $$ \text{common base:}\quad I_E = \frac{V_{EE} - V_{BE}}{R_E},\quad I_B = \frac{I_E}{\beta + 1} $$ $$ V_{CE} = V_{EE} + V_{CC} - I_E(R_C + R_E) $$ $$ V_{CB} = V_{CC} - I_CR_C $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
   <li><b>ตัวตามแรงดัน</b> (รูป 4.46–4.47): วงเบสจากกราวด์ผ่าน \(R_B\) รอยต่อ และ \(R_E\) ลงไปถึง \(-V_{EE}\) ให้ \(I_B = (V_{EE} - V_{BE})/(R_B + (\beta + 1)R_E)\) (สมการ 4.44) รูปแบบเดียวกับไบแอสอิมิตเตอร์ที่ \(V_{EE}\) แทน \(V_{CC}\)</li>
@@ -42,16 +42,22 @@
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">The emitter follower</h2>
     <div class="src" data-l="th">Boylestad หัวข้อ 4.7 (รูป 4.46–4.47)</div><div class="src" data-l="en">Boylestad, section 4.7 (Figs. 4.46–4.47)</div></div></div>
-  <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.9: คอลเล็กเตอร์ต่อกราวด์ตรง ๆ (ไม่มี \(R_C\)) ส่วนล่างของวงจรอยู่ที่ \(-V_{EE}\) แรงดันทุกโหนดจึงติดลบ เลื่อน \(R_B\) หรือ β แล้วดูว่าอิมิตเตอร์ตามเบสอยู่ห่าง 0.7 V เสมอ กราฟล่างคือ \(I_C\) เทียบกับ β ซึ่งราบลงเมื่อ \((\beta + 1)R_E\) ใหญ่กว่า \(R_B\)</p>
-  <p class="lead" data-l="en">Start from the circuit of Ex.9: the collector goes straight to ground (no \(R_C\)) and the bottom of the circuit sits at \(-V_{EE}\), so every node voltage is negative. Move \(R_B\) or β and watch the emitter follow the base, always 0.7 V below it. The lower graph is \(I_C\) against β, which flattens once \((\beta + 1)R_E\) exceeds \(R_B\).</p>
+  <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.9: คอลเล็กเตอร์ต่อกราวด์ตรง ๆ (ไม่มี \(R_C\)) ส่วนล่างของวงจรอยู่ที่ \(-V_{EE}\) แรงดันที่เบสและอิมิตเตอร์จึงติดลบ (คอลเล็กเตอร์อยู่ที่ 0 V) เลื่อน \(R_B\) หรือ β แล้วดูว่าอิมิตเตอร์ตามเบสอยู่ห่าง 0.7 V เสมอ กราฟล่างคือ \(I_C\) เทียบกับ β ซึ่งราบลงเมื่อ \((\beta + 1)R_E\) ใหญ่กว่า \(R_B\)</p>
+  <p class="lead" data-l="en">Start from the circuit of Ex.9: the collector goes straight to ground (no \(R_C\)) and the bottom of the circuit sits at \(-V_{EE}\), so the base and emitter voltages are negative (the collector sits at 0 V). Move \(R_B\) or β and watch the emitter follow the base, always 0.7 V below it. The lower graph is \(I_C\) against β, which flattens once \((\beta + 1)R_E\) exceeds \(R_B\).</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
 </section>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.9: ตัวตามแรงดันที่อิมิตเตอร์</h2><h2 data-l="en">Ex.9: an emitter follower</h2>
     <div class="src" data-l="th">สไลด์หน้า 35 · Boylestad Example 4.16 (รูป 4.48)</div><div class="src" data-l="en">Slide p. 35 · Boylestad Example 4.16 (Fig. 4.48)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 35, Miscellaneous Bias Configurations, Ex.9: determine V_CEQ and I_E for the network of the figure: the collector to ground, R_B = 240 kΩ from the base to ground, β = 90, R_E = 2 kΩ from the emitter to V_EE = −20 V, 10 µF coupling capacitors at the base and the emitter.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 35 คือวงจรเดียวกับที่เพิ่งลองในส่วน A: \(R_B\) = 240 kΩ จากเบสลงกราวด์ และ \(R_E\) = 2 kΩ ลงไปที่ −20 V วงเบสเดินจากกราวด์ผ่าน \(R_B\) รอยต่อ และ \(R_E\) ลงไปถึง \(-V_{EE}\) จึงได้สมการรูปเดียวกับไบแอสอิมิตเตอร์ที่มี \(V_{EE}\) แทน \(V_{CC}\) ก่อนเปิดเฉลย ลองเดาเครื่องหมายของ \(V_B\) และ \(V_E\)</p></div><div class="story-p" data-l="en"><p>Slide p. 35 is the circuit you just tried in section A: \(R_B\) = 240 kΩ from the base to ground and \(R_E\) = 2 kΩ down to −20 V. The base loop runs from ground through \(R_B\), the junction and \(R_E\) down to \(-V_{EE}\), so its equation has the emitter-bias form with \(V_{EE}\) in place of \(V_{CC}\). Before opening the solution, guess the signs of \(V_B\) and \(V_E\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p35.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 35, Miscellaneous Bias Configurations, Ex.9: determine V_CEQ and I_E for the network of the figure: the collector to ground, R_B = 240 kΩ from the base to ground, β = 90, R_E = 2 kΩ from the emitter to V_EE = −20 V, 10 µF coupling capacitors at the base and the emitter.">
     <figcaption data-l="th">สไลด์หน้า 35: Ex.9 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 35: Ex.9 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>คอลเล็กเตอร์ต่อกราวด์ \(R_B\) = 240 kΩ จากเบสลงกราวด์ \(R_E\) = 2 kΩ จากอิมิตเตอร์ไป \(V_{EE}\) = −20 V, β = 90 จงหา \(V_{CEQ}\) และ \(I_{EQ}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>Collector grounded, \(R_B\) = 240 kΩ from base to ground, \(R_E\) = 2 kΩ from the emitter to \(V_{EE}\) = −20 V, β = 90. Determine \(V_{CEQ}\) and \(I_{EQ}\).</p></div>
   <p class="lead" data-l="th">แผงข้างภาพคือแรงดันเทียบกราวด์ของสามขา <b>ลองตอบก่อน</b></p>
@@ -62,8 +68,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.10: วงจรเบสร่วม</h2><h2 data-l="en">Ex.10: a common-base circuit</h2>
     <div class="src" data-l="th">สไลด์หน้า 36 · Boylestad Example 4.17 (รูป 4.52)</div><div class="src" data-l="en">Slide p. 36 · Boylestad Example 4.17 (Fig. 4.52)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 36, Miscellaneous Bias Configurations, Ex.10: determine the voltage V_CBQ and the current I_BQ for the common-base configuration of the figure: the emitter through R_E = 1.2 kΩ to V_EE = 4 V, the collector through R_C = 2.4 kΩ to V_CC = 10 V, the base grounded, β = 60, coupling capacitors at the emitter and the collector.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>วงจรที่สองเปลี่ยนขาที่ใช้ร่วม: สไลด์หน้า 36 ต่อเบสลงกราวด์ ป้อนสัญญาณเข้าที่อิมิตเตอร์ ซึ่งต่อผ่าน \(R_E\) = 1.2 kΩ ไปยัง \(V_{EE}\) = 4 V และเอาสัญญาณออกที่คอลเล็กเตอร์ ซึ่งต่อผ่าน \(R_C\) = 2.4 kΩ ไปยัง \(V_{CC}\) = 10 V วงอิมิตเตอร์มีแค่ \(V_{EE}\), \(R_E\) และรอยต่อ 0.7 V ลองหา \(I_E\) ก่อน แล้วสังเกตว่าไม่ได้ใช้ β เลย</p></div><div class="story-p" data-l="en"><p>The second circuit changes the common terminal: slide p. 36 grounds the base, feeds the signal in at the emitter, which returns through \(R_E\) = 1.2 kΩ to \(V_{EE}\) = 4 V, and takes it out at the collector, which returns through \(R_C\) = 2.4 kΩ to \(V_{CC}\) = 10 V. The emitter loop holds only \(V_{EE}\), \(R_E\) and the 0.7 V junction: find \(I_E\) first and notice that β never comes into it.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p36.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 36, Miscellaneous Bias Configurations, Ex.10: determine the voltage V_CBQ and the current I_BQ for the common-base configuration of the figure: the emitter through R_E = 1.2 kΩ to V_EE = 4 V, the collector through R_C = 2.4 kΩ to V_CC = 10 V, the base grounded, β = 60, coupling capacitors at the emitter and the collector.">
     <figcaption data-l="th">สไลด์หน้า 36: Ex.10 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 36: Ex.10 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรเบสร่วม \(V_{EE}\) = 4 V, \(R_E\) = 1.2 kΩ, \(V_{CC}\) = 10 V, \(R_C\) = 2.4 kΩ, β = 60 จงหา \(I_E\), \(I_{BQ}\), \(V_{CE}\) และ \(V_{CBQ}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>A common-base circuit with \(V_{EE}\) = 4 V, \(R_E\) = 1.2 kΩ, \(V_{CC}\) = 10 V, \(R_C\) = 2.4 kΩ, β = 60. Determine \(I_E\), \(I_{BQ}\), \(V_{CE}\) and \(V_{CBQ}\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองคือวงจรเบสร่วมของหน้า 3.2 กับทรานซิสเตอร์แบบ 0.7 V, β = 60 (สไลด์ถามเฉพาะ \(V_{CBQ}\) และ \(I_{BQ}\) ตำราถามครบสี่ค่า) <b>ลองตอบก่อน</b></p>

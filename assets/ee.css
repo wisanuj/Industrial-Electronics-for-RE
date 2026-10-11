@@ -98,6 +98,8 @@ input[type=range]{width:100%;accent-color:var(--accent);height:16px;margin:0}
 table.tbl{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
 table.tbl th,table.tbl td{border:1px solid var(--line);padding:6px 9px;vertical-align:top;text-align:left}
 table.tbl th{background:var(--panel2)}
+/* a wide summary table (.stack) becomes one block per row on phones, each cell led by its column name (data-h) */
+@media (max-width:560px){table.tbl.stack thead{display:none}table.tbl.stack,table.tbl.stack tbody,table.tbl.stack tr,table.tbl.stack td{display:block;width:auto}table.tbl.stack tr{border:1px solid var(--line);border-top:0;padding:7px 10px}table.tbl.stack tr:first-child{border-top:1px solid var(--line)}table.tbl.stack td{border:0;padding:2px 0}table.tbl.stack td:first-child{font-weight:700}table.tbl.stack td[data-h]::before{content:attr(data-h) ': ';color:var(--muted);font-size:13.5px}}
 /* ---- roadmap page ---- */
 .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--accent);font-weight:700;margin:16px 0 6px}
 .lede{color:var(--muted);font-size:18px;max-width:860px;margin:0}
@@ -186,6 +188,10 @@ details.derive summary::marker{color:var(--accent)}
 .node.soon p{font-size:14.5px}
 .stop .type.soon{color:var(--muted);border-style:dashed}
 .milestone.soon .pin{border-color:var(--line);color:var(--muted);border-style:dashed}
+/* ---- roadmap: the exam-review stop (stage 5, type 'rev') ---- */
+.milestone.s5 .pin{border-color:var(--good);color:var(--good)}
+.node.rev .dot{border-color:var(--good);color:var(--good)}
+.node.s5 .step,.stop .type.rev{color:var(--good)}
 /* hero demo on the roadmap */
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:center;margin-top:8px}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
@@ -316,6 +322,25 @@ figure.slide.q.wide{max-width:860px}
 figure.slide.q.sm{max-width:430px} figure.slide.q.xs{max-width:330px}   /* small crops (chapter 3) are not blown up past their own size */
 .slides{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:8px 0}
 .slides figure.slide{margin:0}
+/* ---- story blocks (Oct 2026): every slide sits at the point of the page where its idea is used, inside a short narrative that
+   leads into the simulation or problem below it (storify.py in the build notes). Desktop: text beside one slide, or text above a
+   row of two to four; phones: stacked. A block before a section joins it: that section loses its top rule. ---- */
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:12px 24px;align-items:start;margin:46px 0 0;padding-top:16px;border-top:3px solid var(--line)}
+.story.n2,.story.n3,.story.n4,.story.n0{grid-template-columns:minmax(0,1fr)}
+.story.in{margin:12px 0 14px;padding-top:0;border-top:0}
+@media (max-width:860px){.story{grid-template-columns:minmax(0,1fr)}}
+.story-k{font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent2)}
+.story h2{margin:3px 0 6px;font-size:22px;line-height:1.35}
+.story-p p{margin:6px 0;font-size:16.5px;line-height:1.75}
+.story.in .story-p p{font-size:16px}
+.story-next{grid-column:1/-1;margin:2px 0 0;font-size:15.5px;font-weight:600;color:var(--accent)}
+.story-f{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);min-width:0}
+.story.n2 .story-f{grid-template-columns:repeat(2,minmax(0,1fr))}
+.story.n3 .story-f,.story.n4 .story-f{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+@media (max-width:640px){.story.n2 .story-f{grid-template-columns:minmax(0,1fr)}}
+.story-f figure.slide{margin:0}
+.story .warnbox{grid-column:1/-1;margin-top:2px}
+.story + .prob{margin-top:18px;padding-top:0;border-top:0}
 .lightbox{position:fixed;inset:0;z-index:1000;background:rgba(8,10,18,.9);display:none;align-items:center;justify-content:center;flex-direction:column;padding:14px;cursor:zoom-out}
 .lightbox.on{display:flex}
 .lightbox img{max-width:100%;max-height:calc(100% - 34px);border-radius:8px;background:#fff}

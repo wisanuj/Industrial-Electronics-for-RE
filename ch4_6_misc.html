@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรไบแอสแบบอื่น ๆ <span class="en">Miscellaneous bias configurations</span></h1>
 <h1 data-l="en">Miscellaneous bias configurations <span class="en">Write the base–emitter loop first, whatever the circuit</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 33–34, 37 วงจรที่ไม่ตรงกับแบบมาตรฐานมีไม่รู้จบ แต่ทางออกเดียวกันเสมอ: เขียนกฎแรงดันของเคียร์ชอฟฟ์รอบวงที่ผ่านรอยต่อเบส–อิมิตเตอร์ (0.7 V) ให้ได้ \(I_B\) ก่อน แล้วที่เหลือตามมาเอง หน้านี้มีภาพจำลองที่แสดงแรงดันรอบวงเบส–อิมิตเตอร์ของทั้งสามวงจรจนผลรวมเป็นศูนย์ (ส่วน A) Ex.7 ป้อนกลับโดยไม่มี \(R_E\) Ex.8 แหล่งจ่ายลบที่อิมิตเตอร์ Ex.11 แหล่งจ่ายสองขั้วที่ต้องใช้เทเวนิน ตารางสรุป และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Chapter 4 slides pp. 33–34, 37. There is no end of circuits that do not fit the standard moulds, but the way out is always the same: write Kirchhoff's voltage law round the loop that passes the 0.7 V base–emitter junction, get \(I_B\), and the rest follows. This page has a simulation that shows the voltages round the base–emitter loop of all three circuits summing to zero (section A), Ex.7 feedback without \(R_E\), Ex.8 a negative supply at the emitter, Ex.11 a split supply that needs Thévenin, the summary table, and more practice.</p>
+<p class="sub" data-l="th">ถ้าเจอวงจรไบแอสที่ไม่เหมือนแบบไหนที่เรียนมาเลย จะเริ่มตรงไหน หน้านี้มีสามวงจรแบบนั้น: วงจรป้อนกลับที่ไม่มี \(R_E\) วงจรที่แหล่งจ่ายลบไปอยู่ที่อิมิตเตอร์ และวงจรแหล่งจ่ายสองขั้ว คำตอบเหมือนกันทั้งสาม: เขียนกฎแรงดันของเคียร์ชอฟฟ์รอบวงที่ผ่านรอยต่อเบส–อิมิตเตอร์ (0.7 V) ให้ได้ \(I_B\) ก่อน แล้วที่เหลือตามมาเอง ภาพจำลองในส่วน A แสดงแรงดันรอบวงนั้นของทั้งสามวงจรจนผลรวมเป็นศูนย์ ตามด้วย Ex.7, Ex.8, Ex.11 ตารางสรุป และแบบฝึกเพิ่ม (สไลด์บทที่ 4 หน้า 33–34, 37 · Boylestad หัวข้อ 4.9–4.10)</p>
+<p class="sub" data-l="en">Where do you start when a bias circuit looks like none you have learned? This page has three of them: a feedback circuit with no \(R_E\), a circuit with its negative supply at the emitter, and a split-supply circuit. The answer is the same for all three: write Kirchhoff's voltage law round the loop through the 0.7 V base–emitter junction, get \(I_B\), and the rest follows. The simulation in section A shows the voltages round that loop for all three circuits summing to zero, followed by Ex.7, Ex.8, Ex.11, the summary table, and more practice (chapter 4 slides, pp. 33–34, 37; Boylestad sections 4.9–4.10).</p>
 <div class="equation-box eqwrap">$$ \sum_\text{loop} V = 0 \ \Rightarrow\ I_B = \frac{V'}{R_B + \beta R'} $$ $$ V_C = V_{CC} - I_CR_C,\quad V_E = V_B - V_{BE},\quad V_{CE} = V_C - V_E $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -50,8 +50,14 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.7: ป้อนกลับจากคอลเล็กเตอร์โดยไม่มี \(R_E\)</h2><h2 data-l="en">Ex.7: collector feedback without \(R_E\)</h2>
     <div class="src" data-l="th">สไลด์หน้า 33 · Boylestad Example 4.18 (รูป 4.53)</div><div class="src" data-l="en">Slide p. 33 · Boylestad Example 4.18 (Fig. 4.53)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 33, Miscellaneous Bias Configurations, Ex.7: for the network of the figure, (a) determine I_CQ and V_CEQ, (b) find V_B, V_C, V_E and V_BC. The figure: V_CC = 20 V, R_C = 4.7 kΩ, R_B = 680 kΩ from the collector to the base, β = 120, the emitter grounded, 10 µF coupling capacitors.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 33 คือวงจรป้อนกลับจากคอลเล็กเตอร์ของหน้า 4.4 ที่ตัด \(R_E\) ทิ้ง (อิมิตเตอร์ต่อกราวด์) และเรียกตัวต้านทานป้อนกลับว่า \(R_B\) = 680 kΩ ไม่ต้องเริ่มใหม่: ใส่ \(R_E\) = 0 ลงในสมการของหน้า 4.4 ก็ได้ \(I_B = (V_{CC} - V_{BE})/(R_B + \beta R_C)\) ทันที</p></div><div class="story-p" data-l="en"><p>Slide p. 33 is the collector-feedback circuit of page 4.4 with \(R_E\) removed (the emitter is grounded), and its feedback resistor is called \(R_B\) = 680 kΩ. No need to start over: put \(R_E\) = 0 into the equation of page 4.4 and \(I_B = (V_{CC} - V_{BE})/(R_B + \beta R_C)\) drops out.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p33.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 33, Miscellaneous Bias Configurations, Ex.7: for the network of the figure, (a) determine I_CQ and V_CEQ, (b) find V_B, V_C, V_E and V_BC. The figure: V_CC = 20 V, R_C = 4.7 kΩ, R_B = 680 kΩ from the collector to the base, β = 120, the emitter grounded, 10 µF coupling capacitors.">
     <figcaption data-l="th">สไลด์หน้า 33: Ex.7 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 33: Ex.7 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 20 V, \(R_C\) = 4.7 kΩ, \(R_B\) = 680 kΩ จากคอลเล็กเตอร์มาเบส อิมิตเตอร์ต่อกราวด์ β = 120 (a) จงหา \(I_{CQ}\) และ \(V_{CEQ}\) (b) จงหา \(V_B\), \(V_C\), \(V_E\) และ \(V_{BC}\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 20 V, \(R_C\) = 4.7 kΩ, \(R_B\) = 680 kΩ from collector to base, the emitter grounded, β = 120. (a) Determine \(I_{CQ}\) and \(V_{CEQ}\). (b) Find \(V_B\), \(V_C\), \(V_E\) and \(V_{BC}\).</p></div>
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
@@ -61,8 +67,14 @@
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Ex.8: แหล่งจ่ายลบที่อิมิตเตอร์</h2><h2 data-l="en">Ex.8: a negative supply at the emitter</h2>
     <div class="src" data-l="th">สไลด์หน้า 34 · Boylestad Example 4.19 (รูป 4.54)</div><div class="src" data-l="en">Slide p. 34 · Boylestad Example 4.19 (Fig. 4.54)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 34, Miscellaneous Bias Configurations, Ex.8: determine V_C and V_B for the network of the figure: R_C = 1.2 kΩ from the collector up to ground, R_B = 100 kΩ from the base to ground, the emitter at V_EE = −9 V, β = 45, 10 µF coupling capacitors.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 34 ดูแปลกตา: \(R_C\) ต่อจากคอลเล็กเตอร์ขึ้นไปที่กราวด์ \(R_B\) ต่อจากเบสลงกราวด์ และแหล่งจ่ายเดียวคือ −9 V ที่อิมิตเตอร์ ลองเดินกฎแรงดันจากกราวด์ผ่าน \(R_B\) และรอยต่อลงไปถึง −9 V แล้วจะพบวงจรไบแอสคงที่ที่คุ้นเคย เพียงแต่แรงดันทุกขาติดลบ</p></div><div class="story-p" data-l="en"><p>Slide p. 34 looks odd: \(R_C\) runs from the collector up to ground, \(R_B\) from the base down to ground, and the only supply is −9 V at the emitter. Walk the voltage law from ground through \(R_B\) and the junction down to −9 V and you find the familiar fixed-bias circuit, only with every terminal voltage negative.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p34.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 34, Miscellaneous Bias Configurations, Ex.8: determine V_C and V_B for the network of the figure: R_C = 1.2 kΩ from the collector up to ground, R_B = 100 kΩ from the base to ground, the emitter at V_EE = −9 V, β = 45, 10 µF coupling capacitors.">
     <figcaption data-l="th">สไลด์หน้า 34: Ex.8 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 34: Ex.8 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(R_C\) = 1.2 kΩ จากคอลเล็กเตอร์ขึ้นกราวด์ \(R_B\) = 100 kΩ จากเบสลงกราวด์ อิมิตเตอร์ต่อ \(V_{EE}\) = −9 V, β = 45 จงหา \(V_C\) และ \(V_B\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(R_C\) = 1.2 kΩ from the collector up to ground, \(R_B\) = 100 kΩ from the base to ground, the emitter at \(V_{EE}\) = −9 V, β = 45. Determine \(V_C\) and \(V_B\).</p></div>
   <p class="lead" data-l="th">ภาพจำลองวาดรางบนเป็นกราวด์และรางล่างเป็น −9 V <b>ลองตอบก่อน</b></p>
@@ -73,8 +85,14 @@
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Ex.11: แหล่งจ่ายสองขั้วกับเทเวนิน</h2><h2 data-l="en">Ex.11: a split supply with Thévenin</h2>
     <div class="src" data-l="th">สไลด์หน้า 37 · Boylestad Example 4.20 (รูป 4.55–4.58)</div><div class="src" data-l="en">Slide p. 37 · Boylestad Example 4.20 (Figs. 4.55–4.58)</div></div></div>
-  <figure class="slide q"><img src="slides/ch4/p37.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 37, Miscellaneous Bias Configurations, Ex.11: determine V_C and V_B for the network of the figure: V_CC = +20 V, R_C = 2.7 kΩ, R_1 = 8.2 kΩ from V_CC to the base, R_2 = 2.2 kΩ from the base to V_EE, R_E = 1.8 kΩ from the emitter to V_EE = −20 V, β = 120, 10 µF coupling capacitors.">
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 37 นำตัวแบ่งแรงดันของหน้า 4.3 มาคร่อมระหว่าง +20 V กับ −20 V: \(R_1\) = 8.2 kΩ ขึ้นไป \(V_{CC}\) ส่วน \(R_2\) = 2.2 kΩ กับ \(R_E\) = 1.8 kΩ ลงไป \(V_{EE}\) เทเวนินสี่ขั้นยังใช้ได้ แต่ \(E_{Th}\) จะติดลบ ระวังเครื่องหมายในวงเบสให้ดี</p></div><div class="story-p" data-l="en"><p>Slide p. 37 puts the voltage divider of page 4.3 across +20 V and −20 V: \(R_1\) = 8.2 kΩ up to \(V_{CC}\), \(R_2\) = 2.2 kΩ and \(R_E\) = 1.8 kΩ down to \(V_{EE}\). The four Thévenin steps still work, but \(E_{Th}\) comes out negative, so watch the signs in the base loop.</p></div></div>
+  <div class="story-f">
+    <figure class="slide q"><img src="slides/ch4/p37.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 37, Miscellaneous Bias Configurations, Ex.11: determine V_C and V_B for the network of the figure: V_CC = +20 V, R_C = 2.7 kΩ, R_1 = 8.2 kΩ from V_CC to the base, R_2 = 2.2 kΩ from the base to V_EE, R_E = 1.8 kΩ from the emitter to V_EE = −20 V, β = 120, 10 µF coupling capacitors.">
     <figcaption data-l="th">สไลด์หน้า 37: Ex.11 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 37: Ex.11 · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = +20 V, \(V_{EE}\) = −20 V, \(R_1\) = 8.2 kΩ, \(R_2\) = 2.2 kΩ (ต่อลง \(V_{EE}\)), \(R_C\) = 2.7 kΩ, \(R_E\) = 1.8 kΩ (ต่อลง \(V_{EE}\)), β = 120 จงหา \(V_C\) และ \(V_B\)</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = +20 V, \(V_{EE}\) = −20 V, \(R_1\) = 8.2 kΩ, \(R_2\) = 2.2 kΩ (down to \(V_{EE}\)), \(R_C\) = 2.7 kΩ, \(R_E\) = 1.8 kΩ (down to \(V_{EE}\)), β = 120. Determine \(V_C\) and \(V_B\).</p></div>
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>

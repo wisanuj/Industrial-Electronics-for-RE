@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script><script src="assets/ie5.js?v=4"></script><script src="assets/ie6.js?v=4"></script><script src="assets/ie7.js?v=4"></script><script src="assets/ie8.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">ไอซีจับเวลา 555 <span class="en">The 555 timer</span></h1>
 <h1 data-l="en">The 555 timer <span class="en">Two comparators, a flip-flop and one capacitor that charges and discharges between V_CC/3 and 2V_CC/3</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 18–22 ไอซี 555 คือตัวแบ่งแรงดัน 3R สองตัวเปรียบเทียบ ฟลิปฟล็อป ขั้นขาออก และทรานซิสเตอร์คายประจุ (รูป 13.16) ต่อ \(R_A\), \(R_B\), C ภายนอกเป็นอะสเตเบิล: C ชาร์จผ่าน \(R_A + R_B\) ขึ้นถึง \(2V_{CC}/3\) แล้วคายผ่าน \(R_B\) ลงถึง \(V_{CC}/3\) ซ้ำไปเรื่อย ๆ ได้คลื่นสี่เหลี่ยม \(f \cong 1.44/(R_A + 2R_B)C\) หรือเป็นโมโนสเตเบิล: พัลส์ลบที่ขา 2 ปล่อยขาออกสูงนาน \(1.1R_AC\) แล้วกลับเอง หน้านี้จำลองภายในตามเวลาจริง: ส่วน A อะสเตเบิลปรับได้ ข้อ 1 ภายในไอซี ข้อ 2 Example 13.1 ข้อ 3 Example 13.2</p>
-<p class="sub" data-l="en">Chapter 8 slides pp. 18–22. The 555 is a 3R divider, two comparators, a flip-flop, an output stage and a discharge transistor (Fig. 13.16). With external \(R_A\), \(R_B\), C it is an astable: C charges through \(R_A + R_B\) up to \(2V_{CC}/3\), then discharges through \(R_B\) down to \(V_{CC}/3\), over and over, giving a square wave at \(f \cong 1.44/(R_A + 2R_B)C\); or a monostable: a negative pulse at pin 2 sets the output high for \(1.1R_AC\), after which it returns by itself. This page simulates the inside in real time: section A an adjustable astable, problem 1 the inside of the IC, problem 2 Example 13.1, problem 3 Example 13.2.</p>
+<p class="sub" data-l="th">ไฟกะพริบ เสียงเตือน ตัวหน่วงเวลาก่อนมอเตอร์ออกตัว: งานจับเวลาเหล่านี้ทำได้ด้วยไอซีตัวเดียว ตัวต้านทานสองตัว และตัวเก็บประจุหนึ่งตัว ไอซีจับเวลา 555 ใช้กันมาตั้งแต่ต้นทศวรรษ 1970 และเป็นไอซีที่ถูกผลิตมากที่สุดตัวหนึ่ง หน้านี้เปิดฝาดูข้างในก่อน (สองระดับ สองตัวเปรียบเทียบ ฟลิปฟล็อปหนึ่งตัว) แล้วให้มันแกว่งเองเป็นอะสเตเบิล และยิงพัลส์ครั้งเดียวเป็นโมโนสเตเบิล ทุกรูปคลื่นมาจากการจำลองตามเวลาจริง (สไลด์บทที่ 8 หน้า 18–22 · Boylestad หัวข้อ 13.4)</p>
+<p class="sub" data-l="en">A blinking light, a warning beep, a delay before a motor starts: such timing jobs take one IC, two resistors and one capacitor. The 555 timer has been in use since the early 1970s and is one of the most produced ICs ever. This page first opens the chip (two levels, two comparators, one flip-flop), then lets it oscillate on its own as an astable and fire a single pulse as a one-shot; every waveform comes from a real time simulation (chapter 8 slides, pp. 18–22; Boylestad section 13.4).</p>
 <div class="equation-box eqwrap">$$ T_{high} \cong 0.7(R_A + R_B)C,\qquad T_{low} \cong 0.7R_BC $$ $$ f = \frac{1}{T_{high} + T_{low}} \cong \frac{1.44}{(R_A + 2R_B)C} $$ $$ \text{one-shot: } T_{high} = 1.1R_AC $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -34,31 +34,21 @@
   <li><b>Monostable</b> (pp. 21–22, Fig. 13.19, Eq. 13.7): C starts at 0 and charges through \(R_A\) to \(2V_{CC}/3\), which takes ln 3 ≈ 1.1 time constants. Example 13.2: 0.825 ms. The pulse width does not depend on the trigger.</li>
   <li><b>The simulation</b>: the resistors, the capacitor, the discharge switch and the output source are real engine parts; the flip-flop and the comparators act between time steps. The measured values use ln 2 = 0.693 and so differ from the 0.7 formulas by about 1 %.</li></ul></section>
 
-<div class="slides">
-  <figure class="slide"><img src="slides/ch8/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 18, Timer circuit: the 555 timer is an example of a versatile timer IC; the 8-pin package (GND, TRIG, OUT, RESET, V_CC, DIS, THR, CTRL) and the internal block diagram with the three-resistor divider at 2/3 V_CC and 1/3 V_CC, two comparators, a flip-flop, the output stage and the discharge transistor (Figure 13.16).">
+
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#ex1"><b>1</b>ภายใน</a><a href="#tA"><b>A</b>อะสเตเบิล</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#ex1"><b>1</b>Inside</a><a href="#tA"><b>A</b>Astable</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · เปิดฝาชิปแปดขา</div><div class="story-k" data-l="en">Part 1 · Opening the eight-pin chip</div>
+    <h2 data-l="th">สองระดับ สองตัวเปรียบเทียบ และความจำหนึ่งบิต</h2><h2 data-l="en">Two levels, two comparators and one bit of memory</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 18 แสดงข้างในของ 555: ตัวต้านทานเท่ากันสามตัวแบ่ง \(V_{CC}\) ให้ระดับ \(2V_{CC}/3\) และ \(V_{CC}/3\) ตัวเปรียบเทียบสองตัวเฝ้าขา 6 (threshold) และขา 2 (trigger) แล้วสั่งฟลิปฟล็อป ขาออก (ขา 3) และทรานซิสเตอร์คายประจุ (ขา 7) ทำตามฟลิปฟล็อปเสมอ</p><p>เคล็ดลับอยู่ระหว่างสองระดับ: เมื่อขาเข้าอยู่ระหว่าง \(V_{CC}/3\) กับ \(2V_{CC}/3\) ไม่มีตัวเปรียบเทียบตัวใดสั่ง ฟลิปฟล็อปจึงจำสถานะเดิมไว้ ความจำหนึ่งบิตนี้คือสิ่งที่ทำให้จับเวลาได้</p></div><div class="story-p" data-l="en"><p>Slide p. 18 shows the inside of the 555: three equal resistors split \(V_{CC}\) into the levels \(2V_{CC}/3\) and \(V_{CC}/3\); two comparators watch pin 6 (threshold) and pin 2 (trigger) and command a flip-flop; the output (pin 3) and the discharge transistor (pin 7) always follow the flip-flop.</p><p>The trick lies between the two levels: while the inputs sit between \(V_{CC}/3\) and \(2V_{CC}/3\) neither comparator speaks, so the flip-flop keeps its state. That one bit of memory is what makes timing possible.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 18, Timer circuit: the 555 timer is an example of a versatile timer IC; the 8-pin package (GND, TRIG, OUT, RESET, V_CC, DIS, THR, CTRL) and the internal block diagram with the three-resistor divider at 2/3 V_CC and 1/3 V_CC, two comparators, a flip-flop, the output stage and the discharge transistor (Figure 13.16).">
     <figcaption data-l="th">สไลด์หน้า 18: ขาและภายในของ 555 (รูป 13.16)</figcaption><figcaption data-l="en">Slide p. 18: the pins and the inside of the 555 (Fig. 13.16)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 19, Timer circuit, astable operation: the timer output is a repetitive square wave; the capacitor charges through R_A + R_B and discharges through R_B between 1/3 V_CC and 2/3 V_CC; f ≈ 1.44/((R_A + 2R_B)C), T_high ≈ 0.7(R_A + R_B)C, T_low ≈ 0.7 R_B C (Figure 13.17).">
-    <figcaption data-l="th">สไลด์หน้า 19: อะสเตเบิล (รูป 13.17, สมการ 13.3–13.6)</figcaption><figcaption data-l="en">Slide p. 19: astable operation (Fig. 13.17, Eqs. 13.3–13.6)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 20, Timer circuit example: determine the frequency and draw the output waveform for the circuit of the figure; V_CC = 5 V, R_A = 7.5 kΩ, R_B = 7.5 kΩ, C = 0.1 µF, 0.01 µF on pin 5 (Example 13.1, Figure 13.18a).">
-    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 13.1</figcaption><figcaption data-l="en">Slide p. 20: Example 13.1</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 21, Timer circuit, monostable operation: the timer output is a one-shot pulse; when an input is received it triggers a one-shot pulse; the time for which the output remains high is T_high = 1.1 R_A C; the circuit and the trigger and output waveforms (Figure 13.19).">
-    <figcaption data-l="th">สไลด์หน้า 21: โมโนสเตเบิล (รูป 13.19, สมการ 13.7)</figcaption><figcaption data-l="en">Slide p. 21: monostable operation (Fig. 13.19, Eq. 13.7)</figcaption></figure>
-  <figure class="slide"><img src="slides/ch8/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 22, Timer circuit example: determine the period of the output waveform for the circuit of the figure when triggered by a negative pulse; +5 V, R_A = 7.5 kΩ, C = 0.1 µF, 0.001 µF on pin 5 (Example 13.2, Figure 13.20).">
-    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ Example 13.2</figcaption><figcaption data-l="en">Slide p. 22: Example 13.2</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ โจทย์ 1: เลื่อนแรงดันที่ขา 6 และขา 2 แล้วดูว่าเมื่อใดฟลิปฟล็อปถูกเซ็ตหรือรีเซ็ต</p><p class="story-next" data-l="en">↓ Problem 1: move the voltages on pins 6 and 2 and see when the flip-flop is set or reset</p>
 </div>
-<div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 20 คือ Example 13.1 หน้า 22 คือ Example 13.2 ของตำรา · สไลด์หน้า 22 ถาม "period" ของขาออก แต่โมโนสเตเบิลให้พัลส์เดียว ตำราเฉลยเป็นความกว้างพัลส์ \(T_{high}\) = 0.825 ms · ตำราหน้า 747 (โปรแกรม 13.3) พิมพ์ "7.15 kΩ" ที่ถูกคือ 7.5 kΩ · สูตร 0.7 ของตำราคือ ln 2 = 0.693 ปัดเศษ ภาพจำลองวัดได้ 1.045 ms และ 0.526 ms (ต่างจาก 1.05/0.525 ไม่ถึง 1 %) · ในภาพจำลองทรานซิสเตอร์คายประจุเป็นสวิตช์ และขั้นขาออกเป็นแหล่งจ่าย 0/\(V_{CC}\) ที่ฟลิปฟล็อปสั่ง</div>
-<div class="warnbox" data-l="en"><b>The slides give no solutions</b>: p. 20 is Example 13.1, p. 22 Example 13.2. Slide p. 22 asks for the "period" of the output, but a one-shot gives a single pulse; the book answers with the pulse width \(T_{high}\) = 0.825 ms. The book's p. 747 (Program 13.3) prints "7.15 kΩ" for 7.5 kΩ. The book's 0.7 is ln 2 = 0.693 rounded; the simulation measures 1.045 ms and 0.526 ms (within 1 % of 1.05/0.525). In the simulation the discharge transistor is a switch and the output stage a 0/\(V_{CC}\) source driven by the flip-flop.</div>
-
-<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>อะสเตเบิล</a><a href="#ex1"><b>1</b>ภายใน</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
-<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Astable</a><a href="#ex1"><b>1</b>Inside</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>More practice</a></nav>
-
-<section class="prob" id="tA">
-  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">อะสเตเบิลปรับได้: ดู C ชาร์จและคายระหว่างสองระดับ</h2><h2 data-l="en">The adjustable astable: watch C charge and discharge between the two levels</h2>
-    <div class="src" data-l="th">สไลด์หน้า 19 · Boylestad หัวข้อ 13.4 (รูป 13.17–13.18)</div><div class="src" data-l="en">Slide p. 19 · Boylestad §13.4 (Figs. 13.17–13.18)</div></div></div>
-  <p class="lead" data-l="th">ตั้ง \(R_A\), \(R_B\), C และ \(V_{CC}\) กราฟล่างคือ \(v_C\) (ระหว่าง \(V_{CC}/3\) กับ \(2V_{CC}/3\)) และขาออก \(v_o\) ตามเวลา (ช้าลงให้เห็น 4 คาบใน 5 วินาที) แผงขวาเทียบ \(T_{high}\), \(T_{low}\), f ที่วัดได้กับสูตร ลองทำ \(R_A\) เล็กกว่า \(R_B\) มาก ๆ: รอบการทำงานเข้าใกล้ 50 % แต่ไม่ถึง สวิตช์ในกล่องคือทรานซิสเตอร์คายประจุ</p>
-  <p class="lead" data-l="en">Set \(R_A\), \(R_B\), C and \(V_{CC}\). The lower graph shows \(v_C\) (between \(V_{CC}/3\) and \(2V_{CC}/3\)) and the output \(v_o\) in time (slowed so that 4 periods take 5 s). The panel on the right compares the measured \(T_{high}\), \(T_{low}\), f with the formulas. Make \(R_A\) much smaller than \(R_B\): the duty cycle approaches 50 % but never reaches it. The switch in the box is the discharge transistor.</p>
-  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
-</section>
 
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.16: ภายใน 555 สองระดับ สองตัวเปรียบเทียบ</h2><h2 data-l="en">Fig. 13.16: inside the 555, two levels, two comparators</h2>
@@ -69,6 +59,38 @@
   <div class="duo"><div class="card sim"><canvas id="cv1"></canvas><div class="panel" id="ctl1"></div></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
 </section>
 
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 2 · ให้ตัวเก็บประจุแกว่งเอง</div><div class="story-k" data-l="en">Part 2 · Let the capacitor swing by itself</div>
+    <h2 data-l="th">อะสเตเบิล: ชาร์จผ่านสองตัว คายผ่านตัวเดียว</h2><h2 data-l="en">The astable: charge through two, discharge through one</h2>
+    <div class="story-p" data-l="th"><p>ต่อขา 6 และขา 2 เข้ากับตัวเก็บประจุตัวเดียว (สไลด์หน้า 19) C ชาร์จผ่าน \(R_A + R_B\) จนถึง \(2V_{CC}/3\) ฟลิปฟล็อปถูกรีเซ็ต ขาออกต่ำ ทรานซิสเตอร์คายประจุนำ C จึงคายผ่าน \(R_B\) ลงไปถึง \(V_{CC}/3\) แล้วถูกเซ็ตใหม่ วนไปไม่รู้จบ</p><p>ตัวเลข 0.7 ในสูตร \(T_{high} = 0.7(R_A + R_B)C\) และ \(T_{low} = 0.7R_BC\) คือ ln 2: ในแต่ละช่วง C เดินได้ครึ่งหนึ่งของระยะที่เหลือไปยังปลายทางพอดี และเพราะช่วงสูงชาร์จผ่านตัวต้านทานมากกว่า รอบการทำงานจึงเกิน 50 % เสมอ</p></div><div class="story-p" data-l="en"><p>Tie pins 6 and 2 to a single capacitor (slide p. 19). C charges through \(R_A + R_B\) up to \(2V_{CC}/3\); the flip-flop is reset, the output goes low, the discharge transistor conducts, and C discharges through \(R_B\) down to \(V_{CC}/3\), where it is set again, for ever.</p><p>The 0.7 in \(T_{high} = 0.7(R_A + R_B)C\) and \(T_{low} = 0.7R_BC\) is ln 2: in each interval C covers exactly half of the remaining way to where it is heading. Since the high interval charges through more resistance, the duty cycle always exceeds 50 %.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 19, Timer circuit, astable operation: the timer output is a repetitive square wave; the capacitor charges through R_A + R_B and discharges through R_B between 1/3 V_CC and 2/3 V_CC; f ≈ 1.44/((R_A + 2R_B)C), T_high ≈ 0.7(R_A + R_B)C, T_low ≈ 0.7 R_B C (Figure 13.17).">
+    <figcaption data-l="th">สไลด์หน้า 19: อะสเตเบิล (รูป 13.17, สมการ 13.3–13.6)</figcaption><figcaption data-l="en">Slide p. 19: astable operation (Fig. 13.17, Eqs. 13.3–13.6)</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th">ในภาพจำลองทรานซิสเตอร์คายประจุเป็นสวิตช์ และขั้นขาออกเป็นแหล่งจ่าย 0/\(V_{CC}\) ที่ฟลิปฟล็อปสั่ง</div><div class="warnbox" data-l="en">In the simulation the discharge transistor is a switch and the output stage a 0/\(V_{CC}\) source driven by the flip-flop.</div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ปรับ \(R_A\), \(R_B\), C แล้วดู \(v_C\) ไต่ขึ้นลงระหว่างเส้นประสองเส้น</p><p class="story-next" data-l="en">↓ Section A: adjust \(R_A\), \(R_B\), C and watch \(v_C\) climb and fall between the two dashed lines</p>
+</div>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">อะสเตเบิลปรับได้: ดู C ชาร์จและคายระหว่างสองระดับ</h2><h2 data-l="en">The adjustable astable: watch C charge and discharge between the two levels</h2>
+    <div class="src" data-l="th">สไลด์หน้า 19 · Boylestad หัวข้อ 13.4 (รูป 13.17–13.18)</div><div class="src" data-l="en">Slide p. 19 · Boylestad §13.4 (Figs. 13.17–13.18)</div></div></div>
+  <p class="lead" data-l="th">ตั้ง \(R_A\), \(R_B\), C และ \(V_{CC}\) กราฟล่างคือ \(v_C\) (ระหว่าง \(V_{CC}/3\) กับ \(2V_{CC}/3\)) และขาออก \(v_o\) ตามเวลา (ช้าลงให้เห็น 4 คาบใน 5 วินาที) แผงขวาเทียบ \(T_{high}\), \(T_{low}\), f ที่วัดได้กับสูตร ลองทำ \(R_A\) เล็กกว่า \(R_B\) มาก ๆ: รอบการทำงานเข้าใกล้ 50 % แต่ไม่ถึง สวิตช์ในกล่องคือทรานซิสเตอร์คายประจุ</p>
+  <p class="lead" data-l="en">Set \(R_A\), \(R_B\), C and \(V_{CC}\). The lower graph shows \(v_C\) (between \(V_{CC}/3\) and \(2V_{CC}/3\)) and the output \(v_o\) in time (slowed so that 4 periods take 5 s). The panel on the right compares the measured \(T_{high}\), \(T_{low}\), f with the formulas. Make \(R_A\) much smaller than \(R_B\): the duty cycle approaches 50 % but never reaches it. The switch in the box is the discharge transistor.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<div class="story">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 3 · ตัวอย่างของสไลด์</div><div class="story-k" data-l="en">Part 3 · The slide's example</div>
+    <h2 data-l="th">Example 13.1: ความถี่จากสามค่า</h2><h2 data-l="en">Example 13.1: a frequency from three values</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 20 ให้ \(R_A = R_B\) = 7.5 kΩ และ C = 0.1 µF ที่ \(V_{CC}\) = 5 V ก่อนเปิดเฉลย ลองเดาก่อน: ช่วงสูงกับช่วงต่ำ ช่วงไหนยาวกว่า และยาวกว่ากี่เท่า คำตอบซ่อนอยู่ในสัดส่วนของ \(R_A + R_B\) ต่อ \(R_B\)</p></div><div class="story-p" data-l="en"><p>Slide p. 20 gives \(R_A = R_B\) = 7.5 kΩ and C = 0.1 µF at \(V_{CC}\) = 5 V. Before opening the solution, guess: which interval is longer, the high or the low one, and by how much? The answer hides in the ratio of \(R_A + R_B\) to \(R_B\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 20, Timer circuit example: determine the frequency and draw the output waveform for the circuit of the figure; V_CC = 5 V, R_A = 7.5 kΩ, R_B = 7.5 kΩ, C = 0.1 µF, 0.01 µF on pin 5 (Example 13.1, Figure 13.18a).">
+    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 13.1</figcaption><figcaption data-l="en">Slide p. 20: Example 13.1</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 20 คือ Example 13.1 ของตำรา · สูตร 0.7 ของตำราคือ ln 2 = 0.693 ปัดเศษ ภาพจำลองวัดได้ 1.045 ms และ 0.526 ms (ต่างจาก 1.05/0.525 ไม่ถึง 1 %)</div><div class="warnbox" data-l="en"><b>The slides give no solutions</b>: p. 20 is the book's Example 13.1. The book's 0.7 is ln 2 = 0.693 rounded; the simulation measures 1.045 ms and 0.526 ms (within 1 % of 1.05/0.525).</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 2: คำนวณแล้วเทียบกับคาบที่ภาพจำลองวัดได้</p><p class="story-next" data-l="en">↓ Problem 2: work it out and compare with the period the simulation measures</p>
+</div>
+
 <section class="prob" id="ex2">
   <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 13.1: อะสเตเบิล 7.5 kΩ, 7.5 kΩ, 0.1 µF</h2><h2 data-l="en">Example 13.1: an astable with 7.5 kΩ, 7.5 kΩ, 0.1 µF</h2>
     <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad Example 13.1 (รูป 13.18)</div><div class="src" data-l="en">Slide p. 20 · Boylestad Example 13.1 (Fig. 13.18)</div></div></div>
@@ -77,6 +99,20 @@
   <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
   <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
 </section>
+
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 4 · ยิงครั้งเดียว</div><div class="story-k" data-l="en">Part 4 · One shot</div>
+    <h2 data-l="th">โมโนสเตเบิล: สะกิดหนึ่งครั้ง ได้พัลส์หนึ่งลูก</h2><h2 data-l="en">The one-shot: one nudge, one pulse</h2>
+    <div class="story-p" data-l="th"><p>ถอด \(R_B\) ออก แล้วให้ขา 2 รอรับทริกเกอร์ (สไลด์หน้า 21) เมื่อพัลส์ลบดึงขา 2 ต่ำกว่า \(V_{CC}/3\) ขาออกสูงทันที และปล่อย C ชาร์จผ่าน \(R_A\) จาก 0 V จนถึง \(2V_{CC}/3\) แล้วทุกอย่างกลับสู่ความสงบ ความกว้างพัลส์คือ \(T_{high} = 1.1R_AC\) โดย 1.1 คือ ln 3 เพราะ C ต้องเดินไปถึงสองในสามของทาง</p><p>วงจรนี้ใช้ทำตัวหน่วงเวลาหรือพัลส์ความกว้างคงที่ไม่ว่าทริกเกอร์จะสั้นแค่ไหน สไลด์หน้า 22 ตั้งโจทย์ด้วย \(R_A\) = 7.5 kΩ และ C = 0.1 µF</p></div><div class="story-p" data-l="en"><p>Remove \(R_B\) and let pin 2 wait for a trigger (slide p. 21). When a negative pulse pulls pin 2 below \(V_{CC}/3\), the output goes high at once and releases C to charge through \(R_A\) from 0 V up to \(2V_{CC}/3\); then everything settles again. The pulse width is \(T_{high} = 1.1R_AC\), where 1.1 is ln 3 because C must travel two thirds of the way.</p><p>The circuit makes delays and fixed-width pulses however short the trigger is. Slide p. 22 sets the problem with \(R_A\) = 7.5 kΩ and C = 0.1 µF.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch8/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 21, Timer circuit, monostable operation: the timer output is a one-shot pulse; when an input is received it triggers a one-shot pulse; the time for which the output remains high is T_high = 1.1 R_A C; the circuit and the trigger and output waveforms (Figure 13.19).">
+    <figcaption data-l="th">สไลด์หน้า 21: โมโนสเตเบิล (รูป 13.19, สมการ 13.7)</figcaption><figcaption data-l="en">Slide p. 21: monostable operation (Fig. 13.19, Eq. 13.7)</figcaption></figure>
+    <figure class="slide"><img src="slides/ch8/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 22, Timer circuit example: determine the period of the output waveform for the circuit of the figure when triggered by a negative pulse; +5 V, R_A = 7.5 kΩ, C = 0.1 µF, 0.001 µF on pin 5 (Example 13.2, Figure 13.20).">
+    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ Example 13.2</figcaption><figcaption data-l="en">Slide p. 22: Example 13.2</figcaption></figure>
+  </div>
+  <div class="warnbox" data-l="th"><b>สไลด์หน้า 22</b> ถาม "period" ของขาออก แต่โมโนสเตเบิลให้พัลส์เดียว ตำราเฉลยเป็นความกว้างพัลส์ \(T_{high}\) = 0.825 ms (หน้า 22 คือ Example 13.2) · ตำราหน้า 747 (โปรแกรม 13.3) พิมพ์ "7.15 kΩ" ที่ถูกคือ 7.5 kΩ</div><div class="warnbox" data-l="en"><b>Slide p. 22</b> asks for the "period" of the output, but a one-shot gives a single pulse; the book answers with the pulse width \(T_{high}\) = 0.825 ms (p. 22 is Example 13.2). The book's p. 747 (Program 13.3) prints "7.15 kΩ" for 7.5 kΩ.</div>
+  <p class="story-next" data-l="th">↓ โจทย์ 3: ภาพจำลองทริกเกอร์ทุก 3 ms วัดความกว้างพัลส์เทียบกับสูตร</p><p class="story-next" data-l="en">↓ Problem 3: the simulation triggers every 3 ms; compare the measured pulse width with the formula</p>
+</div>
 
 <section class="prob" id="ex3">
   <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 13.2: โมโนสเตเบิล 7.5 kΩ, 0.1 µF</h2><h2 data-l="en">Example 13.2: a one-shot with 7.5 kΩ, 0.1 µF</h2>

@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
-<link rel="stylesheet" href="assets/ee.css?v=3">
-<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
-<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
-<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script>
+<link rel="stylesheet" href="assets/ee.css?v=4">
+<script src="assets/stops.js?v=4"></script><script src="assets/shell.js?v=4"></script>
+<script src="assets/circuit.js?v=4"></script><script src="assets/alg.js?v=4"></script><script src="assets/lesson.js?v=4"></script><script src="assets/ch6.js?v=4"></script>
+<script src="assets/ch8.js?v=4"></script><script src="assets/ie.js?v=4"></script><script src="assets/ie1.js?v=4"></script><script src="assets/ie2.js?v=4"></script><script src="assets/ie3.js?v=4"></script><script src="assets/ie4.js?v=4"></script>
 </head>
 <body>
 <div class="wrap">
@@ -19,8 +19,8 @@
 <h1 data-l="th">วงจรไบแอสแบบมีตัวต้านทานอิมิตเตอร์ <span class="en">Emitter-stabilized bias</span></h1>
 <h1 data-l="en">Emitter-stabilized bias <span class="en">\(R_E\) reflected into the base loop as \((\beta + 1)R_E\)</span></h1>
 
-<p class="sub" data-l="th">สไลด์บทที่ 4 หน้า 14–19 เพิ่มตัวต้านทาน \(R_E\) ที่อิมิตเตอร์ของวงจรไบแอสคงที่ กระแสอิมิตเตอร์ \(I_E = (\beta + 1)I_B\) ไหลผ่าน \(R_E\) จึงมีแรงดัน \((\beta + 1)I_BR_E\) ปรากฏในวงเบส เหมือนมีตัวต้านทาน \((\beta + 1)R_E\) ต่ออนุกรมกับ \(R_B\): ยิ่ง β มาก กระแสเบสยิ่งถูกกดลง จุด Q จึงเสถียรกว่า หน้านี้มีภาพจำลองที่ปรับ \(R_E\) และ β ได้พร้อมกราฟความไวต่อ β (ส่วน A) Ex.3 กับการอิ่มตัว ตารางเทียบเมื่อ β เพิ่มสองเท่า (Example 4.5) การอ่านจุด Q จากลักษณะสมบัติจริง (Example 4.7) และแบบฝึกเพิ่ม</p>
-<p class="sub" data-l="en">Chapter 4 slides pp. 14–19. Add a resistor \(R_E\) at the emitter of the fixed-bias circuit: the emitter current \(I_E = (\beta + 1)I_B\) flows through \(R_E\), so a voltage \((\beta + 1)I_BR_E\) appears in the base loop, as if a resistor \((\beta + 1)R_E\) were in series with \(R_B\). The larger β, the more the base current is held down, and Q is more stable. This page has a circuit whose \(R_E\) and β you can change with its β-sensitivity graph (section A), Ex.3 with saturation, the comparison when β doubles (Example 4.5), reading Q off real characteristics (Example 4.7), and more practice.</p>
+<p class="sub" data-l="th">หน้า 4.1 จบด้วยข่าวร้าย: เปลี่ยนทรานซิสเตอร์เป็นตัวที่ β สูงขึ้นสองเท่า กระแสคอลเล็กเตอร์ของวงจรไบแอสคงที่ก็เพิ่มเป็นสองเท่าตาม และ β ก็เปลี่ยนได้เพียงเพราะอุณหภูมิเปลี่ยน ทางแก้แรกใช้ตัวต้านทานเพิ่มเพียงตัวเดียว คือ \(R_E\) ที่ขาอิมิตเตอร์ ซึ่งกดกระแสเบสลงเองเมื่อ β เพิ่ม หน้านี้ให้คุณเลื่อน \(R_E\) แล้วดูกราฟความไวต่อ β ราบลง (ส่วน A) แก้ Ex.3 กับการอิ่มตัว เทียบสองวงจรเมื่อ β เพิ่มสองเท่า (Example 4.5) อ่านจุด Q จากลักษณะสมบัติจริง (Example 4.7) และฝึกเพิ่ม (สไลด์บทที่ 4 หน้า 14–19 · Boylestad หัวข้อ 4.4)</p>
+<p class="sub" data-l="en">Page 4.1 ended with bad news: swap in a transistor with twice the β and the fixed-bias circuit's collector current doubles too, and β can change with nothing more than temperature. The first cure costs a single resistor, \(R_E\) in the emitter lead, which pushes the base current down by itself when β rises. On this page you move \(R_E\) and watch the β-sensitivity graph flatten (section A), solve Ex.3 with its saturation, compare the two circuits when β doubles (Example 4.5), read Q off real characteristics (Example 4.7), and practise more (chapter 4 slides, pp. 14–19; Boylestad section 4.4).</p>
 <div class="equation-box eqwrap">$$ I_B = \frac{V_{CC} - V_{BE}}{R_B + (\beta + 1)R_E} $$ $$ R_i = (\beta + 1)R_E $$ $$ V_{CE} = V_{CC} - I_C(R_C + R_E) $$ $$ V_E = I_ER_E,\quad V_C = V_{CC} - I_CR_C,\quad V_B = V_{BE} + V_E $$ $$ I_{C\text{sat}} = \frac{V_{CC}}{R_C + R_E} $$</div>
 
 <section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
@@ -36,19 +36,35 @@
   <li><b>Stability</b>: when β doubles, \(I_B\) falls by itself because β is in the denominator; \(I_C\) rises by about 81 % instead of 100 %, and \(V_{CE}\) changes by 35 % instead of 76 % (Example 4.5).</li>
   <li><b>Saturation and the load line</b>: \(I_{C\text{sat}} = V_{CC}/(R_C + R_E)\), lower than fixed bias with the same \(R_C\); the load line runs from \((V_{CC}, 0)\) to \((0, V_{CC}/(R_C + R_E))\) (slides pp. 18–19).</li></ul></section>
 
-<div class="slides"><figure class="slide"><img src="slides/ch4/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 14, Emitter-Stabilized Bias Circuit: the dc bias network of the figure contains an emitter resistor to improve the stability level over that of the fixed-bias configuration; the analysis will be performed by first examining the base–emitter loop and then using the results to investigate the collector–emitter loop. Figure 4.17: V_CC, R_B, R_C, C_1, C_2, the transistor and R_E to ground, with I_B, I_C and I_E marked.">
-  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 14: วงจรไบแอสที่มี \(R_E\) (รูป 4.17) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 14: the bias circuit with \(R_E\) (Fig. 4.17) · tap to enlarge</figcaption></figure></div>
+
 
 <nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ผลของ \(R_E\)</a><a href="#ex1"><b>1</b>Ex.3</a><a href="#ex2"><b>2</b>β เพิ่มสองเท่า</a><a href="#ex3"><b>3</b>Example 4.7</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
 <nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>What \(R_E\) does</a><a href="#ex1"><b>1</b>Ex.3</a><a href="#ex2"><b>2</b>β doubled</a><a href="#ex3"><b>3</b>Example 4.7</a><a href="#tC"><b>C</b>More practice</a></nav>
 
+<div class="story n2">
+  <div class="story-t"><div class="story-k" data-l="th">ตอนที่ 1 · ตัวต้านทานที่ต่อต้านเอง</div><div class="story-k" data-l="en">Part 1 · A resistor that pushes back</div>
+    <h2 data-l="th">ทำไม \(R_E\) ตัวเดียวทำให้จุด Q นิ่งขึ้น</h2><h2 data-l="en">Why one \(R_E\) steadies the Q-point</h2>
+    <div class="story-p" data-l="th"><p>สไลด์หน้า 14 คือวงจรไบแอสคงที่เดิมที่เติม \(R_E\) ระหว่างอิมิตเตอร์กับกราวด์ (รูป 4.17) เพื่อให้จุด Q เสถียรกว่าเดิม กระแสอิมิตเตอร์ทั้งหมด \(I_E = (\beta + 1)I_B\) ไหลผ่านตัวนี้ แรงดันอิมิตเตอร์จึงยกขึ้น และส่วนที่ยกขึ้นนี้ไปหักออกจากแรงดันที่ดันกระแสเข้าเบส</p><p>เขียนกฎแรงดันรอบวงเบส–อิมิตเตอร์ (สไลด์หน้า 15) แล้วจะเห็นว่าสมการของ \(I_B\) ต่างจากไบแอสคงที่เพียงพจน์ \((\beta + 1)R_E\) ในตัวส่วน มองจากเบส \(R_E\) ดูใหญ่ขึ้น \((\beta + 1)\) เท่า และเพราะ β อยู่ในตัวส่วน ทรานซิสเตอร์ตัวที่ β สูงกว่าจึงถูกกดกระแสเบสลงมากกว่าเอง</p></div><div class="story-p" data-l="en"><p>Slide p. 14 is the old fixed-bias circuit with \(R_E\) added between the emitter and ground (Fig. 4.17) to make Q more stable. The whole emitter current \(I_E = (\beta + 1)I_B\) flows through it, so the emitter voltage rises, and that rise is subtracted from the voltage that drives current into the base.</p><p>Write the voltage law round the base–emitter loop (slide p. 15) and the equation for \(I_B\) differs from fixed bias only by the term \((\beta + 1)R_E\) in the denominator. Seen from the base, \(R_E\) looks \((\beta + 1)\) times larger, and because β sits in the denominator, a transistor with a higher β gets its base current pushed down harder, all by itself.</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 14, Emitter-Stabilized Bias Circuit: the dc bias network of the figure contains an emitter resistor to improve the stability level over that of the fixed-bias configuration; the analysis will be performed by first examining the base–emitter loop and then using the results to investigate the collector–emitter loop. Figure 4.17: V_CC, R_B, R_C, C_1, C_2, the transistor and R_E to ground, with I_B, I_C and I_E marked.">
+  <figcaption data-l="th">สไลด์บทที่ 4 หน้า 14: วงจรไบแอสที่มี \(R_E\) (รูป 4.17) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Chapter 4 slide p. 14: the bias circuit with \(R_E\) (Fig. 4.17) · tap to enlarge</figcaption></figure>
+    <figure class="slide"><img src="slides/ch4/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 15, Emitter-Stabilized Bias Circuit, base–emitter loop: writing Kirchhoff's voltage law around the indicated loop in the clockwise direction results in I_B = (V_CC − V_BE)/(R_B + (β + 1) R_E). Note that the only difference between this equation for I_B and that obtained for the fixed-bias configuration is the term (β + 1) R_E. Figure 4.19: the loop through V_CC, R_B, the base–emitter junction and R_E.">
+    <figcaption data-l="th">สไลด์หน้า 15: วงเบส–อิมิตเตอร์ (รูป 4.19) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: the base–emitter loop (Fig. 4.19) · tap to enlarge</figcaption></figure>
+  </div>
+  <p class="story-next" data-l="th">↓ ส่วน A: ดูว่า \(R_E\) ทำให้กราฟความไวต่อ β ราบลงได้แค่ไหน และต้องจ่ายอะไรแลก</p><p class="story-next" data-l="en">↓ Section A: see how far \(R_E\) flattens the β-sensitivity graph, and what it costs</p>
+</div>
+
 <section class="prob" id="tA">
   <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ผลของตัวต้านทานอิมิตเตอร์</h2><h2 data-l="en">What the emitter resistor does</h2>
     <div class="src" data-l="th">สไลด์หน้า 15–16 · Boylestad หัวข้อ 4.4 (รูป 4.18–4.22)</div><div class="src" data-l="en">Slides pp. 15–16 · Boylestad, section 4.4 (Figs. 4.18–4.22)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch4/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 15, Emitter-Stabilized Bias Circuit, base–emitter loop: writing Kirchhoff's voltage law around the indicated loop in the clockwise direction results in I_B = (V_CC − V_BE)/(R_B + (β + 1) R_E). Note that the only difference between this equation for I_B and that obtained for the fixed-bias configuration is the term (β + 1) R_E. Figure 4.19: the loop through V_CC, R_B, the base–emitter junction and R_E.">
-    <figcaption data-l="th">สไลด์หน้า 15: วงเบส–อิมิตเตอร์ (รูป 4.19) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 15: the base–emitter loop (Fig. 4.19) · tap to enlarge</figcaption></figure>
+  <div class="story in">
+  <div class="story-t"><div class="story-p" data-l="th"><p>สไลด์หน้า 16 ทำวงคอลเล็กเตอร์ต่อ: \(R_C\) กับ \(R_E\) แบ่งแรงดันแหล่งจ่ายกัน \(V_{CE} = V_{CC} - I_C(R_C + R_E)\) แล้วแรงดันเทียบกราวด์หาได้จาก \(V_E = I_ER_E\), \(V_C = V_{CC} - I_CR_C\) และ \(V_B = V_{BE} + V_E\) ระหว่างลองภาพจำลอง จับตาแถว \(V_E\) ในแผงค่าไว้: ยิ่ง \(R_E\) ใหญ่ มันยิ่งกินแรงดันไปจาก \(V_{CE}\)</p></div><div class="story-p" data-l="en"><p>Slide p. 16 finishes the collector loop: \(R_C\) and \(R_E\) now share the supply, \(V_{CE} = V_{CC} - I_C(R_C + R_E)\), and the voltages to ground follow from \(V_E = I_ER_E\), \(V_C = V_{CC} - I_CR_C\) and \(V_B = V_{BE} + V_E\). As you try the simulation, keep an eye on the \(V_E\) row of the readings: the larger \(R_E\), the more of the supply it takes from \(V_{CE}\).</p></div></div>
+  <div class="story-f">
     <figure class="slide"><img src="slides/ch4/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 16, Emitter-Stabilized Bias Circuit, collector–emitter loop: the collector–emitter loop is redrawn in the figure; writing Kirchhoff's voltage law for the indicated loop in the clockwise direction will result in V_CE = V_CC − I_C (R_C + R_E). The single-subscript voltages: V_E = I_E R_E, V_C = V_CE + V_E, V_C = V_CC − I_C R_C, V_B = V_CC − I_B R_B, V_B = V_BE + V_E.">
-    <figcaption data-l="th">สไลด์หน้า 16: วงคอลเล็กเตอร์–อิมิตเตอร์และแรงดันตัวห้อยเดี่ยว (รูป 4.22) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: the collector–emitter loop and the single-subscript voltages (Fig. 4.22) · tap to enlarge</figcaption></figure></div>
+    <figcaption data-l="th">สไลด์หน้า 16: วงคอลเล็กเตอร์–อิมิตเตอร์และแรงดันตัวห้อยเดี่ยว (รูป 4.22) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 16: the collector–emitter loop and the single-subscript voltages (Fig. 4.22) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <p class="lead" data-l="th">เริ่มจากวงจรของ Ex.3 เลื่อน \(R_E\) ลงจนเป็น 0 แล้วกราฟล่าง (\(I_C\) เทียบกับ β) กลับเป็นเส้นตรงของวงจรไบแอสคงที่ เพิ่ม \(R_E\) แล้วเส้นโค้งราบลง: จุด Q ขยับน้อยลงเมื่อ β เปลี่ยน แต่ \(I_{C\text{sat}}\) และ \(V_{CE}\) ก็ลดลงด้วย เพราะ \(R_E\) กินแรงดัน \(V_E\) ไปส่วนหนึ่ง</p>
   <p class="lead" data-l="en">Start from the circuit of Ex.3. Move \(R_E\) down to 0 and the lower graph (\(I_C\) against β) becomes the straight line of fixed bias; raise \(R_E\) and the curve flattens: Q moves less when β changes, but \(I_{C\text{sat}}\) and \(V_{CE}\) also fall, because \(R_E\) takes a share \(V_E\) of the supply.</p>
   <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
@@ -57,12 +73,18 @@
 <section class="prob" id="ex1">
   <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Ex.3: วงจรไบแอสอิมิตเตอร์ และการอิ่มตัว</h2><h2 data-l="en">Ex.3: an emitter-bias circuit, and its saturation</h2>
     <div class="src" data-l="th">สไลด์หน้า 17–19 · Boylestad Examples 4.4, 4.6 (รูป 4.23–4.25)</div><div class="src" data-l="en">Slides pp. 17–19 · Boylestad Examples 4.4, 4.6 (Figs. 4.23–4.25)</div></div></div>
-  <div class="slides"><figure class="slide"><img src="slides/ch4/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 17, Emitter-Stabilized Bias Circuit, Ex.3: for the emitter bias network of the figure, determine (a) I_B, (b) I_C, (c) V_CE, (d) V_C, (e) V_E, (f) V_B, (g) V_BC. The figure: +20 V, R_B = 430 kΩ, R_C = 2 kΩ, R_E = 1 kΩ with a 40 µF bypass capacitor, 10 µF coupling capacitors, β = 50.">
+  <div class="story in n3">
+  <div class="story-t"><div class="story-p" data-l="th"><p>Ex.3 (สไลด์หน้า 17) ใช้ \(R_E\) = 1 kΩ คู่กับ \(R_B\) = 430 kΩ ก่อนเริ่มคำนวณ ลองคิดว่า \(R_E\) ตัวนี้ดูใหญ่เท่าใดเมื่อมองจากเบส แล้วเทียบกับ \(R_B\) สไลด์หน้า 18–19 ถามต่อเรื่องการอิ่มตัว: ลัดวงจรคอลเล็กเตอร์กับอิมิตเตอร์ แล้ว \(R_C\) กับ \(R_E\) จะอนุกรมกันคร่อม \(V_{CC}\) ระดับอิ่มตัวจึงต่ำกว่าวงจรไบแอสคงที่ที่ใช้ \(R_C\) เท่ากัน และเส้นโหลดลากจาก \(V_{CC}/(R_C + R_E)\) ถึง \(V_{CC}\)</p></div><div class="story-p" data-l="en"><p>Ex.3 (slide p. 17) pairs \(R_E\) = 1 kΩ with \(R_B\) = 430 kΩ. Before you calculate, work out how large that \(R_E\) looks from the base and compare it with \(R_B\). Slides pp. 18–19 then ask about saturation: short the collector to the emitter and \(R_C\), \(R_E\) sit in series across \(V_{CC}\), so the saturation level is lower than for fixed bias with the same \(R_C\), and the load line runs from \(V_{CC}/(R_C + R_E)\) to \(V_{CC}\).</p></div></div>
+  <div class="story-f">
+    <figure class="slide"><img src="slides/ch4/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 17, Emitter-Stabilized Bias Circuit, Ex.3: for the emitter bias network of the figure, determine (a) I_B, (b) I_C, (c) V_CE, (d) V_C, (e) V_E, (f) V_B, (g) V_BC. The figure: +20 V, R_B = 430 kΩ, R_C = 2 kΩ, R_E = 1 kΩ with a 40 µF bypass capacitor, 10 µF coupling capacitors, β = 50.">
     <figcaption data-l="th">สไลด์หน้า 17: Ex.3 · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 17: Ex.3 · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch4/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 18, Emitter-Stabilized Bias Circuit, saturation level: apply a short circuit between the collector–emitter terminals as shown in the figure and calculate the resulting collector current, I_Csat = V_CC/(R_C + R_E). The addition of the emitter resistor reduces the collector saturation level below that obtained with a fixed-bias configuration using the same collector resistor.">
     <figcaption data-l="th">สไลด์หน้า 18: ระดับอิ่มตัว · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 18: the saturation level · tap to enlarge</figcaption></figure>
     <figure class="slide"><img src="slides/ch4/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 4 slide 19, Emitter-Stabilized Bias Circuit, load-line analysis: the load-line analysis of the emitter-bias network is only slightly different from that encountered for the fixed-bias configuration. V_CE = V_CC at I_C = 0 mA, I_C = V_CC/(R_C + R_E) at V_CE = 0 V. Figure 4.25: the load line from V_CC/(R_C + R_E) to V_CC with the Q-point on the I_BQ curve.">
-    <figcaption data-l="th">สไลด์หน้า 19: เส้นโหลด (รูป 4.25) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the load line (Fig. 4.25) · tap to enlarge</figcaption></figure></div>
+    <figcaption data-l="th">สไลด์หน้า 19: เส้นโหลด (รูป 4.25) · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 19: the load line (Fig. 4.25) · tap to enlarge</figcaption></figure>
+  </div>
+</div>
+
   <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 20 V, \(R_B\) = 430 kΩ, \(R_C\) = 2 kΩ, \(R_E\) = 1 kΩ, β = 50 จงหา (a) \(I_B\) (b) \(I_C\) (c) \(V_{CE}\) (d) \(V_C\) (e) \(V_E\) (f) \(V_B\) (g) \(V_{BC}\) แล้วหากระแสอิ่มตัว</p></div>
   <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 20 V, \(R_B\) = 430 kΩ, \(R_C\) = 2 kΩ, \(R_E\) = 1 kΩ, β = 50. Determine (a) \(I_B\) (b) \(I_C\) (c) \(V_{CE}\) (d) \(V_C\) (e) \(V_E\) (f) \(V_B\) (g) \(V_{BC}\), then the saturation current.</p></div>
   <p class="lead" data-l="th">แผงข้างภาพแสดงเส้นโหลดกับจุด Q และสลับเป็นแรงดันของโหนดในขั้นที่ 3–4 <b>ลองตอบก่อน</b></p>
@@ -98,19 +120,19 @@
 
 <section class="notes" data-l="th">
   <div class="card"><h3>ลองทำดู 1 — \(R_E\) กับความชันของกราฟ β</h3>
-    <ol><li>ส่วน A ตั้ง β = 50 แล้วเลื่อน \(R_E\) จาก 0 ถึง 5 kΩ: ที่ 0 กราฟล่างเป็นเส้นตรง (ไบแอสคงที่) ที่ 1 kΩ โค้งลง ที่ 5 kΩ แทบราบ แต่ \(I_C\) เหลือไม่ถึง 1 mA และ \(V_{CE}\) ต่ำลง</li>
+    <ol><li>ส่วน A ตั้ง β = 50 แล้วเลื่อน \(R_E\) จาก 0 ถึง 5 kΩ: ที่ 0 กราฟล่างเป็นเส้นตรง (ไบแอสคงที่) ที่ 1 kΩ โค้งลง ที่ 5 kΩ แทบราบ แต่ \(I_C\) ลดเหลือราว 1.4 mA และ \(V_{CE}\) ต่ำลงเหลือราว 10 V</li>
     <li>คง \(R_E\) = 1 kΩ แล้วลด \(R_B\): จุด Q ไต่ขึ้นตามเส้นโหลดจนอิ่มตัวที่ \(I_{C\text{sat}}\) = 6.67 mA (ไม่ใช่ 10 mA ของวงจรที่ไม่มี \(R_E\))</li></ol></div>
   <div class="card"><h3>ลองทำดู 2 — ความต้านทานสะท้อน</h3>
-    <ol><li>ข้อ 1: \((\beta + 1)R_E\) = 51 kΩ เทียบกับ \(R_B\) = 430 kΩ ยังเล็ก วงจรจึงยังไวต่อ β อยู่พอสมควร (81 %) ลองคิดว่าถ้า \(R_B\) = 100 kΩ และ \(R_E\) = 5 kΩ การเปลี่ยน β จาก 50 เป็น 100 จะเปลี่ยน \(I_C\) เพียง 40 %</li>
+    <ol><li>ข้อ 1: \((\beta + 1)R_E\) = 51 kΩ เทียบกับ \(R_B\) = 430 kΩ ยังเล็ก วงจรจึงยังไวต่อ β อยู่พอสมควร (81 %) ลองคิดว่าถ้า \(R_E\) = 5 kΩ (คง \(R_B\) = 430 kΩ) การเปลี่ยน β จาก 50 เป็น 100 จะเปลี่ยน \(I_C\) เพียงราว 46 % (1.41 → 2.06 mA)</li>
     <li>ข้อ 3: ค่ามาตรฐาน 910 kΩ ตรงพอดี ถ้าเป็น 1 MΩ \(I_B\) จะเหลือ 13.9 µA</li></ol>
     <div class="book">สไลด์บทที่ 4 หน้า 14–19 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 4.4 (Examples 4.4–4.7, รูป 4.17–4.27)</div></div>
 </section>
 <section class="notes" data-l="en">
   <div class="card"><h3>Try this 1 — \(R_E\) and the slope of the β graph</h3>
-    <ol><li>In section A set β = 50 and move \(R_E\) from 0 to 5 kΩ: at 0 the lower graph is a straight line (fixed bias), at 1 kΩ it bends over, at 5 kΩ it is almost flat, but \(I_C\) is under 1 mA and \(V_{CE}\) is lower.</li>
+    <ol><li>In section A set β = 50 and move \(R_E\) from 0 to 5 kΩ: at 0 the lower graph is a straight line (fixed bias), at 1 kΩ it bends over, at 5 kΩ it is almost flat, but \(I_C\) falls to about 1.4 mA and \(V_{CE}\) to about 10 V.</li>
     <li>Hold \(R_E\) = 1 kΩ and lower \(R_B\): Q climbs the load line until it saturates at \(I_{C\text{sat}}\) = 6.67 mA (not the 10 mA of the circuit without \(R_E\)).</li></ol></div>
   <div class="card"><h3>Try this 2 — the reflected resistance</h3>
-    <ol><li>Problem 1: \((\beta + 1)R_E\) = 51 kΩ is still small next to \(R_B\) = 430 kΩ, so the circuit is still fairly sensitive to β (81 %). With \(R_B\) = 100 kΩ and \(R_E\) = 5 kΩ, β from 50 to 100 would change \(I_C\) by only 40 %.</li>
+    <ol><li>Problem 1: \((\beta + 1)R_E\) = 51 kΩ is still small next to \(R_B\) = 430 kΩ, so the circuit is still fairly sensitive to β (81 %). With \(R_E\) = 5 kΩ (and \(R_B\) still 430 kΩ), β from 50 to 100 changes \(I_C\) by only about 46 % (1.41 → 2.06 mA).</li>
     <li>Problem 3: the standard 910 kΩ is exact; with 1 MΩ, \(I_B\) would fall to 13.9 µA.</li></ol>
     <div class="book">Chapter 4 slides pp. 14–19 · Boylestad &amp; Nashelsky, 11th ed., section 4.4 (Examples 4.4–4.7, Figs. 4.17–4.27)</div></div>
 </section>
