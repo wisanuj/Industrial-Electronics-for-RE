@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="7.1 — The Op-Amp: Modes and CMRR">7.1 — ออปแอมป์: โหมดการทำงานและ CMRR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ออปแอมป์: บทนำ โหมดการทำงาน และ CMRR <span class="en">The operational amplifier: modes and CMRR</span></h1>
+<h1 data-l="en">The operational amplifier: modes and CMRR <span class="en">A very high-gain differential amplifier that rejects what both inputs share</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 1 หน้า 3–13 ออปแอมป์ (operational amplifier, op-amp) คือวงจรขยายผลต่างที่มีอัตราขยายสูงมาก ความต้านทานขาเข้าสูง และความต้านทานขาออกต่ำ มันขยาย<b>ผลต่าง</b>ของสัญญาณที่ขั้ว + กับขั้ว − อย่างมหาศาล แต่ขยายส่วนที่<b>เหมือนกัน</b>ทั้งสองขั้วเพียงเล็กน้อย อัตราส่วนของสองอัตราขยายนี้คือ CMRR หน้านี้มีออปแอมป์ที่ป้อนสัญญาณได้ทั้งสองขั้ว (ส่วน A) การทำงานทั้งสี่โหมด (ข้อ 1) การวัด \(A_d\), \(A_c\) ของ Example 10.21 (ข้อ 2) และ Example 10.22 ที่แสดงว่า CMRR สูงทำอะไรได้ (ข้อ 3)</p>
+<p class="sub" data-l="en">Chapter 7 slide set I, pp. 3–13. An operational amplifier (op-amp) is a differential amplifier with a very high gain, a high input resistance and a low output resistance. It amplifies the <b>difference</b> between its + and − inputs enormously, but whatever is <b>common</b> to both inputs only slightly; the ratio of the two gains is the CMRR. This page has an op-amp that can be driven at both inputs (section A), the four modes of operation (problem 1), the measurement of \(A_d\) and \(A_c\) in Example 10.21 (problem 2), and Example 10.22, which shows what a high CMRR buys (problem 3).</p>
+<div class="equation-box eqwrap">$$ V_d = V_{i1} - V_{i2},\qquad V_c = \tfrac{1}{2}(V_{i1} + V_{i2}) $$ $$ V_o = A_dV_d + A_cV_c $$ $$ \text{CMRR} = \frac{A_d}{A_c},\qquad \text{CMRR (log)} = 20\log_{10}\frac{A_d}{A_c}\ \text{(dB)} $$ $$ V_o = A_dV_d\left(1 + \frac{1}{\text{CMRR}}\frac{V_c}{V_d}\right) $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ออปแอมป์</b> (สไลด์หน้า 3, 13): วงจรขยายผลต่างหลายขั้นในชิปเดียว อัตราขยายแรงดันวงเปิดหลายแสน ความต้านทานขาเข้า \(R_i\) หลายเมกะโอห์ม ความต้านทานขาออก \(R_o\) ต่ำกว่า 100 Ω ขาออกเท่ากับอัตราขยายคูณแรงดันระหว่างขั้วเข้า และจ่ายได้ไม่เกินแรงดันเลี้ยง (\(\pm V_{sat}\) ≈ ±13 V ในภาพจำลอง)</li>
+  <li><b>ขาเข้าเดี่ยว</b> (หน้า 4, รูป 10.2): สัญญาณเข้าขั้ว + ขาออกเฟสเดียวกัน เข้าขั้ว − ขาออกกลับเฟส · <b>ขาเข้าคู่</b> (หน้า 5, รูป 10.3): ขยายผลต่าง \(V_{i1} - V_{i2}\) · <b>โหมดร่วม</b> (หน้า 6): สัญญาณเดียวกันทั้งสองขั้วหักล้างกัน ในอุดมคติขาออกเป็นศูนย์</li>
+  <li><b>แยกสัญญาณใด ๆ เป็นสองส่วน</b> (หน้า 8–9, สมการ 10.26–10.28): ส่วนผลต่าง \(V_d\) และส่วนร่วม \(V_c\) (ค่าเฉลี่ย) แล้ว \(V_o = A_dV_d + A_cV_c\) ขั้นตอนวัด: ป้อน \(V_{i1} = -V_{i2}\) = 0.5 V ได้ \(V_o = A_d\) ป้อน \(V_{i1} = V_{i2}\) = 1 V ได้ \(V_o = A_c\)</li>
+  <li><b>CMRR</b> (หน้า 10–12, สมการ 10.29–10.31): \(A_d/A_c\) หรือ 20 log ในเดซิเบล ยิ่งสูงยิ่งดี (อุดมคติอนันต์) Example 10.21: 8000/12 = 666.7 = 56.48 dB · สมการ 10.31 บอกว่าเมื่อ CMRR สูง ขาออก ≅ \(A_dV_d\) ส่วนร่วม (สัญญาณรบกวนที่เข้าทั้งสองสาย) ถูกปฏิเสธ</li>
+  <li><b>สัญญาณเล็กมาก</b>: ด้วย \(A_d\) หลักพันถึงแสน ขาเข้าเพียงมิลลิโวลต์ก็ทำให้ขาออกชนราง การใช้งานจริงจึงต้องป้อนกลับ (หน้า 7.2 เป็นต้นไป) หน้านี้ใช้ออปแอมป์แบบวงเปิดเพื่อดูอัตราขยายล้วน ๆ</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The op-amp</b> (slides pp. 3, 13): several differential-amplifier stages on one chip; an open-loop voltage gain of hundreds of thousands, an input resistance \(R_i\) of megohms, an output resistance \(R_o\) below 100 Ω. The output is the gain times the voltage between the input terminals, and it cannot exceed the supply (\(\pm V_{sat}\) ≈ ±13 V in the simulation).</li>
+  <li><b>Single-ended input</b> (p. 4, Fig. 10.2): a signal at the + input gives an in-phase output, at the − input an inverted one. <b>Double-ended input</b> (p. 5, Fig. 10.3): the difference \(V_{i1} - V_{i2}\) is amplified. <b>Common mode</b> (p. 6): the same signal at both inputs cancels; ideally the output is zero.</li>
+  <li><b>Any pair of signals splits into two parts</b> (pp. 8–9, Eqs. 10.26–10.28): a difference part \(V_d\) and a common part \(V_c\) (the average), with \(V_o = A_dV_d + A_cV_c\). To measure: apply \(V_{i1} = -V_{i2}\) = 0.5 V and read \(V_o = A_d\); apply \(V_{i1} = V_{i2}\) = 1 V and read \(V_o = A_c\).</li>
+  <li><b>CMRR</b> (pp. 10–12, Eqs. 10.29–10.31): \(A_d/A_c\), or 20 log of it in decibels; the higher the better (ideally infinite). Example 10.21: 8000/12 = 666.7 = 56.48 dB. Eq. 10.31 says that with a high CMRR the output ≅ \(A_dV_d\): the common part (noise picked up by both leads) is rejected.</li>
+  <li><b>Tiny signals</b>: with \(A_d\) in the thousands to hundreds of thousands, a few millivolts at the input drive the output to the rails, so practical circuits use feedback (page 7.2 onwards). This page runs the op-amp open-loop to show the bare gains.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch7a/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 3, Introduction: an operational amplifier, or op-amp, is a very high gain differential amplifier with high input impedance and low output impedance; typical uses are voltage amplitude changes (amplitude and polarity), oscillators, filter circuits and many instrumentation circuits; an op-amp contains a number of differential amplifier stages to achieve a very high voltage gain.">
+    <figcaption data-l="th">สไลด์หน้า 3: ออปแอมป์คืออะไร · แตะรูปเพื่อขยาย</figcaption><figcaption data-l="en">Slide p. 3: what an op-amp is · tap to enlarge</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 4, Single-Ended Input: the input signal is connected to one input with the other input connected to ground; the input applied to the plus input (minus input at ground) results in an output of the same polarity as the input; an input applied to the minus input gives an output opposite in phase to the applied signal. Figure 10.2 with the two cases.">
+    <figcaption data-l="th">สไลด์หน้า 4: ขาเข้าเดี่ยวที่ขั้ว + และที่ขั้ว − (รูป 10.2)</figcaption><figcaption data-l="en">Slide p. 4: single-ended input at + and at − (Fig. 10.2)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 5, Double-Ended (Differential) Input: an input V_d applied between the two input terminals (neither input at ground) with the amplified output in phase with that applied between the plus and minus inputs; the same action results when two separate signals are applied to the inputs, the difference signal being V_i1 − V_i2. Figure 10.3.">
+    <figcaption data-l="th">สไลด์หน้า 5: ขาเข้าคู่ (รูป 10.3)</figcaption><figcaption data-l="en">Slide p. 5: double-ended input (Fig. 10.3)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 6, Common-Mode Operation: when the same input signals are applied to both inputs, common-mode operation results; ideally the two inputs are equally amplified and, since they result in opposite-polarity signals at the output, these cancel, resulting in 0 V output; practically a small output signal results. Figure 10.4.">
+    <figcaption data-l="th">สไลด์หน้า 6: โหมดร่วม (รูป 10.4)</figcaption><figcaption data-l="en">Slide p. 6: common-mode operation (Fig. 10.4)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 7, Differential and Common-Mode Operation: one of the more important features of a differential circuit connection is the circuit's ability to greatly amplify signals that are opposite at the two inputs while only slightly amplifying signals that are common to both inputs; the op-amp provides an output component due to the amplification of the difference of the signals and a component due to the signals common to both inputs; the common-mode rejection is described by the common-mode rejection ratio (CMRR).">
+    <figcaption data-l="th">สไลด์หน้า 7: ขยายผลต่างมาก ขยายส่วนร่วมน้อย</figcaption><figcaption data-l="en">Slide p. 7: the difference amplified, the common part barely</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 8, Differential Inputs: when separate inputs are applied, the resulting difference signal is the difference between the two inputs, V_d = V_i1 − V_i2; Common Inputs: when both input signals are the same, a common signal element can be defined as the average of the sum of the two signals, V_c = ½(V_i1 + V_i2).">
+    <figcaption data-l="th">สไลด์หน้า 8: \(V_d\) และ \(V_c\) (สมการ 10.26–10.27)</figcaption><figcaption data-l="en">Slide p. 8: \(V_d\) and \(V_c\) (Eqs. 10.26–10.27)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 9, Output Voltage: since any signals applied to an op-amp in general have both in-phase and out-of-phase components, the resulting output can be expressed as V_o = A_d V_d + A_c V_c, where V_d is the difference input voltage, V_c the common input voltage, A_d the differential gain and A_c the common-mode gain of the amplifier.">
+    <figcaption data-l="th">สไลด์หน้า 9: \(V_o = A_dV_d + A_cV_c\) (สมการ 10.28)</figcaption><figcaption data-l="en">Slide p. 9: \(V_o = A_dV_d + A_cV_c\) (Eq. 10.28)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 10, Common-Mode Rejection Ratio: having obtained A_d and A_c, the common-mode rejection ratio (CMRR) is defined by CMRR = A_d/A_c; the value of CMRR can also be expressed in logarithmic terms as CMRR (log) = 20 log10 (A_d/A_c) dB.">
+    <figcaption data-l="th">สไลด์หน้า 10: CMRR (สมการ 10.29–10.30)</figcaption><figcaption data-l="en">Slide p. 10: CMRR (Eqs. 10.29–10.30)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 11, Common-Mode Rejection Ratio: calculate the CMRR for the circuit measurements shown in the figure. Differential mode: V_i1 = 0.5 mV, V_i2 = −0.5 mV, V_d = 1 mV, V_o = 8 V. Common mode: V_i1 = V_i2 = 1 mV, V_c = 1 mV, V_o = 12 mV (Figure 10.52).">
+    <figcaption data-l="th">สไลด์หน้า 11: โจทย์ Example 10.21 (รูป 10.52)</figcaption><figcaption data-l="en">Slide p. 11: Example 10.21 (Fig. 10.52)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 12, Common-Mode Rejection Ratio: the desired operation has A_d very large with A_c very small; the signal components of opposite polarity appear greatly amplified at the output, whereas in-phase components mostly cancel so that the common-mode gain A_c is very small; ideally the CMRR is infinite, practically the larger the better; V_o = A_d V_d (1 + (1/CMRR)(V_c/V_d)).">
+    <figcaption data-l="th">สไลด์หน้า 12: สมการ 10.31</figcaption><figcaption data-l="en">Slide p. 12: Eq. 10.31</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 13, Op-Amp Basics: the basic circuit is made using a difference amplifier having two inputs (plus and minus) and at least one output; the input signal applied between the input terminals sees an input impedance R_i, typically very high; the output voltage is the amplifier gain times the input signal taken through an output impedance R_o, typically very low; the equivalent circuit with R_i, A_d V_d and R_o, and the ideal one with R_i infinite and R_o zero.">
+    <figcaption data-l="th">สไลด์หน้า 13: วงจรสมมูลของออปแอมป์ \(R_i\), \(A_dV_d\), \(R_o\)</figcaption><figcaption data-l="en">Slide p. 13: the op-amp's equivalent circuit, \(R_i\), \(A_dV_d\), \(R_o\)</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>ตำรา Example 10.22</b> เขียน "(4000)(10 mV) = 40 mV" แต่ 4000 × 10 mV = 40 V ซึ่งเกินแรงดันเลี้ยงของออปแอมป์ ข้อ 3 ของหน้านี้ใช้ขาเข้า 150 µV กับ 140 µV ซึ่งให้ตัวเลข 45.8 mV และ 40.006 mV ของตำราในหน่วยที่ถูกต้อง · สไลด์หน้า 11 ให้โจทย์ Example 10.21 โดยไม่มีเฉลย · ภาพจำลองของหน้านี้ใช้ออปแอมป์ที่มี \(A_d\) และ \(A_c\) ตั้งได้ โดยขาออกถูกตัดที่ \(\pm V_{sat}\) = ±13 V และมีโหลด \(R_L\) = 10 kΩ เพื่อให้เห็นกระแสขาออก (ขาเข้าไม่ดึงกระแสเลย)</div>
+<div class="warnbox" data-l="en"><b>The book's Example 10.22</b> prints "(4000)(10 mV) = 40 mV", but 4000 × 10 mV = 40 V, beyond the op-amp's supply. Problem 3 on this page uses inputs of 150 µV and 140 µV, which give the book's 45.8 mV and 40.006 mV in the right unit. Slide p. 11 states Example 10.21 without a solution. The simulations on this page use an op-amp with adjustable \(A_d\) and \(A_c\), its output clipped at \(\pm V_{sat}\) = ±13 V, and a load \(R_L\) = 10 kΩ so that an output current can be seen (the inputs draw none).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สองขาเข้า</a><a href="#ex1"><b>1</b>สี่โหมด</a><a href="#ex2"><b>2</b>Example 10.21</a><a href="#ex3"><b>3</b>Example 10.22</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Two inputs</a><a href="#ex1"><b>1</b>Four modes</a><a href="#ex2"><b>2</b>Example 10.21</a><a href="#ex3"><b>3</b>Example 10.22</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ออปแอมป์วงเปิด: ป้อนสองขั้ว ดูสองส่วนของขาออก</h2><h2 data-l="en">The open-loop op-amp: drive both inputs, watch the two parts of the output</h2>
+    <div class="src" data-l="th">สไลด์หน้า 4–12 · Boylestad หัวข้อ 10.1, 10.9</div><div class="src" data-l="en">Slides pp. 4–12 · Boylestad §10.1, §10.9</div></div></div>
+  <p class="lead" data-l="th">เลือกโหมด แล้วตั้ง \(V_{i1}\), \(V_{i2}\) (มิลลิโวลต์) อัตราขยายผลต่าง \(A_d\) และ CMRR แผงล่างแยกขาออกเป็น \(A_dV_d\) กับ \(A_cV_c\) ลองโหมดร่วม: ขาออกเหลือไม่กี่มิลลิโวลต์ แล้วลด CMRR ลงดูว่าส่วนร่วมโผล่มาเท่าใด ลองเพิ่ม \(V_{i1}\) จนขาออกชนราง ±13 V ชี้ที่ออปแอมป์เพื่ออ่าน \(V_d\), \(V_o\)</p>
+  <p class="lead" data-l="en">Choose a mode, then set \(V_{i1}\), \(V_{i2}\) (millivolts), the differential gain \(A_d\) and the CMRR. The lower panel splits the output into \(A_dV_d\) and \(A_cV_c\). Try the common mode: the output is a few millivolts; then lower the CMRR and watch the common part grow. Raise \(V_{i1}\) until the output hits the ±13 V rail. Hover over the op-amp to read \(V_d\) and \(V_o\).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">สี่โหมดของขาเข้า: เดี่ยว + / เดี่ยว − / คู่ / ร่วม</h2><h2 data-l="en">The four input modes: single + / single − / double-ended / common</h2>
+    <div class="src" data-l="th">สไลด์หน้า 4–6, 8–9 · Boylestad รูป 10.2–10.4, หัวข้อ 10.9</div><div class="src" data-l="en">Slides pp. 4–6, 8–9 · Boylestad Figs. 10.2–10.4, §10.9</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ออปแอมป์มี \(A_d\) = 8000 และ \(A_c\) = 12 (ค่าที่วัดได้ใน Example 10.21) จงหา \(V_d\), \(V_c\) และ \(V_o\) เมื่อ (a) \(V_{i1}\) = 1 mV ขั้ว − ต่อกราวด์ (b) \(V_{i2}\) = 1 mV ขั้ว + ต่อกราวด์ (c) \(V_{i1} = -V_{i2}\) = 0.5 mV (d) \(V_{i1} = V_{i2}\) = 1 mV</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An op-amp has \(A_d\) = 8000 and \(A_c\) = 12 (the values measured in Example 10.21). Find \(V_d\), \(V_c\) and \(V_o\) for (a) \(V_{i1}\) = 1 mV with the − input grounded (b) \(V_{i2}\) = 1 mV with the + input grounded (c) \(V_{i1} = -V_{i2}\) = 0.5 mV (d) \(V_{i1} = V_{i2}\) = 1 mV.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเปลี่ยนการต่อขาเข้าตามขั้น แผงข้างแสดงสองส่วนของขาออก <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The simulation rewires the inputs step by step; the side panel shows the two parts of the output. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 10.21: วัด \(A_d\), \(A_c\) แล้วหา CMRR</h2><h2 data-l="en">Example 10.21: measure \(A_d\), \(A_c\), find the CMRR</h2>
+    <div class="src" data-l="th">สไลด์หน้า 10–11 · Boylestad Example 10.21 (รูป 10.52)</div><div class="src" data-l="en">Slides pp. 10–11 · Boylestad Example 10.21 (Fig. 10.52)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จากการวัดในรูป 10.52: ป้อน \(V_{i1}\) = 0.5 mV, \(V_{i2}\) = −0.5 mV ได้ \(V_o\) = 8 V · ป้อน \(V_{i1} = V_{i2}\) = 1 mV ได้ \(V_o\) = 12 mV จงหา CMRR</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>From the measurements of Fig. 10.52: with \(V_{i1}\) = 0.5 mV, \(V_{i2}\) = −0.5 mV the output is \(V_o\) = 8 V; with \(V_{i1} = V_{i2}\) = 1 mV it is \(V_o\) = 12 mV. Calculate the CMRR.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 10.22: CMRR 100 เทียบกับ 10⁵</h2><h2 data-l="en">Example 10.22: a CMRR of 100 against 10⁵</h2>
+    <div class="src" data-l="th">สไลด์หน้า 12 · Boylestad Example 10.22 (สมการ 10.31)</div><div class="src" data-l="en">Slide p. 12 · Boylestad Example 10.22 (Eq. 10.31)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ออปแอมป์มี \(A_d\) = 4000 ขาเข้า \(V_{i1}\) = 150 µV, \(V_{i2}\) = 140 µV (ตำราเขียน mV ดูกรอบเตือนด้านบน) จงหา \(V_o\) เมื่อ CMRR เป็น (a) 100 (b) 10⁵</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An op-amp has \(A_d\) = 4000; the inputs are \(V_{i1}\) = 150 µV and \(V_{i2}\) = 140 µV (the book says mV, see the note above). Find \(V_o\) for a CMRR of (a) 100 (b) 10⁵.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>โหมด "คู่ (ตรงข้าม)": ตั้ง \(V_{i1}\) = 0.5 mV ขาออก 8 V ตามรูป 10.52a แล้วเพิ่มเป็น 2 mV: สมการต้องการ 32 V แต่ขาออกหยุดที่ 13 V ป้ายบอก "อิ่มตัว" นี่คือเหตุที่ออปแอมป์วงเปิดใช้ขยายสัญญาณไม่ได้</li>
+    <li>โหมด "ร่วม": ตั้ง \(V_{i1}\) = 1 mV ขาออก 12 mV ลด CMRR เหลือ 20 dB (= 10): \(A_c\) = 800 ขาออกโตเป็น 0.8 V สัญญาณรบกวนโหมดร่วมจะทะลุออกมา</li>
+    <li>โหมด "อิสระ": \(V_{i1}\) = 1.2 mV, \(V_{i2}\) = 1.0 mV: \(V_d\) = 0.2 mV ให้ 1.6 V ส่วน \(V_c\) = 1.1 mV ให้ 13 mV รวม 1.613 V ตรวจกับสมการ 10.31</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–3</h3>
+    <ol><li>ข้อ 1 ขั้น (a) กับ (c): ขาเข้าเดี่ยว 1 mV กับขาเข้าคู่ ±0.5 mV ให้ \(V_d\) เท่ากัน แต่ \(V_c\) ต่างกัน (0.5 mV กับ 0) ขาออกจึงต่างกัน 6 mV ชี้ที่ออปแอมป์แล้วเทียบ</li>
+    <li>ข้อ 3: กดให้ครบทุกขั้นแล้วเลื่อนเมาส์ไปที่ \(R_L\): กระแส 4.58 µA คือ 45.8 mV / 10 kΩ ขาเข้าทั้งสองไม่มีจุดวิ่งเลยเพราะความต้านทานขาเข้าเป็นอนันต์</li></ol>
+    <div class="book">สไลด์บทที่ 7 ชุดที่ 1 หน้า 3–13 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 10.1 (รูป 10.1–10.4), 10.4 และ 10.9 (สมการ 10.26–10.31, Examples 10.21–10.22)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Mode "differential": set \(V_{i1}\) = 0.5 mV for the 8 V of Fig. 10.52a, then raise it to 2 mV: the equation wants 32 V but the output stops at 13 V and the badge says "saturated". This is why an open-loop op-amp cannot be used as an amplifier.</li>
+    <li>Mode "common": set \(V_{i1}\) = 1 mV for 12 mV out; lower the CMRR to 20 dB (= 10): \(A_c\) = 800 and the output grows to 0.8 V, common-mode noise leaking through.</li>
+    <li>Mode "independent": \(V_{i1}\) = 1.2 mV, \(V_{i2}\) = 1.0 mV: \(V_d\) = 0.2 mV gives 1.6 V, \(V_c\) = 1.1 mV gives 13 mV, 1.613 V in all. Check it against Eq. 10.31.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–3</h3>
+    <ol><li>Problem 1, steps (a) and (c): a single-ended 1 mV and a double-ended ±0.5 mV give the same \(V_d\) but different \(V_c\) (0.5 mV and 0), so the outputs differ by 6 mV. Hover over the op-amp and compare.</li>
+    <li>Problem 3: open every step, then hover over \(R_L\): the 4.58 µA is 45.8 mV / 10 kΩ. Neither input shows any moving dots, since the input resistance is infinite.</li></ol>
+    <div class="book">Chapter 7 slide set I, pp. 3–13 · Boylestad &amp; Nashelsky, 11th ed., §10.1 (Figs. 10.1–10.4), §10.4 and §10.9 (Eqs. 10.26–10.31, Examples 10.21–10.22)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx;
+  OP.problem(1, 'modes'); OP.problem(2, 'ex1021'); OP.problem(3, 'ex1022');
+
+  /* =================================================================== A: the open-loop op-amp with two inputs */
+  const mV = v => `${LS.u(v, 3)} mV`, modeOf = { sp: t('ขาเข้าเดี่ยวที่ขั้ว +', 'single-ended at +'), sn: t('ขาเข้าเดี่ยวที่ขั้ว −', 'single-ended at −'), d: t('ขาเข้าคู่ (ตรงข้าม)', 'double-ended (opposite)'), c: t('โหมดร่วม', 'common mode'), any: t('สองขาเข้าอิสระ', 'two independent inputs') };
+  const inputs = S => (S.mode === 'sp' ? [S.v1 * 1e-3, null] : S.mode === 'sn' ? [null, S.v2 * 1e-3] : S.mode === 'd' ? [S.v1 * 1e-3, -S.v1 * 1e-3] : S.mode === 'c' ? [S.v1 * 1e-3, S.v1 * 1e-3] : [S.v1 * 1e-3, S.v2 * 1e-3]);
+  const acOf = S => S.Ad / Math.pow(10, S.cmrr / 20);
+  let blocks = {};
+  const vis = S => { const two = S.mode === 'any' || S.mode === 'sn'; blocks.v2.block.style.display = two ? '' : 'none'; blocks.v1.block.style.display = S.mode === 'sn' ? 'none' : ''; };
+  OP.explorer({ init: { mode: 'd', v1: 0.5, v2: -0.5, Ad: 8000, cmrr: 56.5 }, title: t('ขาเข้าและอัตราขยาย', 'Inputs and gains'),
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'm_sp', label: t('เดี่ยว +', 'single +') }, { id: 'm_sn', label: t('เดี่ยว −', 'single −') }, { id: 'm_d', label: t('คู่ (ตรงข้าม)', 'differential'), on: true }, { id: 'm_c', label: t('ร่วม', 'common') }, { id: 'm_any', label: t('อิสระ', 'independent') }], id => { S.mode = id.slice(2); vis(S); build(); });
+      blocks.v1 = ui.slider(p, { id: 'aV1', label: 'V_i1', min: -2, max: 2, step: 0.05, value: S.v1, fmt: v => mV(v), oninput: v => { S.v1 = v; build(); } });
+      blocks.v2 = ui.slider(p, { id: 'aV2', label: 'V_i2', min: -2, max: 2, step: 0.05, value: S.v2, fmt: v => mV(v), oninput: v => { S.v2 = v; build(); } });
+      OP.logSlider(p, 'aAd', 'A_d', 100, 200000, () => S.Ad, v => { S.Ad = v; }, build, v => LS.u(v, 0), OP.rndR);
+      ui.slider(p, { id: 'aCM', label: 'CMRR', min: 20, max: 120, step: 0.5, value: S.cmrr, fmt: v => `${fd(v, 1)} dB = ${LS.u(Math.pow(10, v / 20), 0)}`, oninput: v => { S.cmrr = v; build(); } });
+      vis(S); },
+    spec: S => { const [V1, V2] = inputs(S); return OP.ckt({ kind: 'pair', V1, V2, gain: S.Ad, gc: acOf(S), RL: 1e4, aText: LS.u(S.Ad, 0) }); },
+    side: (ctx, b, bd, c, S) => { const a = OP.z(c), Ac = acOf(S); CH8.bars(ctx, b, [{ label: 'A_d V_d', v: S.Ad * a.vd, color: C.q, sub: bd.short ? '' : `${vtx(a.vd)} × ${LS.u(S.Ad, 0)}` }, { label: 'A_c V_c', v: Ac * a.vc, color: '#c792ea', sub: bd.short ? '' : `${vtx(a.vc)} × ${LS.u(Ac, 2)}` }, { label: 'V_o', v: a.vo, color: a.state === 'lin' ? C.curve : C.red, sub: bd.short ? '' : a.st[0] }], { title: bd.short ? '' : t('สองส่วนของขาออก V_o = A_d V_d + A_c V_c', 'the two parts of the output V_o = A_d V_d + A_c V_c'), fmt: v => vtx(v), sub: !bd.short, max: Math.max(Math.abs(a.vo) * 1.15, Math.abs(Ac * a.vc) * 1.15, 1e-4) }); },
+    after: (v, c) => OP.tags(v, c),
+    badge: (c, S) => { const a = OP.z(c); return [[`${modeOf[S.mode]} · V_o = ${vtx(a.vo)} · ${a.st[0]}`, `${modeOf[S.mode]} · V_o = ${vtx(a.vo)} · ${a.st[0]}`], a.st[1]]; },
+    rows: (c, S) => { const a = OP.z(c), Ac = acOf(S); return [['V_d = V_i1 − V_i2', vtx(a.vd)], ['V_c = ½(V_i1 + V_i2)', vtx(a.vc)], ['A_d', LS.u(S.Ad, 0)], ['A_c = A_d / CMRR', LS.u(Ac, 3)], ['A_d V_d', vtx(S.Ad * a.vd)], ['A_c V_c', vtx(Ac * a.vc)], ['V_o', vtx(a.vo)], [t('สถานะ', 'state'), a.st[0]], ['I_L = V_o / R_L', OP.itx(a.vo / 1e4)]]; },
+    text: (c, S) => { const a = OP.z(c), Ac = acOf(S), lin = a.state === 'lin', want = S.Ad * a.vd + Ac * a.vc;
+      if (!lin) return t(`สมการ 10.28 ต้องการ \\(V_o\\) = ${vtx(want)} แต่ออปแอมป์จ่ายได้ไม่เกิน \\(\\pm V_{sat}\\) = ±13 V ขาออกจึงค้างที่ราง: ออปแอมป์วงเปิดอิ่มตัวง่ายมากเพราะ \\(A_d\\) สูง ลดขาเข้าหรือลด \\(A_d\\)`, `Eq. 10.28 asks for \\(V_o\\) = ${vtx(want)}, but the op-amp cannot swing beyond \\(\\pm V_{sat}\\) = ±13 V, so the output sits at the rail: an open-loop op-amp saturates very easily because \\(A_d\\) is so high. Lower the input or \\(A_d\\).`);
+      if (S.mode === 'c') return t(`โหมดร่วม: \\(V_d\\) = 0 จึงไม่มีส่วนผลต่างเลย ขาออก ${vtx(a.vo)} มาจาก \\(A_cV_c\\) = ${LS.u(Ac, 2)} × ${vtx(a.vc)} ล้วน ๆ ยิ่ง CMRR สูง \\(A_c\\) ยิ่งเล็กและขาออกยิ่งใกล้ศูนย์ (สไลด์หน้า 6)`, `Common mode: \\(V_d\\) = 0, so there is no difference part at all; the ${vtx(a.vo)} output is purely \\(A_cV_c\\) = ${LS.u(Ac, 2)} × ${vtx(a.vc)}. The higher the CMRR, the smaller \\(A_c\\) and the closer the output to zero (slide p. 6).`);
+      const ratio = Math.abs(a.vd) > 1e-12 ? Math.abs(Ac * a.vc / (S.Ad * a.vd)) : 0;
+      return t(`${modeOf[S.mode]}: \\(V_d\\) = ${vtx(a.vd)} ให้ \\(A_dV_d\\) = ${vtx(S.Ad * a.vd)} ส่วน \\(V_c\\) = ${vtx(a.vc)} ให้ \\(A_cV_c\\) = ${vtx(Ac * a.vc)} (${fd(ratio * 100, 2)} % ของส่วนผลต่าง) รวม \\(V_o\\) = ${vtx(a.vo)} ตรงกับสมการ 10.31: \\(A_dV_d(1 + \\frac{1}{\\text{CMRR}}\\frac{V_c}{V_d})\\)`, `${modeOf[S.mode]}: \\(V_d\\) = ${vtx(a.vd)} gives \\(A_dV_d\\) = ${vtx(S.Ad * a.vd)}, and \\(V_c\\) = ${vtx(a.vc)} gives \\(A_cV_c\\) = ${vtx(Ac * a.vc)} (${fd(ratio * 100, 2)} % of the difference part); in all \\(V_o\\) = ${vtx(a.vo)}, as Eq. 10.31 says: \\(A_dV_d(1 + \\frac{1}{\\text{CMRR}}\\frac{V_c}{V_d})\\).`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, db = x => 20 * Math.log10(x);
+  CH6.quiz('quiz', [
+    { q: t('1) ออปแอมป์วัดได้ \\(A_d\\) = 5000, \\(A_c\\) = 2.5 จงหา CMRR เป็นอัตราส่วนและเป็นเดซิเบล', '1) An op-amp measures \\(A_d\\) = 5000, \\(A_c\\) = 2.5. Find the CMRR as a ratio and in decibels.'),
+      fields: [{ key: 'x', lab: 'CMRR =', ans: 2000, tol: 1 }, { key: 'y', lab: 'CMRR =', ans: db(2000), unit: 'dB', tol: 0.05 }], work: work(R`\text{CMRR} = \frac{5000}{2.5} = 2000,\qquad 20\log_{10}2000 = ${fd(db(2000), 2)}\ \text{dB}`) },
+    { q: t('2) \\(V_{i1}\\) = 2.2 mV, \\(V_{i2}\\) = 1.8 mV จงหา \\(V_d\\) และ \\(V_c\\)', '2) \\(V_{i1}\\) = 2.2 mV, \\(V_{i2}\\) = 1.8 mV. Find \\(V_d\\) and \\(V_c\\).'),
+      fields: [{ key: 'x', lab: 'V_d =', ans: 0.4, unit: 'mV', tol: 0.005 }, { key: 'y', lab: 'V_c =', ans: 2, unit: 'mV', tol: 0.005 }], work: work(R`V_d = 2.2 - 1.8 = 0.4\ \text{mV},\qquad V_c = \tfrac{1}{2}(2.2 + 1.8) = 2\ \text{mV}`) },
+    { q: t('3) ออปแอมป์ \\(A_d\\) = 2000, CMRR = 60 dB ขาเข้ามี \\(V_d\\) = 2 mV และ \\(V_c\\) = 20 mV จงหา \\(V_o\\) (สมการ 10.31)', '3) An op-amp with \\(A_d\\) = 2000 and CMRR = 60 dB has \\(V_d\\) = 2 mV and \\(V_c\\) = 20 mV at its inputs. Find \\(V_o\\) (Eq. 10.31).'),
+      fields: [{ key: 'x', lab: 'V_o =', ans: 4.04, unit: 'V', tol: 0.01 }], work: work(R`\text{CMRR} = 10^{60/20} = 1000;\quad V_o = (2000)(2\ \text{mV})\left(1 + \frac{1}{1000}\cdot\frac{20}{2}\right) = 4\ \text{V}(1.01) = 4.04\ \text{V}`) },
+    { q: t('4) ใบข้อมูลให้ \\(A_d\\) = 10⁵ และ CMRR = 80 dB จงหา \\(A_c\\) และขาออกโหมดร่วมเมื่อ \\(V_c\\) = 1 V', '4) A data sheet gives \\(A_d\\) = 10⁵ and CMRR = 80 dB. Find \\(A_c\\) and the common-mode output for \\(V_c\\) = 1 V.'),
+      fields: [{ key: 'x', lab: 'A_c =', ans: 10, tol: 0.05 }, { key: 'y', lab: 'V_o =', ans: 10, unit: 'V', tol: 0.05 }], work: work(R`A_c = \frac{A_d}{\text{CMRR}} = \frac{10^5}{10^4} = 10;\quad V_o = A_cV_c = 10\ \text{V}`, t('<div class="sub2">สัญญาณร่วม 1 V ให้ขาออก 10 V: ทะลุรางเสียด้วยซ้ำ CMRR 80 dB จึงยังต้องการขาเข้าร่วมที่เล็ก</div>', '<div class="sub2">A 1 V common signal gives 10 V out, close to the rails: even 80 dB of CMRR wants a small common input.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

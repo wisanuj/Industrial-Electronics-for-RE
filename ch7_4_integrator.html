@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="7.4 — Integrator and Differentiator">7.4 — วงจรอินทิเกรเตอร์และดิฟเฟอเรนชิเอเตอร์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรอินทิเกรเตอร์และดิฟเฟอเรนชิเอเตอร์ <span class="en">The integrator and the differentiator</span></h1>
+<h1 data-l="en">The integrator and the differentiator <span class="en">A capacitor in place of a resistor turns the summer into calculus</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 2 หน้า 3–6 ถ้าแทน \(R_f\) ของวงจรกลับเฟสด้วยตัวเก็บประจุ กระแสคงที่ \(v_1/R\) จากกราวด์เสมือนจะเติมประจุให้ C ด้วยอัตราคงที่ ขาออกจึงเป็นเส้นตรงลาดลง: อินทิกรัลของขาเข้าคูณ \(-1/RC\) (สมการ 10.13) ถ้าสลับให้ C อยู่ด้านขาเข้าและ R ป้อนกลับ กระแสของ C คือ \(C\,dv_1/dt\) ขาออกจึงเป็นอนุพันธ์ (สมการ 10.15) หน้านี้จำลองตามเวลาจริง: วงจรปรับได้กับคลื่นขาเข้าสี่แบบ (ส่วน A) รูป 10.39 ที่ R = 1 MΩ แล้ว 100 kΩ ข้อ 10 ของตำรา อินทิเกรเตอร์รวมสัญญาณ (รูป 10.40) และดิฟเฟอเรนชิเอเตอร์กับคลื่นสามเหลี่ยม</p>
+<p class="sub" data-l="en">Chapter 7 slide set II, pp. 3–6. Replace the \(R_f\) of the inverting amplifier by a capacitor: the constant current \(v_1/R\) from the virtual ground charges C at a constant rate, so the output is a straight falling ramp: the integral of the input times \(-1/RC\) (Eq. 10.13). Swap them, C at the input and R in the feedback: C's current is \(C\,dv_1/dt\) and the output is the derivative (Eq. 10.15). This page simulates in real time: an adjustable circuit with four input waveforms (section A), Fig. 10.39 with R = 1 MΩ then 100 kΩ, the book's Problem 10, the summing integrator (Fig. 10.40) and the differentiator with a triangle wave.</p>
+<div class="equation-box eqwrap">$$ v_o(t) = -\frac{1}{RC}\int v_1(t)\,dt $$ $$ v_o(t) = -\left[\frac{1}{R_1C}\int v_1\,dt + \frac{1}{R_2C}\int v_2\,dt + \frac{1}{R_3C}\int v_3\,dt\right] $$ $$ v_o(t) = -RC\frac{dv_1(t)}{dt} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>อินทิเกรเตอร์</b> (หน้า 3–4, รูป 10.38): กราวด์เสมือนทำให้กระแสผ่าน R เป็น \(v_1/R\) และต้องไหลเข้า C ทั้งหมด \(v_C\) จึงเพิ่มตามอินทิกรัลของ \(v_1\) ปลายซ้ายของ C อยู่ที่ 0 ขาออกคือ \(-v_C\): \(v_o = -\frac{1}{RC}\int v_1\,dt\) (สมการ 10.12–10.13 ในรูป \(V_o/V_1 = -1/sCR\))</li>
+  <li><b>ขั้นคงที่ให้ลาดตรง</b> (หน้า 5, รูป 10.39): \(v_1\) = 1 V กับ 1 MΩ, 1 µF ให้ตัวคูณสเกล −1/RC = −1 V/s ขาออกลาดลง −1 V ทุกวินาที R = 100 kΩ ให้ −10 V/s · ขาออกลาดได้จนถึง \(-V_{sat}\) แล้วค้าง: อินทิเกรเตอร์จริงอิ่มตัวเสมอเมื่อขาเข้ามีองค์ประกอบกระแสตรง</li>
+  <li><b>หลายขาเข้า</b> (รูป 10.40, สมการ 10.14): แต่ละขามีตัวคูณสเกล \(1/R_kC\) ของตัวเอง (200 kΩ, 100 kΩ, 1 MΩ กับ 1 µF ให้ 5, 10, 1) คือวงจรรวมสัญญาณที่เป็นอินทิเกรเตอร์ด้วย: หัวใจของคอมพิวเตอร์แอนะล็อก</li>
+  <li><b>ดิฟเฟอเรนชิเอเตอร์</b> (หน้า 6, รูป 10.41): \(i = C\,dv_1/dt\) ผ่าน R ให้ \(v_o = -RC\,dv_1/dt\) คลื่นสามเหลี่ยมให้คลื่นสี่เหลี่ยม คลื่นไซน์ให้โคไซน์ (นำหน้า 90°) ขั้นให้พัลส์แหลมชนราง · ใช้น้อยกว่าเพราะขยายสัญญาณรบกวนความถี่สูง</li>
+  <li><b>ค่าคงตัวเวลา RC</b> คือตัวเลขเดียวที่กำหนดสเกล: อินทิเกรเตอร์หาร ดิฟเฟอเรนชิเอเตอร์คูณ</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The integrator</b> (pp. 3–4, Fig. 10.38): the virtual ground makes the current through R equal to \(v_1/R\), and all of it must flow into C, so \(v_C\) grows as the integral of \(v_1\). The left end of C is at 0, so the output is \(-v_C\): \(v_o = -\frac{1}{RC}\int v_1\,dt\) (Eqs. 10.12–10.13, written as \(V_o/V_1 = -1/sCR\)).</li>
+  <li><b>A constant step gives a straight ramp</b> (p. 5, Fig. 10.39): \(v_1\) = 1 V with 1 MΩ and 1 µF gives a scale factor −1/RC = −1 V/s, so the output falls 1 V every second; R = 100 kΩ gives −10 V/s. The ramp can only go to \(-V_{sat}\), where it stops: a real integrator always saturates if the input has a dc component.</li>
+  <li><b>Several inputs</b> (Fig. 10.40, Eq. 10.14): each has its own scale factor \(1/R_kC\) (200 kΩ, 100 kΩ, 1 MΩ with 1 µF give 5, 10, 1): a summing amplifier that integrates too, the heart of the analogue computer.</li>
+  <li><b>The differentiator</b> (p. 6, Fig. 10.41): \(i = C\,dv_1/dt\) through R gives \(v_o = -RC\,dv_1/dt\). A triangle gives a square wave, a sine a cosine (90° ahead), a step a spike to the rail. Less used, because it amplifies high-frequency noise.</li>
+  <li><b>The time constant RC</b> is the single number that sets the scale: the integrator divides by it, the differentiator multiplies.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch7b/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 3, Integrator Circuit: if the feedback component used is a capacitor, the resulting connection is called an integrator; the virtual-ground equivalent circuit shows that an expression for the voltage between input and output can be derived in terms of the current I from input to output; Figure 10.38 with the integrator and its virtual-ground equivalent, X_C = 1/jωC = 1/sC.">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 3: อินทิเกรเตอร์และวงจรสมมูลกราวด์เสมือน (รูป 10.38)</figcaption><figcaption data-l="en">Set II slide p. 3: the integrator and its virtual-ground equivalent (Fig. 10.38)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 4, Integrator Circuit: where s = jω is in the Laplace notation; solving for V_o/V_1 yields I = V_1/R = −V_o/X_C = −V_o/(1/sC) = −sCV_o, V_o/V_1 = −1/sCR; the expression can be rewritten in the time domain as v_o(t) = −(1/RC) ∫ v_1(t) dt.">
+    <figcaption data-l="th">สไลด์หน้า 4: จาก \(V_o/V_1 = -1/sCR\) ถึงสมการ 10.13</figcaption><figcaption data-l="en">Slide p. 4: from \(V_o/V_1 = -1/sCR\) to Eq. 10.13</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 5, Integrator Circuit: as an example, consider an input voltage V_1 = 1 V to the integrator circuit of the figure; the scale factor of 1/RC is to be found; the circuit has R = 1 MΩ and C = 1 µF (Figure 10.39a).">
+    <figcaption data-l="th">สไลด์หน้า 5: ขั้น 1 V เข้า 1 MΩ, 1 µF (รูป 10.39a)</figcaption><figcaption data-l="en">Slide p. 5: a 1 V step into 1 MΩ, 1 µF (Fig. 10.39a)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 6, Differentiator Circuit: a differentiator circuit is shown in the figure; while not as useful as the circuit forms covered above, the differentiator does provide a useful operation, the resulting relation for the circuit being v_o(t) = −RC dv_1(t)/dt (Figure 10.41, C at the input and R in the feedback).">
+    <figcaption data-l="th">สไลด์หน้า 6: ดิฟเฟอเรนชิเอเตอร์ (รูป 10.41, สมการ 10.15)</figcaption><figcaption data-l="en">Slide p. 6: the differentiator (Fig. 10.41, Eq. 10.15)</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 5 ตัดจบก่อนคำตอบ</b> ("The scale factor of 1/RC is" แล้วว่าง): −1/RC = −1 V/s และกรณี R = 100 kΩ ให้ −10 V/s อยู่ในตำราหน้า 626–627 (รูป 10.39b–c) · สไลด์หน้า 3 ขึ้นต้นด้วย "PRACTICAL OP-AMP CIRCUITS" ต่อจากชุดที่ 1 · ภาพจำลองของหน้านี้เดินตามเวลาจริงทีละก้าว (ตัวเก็บประจุจำประจุไว้) แล้วเล่นช้าลงให้ดูทัน: ป้ายบอกเวลาของวงจร เมื่อครบหน้าต่างจะเริ่มใหม่ · ขั้นเข้าดิฟเฟอเรนชิเอเตอร์ให้อนุพันธ์เป็นอนันต์ ขาออกจึงกระชากชนรางหนึ่งก้าวเวลาแล้วกลับ</div>
+<div class="warnbox" data-l="en"><b>Slide p. 5 breaks off before the answer</b> ("The scale factor of 1/RC is", then nothing): −1/RC = −1 V/s, and R = 100 kΩ gives −10 V/s, on pp. 626–627 of the book (Fig. 10.39b–c). Slide p. 3 opens with "PRACTICAL OP-AMP CIRCUITS", continuing set I. The simulations on this page step through real time (the capacitor remembers its charge) and are slowed down to be watchable: the badge gives the circuit time, and the window restarts when it ends. A step into the differentiator has an infinite derivative, so the output spikes to the rail for one time step and returns.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ตามเวลา</a><a href="#ex1"><b>1</b>รูป 10.39</a><a href="#ex2"><b>2</b>ข้อ 10</a><a href="#ex3"><b>3</b>รูป 10.40</a><a href="#ex4"><b>4</b>ดิฟเฟอเรนชิเอเตอร์</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>In time</a><a href="#ex1"><b>1</b>Fig. 10.39</a><a href="#ex2"><b>2</b>Problem 10</a><a href="#ex3"><b>3</b>Fig. 10.40</a><a href="#ex4"><b>4</b>Differentiator</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">อินทิเกรเตอร์หรือดิฟเฟอเรนชิเอเตอร์ กับคลื่นขาเข้าสี่แบบ</h2><h2 data-l="en">Integrator or differentiator, with four input waveforms</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 3–6 · Boylestad หัวข้อ 10.5 (รูป 10.38–10.41)</div><div class="src" data-l="en">Set II slides pp. 3–6 · Boylestad §10.5 (Figs. 10.38–10.41)</div></div></div>
+  <p class="lead" data-l="th">เลือกวงจรและคลื่นขาเข้า (ขั้น สี่เหลี่ยม สามเหลี่ยม ไซน์) แล้วตั้งขนาด ความถี่ R และ C กราฟล่างซ้ายคือ \(v_1(t)\) ล่างขวาคือ \(v_o(t)\) จากการจำลองตามเวลา อินทิเกรเตอร์: สี่เหลี่ยม → สามเหลี่ยม, ไซน์ → ลบโคไซน์, ขั้น → ลาดชนราง ดิฟเฟอเรนชิเอเตอร์: สามเหลี่ยม → สี่เหลี่ยม, ไซน์ → ลบโคไซน์ที่ใหญ่ขึ้นตามความถี่, ขั้น → พัลส์แหลม ลองเพิ่มความถี่กับอินทิเกรเตอร์: ขาออกเล็กลงตาม 1/f</p>
+  <p class="lead" data-l="en">Choose the circuit and the input (step, square, triangle, sine), then set the amplitude, the frequency, R and C. The lower left graph is \(v_1(t)\), the lower right \(v_o(t)\) from the time simulation. Integrator: square → triangle, sine → minus cosine, step → a ramp to the rail. Differentiator: triangle → square, sine → minus cosine growing with frequency, step → a spike. Raise the frequency of the integrator: the output shrinks as 1/f.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 10.39: ขั้น 1 V ลาด −1 V/s แล้ว −10 V/s</h2><h2 data-l="en">Fig. 10.39: a 1 V step, a −1 V/s ramp, then −10 V/s</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 3–5 · Boylestad รูป 10.39, สมการ 10.12–10.13</div><div class="src" data-l="en">Set II slides pp. 3–5 · Boylestad Fig. 10.39, Eqs. 10.12–10.13</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อินทิเกรเตอร์มี R = 1 MΩ, C = 1 µF ป้อนขั้นคงที่ \(v_1\) = 1 V จงหาตัวคูณสเกล 1/RC และขาออก \(v_o(t)\) แล้วทำซ้ำเมื่อ R = 100 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An integrator has R = 1 MΩ and C = 1 µF; a constant \(v_1\) = 1 V is applied. Find the scale factor 1/RC and the output \(v_o(t)\), then repeat for R = 100 kΩ.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเดินตามเวลาจริง 3 วินาที (ช้าลง 2 เท่า) ขั้นสุดท้ายเปลี่ยน R เป็น 100 kΩ <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The simulation runs 3 s of circuit time at half speed; the last step switches R to 100 kΩ. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">ข้อ 10: ขั้น 1.5 V เข้า 200 kΩ, 0.1 µF</h2><h2 data-l="en">Problem 10: a 1.5 V step into 200 kΩ, 0.1 µF</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 10 ท้ายบทที่ 10 (รูป 10.69)</div><div class="src" data-l="en">Boylestad chapter 10 Problem 10 (Fig. 10.69)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงร่างรูปคลื่นขาออกของอินทิเกรเตอร์ที่มี R = 200 kΩ, C = 0.1 µF เมื่อป้อน \(V_1\) = +1.5 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Sketch the output waveform of an integrator with R = 200 kΩ and C = 0.1 µF for an input \(V_1\) = +1.5 V.</p></div>
+  <p class="lead" data-l="th">หน้าต่างเวลา 250 ms ช้าลง 20 เท่า <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">A 250 ms window slowed down 20×. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">รูป 10.40: อินทิเกรเตอร์รวมสัญญาณ</h2><h2 data-l="en">Fig. 10.40: the summing integrator</h2>
+    <div class="src" data-l="th">Boylestad รูป 10.40b–c, สมการ 10.14 (ขาเข้าเลือกโดยหน้านี้)</div><div class="src" data-l="en">Boylestad Fig. 10.40b–c, Eq. 10.14 (inputs chosen by this page)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(R_1\) = 200 kΩ, \(R_2\) = 100 kΩ, \(R_3\) = 1 MΩ, C = 1 µF จงหาตัวคูณสเกลของแต่ละขา และความชันของขาออกเมื่อ \(V_1\) = 0.2 V, \(V_2\) = −0.1 V, \(V_3\) = 1 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(R_1\) = 200 kΩ, \(R_2\) = 100 kΩ, \(R_3\) = 1 MΩ, C = 1 µF. Find the scale factor of each input, and the slope of the output for \(V_1\) = 0.2 V, \(V_2\) = −0.1 V, \(V_3\) = 1 V.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">ดิฟเฟอเรนชิเอเตอร์: คลื่นสามเหลี่ยมให้คลื่นสี่เหลี่ยม</h2><h2 data-l="en">The differentiator: a triangle gives a square wave</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 6 · Boylestad รูป 10.41, สมการ 10.15 (ค่าเลือกโดยหน้านี้)</div><div class="src" data-l="en">Set II slide p. 6 · Boylestad Fig. 10.41, Eq. 10.15 (values chosen by this page)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ดิฟเฟอเรนชิเอเตอร์มี C = 0.1 µF, R = 10 kΩ ป้อนคลื่นสามเหลี่ยม ±1 V ความถี่ 100 Hz จงหา \(v_o(t)\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A differentiator has C = 0.1 µF and R = 10 kΩ; the input is a ±1 V triangle wave at 100 Hz. Find \(v_o(t)\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>อินทิเกรเตอร์ + สี่เหลี่ยม ±1 V ที่ 100 Hz กับ R = 100 kΩ, C = 0.1 µF (RC = 10 ms): ครึ่งคาบ 5 ms ลาด 100 V/s ให้สามเหลี่ยม ±0.25 V เพิ่มความถี่เป็น 1 kHz: เหลือ ±0.025 V (ลดตาม 1/f) นี่คือตัวกรองผ่านต่ำชนิดหนึ่ง</li>
+    <li>อินทิเกรเตอร์ + ไซน์: ขาออกเป็นลบโคไซน์ ล้าหลัง 90° และขนาด \(A/\omega RC\) ตรวจกับความถี่ที่ \(\omega RC\) = 1: ขาออกเท่าขาเข้า</li>
+    <li>ดิฟเฟอเรนชิเอเตอร์ + ขั้น: พัลส์ชนรางหนึ่งก้าวเวลาแล้วกลับศูนย์ (ประจุไหลเข้า C หมดในก้าวเดียว) วงจรจริงมีตัวต้านทานอนุกรมกับ C เพื่อจำกัดพัลส์นี้</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–4</h3>
+    <ol><li>ข้อ 1: ขณะขาออกลาดลง ชี้ที่ C: กระแส 1 µA คงที่ แต่แรงดันเพิ่มเรื่อย ๆ — นั่นคือนิยามของตัวเก็บประจุ \(i = C\,dv/dt\)</li>
+    <li>ข้อ 2: ที่ 173 ms ขาออกชนราง −13 V ชี้ที่ออปแอมป์: \(V_d\) ไม่ใช่ศูนย์อีกต่อไป และกระแสของ R ไม่เข้า C แล้ว (จุดหยุด)</li>
+    <li>ข้อ 4: ขณะขาเข้าขึ้น จุดวิ่งทางหนึ่ง ขณะลงวิ่งกลับ ขนาดกระแส 40 µA คงที่ตลอดครึ่งคาบ</li></ol>
+    <div class="book">สไลด์บทที่ 7 ชุดที่ 2 หน้า 3–6 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 10.5 (รูป 10.38–10.41, สมการ 10.12–10.15) ข้อ 10 ท้ายบท</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Integrator + ±1 V square at 100 Hz with R = 100 kΩ, C = 0.1 µF (RC = 10 ms): a 5 ms half period at 100 V/s gives a ±0.25 V triangle. Raise the frequency to 1 kHz: ±0.025 V (it falls as 1/f). This is a kind of low-pass filter.</li>
+    <li>Integrator + sine: the output is minus a cosine, 90° behind, of size \(A/\omega RC\). Check at the frequency where \(\omega RC\) = 1: the output equals the input.</li>
+    <li>Differentiator + step: a spike to the rail for one time step, then back to zero (the charge rushes into C in one step). Real circuits add a resistor in series with C to tame this pulse.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–4</h3>
+    <ol><li>Problem 1: while the output ramps down, hover over C: a constant 1 µA, yet a steadily rising voltage: the very definition of a capacitor, \(i = C\,dv/dt\).</li>
+    <li>Problem 2: at 173 ms the output hits the −13 V rail; hover over the op-amp: \(V_d\) is no longer zero, and R's current no longer enters C (the dots stop).</li>
+    <li>Problem 4: while the input rises the dots run one way, while it falls the other; the 40 µA magnitude is constant through each half period.</li></ol>
+    <div class="book">Chapter 7 slide set II, pp. 3–6 · Boylestad &amp; Nashelsky, 11th ed., §10.5 (Figs. 10.38–10.41, Eqs. 10.12–10.15), Problem 10</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx, kO = r => CK.eng(r, 'Ω'), TAU = 2 * Math.PI;
+  OP.problem(1, 'f1039'); OP.problem(2, 'p10'); OP.problem(3, 'sumint'); OP.problem(4, 'diff');
+
+  /* =================================================================== A: integrator / differentiator in time */
+  const nice = y => [0.1, 0.2, 0.5, 1, 2, 5, 10, 15].find(v => v >= y * 1.15) || 15, VS = CK.OPAMP.VSAT, niceT = s => [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20].find(v => v >= s) || 20;   // round windows: round tick labels
+  const NAME = { integ: t('อินทิเกรเตอร์', 'integrator'), diff: t('ดิฟเฟอเรนชิเอเตอร์', 'differentiator') }, WN = { step: t('ขั้น', 'step'), square: t('สี่เหลี่ยม', 'square'), tri: t('สามเหลี่ยม', 'triangle'), sine: t('ไซน์', 'sine') };
+  /* the expected output: slope (V/s) for the integrator's step, else a peak (V); the window length Tw (s) and the reference current for the dots */
+  const expect = S => { const RC = S.R * S.C, Tp = 1 / S.f, A = S.A; let peak, slope = 0, Tw, iref;
+    if (S.kind === 'integ') { if (S.wave === 'step') { slope = -A / RC; Tw = niceT(1.3 * VS / Math.abs(slope)); peak = Math.min(VS, Math.abs(slope) * Tw); } else { Tw = 3 * Tp; peak = S.wave === 'square' ? A * Tp / (4 * RC) : S.wave === 'tri' ? A * Tp / (8 * RC) : A / (TAU * S.f * RC); } iref = A / S.R; }
+    else { if (S.wave === 'step' || S.wave === 'square') { peak = VS; Tw = S.wave === 'step' ? niceT(20 * RC) : 3 * Tp; iref = Math.max(A / S.R, S.C * A / (0.02 * Tp)); } else { Tw = 3 * Tp; peak = S.wave === 'tri' ? 4 * A * S.f * RC : TAU * S.f * RC * A; iref = S.C * (S.wave === 'tri' ? 4 * A * S.f : TAU * S.f * A); } }
+    return { RC, slope, peak: Math.min(VS, peak), Tw, iref, y: nice(Math.min(VS, peak)) }; };
+  let blocks = {};
+  const vis = S => { blocks.f.block.style.display = S.wave === 'step' ? 'none' : ''; };
+  const upd = { acc: 0 };
+  OP.explorer({ init: { kind: 'integ', wave: 'step', A: 1, f: 100, R: 1e6, C: 1e-6 }, title: t('วงจรและขาเข้า', 'The circuit and its input'), layout: { rowAsp: 0.5, rowMin: 230, cktAspM: 0.55 },
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'k_integ', label: t('อินทิเกรเตอร์', 'integrator'), on: true }, { id: 'k_diff', label: t('ดิฟเฟอเรนชิเอเตอร์', 'differentiator') }], id => { S.kind = id.slice(2);
+        if (S.kind === 'diff') { S.R = 10e3; S.C = 0.1e-6; } else { S.R = 1e6; S.C = 1e-6; }   // each circuit starts from its own textbook values (RC = 1 ms for the differentiator, 1 s for the integrator)
+        blocks.R.set(Math.log10(S.R)); blocks.C.set(Math.log10(S.C)); build(); });
+      ui.radio(p, [{ id: 'w_step', label: WN.step, on: true }, { id: 'w_square', label: WN.square }, { id: 'w_tri', label: WN.tri }, { id: 'w_sine', label: WN.sine }], id => { S.wave = id.slice(2); vis(S); build(); });
+      ui.slider(p, { id: 'aA', label: t('ขนาด', 'amplitude'), min: 0.1, max: 2, step: 0.05, value: S.A, fmt: v => vtx(v), oninput: v => { S.A = v; build(); } });
+      blocks.f = OP.logSlider(p, 'aF', 'f', 1, 1e3, () => S.f, v => { S.f = v; }, build, OP.fHz, OP.rndR);
+      blocks.R = OP.logSlider(p, 'aR', 'R', 10e3, 1e6, () => S.R, v => { S.R = v; }, build, kO, OP.rndR);
+      blocks.C = OP.logSlider(p, 'aC', 'C', 0.01e-6, 10e-6, () => S.C, v => { S.C = v; }, build, OP.uF, x => OP.rndR(x * 1e9) / 1e9);
+      vis(S); },
+    spec: S => { const sig = S.wave === 'step' ? OP.src.step(S.A) : OP.src[S.wave](S.A, 1 / S.f); return OP.ckt(S.kind === 'integ' ? { kind: 'integ', R1: S.R, C: S.C, r1Name: 'R', mode: 'tran', sig } : { kind: 'diff', C: S.C, Rf: S.R, rfName: 'R', mode: 'tran', sig }); },
+    vo: S => { const e = expect(S); return { speed: 80 / e.iref, dotRef: e.iref }; },
+    onBuild: (c, S) => { const e = expect(S); S.e = e; S.rec = new OP.Rec(e.Tw, 1500, OP.OUTS, 5); S.rec.sync(c); },
+    tick: (dt, c, S, show) => { if (!S.rec) return; S.rec.run(c, dt); upd.acc += dt; if (upd.acc > 0.12) { upd.acc = 0; show(); } },
+    waves: [(ctx, b, bd, c, S) => { const ms = S.e.Tw < 1; OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'v1', color: C.elec, label: 'v_1' }], y: [-1.25 * S.A, 1.25 * S.A], yt: [-S.A, 0, S.A], ms, title: bd.short ? '' : t(`ขาเข้า: ${WN[S.wave]}`, `input: ${WN[S.wave]}`), short: bd.short }); },
+      (ctx, b, bd, c, S) => { const ms = S.e.Tw < 1, Y = S.e.y; OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'vo', color: C.q, label: 'v_o', w: 2.8 }], y: [-Y, Y], yt: [-Y, -Y / 2, 0, Y / 2, Y], ms, title: bd.short ? '' : t(`ขาออกของ${NAME[S.kind]}`, `output of the ${NAME[S.kind]}`), short: bd.short,
+        hl: Y >= 10 ? [{ y: VS, label: bd.short ? '' : '+V_sat', color: C.red }, { y: -VS, label: bd.short ? '' : '−V_sat', color: C.red }] : [] }); }],
+    after: (v, c) => OP.tags(v, c, { vg: 'N' }),
+    badge: (c, S) => { const rec = S.rec, vo = rec ? rec.last('vo') : 0, ms = S.e.Tw < 1, tm = rec ? (ms ? `${fd(rec.t * 1e3, 1)} ms` : `${fd(rec.t, 2)} s`) : ''; return [[`${NAME[S.kind]} · t = ${tm} · v_o = ${vtx(vo)}`, `${NAME[S.kind]} · t = ${tm} · v_o = ${vtx(vo)}`], Math.abs(vo) < 0.98 * VS ? 'ok' : 'wait']; },
+    rows: (c, S) => { const e = S.e, rec = S.rec; return [['RC', `${LS.u(e.RC * 1e3, 3)} ms`], [S.kind === 'integ' ? '1/RC' : 'RC', S.kind === 'integ' ? `${LS.u(1 / e.RC, 3)} s⁻¹` : `${LS.u(e.RC * 1e3, 3)} ms`], [S.kind === 'integ' && S.wave === 'step' ? t('ความชัน −A/RC', 'slope −A/RC') : t('ยอดที่คาด', 'expected peak'), S.kind === 'integ' && S.wave === 'step' ? `${LS.u(e.slope, 3)} V/s` : vtx(e.peak)], [t('หน้าต่างเวลา', 'time window'), e.Tw < 1 ? `${LS.u(e.Tw * 1e3, 3)} ms` : `${LS.u(e.Tw, 3)} s`], ['v_1(t)', vtx(rec ? rec.last('v1') : 0)], ['v_o(t)', vtx(rec ? rec.last('vo') : 0)], ['I_C', itx(c.I('C').re)]]; },
+    text: (c, S) => { const e = S.e;
+      if (S.kind === 'integ') { if (S.wave === 'step') return t(`กระแสคงที่ \\(A/R\\) = ${itx(S.A / S.R)} เข้า C ทำให้ขาออกลาดลง \\(-A/RC\\) = ${LS.u(e.slope, 3)} V/s ถึงราง −13 V ใน ${LS.u(VS / Math.abs(e.slope), 3)} s แล้วค้าง: อินทิเกรเตอร์จริงอิ่มตัวเสมอเมื่อขาเข้ามีกระแสตรง`, `A constant current \\(A/R\\) = ${itx(S.A / S.R)} into C makes the output ramp down at \\(-A/RC\\) = ${LS.u(e.slope, 3)} V/s, reaching the −13 V rail in ${LS.u(VS / Math.abs(e.slope), 3)} s and staying there: a real integrator always saturates on a dc input.`);
+        if (S.wave === 'square') return t(`ขั้นบวกให้ลาดลง ขั้นลบให้ลาดขึ้น: คลื่นสี่เหลี่ยมกลายเป็นสามเหลี่ยมยอด \\(AT/4RC\\) = ${vtx(e.peak)} (ลาด ${LS.u(S.A / e.RC, 3)} V/s นานครึ่งคาบ ${LS.u(500 / S.f, 3)} ms แล้วสลับ) ความถี่สูงขึ้นให้ยอดเล็กลง`, `A positive half gives a falling ramp, a negative one a rising ramp: the square wave becomes a triangle of peak \\(AT/4RC\\) = ${vtx(e.peak)} (a slope of ${LS.u(S.A / e.RC, 3)} V/s for a half period of ${LS.u(500 / S.f, 3)} ms, then reversed). A higher frequency gives a smaller peak.`);
+        if (S.wave === 'tri') return t(`อินทิกรัลของเส้นตรงคือพาราโบลา: ขาออกเป็นโค้งพาราโบลาต่อกัน ยอด \\(AT/8RC\\) = ${vtx(e.peak)} และกลับเครื่องหมาย`, `The integral of a straight line is a parabola: the output is a chain of parabolic arcs of peak \\(AT/8RC\\) = ${vtx(e.peak)}, inverted.`);
+        return t(`\\(-\\frac{1}{RC}\\int A\\sin\\omega t\\,dt = \\frac{A}{\\omega RC}\\cos\\omega t\\): ขาออกเป็นโคไซน์ขนาด ${vtx(e.peak)} นำหน้าไซน์ขาเข้า 90° (ที่ \\(\\omega RC\\) = 1 ขนาดเท่าขาเข้า: ตอนนี้ \\(\\omega RC\\) = ${LS.u(TAU * S.f * e.RC, 3)})`, `\\(-\\frac{1}{RC}\\int A\\sin\\omega t\\,dt = \\frac{A}{\\omega RC}\\cos\\omega t\\): the output is a cosine of ${vtx(e.peak)}, 90° ahead of the input sine (at \\(\\omega RC\\) = 1 it equals the input; now \\(\\omega RC\\) = ${LS.u(TAU * S.f * e.RC, 3)}).`); }
+      if (S.wave === 'step' || S.wave === 'square') return t(`ขอบของขั้นมีอนุพันธ์เป็นอนันต์: ประจุ \\(C\\,\\Delta v\\) = ${LS.u(S.C * (S.wave === 'step' ? S.A : 2 * S.A) * 1e6, 3)} µC พุ่งเข้า C ในก้าวเวลาเดียว ขาออกกระชากชนราง ±13 V แล้วกลับศูนย์ขณะขาเข้าคงที่ (อนุพันธ์ศูนย์)`, `The edge of a step has an infinite derivative: a charge \\(C\\,\\Delta v\\) = ${LS.u(S.C * (S.wave === 'step' ? S.A : 2 * S.A) * 1e6, 3)} µC rushes into C in a single time step, the output spikes to the ±13 V rail and returns to zero while the input is constant (zero derivative).`);
+      if (S.wave === 'tri') return t(`ความชันของสามเหลี่ยม \\(\\pm 4Af\\) = ±${LS.u(4 * S.A * S.f, 3)} V/s คงที่ทีละครึ่งคาบ ขาออก \\(-RC\\,dv_1/dt\\) = ∓${vtx(e.peak)} จึงเป็นคลื่นสี่เหลี่ยม`, `The triangle's slope \\(\\pm 4Af\\) = ±${LS.u(4 * S.A * S.f, 3)} V/s is constant within each half period, so the output \\(-RC\\,dv_1/dt\\) = ∓${vtx(e.peak)} is a square wave.`);
+      return t(`\\(-RC\\frac{d}{dt}A\\sin\\omega t = -\\omega RC\\,A\\cos\\omega t\\): ขาออกเป็นลบโคไซน์ขนาด \\(\\omega RC\\,A\\) = ${vtx(e.peak)} โตตามความถี่: สัญญาณรบกวนความถี่สูงจึงถูกขยายมาก`, `\\(-RC\\frac{d}{dt}A\\sin\\omega t = -\\omega RC\\,A\\cos\\omega t\\): the output is minus a cosine of \\(\\omega RC\\,A\\) = ${vtx(e.peak)}, growing with frequency, which is why high-frequency noise is amplified so much.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) อินทิเกรเตอร์ R = 1 MΩ, C = 0.1 µF ป้อนขั้น 2 V จงหาความชันของขาออก และเวลาที่ถึง −13 V', '1) An integrator with R = 1 MΩ and C = 0.1 µF receives a 2 V step. Find the slope of the output and the time to reach −13 V.'),
+      fields: [{ key: 'x', lab: t('ความชัน =', 'slope ='), ans: -20, unit: 'V/s', tol: 0.1 }, { key: 'y', lab: 't =', ans: 0.65, unit: 's', tol: 0.005 }], work: work(R`-\frac{1}{RC} = -\frac{1}{(10^6)(10^{-7})} = -10\ \text{s}^{-1};\quad \text{slope} = -10 \times 2 = -20\ \text{V/s};\quad t = \frac{13}{20} = 0.65\ \text{s}`) },
+    { q: t('2) ต้องการลาด −5 V/s จากขั้น 1 V ด้วย C = 1 µF จงหา R', '2) We want a −5 V/s ramp from a 1 V step with C = 1 µF. Find R.'),
+      fields: [{ key: 'x', lab: 'R =', ans: 200, unit: 'kΩ', tol: 0.5 }], work: work(R`\frac{1}{RC} = 5 \Rightarrow R = \frac{1}{5 \times 10^{-6}} = 200\ \text{k}\Omega`) },
+    { q: t('3) ดิฟเฟอเรนชิเอเตอร์ RC = 0.1 ms ป้อนไซน์ 1 V ยอด ที่ 1 kHz จงหาขนาดของขาออก', '3) A differentiator with RC = 0.1 ms receives a 1 V peak sine at 1 kHz. Find the output amplitude.'),
+      fields: [{ key: 'x', lab: '|v_o| =', ans: TAU * 1000 * 1e-4, unit: 'V', tol: 0.005 }], work: work(R`|v_o| = \omega RC\,A = 2\pi(1000)(10^{-4})(1\ \text{V}) = ${fd(TAU * 1000 * 1e-4, 3)}\ \text{V}`) },
+    { q: t('4) อินทิเกรเตอร์ RC = 10 ms ป้อนคลื่นสี่เหลี่ยม ±2 V ที่ 50 Hz จงหายอดของสามเหลี่ยมขาออก', '4) An integrator with RC = 10 ms receives a ±2 V square wave at 50 Hz. Find the peak of the output triangle.'),
+      fields: [{ key: 'x', lab: t('ยอด =', 'peak ='), ans: 1, unit: 'V', tol: 0.01 }], work: work(R`\text{slope} = \frac{2\ \text{V}}{10\ \text{ms}} = 200\ \text{V/s}\ \text{for}\ \frac{T}{2} = 10\ \text{ms}:\ 2\ \text{V peak to peak} = \pm 1\ \text{V}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

@@ -37,6 +37,9 @@
          gate: the gate-junction diode). pins: true writes D, G, S beside the leads. Results: I[id] = I_D from D to S, I[id + ':g'] = I_G from G to S;
          circuit.J(id) gives them in n-channel terms. Drawn as a JFET (Fig. 6.14) or, for kind 'dmos' / 'emos', as a MOSFET with an insulated gate
          and the substrate tied to the source (Figs. 6.30, 6.39; the enhancement type's channel bar is broken)
+     OA  operational amplifier (chapter 7, Oct 2026): P (noninverting input), N (inverting input), O (output), node names with P and N on one line
+         and O off to one side; gain (default 2e5), vsat (default 13 V: the output saturates smoothly at ±vsat, a tanh); no input current, zero
+         output resistance. Results: I[id] = the current into the output terminal (from the circuit); circuit.OA(id) = { vp, vn, vd, vo, io, state }
    Sign convention for results: I[id] is the current through the part from a to b. */
 (function (global) {
 'use strict';
@@ -223,13 +226,24 @@ FET.biasOf = (p, rs, vg = 0) => { const { vt, b } = FET.kb(p), f = v => (v > vt 
   let lo = 0, hi = 2 * f(vg) + 1e-9; for (let k = 0; k < 90; k++) { const m = (lo + hi) / 2; if (m - f(vg - m * rs) < 0) lo = m; else hi = m; } const id = (lo + hi) / 2; return { id, vgs: vg - id * rs }; };
 CK.FET = FET;
 
+/* ---------------- the op-amp (chapter 7, Oct 2026) ----------------
+   An ideal op-amp but for a finite open-loop gain A and the supply rails: v_o = V_sat·tanh(A v_d / V_sat), v_d = v_P − v_N, so that the output is
+   A·v_d while |v_o| is well below V_sat and settles at ±V_sat beyond (the book's op-amp with Av = 200 000 and a virtual short at the inputs).
+   Infinite input resistance (GMIN only) and zero output resistance (a voltage source at O). DC and transients: Newton on v_d with the output
+   linearised (slope g = dv_o/dv_d); AC uses the slope at the last DC point (A in the linear region) */
+const OPAMP = { A: 2e5, VSAT: 13 };
+OPAMP.rails = p => (p.vhi !== undefined || p.vlo !== undefined ? { Vs: ((p.vhi ?? OPAMP.VSAT) - (p.vlo ?? -OPAMP.VSAT)) / 2, vm: ((p.vhi ?? OPAMP.VSAT) + (p.vlo ?? -OPAMP.VSAT)) / 2 } : { Vs: p.vsat ?? OPAMP.VSAT, vm: 0 });   // vhi / vlo: single-supply rails (a comparator on 0 and +V, chapter 8); the output swings about their middle
+OPAMP.f = (p, vd, vc = 0) => { const A = p.gain ?? OPAMP.A, Ac = p.gc || 0, { Vs, vm } = OPAMP.rails(p), x = A * vd + Ac * vc, r = x / Vs, u = Math.pow(r * r, 8), q = Math.pow(1 + u, -1 / 16), fp = q / (1 + u);   // gc: the common-mode gain A_c (chapter 7, Eq. 10.28): x = A_d v_d + A_c v_c. v_o = x (1 + (x/V_sat)^16)^(−1/16): linear to 0.01 % at 0.6 V_sat, at the rail by 1.3 V_sat (a tanh bends far too early for an open-loop measurement such as Example 10.21)
+  return { v: vm + x * q, g: A * fp, gP: fp * (A + Ac / 2), gN: fp * (A - Ac / 2), x, fp }; };
+CK.OPAMP = OPAMP;
+
 /* ---------------- the circuit ---------------- */
 class Circuit {
   constructor(spec) {
     this.nodes = spec.nodes;                      // name -> [x, y] in grid units
     this.ground = spec.ground || Object.keys(spec.nodes)[0];
     this.parts = spec.parts.map((p, i) => ({ ...p, id: p.id || (p.type + '_' + i) }));
-    this.parts.forEach(p => { if (p.type === 'Q') { p.a = p.C; p.b = p.E; } if (p.type === 'J') { p.a = p.D; p.b = p.S; } });   // a transistor's collector (drain) path is its a → b (dots, picking, the meter's clamp)
+    this.parts.forEach(p => { if (p.type === 'Q') { p.a = p.C; p.b = p.E; } if (p.type === 'J') { p.a = p.D; p.b = p.S; } if (p.type === 'OA') { p.a = p.O; p.b = this.ground; } });   // a transistor's collector (drain) path is its a → b (dots, picking, the meter's clamp)
     this.byId = {}; this.parts.forEach(p => { this.byId[p.id] = p; });
     this.mode = spec.mode || 'dc';                // 'dc' | 'ac' | 'tran'
     this.w = spec.w || 2 * Math.PI * 50;          // AC angular frequency (rad/s)
@@ -249,11 +263,12 @@ class Circuit {
      circuit is solved, the diode voltages are updated (limited on the exponential), until they stop moving. result.iters counts the solves */
   solve(dt) {
     if (this.mode === 'tran' && !(dt > 0)) dt = 1e-6;   // a board solves once without a step: look 1 µs ahead (capacitor voltages are only updated by step)
-    const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'), js = this.parts.filter(p => p.type === 'J');
-    if ((!ds.length && !qs.length && !js.length) || this.mode === 'ac') return this.solve1(dt);
+    const ds = this.parts.filter(p => p.type === 'D'), qs = this.parts.filter(p => p.type === 'Q'), js = this.parts.filter(p => p.type === 'J'), oas = this.parts.filter(p => p.type === 'OA');
+    if ((!ds.length && !qs.length && !js.length && !oas.length) || this.mode === 'ac') return this.solve1(dt);
     ds.forEach(p => { if (p.vd === undefined || !isFinite(p.vd)) p.vd = (p.model || 'shockley') === 'shockley' || p.model === 'table' ? 0.6 : 0; });
     qs.forEach(p => { if (!isFinite(p.vbe)) p.vbe = BJT.v0(p); if (!isFinite(p.vce)) p.vce = 0; });
     js.forEach(p => { if (!isFinite(p.vgs)) p.vgs = 0; if (!isFinite(p.vds)) p.vds = 0; });
+    oas.forEach(p => { if (!isFinite(p.vd)) p.vd = 0; if (!isFinite(p.vc)) p.vc = 0; });
     const moved = (a, b) => Math.abs(a - b) > 1e-9 + 1e-7 * Math.abs(a);
     let r = null, it = 0, damp = false;
     for (; it < 400; it++) { r = this.solve1(dt); if (r.error === 'singular') return r; let done = true;
@@ -268,6 +283,9 @@ class Circuit {
         let ng = gd ? DIODE.lim(gd, vg, p.vgs) : vg, nd = vd;   // the square law is smooth: plain Newton, smaller steps only once damping has set in
         if (damp) { ng = p.vgs + Math.max(-0.5, Math.min(0.5, ng - p.vgs)); nd = p.vds + Math.max(-1, Math.min(1, nd - p.vds)); }
         if (moved(ng, p.vgs) || moved(nd, p.vds)) done = false; p.vgs = ng; p.vds = nd; });
+      oas.forEach(p => { const Vs = OPAMP.rails(p).Vs, A = p.gain ?? OPAMP.A, v = r.V[p.P].re - r.V[p.N].re, g = OPAMP.f(p, p.vd, p.vc).g; p.vc = (r.V[p.P].re + r.V[p.N].re) / 2;   // the common-mode input follows freely (A_c is small)
+        const lim = damp ? 2 * Vs / A : g < 0.02 * A ? 4 * Vs : 50 * Vs / A;   // the linear region is a few V_sat/A wide: small steps there, free steps once the output is saturated (v_d then hardly matters), tiny steps when damping
+        const nv = p.vd + Math.max(-lim, Math.min(lim, v - p.vd)); if (moved(nv, p.vd)) done = false; p.vd = nv; });
       if (done) break; }
     r.iters = it + 1;
     /* a straight-line diode left "on" with (almost) no current sits on its boundary: restart it once from "off", so that with no current
@@ -283,14 +301,14 @@ class Circuit {
     const parent = {}; names.forEach(n => { parent[n] = n; });
     const find = n => { while (parent[n] !== n) { parent[n] = parent[parent[n]]; n = parent[n]; } return n; };
     const shorts = [], others = [];
-    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent) || (p.type === 'Q' && !(p.B in parent)) || (p.type === 'J' && !(p.G in parent))) throw new Error('unknown node in ' + p.id);
+    for (const p of parts) { if (!(p.a in parent) || !(p.b in parent) || (p.type === 'Q' && !(p.B in parent)) || (p.type === 'J' && !(p.G in parent)) || (p.type === 'OA' && !(p.P in parent && p.N in parent))) throw new Error('unknown node in ' + p.id);
       if (this.isShort(p)) { shorts.push(p); const ra = find(p.a), rb = find(p.b); if (ra !== rb) parent[ra] = rb; } else others.push(p); }
     const gRoot = find(this.ground); const netOf = {}; let nNet = 0; const netIdx = { [gRoot]: -1 };
     for (const n of names) { const r = find(n); if (!(r in netIdx)) netIdx[r] = nNet++; netOf[n] = netIdx[r]; }
     // ---- 2. build MNA over nets ----
     const extra = []; // parts needing a branch-current unknown
     for (const p of others) {
-      if (p.type === 'V' || p.type === 'VAC' || p.type === 'motor' || p.type === 'E' || p.type === 'H') extra.push(p);
+      if (p.type === 'V' || p.type === 'VAC' || p.type === 'motor' || p.type === 'E' || p.type === 'H' || p.type === 'OA') extra.push(p);
       if (p.type === 'XF') extra.push(p);
       if (p.type === 'C' && mode === 'dc') { /* open */ }
     }
@@ -345,6 +363,11 @@ class Circuit {
     });
     extra.forEach((p, k) => {
       const r = nNet + k;
+      if (p.type === 'OA') { // V_O = f(x) linearised at the last x = A_d v_d + A_c v_c: V_O − f'(A_d + A_c/2) V_P − f'(A_c/2 − A_d) V_N = f0 − f' x0; the branch current x flows from O through the op-amp to ground
+        const nO = netOf[p.O], nP = netOf[p.P], nN = netOf[p.N], vd0 = p.vd ?? 0, vc0 = p.vc ?? 0, f = OPAMP.f(p, vd0, vc0);
+        if (nO >= 0) { Ar[nO][r] += 1; Ar[r][nO] += 1; } if (nP >= 0) Ar[r][nP] -= f.gP; if (nN >= 0) Ar[r][nN] += f.gN;
+        if (mode !== 'ac') br[r] = f.v - f.fp * f.x;   // f.v includes the rails' middle
+        return; }
       if (p.type === 'XF') {
         // v_ab = n v_cd ; i_c(into dot c, out of the secondary) = -n i_a.  Unknown: primary current i1 (into a).
         const na = netOf[p.a], nb = netOf[p.b], nc = netOf[p.c], nd = netOf[p.d], n = p.n;
@@ -457,6 +480,9 @@ class Circuit {
   J(id) { const p = this.byId[id], s = p.pch ? -1 : 1, r = this.result, v = n => (r ? r.V[n].re : 0), i = k => (r && r.I[k] ? r.I[k].re : 0);
     const VGS = s * (v(p.G) - v(p.S)), VDS = s * (v(p.D) - v(p.S)), m = FET.iv(p, VGS, VDS), kb = FET.kb(p), vov = VGS - kb.vt;
     return { ID: s * i(id), IG: s * i(id + ':g'), IS: s * (i(id) + i(id + ':g')), VGS, VDS, VDG: VDS - VGS, region: m.region, vov, rd: vov > 0 ? 1 / (2 * kb.b * vov) : Infinity }; }
+  /* an op-amp's state: vd = v_P − v_N, vo, io = the current it delivers into the circuit, state 'lin' (|v_o| below 0.98 V_sat) or 'sat+' / 'sat−' */
+  OA(id) { const p = this.byId[id], r = this.result, v = n => (r ? r.V[n].re : 0), vo = v(p.O), { Vs, vm } = OPAMP.rails(p);
+    return { vp: v(p.P), vn: v(p.N), vd: v(p.P) - v(p.N), vc: (v(p.P) + v(p.N)) / 2, vo, io: -(r && r.I[id] ? r.I[id].re : 0), state: vo > vm + 0.98 * Vs ? 'sat+' : vo < vm - 0.98 * Vs ? 'sat−' : 'lin' }; }
   Vab(id) { const p = this.byId[id]; return Cx.sub(this.V(p.a), this.V(p.b)); }
   I(id) { return (this.result && this.result.I[id]) || cx(0); }
   /* power absorbed by the part (DC/tran: instantaneous; AC: average, phasors are peak) */
@@ -601,7 +627,8 @@ class View {
     const s = Math.min(box.w / (x1 - x0), box.h / (y1 - y0)); this.u = s;
     this.ox = box.x + (box.w - (x1 - x0) * s) / 2 - x0 * s; this.oy = box.y + (box.h - (y1 - y0) * s) / 2 - y0 * s;
     this.flows = {};
-    this.ckt.parts.forEach(p => { const path = this.path(p); if (path) { const f = new Flow(path); this.flows[p.id] = f; }
+    this.ckt.parts.forEach(p => { if (p.type === 'OA') { const g = this.oaGeom(p); this.flows[p.id] = new Flow([this.P(p.O), g.apex]); return; }   // the output lead only: I[id] > 0 flows into the output terminal
+      const path = this.path(p); if (path) { const f = new Flow(path); this.flows[p.id] = f; }
       if (p.type === 'XF') this.flows[p.id + ':2'] = new Flow([this.P(p.c), this.P(p.d)]);
       if (p.type === 'Q') this.flows[p.id + ':b'] = new Flow(this.qBasePath(p));
       if (p.type === 'J') this.flows[p.id + ':g'] = new Flow(this.jGatePath(p)); });
@@ -611,6 +638,7 @@ class View {
     if (p.type === 'XF') return [this.P(p.a), this.P(p.b)];
     if (p.type === 'Q') { const g = this.qGeom(p); return [g.C, g.cT, g.at(-0.14, 0.31), g.at(0.14, 0.31), g.eT, g.E]; }   // collector current: in at the collector, across the base, out of the emitter
     if (p.type === 'J') { const g = this.jGeom(p); return [g.D, g.dT, g.dB, g.sB, g.sT, g.S]; }   // drain current: in at the drain, down the channel bar, out of the source
+    if (p.type === 'OA') { const g = this.oaGeom(p); return [g.P, g.bP, g.apex, g.bN, g.N]; }   // the outline, for picking only (no dots through the op-amp)
     const pts = [this.P(p.a)]; (p.pts || []).forEach(q => pts.push(this.P(q))); pts.push(this.P(p.b)); return pts;
   }
   ampScale() { return this.o.speed ?? 60; }
@@ -648,6 +676,7 @@ class View {
     for (const n in c.nodes) { if ((deg[n] || 0) >= 3) { const [x, y] = this.P(n); ctx.beginPath(); ctx.arc(x, y, Math.max(3, u * 0.07), 0, 2 * Math.PI); ctx.fillStyle = vcol(n); ctx.fill(); } }
     // ground symbol
     if (this.o.ground !== false) this.drawGround(c.ground);
+    (this.o.grounds || []).forEach(n => { if (c.nodes[n]) this.groundGlyph(this.P(n)); });
     // node letters at every point of each node (the course labels all points joined by wire with the same letter)
     if (this.o.netLetters) { const T = this.o.netLetters; const ctx = this.ctx; const r = Math.max(9, this.u * 0.2);
       for (const n in c.nodes) { const k = T.netOf[n]; if (k === undefined) continue; if (this.o.letterNodes && !this.o.letterNodes.includes(n)) continue;
@@ -671,7 +700,7 @@ class View {
     }
     c.parts.forEach(p => { if (p.hidden) return; if (p.type === 'Q') this.qArrow(p); if (p.type === 'J') this.jArrow(p); });
     // current labels
-    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S' || p.type === 'Q' || p.type === 'J'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
+    if (this.o.showI) c.parts.forEach(p => { if (p.showI === false || (this.o.showI !== 'all' && !p.showI && (p.type === 'W' || p.type === 'S' || p.type === 'Q' || p.type === 'J' || p.type === 'OA'))) return; if (p.type === 'VM') return; this.drawILabel(p); });
     // the meter (voltage probes and a current clamp, opened with the button at the top right)
     this._drawT = performance.now(); this.drawMeter();
     // hover tooltip
@@ -691,7 +720,8 @@ class View {
     segs.forEach(([t, sub]) => { ctx.font = fnt(sub); ctx.fillText(t, x0, y + (sub ? size * 0.3 : 0)); x0 += ctx.measureText(t).width; }); }
   banner(s) { const ctx = this.ctx, b = this.box; ctx.save(); ctx.fillStyle = 'rgba(192,57,43,.9)'; ctx.fillRect(b.x + 8, b.y + 8, b.w - 16, 28); this.text(s, b.x + b.w / 2, b.y + 22, { color: '#fff', size: 14.5, weight: '600' }); ctx.restore(); }
   stroke(pts, color, w) { const ctx = this.ctx; ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath(); pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1])); ctx.stroke(); ctx.restore(); }
-  drawGround(n) { if (!n) return; const ctx = this.ctx, u = this.u; const [x, y] = this.P(n); const g = this.o.groundAt ? this.P(this.o.groundAt) : [x, y];
+  drawGround(n) { if (!n) return; const [x, y] = this.P(n); this.groundGlyph(this.o.groundAt ? this.P(this.o.groundAt) : [x, y]); }
+  groundGlyph(g) { const ctx = this.ctx, u = this.u;
     const s = u * 0.28; ctx.save(); ctx.strokeStyle = PAL.wire; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(g[0], g[1]); ctx.lineTo(g[0], g[1] + s);
     for (let k = 0; k < 3; k++) { const w = s * (1 - k * 0.32); ctx.moveTo(g[0] - w, g[1] + s + k * s * 0.33); ctx.lineTo(g[0] + w, g[1] + s + k * s * 0.33); } ctx.stroke(); ctx.restore(); }
   /* part geometry: leads + body centred between a and b */
@@ -704,6 +734,7 @@ class View {
     if (p.type === 'XF') { this.drawXF(p, vcol, hi); return; }
     if (p.type === 'Q') { this.drawQ(p, vcol, hi); return; }
     if (p.type === 'J') { this.drawJ(p, vcol, hi); return; }
+    if (p.type === 'OA') { this.drawOA(p, vcol, hi); return; }
     const [ax, ay] = this.P(p.a), [bx, by] = this.P(p.b); const L = Math.hypot(bx - ax, by - ay); const ang = Math.atan2(by - ay, bx - ax);
     const body = Math.min(L * 0.7, u * (p.bodyLen || (p.type === 'R' ? 1.1 : p.type === 'L' ? 1.2 : 0.95)));
     const m1 = (L - body) / 2;
@@ -731,7 +762,9 @@ class View {
     const name = p.name ?? p.id.replace(/_\d+$/, ''); const v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : this.valueText(p);
     const sz = Math.max(11.5, u * 0.31);
     if (vertical) { this.text(name, lx, ly - sz * 0.62, { align, color: PAL.ink, size: sz, weight: '600' }); if (v) this.text(v, lx, ly + sz * 0.62, { align, color: PAL.muted, size: sz * 0.92 }); }
-    else { const yy = side > 0 ? ly - sz * 0.6 : ly + sz * 0.6; this.text(v ? `${name}  ${v}` : name, lx, yy, { align, color: PAL.ink, size: sz, weight: '600' }); }
+    else { const yy = side > 0 ? ly - sz * 0.6 : ly + sz * 0.6;
+      if (p.stack && v) { const y1 = side > 0 ? yy - sz * 1.1 : yy; this.text(name, lx, y1, { align, color: PAL.ink, size: sz, weight: '600' }); this.text(v, lx, y1 + sz * 1.1, { align, color: PAL.muted, size: sz * 0.92 }); return; }   // stack: the name over the value (a horizontal part in a tight row, chapter 7)
+      this.text(v ? `${name}  ${v}` : name, lx, yy, { align, color: PAL.ink, size: sz, weight: '600' }); }
   }
   valueText(p) {
     switch (p.type) { case 'D': return p.vz ? `V_Z = ${CK.eng(p.vz, 'V')}` : (p.model === 'simple' || p.model === 'pwl') ? `${CK.eng(p.vk ?? 0.7, 'V')}` : ''; case 'R': case 'lamp': return CK.eng(p.value, 'Ω'); case 'V': return CK.eng(p.value, 'V'); case 'I': return CK.eng(p.value, 'A');
@@ -831,6 +864,22 @@ class View {
         lines.forEach((s, k) => this.text(s, lx, ly + (k - (n - 1) / 2) * sz * 1.08, { align: al, color: k ? PAL.muted : PAL.ink, size: k ? sz * 0.92 : sz, weight: k ? '' : '600' })); }
       else this.text(v ? `${name}  ${String(v).replace(/\n/g, ', ')}` : name, lx, ly, { align: al, color: PAL.ink, size: sz, weight: '600' }); }
   }
+  /* the op-amp (Fig. 10.1): a triangle whose base faces the two inputs (P above N, or beside each other) and whose apex points at the output; leads
+     from P, N to the base and from the apex to O; + and − signs inside the base at the rows of P and N */
+  oaGeom(p) { const u = this.u, P = this.P(p.P), N = this.P(p.N), O = this.P(p.O), m = [(P[0] + N[0]) / 2, (P[1] + N[1]) / 2], L = Math.hypot(O[0] - m[0], O[1] - m[1]) || 1, ax = (O[0] - m[0]) / L, ay = (O[1] - m[1]) / L;
+    const nx = -ay, ny = ax, sP = (P[0] - m[0]) * nx + (P[1] - m[1]) * ny, h = Math.max(Math.abs(sP) + 0.32 * u, 0.6 * u), lead = Math.min(0.35 * u, L * 0.2), base = lead, apexD = L - lead;
+    const at = (t, sd) => [m[0] + ax * t + nx * sd, m[1] + ay * t + ny * sd];
+    return { P, N, O, m, at, h, bP: at(base, sP), bN: at(base, -sP), b1: at(base, h), b2: at(base, -h), apex: at(apexD, 0), cc: at((base + apexD) / 2, 0), base, apexD, sP, ax, ay, nx, ny }; }
+  drawOA(p, vcol, hi) {
+    const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055), g = this.oaGeom(p), col = hi ? PAL.sel : (p.color || PAL.body), sz = Math.max(11.5, u * 0.3);
+    this.stroke([g.P, g.bP], hi ? PAL.sel : vcol(p.P), lw); this.stroke([g.N, g.bN], hi ? PAL.sel : vcol(p.N), lw); this.stroke([g.apex, g.O], hi ? PAL.sel : vcol(p.O), lw);
+    ctx.save(); ctx.fillStyle = 'rgba(90,209,255,.12)'; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = 'round'; ctx.beginPath(); ctx.moveTo(g.b1[0], g.b1[1]); ctx.lineTo(g.apex[0], g.apex[1]); ctx.lineTo(g.b2[0], g.b2[1]); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore();
+    const sgn = (pt, s) => { const q = [pt[0] + g.ax * 0.2 * u, pt[1] + g.ay * 0.2 * u]; this.text(s, q[0], q[1], { color: PAL.ink, size: sz * 1.05, weight: '700' }); };
+    sgn(g.bP, '+'); sgn(g.bN, '−');
+    if (this.o.labels && p.label !== false) { const name = p.name ?? p.id.replace(/_\d+$/, ''), v = p.valText !== undefined ? (typeof p.valText === 'function' ? p.valText(p) : p.valText) : '';
+      const top = g.at((g.base + g.apexD) / 2, -(p.labelSide || 1) * (g.h * 0.55 + 0.3 * u)), vert = Math.abs(g.ay) > 0.7;   // above the body of a rightward op-amp (labelSide: −1 below; beside it when the op-amp points up or down)
+      this.text(v ? `${name}  ${v}` : name, top[0], top[1] - (vert ? 0 : sz * 0.2), { color: PAL.ink, size: sz, weight: '600', align: vert ? 'left' : 'center' }); }
+  }
   drawXF(p, vcol, hi) {
     const ctx = this.ctx, u = this.u, lw = Math.max(2, u * 0.055); const A = this.P(p.a), B = this.P(p.b), Cc = this.P(p.c), D = this.P(p.d);
     const col = hi ? PAL.sel : PAL.body; const turns = (x, ya, yb, dir, nT) => { const y0 = Math.min(ya, yb), h = Math.abs(yb - ya) / nT; if (h < 0.5) return; ctx.beginPath(); ctx.moveTo(x, y0);
@@ -848,7 +897,7 @@ class View {
   /* ---------- interaction ---------- */
   pick(x, y) {
     let best = null, bd = Math.max(9, this.u * 0.22);
-    this.ckt.parts.forEach(p => { const pts = p.type === 'XF' ? [this.P(p.a), this.P(p.d)] : this.path(p);
+    this.ckt.parts.forEach(p => { if (p.hidden) return; const pts = p.type === 'XF' ? [this.P(p.a), this.P(p.d)] : this.path(p);
       for (let i = 1; i < pts.length; i++) { const d = segDist(x, y, pts[i - 1], pts[i]); if (d < bd || (best && best.type === 'W' && p.type !== 'W' && d < bd + 4)) { bd = d; best = p; } } });
     return best;
   }
@@ -886,7 +935,7 @@ class View {
       jack: { red: [x + 26, y + h], clamp: [x + w / 2, y + h], black: [x + w - 26, y + h] } }; }
   mtSize() { const L = Math.max(26, Math.min(40, this.u * 0.7)), f = L / 40; return { L, N: 11 * f, w: 9 * f }; }
   mtClampR() { return Math.max(8, Math.min(12, this.u * 0.2)); }
-  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd', 'B', 'G'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
+  mtNodes() { if (this._mtN) return this._mtN; const s = new Set(); this.ckt.parts.forEach(p => ['a', 'b', 'c', 'd', 'B', 'G', 'P', 'N', 'O'].forEach(k => { if (p[k] !== undefined && this.ckt.nodes[p[k]]) s.add(p[k]); })); return (this._mtN = s); }
   mtParts() { return this.ckt.parts.filter(p => p.type !== 'VM' && p.type !== 'XF'); }   // the clamp goes round wires and elements
   /* after a rebuild: a probe on a node that is gone, or the clamp on a part that is gone, goes back to the meter; one that no longer sits
      where it was moves to its node, or to the middle of its part */
@@ -974,6 +1023,8 @@ class View {
     if (this.o.tip) { const L = this.o.tip(p, c); if (L && L.length) this.tipBox(L); return; }   // o.tip(part, circuit) → lines (first line = title)
     if (p.type === 'Q') { const q = c.Q(p.id), e = p.pnp ? ['V_EB', 'V_EC'] : ['V_BE', 'V_CE'], reg = { cutoff: MCt('ย่านคัตออฟ', 'cutoff'), saturation: MCt('ย่านอิ่มตัว', 'saturation'), active: MCt('ย่านแอกทีฟ', 'active') }[q.region];
       this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} (${p.pnp ? 'pnp' : 'npn'}) · ${reg}`, `I_B = ${CK.eng(q.IB, 'A')}, I_C = ${CK.eng(q.IC, 'A')}`, `I_E = ${CK.eng(q.IE, 'A')}`, `${e[0]} = ${CK.eng(q.VBE, 'V')}, ${e[1]} = ${CK.eng(q.VCE, 'V')}`]); return; }
+    if (p.type === 'OA') { const a = c.OA(p.id), st = { lin: MCt('ย่านเชิงเส้น', 'linear'), 'sat+': MCt('อิ่มตัวที่ราง +', 'saturated at the + rail'), 'sat−': MCt('อิ่มตัวที่ราง −', 'saturated at the − rail') }[a.state];
+      this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} · ${st}`, `V+ = ${CK.eng(a.vp, 'V')}, V− = ${CK.eng(a.vn, 'V')}`, `V_d = ${CK.eng(a.vd, 'V')}, V_o = ${CK.eng(a.vo, 'V')}`, `I_o = ${CK.eng(a.io, 'A')}`]); return; }
     if (p.type === 'J') { const j = c.J(p.id), s = p.pch ? -1 : 1, reg = { cutoff: MCt('คัตออฟ', 'cutoff'), ohmic: MCt('ย่านโอห์มิก', 'ohmic region'), saturation: MCt('ย่านอิ่มตัว (กระแสคงที่)', 'saturation (constant current)') }[j.region];
       this.tipBox([`${p.name ?? p.id.replace(/_\d+$/, '')} (${p.pch ? 'p' : 'n'}-channel ${FET.kind(p) === 'jfet' ? 'JFET' : 'MOSFET'}) · ${reg}`, `I_D = ${CK.eng(j.ID, 'A')}, I_G = ${CK.eng(j.IG, 'A')}`, `V_GS = ${CK.eng(s * j.VGS, 'V')}, V_DS = ${CK.eng(s * j.VDS, 'V')}`]); return; }
     const v = c.Vab(p.id), i = c.I(p.id); const lines = [];

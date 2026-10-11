@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="7.2 — Inverting and Noninverting Amplifiers">7.2 — วงจรขยายกลับเฟสและไม่กลับเฟส</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรขยายกลับเฟส ไม่กลับเฟส และตัวตามแรงดัน <span class="en">Inverting and noninverting amplifiers, the unity follower</span></h1>
+<h1 data-l="en">Inverting and noninverting amplifiers, the unity follower <span class="en">Feedback turns a gain of 200 000 into exactly \(-R_f/R_1\)</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 1 หน้า 13–18 และแบบฝึกหัดหน้า 21–22 ออปแอมป์มีอัตราขยายสูงเกินใช้ จึงต่อตัวต้านทานป้อนขาออกกลับเข้าขั้ว − (ป้อนกลับลบ): ขาออกจะปรับตัวจนแรงดันระหว่างขั้วเข้า \(V_i = V_o/A\) แทบเป็นศูนย์ ขั้ว − จึงเป็น<b>กราวด์เสมือน</b> (วงจรกลับเฟส) หรือตาม \(V_1\) (วงจรไม่กลับเฟส) และอัตราขยายถูกกำหนดด้วยตัวต้านทานสองตัวเท่านั้น หน้านี้มีวงจรทั้งสามแบบที่ปรับค่าได้พร้อมกราฟถ่ายโอน (ส่วน A) Examples 10.5–10.6 โจทย์หน้า 21–22 ที่มีโพเทนชิออมิเตอร์ และตัวตามแรงดันที่ทำหน้าที่บัฟเฟอร์</p>
+<p class="sub" data-l="en">Chapter 7 slide set I, pp. 13–18 and the exercises on pp. 21–22. The op-amp's gain is far too high to use as it is, so a resistor feeds the output back to the − input (negative feedback): the output adjusts itself until the voltage between the inputs, \(V_i = V_o/A\), is nearly zero. The − input then sits at a <b>virtual ground</b> (inverting circuit) or follows \(V_1\) (noninverting circuit), and the gain is set by two resistors alone. This page has all three circuits with adjustable values and the transfer graph (section A), Examples 10.5–10.6, the potentiometer problems of pp. 21–22, and the unity follower acting as a buffer.</p>
+<div class="equation-box eqwrap">$$ V_i = \frac{V_o}{A} \approx 0 $$ $$ \text{inverting: } V_o = -\frac{R_f}{R_1}V_1 $$ $$ \text{noninverting: } V_o = \left(1 + \frac{R_f}{R_1}\right)V_1 $$ $$ \text{follower: } V_o = V_1 $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>สองกฎของออปแอมป์ที่มีป้อนกลับลบ</b>: (1) ขั้วเข้าไม่ดึงกระแส (\(R_i\) สูงมาก) (2) \(V_+ \approx V_-\) เพราะ \(V_o = AV_i\) และ \(V_o\) มีขอบเขต (\(\pm V_{sat}\)) ขณะที่ \(A\) ใหญ่มาก: \(V_i\) จึงไม่เกิน 13 V/2 × 10⁵ = 65 µV</li>
+  <li><b>วงจรกลับเฟส</b> (หน้า 14–15, รูป 10.33–10.34, สมการ 10.8): ขั้ว + ต่อกราวด์ ขั้ว − จึงเป็นกราวด์เสมือน กระแส \(V_1/R_1\) ไหลผ่าน \(R_f\) ทั้งหมด \(V_o = -(R_f/R_1)V_1\) Example 10.5: −10 V อัตราขยายเป็นลบและอาจน้อยกว่า 1 ได้</li>
+  <li><b>วงจรไม่กลับเฟส</b> (หน้า 16–17, รูป 10.35, สมการ 10.9): \(V_1\) เข้าขั้ว + ขั้ว − ตามไปที่ \(V_1\) ตัวแบ่งแรงดัน \(R_1\)–\(R_f\) จากขาออกต้องให้ \(V_1\) ที่ขั้ว − จึง \(V_o = (1 + R_f/R_1)V_1\) Example 10.6: 12 V อัตราขยายไม่ต่ำกว่า 1 และแหล่งจ่ายไม่ต้องจ่ายกระแส</li>
+  <li><b>ตัวตามแรงดัน</b> (หน้า 18, รูป 10.36, สมการ 10.10): ขาออกต่อตรงเข้าขั้ว − อัตราขยาย 1 ไม่กลับเฟส ใช้เป็นบัฟเฟอร์: ความต้านทานขาเข้าสูง ขาออกต่ำ (เหมือนอิมิตเตอร์ตามแต่ไม่มี 0.7 V หาย)</li>
+  <li><b>ขอบเขต</b>: สูตรใช้ได้ขณะ \(|V_o| < V_{sat}\) ≈ 13 V เท่านั้น เลยจากนั้นขาออกถูกตัด (ส่วน A: กราฟถ่ายโอนหักเป็นเส้นนอน) · อัตราขยายวงปิดที่แท้จริงคือ \(-\frac{R_f/R_1}{1 + (1 + R_f/R_1)/A}\) ยิ่ง \(A\) ใหญ่ยิ่งใกล้สูตร</li>
+  <li><b>โพเทนชิออมิเตอร์ใน \(R_1\)</b> (หน้า 21–22): วงจรกลับเฟสปรับได้ −50 ถึง −25 วงจรไม่กลับเฟสให้ 10.5 ลงถึง 5.5 V</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The two rules of an op-amp with negative feedback</b>: (1) the input terminals draw no current (\(R_i\) is very high); (2) \(V_+ \approx V_-\), because \(V_o = AV_i\) and \(V_o\) is bounded (\(\pm V_{sat}\)) while \(A\) is huge: \(V_i\) never exceeds 13 V/2 × 10⁵ = 65 µV.</li>
+  <li><b>The inverting amplifier</b> (pp. 14–15, Figs. 10.33–10.34, Eq. 10.8): the + input is grounded, so the − input is a virtual ground; the current \(V_1/R_1\) flows entirely through \(R_f\), and \(V_o = -(R_f/R_1)V_1\). Example 10.5: −10 V. The gain is negative and may be below 1.</li>
+  <li><b>The noninverting amplifier</b> (pp. 16–17, Fig. 10.35, Eq. 10.9): \(V_1\) enters the + input and the − input follows it; the \(R_1\)–\(R_f\) divider from the output must deliver \(V_1\) at the − input, so \(V_o = (1 + R_f/R_1)V_1\). Example 10.6: 12 V. The gain is never below 1, and the source supplies no current.</li>
+  <li><b>The unity follower</b> (p. 18, Fig. 10.36, Eq. 10.10): the output is tied straight to the − input; gain 1, no inversion. Used as a buffer: high input resistance, low output resistance (an emitter follower without the lost 0.7 V).</li>
+  <li><b>Limits</b>: the formulas hold only while \(|V_o| < V_{sat}\) ≈ 13 V; beyond that the output clips (section A: the transfer graph bends flat). The true closed-loop gain is \(-\frac{R_f/R_1}{1 + (1 + R_f/R_1)/A}\), closer to the formula the larger \(A\).</li>
+  <li><b>A potentiometer in \(R_1\)</b> (pp. 21–22): the inverting circuit adjusts from −50 to −25, the noninverting one gives 10.5 down to 5.5 V.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch7a/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 14, Op-Amp Basics: the basic circuit connection using an op-amp provides operation as a constant-gain multiplier; an input signal V_1 is applied through resistor R_1 to the minus input, the output is connected back to the same minus input through resistor R_f, the plus input is connected to ground; the resulting output is opposite in phase to the input signal; V_o/V_1 = −R_f/R_1.">
+    <figcaption data-l="th">สไลด์หน้า 14: การต่อพื้นฐาน \(V_o/V_1 = -R_f/R_1\) (รูป 10.33)</figcaption><figcaption data-l="en">Slide p. 14: the basic connection, \(V_o/V_1 = -R_f/R_1\) (Fig. 10.33)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 15, Practical Op-Amp Circuits, Inverting Amplifier Circuit: the most widely used constant-gain amplifier circuit is the inverting amplifier (Figure 10.34, V_o = −(R_f/R_1)V_1); if the circuit has R_1 = 100 kΩ and R_f = 500 kΩ, what output voltage results for an input of V_1 = 2 V?">
+    <figcaption data-l="th">สไลด์หน้า 15: วงจรกลับเฟสและโจทย์ Example 10.5</figcaption><figcaption data-l="en">Slide p. 15: the inverting amplifier and Example 10.5</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 16, Noninverting Amplifier Circuit: the connection of the figure works as a noninverting amplifier or constant-gain multiplier; the inverting amplifier connection is more widely used because it has better frequency stability; the virtual-ground equivalent with V_i ≈ 0 gives V_o/V_1 = (R_1 + R_f)/R_1 = 1 + R_f/R_1 (Figure 10.35).">
+    <figcaption data-l="th">สไลด์หน้า 16: วงจรไม่กลับเฟส \(V_o/V_1 = 1 + R_f/R_1\) (รูป 10.35)</figcaption><figcaption data-l="en">Slide p. 16: the noninverting amplifier, \(V_o/V_1 = 1 + R_f/R_1\) (Fig. 10.35)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 17, Noninverting Amplifier Circuit: calculate the output voltage of a noninverting amplifier for values of V_1 = 2 V, R_f = 500 kΩ and R_1 = 100 kΩ (Example 10.6).">
+    <figcaption data-l="th">สไลด์หน้า 17: โจทย์ Example 10.6</figcaption><figcaption data-l="en">Slide p. 17: Example 10.6</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 18, Unity Follower Circuit: the unity-follower circuit provides a gain of unity with no polarity or phase reversal; from the equivalent circuit it is clear that V_o = V_1 and that the output is the same polarity and magnitude as the input (Figure 10.36).">
+    <figcaption data-l="th">สไลด์หน้า 18: ตัวตามแรงดัน \(V_o = V_1\) (รูป 10.36)</figcaption><figcaption data-l="en">Slide p. 18: the unity follower, \(V_o = V_1\) (Fig. 10.36)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 21, Exercises of Op-Amp: what is the range of the voltage-gain adjustment in the circuit of the figure? An inverting amplifier with V_1 through 10 kΩ in series with a 10 kΩ potentiometer into the minus input, R_f = 500 kΩ (Problem 2, Fig. 10.63).">
+    <figcaption data-l="th">สไลด์หน้า 21: โจทย์ข้อ 2 (รูป 10.63)</figcaption><figcaption data-l="en">Slide p. 21: Problem 2 (Fig. 10.63)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 22, Exercises of Op-Amp: what range of output voltage is developed in the circuit of the figure? A noninverting amplifier with V_1 = 0.5 V at the plus input, R_f = 200 kΩ from the output to the minus input, and 10 kΩ in series with a 10 kΩ potentiometer from the minus input to ground (Problem 7, Fig. 10.67).">
+    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ข้อ 7 (รูป 10.67)</figcaption><figcaption data-l="en">Slide p. 22: Problem 7 (Fig. 10.67)</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 15 และ 17 คือ Examples 10.5–10.6 หน้า 21–22 คือข้อ 2 และ 7 ท้ายบทที่ 10 ของตำรา (แบบฝึกเพิ่มใช้ข้อ 4–6) · ข้อ 3 ของหน้านี้ต้องการแหล่งจ่ายเพื่อให้เห็นขาออก จึงเลือก \(V_1\) = 0.2 V เอง (โจทย์ถามแค่ช่วงอัตราขยาย) · ภาพจำลองใช้ออปแอมป์ \(A\) = 2 × 10⁵, \(V_{sat}\) = ±13 V จุดกระแสหายเข้าออปแอมป์ที่ขาออกเพราะกระแสนั้นกลับทางแหล่งจ่ายไฟเลี้ยงซึ่งไม่ได้วาด</div>
+<div class="warnbox" data-l="en"><b>The slides give no solutions</b>: pp. 15 and 17 are Examples 10.5–10.6, pp. 21–22 are Problems 2 and 7 at the end of the book's chapter 10 (the practice box uses Problems 4–6). Problem 3 on this page needs a source for an output to show, so \(V_1\) = 0.2 V is this page's choice (the problem asks only for the gain range). The simulations use an op-amp with \(A\) = 2 × 10⁵ and \(V_{sat}\) = ±13 V; the current dots vanish into the op-amp at its output because that current returns through the supply rails, which are not drawn.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สามวงจร</a><a href="#ex1"><b>1</b>Example 10.5</a><a href="#ex2"><b>2</b>Example 10.6</a><a href="#ex3"><b>3</b>ข้อ 2</a><a href="#ex4"><b>4</b>ข้อ 7</a><a href="#ex5"><b>5</b>บัฟเฟอร์</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Three circuits</a><a href="#ex1"><b>1</b>Example 10.5</a><a href="#ex2"><b>2</b>Example 10.6</a><a href="#ex3"><b>3</b>Problem 2</a><a href="#ex4"><b>4</b>Problem 7</a><a href="#ex5"><b>5</b>Buffer</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรปรับได้ทั้งสามแบบ กับกราฟถ่ายโอน \(V_o\)–\(V_1\)</h2><h2 data-l="en">The three adjustable circuits, with the \(V_o\)–\(V_1\) transfer graph</h2>
+    <div class="src" data-l="th">สไลด์หน้า 14–18 · Boylestad หัวข้อ 10.4–10.5</div><div class="src" data-l="en">Slides pp. 14–18 · Boylestad §10.4–10.5</div></div></div>
+  <p class="lead" data-l="th">เลือกวงจร แล้วเลื่อน \(V_1\), \(R_1\), \(R_f\) และอัตราขยายวงเปิด \(A\) กราฟล่างคือขาออกเทียบขาเข้าจากตัวแก้วงจร: เส้นตรงความชัน \(-R_f/R_1\) หรือ \(1 + R_f/R_1\) ที่หักเป็นเส้นนอนเมื่อชนราง ±13 V ลองลด \(A\) ลงเหลือ 100 แล้วดูว่าอัตราขยายจริงถอยจากสูตรเท่าใด ชี้ที่ออปแอมป์เพื่ออ่าน \(V_d\) และสังเกตว่าในวงจรไม่กลับเฟสแหล่งจ่ายไม่มีจุดวิ่ง</p>
+  <p class="lead" data-l="en">Choose a circuit, then move \(V_1\), \(R_1\), \(R_f\) and the open-loop gain \(A\). The lower graph is the output against the input from the engine: a line of slope \(-R_f/R_1\) or \(1 + R_f/R_1\) that bends flat at the ±13 V rails. Lower \(A\) to 100 and see how far the real gain falls short of the formula. Hover over the op-amp to read \(V_d\), and notice that in the noninverting circuit the source carries no dots.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 10.5: วงจรกลับเฟส</h2><h2 data-l="en">Example 10.5: the inverting amplifier</h2>
+    <div class="src" data-l="th">สไลด์หน้า 14–15 · Boylestad Example 10.5 (รูป 10.34, สมการ 10.8)</div><div class="src" data-l="en">Slides pp. 14–15 · Boylestad Example 10.5 (Fig. 10.34, Eq. 10.8)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรรูป 10.34 มี \(R_1\) = 100 kΩ, \(R_f\) = 500 kΩ จงหาแรงดันขาออกเมื่อ \(V_1\) = 2 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The circuit of Fig. 10.34 has \(R_1\) = 100 kΩ and \(R_f\) = 500 kΩ. What output voltage results for an input of \(V_1\) = 2 V?</p></div>
+  <p class="lead" data-l="th">เฉลยเดินตามกระแส: กราวด์เสมือน → \(I_1\) → \(I_f = I_1\) → \(V_o\) <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The solution follows the current: virtual ground → \(I_1\) → \(I_f = I_1\) → \(V_o\). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 10.6: วงจรไม่กลับเฟส</h2><h2 data-l="en">Example 10.6: the noninverting amplifier</h2>
+    <div class="src" data-l="th">สไลด์หน้า 16–17 · Boylestad Example 10.6 (รูป 10.35, สมการ 10.9)</div><div class="src" data-l="en">Slides pp. 16–17 · Boylestad Example 10.6 (Fig. 10.35, Eq. 10.9)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาแรงดันขาออกของวงจรไม่กลับเฟส (รูป 10.35) เมื่อ \(V_1\) = 2 V, \(R_f\) = 500 kΩ, \(R_1\) = 100 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Calculate the output voltage of a noninverting amplifier (Fig. 10.35) for \(V_1\) = 2 V, \(R_f\) = 500 kΩ and \(R_1\) = 100 kΩ.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ข้อ 2: ช่วงอัตราขยายเมื่อ \(R_1\) มีโพเทนชิออมิเตอร์</h2><h2 data-l="en">Problem 2: the gain range with a potentiometer in \(R_1\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 21 · Boylestad ข้อ 2 ท้ายบทที่ 10 (รูป 10.63)</div><div class="src" data-l="en">Slide p. 21 · Boylestad chapter 10 Problem 2 (Fig. 10.63)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรกลับเฟสมี \(R_1\) = 10 kΩ อนุกรมกับโพเทนชิออมิเตอร์ 10 kΩ และ \(R_f\) = 500 kΩ จงหาช่วงการปรับอัตราขยายแรงดัน (ภาพจำลองใช้ \(V_1\) = 0.2 V)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An inverting amplifier has \(R_1\) = 10 kΩ in series with a 10 kΩ potentiometer, and \(R_f\) = 500 kΩ. What is the range of the voltage-gain adjustment? (The simulation uses \(V_1\) = 0.2 V.)</p></div>
+  <p class="lead" data-l="th">แถบเลื่อนด้านล่างหมุนโพเทนชิออมิเตอร์ <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The slider below turns the potentiometer. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas><div class="panel" id="ctl3"></div></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">ข้อ 7: ช่วงขาออกของวงจรไม่กลับเฟส</h2><h2 data-l="en">Problem 7: the output range of a noninverting amplifier</h2>
+    <div class="src" data-l="th">สไลด์หน้า 22 · Boylestad ข้อ 7 ท้ายบทที่ 10 (รูป 10.67)</div><div class="src" data-l="en">Slide p. 22 · Boylestad chapter 10 Problem 7 (Fig. 10.67)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_1\) = 0.5 V เข้าขั้ว + \(R_f\) = 200 kΩ \(R_1\) = 10 kΩ อนุกรมกับโพเทนชิออมิเตอร์ 10 kΩ จงหาช่วงของแรงดันขาออก</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_1\) = 0.5 V at the + input, \(R_f\) = 200 kΩ, and \(R_1\) = 10 kΩ in series with a 10 kΩ potentiometer. What range of output voltage is developed?</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas><div class="panel" id="ctl4"></div></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="ex5">
+  <div class="prob-head"><span class="prob-no">5</span><div><h2 data-l="th">ตัวตามแรงดันเป็นบัฟเฟอร์: แหล่งจ่าย 10 kΩ ขับโหลด 1 kΩ</h2><h2 data-l="en">The unity follower as a buffer: a 10 kΩ source driving a 1 kΩ load</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18 · Boylestad รูป 10.36, สมการ 10.10 (ตัวอย่างของหน้านี้)</div><div class="src" data-l="en">Slide p. 18 · Boylestad Fig. 10.36, Eq. 10.10 (this page's example)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แหล่งจ่าย 2 V มีความต้านทานภายใน \(R_s\) = 10 kΩ ต่อผ่านตัวตามแรงดันไปยังโหลด \(R_L\) = 1 kΩ จงหา \(V_o\) และเทียบกับการต่อโหลดเข้ากับแหล่งจ่ายโดยตรง</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 2 V source with an internal resistance \(R_s\) = 10 kΩ drives a load \(R_L\) = 1 kΩ through a unity follower. Find \(V_o\), and compare with connecting the load to the source directly.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv5"></canvas></div><div class="card solve"><div id="ask5"></div><div id="st5"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">Boylestad ข้อ 4–6 ท้ายบทที่ 10 · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Boylestad chapter 10 Problems 4–6 · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>วงจรกลับเฟส \(R_f/R_1\) = 5: เลื่อน \(V_1\) จาก 0 ถึง 3 V ขาออกเดินลงตามเส้น −5 จนถึง −13 V ที่ \(V_1\) = 2.6 V แล้วหยุด ป้ายเปลี่ยนเป็น "อิ่มตัว" และ \(V_-\) ไม่ใช่กราวด์เสมือนอีกต่อไป (ชี้ที่ออปแอมป์: \(V_d\) โตเป็นมิลลิโวลต์)</li>
+    <li>ลด \(A\) เหลือ 100: อัตราขยายจริง −5/(1 + 6/100) = −4.72 ตำราสมมุติ \(A\) ใหญ่เป็นอนันต์ ออปแอมป์จริงมี \(A\) ≥ 10⁵ จึงใกล้สูตรมาก</li>
+    <li>วงจรไม่กลับเฟส: ตั้ง \(R_f\) = 0 (เลื่อนไปซ้ายสุด): อัตราขยาย 1 คือตัวตามแรงดัน ตั้ง \(R_1\) ใหญ่มาก: อัตราขยายเข้าใกล้ 1 เช่นกัน ไม่มีทางได้ต่ำกว่า 1</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–5</h3>
+    <ol><li>ข้อ 1 กับข้อ 2 ใช้ตัวต้านทานชุดเดียวกัน แต่ได้ −5 และ +6: ในวงจรไม่กลับเฟสกระแสของ \(R_1\) มาจากขาออก ไม่ใช่จากแหล่งจ่าย (แหล่งจ่ายไม่มีจุดวิ่ง)</li>
+    <li>ข้อ 3: หมุนโพเทนชิออมิเตอร์ไปที่ 0 % แล้วเพิ่ม \(V_1\) ในใจเป็น 0.3 V: อัตราขยาย −50 ต้องการ −15 V ซึ่งเกินราง ช่วงอัตราขยายจึงใช้ได้กับขาเข้าไม่เกิน 0.26 V</li>
+    <li>ข้อ 5: เอาตัวตามแรงดันออกในใจ: โหลด 1 kΩ กับ \(R_s\) = 10 kΩ เป็นตัวแบ่งแรงดัน เหลือ 0.18 V นี่คือคุณค่าของความต้านทานขาเข้าสูงและขาออกต่ำ</li></ol>
+    <div class="book">สไลด์บทที่ 7 ชุดที่ 1 หน้า 13–18, 21–22 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 10.4 (รูป 10.33) และ 10.5 (รูป 10.34–10.36, Examples 10.5–10.6) ข้อ 2, 4–7 ท้ายบท</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Inverting, \(R_f/R_1\) = 5: move \(V_1\) from 0 to 3 V. The output walks down the −5 line to −13 V at \(V_1\) = 2.6 V and stops; the badge says "saturated" and \(V_-\) is no longer a virtual ground (hover over the op-amp: \(V_d\) grows to millivolts).</li>
+    <li>Lower \(A\) to 100: the real gain is −5/(1 + 6/100) = −4.72. The book assumes an infinite \(A\); real op-amps have \(A\) ≥ 10⁵, so the formula is very close.</li>
+    <li>Noninverting: set \(R_f\) = 0 (slider fully left): gain 1, the unity follower. Make \(R_1\) very large: the gain again approaches 1. It can never go below 1.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–5</h3>
+    <ol><li>Problems 1 and 2 use the same resistors yet give −5 and +6: in the noninverting circuit the current of \(R_1\) comes from the output, not from the source (the source carries no dots).</li>
+    <li>Problem 3: turn the potentiometer to 0 % and imagine \(V_1\) = 0.3 V: a gain of −50 would want −15 V, beyond the rail; the gain range is usable only for inputs up to 0.26 V.</li>
+    <li>Problem 5: remove the follower in your head: the 1 kΩ load and \(R_s\) = 10 kΩ form a divider leaving 0.18 V. That is what a high input resistance and a low output resistance are worth.</li></ol>
+    <div class="book">Chapter 7 slide set I, pp. 13–18, 21–22 · Boylestad &amp; Nashelsky, 11th ed., §10.4 (Fig. 10.33) and §10.5 (Figs. 10.34–10.36, Examples 10.5–10.6), Problems 2, 4–7</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx, kO = r => CK.eng(r, 'Ω');
+  OP.problem(1, 'ex105'); OP.problem(2, 'ex106'); OP.problem(3, 'p2'); OP.problem(4, 'p7'); OP.problem(5, 'follower');
+
+  /* =================================================================== A: the three circuits with the transfer graph */
+  const NAME = { inv: t('วงจรกลับเฟส', 'inverting'), noninv: t('วงจรไม่กลับเฟส', 'noninverting'), follower: t('ตัวตามแรงดัน', 'unity follower') };
+  const gainOf = S => (S.kind === 'inv' ? -S.Rf / S.R1 : S.kind === 'noninv' ? 1 + S.Rf / S.R1 : 1);
+  const specOf = (S, v1) => OP.ckt({ kind: S.kind, V1: v1, R1: S.R1, Rf: S.Rf, gain: S.A, RL: S.kind === 'follower' ? 10e3 : 0 });
+  let blocks = {};
+  const vis = S => { const r = S.kind !== 'follower'; blocks.R1.block.style.display = r ? '' : 'none'; blocks.Rf.block.style.display = r ? '' : 'none'; };
+  OP.explorer({ init: { kind: 'inv', V1: 2, R1: 100e3, Rf: 500e3, A: 2e5 }, title: t('วงจรและค่า', 'The circuit and its values'),
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'k_inv', label: t('กลับเฟส', 'inverting'), on: true }, { id: 'k_noninv', label: t('ไม่กลับเฟส', 'noninverting') }, { id: 'k_follower', label: t('ตัวตามแรงดัน', 'follower') }], id => { S.kind = id.slice(2); vis(S); build(); });
+      ui.slider(p, { id: 'aV1', label: 'V_1', min: -3, max: 3, step: 0.05, value: S.V1, fmt: v => vtx(v), oninput: v => { S.V1 = v; build(); } });
+      blocks.R1 = OP.logSlider(p, 'aR1', 'R_1', 1e3, 1e6, () => S.R1, v => { S.R1 = v; }, build, kO, OP.rndR);
+      blocks.Rf = OP.logSlider(p, 'aRf', 'R_f', 1e3, 2e6, () => S.Rf, v => { S.Rf = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aA', t('A (วงเปิด)', 'A (open loop)'), 10, 1e6, () => S.A, v => { S.A = v; }, build, v => LS.u(v, 0), OP.rndR);
+      vis(S); },
+    spec: S => specOf(S, S.V1),
+    onBuild: (c, S) => { S.pts = OP.xfer(v => specOf(S, v), -3, 3); },
+    side: (ctx, b, bd, c, S) => { const a = OP.z(c), G = gainOf(S); OP.plot(ctx, b, { x: [-3, 3], y: [-15, 15], xt: [-3, -2, -1, 1, 2, 3], yt: [-10, -5, 0, 5, 10], xl: 'V_1 (V)', yl: 'V_o (V)', title: bd.short ? '' : t(`${NAME[S.kind]}: ความชัน ${fd(G, 2)}`, `${NAME[S.kind]}: slope ${fd(G, 2)}`),
+      curves: [{ pts: S.pts || [], color: C.curve, w: 2.6 }, { f: v => G * v, color: C.tan, w: 1.4, dash: [5, 4], label: bd.short ? '' : t('สูตร', 'formula') }], hl: [{ y: 13, label: bd.short ? '' : '+V_sat', color: C.red }, { y: -13, label: bd.short ? '' : '−V_sat', color: C.red }],
+      pts: [{ x: S.V1, y: a.vo, label: bd.short ? '' : `(${vtx(S.V1)}, ${vtx(a.vo)})`, side: S.V1 > 0 ? -1 : 1, dy: a.vo > 0 ? 16 : -16 }], guides: [{ x: S.V1, y: a.vo }] }); },
+    after: (v, c, S) => OP.tags(v, c, { vg: 'N', vgText: S.kind === 'inv' ? undefined : `V_− = ${vtx(OP.z(c).vn)}` }),
+    badge: (c, S) => { const a = OP.z(c); return [[`${NAME[S.kind]} · V_o = ${vtx(a.vo)} · ${a.st[0]}`, `${NAME[S.kind]} · V_o = ${vtx(a.vo)} · ${a.st[0]}`], a.st[1]]; },
+    rows: (c, S) => { const a = OP.z(c), G = gainOf(S), i1 = S.kind === 'follower' ? 0 : c.I('R1').re; return [[t('อัตราขยายตามสูตร', 'gain by the formula'), fd(G, 3)], [t('V_o ตามสูตร', 'V_o by the formula'), vtx(G * S.V1)], [t('V_o ตัวแก้วงจร', 'V_o engine'), vtx(a.vo)], ['V_d = V_o / A', vtx(a.vd)], ['V_−', vtx(a.vn)], ['I_1', itx(i1)], [S.kind === 'follower' ? 'I_L' : 'I_f', itx(S.kind === 'follower' ? c.I('RL').re : c.I('Rf').re)], [t('สถานะ', 'state'), a.st[0]]]; },
+    text: (c, S) => { const a = OP.z(c), G = gainOf(S), want = G * S.V1;
+      if (a.state !== 'lin') return t(`สูตรต้องการ \\(V_o\\) = ${vtx(want)} แต่ขาออกถูกตัดที่ \\(\\pm V_{sat}\\) = ±13 V ป้อนกลับทำงานไม่ได้อีก: \\(V_d\\) = ${vtx(a.vd)} ไม่ใช่ศูนย์แล้ว และขั้ว − ไม่ใช่กราวด์เสมือน ลด \\(V_1\\) หรือลดอัตราขยาย`, `The formula wants \\(V_o\\) = ${vtx(want)}, but the output is clipped at \\(\\pm V_{sat}\\) = ±13 V and the feedback can no longer act: \\(V_d\\) = ${vtx(a.vd)} is not zero any more and the − input is not a virtual ground. Lower \\(V_1\\) or the gain.`);
+      const err = Math.abs(want) > 1e-9 ? (a.vo / want - 1) * 100 : 0;
+      if (S.kind === 'inv') return t(`กราวด์เสมือน: \\(V_-\\) = ${vtx(a.vn)} กระแส \\(I_1 = V_1/R_1\\) = ${itx(c.I('R1').re)} ไหลผ่าน \\(R_f\\) ทั้งหมด ให้ \\(V_o = -(R_f/R_1)V_1\\) = ${vtx(want)} ตัวแก้วงจรได้ ${vtx(a.vo)} (ต่าง ${fd(err, 3)} % เพราะ \\(A\\) = ${LS.u(S.A, 0)} ไม่ใช่อนันต์)`, `Virtual ground: \\(V_-\\) = ${vtx(a.vn)}. The current \\(I_1 = V_1/R_1\\) = ${itx(c.I('R1').re)} flows entirely through \\(R_f\\), giving \\(V_o = -(R_f/R_1)V_1\\) = ${vtx(want)}; the engine finds ${vtx(a.vo)} (${fd(err, 3)} % off, because \\(A\\) = ${LS.u(S.A, 0)} is not infinite).`);
+      if (S.kind === 'noninv') return t(`ลัดวงจรเสมือน: \\(V_-\\) = ${vtx(a.vn)} ≈ \\(V_1\\) ตัวแบ่ง \\(R_1\\)–\\(R_f\\) จากขาออกต้องให้ค่านี้ จึง \\(V_o = (1 + R_f/R_1)V_1\\) = ${vtx(want)} (ตัวแก้วงจร ${vtx(a.vo)}) แหล่งจ่ายไม่จ่ายกระแสเลย กระแส ${itx(c.I('R1').re)} ของ \\(R_1\\) มาจากขาออกผ่าน \\(R_f\\)`, `Virtual short: \\(V_-\\) = ${vtx(a.vn)} ≈ \\(V_1\\). The \\(R_1\\)–\\(R_f\\) divider from the output must deliver this, so \\(V_o = (1 + R_f/R_1)V_1\\) = ${vtx(want)} (engine ${vtx(a.vo)}). The source supplies no current; the ${itx(c.I('R1').re)} in \\(R_1\\) comes from the output through \\(R_f\\).`);
+      return t(`ตัวตามแรงดัน: \\(V_o = V_1\\) = ${vtx(a.vo)} โหลด 10 kΩ ดึง ${itx(c.I('RL').re)} จากออปแอมป์ ไม่ใช่จากแหล่งจ่าย`, `Unity follower: \\(V_o = V_1\\) = ${vtx(a.vo)}. The 10 kΩ load draws ${itx(c.I('RL').re)} from the op-amp, not from the source.`); } });
+
+  /* =================================================================== C: more practice (Problems 4–6) */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) ข้อ 4 (รูป 10.65): วงจรกลับเฟส \\(R_1\\) = 20 kΩ, \\(R_f\\) = 200 kΩ ขาเข้าเปลี่ยนได้ 0.1–0.5 V จงหาช่วงของ \\(V_o\\)', '1) Problem 4 (Fig. 10.65): an inverting amplifier with \\(R_1\\) = 20 kΩ, \\(R_f\\) = 200 kΩ; the input varies from 0.1 to 0.5 V. Find the range of \\(V_o\\).'),
+      fields: [{ key: 'x', lab: t('ที่ 0.1 V: V_o =', 'at 0.1 V: V_o ='), ans: -1, unit: 'V', tol: 0.01 }, { key: 'y', lab: t('ที่ 0.5 V: V_o =', 'at 0.5 V: V_o ='), ans: -5, unit: 'V', tol: 0.01 }], work: work(R`A_v = -\frac{200}{20} = -10:\quad V_o = -1\ \text{V} \ldots -5\ \text{V}`) },
+    { q: t('2) ข้อ 5 (รูป 10.66): วงจรไม่กลับเฟส \\(R_f\\) = 360 kΩ, \\(R_1\\) = 12 kΩ ขาเข้า 0.3 V จงหา \\(V_o\\)', '2) Problem 5 (Fig. 10.66): a noninverting amplifier with \\(R_f\\) = 360 kΩ, \\(R_1\\) = 12 kΩ and a 0.3 V input. Find \\(V_o\\).'),
+      fields: [{ key: 'x', lab: 'V_o =', ans: 9.3, unit: 'V', tol: 0.01 }], work: work(R`V_o = \left(1 + \frac{360}{12}\right)(0.3\ \text{V}) = 31(0.3\ \text{V}) = 9.3\ \text{V}`) },
+    { q: t('3) ข้อ 6: วงจรข้อ 2 ต้องป้อนเท่าใดจึงได้ขาออก 2.4 V', '3) Problem 6: what input must the circuit of question 2 receive for an output of 2.4 V?'),
+      fields: [{ key: 'x', lab: 'V_1 =', ans: 2.4 / 31 * 1e3, unit: 'mV', tol: 0.2 }], work: work(R`V_1 = \frac{V_o}{31} = \frac{2.4\ \text{V}}{31} = ${fd(2.4 / 31 * 1e3, 1)}\ \text{mV}`) },
+    { q: t('4) Example 10.5 ด้วย \\(R_1\\) = 50 kΩ (\\(R_f\\) = 500 kΩ, \\(V_1\\) = 2 V): สูตรให้เท่าใด และออปแอมป์ที่มี \\(V_{sat}\\) = 13 V ให้เท่าใดจริง', '4) Example 10.5 with \\(R_1\\) = 50 kΩ (\\(R_f\\) = 500 kΩ, \\(V_1\\) = 2 V): what does the formula give, and what does an op-amp with \\(V_{sat}\\) = 13 V actually give?'),
+      fields: [{ key: 'x', lab: t('สูตร: V_o =', 'formula: V_o ='), ans: -20, unit: 'V', tol: 0.05 }, { key: 'y', lab: t('จริง: V_o =', 'actual: V_o ='), ans: -13, unit: 'V', tol: 0.05 }], work: work(R`-\frac{500}{50}(2\ \text{V}) = -20\ \text{V} \quad\Rightarrow\quad V_o = -V_{sat} = -13\ \text{V}`, t('<div class="sub2">ขาออกถูกตัดที่ราง สัญญาณบิดเบี้ยว ต้องลดอัตราขยายหรือขาเข้า</div>', '<div class="sub2">The output clips at the rail and the signal is distorted: reduce the gain or the input.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

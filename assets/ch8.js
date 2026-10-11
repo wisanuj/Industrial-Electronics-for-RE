@@ -53,7 +53,7 @@ CH8.Board = class {
     const sp = this.narrow ? (o.shortSpec ? o.shortSpec(spec) : CH6.shortLabels(spec, o.pad ?? 1.2)) : CH8.margins(spec, o.pad ?? 1.2);
     const c = new CK.Circuit(sp); c.solve(); this.ckt = c; const im = CH6.imax(c); this.imax = im;
     this.view = new CK.View(this.cv, c, Object.assign({ speed: (o.dotSpeed || 95) / Math.max(im, 1e-12), ground: false, showI: false, pad: o.pad ?? 1.2, tips: true,
-      acPeak: true, acPower: true, dotRef: im, acTime: () => this.clk.at(c.w) }, o.view || {}, vo));
+      acPeak: true, acPower: true, dotRef: im, acTime: () => this.clk.at(c.w), grounds: sp.grounds }, o.view || {}, vo));   // grounds: ground symbols at these nodes (op-amp circuits, chapter 7)
     if (this.ctx) { this.view.ctx = this.ctx; this.view.fit(this.box.ckt); }
     return c;
   }

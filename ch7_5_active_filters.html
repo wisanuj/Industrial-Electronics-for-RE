@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="7.5 — Active Filters">7.5 — ตัวกรองแอกทีฟ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ตัวกรองแอกทีฟ <span class="en">Active filters</span></h1>
+<h1 data-l="en">Active filters <span class="en">An RC section sets the cutoff, the op-amp adds gain and keeps the next stage from loading it</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 2 หน้า 7–17 ตัวกรองสร้างได้จาก R กับ C อย่างเดียว แต่ตัวกรองแอกทีฟ (active filter) เพิ่มออปแอมป์เข้าไปเพื่อให้อัตราขยายและแยกขั้นออกจากกัน ตัวกรองผ่านต่ำปล่อยสัญญาณจากกระแสตรงถึงความถี่ตัด \(f_{OH}\) ผ่านสูงปล่อยเหนือ \(f_{OL}\) ผ่านแถบปล่อยระหว่างสองค่า อันดับหนึ่งลาด −20 dB ต่อทศ อันดับสอง −40 dB หน้านี้มีตัวกรองห้าแบบที่ปรับได้พร้อมกราฟโบเดจากตัวแก้วงจร (ส่วน A) Examples 11.12–11.14 และข้อค้นพบว่าสองชุด RC ต่อกันโดยไม่มีบัฟเฟอร์ให้จุด −3 dB ไม่ตรงสูตร</p>
+<p class="sub" data-l="en">Chapter 7 slide set II, pp. 7–17. A filter can be built from R and C alone, but an active filter adds an op-amp for gain and to isolate the stages. A low-pass filter passes from dc up to the cutoff \(f_{OH}\), a high-pass passes above \(f_{OL}\), a bandpass passes between two cutoffs; first order rolls off at −20 dB per decade, second order at −40 dB. This page has five adjustable filters with Bode plots from the engine (section A), Examples 11.12–11.14, and the finding that two RC sections cascaded without a buffer do not put the −3 dB point where the formula says.</p>
+<div class="equation-box eqwrap">$$ A_v = 1 + \frac{R_F}{R_G} $$ $$ f_{OH} = \frac{1}{2\pi R_1C_1},\qquad f_{OL} = \frac{1}{2\pi R_1C_1} $$ $$ \text{1st order: } -20\ \text{dB/decade} $$ $$ \text{2nd order: } -40\ \text{dB/decade} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>สามแบบในอุดมคติ</b> (หน้า 7–9, รูป 11.30): ผ่านต่ำ ผ่านสูง ผ่านแถบ ตัวกรองจริงไม่ตัดขาด แต่ลาดลงเป็นเดซิเบลต่อทศ: อัตราขยายเป็น dB = 20 log|V_o/V_1| และที่ความถี่ตัดอัตราขยายลด 3 dB (เหลือ 1/√2)</li>
+  <li><b>ผ่านต่ำอันดับหนึ่ง</b> (หน้า 10–11, รูป 11.31, สมการ 11.13–11.14): \(R_1C_1\) เป็นตัวแบ่งแรงดันก่อนขั้ว + ขาออกถูกขยาย \(A_v = 1 + R_F/R_G\) (วงจรไม่กลับเฟส) \(f_{OH} = 1/2\pi R_1C_1\) ลาด −20 dB/ทศ Example 11.12: 6.63 kHz · ต่อสองชุด (รูป 11.32) ได้ −40 dB/ทศ</li>
+  <li><b>ผ่านสูง</b> (หน้า 12–14, รูป 11.33, สมการ 11.15): สลับ R กับ C ของชุด \(f_{OL}\) สูตรเดียวกัน Example 11.13: \(A_v\) = 6, \(f_{OL}\) ≈ 1.5 kHz</li>
+  <li><b>ข้อค้นพบ</b>: ชุด RC สองชุดที่ต่อตรงกัน (รูป 11.32, 11.33b) ชุดที่สองโหลดชุดแรก ฟังก์ชันถ่ายโอนเป็น \(x^2/(x^2 + 3x + 1)\) ไม่ใช่ \((x/(x+1))^2\): ที่ \(f_{OL}\) ตามสูตรอัตราขยายเหลือ 1/3 (−9.5 dB) และจุด −3 dB จริงอยู่ที่ 2.67\(f_{OL}\) (ผ่านต่ำ: 0.37\(f_{OH}\)) สูตรของตำราบอกแค่จุดตัดของเส้นกำกับ ตัวกรองอันดับสองที่ความถี่ตัดตรงสูตรใช้โครงสร้าง Sallen–Key</li>
+  <li><b>ผ่านแถบ</b> (หน้า 15–17, รูป 11.34): ผ่านสูงอันดับหนึ่งแล้วต่อด้วยผ่านต่ำอันดับหนึ่ง ออปแอมป์ตัวแรกมีความต้านทานขาออกต่ำ จึงไม่ถูกขั้นที่สองโหลด การตอบสนองเป็นผลคูณ Example 11.14: 159.15 Hz ถึง 7.96 kHz</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The three ideal shapes</b> (pp. 7–9, Fig. 11.30): low-pass, high-pass, bandpass. Real filters do not cut off sharply but roll off in decibels per decade: the gain in dB is 20 log|V_o/V_1|, and at the cutoff it is 3 dB down (1/√2).</li>
+  <li><b>First-order low-pass</b> (pp. 10–11, Fig. 11.31, Eqs. 11.13–11.14): \(R_1C_1\) is a divider in front of the + input; the output is amplified by \(A_v = 1 + R_F/R_G\) (a noninverting amplifier); \(f_{OH} = 1/2\pi R_1C_1\), −20 dB/decade. Example 11.12: 6.63 kHz. Two sections (Fig. 11.32) give −40 dB/decade.</li>
+  <li><b>High-pass</b> (pp. 12–14, Fig. 11.33, Eq. 11.15): swap the R and C of the section; the same formula for \(f_{OL}\). Example 11.13: \(A_v\) = 6, \(f_{OL}\) ≈ 1.5 kHz.</li>
+  <li><b>A finding</b>: two RC sections connected directly (Figs. 11.32, 11.33b) load each other; the transfer function is \(x^2/(x^2 + 3x + 1)\), not \((x/(x+1))^2\): at the formula's \(f_{OL}\) the gain is down to 1/3 (−9.5 dB), and the actual −3 dB point is at 2.67\(f_{OL}\) (low-pass: 0.37\(f_{OH}\)). The book's formula marks only where the asymptotes meet; a second-order filter whose cutoff matches it uses the Sallen–Key structure.</li>
+  <li><b>Bandpass</b> (pp. 15–17, Fig. 11.34): a first-order high-pass followed by a first-order low-pass. The first op-amp's low output resistance keeps the second stage from loading it, so the response is the product. Example 11.14: 159.15 Hz to 7.96 kHz.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch7b/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 7, Active Filters: a popular application uses op-amps to build active filter circuits; a filter circuit can be constructed using passive components, resistors and capacitors; an active filter additionally uses an amplifier to provide voltage amplification and signal isolation or buffering; a filter that provides a constant output from dc up to a cutoff frequency f_OH and then passes no signal above that frequency is called an ideal low-pass filter (Figure 11.30a).">
+    <figcaption data-l="th">สไลด์ชุดที่ 2 หน้า 7: ตัวกรองผ่านต่ำอุดมคติ (รูป 11.30a)</figcaption><figcaption data-l="en">Set II slide p. 7: the ideal low-pass filter (Fig. 11.30a)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 8, Active Filters: a filter that provides or passes signals above a cutoff frequency f_OL is a high-pass filter, as idealized in the figure (Figure 11.30b).">
+    <figcaption data-l="th">สไลด์หน้า 8: ผ่านสูงอุดมคติ (รูป 11.30b)</figcaption><figcaption data-l="en">Slide p. 8: the ideal high-pass filter (Fig. 11.30b)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 9, Active Filters: when the filter circuit passes signals that are above one ideal cutoff frequency and below a second cutoff frequency, it is called a bandpass filter, as idealized in the figure (Figure 11.30c).">
+    <figcaption data-l="th">สไลด์หน้า 9: ผ่านแถบอุดมคติ (รูป 11.30c)</figcaption><figcaption data-l="en">Slide p. 9: the ideal bandpass filter (Fig. 11.30c)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 10, Low-Pass Filter: a first-order low-pass filter using a single resistor and capacitor has a practical slope of −20 dB per decade; the circuit with R_G, R_F, the op-amp, R_1 and C_1 at the plus input, with A_v = 1 + R_F/R_G and f_OH = 1/(2π R_1 C_1), and the response plot (Figure 11.31).">
+    <figcaption data-l="th">สไลด์หน้า 10: ผ่านต่ำอันดับหนึ่ง (รูป 11.31, สมการ 11.13–11.14)</figcaption><figcaption data-l="en">Slide p. 10: the first-order low-pass filter (Fig. 11.31, Eqs. 11.13–11.14)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 11, Low-Pass Filter: calculate the cutoff frequency of a first-order low-pass filter for R_1 = 1.2 kΩ and C_1 = 0.02 µF (Example 11.12) with the circuit of Figure 11.31a.">
+    <figcaption data-l="th">สไลด์หน้า 11: โจทย์ Example 11.12</figcaption><figcaption data-l="en">Slide p. 11: Example 11.12</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 12, High-Pass Active Filter: first- and second-order high-pass active filters can be built as shown; the first-order circuit has C_1 in series and R_1 to ground at the plus input, the second-order one C_1, C_2 in series with R_1, R_2 to ground, both with R_G and R_F around the op-amp (Figure 11.33a–b).">
+    <figcaption data-l="th">สไลด์หน้า 12: ผ่านสูงอันดับหนึ่งและสอง (รูป 11.33a–b)</figcaption><figcaption data-l="en">Slide p. 12: first- and second-order high-pass filters (Fig. 11.33a–b)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 13, High-Pass Active Filter: the response plot of V_o/V_1 against f with −20 dB/decade and −40 dB/decade slopes rising to the passband above f_OL (Figure 11.33c).">
+    <figcaption data-l="th">สไลด์หน้า 13: การตอบสนอง −20 และ −40 dB ต่อทศ (รูป 11.33c)</figcaption><figcaption data-l="en">Slide p. 13: the −20 and −40 dB per decade responses (Fig. 11.33c)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 14, High-Pass Active Filter: calculate the cutoff frequency of a second-order high-pass filter for R_1 = R_2 = 2.1 kΩ, C_1 = C_2 = 0.05 µF, and R_G = 10 kΩ, R_F = 50 kΩ (Example 11.13).">
+    <figcaption data-l="th">สไลด์หน้า 14: โจทย์ Example 11.13</figcaption><figcaption data-l="en">Slide p. 14: Example 11.13</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 15, Bandpass Filter: the figure shows a bandpass filter using two stages, the first a high-pass filter and the second a low-pass filter, the combined operation being the desired bandpass response; the circuit with the high-pass section (C_1, R_1) and the low-pass section (R_2, C_2), each op-amp with R_G and R_F (Figure 11.34).">
+    <figcaption data-l="th">สไลด์หน้า 15: ผ่านแถบสองขั้น (รูป 11.34)</figcaption><figcaption data-l="en">Slide p. 15: the two-stage bandpass filter (Fig. 11.34)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 16, Bandpass Filter: the response plot with A(mid) between f_OL and f_OH, rising at 20 dB/decade below f_OL and falling at −20 dB/decade above f_OH.">
+    <figcaption data-l="th">สไลด์หน้า 16: การตอบสนองผ่านแถบ</figcaption><figcaption data-l="en">Slide p. 16: the bandpass response</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7b/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 part II slide 17, Bandpass Filter: calculate the cutoff frequencies of the bandpass filter circuit with R_1 = R_2 = 10 kΩ, C_1 = 0.1 µF, and C_2 = 0.002 µF (Example 11.14), with the two-stage circuit.">
+    <figcaption data-l="th">สไลด์หน้า 17: โจทย์ Example 11.14</figcaption><figcaption data-l="en">Slide p. 17: Example 11.14</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 11 (Example 11.12) ไม่ให้ค่า \(R_G\), \(R_F\)</b> ในรูป หน้านี้ใช้ 10 kΩ กับ 50 kΩ ของ Example 11.13 (\(A_v\) = 6) ซึ่งไม่กระทบความถี่ตัด · สไลด์หน้า 15 และ 16 คือข้อความเดียวกัน (รูปวงจรกับรูปการตอบสนอง) หน้า 14 มีแต่ข้อความ · Example 11.14 ไม่ให้ \(R_G\), \(R_F\) เช่นกัน หน้านี้ใช้ 10/50 kΩ ทั้งสองตัว (อัตราขยายกลางแถบ 36) · <b>ข้อค้นพบ</b> ตัวกรองอันดับสองของรูป 11.32 และ 11.33b: จุด −3 dB จริงไม่ตรง \(1/2\pi R_1C_1\) (ดูประเด็นสำคัญและข้อ 2) · ภาพจำลองแก้วงจรในโหมดเฟสเซอร์ที่ความถี่ที่เลือก และกวาดความถี่ 73 จุดเพื่อวาดกราฟโบเด</div>
+<div class="warnbox" data-l="en"><b>Slide p. 11 (Example 11.12) gives no \(R_G\), \(R_F\)</b> in its figure; this page uses the 10 kΩ and 50 kΩ of Example 11.13 (\(A_v\) = 6), which does not affect the cutoff. Slides pp. 15 and 16 carry the same text (the circuit and its response); p. 14 is text only. Example 11.14 gives no \(R_G\), \(R_F\) either; this page uses 10/50 kΩ for both op-amps (a mid-band gain of 36). <b>A finding</b> on the second-order filters of Figs. 11.32 and 11.33b: the actual −3 dB point is not at \(1/2\pi R_1C_1\) (see the key points and problem 2). The simulations solve the circuit as phasors at the chosen frequency and sweep 73 frequencies for the Bode plot.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ห้าแบบ</a><a href="#ex1"><b>1</b>Example 11.12</a><a href="#ex2"><b>2</b>Example 11.13</a><a href="#ex3"><b>3</b>Example 11.14</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Five filters</a><a href="#ex1"><b>1</b>Example 11.12</a><a href="#ex2"><b>2</b>Example 11.13</a><a href="#ex3"><b>3</b>Example 11.14</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">ตัวกรองห้าแบบที่ปรับได้ กับกราฟโบเดจากตัวแก้วงจร</h2><h2 data-l="en">Five adjustable filters, with Bode plots from the engine</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 10–16 · Boylestad หัวข้อ 11.6 (รูป 11.31–11.34)</div><div class="src" data-l="en">Set II slides pp. 10–16 · Boylestad §11.6 (Figs. 11.31–11.34)</div></div></div>
+  <p class="lead" data-l="th">เลือกตัวกรอง ตั้งความถี่ของสัญญาณ \(f\) และค่า R, C, \(R_G\), \(R_F\) วงจรทำงานที่ความถี่นั้น (จุดวิ่งสลับทิศ) กราฟล่างซ้ายคือขนาดเป็นเดซิเบลเทียบความถี่: เส้นทึบจากตัวแก้วงจร เส้นประคือเส้นกำกับของตำรา (−20 หรือ −40 dB ต่อทศจากความถี่ตัดตามสูตร) และเส้นม่วงคือจุด −3 dB จริง กราฟล่างขวาคือ \(v_1\), \(v_o\) ตามเวลา ลองผ่านสูงอันดับสอง: ที่ \(f_{OL}\) ตามสูตรอัตราขยายเหลือ 1/3 ไม่ใช่ 1/√2</p>
+  <p class="lead" data-l="en">Choose a filter, set the signal frequency \(f\) and the values of R, C, \(R_G\), \(R_F\). The circuit runs at that frequency (the dots reverse). The lower left graph is the magnitude in decibels against frequency: the solid line from the engine, the dashed line the book's asymptote (−20 or −40 dB per decade from the formula's cutoff), and the purple line the actual −3 dB point. The lower right graph shows \(v_1\) and \(v_o\) in time. Try the second-order high-pass: at the formula's \(f_{OL}\) the gain is down to 1/3, not 1/√2.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 11.12: ผ่านต่ำอันดับหนึ่ง 1.2 kΩ, 0.02 µF</h2><h2 data-l="en">Example 11.12: a first-order low-pass, 1.2 kΩ, 0.02 µF</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 10–11 · Boylestad Example 11.12 (รูป 11.31, สมการ 11.13–11.14)</div><div class="src" data-l="en">Set II slides pp. 10–11 · Boylestad Example 11.12 (Fig. 11.31, Eqs. 11.13–11.14)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาความถี่ตัดของตัวกรองผ่านต่ำอันดับหนึ่งที่มี \(R_1\) = 1.2 kΩ, \(C_1\) = 0.02 µF (ใช้ \(R_G\) = 10 kΩ, \(R_F\) = 50 kΩ)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Calculate the cutoff frequency of a first-order low-pass filter with \(R_1\) = 1.2 kΩ and \(C_1\) = 0.02 µF (with \(R_G\) = 10 kΩ, \(R_F\) = 50 kΩ).</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเปลี่ยนความถี่ตามขั้น: ในแถบผ่าน ที่ \(f_{OH}\) และหนึ่งทศเหนือ <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The simulation changes frequency with the steps: in the passband, at \(f_{OH}\), and one decade above. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 11.13: ผ่านสูงอันดับสอง 2.1 kΩ, 0.05 µF</h2><h2 data-l="en">Example 11.13: a second-order high-pass, 2.1 kΩ, 0.05 µF</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 12–14 · Boylestad Example 11.13 (รูป 11.33b, สมการ 11.15)</div><div class="src" data-l="en">Set II slides pp. 12–14 · Boylestad Example 11.13 (Fig. 11.33b, Eq. 11.15)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาความถี่ตัดของตัวกรองผ่านสูงอันดับสอง (รูป 11.33b) ที่มี \(R_1 = R_2\) = 2.1 kΩ, \(C_1 = C_2\) = 0.05 µF, \(R_G\) = 10 kΩ, \(R_F\) = 50 kΩ</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Calculate the cutoff frequency of a second-order high-pass filter (Fig. 11.33b) with \(R_1 = R_2\) = 2.1 kΩ, \(C_1 = C_2\) = 0.05 µF, \(R_G\) = 10 kΩ and \(R_F\) = 50 kΩ.</p></div>
+  <p class="lead" data-l="th">ขั้นที่ 3 แสดงว่าวงจรจริงให้จุด −3 dB ที่ไหน <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">Step 3 shows where the actual circuit puts its −3 dB point. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 11.14: ผ่านแถบ 159 Hz – 7.96 kHz</h2><h2 data-l="en">Example 11.14: a bandpass, 159 Hz to 7.96 kHz</h2>
+    <div class="src" data-l="th">สไลด์ชุดที่ 2 หน้า 15–17 · Boylestad Example 11.14 (รูป 11.34)</div><div class="src" data-l="en">Set II slides pp. 15–17 · Boylestad Example 11.14 (Fig. 11.34)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>จงหาความถี่ตัดทั้งสองของตัวกรองผ่านแถบรูป 11.34 ที่มี \(R_1 = R_2\) = 10 kΩ, \(C_1\) = 0.1 µF, \(C_2\) = 0.002 µF (ออปแอมป์ทั้งสองใช้ \(R_G\) = 10 kΩ, \(R_F\) = 50 kΩ)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>Calculate the cutoff frequencies of the bandpass filter of Fig. 11.34 with \(R_1 = R_2\) = 10 kΩ, \(C_1\) = 0.1 µF and \(C_2\) = 0.002 µF (both op-amps with \(R_G\) = 10 kΩ, \(R_F\) = 50 kΩ).</p></div>
+  <p class="lead" data-l="th">วงจรกว้าง: สองขั้นเรียงกัน <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">A wide circuit: the two stages side by side. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>ผ่านต่ำอันดับหนึ่งของ Example 11.12: เลื่อน \(f\) ไปที่ 6.63 kHz อัตราขยาย 15.6 − 3 = 12.6 dB และ \(v_o\) ล้าหลัง \(v_1\) 45° (กราฟขวา) ที่ 66 kHz เหลือ −4.4 dB และล้าหลังเกือบ 90°</li>
+    <li>ผ่านต่ำอันดับสอง: ความถี่ตัดตามสูตรเท่าเดิม แต่เส้นม่วง (−3 dB จริง) อยู่ที่ 0.37 เท่า: ชุดที่สองโหลดชุดแรก เพิ่ม \(R_2\) เป็น 10 เท่าของ \(R_1\) และลด \(C_2\) เป็น 1/10: การโหลดน้อยลง จุด −3 dB ขยับเข้าใกล้สูตร</li>
+    <li>ผ่านแถบ: ตั้ง \(C_2\) ให้ \(f_{OH}\) ต่ำกว่า \(f_{OL}\): แถบผ่านหายไป อัตราขยายกลางแถบต่ำกว่า 36 เพราะสองขั้นเหลื่อมกัน</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–3</h3>
+    <ol><li>ข้อ 1: ที่ \(f_{OH}\) ชี้ที่ \(C_1\) และ \(R_1\): แรงดันทั้งสองมีขนาดเท่ากัน (\(X_C = R\)) นี่คือนิยามของความถี่ตัด</li>
+    <li>ข้อ 2 ขั้น 3: เลื่อนเมาส์ไปที่ \(R_1\) และ \(R_2\): กระแสของ \(C_2\) ดึงจากจุดต่อกลาง ทำให้ชุดแรกไม่ใช่ตัวแบ่งแรงดันเดี่ยวอีกต่อไป</li>
+    <li>ข้อ 3: ที่ 1 kHz กลางแถบ ออปแอมป์ตัวแรกให้ ≈ 6 เท่า ตัวที่สองอีก 6 เท่า: 36 = 31.1 dB ชี้ที่ขาออกของตัวแรก</li></ol>
+    <div class="book">สไลด์บทที่ 7 ชุดที่ 2 หน้า 7–17 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 11.6 (รูป 11.30–11.34, สมการ 11.13–11.15, Examples 11.12–11.14)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>The first-order low-pass of Example 11.12: move \(f\) to 6.63 kHz; the gain is 15.6 − 3 = 12.6 dB and \(v_o\) lags \(v_1\) by 45° (right graph). At 66 kHz it is −4.4 dB and lags by nearly 90°.</li>
+    <li>Second-order low-pass: the formula's cutoff is unchanged, but the purple line (the actual −3 dB) sits at 0.37 of it: the second section loads the first. Make \(R_2\) ten times \(R_1\) and \(C_2\) a tenth: the loading shrinks and the −3 dB point moves toward the formula.</li>
+    <li>Bandpass: set \(C_2\) so that \(f_{OH}\) falls below \(f_{OL}\): the passband disappears and the mid-band gain drops below 36 because the two stages overlap.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–3</h3>
+    <ol><li>Problem 1: at \(f_{OH}\) hover over \(C_1\) and \(R_1\): the two voltages have equal magnitude (\(X_C = R\)); that is the definition of the cutoff.</li>
+    <li>Problem 2, step 3: hover over \(R_1\) and \(R_2\): the current of \(C_2\) is drawn from the middle node, so the first section is no longer a simple divider.</li>
+    <li>Problem 3: at 1 kHz, mid-band, the first op-amp gives ≈ 6×, the second another 6×: 36 = 31.1 dB. Hover over the first op-amp's output.</li></ol>
+    <div class="book">Chapter 7 slide set II, pp. 7–17 · Boylestad &amp; Nashelsky, 11th ed., §11.6 (Figs. 11.30–11.34, Eqs. 11.13–11.15, Examples 11.12–11.14)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, kO = r => CK.eng(r, 'Ω'), TAU = 2 * Math.PI, Cx = CK.Cx, dB = OP.dB, fHz = OP.fHz;
+  OP.problem(1, 'ex1112'); OP.problem(2, 'ex1113'); OP.problem(3, 'ex1114');
+
+  /* =================================================================== A: the five filters with Bode plots */
+  const NAME = { lp1: t('ผ่านต่ำอันดับหนึ่ง', 'first-order low-pass'), lp2: t('ผ่านต่ำอันดับสอง', 'second-order low-pass'), hp1: t('ผ่านสูงอันดับหนึ่ง', 'first-order high-pass'), hp2: t('ผ่านสูงอันดับสอง', 'second-order high-pass'), bp: t('ผ่านแถบ', 'bandpass') };
+  const fcOf = (r, c) => 1 / (TAU * r * c);
+  let blocks = {};
+  const vis = S => { const two = S.kind === 'lp2' || S.kind === 'hp2' || S.kind === 'bp'; blocks.R2.block.style.display = two ? '' : 'none'; blocks.C2.block.style.display = two ? '' : 'none'; };
+  const specOf = (S, f) => OP.ckt({ kind: S.kind, R1: S.R1, C1: S.C1, R2: S.R2, C2: S.C2, RG: S.RG, RF: S.RF, f, mode: 'ac' });
+  OP.explorer({ init: { kind: 'lp1', f: 1000, R1: 1200, C1: 0.02e-6, R2: 1200, C2: 0.02e-6, RG: 10e3, RF: 50e3 }, title: t('ตัวกรองและค่า', 'The filter and its values'), layout: { cktAspM: 0.5 },
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'k_lp1', label: t('ผ่านต่ำ 1', 'LP 1st'), on: true }, { id: 'k_lp2', label: t('ผ่านต่ำ 2', 'LP 2nd') }, { id: 'k_hp1', label: t('ผ่านสูง 1', 'HP 1st') }, { id: 'k_hp2', label: t('ผ่านสูง 2', 'HP 2nd') }, { id: 'k_bp', label: t('ผ่านแถบ', 'bandpass') }], id => { S.kind = id.slice(2); vis(S); build(); });
+      OP.logSlider(p, 'aF', 'f', 10, 1e6, () => S.f, v => { S.f = v; }, build, fHz, OP.rndR);
+      OP.logSlider(p, 'aR1', 'R_1', 100, 1e6, () => S.R1, v => { S.R1 = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aC1', 'C_1', 0.001e-6, 10e-6, () => S.C1, v => { S.C1 = v; }, build, OP.uF, x => OP.rndR(x * 1e12) / 1e12);
+      blocks.R2 = OP.logSlider(p, 'aR2', 'R_2', 100, 1e6, () => S.R2, v => { S.R2 = v; }, build, kO, OP.rndR);
+      blocks.C2 = OP.logSlider(p, 'aC2', 'C_2', 0.001e-6, 10e-6, () => S.C2, v => { S.C2 = v; }, build, OP.uF, x => OP.rndR(x * 1e12) / 1e12);
+      OP.logSlider(p, 'aRG', 'R_G', 1e3, 100e3, () => S.RG, v => { S.RG = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aRF', 'R_F', 1e3, 1e6, () => S.RF, v => { S.RF = v; }, build, kO, OP.rndR);
+      vis(S); },
+    spec: S => specOf(S, S.f),
+    onBuild: (c, S) => { const bp = S.kind === 'bp', two = S.kind === 'lp2' || S.kind === 'hp2', hp = S.kind.startsWith('hp'), Av1 = 1 + S.RF / S.RG;
+      S.Av = bp ? Av1 * Av1 : Av1; S.sw = OP.sweep(f => specOf(S, f), bp ? 1 : 10, 1e6, 73); S.hp = hp; S.two = two; S.bp = bp;
+      S.fc = bp ? null : fcOf(S.R1, S.C1); S.fL = bp ? fcOf(S.R1, S.C1) : null; S.fH = bp ? fcOf(S.R2, S.C2) : null;
+      S.f3 = bp ? OP.at(S.sw, S.Av / Math.SQRT2, 'lo') : OP.at(S.sw, S.Av / Math.SQRT2, hp ? 'hi' : 'lo'); S.f3b = bp ? OP.at(S.sw, S.Av / Math.SQRT2, 'hi') : null; },
+    side: (ctx, b, bd, c, S) => OP.bode(ctx, b, bd, { sw: S.sw, Av: S.Av, fc: S.fc, n: S.two ? 2 : 1, hp: S.hp, f: S.f, spec: specOf(S, S.f), f3: S.f3, f3b: S.f3b, lo: S.two ? -70 : -40, fcs: S.bp ? [{ f: S.fL, label: `f_OL = ${fHz(S.fL)}` }, { f: S.fH, label: `f_OH = ${fHz(S.fH)}` }] : [],
+      title: t(`${NAME[S.kind]}: A_v = ${fd(S.Av, 2)} = ${fd(dB(S.Av), 1)} dB`, `${NAME[S.kind]}: A_v = ${fd(S.Av, 2)} = ${fd(dB(S.Av), 1)} dB`) }),
+    waves: [(ctx, b, bd, c, S) => OP.acWaves(ctx, b, bd, c)],
+    badge: (c, S) => { const g = Cx.abs(c.V('o')); return [[`${NAME[S.kind]} · f = ${fHz(S.f)}: |V_o/V_1| = ${fd(g, 3)} = ${fd(dB(g), 1)} dB`, `${NAME[S.kind]} · f = ${fHz(S.f)}: |V_o/V_1| = ${fd(g, 3)} = ${fd(dB(g), 1)} dB`], g > S.Av / Math.SQRT2 ? 'ok' : 'wait']; },
+    rows: (c, S) => { const vo = c.V('o'), g = Cx.abs(vo), ph = CH6.wrap(CH6.deg(vo) - CH6.deg(c.V('s'))); return [[t('A_v ในแถบผ่าน', 'passband A_v'), `${fd(S.Av, 3)} = ${fd(dB(S.Av), 2)} dB`]].concat(S.bp ? [['f_OL (1/2πR_1C_1)', fHz(S.fL)], ['f_OH (1/2πR_2C_2)', fHz(S.fH)], [t('−3 dB จริง', 'actual −3 dB'), `${fHz(S.f3)} – ${fHz(S.f3b)}`]] : [[S.hp ? 'f_OL (1/2πR_1C_1)' : 'f_OH (1/2πR_1C_1)', fHz(S.fc)], [t('−3 dB จริง', 'actual −3 dB'), isFinite(S.f3) ? fHz(S.f3) : '–']]).concat([[t('ที่ f: |V_o/V_1|', 'at f: |V_o/V_1|'), `${fd(g, 3)} = ${fd(dB(g), 2)} dB`], [t('เฟสของ v_o', 'phase of v_o'), `${fd(ph, 1)}°`]]); },
+    text: (c, S) => { const g = Cx.abs(c.V('o')), rel = fd(dB(g) - dB(S.Av), 1);
+      if (S.bp) return t(`ขั้นแรกผ่านสูง \\(f_{OL}\\) = ${fHz(S.fL)} ขั้นที่สองผ่านต่ำ \\(f_{OH}\\) = ${fHz(S.fH)} ออปแอมป์ตัวแรกมีความต้านทานขาออกต่ำ ขั้นที่สองจึงไม่โหลดมัน: การตอบสนองเป็นผลคูณและจุด −3 dB จริง (${fHz(S.f3)}, ${fHz(S.f3b)}) ตรงสูตรเมื่อสองความถี่ห่างกันมาก ที่ \\(f\\) = ${fHz(S.f)} อัตราขยาย ${fd(g, 2)} (${rel} dB เทียบกลางแถบ ${fd(S.Av, 1)})`, `The first stage is a high-pass with \\(f_{OL}\\) = ${fHz(S.fL)}, the second a low-pass with \\(f_{OH}\\) = ${fHz(S.fH)}. The first op-amp's low output resistance keeps the second stage from loading it, so the response is the product and the actual −3 dB points (${fHz(S.f3)}, ${fHz(S.f3b)}) match the formulas when the two frequencies are far apart. At \\(f\\) = ${fHz(S.f)} the gain is ${fd(g, 2)} (${rel} dB against the mid-band ${fd(S.Av, 1)}).`);
+      if (S.two) return t(`${NAME[S.kind]}: สูตรของตำราให้ \\(1/2\\pi R_1C_1\\) = ${fHz(S.fc)} แต่สองชุด RC ต่อตรงกัน ชุดที่สองโหลดชุดแรก จุด −3 dB จริงอยู่ที่ ${fHz(S.f3)} (${fd(S.f3 / S.fc, 2)} เท่า) และที่ความถี่ตามสูตรอัตราขยายเหลือ 1/3 ของแถบผ่าน (เมื่อ \\(R_1 = R_2\\), \\(C_1 = C_2\\)) ส่วนลาด −40 dB ต่อทศถูกต้อง ที่ \\(f\\) = ${fHz(S.f)}: ${fd(g, 3)} (${rel} dB)`, `${NAME[S.kind]}: the book's formula gives \\(1/2\\pi R_1C_1\\) = ${fHz(S.fc)}, but the two RC sections are connected directly and the second loads the first: the actual −3 dB point is at ${fHz(S.f3)} (${fd(S.f3 / S.fc, 2)} times), and at the formula's frequency the gain is 1/3 of the passband (for \\(R_1 = R_2\\), \\(C_1 = C_2\\)). The −40 dB per decade slope is right. At \\(f\\) = ${fHz(S.f)}: ${fd(g, 3)} (${rel} dB).`);
+      return t(`${NAME[S.kind]}: ตัวแบ่งแรงดัน RC ก่อนขั้ว + ให้ 1/√2 ที่ \\(X_C = R\\) คือ \\(f_c = 1/2\\pi R_1C_1\\) = ${fHz(S.fc)} (ตัวแก้วงจร ${fHz(S.f3)}) แล้วออปแอมป์ขยาย \\(1 + R_F/R_G\\) = ${fd(S.Av, 2)} ลาด −20 dB ต่อทศ ที่ \\(f\\) = ${fHz(S.f)}: ${fd(g, 3)} (${rel} dB เทียบแถบผ่าน)`, `${NAME[S.kind]}: the RC divider in front of the + input gives 1/√2 where \\(X_C = R\\), that is \\(f_c = 1/2\\pi R_1C_1\\) = ${fHz(S.fc)} (engine ${fHz(S.f3)}); the op-amp then amplifies by \\(1 + R_F/R_G\\) = ${fd(S.Av, 2)}. The roll-off is −20 dB per decade. At \\(f\\) = ${fHz(S.f)}: ${fd(g, 3)} (${rel} dB against the passband).`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, f1 = fcOf(4.7e3, 0.01e-6), c2 = 1 / (TAU * 10e3 * 1000);
+  CH6.quiz('quiz', [
+    { q: t('1) ตัวกรองผ่านต่ำอันดับหนึ่ง \\(R_1\\) = 4.7 kΩ, \\(C_1\\) = 0.01 µF จงหา \\(f_{OH}\\)', '1) A first-order low-pass filter with \\(R_1\\) = 4.7 kΩ and \\(C_1\\) = 0.01 µF. Find \\(f_{OH}\\).'),
+      fields: [{ key: 'x', lab: 'f_OH =', ans: f1 / 1e3, unit: 'kHz', tol: 0.02 }], work: work(R`f_{OH} = \frac{1}{2\pi(4.7 \times 10^3)(0.01 \times 10^{-6})} = ${fd(f1 / 1e3, 2)}\ \text{kHz}`) },
+    { q: t('2) ต้องการ \\(f_{OH}\\) = 1 kHz ด้วย \\(R_1\\) = 10 kΩ จงหา \\(C_1\\)', '2) We want \\(f_{OH}\\) = 1 kHz with \\(R_1\\) = 10 kΩ. Find \\(C_1\\).'),
+      fields: [{ key: 'x', lab: 'C_1 =', ans: c2 * 1e6, unit: 'µF', tol: 0.0003 }], work: work(R`C_1 = \frac{1}{2\pi R_1 f_{OH}} = \frac{1}{2\pi(10^4)(10^3)} = ${fd(c2 * 1e6, 4)}\ \mu\text{F}`) },
+    { q: t('3) \\(R_G\\) = 10 kΩ, \\(R_F\\) = 47 kΩ จงหาอัตราขยายในแถบผ่านและเป็นเดซิเบล', '3) \\(R_G\\) = 10 kΩ, \\(R_F\\) = 47 kΩ. Find the passband gain and its value in decibels.'),
+      fields: [{ key: 'x', lab: 'A_v =', ans: 5.7, tol: 0.01 }, { key: 'y', lab: 'A_v =', ans: dB(5.7), unit: 'dB', tol: 0.05 }], work: work(R`A_v = 1 + \frac{47}{10} = 5.7 = 20\log_{10}5.7 = ${fd(dB(5.7), 2)}\ \text{dB}`) },
+    { q: t('4) สองทศเหนือ \\(f_{OH}\\) ตัวกรองผ่านต่ำอันดับหนึ่งและอันดับสองลดลงกี่เดซิเบลจากแถบผ่าน (ตามเส้นกำกับ)', '4) Two decades above \\(f_{OH}\\), how many decibels below the passband are a first- and a second-order low-pass filter (by the asymptotes)?'),
+      fields: [{ key: 'x', lab: t('อันดับหนึ่ง:', 'first order:'), ans: -40, unit: 'dB', tol: 0.1 }, { key: 'y', lab: t('อันดับสอง:', 'second order:'), ans: -80, unit: 'dB', tol: 0.1 }], work: work(R`2 \times (-20) = -40\ \text{dB};\qquad 2 \times (-40) = -80\ \text{dB}`, t('<div class="sub2">อัตราขยายเหลือ 1/100 และ 1/10 000</div>', '<div class="sub2">The gain is down to 1/100 and 1/10 000.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

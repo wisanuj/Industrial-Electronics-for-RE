@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="8.4 — The 566 VCO">8.4 — ออสซิลเลเตอร์ควบคุมด้วยแรงดัน 566</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ออสซิลเลเตอร์ควบคุมด้วยแรงดัน 566 <span class="en">The 566 voltage-controlled oscillator</span></h1>
+<h1 data-l="en">The 566 voltage-controlled oscillator <span class="en">A capacitor charged by a current that a dc voltage sets: frequency from voltage</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 23–26 ออสซิลเลเตอร์ควบคุมด้วยแรงดัน (voltage-controlled oscillator, VCO) ให้คลื่นสี่เหลี่ยมและสามเหลี่ยมที่ความถี่ปรับได้ด้วยแรงดันกระแสตรง ไอซี 566 มีแหล่งกระแสที่ชาร์จและคาย \(C_1\) ภายนอกด้วยกระแส \((V^+ - V_C)/R_1\) และชมิตต์ทริกเกอร์ที่สลับทิศเมื่อแรงดันบนตัวเก็บประจุถึงสองระดับ ยิ่ง \(V_C\) ต่ำ กระแสยิ่งมาก ความถี่ยิ่งสูง: \(f_o = \frac{2}{R_1C_1}\frac{V^+ - V_C}{V^+}\) หน้านี้จำลองการชาร์จจริงตามเวลา: ส่วน A ปรับ \(V^+\), \(R_1\), \(C_1\), \(V_C\) พร้อมกราฟ \(f_o\)–\(V_C\) ข้อ 1 รูป 13.22 ข้อ 2 โพเทนชิออมิเตอร์ของรูป 13.23</p>
+<p class="sub" data-l="en">Chapter 8 slides pp. 23–26. A voltage-controlled oscillator (VCO) gives square and triangle waves whose frequency a dc voltage sets. The 566 IC has current sources that charge and discharge an external \(C_1\) with \((V^+ - V_C)/R_1\), and a Schmitt trigger that reverses the direction when the capacitor voltage reaches either of two levels. The lower \(V_C\), the larger the current and the higher the frequency: \(f_o = \frac{2}{R_1C_1}\frac{V^+ - V_C}{V^+}\). This page simulates the charging in time: section A adjusts \(V^+\), \(R_1\), \(C_1\), \(V_C\) with an \(f_o\)–\(V_C\) graph, problem 1 is Fig. 13.22, problem 2 the potentiometer of Fig. 13.23.</p>
+<div class="equation-box eqwrap">$$ f_o = \frac{2}{R_1C_1}\left(\frac{V^+ - V_C}{V^+}\right) $$ $$ 2\ \text{k}\Omega \le R_1 \le 20\ \text{k}\Omega,\qquad \tfrac{3}{4}V^+ \le V_C \le V^+ $$ $$ f_o < 1\ \text{MHz},\qquad 10\ \text{V} \le V^+ \le 24\ \text{V} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>โครงสร้าง</b> (หน้า 23, รูป 13.21): แหล่งกระแสคู่ ชมิตต์ทริกเกอร์ และบัฟเฟอร์สองตัว ขา 6 รับ \(R_1\) จาก \(V^+\) ขา 5 รับ \(V_C\) ขา 7 รับ \(C_1\) ขา 3 ให้สี่เหลี่ยม ขา 4 ให้สามเหลี่ยม</li>
+  <li><b>ทำไมความถี่ขึ้นกับ \(V_C\)</b>: ขา 6 ภายในอยู่ที่ \(V_C\) กระแสใน \(R_1\) จึงเป็น \((V^+ - V_C)/R_1\) กระแสนี้ถูกสะท้อนไปชาร์จและคาย \(C_1\) ระหว่างสองระดับที่ห่างกัน \(V^+/4\): ครึ่งคาบ = \(C_1(V^+/4)/I\) ให้สมการ 13.8 \(V_C\) ใกล้ \(V^+\) → กระแสน้อย → ความถี่ต่ำ</li>
+  <li><b>ข้อจำกัด</b> (หน้า 24): \(R_1\) 2–20 kΩ, \(V_C\) ระหว่าง 0.75\(V^+\) กับ \(V^+\), \(f_o\) < 1 MHz, \(V^+\) 10–24 V ช่วงปรับ 10 ต่อ 1 จาก \(R_1C_1\) และอีก 10 ต่อ 1 จาก \(V_C\)</li>
+  <li><b>ตัวอย่าง</b>: รูป 13.22 (หน้า 25): \(V_C\) = 10.4 V จาก 1.5 kΩ/10 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 820 pF → 32.5 kHz · รูป 13.23 (หน้า 26): โพเทนชิออมิเตอร์ 5 kΩ เลื่อน \(V_C\) 11.74–9.19 V → 19.7–212.9 kHz · รูป 13.24 (ตำรา): \(V_{in}\) 1.4 V ยอดรอบ \(V_C\) = 10.4 V มอดูเลตความถี่ 10 ต่อ 1</li>
+  <li><b>ภาพจำลอง</b>: แหล่งกระแส ±I และ \(C_1\) เป็นชิ้นส่วนจริง ชมิตต์ทริกเกอร์สลับระหว่างก้าวเวลาที่ 0.375\(V^+\) และ 0.625\(V^+\) (ห่างกัน \(V^+/4\) ตามสมการ) ความถี่ที่วัดได้ตรงสูตรภายใน 0.5 %</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Structure</b> (p. 23, Fig. 13.21): a pair of current sources, a Schmitt trigger and two buffers. Pin 6 takes \(R_1\) from \(V^+\), pin 5 takes \(V_C\), pin 7 takes \(C_1\), pin 3 gives the square wave, pin 4 the triangle.</li>
+  <li><b>Why the frequency depends on \(V_C\)</b>: inside, pin 6 sits at \(V_C\), so the current in \(R_1\) is \((V^+ - V_C)/R_1\); it is mirrored to charge and discharge \(C_1\) between two levels \(V^+/4\) apart: half a period = \(C_1(V^+/4)/I\), which gives Eq. 13.8. \(V_C\) near \(V^+\) → little current → a low frequency.</li>
+  <li><b>Limits</b> (p. 24): \(R_1\) 2–20 kΩ, \(V_C\) between 0.75\(V^+\) and \(V^+\), \(f_o\) < 1 MHz, \(V^+\) 10–24 V. A 10-to-1 range from \(R_1C_1\) and another 10-to-1 from \(V_C\).</li>
+  <li><b>Examples</b>: Fig. 13.22 (p. 25): \(V_C\) = 10.4 V from 1.5 kΩ/10 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 820 pF → 32.5 kHz · Fig. 13.23 (p. 26): a 5 kΩ potentiometer moves \(V_C\) from 11.74 to 9.19 V → 19.7 to 212.9 kHz · Fig. 13.24 (book): a 1.4 V peak \(V_{in}\) about \(V_C\) = 10.4 V frequency-modulates over 10 to 1.</li>
+  <li><b>The simulation</b>: the ±I current source and \(C_1\) are real parts; the Schmitt trigger switches between time steps at 0.375\(V^+\) and 0.625\(V^+\) (\(V^+/4\) apart, as the equation requires). The measured frequency matches the formula within 0.5 %.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch8/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 23, Voltage-Controlled Oscillator: a VCO is a circuit that provides a varying output signal (typically square-wave or triangular-wave) whose frequency can be adjusted over a range controlled by a dc voltage; the 566 block diagram with current sources, Schmitt trigger and buffer amplifiers, and the pin configuration: 1 ground, 3 square-wave output, 4 triangular-wave output, 5 modulation input V_C, 6 R_1, 7 C_1, 8 V+ (Figure 13.21).">
+    <figcaption data-l="th">สไลด์หน้า 23: โครงสร้างและขาของ 566 (รูป 13.21)</figcaption><figcaption data-l="en">Slide p. 23: the 566's structure and pins (Fig. 13.21)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 24, Voltage-Controlled Oscillator: the oscillator can be programmed over a 10-to-1 frequency range by proper selection of an external resistor and capacitor, and then modulated over a 10-to-1 frequency range by a control voltage V_C; f_o = (2/(R_1 C_1))((V+ − V_C)/V+); restrictions: 2 kΩ ≤ R_1 ≤ 20 kΩ, 3/4 V+ ≤ V_C ≤ V+, f_o below 1 MHz, V+ between 10 V and 24 V (Equation 13.8).">
+    <figcaption data-l="th">สไลด์หน้า 24: สมการ 13.8 และข้อจำกัด</figcaption><figcaption data-l="en">Slide p. 24: Eq. 13.8 and the limits</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p25.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 25, Voltage-Controlled Oscillator example: the 566 function generator used to provide both square-wave and triangular-wave signals at a fixed frequency set by R_1, C_1 and V_C; a resistor divider R_2 = 1.5 kΩ and R_3 = 10 kΩ sets the dc modulating voltage; V+ = 12 V, R_1 = 10 kΩ, C_1 = 820 pF (Figure 13.22).">
+    <figcaption data-l="th">สไลด์หน้า 25: ตัวอย่างรูป 13.22</figcaption><figcaption data-l="en">Slide p. 25: the example of Fig. 13.22</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p26.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 26, Voltage-Controlled Oscillator example: the output square-wave frequency can be adjusted using the input voltage V_C; potentiometer R_3 allows varying V_C; V+ = 12 V, R_2 = 510 Ω, R_3 = 5 kΩ, R_4 = 18 kΩ, R_1 = 10 kΩ, C_1 = 220 pF (Figure 13.23).">
+    <figcaption data-l="th">สไลด์หน้า 26: ตัวอย่างรูป 13.23</figcaption><figcaption data-l="en">Slide p. 26: the example of Fig. 13.23</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 25–26 คือสองตัวอย่างในหัวข้อ 13.5 ของตำรา (หน้า 737–738) · ตำราปัด \(V_C\) ของรูป 13.22 เป็น 10.4 V (ค่าเต็ม 10.43 V) จึงได้ 32.5 kHz ค่าเต็มให้ 31.8 kHz ซึ่งภาพจำลองวัดได้ · รูป 13.23 ของตำรามีตัวต้านทาน \(R_4\) = 18 kΩ ใต้โพเทนชิออมิเตอร์ ในสไลด์วาดครบแต่ข้อความพูดถึงแค่ \(R_3\) · ภายใน 566 ขา 6 อยู่ที่ \(V_C\): ภาพจำลองวางแหล่งจ่ายซ่อนไว้ที่ขา 6 เพื่อให้กระแสใน \(R_1\) ถูกต้อง และเลือกระดับของชมิตต์ทริกเกอร์ที่ 0.375\(V^+\)/0.625\(V^+\) (ตำราไม่ระบุ ระบุเพียงผลคือสมการ 13.8)</div>
+<div class="warnbox" data-l="en"><b>The slides give no solutions</b>: pp. 25–26 are the two worked examples of the book's §13.5 (pp. 737–738). The book rounds the \(V_C\) of Fig. 13.22 to 10.4 V (the full value is 10.43 V) and so gets 32.5 kHz; the full value gives 31.8 kHz, which the simulation measures. The book's Fig. 13.23 has a resistor \(R_4\) = 18 kΩ below the potentiometer; the slide draws it but its text mentions only \(R_3\). Inside the 566 pin 6 sits at \(V_C\): the simulation places a hidden source at pin 6 so that the current in \(R_1\) is right, and sets the Schmitt trigger levels at 0.375\(V^+\)/0.625\(V^+\) (the book does not state them, only their consequence, Eq. 13.8).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ปรับ V<sub>C</sub></a><a href="#ex1"><b>1</b>รูป 13.22</a><a href="#ex2"><b>2</b>รูป 13.23</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Adjust V<sub>C</sub></a><a href="#ex1"><b>1</b>Fig. 13.22</a><a href="#ex2"><b>2</b>Fig. 13.23</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">VCO ปรับได้: \(V_C\) ตั้งกระแส กระแสตั้งความถี่</h2><h2 data-l="en">The adjustable VCO: \(V_C\) sets the current, the current sets the frequency</h2>
+    <div class="src" data-l="th">สไลด์หน้า 23–24 · Boylestad หัวข้อ 13.5 (รูป 13.21)</div><div class="src" data-l="en">Slides pp. 23–24 · Boylestad §13.5 (Fig. 13.21)</div></div></div>
+  <p class="lead" data-l="th">ตั้ง \(V^+\), \(R_1\), \(C_1\) และ \(V_C\) (จำกัดในช่วง 0.75\(V^+\) ถึง \(V^+\)) กราฟล่างซ้ายคือ \(f_o\) เทียบ \(V_C\) จากสมการ 13.8 (เส้นตรงลาดลง) กับจุดที่วัดได้จากภาพจำลอง กราฟล่างขวาคือสามเหลี่ยมบน \(C_1\) กับสี่เหลี่ยมขาออก ชี้ที่ \(R_1\): กระแส \((V^+ - V_C)/R_1\) คือกระแสเดียวกับที่ชาร์จ \(C_1\) ลด \(V_C\) ลง: ความชันของสามเหลี่ยมชันขึ้น ความถี่สูงขึ้น</p>
+  <p class="lead" data-l="en">Set \(V^+\), \(R_1\), \(C_1\) and \(V_C\) (kept within 0.75\(V^+\) to \(V^+\)). The lower left graph is \(f_o\) against \(V_C\) from Eq. 13.8 (a falling straight line) with the point measured in the simulation; the lower right shows the triangle on \(C_1\) and the square output. Hover over \(R_1\): the current \((V^+ - V_C)/R_1\) is the very current that charges \(C_1\). Lower \(V_C\): the triangle steepens and the frequency rises.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.22: ความถี่คงที่จากตัวแบ่ง 1.5 kΩ/10 kΩ</h2><h2 data-l="en">Fig. 13.22: a fixed frequency from a 1.5 kΩ/10 kΩ divider</h2>
+    <div class="src" data-l="th">สไลด์หน้า 25 · Boylestad หัวข้อ 13.5 (รูป 13.22, สมการ 13.8)</div><div class="src" data-l="en">Slide p. 25 · Boylestad §13.5 (Fig. 13.22, Eq. 13.8)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V^+\) = 12 V, \(R_2\) = 1.5 kΩ, \(R_3\) = 10 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 820 pF จงหา \(V_C\) และ \(f_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V^+\) = 12 V, \(R_2\) = 1.5 kΩ, \(R_3\) = 10 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 820 pF. Find \(V_C\) and \(f_o\).</p></div>
+  <p class="lead" data-l="th">หนึ่งคาบ 31 µs: ภาพจำลองช้าลงสี่หมื่นเท่า <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">One period is 31 µs: the simulation is slowed forty-thousand-fold. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">รูป 13.23: ช่วงความถี่จากโพเทนชิออมิเตอร์ 5 kΩ</h2><h2 data-l="en">Fig. 13.23: the frequency range from a 5 kΩ potentiometer</h2>
+    <div class="src" data-l="th">สไลด์หน้า 26 · Boylestad หัวข้อ 13.5 (รูป 13.23)</div><div class="src" data-l="en">Slide p. 26 · Boylestad §13.5 (Fig. 13.23)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V^+\) = 12 V, \(R_2\) = 510 Ω, โพเทนชิออมิเตอร์ \(R_3\) = 5 kΩ, \(R_4\) = 18 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 220 pF จงหา \(V_C\) และ \(f_o\) ที่ปลายทั้งสองของโพเทนชิออมิเตอร์</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V^+\) = 12 V, \(R_2\) = 510 Ω, a 5 kΩ potentiometer \(R_3\), \(R_4\) = 18 kΩ, \(R_1\) = 10 kΩ, \(C_1\) = 220 pF. Find \(V_C\) and \(f_o\) at both ends of the potentiometer.</p></div>
+  <p class="lead" data-l="th">แถบเลื่อนใต้ภาพหมุนโพเทนชิออมิเตอร์ <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The slider under the picture turns the potentiometer. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas><div class="panel" id="ctl2"></div></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>เลื่อน \(V_C\) จาก \(V^+\) ลงถึง 0.75\(V^+\): ความถี่ไต่จากศูนย์เป็นเส้นตรงถึง \(0.5/R_1C_1\) นี่คือช่วงมอดูเลต 10 ต่อ 1 ของตำรา (จาก 0.025 ถึง 0.25 ของ \(V^+\))</li>
+    <li>ตั้ง \(R_1\) = 20 kΩ แล้ว 2 kΩ: ความถี่ต่างกัน 10 เท่าที่ \(V_C\) เดิม: ช่วงจาก \(R_1\) ตามข้อจำกัดข้อ 1</li>
+    <li>ตั้งให้ \(f_o\) เกิน 1 MHz (\(C_1\) เล็ก \(V_C\) ต่ำ): แผงเตือนว่าเกินข้อจำกัดข้อ 3 ของตำรา ภาพจำลองยังทำงานแต่ชิปจริงไม่รับประกัน</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–2</h3>
+    <ol><li>ข้อ 1: ชี้ที่ \(C_1\) ขณะสามเหลี่ยมขึ้น: กระแส +156.5 µA ขณะลง: −156.5 µA ขนาดเท่ากระแสใน \(R_1\) พอดี</li>
+    <li>ข้อ 2: ที่ไวเปอร์ล่างสุด \(V_C\) = 9.19 V ยังเกิน 9 V (0.75\(V^+\)) นิดเดียว ถ้าตัด \(R_4\) เหลือ 15 kΩ: \(V_C\) = 8.78 V ต่ำกว่าเกณฑ์ ความถี่ตามสูตรคือ 244 kHz แต่ชิปอาจไม่ทำตาม</li></ol>
+    <div class="book">สไลด์บทที่ 8 หน้า 23–26 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 13.5 (รูป 13.21–13.24, สมการ 13.8)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Move \(V_C\) from \(V^+\) down to 0.75\(V^+\): the frequency climbs linearly from zero to \(0.5/R_1C_1\). That is the book's 10-to-1 modulation range (from 0.025 to 0.25 of \(V^+\)).</li>
+    <li>Set \(R_1\) = 20 kΩ, then 2 kΩ: a 10-fold change in frequency at the same \(V_C\): the range from \(R_1\), within limit 1.</li>
+    <li>Push \(f_o\) past 1 MHz (a small \(C_1\), a low \(V_C\)): the panel warns that limit 3 is exceeded; the simulation still runs but a real chip is not guaranteed to.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–2</h3>
+    <ol><li>Problem 1: hover over \(C_1\) while the triangle rises: +156.5 µA; while it falls: −156.5 µA, exactly the magnitude of the current in \(R_1\).</li>
+    <li>Problem 2: with the wiper at the bottom \(V_C\) = 9.19 V is only just above 9 V (0.75\(V^+\)). Cut \(R_4\) to 15 kΩ: \(V_C\) = 8.78 V, below the limit; the formula says 244 kHz but the chip may not follow.</li></ol>
+    <div class="book">Chapter 8 slides pp. 23–26 · Boylestad &amp; Nashelsky, 11th ed., §13.5 (Figs. 13.21–13.24, Eq. 13.8)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx, kO = r => CK.eng(r, 'Ω'), fHz = OP.fHz, pF = IC.pF;
+  IC.problem(1, 'vco'); IC.problem(2, 'vcoPot');
+
+  /* =================================================================== A: the adjustable VCO */
+  const VX = { up: true, Vp: 12, VC: 10.4, R1: 10e3, I: 0, vc1: 0, edges: [] }, resetVX = () => { VX.up = true; VX.edges = []; VX.pt = undefined; VX.pv = undefined; }, upd = { acc: 0 };
+  const OUTS = { vc: c => c.V('p7').re, sq: c => c.V('sq').re };
+  let vcSlider = null;
+  OP.explorer({ init: { Vp: 12, R1: 10e3, C1: 820e-12, VC: 10.4 }, title: t('ค่าของวงจร', 'The circuit values'), layout: { rowAsp: 0.55, rowMin: 250, cktAspM: 0.62 },
+    controls: (p, S, build) => {
+      ui.slider(p, { id: 'aVp', label: 'V+', min: 10, max: 24, step: 0.5, value: S.Vp, fmt: v => vtx(v), oninput: v => { S.Vp = v; S.VC = Math.max(0.75 * v, Math.min(v, S.VC)); vcSlider.el.min = 0.75 * v; vcSlider.el.max = v; vcSlider.set(S.VC); build(); } });
+      OP.logSlider(p, 'aR1', 'R_1', 2e3, 20e3, () => S.R1, v => { S.R1 = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aC1', 'C_1', 100e-12, 10e-9, () => S.C1, v => { S.C1 = v; }, build, pF, x => OP.rndR(x * 1e15) / 1e15);
+      vcSlider = ui.slider(p, { id: 'aVC', label: 'V_C', min: 9, max: 12, step: 0.01, value: S.VC, fmt: v => `${vtx(v)} (${fd(v / S.Vp * 100, 1)} % ${t('ของ', 'of')} V+)`, oninput: v => { S.VC = v; build(); } }); },
+    spec: S => { const sp = IC.ckt({ kind: 'v566', st: VX, Vp: S.Vp, R1: S.R1, C1: S.C1, VC: S.VC }); S.box = sp.box; return sp; },
+    onBuild: (c, S) => { VX.Vp = S.Vp; VX.VC = S.VC; VX.R1 = S.R1; resetVX(); const fo = Math.max(IC.f566(S.Vp, S.VC, S.R1, S.C1), 1); S.fo = fo; S.rec = new OP.Rec(4 / fo, 2000, OUTS, 5); S.rec.ctl = IC.ctl566(VX); S.rec.onRestart = resetVX; S.rec.sync(c); },
+    tick: (dt, c, S, show) => { if (!S.rec) return; S.rec.run(c, dt); upd.acc += dt; if (upd.acc > 0.2) { upd.acc = 0; show(); } },
+    side: (ctx, b, bd, c, S) => { const fmax = IC.f566(S.Vp, 0.75 * S.Vp, S.R1, S.C1), p = IC.period(VX), fm = p ? 1 / p.T : NaN;
+      OP.plot(ctx, b, { x: [0.75 * S.Vp, S.Vp], y: [0, fmax * 1.1], xt: [0.75, 0.8, 0.85, 0.9, 0.95, 1].map(k => +(k * S.Vp).toFixed(3)), xf: x => IE.num(x, 2), yt: [0.25, 0.5, 0.75, 1].map(k => k * fmax), yf: y => fHz(y), xl: 'V_C (V)', yl: 'f_o', title: bd.short ? '' : t('สมการ 13.8: เส้นตรงจาก 0 ที่ V_C = V+ ถึง 0.5/R_1C_1 ที่ 0.75V+', 'Eq. 13.8: a line from 0 at V_C = V+ to 0.5/R_1C_1 at 0.75V+'),
+        curves: [{ f: x => IC.f566(S.Vp, x, S.R1, S.C1), color: C.curve, w: 2.6 }], pts: [{ x: S.VC, y: S.fo, label: bd.short ? '' : `${t('สูตร', 'formula')} ${fHz(S.fo)}`, side: S.VC > 0.875 * S.Vp ? -1 : 1, dy: 16 }].concat(isFinite(fm) ? [{ x: S.VC, y: fm, color: C.tan, r: 5, label: bd.short ? '' : `${t('วัดได้', 'measured')} ${fHz(fm)}`, side: S.VC > 0.875 * S.Vp ? -1 : 1, dy: -16 }] : []), guides: [{ x: S.VC, y: S.fo }] }); },
+    waves: [(ctx, b, bd, c, S) => { const V = S.Vp, Tw = S.rec.Tw, us = Tw < 1e-3; OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'vc', color: C.q, label: t('สามเหลี่ยม', 'triangle'), w: 2.6 }, { key: 'sq', color: C.elec, label: t('สี่เหลี่ยม', 'square'), w: 2.2 }], y: [-0.05 * V, 1.1 * V], yt: [0, V / 4, V / 2, 3 * V / 4, V], yf: y => IE.num(y, 1), ms: !us, us, xf: x => IE.num(x, 1), xl: us ? 't (µs)' : 't (ms)', title: bd.short ? '' : t('สี่คาบ', 'four periods'), hl: [{ y: 0.625 * V, color: C.tan, label: bd.short ? '' : '0.625 V+' }, { y: 0.375 * V, color: C.tan, label: bd.short ? '' : '0.375 V+', left: true }], short: bd.short }); }],
+    after: (v, c, S) => { IC.box(v, S.box); OP.tag(v, 'sq', `${vtx(c.V('sq').re)}`, C.elec, 0.1, -0.42); OP.tag(v, 'tri', `${vtx(c.V('p7').re)}`, C.q, 0.1, 0.5); },
+    badge: (c, S) => { const p = IC.period(VX); return [[p ? `${t('วัดได้', 'measured')} f = ${fHz(1 / p.T)} · ${t('สูตร', 'formula')} ${fHz(S.fo)}` : `${t('สูตร', 'formula')} f_o = ${fHz(S.fo)}`, p ? `${t('วัดได้', 'measured')} f = ${fHz(1 / p.T)} · ${t('สูตร', 'formula')} ${fHz(S.fo)}` : `${t('สูตร', 'formula')} f_o = ${fHz(S.fo)}`], S.fo < 1e6 ? 'ok' : 'wait']; },
+    rows: (c, S) => { const p = IC.period(VX), I = (S.Vp - S.VC) / S.R1; return [['(V+ − V_C)/V+', fd((S.Vp - S.VC) / S.Vp, 4)], ['I = (V+ − V_C)/R_1', itx(I)], ['2/R_1C_1', fHz(2 / (S.R1 * S.C1))], [t('f_o สมการ 13.8', 'f_o by Eq. 13.8'), fHz(S.fo)], [t('f_o วัดได้', 'f_o measured'), p ? fHz(1 / p.T) : '–'], [t('คาบ', 'period'), IC.ms(1 / S.fo)], [t('ข้อจำกัด', 'limits'), (S.R1 >= 2e3 && S.R1 <= 20e3 ? '✓ R_1 ' : '✗ R_1 ') + (S.VC >= 0.75 * S.Vp - 1e-9 ? '✓ V_C ' : '✗ V_C ') + (S.fo < 1e6 ? '✓ f_o ' : '✗ f_o ') + (S.Vp >= 10 && S.Vp <= 24 ? '✓ V+' : '✗ V+')]]; },
+    text: (c, S) => { const I = (S.Vp - S.VC) / S.R1, half = S.C1 * (S.Vp / 4) / I; return t(`ขา 6 อยู่ที่ \\(V_C\\) กระแสใน \\(R_1\\) จึงเป็น (${vtx(S.Vp)} − ${vtx(S.VC)})/${kO(S.R1)} = ${itx(I)} กระแสนี้ชาร์จ \\(C_1\\) = ${pF(S.C1)} ข้ามช่วง \\(V^+/4\\) = ${vtx(S.Vp / 4)} ในครึ่งคาบ \\(C_1(V^+/4)/I\\) = ${IC.ms(half)} แล้วคายกลับเท่ากัน: \\(f_o = I/(2C_1 \\cdot V^+/4) = \\frac{2}{R_1C_1}\\frac{V^+ - V_C}{V^+}\\) = ${fHz(S.fo)}${S.fo >= 1e6 ? ' เกิน 1 MHz: นอกข้อจำกัดของชิป' : ''}`, `Pin 6 sits at \\(V_C\\), so the current in \\(R_1\\) is (${vtx(S.Vp)} − ${vtx(S.VC)})/${kO(S.R1)} = ${itx(I)}. It charges \\(C_1\\) = ${pF(S.C1)} across \\(V^+/4\\) = ${vtx(S.Vp / 4)} in half a period \\(C_1(V^+/4)/I\\) = ${IC.ms(half)}, then discharges it in the same time: \\(f_o = I/(2C_1 \\cdot V^+/4) = \\frac{2}{R_1C_1}\\frac{V^+ - V_C}{V^+}\\) = ${fHz(S.fo)}${S.fo >= 1e6 ? ', above 1 MHz: outside the chip\'s limits' : ''}.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, q1 = IC.f566(12, 10, 10e3, 1e-9), q2 = 2 / (4.7e3 * 20e3) * 1, q4lo = IC.f566(12, 11.8, 10e3, 220e-12), q4hi = IC.f566(12, 9, 10e3, 220e-12);
+  CH6.quiz('quiz', [
+    { q: t('1) \\(V^+\\) = 12 V, \\(V_C\\) = 10 V, \\(R_1\\) = 10 kΩ, \\(C_1\\) = 1 nF จงหา \\(f_o\\)', '1) \\(V^+\\) = 12 V, \\(V_C\\) = 10 V, \\(R_1\\) = 10 kΩ, \\(C_1\\) = 1 nF. Find \\(f_o\\).'),
+      fields: [{ key: 'x', lab: 'f_o =', ans: q1 / 1e3, unit: 'kHz', tol: 0.1 }], work: work(R`f_o = \frac{2}{(10^4)(10^{-9})}\cdot\frac{12 - 10}{12} = ${fd(q1 / 1e3, 1)}\ \text{kHz}`) },
+    { q: t('2) ต้องการ \\(f_o\\) = 20 kHz ที่ \\(V_C\\) = 0.9\\(V^+\\) ด้วย \\(R_1\\) = 4.7 kΩ จงหา \\(C_1\\)', '2) We want \\(f_o\\) = 20 kHz at \\(V_C\\) = 0.9\\(V^+\\) with \\(R_1\\) = 4.7 kΩ. Find \\(C_1\\).'),
+      fields: [{ key: 'x', lab: 'C_1 =', ans: 2 * 0.1 / (4.7e3 * 20e3) * 1e12, unit: 'pF', tol: 5 }], work: work(R`C_1 = \frac{2}{R_1 f_o}\cdot\frac{V^+ - V_C}{V^+} = \frac{2(0.1)}{(4.7 \times 10^3)(20 \times 10^3)} = ${fd(2 * 0.1 / (4.7e3 * 20e3) * 1e12, 0)}\ \text{pF}`) },
+    { q: t('3) ตัวแบ่ง \\(R_2\\) = 2.2 kΩ, \\(R_3\\) = 10 kΩ บน \\(V^+\\) = 15 V ให้ \\(V_C\\) เท่าใด และอยู่ในช่วงที่อนุญาตหรือไม่ (ตอบขีดจำกัดล่าง 0.75\\(V^+\\))', '3) A divider \\(R_2\\) = 2.2 kΩ, \\(R_3\\) = 10 kΩ on \\(V^+\\) = 15 V: what is \\(V_C\\), and is it in the allowed range (give the lower limit 0.75\\(V^+\\))?'),
+      fields: [{ key: 'x', lab: 'V_C =', ans: 15 * 10 / 12.2, unit: 'V', tol: 0.02 }, { key: 'y', lab: '0.75 V+ =', ans: 11.25, unit: 'V', tol: 0.01 }], work: work(R`V_C = \frac{10}{12.2}(15\ \text{V}) = ${fd(15 * 10 / 12.2, 2)}\ \text{V} \ge 0.75(15) = 11.25\ \text{V}\ \checkmark`) },
+    { q: t('4) รูป 13.24 ของตำรา: \\(V_{in}\\) แกว่ง \\(V_C\\) ระหว่าง 9 V กับ 11.8 V (\\(V^+\\) = 12 V, \\(R_1\\) = 10 kΩ, \\(C_1\\) = 220 pF) จงหาช่วงความถี่', '4) The book\'s Fig. 13.24: \\(V_{in}\\) swings \\(V_C\\) between 9 V and 11.8 V (\\(V^+\\) = 12 V, \\(R_1\\) = 10 kΩ, \\(C_1\\) = 220 pF). Find the frequency range.'),
+      fields: [{ key: 'x', lab: t('ต่ำสุด =', 'lowest ='), ans: q4lo / 1e3, unit: 'kHz', tol: 0.2 }, { key: 'y', lab: t('สูงสุด =', 'highest ='), ans: q4hi / 1e3, unit: 'kHz', tol: 1 }], work: work(R`\frac{2}{R_1C_1} = 909\ \text{kHz}:\quad 909\left(\frac{0.2}{12}\right) = ${fd(q4lo / 1e3, 1)}\ \text{kHz},\qquad 909\left(\frac{3}{12}\right) = ${fd(q4hi / 1e3, 0)}\ \text{kHz}`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

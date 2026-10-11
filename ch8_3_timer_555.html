@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="8.3 — The 555 Timer">8.3 — ไอซีจับเวลา 555</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ไอซีจับเวลา 555 <span class="en">The 555 timer</span></h1>
+<h1 data-l="en">The 555 timer <span class="en">Two comparators, a flip-flop and one capacitor that charges and discharges between V_CC/3 and 2V_CC/3</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 18–22 ไอซี 555 คือตัวแบ่งแรงดัน 3R สองตัวเปรียบเทียบ ฟลิปฟล็อป ขั้นขาออก และทรานซิสเตอร์คายประจุ (รูป 13.16) ต่อ \(R_A\), \(R_B\), C ภายนอกเป็นอะสเตเบิล: C ชาร์จผ่าน \(R_A + R_B\) ขึ้นถึง \(2V_{CC}/3\) แล้วคายผ่าน \(R_B\) ลงถึง \(V_{CC}/3\) ซ้ำไปเรื่อย ๆ ได้คลื่นสี่เหลี่ยม \(f \cong 1.44/(R_A + 2R_B)C\) หรือเป็นโมโนสเตเบิล: พัลส์ลบที่ขา 2 ปล่อยขาออกสูงนาน \(1.1R_AC\) แล้วกลับเอง หน้านี้จำลองภายในตามเวลาจริง: ส่วน A อะสเตเบิลปรับได้ ข้อ 1 ภายในไอซี ข้อ 2 Example 13.1 ข้อ 3 Example 13.2</p>
+<p class="sub" data-l="en">Chapter 8 slides pp. 18–22. The 555 is a 3R divider, two comparators, a flip-flop, an output stage and a discharge transistor (Fig. 13.16). With external \(R_A\), \(R_B\), C it is an astable: C charges through \(R_A + R_B\) up to \(2V_{CC}/3\), then discharges through \(R_B\) down to \(V_{CC}/3\), over and over, giving a square wave at \(f \cong 1.44/(R_A + 2R_B)C\); or a monostable: a negative pulse at pin 2 sets the output high for \(1.1R_AC\), after which it returns by itself. This page simulates the inside in real time: section A an adjustable astable, problem 1 the inside of the IC, problem 2 Example 13.1, problem 3 Example 13.2.</p>
+<div class="equation-box eqwrap">$$ T_{high} \cong 0.7(R_A + R_B)C,\qquad T_{low} \cong 0.7R_BC $$ $$ f = \frac{1}{T_{high} + T_{low}} \cong \frac{1.44}{(R_A + 2R_B)C} $$ $$ \text{one-shot: } T_{high} = 1.1R_AC $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ภายใน</b> (หน้า 18, รูป 13.16): R สามตัวให้ \(2V_{CC}/3\) และ \(V_{CC}/3\) ตัวเปรียบเทียบ 1 (ขา 6 threshold สูงกว่า 2V_CC/3 → รีเซ็ต) และ 2 (ขา 2 trigger ต่ำกว่า V_CC/3 → เซ็ต) ฟลิปฟล็อปจำสถานะระหว่างนั้น ขาออก (ขา 3) และทรานซิสเตอร์คายประจุ (ขา 7) ตามฟลิปฟล็อป</li>
+  <li><b>อะสเตเบิล</b> (หน้า 19–20, รูป 13.17–13.18, สมการ 13.3–13.6): ชาร์จผ่าน \(R_A + R_B\): \(T_{high}\) ≅ 0.7(\(R_A + R_B\))C คายผ่าน \(R_B\): \(T_{low}\) ≅ 0.7\(R_B\)C (0.7 คือ ln 2 ปัดเศษ) Example 13.1: 7.5 kΩ, 7.5 kΩ, 0.1 µF → 1.05 ms, 0.525 ms, 635 Hz ขาออกสูงนานกว่าต่ำเสมอ</li>
+  <li><b>โมโนสเตเบิล</b> (หน้า 21–22, รูป 13.19, สมการ 13.7): C เริ่มจาก 0 ชาร์จผ่าน \(R_A\) ถึง \(2V_{CC}/3\) ใช้เวลา ln 3 ≈ 1.1 ค่าคงตัวเวลา Example 13.2: 0.825 ms ความกว้างพัลส์ไม่ขึ้นกับทริกเกอร์</li>
+  <li><b>ภาพจำลอง</b>: ตัวต้านทาน ตัวเก็บประจุ สวิตช์คายประจุ และแหล่งจ่ายขาออกเป็นชิ้นส่วนจริงของตัวแก้วงจร ฟลิปฟล็อปกับตัวเปรียบเทียบทำงานระหว่างก้าวเวลา ค่าที่วัดได้ใช้ ln 2 = 0.693 จึงต่างจากสูตร 0.7 ราว 1 %</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Inside</b> (p. 18, Fig. 13.16): three R give \(2V_{CC}/3\) and \(V_{CC}/3\); comparator 1 (pin 6, threshold, above 2V_CC/3 → reset) and 2 (pin 2, trigger, below V_CC/3 → set); the flip-flop remembers in between; the output (pin 3) and the discharge transistor (pin 7) follow the flip-flop.</li>
+  <li><b>Astable</b> (pp. 19–20, Figs. 13.17–13.18, Eqs. 13.3–13.6): charging through \(R_A + R_B\): \(T_{high}\) ≅ 0.7(\(R_A + R_B\))C; discharging through \(R_B\): \(T_{low}\) ≅ 0.7\(R_B\)C (0.7 is ln 2 rounded). Example 13.1: 7.5 kΩ, 7.5 kΩ, 0.1 µF → 1.05 ms, 0.525 ms, 635 Hz. The output is always high longer than low.</li>
+  <li><b>Monostable</b> (pp. 21–22, Fig. 13.19, Eq. 13.7): C starts at 0 and charges through \(R_A\) to \(2V_{CC}/3\), which takes ln 3 ≈ 1.1 time constants. Example 13.2: 0.825 ms. The pulse width does not depend on the trigger.</li>
+  <li><b>The simulation</b>: the resistors, the capacitor, the discharge switch and the output source are real engine parts; the flip-flop and the comparators act between time steps. The measured values use ln 2 = 0.693 and so differ from the 0.7 formulas by about 1 %.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch8/p18.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 18, Timer circuit: the 555 timer is an example of a versatile timer IC; the 8-pin package (GND, TRIG, OUT, RESET, V_CC, DIS, THR, CTRL) and the internal block diagram with the three-resistor divider at 2/3 V_CC and 1/3 V_CC, two comparators, a flip-flop, the output stage and the discharge transistor (Figure 13.16).">
+    <figcaption data-l="th">สไลด์หน้า 18: ขาและภายในของ 555 (รูป 13.16)</figcaption><figcaption data-l="en">Slide p. 18: the pins and the inside of the 555 (Fig. 13.16)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 19, Timer circuit, astable operation: the timer output is a repetitive square wave; the capacitor charges through R_A + R_B and discharges through R_B between 1/3 V_CC and 2/3 V_CC; f ≈ 1.44/((R_A + 2R_B)C), T_high ≈ 0.7(R_A + R_B)C, T_low ≈ 0.7 R_B C (Figure 13.17).">
+    <figcaption data-l="th">สไลด์หน้า 19: อะสเตเบิล (รูป 13.17, สมการ 13.3–13.6)</figcaption><figcaption data-l="en">Slide p. 19: astable operation (Fig. 13.17, Eqs. 13.3–13.6)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 20, Timer circuit example: determine the frequency and draw the output waveform for the circuit of the figure; V_CC = 5 V, R_A = 7.5 kΩ, R_B = 7.5 kΩ, C = 0.1 µF, 0.01 µF on pin 5 (Example 13.1, Figure 13.18a).">
+    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 13.1</figcaption><figcaption data-l="en">Slide p. 20: Example 13.1</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p21.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 21, Timer circuit, monostable operation: the timer output is a one-shot pulse; when an input is received it triggers a one-shot pulse; the time for which the output remains high is T_high = 1.1 R_A C; the circuit and the trigger and output waveforms (Figure 13.19).">
+    <figcaption data-l="th">สไลด์หน้า 21: โมโนสเตเบิล (รูป 13.19, สมการ 13.7)</figcaption><figcaption data-l="en">Slide p. 21: monostable operation (Fig. 13.19, Eq. 13.7)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p22.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 22, Timer circuit example: determine the period of the output waveform for the circuit of the figure when triggered by a negative pulse; +5 V, R_A = 7.5 kΩ, C = 0.1 µF, 0.001 µF on pin 5 (Example 13.2, Figure 13.20).">
+    <figcaption data-l="th">สไลด์หน้า 22: โจทย์ Example 13.2</figcaption><figcaption data-l="en">Slide p. 22: Example 13.2</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์ไม่มีเฉลย</b>: หน้า 20 คือ Example 13.1 หน้า 22 คือ Example 13.2 ของตำรา · สไลด์หน้า 22 ถาม "period" ของขาออก แต่โมโนสเตเบิลให้พัลส์เดียว ตำราเฉลยเป็นความกว้างพัลส์ \(T_{high}\) = 0.825 ms · ตำราหน้า 747 (โปรแกรม 13.3) พิมพ์ "7.15 kΩ" ที่ถูกคือ 7.5 kΩ · สูตร 0.7 ของตำราคือ ln 2 = 0.693 ปัดเศษ ภาพจำลองวัดได้ 1.045 ms และ 0.526 ms (ต่างจาก 1.05/0.525 ไม่ถึง 1 %) · ในภาพจำลองทรานซิสเตอร์คายประจุเป็นสวิตช์ และขั้นขาออกเป็นแหล่งจ่าย 0/\(V_{CC}\) ที่ฟลิปฟล็อปสั่ง</div>
+<div class="warnbox" data-l="en"><b>The slides give no solutions</b>: p. 20 is Example 13.1, p. 22 Example 13.2. Slide p. 22 asks for the "period" of the output, but a one-shot gives a single pulse; the book answers with the pulse width \(T_{high}\) = 0.825 ms. The book's p. 747 (Program 13.3) prints "7.15 kΩ" for 7.5 kΩ. The book's 0.7 is ln 2 = 0.693 rounded; the simulation measures 1.045 ms and 0.526 ms (within 1 % of 1.05/0.525). In the simulation the discharge transistor is a switch and the output stage a 0/\(V_{CC}\) source driven by the flip-flop.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>อะสเตเบิล</a><a href="#ex1"><b>1</b>ภายใน</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Astable</a><a href="#ex1"><b>1</b>Inside</a><a href="#ex2"><b>2</b>Example 13.1</a><a href="#ex3"><b>3</b>Example 13.2</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">อะสเตเบิลปรับได้: ดู C ชาร์จและคายระหว่างสองระดับ</h2><h2 data-l="en">The adjustable astable: watch C charge and discharge between the two levels</h2>
+    <div class="src" data-l="th">สไลด์หน้า 19 · Boylestad หัวข้อ 13.4 (รูป 13.17–13.18)</div><div class="src" data-l="en">Slide p. 19 · Boylestad §13.4 (Figs. 13.17–13.18)</div></div></div>
+  <p class="lead" data-l="th">ตั้ง \(R_A\), \(R_B\), C และ \(V_{CC}\) กราฟล่างคือ \(v_C\) (ระหว่าง \(V_{CC}/3\) กับ \(2V_{CC}/3\)) และขาออก \(v_o\) ตามเวลา (ช้าลงให้เห็น 4 คาบใน 5 วินาที) แผงขวาเทียบ \(T_{high}\), \(T_{low}\), f ที่วัดได้กับสูตร ลองทำ \(R_A\) เล็กกว่า \(R_B\) มาก ๆ: รอบการทำงานเข้าใกล้ 50 % แต่ไม่ถึง สวิตช์ในกล่องคือทรานซิสเตอร์คายประจุ</p>
+  <p class="lead" data-l="en">Set \(R_A\), \(R_B\), C and \(V_{CC}\). The lower graph shows \(v_C\) (between \(V_{CC}/3\) and \(2V_{CC}/3\)) and the output \(v_o\) in time (slowed so that 4 periods take 5 s). The panel on the right compares the measured \(T_{high}\), \(T_{low}\), f with the formulas. Make \(R_A\) much smaller than \(R_B\): the duty cycle approaches 50 % but never reaches it. The switch in the box is the discharge transistor.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.16: ภายใน 555 สองระดับ สองตัวเปรียบเทียบ</h2><h2 data-l="en">Fig. 13.16: inside the 555, two levels, two comparators</h2>
+    <div class="src" data-l="th">สไลด์หน้า 18 · Boylestad รูป 13.16</div><div class="src" data-l="en">Slide p. 18 · Boylestad Fig. 13.16</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>555 ที่ \(V_{CC}\) = 5 V มีตัวต้านทาน 5 kΩ สามตัวอนุกรม จงหาระดับอ้างอิงของตัวเปรียบเทียบทั้งสอง และบอกว่าขา 6 (threshold) กับขา 2 (trigger) ต้องมีแรงดันเท่าใดจึงรีเซ็ตและเซ็ตฟลิปฟล็อป</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 555 at \(V_{CC}\) = 5 V with three 5 kΩ resistors in series. Find the two comparators' reference levels, and the voltages at pin 6 (threshold) and pin 2 (trigger) that reset and set the flip-flop.</p></div>
+  <p class="lead" data-l="th">แถบเลื่อนใต้ภาพตั้งแรงดันที่ขา 6 และขา 2 <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The sliders under the picture set the voltages at pins 6 and 2. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas><div class="panel" id="ctl1"></div></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 13.1: อะสเตเบิล 7.5 kΩ, 7.5 kΩ, 0.1 µF</h2><h2 data-l="en">Example 13.1: an astable with 7.5 kΩ, 7.5 kΩ, 0.1 µF</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad Example 13.1 (รูป 13.18)</div><div class="src" data-l="en">Slide p. 20 · Boylestad Example 13.1 (Fig. 13.18)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 5 V, \(R_A = R_B\) = 7.5 kΩ, C = 0.1 µF จงหาความถี่และร่างรูปคลื่นขาออก</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 5 V, \(R_A = R_B\) = 7.5 kΩ, C = 0.1 µF. Determine the frequency and draw the output waveform.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">Example 13.2: โมโนสเตเบิล 7.5 kΩ, 0.1 µF</h2><h2 data-l="en">Example 13.2: a one-shot with 7.5 kΩ, 0.1 µF</h2>
+    <div class="src" data-l="th">สไลด์หน้า 21–22 · Boylestad Example 13.2 (รูป 13.19–13.20)</div><div class="src" data-l="en">Slides pp. 21–22 · Boylestad Example 13.2 (Figs. 13.19–13.20)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_{CC}\) = 5 V, \(R_A\) = 7.5 kΩ, C = 0.1 µF ทริกเกอร์ด้วยพัลส์ลบ จงหาความกว้างของพัลส์ขาออก</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_{CC}\) = 5 V, \(R_A\) = 7.5 kΩ, C = 0.1 µF, triggered by a negative pulse. Find the width of the output pulse.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองทริกเกอร์ทุก 3 ms <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The simulation triggers every 3 ms. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ใช้สูตร 0.7 และ 1.44 ของตำรา · ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Use the book's 0.7 and 1.44 formulas · give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>ตั้ง \(R_A\) = 1 kΩ, \(R_B\) = 100 kΩ: \(T_{high}\) ≈ \(T_{low}\) รอบการทำงาน 50.2 % ใกล้สี่เหลี่ยมสมมาตรที่สุดที่วงจรนี้ทำได้</li>
+    <li>เปลี่ยน \(V_{CC}\) จาก 5 เป็น 15 V: รูปคลื่น \(v_C\) ขยายตาม แต่ความถี่ไม่เปลี่ยน เพราะทั้งระดับอ้างอิงและเป้าหมายการชาร์จเป็นสัดส่วนของ \(V_{CC}\) นี่คือความแม่นยำของ 555</li>
+    <li>ชี้ที่ \(R_B\) ระหว่างคายประจุ: กระแสไหลกลับทางจากตัวเก็บประจุผ่าน \(R_B\) เข้าสวิตช์ขา 7 ลงกราวด์</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–3</h3>
+    <ol><li>ข้อ 1: ตั้งขา 6 = 4 V และขา 2 = 1 V พร้อมกัน: ตัวเปรียบเทียบทั้งสองสั่ง ในชิปจริงฟลิปฟล็อปตัดสินด้วยลำดับความสำคัญ (รีเซ็ตชนะ) ซึ่งเกิดไม่ได้ในวงจรปกติเพราะขา 6 กับ 2 ต่อร่วมกัน</li>
+    <li>ข้อ 2: ภาพจำลองวัดได้ 636 Hz: สูตร 1.44 ให้ 640 Hz สูตร 0.7 ให้ 635 Hz ค่าจริง ln 2 ให้ 641 Hz ต่างกันในหลักที่สามเท่านั้น</li>
+    <li>ข้อ 3: ตั้งใจดูขณะทริกเกอร์: \(v_C\) เริ่มจาก 0 (ไม่ใช่ \(V_{CC}/3\) อย่างอะสเตเบิล) จึงใช้ 1.1 ไม่ใช่ 0.7 ค่าคงตัวเวลา</li></ol>
+    <div class="book">สไลด์บทที่ 8 หน้า 18–22 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 13.4 (รูป 13.16–13.20, สมการ 13.3–13.7, Examples 13.1–13.2)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Set \(R_A\) = 1 kΩ, \(R_B\) = 100 kΩ: \(T_{high}\) ≈ \(T_{low}\), a duty cycle of 50.2 %, the most symmetrical square wave this circuit can give.</li>
+    <li>Change \(V_{CC}\) from 5 to 15 V: the \(v_C\) waveform scales but the frequency does not change, because both the reference levels and the charging target are fractions of \(V_{CC}\). That is the 555's accuracy.</li>
+    <li>Hover over \(R_B\) during discharge: the current flows back from the capacitor through \(R_B\) into the pin 7 switch to ground.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–3</h3>
+    <ol><li>Problem 1: set pin 6 = 4 V and pin 2 = 1 V at the same time: both comparators speak. In the real chip the flip-flop decides by priority (reset wins), which cannot happen in a normal circuit since pins 6 and 2 are tied together.</li>
+    <li>Problem 2: the simulation measures 636 Hz: the 1.44 formula gives 640 Hz, the 0.7 formulas 635 Hz, the exact ln 2 gives 641 Hz; they differ only in the third digit.</li>
+    <li>Problem 3: watch the trigger instant: \(v_C\) starts from 0 (not from \(V_{CC}/3\) as in the astable), which is why the factor is 1.1 time constants, not 0.7.</li></ol>
+    <div class="book">Chapter 8 slides pp. 18–22 · Boylestad &amp; Nashelsky, 11th ed., §13.4 (Figs. 13.16–13.20, Eqs. 13.3–13.7, Examples 13.1–13.2)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, kO = r => CK.eng(r, 'Ω'), ms = IC.ms, fHz = OP.fHz;
+  IC.problem(1, 'in555'); IC.problem(2, 'astable'); IC.problem(3, 'mono');
+
+  /* =================================================================== A: the adjustable astable */
+  const AX = { hi: true, VCC: 5, mono: false, edges: [] }, resetAX = () => { AX.hi = true; AX.edges = []; AX.pt = undefined; AX.pv = undefined; }, upd = { acc: 0 };
+  const OUTS = { vc: c => c.V('capn').re, vo: c => c.V('out').re };
+  const formula = S => IC.S.f555(S.RA, S.RB, S.C);
+  OP.explorer({ init: { RA: 7.5e3, RB: 7.5e3, C: 0.1e-6, VCC: 5 }, title: t('ค่าภายนอก', 'The external values'), layout: { rowAsp: 0.5, rowMin: 230, cktAspM: 0.62 },
+    controls: (p, S, build) => {
+      OP.logSlider(p, 'aRA', 'R_A', 1e3, 1e6, () => S.RA, v => { S.RA = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aRB', 'R_B', 1e3, 1e6, () => S.RB, v => { S.RB = v; }, build, kO, OP.rndR);
+      OP.logSlider(p, 'aC', 'C', 1e-9, 10e-6, () => S.C, v => { S.C = v; }, build, OP.uF, x => OP.rndR(x * 1e12) / 1e12);
+      ui.slider(p, { id: 'aVcc', label: 'V_CC', min: 4.5, max: 16, step: 0.5, value: S.VCC, fmt: v => vtx(v), oninput: v => { S.VCC = v; build(); } }); },
+    spec: S => { const sp = IC.ckt({ kind: 't555', st: AX, VCC: S.VCC, RA: S.RA, RB: S.RB, C: S.C }); S.box = sp.box; return sp; },
+    onBuild: (c, S) => { AX.VCC = S.VCC; resetAX(); const f = formula(S); S.rec = new OP.Rec(4 / f.f, 1600, OUTS, 5); S.rec.ctl = IC.ctl555(AX); S.rec.onRestart = resetAX; S.rec.sync(c); },
+    tick: (dt, c, S, show) => { if (!S.rec) return; S.rec.run(c, dt); upd.acc += dt; if (upd.acc > 0.2) { upd.acc = 0; show(); } },
+    waves: [(ctx, b, bd, c, S) => { const V = S.VCC, Tw = S.rec.Tw; OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'vc', color: C.q, label: 'v_C', w: 2.6 }, { key: 'vo', color: C.elec, label: 'v_o', w: 2.2 }], y: [-0.1 * V, 1.2 * V], yt: [0, V / 3, 2 * V / 3, V], yf: y => IE.num(y, 2), ms: Tw < 1, xf: x => IE.num(x, 2), xl: Tw < 1 ? 't (ms)' : 't (s)', title: bd.short ? '' : t('สี่คาบ', 'four periods'), hl: [{ y: 2 * V / 3, color: C.tan, label: bd.short ? '' : '2V_CC/3' }, { y: V / 3, color: C.tan, label: bd.short ? '' : 'V_CC/3', left: true }], short: bd.short }); }],
+    after: (v, c, S) => { IC.box(v, S.box); OP.tag(v, 'out', `v_o = ${vtx(c.V('out').re)}`, C.elec, 0.1, -0.42); },
+    badge: (c, S) => { const p = IC.period(AX), f = formula(S); return [[p ? `${t('วัดได้', 'measured')}: T_high = ${ms(p.hi)}, T_low = ${ms(p.lo)}, f = ${fHz(1 / p.T)}` : `${t('สูตร', 'formula')}: f ≅ ${fHz(f.f)} · ${AX.hi ? t('กำลังชาร์จ', 'charging') : t('กำลังคาย', 'discharging')}`, p ? `${t('วัดได้', 'measured')}: T_high = ${ms(p.hi)}, T_low = ${ms(p.lo)}, f = ${fHz(1 / p.T)}` : `${t('สูตร', 'formula')}: f ≅ ${fHz(f.f)} · ${AX.hi ? t('กำลังชาร์จ', 'charging') : t('กำลังคาย', 'discharging')}`], AX.hi ? 'ok' : 'wait']; },
+    rows: (c, S) => { const f = formula(S), p = IC.period(AX); return [['0.7(R_A + R_B)C', ms(0.7 * (S.RA + S.RB) * S.C)], ['0.7 R_B C', ms(0.7 * S.RB * S.C)], ['1.44/(R_A + 2R_B)C', fHz(f.f)], [t('วัดได้ T_high', 'measured T_high'), p ? ms(p.hi) : '–'], [t('วัดได้ T_low', 'measured T_low'), p ? ms(p.lo) : '–'], [t('วัดได้ f', 'measured f'), p ? fHz(1 / p.T) : '–'], [t('รอบการทำงาน', 'duty cycle'), `${fd((S.RA + S.RB) / (S.RA + 2 * S.RB) * 100, 1)} %`], ['v_C(t)', vtx(c.V('capn').re)]]; },
+    text: (c, S) => { const f = formula(S); return t(`C ชาร์จผ่าน \\(R_A + R_B\\) = ${kO(S.RA + S.RB)} จาก \\(V_{CC}/3\\) ถึง \\(2V_{CC}/3\\) ใน ln 2 (\\(R_A + R_B\\))C = ${ms(f.th)} แล้วคายผ่าน \\(R_B\\) = ${kO(S.RB)} อย่างเดียวใน ln 2 \\(R_B\\)C = ${ms(f.tl)} ขาออกสูงขณะชาร์จ: รอบการทำงาน (\\(R_A + R_B\\))/(\\(R_A + 2R_B\\)) = ${fd((S.RA + S.RB) / (S.RA + 2 * S.RB) * 100, 1)} % เกิน 50 % เสมอ ความถี่ไม่ขึ้นกับ \\(V_{CC}\\)`, `C charges through \\(R_A + R_B\\) = ${kO(S.RA + S.RB)} from \\(V_{CC}/3\\) to \\(2V_{CC}/3\\) in ln 2 (\\(R_A + R_B\\))C = ${ms(f.th)}, then discharges through \\(R_B\\) = ${kO(S.RB)} alone in ln 2 \\(R_B\\)C = ${ms(f.tl)}. The output is high while charging: a duty cycle of (\\(R_A + R_B\\))/(\\(R_A + 2R_B\\)) = ${fd((S.RA + S.RB) / (S.RA + 2 * S.RB) * 100, 1)} %, always above 50 %. The frequency does not depend on \\(V_{CC}\\).`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, q1 = { th: 0.7 * 57e3 * 0.01e-6, tl: 0.7 * 47e3 * 0.01e-6 }, q2c = 1.44 / (3 * 10e3 * 1000), q3 = 1.1 * 100e3 * 10e-6;
+  CH6.quiz('quiz', [
+    { q: t('1) อะสเตเบิล \\(R_A\\) = 10 kΩ, \\(R_B\\) = 47 kΩ, C = 0.01 µF จงหา \\(T_{high}\\), \\(T_{low}\\) และ f', '1) An astable with \\(R_A\\) = 10 kΩ, \\(R_B\\) = 47 kΩ, C = 0.01 µF. Find \\(T_{high}\\), \\(T_{low}\\) and f.'),
+      fields: [{ key: 'x', lab: 'T_high =', ans: q1.th * 1e6, unit: 'µs', tol: 1 }, { key: 'y', lab: 'T_low =', ans: q1.tl * 1e6, unit: 'µs', tol: 1 }, { key: 'z', lab: 'f =', ans: 1 / (q1.th + q1.tl), unit: 'Hz', tol: 5 }], work: work(R`T_{high} = 0.7(57\ \text{k}\Omega)(0.01\ \mu\text{F}) = ${fd(q1.th * 1e6, 0)}\ \mu\text{s};\ T_{low} = 0.7(47\ \text{k}\Omega)(0.01\ \mu\text{F}) = ${fd(q1.tl * 1e6, 0)}\ \mu\text{s};\ f = \frac{1}{${fd((q1.th + q1.tl) * 1e6, 0)}\ \mu\text{s}} = ${fd(1 / (q1.th + q1.tl), 0)}\ \text{Hz}`) },
+    { q: t('2) ต้องการ 1 kHz ด้วย \\(R_A = R_B\\) = 10 kΩ จงหา C จากสูตร 1.44', '2) We want 1 kHz with \\(R_A = R_B\\) = 10 kΩ. Find C from the 1.44 formula.'),
+      fields: [{ key: 'x', lab: 'C =', ans: q2c * 1e6, unit: 'µF', tol: 0.001 }], work: work(R`C = \frac{1.44}{(R_A + 2R_B)f} = \frac{1.44}{(30\ \text{k}\Omega)(1\ \text{kHz})} = ${fd(q2c * 1e6, 3)}\ \mu\text{F}`) },
+    { q: t('3) โมโนสเตเบิล \\(R_A\\) = 100 kΩ, C = 10 µF จงหาความกว้างพัลส์', '3) A one-shot with \\(R_A\\) = 100 kΩ and C = 10 µF. Find the pulse width.'),
+      fields: [{ key: 'x', lab: 'T_high =', ans: q3, unit: 's', tol: 0.005 }], work: work(R`T_{high} = 1.1R_AC = 1.1(100\ \text{k}\Omega)(10\ \mu\text{F}) = ${fd(q3, 1)}\ \text{s}`) },
+    { q: t('4) อะสเตเบิลข้อ 1 ที่ \\(V_{CC}\\) = 9 V: \\(v_C\\) แกว่งระหว่างค่าใด และความถี่เปลี่ยนหรือไม่', '4) The astable of question 1 at \\(V_{CC}\\) = 9 V: between which values does \\(v_C\\) swing, and does the frequency change?'),
+      fields: [{ key: 'x', lab: t('ต่ำ =', 'low ='), ans: 3, unit: 'V', tol: 0.01 }, { key: 'y', lab: t('สูง =', 'high ='), ans: 6, unit: 'V', tol: 0.01 }, { key: 'z', lab: 'f =', ans: 1 / (q1.th + q1.tl), unit: 'Hz', tol: 5 }], work: work(R`\tfrac{V_{CC}}{3} = 3\ \text{V},\qquad \tfrac{2V_{CC}}{3} = 6\ \text{V}`, t('<div class="sub2">ความถี่เท่าเดิม: ทั้งสองระดับและเป้าหมายการชาร์จเป็นสัดส่วนของ V<sub>CC</sub></div>', '<div class="sub2">The frequency is unchanged: both levels and the charging target scale with V<sub>CC</sub>.</div>')) } ], { wide: true });
+});
+</script>
+</body>
+</html>

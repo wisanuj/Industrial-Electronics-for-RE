@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="8.2 — DAC and ADC">8.2 — ตัวแปลงดิจิทัล-แอนะล็อกและแอนะล็อก-ดิจิทัล</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">ตัวแปลงดิจิทัล-แอนะล็อกและแอนะล็อก-ดิจิทัล <span class="en">Digital-to-analogue and analogue-to-digital converters</span></h1>
+<h1 data-l="en">Digital-to-analogue and analogue-to-digital converters <span class="en">A ladder of R and 2R turns bits into a voltage; a counter and a comparator turn it back</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 8–17 ตัวแปลงดิจิทัล-แอนะล็อก (digital-to-analogue converter, DAC) ที่นิยมใช้บันไดตัวต้านทาน R-2R: บิตแต่ละตัวต่อ 0 V หรือ \(V_{ref}\) เข้าขาของบันได ขาออกเป็นแรงดันที่แปรตามค่าฐานสอง ขั้นละ \(V_{ref}/2^n\) ตัวแปลงแอนะล็อก-ดิจิทัล (analogue-to-digital converter, ADC) ทำย้อนกลับสองวิธี: แบบบันได (ตัวนับขับ DAC ให้แรงดันบันไดไต่ขึ้นจนตัวเปรียบเทียบบอกว่าเกินขาเข้า) และแบบสองความชัน (อินทิเกรเตอร์ขึ้นด้วยขาเข้านานคงที่ แล้วลงด้วยแรงดันอ้างอิง นับเวลาขาลง) หน้านี้แก้บันไดจริงในตัวแก้วงจร (ส่วน A) และจำลอง ADC แบบบันไดตามเวลา (ส่วน B) รูป 13.12b ความละเอียดและเวลาแปลง และแบบสองความชันที่ใช้อินทิเกรเตอร์ของบทที่ 7</p>
+<p class="sub" data-l="en">Chapter 8 slides pp. 8–17. A popular digital-to-analogue converter (DAC) uses an R-2R resistor ladder: each bit connects 0 V or \(V_{ref}\) to a leg of the ladder and the output is a voltage proportional to the binary value, in steps of \(V_{ref}/2^n\). An analogue-to-digital converter (ADC) goes the other way by two methods: the ladder network (a counter drives a DAC so that a staircase climbs until a comparator says it has passed the input) and dual slope (an integrator ramps with the input for a fixed time, then back with a reference, and the return time is counted). This page solves the real ladder in the engine (section A), simulates the ladder-network ADC in time (section B), Fig. 13.12b, resolution and conversion time, and the dual-slope converter built on chapter 7's integrator.</p>
+<div class="equation-box eqwrap">$$ V_o = \frac{D_0 \times 2^0 + D_1 \times 2^1 + D_2 \times 2^2 + D_3 \times 2^3}{2^4}V_{ref} $$ $$ \text{resolution} = \frac{V_{ref}}{2^n},\qquad T_{conv} = \frac{2^n}{f} $$ $$ \text{dual slope: } N_2 = N_1\frac{V_{in}}{V_{ref}} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>บันได R-2R</b> (หน้า 9–10, รูป 13.12, สมการ 13.1): ใช้ตัวต้านทานแค่สองค่า มองจากโหนดใดก็เห็น R, R, 2R แต่ละขั้นไปทางซ้ายน้ำหนักลดครึ่ง ขาออกจึงเป็นผลรวมถ่วงน้ำหนัก 1 : 2 : 4 : 8 ของบิต 0110 กับ 16 V ให้ 6 V</li>
+  <li><b>ความละเอียด</b> (หน้า 16, สมการ 13.2): ขั้นเล็กสุด \(V_{ref}/2^n\): 4 บิต/16 V → 1 V, 10 บิต/10 V → 10 mV, 12 บิต/10 V → 2.44 mV ไอซี DAC (รูป 13.13) ใช้บันได R-2R กับสวิตช์กระแส</li>
+  <li><b>ADC แบบสองความชัน</b> (หน้า 12–14, รูป 13.14): ขึ้นด้วย \(V_{in}\) นาน \(N_1\) นาฬิกา ลงด้วย \(V_{ref}\) จนถึงศูนย์ นับได้ \(N_2 = N_1V_{in}/V_{ref}\): \(RC\) และนาฬิกาหักล้างกัน แม่นยำ ใช้ในมัลติมิเตอร์ดิจิทัล</li>
+  <li><b>ADC แบบบันได</b> (หน้า 15–17, รูป 13.15): ตัวนับ + DAC + ตัวเปรียบเทียบ หยุดเมื่อบันไดเกินขาเข้า เวลาแปลงสูงสุด \(2^n/f\): 12 บิตที่ 1 MHz → 4.096 ms (244 ครั้ง/วินาที เฉลี่ย 488)</li>
+  <li><b>ภาพจำลอง</b>: บันไดเป็นวงจรจริง (ตัวต้านทาน 8 ตัว + แหล่งจ่ายบิต) ตัวนับ ตรรกะหยุด และสวิตช์ของตัวแปลงสองความชันทำงานระหว่างก้าวเวลา ออปแอมป์และตัวเปรียบเทียบเป็นของบทที่ 7–8.1</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The R-2R ladder</b> (pp. 9–10, Fig. 13.12, Eq. 13.1): only two resistor values; from any node one sees R, R, 2R, and each stage to the left halves the weight, so the output is the 1 : 2 : 4 : 8 weighted sum of the bits. 0110 with 16 V gives 6 V.</li>
+  <li><b>Resolution</b> (p. 16, Eq. 13.2): the smallest step \(V_{ref}/2^n\): 4 bits/16 V → 1 V, 10 bits/10 V → 10 mV, 12 bits/10 V → 2.44 mV. DAC ICs (Fig. 13.13) use an R-2R ladder with current switches.</li>
+  <li><b>The dual-slope ADC</b> (pp. 12–14, Fig. 13.14): ramp with \(V_{in}\) for \(N_1\) clocks, back with \(V_{ref}\) to zero, count \(N_2 = N_1V_{in}/V_{ref}\): \(RC\) and the clock cancel, so it is accurate; used in digital multimeters.</li>
+  <li><b>The ladder-network ADC</b> (pp. 15–17, Fig. 13.15): counter + DAC + comparator, stopping when the staircase passes the input. Maximum conversion time \(2^n/f\): 12 bits at 1 MHz → 4.096 ms (244 conversions per second, 488 on average).</li>
+  <li><b>The simulation</b>: the ladder is a real circuit (8 resistors + bit sources); the counter, the stop logic and the dual-slope switches run between time steps; the op-amps and comparators are those of chapters 7 and 8.1.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch8/p08.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 8, Digital-Analog converters, types: digital to analog converters (DAC) and analog to digital converters (ADC); block diagrams of a DAC IC using an R-2R ladder network with current switches and a reference current (Figure 13.13), and of an ADC with comparator, control logic, clock, digital counter and ladder network.">
+    <figcaption data-l="th">สไลด์หน้า 8: ไอซี DAC แบบ R-2R และ ADC แบบบันได (รูป 13.13)</figcaption><figcaption data-l="en">Slide p. 8: an R-2R DAC IC and the ladder-network ADC (Fig. 13.13)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p09.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 9, Digital to Analog converters (DAC): one popular scheme uses a network of resistors called a ladder network, which accepts inputs of binary values at typically 0 V or V_ref and provides an output voltage proportional to the binary input value; output voltage V_o = (D0 × 2^0 + D1 × 2^1 + D2 × 2^2 + D3 × 2^3)/2^4 × V_ref; voltage resolution V_ref/2^n; the four-stage ladder with R between the nodes and 2R legs.">
+    <figcaption data-l="th">สไลด์หน้า 9: บันได R-2R และสมการ 13.1–13.2</figcaption><figcaption data-l="en">Slide p. 9: the R-2R ladder and Eqs. 13.1–13.2</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p10.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 10, DAC: four-stage ladder network used as a DAC, circuit example with 0110 input; 10 kΩ series resistors, 20 kΩ legs, D0 = 0, D1 = 1 (+16 V), D2 = 1 (+16 V), D3 = 0, V_o = 6 V (Figure 13.12b).">
+    <figcaption data-l="th">สไลด์หน้า 10: ตัวอย่าง 0110 → 6 V (รูป 13.12b)</figcaption><figcaption data-l="en">Slide p. 10: the 0110 → 6 V example (Fig. 13.12b)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p11.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 11, Analog to Digital converters (ADC), types: dual slope conversion and ladder network conversion; the two block diagrams with integrator, comparator, control logic, clock, digital counter and ladder network.">
+    <figcaption data-l="th">สไลด์หน้า 11: ADC สองวิธี</figcaption><figcaption data-l="en">Slide p. 11: the two ADC methods</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p12.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 12, Dual Slope Conversion: the analog input voltage is applied to an integrator or ramp-generator circuit; the digital output is obtained from a digital counter that is operated during both positive and negative slope intervals of the integrator (Figure 13.14a).">
+    <figcaption data-l="th">สไลด์หน้า 12: แบบสองความชัน (รูป 13.14a)</figcaption><figcaption data-l="en">Slide p. 12: dual-slope conversion (Fig. 13.14a)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p13.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 13, Dual Slope Conversion, rising slope: for a fixed interval the analog voltage is applied to the integrator; the integrator output rises to some positive level; this positive voltage is applied to a comparator; at the end of the fixed interval the counter is reset to 0 and an electronic switch connects the integrator input to a fixed reference voltage; the waveform with larger and smaller input voltages (Figure 13.14b).">
+    <figcaption data-l="th">สไลด์หน้า 13: ความชันขึ้น (รูป 13.14b)</figcaption><figcaption data-l="en">Slide p. 13: the rising slope (Fig. 13.14b)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p14.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 14, Dual Slope Conversion, falling slope: the integrator output decreases at a fixed rate; when the integrator output falls below the reference level of the comparator, control logic stops the counter; the digital counter output is the digital conversion of the analog input.">
+    <figcaption data-l="th">สไลด์หน้า 14: ความชันลง</figcaption><figcaption data-l="en">Slide p. 14: the falling slope</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p15.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 15, Ladder Network Conversion: another popular method of analog-to-digital conversion uses a ladder network along with counter and comparator circuits; a digital counter advances from zero while a ladder network converts the digital count to a staircase analog voltage; when the staircase voltage into the comparator equals the analog input voltage the counter stops; the last count is the digital conversion (Figure 13.15).">
+    <figcaption data-l="th">สไลด์หน้า 15: แบบบันได (รูป 13.15)</figcaption><figcaption data-l="en">Slide p. 15: ladder-network conversion (Fig. 13.15)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p16.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 16, Ladder Network Conversion: the amount of voltage change stepped by the staircase signal depends on the number of count bits used (the resolution) V_ref/2^n; example: a 12-bit ADC with a 10 V reference level has the following resolution.">
+    <figcaption data-l="th">สไลด์หน้า 16: ความละเอียด \(V_{ref}/2^n\)</figcaption><figcaption data-l="en">Slide p. 16: the resolution \(V_{ref}/2^n\)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p17.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 17, Ladder Network Conversion: the conversion time depends on the clock frequency of the counter, T_conv = 2^n/f where n is the number of binary bits and f the clock frequency; example: a 12-bit ADC with a 1 MHz clock has a maximum conversion time.">
+    <figcaption data-l="th">สไลด์หน้า 17: เวลาแปลง \(2^n/f\)</figcaption><figcaption data-l="en">Slide p. 17: the conversion time \(2^n/f\)</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 16–17 ตัดจบก่อนคำตอบ</b> ("has the following resolution:" / "has a maximum conversion time." แล้วว่าง): 10 V/4096 = 2.44 mV และ 4096/1 MHz = 4.096 ms (ตำราหน้า 731) · สมการ 13.1 ในตำราพิมพ์ "D_1 × 2^1 * D_2 × 2^2" (เครื่องหมายคูณแทนบวก) สไลด์หน้า 9 ถูก · ภาพจำลองแบบสองความชันใช้อินทิเกรเตอร์กลับเฟสของบทที่ 7 รูปคลื่นจึงลาดลงแล้วกลับขึ้น (รูป 13.14b วาดกลับทาง) ผลการนับเหมือนกัน · ค่า R, C, นาฬิกา และ \(V_{in}\) ของภาพจำลองทั้งสองเป็นของหน้านี้ (ตำราให้แค่แผนผัง)</div>
+<div class="warnbox" data-l="en"><b>Slides pp. 16–17 break off before the answers</b> ("has the following resolution:" / "has a maximum conversion time." and nothing more): 10 V/4096 = 2.44 mV and 4096/1 MHz = 4.096 ms (book p. 731). The book's Eq. 13.1 prints "D_1 × 2^1 * D_2 × 2^2" (a multiplication sign where a plus belongs); slide p. 9 has it right. The dual-slope simulation uses chapter 7's inverting integrator, so its ramp goes down and comes back up (Fig. 13.14b is drawn the other way round); the count is the same. The R, C, clock and \(V_{in}\) of both simulations are this page's choices (the book gives only block diagrams).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>บันได R-2R</a><a href="#tB"><b>B</b>ADC แบบบันได</a><a href="#ex1"><b>1</b>รูป 13.12b</a><a href="#ex2"><b>2</b>นับจนเกิน</a><a href="#ex3"><b>3</b>สองความชัน</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>R-2R ladder</a><a href="#tB"><b>B</b>Ladder ADC</a><a href="#ex1"><b>1</b>Fig. 13.12b</a><a href="#ex2"><b>2</b>Count until passed</a><a href="#ex3"><b>3</b>Dual slope</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">บันได R-2R สี่บิต: กดบิตแล้วดูแรงดัน</h2><h2 data-l="en">The 4-bit R-2R ladder: press the bits, watch the voltage</h2>
+    <div class="src" data-l="th">สไลด์หน้า 9–10 · Boylestad หัวข้อ 13.3 (รูป 13.12)</div><div class="src" data-l="en">Slides pp. 9–10 · Boylestad §13.3 (Fig. 13.12)</div></div></div>
+  <p class="lead" data-l="th">ปุ่ม \(D_3\)–\(D_0\) ต่อแต่ละขาของบันไดเข้า \(V_{ref}\) (1) หรือ 0 V (0) ตัวแก้วงจรหาแรงดันขาออกจากตัวต้านทานแปดตัวตรง ๆ แล้วแผงล่างเทียบกับสมการ 13.1 และวางจุดบนบันได 16 ขั้น ลองเปิดทีละบิต: 1, 2, 4, 8 V น้ำหนักเพิ่มสองเท่าทุกขั้นไปทางขวา เลื่อน \(V_{ref}\) ดูว่าทุกขั้นขยายตาม</p>
+  <p class="lead" data-l="en">The buttons \(D_3\)–\(D_0\) connect each leg of the ladder to \(V_{ref}\) (1) or 0 V (0). The engine finds the output from the eight resistors directly; the lower panel compares it with Eq. 13.1 and places the point on the 16-step staircase. Turn one bit on at a time: 1, 2, 4, 8 V, the weight doubling with each step to the right. Move \(V_{ref}\) and watch every step scale.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="tB">
+  <div class="prob-head"><span class="prob-no">B</span><div><h2 data-l="th">ADC แบบบันได: ตัวนับไต่จนตัวเปรียบเทียบสั่งหยุด</h2><h2 data-l="en">The ladder-network ADC: the counter climbs until the comparator says stop</h2>
+    <div class="src" data-l="th">สไลด์หน้า 15–17 · Boylestad รูป 13.15</div><div class="src" data-l="en">Slides pp. 15–17 · Boylestad Fig. 13.15</div></div></div>
+  <p class="lead" data-l="th">บันไดเดียวกับส่วน A ถูกขับด้วยตัวนับที่เดินทุกคาบนาฬิกา ตัวเปรียบเทียบเทียบบันไดกับ \(V_{in}\) เมื่อบันไดสูงกว่า \(V_{in}\) เป็นครั้งแรกตัวนับหยุด ค่านับคือผลการแปลง (ภาพซ้ำทุก 16 คาบ) ตั้ง \(V_{in}\) และความถี่นาฬิกา: ค่าเล็กนับถึงเร็ว ค่าใกล้ 16 V ใช้เกือบเต็ม \(2^n\) คาบ</p>
+  <p class="lead" data-l="en">The same ladder as in section A, driven by a counter that advances every clock period; a comparator compares the staircase with \(V_{in}\). The first time the staircase exceeds \(V_{in}\) the counter stops; the count is the conversion (the picture repeats every 16 periods). Set \(V_{in}\) and the clock: small values are reached quickly, values near 16 V take almost the full \(2^n\) periods.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvB"></canvas></div><div class="card solve"><div class="panel" id="pB"></div><div id="wB" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.12b: 0110 กับ \(V_{ref}\) = 16 V</h2><h2 data-l="en">Fig. 13.12b: 0110 with \(V_{ref}\) = 16 V</h2>
+    <div class="src" data-l="th">สไลด์หน้า 10 · Boylestad รูป 13.12b, สมการ 13.1–13.2</div><div class="src" data-l="en">Slide p. 10 · Boylestad Fig. 13.12b, Eqs. 13.1–13.2</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>บันได R-2R สี่ขั้น R = 10 kΩ, 2R = 20 kΩ, \(V_{ref}\) = 16 V รหัส \(D_3D_2D_1D_0\) = 0110 จงหา \(V_o\) ความละเอียด และขาออกสูงสุด (1111)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A four-stage R-2R ladder, R = 10 kΩ, 2R = 20 kΩ, \(V_{ref}\) = 16 V, code \(D_3D_2D_1D_0\) = 0110. Find \(V_o\), the resolution and the largest output (1111).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">รูป 13.15: นับจนเกิน 5.7 V แล้วความละเอียดของ 12 บิต</h2><h2 data-l="en">Fig. 13.15: count until past 5.7 V, then the 12-bit resolution</h2>
+    <div class="src" data-l="th">สไลด์หน้า 15–17 · Boylestad รูป 13.15, หน้า 731</div><div class="src" data-l="en">Slides pp. 15–17 · Boylestad Fig. 13.15, p. 731</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ADC แบบบันได 4 บิต \(V_{ref}\) = 16 V นาฬิกา 1 kHz แปลง \(V_{in}\) = 5.7 V จงหาค่านับและเวลาที่ใช้ แล้วหาความละเอียดของ ADC 12 บิตกับ \(V_{ref}\) = 10 V และเวลาแปลงสูงสุดที่นาฬิกา 1 MHz</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 4-bit ladder-network ADC with \(V_{ref}\) = 16 V and a 1 kHz clock converts \(V_{in}\) = 5.7 V. Find the count and the time taken; then the resolution of a 12-bit ADC with \(V_{ref}\) = 10 V and its maximum conversion time with a 1 MHz clock.</p></div>
+  <p class="lead" data-l="th">ภาพจำลองเดินตามเวลา (ช้าลง 500 เท่า) และเริ่มใหม่ทุก 16 ms <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The simulation runs in time (slowed 500×) and restarts every 16 ms. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">รูป 13.14: ตัวแปลงสองความชัน</h2><h2 data-l="en">Fig. 13.14: the dual-slope converter</h2>
+    <div class="src" data-l="th">สไลด์หน้า 12–14 · Boylestad รูป 13.14 (ค่าของหน้านี้)</div><div class="src" data-l="en">Slides pp. 12–14 · Boylestad Fig. 13.14 (this page's values)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>อินทิเกรเตอร์ R = 10 kΩ, C = 1 µF นาฬิกา 1 kHz ช่วงแรกต่อ \(V_{in}\) = 3 V นาน \(N_1\) = 10 คาบ แล้วต่อ \(-V_{ref}\) = −10 V จนขาออกกลับถึง 0 จงหาแรงดันปลายช่วงแรก เวลาขากลับ และค่านับ \(N_2\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>An integrator with R = 10 kΩ, C = 1 µF and a 1 kHz clock: the first phase connects \(V_{in}\) = 3 V for \(N_1\) = 10 periods, then \(-V_{ref}\) = −10 V until the output is back at 0. Find the voltage at the end of the first phase, the return time and the count \(N_2\).</p></div>
+  <p class="lead" data-l="th">สวิตช์ \(S_1\), \(S_2\) และตัวเปรียบเทียบทำงานเองในภาพจำลอง <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The switches \(S_1\), \(S_2\) and the comparator act on their own in the simulation. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A และ B</h3>
+    <ol><li>ส่วน A: เปิด \(D_0\) อย่างเดียวแล้วชี้ที่ตัวต้านทานทีละตัว: กระแสจากแหล่งจ่าย 16 V แบ่งครึ่งทุกโหนดไปทางขวา เหลือ 1/16 ที่ขาออก นี่คือที่มาของน้ำหนัก 1 : 2 : 4 : 8</li>
+    <li>ส่วน A: รหัส 1000 กับ 0111 ต่างกันขั้นเดียว (8 กับ 7 V) แม้บิตสลับหมดทั้งสี่ตัว ถ้าตัวต้านทานไม่ตรงค่า ขั้นนี้คือจุดที่พลาดมากที่สุดในวงจรจริง</li>
+    <li>ส่วน B: ตั้ง \(V_{in}\) = 15.5 V: นับถึง 15 แล้วบันได (15 V) ยังไม่เกิน ขาเข้าเกินช่วงวัด ตัวนับค้างที่ 1111</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–3</h3>
+    <ol><li>ข้อ 2: ความคลาดเคลื่อนของแบบบันไดคือ "ไม่เกินหนึ่งขั้น": 5.7 V ให้ 6 (0110) ถ้า \(V_{in}\) = 6.2 V ได้ 7</li>
+    <li>ข้อ 3: ในภาพจำลอง RC = 10 ms พอดีกับ \(T_1\) ลองคิดใหม่ถ้า RC = 20 ms: ลาดถึง −1.5 V กลับใน 3 ms เท่าเดิม นี่คือความหมายของ "RC หักล้างกัน"</li>
+    <li>ข้อ 3: ตัวเปรียบเทียบขวาสุดให้ 5 V ตลอดที่ขาออกเป็นลบ และกลับเป็น 0 ตรงจังหวะที่ลาดกลับถึงศูนย์: นั่นคือสัญญาณหยุดนับ</li></ol>
+    <div class="book">สไลด์บทที่ 8 หน้า 8–17 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 13.3 (รูป 13.12–13.15, สมการ 13.1–13.2)</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — sections A and B</h3>
+    <ol><li>Section A: turn on \(D_0\) alone and hover over the resistors one by one: the current from the 16 V source halves at every node to the right, leaving 1/16 at the output. That is where the 1 : 2 : 4 : 8 weights come from.</li>
+    <li>Section A: the codes 1000 and 0111 differ by one step (8 and 7 V) although all four bits flip. With imperfect resistors this is where a real ladder errs most.</li>
+    <li>Section B: set \(V_{in}\) = 15.5 V: the count reaches 15 and the staircase (15 V) still has not passed it; the input is out of range and the counter sits at 1111.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–3</h3>
+    <ol><li>Problem 2: the ladder method's error is "within one step": 5.7 V gives 6 (0110); \(V_{in}\) = 6.2 V would give 7.</li>
+    <li>Problem 3: in the simulation RC = 10 ms happens to equal \(T_1\). Imagine RC = 20 ms: the ramp reaches −1.5 V and returns in the same 3 ms. That is what "RC cancels" means.</li>
+    <li>Problem 3: the comparator on the right gives 5 V while the output is negative and returns to 0 at the instant the ramp is back at zero: that is the stop signal.</li></ol>
+    <div class="book">Chapter 8 slides pp. 8–17 · Boylestad &amp; Nashelsky, 11th ed., §13.3 (Figs. 13.12–13.15, Eqs. 13.1–13.2)</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx;
+  IC.problem(1, 'ladder'); IC.problem(2, 'adc'); IC.problem(3, 'dual');
+
+  /* =================================================================== A: the R-2R ladder */
+  const stair = (ctx, b, bd, Vref, code, title) => OP.plot(ctx, b, { x: [-0.5, 15.5], y: [0, Vref * 1.05], xt: [0, 2, 4, 6, 8, 10, 12, 14], yt: [0, Vref / 4, Vref / 2, 3 * Vref / 4, Vref], yf: y => IE.num(y, 1), xl: t('รหัส (ฐานสิบ)', 'code (decimal)'), yl: 'V_o (V)', title: bd.short ? '' : title,
+    curves: [{ pts: [...Array(16).keys()].flatMap(k => [[k - 0.5, k * Vref / 16], [k + 0.5, k * Vref / 16]]), color: C.curve, w: 2.4 }], pts: [{ x: code, y: code * Vref / 16, label: bd.short ? '' : `${code.toString(2).padStart(4, '0')} → ${vtx(code * Vref / 16)}`, side: code > 8 ? -1 : 1 }], guides: [{ x: code, y: code * Vref / 16 }] });
+  const codeOf = bits => bits.reduce((a, b, k) => a + b * Math.pow(2, k), 0);
+  let bitBtns = null;
+  OP.explorer({ init: { bits: [0, 1, 1, 0], Vref: 16 }, title: t('บิตและแรงดันอ้างอิง', 'The bits and the reference'),
+    controls: (p, S, build) => {
+      bitBtns = ui.buttons(p, [3, 2, 1, 0].map(k => ({ id: 'bit' + k, label: `D_${k} = ${S.bits[k]}`, on: !!S.bits[k], onclick: el => { S.bits[k] = S.bits[k] ? 0 : 1; el.classList.toggle('on', !!S.bits[k]); el.innerHTML = ui.subs(`D_${k} = ${S.bits[k]}`); build(); } })));
+      ui.slider(p, { id: 'aVref', label: 'V_ref', min: 4, max: 16, step: 0.5, value: S.Vref, fmt: v => vtx(v), oninput: v => { S.Vref = v; build(); } }); },
+    spec: S => IC.ckt({ kind: 'ladder', bits: S.bits.slice(), Vref: S.Vref }),
+    side: (ctx, b, bd, c, S) => stair(ctx, b, bd, S.Vref, codeOf(S.bits), t(`16 ระดับ ขั้นละ V_ref/16 = ${vtx(S.Vref / 16)}`, `16 levels, V_ref/16 = ${vtx(S.Vref / 16)} apart`)),
+    after: (v, c) => OP.tag(v, 'o', `V_o = ${vtx(c.V('o').re)}`, C.q, 0.1, -0.42),
+    badge: (c, S) => { const code = codeOf(S.bits); return [[`D_3D_2D_1D_0 = ${S.bits.slice().reverse().join('')} = ${code} → V_o = ${vtx(c.V('o').re)}`, `D_3D_2D_1D_0 = ${S.bits.slice().reverse().join('')} = ${code} → V_o = ${vtx(c.V('o').re)}`], 'ok']; },
+    rows: (c, S) => { const code = codeOf(S.bits); return [['D_3 × 8', `${S.bits[3] * 8}`], ['D_2 × 4', `${S.bits[2] * 4}`], ['D_1 × 2', `${S.bits[1] * 2}`], ['D_0 × 1', `${S.bits[0]}`], [t('รวม (ฐานสิบ)', 'total (decimal)'), `${code}`], [t('V_o ตามสมการ 13.1', 'V_o by Eq. 13.1'), vtx(code / 16 * S.Vref)], [t('V_o ตัวแก้วงจร', 'V_o engine'), vtx(c.V('o').re)], [t('ความละเอียด V_ref/16', 'resolution V_ref/16'), vtx(S.Vref / 16)]]; },
+    text: (c, S) => { const code = codeOf(S.bits); return t(`\\(V_o = \\frac{${S.bits[0]}\\cdot 1 + ${S.bits[1]}\\cdot 2 + ${S.bits[2]}\\cdot 4 + ${S.bits[3]}\\cdot 8}{16}(${vtx(S.Vref)}) = \\frac{${code}}{16}(${vtx(S.Vref)})\\) = ${vtx(code / 16 * S.Vref)} ตัวแก้วงจรได้ ${vtx(c.V('o').re)} จากตัวต้านทานแปดตัวโดยไม่ใช้สูตร: บันไดไม่มีโหลด น้ำหนักจึงตรง 1 : 2 : 4 : 8 พอดี`, `\\(V_o = \\frac{${S.bits[0]}\\cdot 1 + ${S.bits[1]}\\cdot 2 + ${S.bits[2]}\\cdot 4 + ${S.bits[3]}\\cdot 8}{16}(${vtx(S.Vref)}) = \\frac{${code}}{16}(${vtx(S.Vref)})\\) = ${vtx(code / 16 * S.Vref)}. The engine finds ${vtx(c.V('o').re)} from the eight resistors without the formula: the ladder is unloaded, so the weights are exactly 1 : 2 : 4 : 8.`); } });
+
+  /* =================================================================== B: the ladder-network ADC in time */
+  const X = { count: 0, Tc: 1e-3, next: 0, done: false, Vref: 16, steps: [] }, resetX = () => { X.count = 0; X.next = 0; X.done = false; X.steps = []; }, updB = { acc: 0 };
+  const OUTS = { vdac: c => c.V('o').re, vin: c => c.V('vin').re, cmp: c => c.V('c').re };
+  OP.explorer({ ids: { cv: 'cvB', panel: 'pB', text: 'wB' }, init: { vin: 5.7, f: 1000 }, title: t('ขาเข้าและนาฬิกา', 'The input and the clock'), layout: { rowAsp: 0.5, rowMin: 230, cktAspM: 0.5 },
+    controls: (p, S, build) => {
+      ui.slider(p, { id: 'bVin', label: 'V_in', min: 0, max: 16, step: 0.1, value: S.vin, fmt: v => vtx(v), oninput: v => { S.vin = v; build(); } });
+      OP.logSlider(p, 'bF', t('นาฬิกา', 'clock'), 100, 1e5, () => S.f, v => { S.f = v; }, build, OP.fHz, OP.rndR); },
+    spec: S => IC.ckt({ kind: 'adc', st: X, vin: S.vin }),
+    onBuild: (c, S) => { X.Tc = 1 / S.f; resetX(); S.rec = new OP.Rec(16 / S.f, 800, OUTS, 8); S.rec.ctl = IC.ctlAdc(X); S.rec.onRestart = resetX; S.rec.sync(c); },
+    tick: (dt, c, S, show) => { if (!S.rec) return; S.rec.run(c, dt); updB.acc += dt; if (updB.acc > 0.15) { updB.acc = 0; show(); } },
+    waves: [(ctx, b, bd, c, S) => OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'vdac', color: C.q, label: t('บันได', 'staircase'), w: 2.8 }, { key: 'vin', color: C.elec, label: 'V_in', dash: [6, 4] }, { key: 'cmp', color: C.tan, label: t('หยุด', 'stop') }], y: [0, 16], yt: [0, 4, 8, 12, 16], ms: S.rec.Tw >= 1e-3, xf: x => IE.num(x, 1), xl: S.rec.Tw >= 1e-3 ? 't (ms)' : 't (µs)', title: bd.short ? '' : t('หนึ่งการแปลง: 16 คาบนาฬิกา', 'one conversion: 16 clock periods'), short: bd.short })],
+    after: (v, c) => { OP.tag(v, 'o', `${vtx(c.V('o').re)}`, C.q, 0.1, -0.42); OP.tag(v, 'c', X.done ? t('หยุดนับ', 'stop') : t('นับต่อ', 'count'), X.done ? C.q : C.tan, 0.1, -0.42); },
+    badge: (c, S) => [[`${t('นับ', 'count')} ${X.count} = ${X.count.toString(2).padStart(4, '0')} · ${t('บันได', 'staircase')} ${vtx(X.count)} ${X.done ? '≥ V_in: ' + t('หยุด', 'stop') : '< V_in'}`, `${t('นับ', 'count')} ${X.count} = ${X.count.toString(2).padStart(4, '0')} · ${t('บันได', 'staircase')} ${vtx(X.count)} ${X.done ? '≥ V_in: ' + t('หยุด', 'stop') : '< V_in'}`], X.done ? 'ok' : 'wait'],
+    rows: (c, S) => [['V_in', vtx(S.vin)], [t('ขั้นบันได V_ref/16', 'step V_ref/16'), '1 V'], [t('ค่านับที่คาด ⌈V_in⌉', 'expected count ⌈V_in⌉'), `${Math.min(15, Math.ceil(S.vin))}`], [t('ค่านับขณะนี้', 'count now'), `${X.count} = ${X.count.toString(2).padStart(4, '0')}`], ['V_DAC', vtx(c.V('o').re)], [t('เวลาแปลง = นับ × T_c', 'conversion time = count × T_c'), IC.ms(X.count / S.f)], [t('สูงสุด 2⁴/f', 'maximum 2⁴/f'), IC.ms(16 / S.f)]],
+    text: (c, S) => { const n = Math.min(15, Math.ceil(S.vin - 1e-9)); return S.vin > 15 ? t(`\\(V_{in}\\) = ${vtx(S.vin)} เกินขั้นสูงสุดของบันได (15 V): ตัวนับไปถึง 1111 แล้วบันไดก็ยังไม่เกินขาเข้า ผลลัพธ์ค้างที่ 15 ต้องลด \\(V_{in}\\) หรือเพิ่ม \\(V_{ref}\\)`, `\\(V_{in}\\) = ${vtx(S.vin)} exceeds the ladder's top step (15 V): the counter reaches 1111 and the staircase still has not passed the input; the result sticks at 15. Lower \\(V_{in}\\) or raise \\(V_{ref}\\).`)
+      : t(`บันไดขึ้นขั้นละ 1 V ทุก \\(T_c\\) = ${IC.ms(1 / S.f)} ขั้นแรกที่สูงกว่า \\(V_{in}\\) = ${vtx(S.vin)} คือ ${n} V ตัวนับจึงหยุดที่ ${n} = ${n.toString(2).padStart(4, '0')} ใช้เวลา ${IC.ms(n / S.f)} (อย่างมาก \\(2^4/f\\) = ${IC.ms(16 / S.f)}) ความคลาดเคลื่อนไม่เกินหนึ่งขั้น`, `The staircase climbs 1 V every \\(T_c\\) = ${IC.ms(1 / S.f)}; the first step above \\(V_{in}\\) = ${vtx(S.vin)} is ${n} V, so the counter stops at ${n} = ${n.toString(2).padStart(4, '0')} after ${IC.ms(n / S.f)} (at most \\(2^4/f\\) = ${IC.ms(16 / S.f)}). The error is within one step.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html;
+  CH6.quiz('quiz', [
+    { q: t('1) บันได 4 บิต \\(V_{ref}\\) = 10 V รหัส 1011 จงหา \\(V_o\\) และความละเอียด', '1) A 4-bit ladder with \\(V_{ref}\\) = 10 V and the code 1011. Find \\(V_o\\) and the resolution.'),
+      fields: [{ key: 'x', lab: 'V_o =', ans: 11 / 16 * 10, unit: 'V', tol: 0.01 }, { key: 'y', lab: t('ความละเอียด =', 'resolution ='), ans: 0.625, unit: 'V', tol: 0.001 }], work: work(R`V_o = \frac{1 + 2 + 8}{16}(10\ \text{V}) = 6.875\ \text{V};\qquad \frac{10\ \text{V}}{16} = 0.625\ \text{V}`) },
+    { q: t('2) ADC 8 บิต \\(V_{ref}\\) = 5 V นาฬิกา 100 kHz จงหาความละเอียด เวลาแปลงสูงสุด และจำนวนครั้งต่อวินาทีอย่างน้อย', '2) An 8-bit ADC with \\(V_{ref}\\) = 5 V and a 100 kHz clock. Find the resolution, the maximum conversion time and the minimum conversions per second.'),
+      fields: [{ key: 'x', lab: t('ความละเอียด =', 'resolution ='), ans: 5 / 256 * 1e3, unit: 'mV', tol: 0.05 }, { key: 'y', lab: 'T_conv =', ans: 2.56, unit: 'ms', tol: 0.01 }, { key: 'z', lab: t('ครั้ง/วินาที =', 'per second ='), ans: 1e5 / 256, tol: 1 }], work: work(R`\frac{5}{256} = ${fd(5 / 256 * 1e3, 2)}\ \text{mV};\quad T = \frac{256}{10^5} = 2.56\ \text{ms};\quad \frac{1}{2.56\ \text{ms}} = ${fd(1e5 / 256, 0)}\ \text{/s}`) },
+    { q: t('3) ตัวแปลงสองความชัน \\(N_1\\) = 1000, \\(V_{ref}\\) = 2 V วัด \\(V_{in}\\) = 1.234 V จงหา \\(N_2\\) และถ้านาฬิกาช้าลง 10 % \\(N_2\\) เปลี่ยนหรือไม่', '3) A dual-slope converter with \\(N_1\\) = 1000 and \\(V_{ref}\\) = 2 V measures \\(V_{in}\\) = 1.234 V. Find \\(N_2\\); does it change if the clock runs 10 % slow?'),
+      fields: [{ key: 'x', lab: 'N_2 =', ans: 617, tol: 0.5 }, { key: 'y', lab: t('นาฬิกาช้า: N_2 =', 'slow clock: N_2 ='), ans: 617, tol: 0.5 }], work: work(R`N_2 = N_1\frac{V_{in}}{V_{ref}} = 1000\frac{1.234}{2} = 617`, t('<div class="sub2">นาฬิกาเดียวกันคุมทั้งสองช่วง ความถี่จึงหักล้างกัน</div>', '<div class="sub2">The same clock times both slopes, so its frequency cancels.</div>')) },
+    { q: t('4) ต้องการความละเอียด 1 mV จาก \\(V_{ref}\\) = 4.096 V ต้องใช้กี่บิต', '4) We want a 1 mV resolution from \\(V_{ref}\\) = 4.096 V. How many bits?'),
+      fields: [{ key: 'x', lab: 'n =', ans: 12, tol: 0.01 }], work: work(R`\frac{4.096\ \text{V}}{2^n} = 1\ \text{mV} \Rightarrow 2^n = 4096 \Rightarrow n = 12`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

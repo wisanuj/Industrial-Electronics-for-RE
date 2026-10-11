@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="7.3 — The Summing Amplifier">7.3 — วงจรรวมสัญญาณ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรรวมสัญญาณ <span class="en">The summing amplifier</span></h1>
+<h1 data-l="en">The summing amplifier <span class="en">Every input adds its own weighted term, because they all meet at a virtual ground</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 7 ชุดที่ 1 หน้า 19–20 และแบบฝึกหัดหน้า 23–24 วงจรที่ใช้มากที่สุดของออปแอมป์: ขาเข้าหลายขาผ่านตัวต้านทานของตัวเองมาพบกันที่ขั้ว − ซึ่งเป็นกราวด์เสมือน กระแสของแต่ละขาจึงไม่ขึ้นต่อกัน รวมกันแล้วไหลผ่าน \(R_f\) ออกไป ขาออกคือผลรวมถ่วงน้ำหนักด้วยอัตราขยาย \(R_f/R_k\) ของแต่ละขา (กลับเครื่องหมาย) หน้านี้มีวงจรสามขาเข้าที่ปรับได้ (ส่วน A) Example 10.7 ทั้งสองข้อ โจทย์หน้า 23 (ข้อ 8–9 ของตำรา รวมกรณีที่ผลรวมเกินราง) และโจทย์หน้า 24 ที่มีออปแอมป์สามตัว</p>
+<p class="sub" data-l="en">Chapter 7 slide set I, pp. 19–20 and the exercises on pp. 23–24. The most used op-amp circuit: several inputs, each through its own resistor, meet at the − input, a virtual ground, so their currents are independent; their sum flows out through \(R_f\). The output is the weighted sum, each input weighted by its gain \(R_f/R_k\), with the sign reversed. This page has an adjustable three-input circuit (section A), both parts of Example 10.7, the problem of p. 23 (the book's Problems 8–9, including the case where the sum exceeds the rail) and the three-op-amp problem of p. 24.</p>
+<div class="equation-box eqwrap">$$ V_o = -\left(\frac{R_f}{R_1}V_1 + \frac{R_f}{R_2}V_2 + \frac{R_f}{R_3}V_3\right) $$ $$ I_f = I_1 + I_2 + I_3,\qquad I_k = \frac{V_k}{R_k} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>ทำไมรวมได้</b> (หน้า 19, รูป 10.37b): ขั้ว − อยู่ที่ 0 V (กราวด์เสมือน) ปลายขวาของตัวต้านทานทุกตัวจึงอยู่ที่ 0 กระแส \(I_k = V_k/R_k\) ของแต่ละขาไม่รู้จักขาอื่นเลย ขั้ว − รับกระแสไม่ได้ ผลรวม \(\sum I_k\) จึงผ่าน \(R_f\) และ \(V_o = -R_f\sum I_k\) (สมการ 10.11)</li>
+  <li><b>แต่ละขามีอัตราขยายของตัวเอง</b> \(R_f/R_k\): Example 10.7a: 2, 1, 1 ให้ −7 V · 10.7b: 5, 2, 1 กับ \(V_1\) ลบ ให้ +3 V ขาเข้าลบให้ส่วนบวก</li>
+  <li><b>ขอบเขต</b>: ผลรวมต้องไม่เกิน \(V_{sat}\) ≈ 13 V ข้อ 8 ของตำรา (\(R_f\) = 330 kΩ) ต้องการ −16.5 V จึงชนราง · ค่า \(R_f\) สูงสุดก่อนอิ่มตัวคือ \(V_{sat}/\sum I_k\)</li>
+  <li><b>ต่อหลายขั้น</b> (หน้า 24): ขาออกของออปแอมป์มีความต้านทานต่ำ จึงป้อนตัวต้านทานขาเข้าของขั้นถัดไปได้โดยไม่ถูกโหลด คิดทีละขั้นจากซ้ายไปขวา: 21 × 0.1 V = 2.1 V และ 0.1 V (ตัวตาม) แล้วรวม −(5 × 2.1 + 10 × 0.1) = −11.5 V</li>
+  <li><b>ใช้ทำอะไร</b>: ผสมสัญญาณเสียง (มิกเซอร์) ตัวแปลงดิจิทัลเป็นแอนะล็อกแบบถ่วงน้ำหนัก 1 : 2 : 4 และตัวหาค่าเฉลี่ย (\(R_k\) เท่ากัน \(R_f = R/n\))</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>Why it sums</b> (p. 19, Fig. 10.37b): the − input sits at 0 V (virtual ground), so the right end of every resistor is at 0 and each current \(I_k = V_k/R_k\) knows nothing of the others. The − input takes no current, so the total \(\sum I_k\) passes through \(R_f\) and \(V_o = -R_f\sum I_k\) (Eq. 10.11).</li>
+  <li><b>Each input has its own gain</b> \(R_f/R_k\): Example 10.7a: 2, 1, 1 give −7 V; 10.7b: 5, 2, 1 with a negative \(V_1\) give +3 V. A negative input contributes a positive term.</li>
+  <li><b>Limits</b>: the sum must stay below \(V_{sat}\) ≈ 13 V. The book's Problem 8 (\(R_f\) = 330 kΩ) wants −16.5 V and hits the rail. The largest \(R_f\) before saturation is \(V_{sat}/\sum I_k\).</li>
+  <li><b>Cascading stages</b> (p. 24): an op-amp's output resistance is low, so it drives the next stage's input resistor without being loaded. Work from left to right: 21 × 0.1 V = 2.1 V and 0.1 V (follower), then −(5 × 2.1 + 10 × 0.1) = −11.5 V.</li>
+  <li><b>What it is for</b>: audio mixers, weighted 1 : 2 : 4 digital-to-analogue converters, and averagers (equal \(R_k\), \(R_f = R/n\)).</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch7a/p19.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 19, Summing Amplifier Circuit: probably the most used of the op-amp circuits is the summing amplifier; the circuit shows a three-input summing amplifier, which provides a means of algebraically summing (adding) three voltages, each multiplied by a constant-gain factor; Figure 10.37 with the virtual-ground equivalent and V_o = −(R_f/R_1 V_1 + R_f/R_2 V_2 + R_f/R_3 V_3).">
+    <figcaption data-l="th">สไลด์หน้า 19: วงจรรวมสัญญาณสามขาเข้า (รูป 10.37, สมการ 10.11)</figcaption><figcaption data-l="en">Slide p. 19: the three-input summing amplifier (Fig. 10.37, Eq. 10.11)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p20.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 20, Summing Amplifier Circuit: calculate the output voltage of an op-amp summing amplifier for the following sets of voltages and resistors; use R_f = 1 MΩ in all cases. (a) V_1 = +1 V, V_2 = +2 V, V_3 = +3 V, R_1 = 500 kΩ, R_2 = 1 MΩ, R_3 = 1 MΩ. (b) V_1 = −2 V, V_2 = +3 V, V_3 = +1 V, R_1 = 200 kΩ, R_2 = 500 kΩ, R_3 = 1 MΩ (Example 10.7).">
+    <figcaption data-l="th">สไลด์หน้า 20: โจทย์ Example 10.7</figcaption><figcaption data-l="en">Slide p. 20: Example 10.7</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p23.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 23, Exercises of Op-Amp: calculate the output voltage of the circuit in the figure for R_f = 68 kΩ; V_1 = +0.2 V through 33 kΩ, V_2 = −0.5 V through 22 kΩ, V_3 = +0.8 V through 12 kΩ, the three resistors joined at the upper op-amp input marked +, the lower input marked − grounded, R_f from the output to the upper input (Problem 9, Fig. 10.68).">
+    <figcaption data-l="th">สไลด์หน้า 23: โจทย์ข้อ 9 (รูป 10.68) — ดูกรอบเตือน</figcaption><figcaption data-l="en">Slide p. 23: Problem 9 (Fig. 10.68), see the note</figcaption></figure>
+  <figure class="slide"><img src="slides/ch7a/p24.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 7 slide 24, Exercises of Op-Amp: calculate the output voltage V_o in the circuit of the figure; V_1 = 0.1 V feeds the plus inputs of two op-amps, the upper one a noninverting amplifier with 400 kΩ feedback and 20 kΩ to ground, the lower one a unity follower; their outputs pass through 20 kΩ and 10 kΩ into a third op-amp with R_f = 100 kΩ (Problem 14, Fig. 10.73).">
+    <figcaption data-l="th">สไลด์หน้า 24: โจทย์ข้อ 14 (รูป 10.73)</figcaption><figcaption data-l="en">Slide p. 24: Problem 14 (Fig. 10.73)</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 23 (และรูป 10.68 ของตำรา)</b> วาดตัวต้านทานขาเข้าทั้งสามเข้าขั้วบนที่มีเครื่องหมาย + และต่อ \(R_f\) กลับมาที่ขั้วเดียวกัน โดยขั้ว − ต่อกราวด์ นั่นคือป้อนกลับบวก ขาออกจะวิ่งชนรางไม่ใช่รวมสัญญาณ วงจรรวมสัญญาณต้องให้ขาเข้าพบกันที่ขั้ว − และขั้ว + ต่อกราวด์ (เหมือนรูป 10.37) ภาพจำลองข้อ 3 ใช้แบบหลัง · สไลด์ไม่มีเฉลย: หน้า 20 คือ Example 10.7 หน้า 23–24 คือข้อ 9 (และ 8) กับข้อ 14 ท้ายบทที่ 10 · ข้อ 8 (\(R_f\) = 330 kΩ) ให้ −16.5 V ตามสมการ ซึ่งเกิน \(V_{sat}\) ภาพจำลองจึงอิ่มตัวที่ −13 V</div>
+<div class="warnbox" data-l="en"><b>Slide p. 23 (and the book's Fig. 10.68)</b> draws the three input resistors into the upper terminal marked + and returns \(R_f\) to that same terminal, with the − input grounded. That is positive feedback: the output would run to a rail instead of summing. A summing amplifier needs the inputs at the − terminal and the + terminal grounded (as in Fig. 10.37); problem 3's simulation uses the latter. The slides give no solutions: p. 20 is Example 10.7, pp. 23–24 are Problems 9 (and 8) and 14 of chapter 10. Problem 8 (\(R_f\) = 330 kΩ) gives −16.5 V by the equation, beyond \(V_{sat}\), so the simulation saturates at −13 V.</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>สามขาเข้า</a><a href="#ex1"><b>1</b>Example 10.7a</a><a href="#ex2"><b>2</b>Example 10.7b</a><a href="#ex3"><b>3</b>ข้อ 9 และ 8</a><a href="#ex4"><b>4</b>ข้อ 14</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Three inputs</a><a href="#ex1"><b>1</b>Example 10.7a</a><a href="#ex2"><b>2</b>Example 10.7b</a><a href="#ex3"><b>3</b>Problems 9 and 8</a><a href="#ex4"><b>4</b>Problem 14</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรรวมสามขาเข้าที่ปรับได้: ดูส่วนของแต่ละขา</h2><h2 data-l="en">The adjustable three-input summer: watch each input's term</h2>
+    <div class="src" data-l="th">สไลด์หน้า 19 · Boylestad หัวข้อ 10.5 (รูป 10.37)</div><div class="src" data-l="en">Slide p. 19 · Boylestad §10.5 (Fig. 10.37)</div></div></div>
+  <p class="lead" data-l="th">ตั้ง \(V_1\), \(V_2\), \(V_3\) และตัวต้านทานทั้งสี่ตัว แผงล่างแสดงสามส่วน \(-(R_f/R_k)V_k\) กับผลรวม \(V_o\) ลองกลับเครื่องหมายขาหนึ่ง: ส่วนของมันกลับทิศ แต่ส่วนอื่นไม่เปลี่ยน ลองเพิ่ม \(R_f\) จนขาออกชนราง 13 V แล้วดูจุดวิ่ง: กระแสของแต่ละขาพบกันที่ขั้ว − แล้วไหลผ่าน \(R_f\) รวมกัน</p>
+  <p class="lead" data-l="en">Set \(V_1\), \(V_2\), \(V_3\) and the four resistors. The lower panel shows the three terms \(-(R_f/R_k)V_k\) and the total \(V_o\). Reverse the sign of one input: its term flips while the others stay put. Raise \(R_f\) until the output hits the 13 V rail, and watch the dots: each input's current meets the others at the − input and they flow through \(R_f\) together.</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">Example 10.7(a): ขาเข้าบวกทั้งสาม</h2><h2 data-l="en">Example 10.7(a): three positive inputs</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad Example 10.7a (สมการ 10.11)</div><div class="src" data-l="en">Slide p. 20 · Boylestad Example 10.7a (Eq. 10.11)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_1\) = +1 V, \(V_2\) = +2 V, \(V_3\) = +3 V, \(R_1\) = 500 kΩ, \(R_2\) = 1 MΩ, \(R_3\) = 1 MΩ, \(R_f\) = 1 MΩ จงหา \(V_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_1\) = +1 V, \(V_2\) = +2 V, \(V_3\) = +3 V, \(R_1\) = 500 kΩ, \(R_2\) = 1 MΩ, \(R_3\) = 1 MΩ, \(R_f\) = 1 MΩ. Find \(V_o\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">Example 10.7(b): ขาเข้าลบหนึ่งขา</h2><h2 data-l="en">Example 10.7(b): one negative input</h2>
+    <div class="src" data-l="th">สไลด์หน้า 20 · Boylestad Example 10.7b</div><div class="src" data-l="en">Slide p. 20 · Boylestad Example 10.7b</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_1\) = −2 V, \(V_2\) = +3 V, \(V_3\) = +1 V, \(R_1\) = 200 kΩ, \(R_2\) = 500 kΩ, \(R_3\) = 1 MΩ, \(R_f\) = 1 MΩ จงหา \(V_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_1\) = −2 V, \(V_2\) = +3 V, \(V_3\) = +1 V, \(R_1\) = 200 kΩ, \(R_2\) = 500 kΩ, \(R_3\) = 1 MΩ, \(R_f\) = 1 MΩ. Find \(V_o\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">ข้อ 9 และ 8: \(R_f\) = 68 kΩ แล้ว 330 kΩ</h2><h2 data-l="en">Problems 9 and 8: \(R_f\) = 68 kΩ, then 330 kΩ</h2>
+    <div class="src" data-l="th">สไลด์หน้า 23 · Boylestad ข้อ 8–9 ท้ายบทที่ 10 (รูป 10.68)</div><div class="src" data-l="en">Slide p. 23 · Boylestad chapter 10 Problems 8–9 (Fig. 10.68)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_1\) = +0.2 V ผ่าน 33 kΩ, \(V_2\) = −0.5 V ผ่าน 22 kΩ, \(V_3\) = +0.8 V ผ่าน 12 kΩ จงหา \(V_o\) เมื่อ \(R_f\) = 68 kΩ (ข้อ 9) และ 330 kΩ (ข้อ 8)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_1\) = +0.2 V through 33 kΩ, \(V_2\) = −0.5 V through 22 kΩ, \(V_3\) = +0.8 V through 12 kΩ. Find \(V_o\) for \(R_f\) = 68 kΩ (Problem 9) and 330 kΩ (Problem 8).</p></div>
+  <p class="lead" data-l="th">ขั้นสุดท้ายเปลี่ยน \(R_f\) เป็น 330 kΩ ให้ดูว่าเกิดอะไรขึ้นเมื่อผลรวมเกินราง <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The last step changes \(R_f\) to 330 kΩ to show what happens when the sum exceeds the rail. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">ข้อ 14: สองขั้นแรกแล้วรวม</h2><h2 data-l="en">Problem 14: two first stages, then a summer</h2>
+    <div class="src" data-l="th">สไลด์หน้า 24 · Boylestad ข้อ 14 ท้ายบทที่ 10 (รูป 10.73)</div><div class="src" data-l="en">Slide p. 24 · Boylestad chapter 10 Problem 14 (Fig. 10.73)</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>\(V_1\) = 0.1 V ป้อนออปแอมป์สองตัว: ตัวบนเป็นวงจรไม่กลับเฟส 400 kΩ/20 kΩ ตัวล่างเป็นตัวตามแรงดัน ขาออกทั้งสองผ่าน 20 kΩ และ 10 kΩ เข้าวงจรรวมที่มี \(R_f\) = 100 kΩ จงหา \(V_o\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>\(V_1\) = 0.1 V feeds two op-amps: the upper one a noninverting amplifier, 400 kΩ/20 kΩ, the lower one a unity follower. Their outputs pass through 20 kΩ and 10 kΩ into a summer with \(R_f\) = 100 kΩ. Find \(V_o\).</p></div>
+  <p class="lead" data-l="th">วงจรกว้าง: ชี้ที่ออปแอมป์แต่ละตัวเพื่ออ่านค่า <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">A wide circuit: hover over each op-amp to read it. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>ตั้งทุกขาเป็น 1 V และ \(R_1 = R_2 = R_3\) = 300 kΩ, \(R_f\) = 100 kΩ: ขาออก −1 V คือลบของค่าเฉลี่ย (ตัวหาค่าเฉลี่ย)</li>
+    <li>ตั้ง \(R_1\) = 10 kΩ, \(R_2\) = 20 kΩ, \(R_3\) = 40 kΩ, \(R_f\) = 10 kΩ แล้วเปิด/ปิดขาเข้า (1 V หรือ 0): ขาออก −(1·b₁ + 0.5·b₂ + 0.25·b₃) คือตัวแปลงดิจิทัลเป็นแอนะล็อก 3 บิต</li>
+    <li>เพิ่ม \(R_f\) จนป้ายขึ้น "อิ่มตัว": ส่วนที่คำนวณได้เกิน 13 V แต่แท่ง \(V_o\) หยุดที่ 13 V กระแสใน \(R_f\) ไม่เพิ่มอีก</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–4</h3>
+    <ol><li>ข้อ 2: จุดบนแถว \(V_1\) = −2 V วิ่งสวนทางกับอีกสองแถว เพราะกระแสของมันไหลออกจากกราวด์เสมือน กระแสสุทธิใน \(R_f\) เหลือ 3 µA ไหลจากขาออกเข้ามา</li>
+    <li>ข้อ 3 ขั้นสุดท้าย: \(V_-\) ไม่ใช่ 0 V อีกต่อไป (ชี้ที่ออปแอมป์: \(V_d\) หลายมิลลิโวลต์) เพราะป้อนกลับหมดฤทธิ์เมื่อขาออกชนราง</li>
+    <li>ข้อ 4: ชี้ที่ตัวต้านทาน 20 kΩ และ 10 kΩ: กระแส 105 µA + 10 µA = 115 µA ผ่าน \(R_f\) = 100 kΩ ให้ 11.5 V พอดี</li></ol>
+    <div class="book">สไลด์บทที่ 7 ชุดที่ 1 หน้า 19–20, 23–24 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 10.5 (รูป 10.37, Example 10.7) ข้อ 8–9, 14 ท้ายบท</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>Set every input to 1 V with \(R_1 = R_2 = R_3\) = 300 kΩ and \(R_f\) = 100 kΩ: the −1 V output is minus the average (an averager).</li>
+    <li>Set \(R_1\) = 10 kΩ, \(R_2\) = 20 kΩ, \(R_3\) = 40 kΩ, \(R_f\) = 10 kΩ and switch the inputs between 1 V and 0: the output −(1·b₁ + 0.5·b₂ + 0.25·b₃) is a 3-bit digital-to-analogue converter.</li>
+    <li>Raise \(R_f\) until the badge says "saturated": the computed terms exceed 13 V but the \(V_o\) bar stops at 13 V, and the current in \(R_f\) grows no further.</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–4</h3>
+    <ol><li>Problem 2: the dots on the \(V_1\) = −2 V row run against the other two rows, because its current flows out of the virtual ground; the net 3 µA in \(R_f\) flows in from the output.</li>
+    <li>Problem 3, last step: \(V_-\) is no longer 0 V (hover over the op-amp: \(V_d\) is several millivolts), because the feedback loses its grip once the output hits the rail.</li>
+    <li>Problem 4: hover over the 20 kΩ and 10 kΩ resistors: 105 µA + 10 µA = 115 µA through \(R_f\) = 100 kΩ gives exactly 11.5 V.</li></ol>
+    <div class="book">Chapter 7 slide set I, pp. 19–20, 23–24 · Boylestad &amp; Nashelsky, 11th ed., §10.5 (Fig. 10.37, Example 10.7), Problems 8–9 and 14</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx, kO = r => CK.eng(r, 'Ω');
+  OP.problem(1, 'ex107a'); OP.problem(2, 'ex107b'); OP.problem(3, 'p9'); OP.problem(4, 'p14');
+
+  /* =================================================================== A: the adjustable three-input summer */
+  const COLS = [C.tan, '#c792ea', C.q];
+  OP.explorer({ init: { V: [1, 2, 3], R: [500e3, 1e6, 1e6], Rf: 1e6 }, title: t('ขาเข้าและตัวต้านทาน', 'Inputs and resistors'),
+    controls: (p, S, build) => {
+      [0, 1, 2].forEach(k => ui.slider(p, { id: 'aV' + k, label: `V_${k + 1}`, min: -3, max: 3, step: 0.05, value: S.V[k], fmt: v => vtx(v), oninput: v => { S.V[k] = v; build(); } }));
+      [0, 1, 2].forEach(k => OP.logSlider(p, 'aR' + k, `R_${k + 1}`, 10e3, 2e6, () => S.R[k], v => { S.R[k] = v; }, build, kO, OP.rndR));
+      OP.logSlider(p, 'aRf', 'R_f', 10e3, 2e6, () => S.Rf, v => { S.Rf = v; }, build, kO, OP.rndR); },
+    spec: S => OP.ckt({ kind: 'sum', V: S.V.slice(), R: S.R.slice(), Rf: S.Rf }),
+    side: (ctx, b, bd, c, S) => { const a = OP.z(c), items = S.V.map((v, k) => ({ label: `−(R_f/R_${k + 1})V_${k + 1}`, v: -S.Rf / S.R[k] * v, color: COLS[k], sub: bd.short ? '' : `−${fd(S.Rf / S.R[k], 2)} × ${vtx(v)}` }));
+      items.push({ label: 'V_o', v: a.vo, color: a.state === 'lin' ? C.curve : C.red, sub: bd.short ? '' : a.st[0] }); CH8.bars(ctx, b, items, { title: bd.short ? '' : t('สามส่วนและผลรวม (สมการ 10.11)', 'the three terms and their sum (Eq. 10.11)'), fmt: v => vtx(v), sub: !bd.short }); },
+    after: (v, c) => OP.tags(v, c, { vg: 'N' }),
+    badge: (c, S) => { const a = OP.z(c); return [[`V_o = ${vtx(a.vo)} · ${a.st[0]}`, `V_o = ${vtx(a.vo)} · ${a.st[0]}`], a.st[1]]; },
+    rows: (c, S) => { const a = OP.z(c), I = k => c.I('R' + (k + 1)).re; return S.V.map((v, k) => [`I_${k + 1} = V_${k + 1}/R_${k + 1}`, itx(I(k))]).concat([['ΣI = I_f', itx(I(0) + I(1) + I(2))], [t('V_o ตามสูตร', 'V_o by the formula'), vtx(-S.Rf * (S.V[0] / S.R[0] + S.V[1] / S.R[1] + S.V[2] / S.R[2]))], [t('V_o ตัวแก้วงจร', 'V_o engine'), vtx(a.vo)], ['V_−', vtx(a.vn)], [t('สถานะ', 'state'), a.st[0]]]); },
+    text: (c, S) => { const a = OP.z(c), terms = S.V.map((v, k) => -S.Rf / S.R[k] * v), want = terms[0] + terms[1] + terms[2];
+      if (a.state !== 'lin') return t(`ผลรวม ${terms.map(x => vtx(x)).join(' + ')} = ${vtx(want)} เกิน \\(V_{sat}\\) = 13 V ขาออกชนราง ป้อนกลับหมดฤทธิ์ \\(V_-\\) = ${vtx(a.vn)} ไม่ใช่กราวด์เสมือนอีกต่อไป และกระแสของขาเข้าไม่เป็นไปตามสูตรแล้ว ลด \\(R_f\\) หรือลดขาเข้า`, `The sum ${terms.map(x => vtx(x)).join(' + ')} = ${vtx(want)} exceeds \\(V_{sat}\\) = 13 V: the output hits the rail, the feedback loses its grip, \\(V_-\\) = ${vtx(a.vn)} is no longer a virtual ground and the input currents no longer follow the formula. Lower \\(R_f\\) or the inputs.`);
+      return t(`กราวด์เสมือน \\(V_-\\) = ${vtx(a.vn)}: กระแสของแต่ละขา \\(V_k/R_k\\) ไม่ขึ้นต่อกัน รวมเป็น ${itx(c.I('Rf').re)} ผ่าน \\(R_f\\) ให้ \\(V_o = -R_f\\sum I_k\\) = ${terms.map(x => vtx(x)).join(' + ')} = ${vtx(want)} (ตัวแก้วงจร ${vtx(a.vo)})`, `Virtual ground, \\(V_-\\) = ${vtx(a.vn)}: each input's current \\(V_k/R_k\\) is independent; together they are ${itx(c.I('Rf').re)} through \\(R_f\\), giving \\(V_o = -R_f\\sum I_k\\) = ${terms.map(x => vtx(x)).join(' + ')} = ${vtx(want)} (engine ${vtx(a.vo)}).`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, iSum = 0.2 / 33e3 - 0.5 / 22e3 + 0.8 / 12e3, rfMax = 13 / iSum;
+  CH6.quiz('quiz', [
+    { q: t('1) ตัวหาค่าเฉลี่ย: \\(V_1\\) = 1.2 V, \\(V_2\\) = 2.1 V, \\(V_3\\) = 0.3 V, \\(R_1 = R_2 = R_3\\) = 300 kΩ, \\(R_f\\) = 100 kΩ จงหา \\(V_o\\)', '1) An averager: \\(V_1\\) = 1.2 V, \\(V_2\\) = 2.1 V, \\(V_3\\) = 0.3 V, \\(R_1 = R_2 = R_3\\) = 300 kΩ, \\(R_f\\) = 100 kΩ. Find \\(V_o\\).'),
+      fields: [{ key: 'x', lab: 'V_o =', ans: -1.2, unit: 'V', tol: 0.01 }], work: work(R`V_o = -\frac{100}{300}(1.2 + 2.1 + 0.3) = -\frac{3.6}{3} = -1.2\ \text{V}`) },
+    { q: t('2) ตัวแปลงดิจิทัลเป็นแอนะล็อก 3 บิต: \\(R_1\\) = 10 kΩ, \\(R_2\\) = 20 kΩ, \\(R_3\\) = 40 kΩ, \\(R_f\\) = 10 kΩ ขาเข้าเป็น 1 V หรือ 0 จงหา \\(V_o\\) เมื่อทุกขาเป็น 1 V และเมื่อมีแต่ \\(V_2\\)', '2) A 3-bit digital-to-analogue converter: \\(R_1\\) = 10 kΩ, \\(R_2\\) = 20 kΩ, \\(R_3\\) = 40 kΩ, \\(R_f\\) = 10 kΩ; each input is 1 V or 0. Find \\(V_o\\) with all inputs at 1 V, and with only \\(V_2\\) at 1 V.'),
+      fields: [{ key: 'x', lab: t('ทุกขา: V_o =', 'all: V_o ='), ans: -1.75, unit: 'V', tol: 0.01 }, { key: 'y', lab: t('เฉพาะ V_2: V_o =', 'only V_2: V_o ='), ans: -0.5, unit: 'V', tol: 0.01 }], work: work(R`V_o = -(1 \cdot 1 + 0.5 \cdot 1 + 0.25 \cdot 1) = -1.75\ \text{V};\qquad -(0.5 \cdot 1) = -0.5\ \text{V}`) },
+    { q: t('3) วงจรข้อ 3 (33, 22, 12 kΩ กับ +0.2, −0.5, +0.8 V): \\(R_f\\) ใหญ่ที่สุดเท่าใดก่อนขาออกอิ่มตัวที่ −13 V', '3) The circuit of problem 3 (33, 22, 12 kΩ with +0.2, −0.5, +0.8 V): what is the largest \\(R_f\\) before the output saturates at −13 V?'),
+      fields: [{ key: 'x', lab: 'ΣI =', ans: iSum * 1e6, unit: 'µA', tol: 0.1 }, { key: 'y', lab: 'R_f(max) =', ans: rfMax / 1e3, unit: 'kΩ', tol: 1 }], work: work(R`\sum I = \frac{0.2}{33} - \frac{0.5}{22} + \frac{0.8}{12}\ \text{mA} = ${fd(iSum * 1e6, 1)}\ \mu\text{A};\quad R_f = \frac{13\ \text{V}}{${fd(iSum * 1e6, 1)}\ \mu\text{A}} = ${fd(rfMax / 1e3, 0)}\ \text{k}\Omega`) },
+    { q: t('4) ต้องการ \\(V_o = -(4V_1 + V_2)\\) ด้วย \\(R_f\\) = 100 kΩ จงหา \\(R_1\\) และ \\(R_2\\)', '4) We want \\(V_o = -(4V_1 + V_2)\\) with \\(R_f\\) = 100 kΩ. Find \\(R_1\\) and \\(R_2\\).'),
+      fields: [{ key: 'x', lab: 'R_1 =', ans: 25, unit: 'kΩ', tol: 0.1 }, { key: 'y', lab: 'R_2 =', ans: 100, unit: 'kΩ', tol: 0.1 }], work: work(R`\frac{R_f}{R_1} = 4 \Rightarrow R_1 = 25\ \text{k}\Omega;\qquad \frac{R_f}{R_2} = 1 \Rightarrow R_2 = 100\ \text{k}\Omega`) } ], { wide: true });
+});
+</script>
+</body>
+</html>

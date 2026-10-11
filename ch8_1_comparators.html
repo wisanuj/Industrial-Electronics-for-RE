@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="8.1 — Comparators">8.1 — วงจรเปรียบเทียบแรงดัน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/ee.css?v=3">
+<script src="assets/stops.js?v=3"></script><script src="assets/shell.js?v=3"></script>
+<script src="assets/circuit.js?v=3"></script><script src="assets/alg.js?v=3"></script><script src="assets/lesson.js?v=3"></script><script src="assets/ch6.js?v=3"></script>
+<script src="assets/ch8.js?v=3"></script><script src="assets/ie.js?v=3"></script><script src="assets/ie1.js?v=3"></script><script src="assets/ie2.js?v=3"></script><script src="assets/ie3.js?v=3"></script><script src="assets/ie4.js?v=3"></script><script src="assets/ie5.js?v=3"></script><script src="assets/ie6.js?v=3"></script><script src="assets/ie7.js?v=3"></script><script src="assets/ie8.js?v=3"></script>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar" id="mc-top"></header>
+<h1 data-l="th">วงจรเปรียบเทียบแรงดัน <span class="en">Comparators</span></h1>
+<h1 data-l="en">Comparators <span class="en">An op-amp without feedback: the input is linear, the output is digital</span></h1>
+
+<p class="sub" data-l="th">สไลด์บทที่ 8 หน้า 3–7 ไอซีที่มีทั้งส่วนเชิงเส้นและดิจิทัล (linear-digital IC) ชนิดแรกคือวงจรเปรียบเทียบ (comparator): ออปแอมป์ที่ไม่มีป้อนกลับ อัตราขยายเต็มหลายแสนทำให้ขาออกมีได้แค่สองค่า \(+V_{sat}\) เมื่อขั้ว + สูงกว่าขั้ว − และ \(-V_{sat}\) เมื่อต่ำกว่า เทียบสัญญาณขาเข้ากับแรงดันอ้างอิง \(V_{ref}\) แล้วได้คำตอบดิจิทัลว่า "เกินหรือไม่เกิน" หน้านี้มีวงจรเปรียบเทียบที่ป้อนไซน์ได้ (ส่วน A) วงจรรูป 13.3 ทั้งสองแบบที่ขับ LED ตัวตรวจจับการข้ามศูนย์ (รูป 13.2) และตัวตรวจจับหน้าต่างจากไอซี 339 สองตัว (รูป 13.11)</p>
+<p class="sub" data-l="en">Chapter 8 slides pp. 3–7. The first linear-digital IC is the comparator: an op-amp without feedback, whose full gain of hundreds of thousands leaves the output only two values, \(+V_{sat}\) when the + input is above the − input and \(-V_{sat}\) when below. It compares an input signal with a reference \(V_{ref}\) and answers digitally, "above or not". This page has a comparator that can be driven by a sine (section A), both circuits of Fig. 13.3 driving an LED, the zero-crossing detector (Fig. 13.2) and the window detector built from two 339 comparators (Fig. 13.11).</p>
+<div class="equation-box eqwrap">$$ V_+ > V_-:\ V_o = +V_{sat},\qquad V_+ < V_-:\ V_o = -V_{sat} $$ $$ V_{ref} = \frac{R_2}{R_1 + R_2}V^+ $$ $$ \text{window: output high only for } V_{ref2} < V_{in} < V_{ref1} $$</div>
+
+<section class="keypoints" data-l="th"><h2>ประเด็นสำคัญของหน้านี้</h2><ul>
+  <li><b>วงจรเปรียบเทียบ</b> (หน้า 3, รูป 13.1–13.2): ไม่มีป้อนกลับ ขาออกสวิงสุดทั้งสองทาง ขาเข้าเป็นไซน์ (เชิงเส้น) ขาออกเป็นสี่เหลี่ยม (ดิจิทัล) สลับทุกครั้งที่ขาเข้าข้าม \(V_{ref}\) แค่เศษเสี้ยวของมิลลิโวลต์ก็สลับ</li>
+  <li><b>ไม่กลับเฟส / กลับเฟส</b> (หน้า 4–5, รูป 13.3): \(V_{ref}\) = +6 V จากตัวแบ่ง 10 kΩ/10 kΩ บน +12 V ป้อน \(V_i\) ที่ขั้ว + ขาออก +12 V เมื่อ \(V_i\) > 6 V (LED ติด) สลับขั้วกัน LED ติดเมื่อ \(V_i\) < 6 V เลือกได้ตามงาน</li>
+  <li><b>ไอซีเปรียบเทียบเฉพาะทาง</b> (หน้า 7): 311, 339 สลับเร็วกว่า 741 มีภูมิคุ้มกันสัญญาณรบกวน และขาออกเป็นทรานซิสเตอร์คอลเล็กเตอร์เปิด (ขับโหลดได้ ต่อขาออกร่วมกันได้แบบ wired-AND)</li>
+  <li><b>ตัวตรวจจับหน้าต่าง</b> (หน้า 6, รูป 13.11): สองตัวเปรียบเทียบ ขาเข้าร่วม ขาออกร่วมผ่านตัวต้านทานดึงขึ้น ตัวหนึ่งดึงลงเมื่อขาเข้าเกิน +5 V อีกตัวเมื่อต่ำกว่า +1 V ขาออกจึงสูงเฉพาะในหน้าต่าง 1–5 V</li>
+  <li><b>ภาพจำลอง</b>: ออปแอมป์ของบทที่ 7 ที่มีรางเดียว (0 ถึง +9 V) สำหรับ 339 และทรานซิสเตอร์คอลเล็กเตอร์เปิดแทนด้วยไดโอดอุดมคติที่หันแคโทดเข้าขาออก</li></ul></section>
+<section class="keypoints" data-l="en"><h2>Key points of this page</h2><ul>
+  <li><b>The comparator</b> (p. 3, Figs. 13.1–13.2): no feedback, the output swings fully either way. A sine input (linear) gives a square output (digital) that switches each time the input crosses \(V_{ref}\); a fraction of a millivolt is enough.</li>
+  <li><b>Noninverting / inverting</b> (pp. 4–5, Fig. 13.3): \(V_{ref}\) = +6 V from a 10 kΩ/10 kΩ divider on +12 V. With \(V_i\) at the + input the output is +12 V for \(V_i\) > 6 V (LED on); swap the inputs and the LED lights for \(V_i\) < 6 V. Choose whichever the job needs.</li>
+  <li><b>Dedicated comparator ICs</b> (p. 7): the 311 and 339 switch faster than a 741, have built-in noise immunity, and their outputs are open-collector transistors (they drive loads and can be wire-ANDed).</li>
+  <li><b>The window detector</b> (p. 6, Fig. 13.11): two comparators with a common input and a common output through a pull-up; one pulls low when the input exceeds +5 V, the other when it drops below +1 V, so the output is high only inside the 1–5 V window.</li>
+  <li><b>The simulation</b>: chapter 7's op-amp with single-supply rails (0 to +9 V) for the 339, and the open-collector transistor represented by an ideal diode with its cathode at the output.</li></ul></section>
+
+<div class="slides">
+  <figure class="slide"><img src="slides/ch8/p03.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 3, Comparator Circuit: the operation is a basic comparison; the output swings between its maximum and minimum voltage depending on whether one input (V_in) is greater or less than the other (V_ref); the output is always a square wave where the maximum high output voltage is +V_SAT and the minimum low output voltage is −V_SAT; Figure 13.1 with a sine input and a square output.">
+    <figcaption data-l="th">สไลด์หน้า 3: ขาเข้าไซน์ ขาออกสี่เหลี่ยม (รูป 13.1–13.2)</figcaption><figcaption data-l="en">Slide p. 3: a sine in, a square wave out (Figs. 13.1–13.2)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p04.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 4, Noninverting Op-Amp Comparator: the output goes to +V_SAT when the input V_i is greater than the reference voltage and to −V_SAT when less; the example circuit with a 741, +12 V and −12 V supplies, a 10 kΩ/10 kΩ divider giving V_ref = +6 V at the minus input, V_i at the plus input, 470 Ω and an LED at the output.">
+    <figcaption data-l="th">สไลด์หน้า 4: วงจรเปรียบเทียบไม่กลับเฟส (รูป 13.3a)</figcaption><figcaption data-l="en">Slide p. 4: the noninverting comparator (Fig. 13.3a)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p05.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 5, Inverting Op-Amp Comparator: the output goes to −V_SAT when the input V_i is greater than the reference voltage and to +V_SAT when less; the same circuit with V_i at the minus input and V_ref = +6 V at the plus input.">
+    <figcaption data-l="th">สไลด์หน้า 5: วงจรเปรียบเทียบกลับเฟส (รูป 13.3b)</figcaption><figcaption data-l="en">Slide p. 5: the inverting comparator (Fig. 13.3b)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p06.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 6, Comparator Circuit: two comparator circuits connected with common output and also with common input; +9 V supply, comparator 1 with V_ref1 ≅ +5 V from 7.5 kΩ and 9.1 kΩ, comparator 2 with V_ref2 ≅ +1 V from 8.2 kΩ and 1 kΩ, a 5.1 kΩ pull-up on the common output; output low above +5 V and below +1 V, high between (Figure 13.11).">
+    <figcaption data-l="th">สไลด์หน้า 6: ตัวตรวจจับหน้าต่าง (รูป 13.11)</figcaption><figcaption data-l="en">Slide p. 6: the window detector (Fig. 13.11)</figcaption></figure>
+  <figure class="slide"><img src="slides/ch8/p07.webp" width="1600" height="900" loading="lazy" decoding="async" alt="Chapter 8 slide 7, Comparator Circuit, advantages of comparator ICs: faster switching, built-in noise immunity, outputs capable of directly driving loads.">
+    <figcaption data-l="th">สไลด์หน้า 7: ข้อดีของไอซีเปรียบเทียบ</figcaption><figcaption data-l="en">Slide p. 7: the advantages of comparator ICs</figcaption></figure>
+</div>
+<div class="warnbox" data-l="th"><b>สไลด์หน้า 6 (และรูป 13.11 ของตำรา)</b> ให้แค่ "≅ +5 V" และ "≅ +1 V" ค่าจริงของตัวแบ่งคือ 4.93 V และ 0.98 V ซึ่งภาพจำลองใช้ · สไลด์ไม่มีโจทย์คำนวณในหัวข้อนี้ หน้านี้ใช้รูป 13.2–13.3 และ 13.11 กับโปรแกรม PSpice ของตำรา (โปรแกรม 13.1–13.2) เป็นโจทย์ · ไอซี 741 ในภาพจำลองสลับทันที ของจริงมีสลูว์เรต 0.5 V/µs จึงใช้ได้ถึงไม่กี่กิโลเฮิรตซ์ นี่คือเหตุผลหนึ่งของไอซีเปรียบเทียบเฉพาะทาง (หน้า 7)</div>
+<div class="warnbox" data-l="en"><b>Slide p. 6 (and the book's Fig. 13.11)</b> only says "≅ +5 V" and "≅ +1 V"; the dividers actually give 4.93 V and 0.98 V, which the simulation uses. The slides pose no numerical problems on this topic; this page turns Figs. 13.2–13.3 and 13.11 and the book's PSpice runs (Programs 13.1–13.2) into problems. The simulated 741 switches instantly; a real one has a slew rate of 0.5 V/µs and is good only to a few kilohertz, one reason for dedicated comparator ICs (p. 7).</div>
+
+<nav class="toc" data-l="th"><span class="tl">ในหน้านี้:</span><a href="#tA"><b>A</b>ป้อนไซน์</a><a href="#ex1"><b>1</b>ไม่กลับเฟส</a><a href="#ex2"><b>2</b>กลับเฟส</a><a href="#ex3"><b>3</b>ข้ามศูนย์</a><a href="#ex4"><b>4</b>หน้าต่าง</a><a href="#tC"><b>C</b>ฝึกเพิ่ม</a></nav>
+<nav class="toc" data-l="en"><span class="tl">On this page:</span><a href="#tA"><b>A</b>Sine input</a><a href="#ex1"><b>1</b>Noninverting</a><a href="#ex2"><b>2</b>Inverting</a><a href="#ex3"><b>3</b>Zero crossing</a><a href="#ex4"><b>4</b>Window</a><a href="#tC"><b>C</b>More practice</a></nav>
+
+<section class="prob" id="tA">
+  <div class="prob-head"><span class="prob-no">A</span><div><h2 data-l="th">วงจรเปรียบเทียบกับสัญญาณไซน์: เลื่อน \(V_{ref}\) ดูความกว้างพัลส์</h2><h2 data-l="en">The comparator with a sine: move \(V_{ref}\), watch the pulse width</h2>
+    <div class="src" data-l="th">สไลด์หน้า 3–5 · Boylestad หัวข้อ 13.2 (รูป 13.2–13.3)</div><div class="src" data-l="en">Slides pp. 3–5 · Boylestad §13.2 (Figs. 13.2–13.3)</div></div></div>
+  <p class="lead" data-l="th">ขาเข้าเป็นไซน์ที่ปรับขนาดและระดับกระแสตรงได้ \(V_{ref}\) มาจากตัวแบ่งแรงดันที่ปรับ \(R_2\) ได้ เลือกไม่กลับเฟสหรือกลับเฟส กราฟล่างแสดง \(v_i\), เส้น \(V_{ref}\) และ \(v_o\) ตามเวลา (ช้าลง 250 เท่า) ขาออกสูงนานเท่าที่ \(v_i\) อยู่เหนือ \(V_{ref}\): ยิ่ง \(V_{ref}\) สูง พัลส์ยิ่งแคบ LED กะพริบตามขาออก (ที่ 100 Hz ตาจริงเห็นเป็นสว่างคงที่)</p>
+  <p class="lead" data-l="en">The input is a sine with adjustable amplitude and dc level; \(V_{ref}\) comes from a divider with an adjustable \(R_2\). Choose noninverting or inverting. The lower graph shows \(v_i\), the \(V_{ref}\) line and \(v_o\) in time (slowed 250×). The output stays high as long as \(v_i\) is above \(V_{ref}\): the higher \(V_{ref}\), the narrower the pulse. The LED blinks with the output (at 100 Hz a real eye sees a steady glow).</p>
+  <div class="duo"><div class="card sim"><canvas id="cvA"></canvas></div><div class="card solve"><div class="panel" id="pA"></div><div id="wA" style="margin-top:12px"></div></div></div>
+</section>
+
+<section class="prob" id="ex1">
+  <div class="prob-head"><span class="prob-no">1</span><div><h2 data-l="th">รูป 13.3a: วงจรเปรียบเทียบไม่กลับเฟสขับ LED</h2><h2 data-l="en">Fig. 13.3a: the noninverting comparator driving an LED</h2>
+    <div class="src" data-l="th">สไลด์หน้า 4 · Boylestad รูป 13.3a, โปรแกรม PSpice 13.1</div><div class="src" data-l="en">Slide p. 4 · Boylestad Fig. 13.3a, PSpice Program 13.1</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>ออปแอมป์ 741 แหล่งจ่าย ±12 V ตัวแบ่ง 10 kΩ/10 kΩ จาก +12 V ป้อนขั้ว − \(V_i\) ป้อนขั้ว + ขาออกผ่าน 470 Ω เข้า LED จงหา \(V_{ref}\) และ \(V_o\) เมื่อ \(V_i\) = 4 V และ 8 V และบอกว่า LED ติดเมื่อใด</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 741 on ±12 V, a 10 kΩ/10 kΩ divider from +12 V feeding the − input, \(V_i\) at the + input, the output through 470 Ω into an LED. Find \(V_{ref}\) and \(V_o\) for \(V_i\) = 4 V and 8 V, and say when the LED is on.</p></div>
+  <p class="lead" data-l="th">แถบเลื่อนใต้ภาพตั้ง \(V_i\) <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The slider under the picture sets \(V_i\). <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv1"></canvas><div class="panel" id="ctl1"></div></div><div class="card solve"><div id="ask1"></div><div id="st1"></div></div></div>
+</section>
+
+<section class="prob" id="ex2">
+  <div class="prob-head"><span class="prob-no">2</span><div><h2 data-l="th">รูป 13.3b: สลับขั้ว LED ติดเมื่อต่ำกว่า \(V_{ref}\)</h2><h2 data-l="en">Fig. 13.3b: inputs swapped, the LED lights below \(V_{ref}\)</h2>
+    <div class="src" data-l="th">สไลด์หน้า 5 · Boylestad รูป 13.3b</div><div class="src" data-l="en">Slide p. 5 · Boylestad Fig. 13.3b</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>วงจรเดิมแต่ \(V_{ref}\) = 6 V เข้าขั้ว + และ \(V_i\) เข้าขั้ว − จงหา \(V_o\) เมื่อ \(V_i\) = 8 V และ 4 V</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>The same circuit with \(V_{ref}\) = 6 V at the + input and \(V_i\) at the − input. Find \(V_o\) for \(V_i\) = 8 V and 4 V.</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv2"></canvas><div class="panel" id="ctl2"></div></div><div class="card solve"><div id="ask2"></div><div id="st2"></div></div></div>
+</section>
+
+<section class="prob" id="ex3">
+  <div class="prob-head"><span class="prob-no">3</span><div><h2 data-l="th">รูป 13.2: ตัวตรวจจับการข้ามศูนย์</h2><h2 data-l="en">Fig. 13.2: the zero-crossing detector</h2>
+    <div class="src" data-l="th">สไลด์หน้า 3 · Boylestad รูป 13.2, โปรแกรม PSpice 13.2</div><div class="src" data-l="en">Slide p. 3 · Boylestad Fig. 13.2, PSpice Program 13.2</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>741 ขั้ว − ต่อกราวด์ ขั้ว + รับไซน์ 5 V ยอด 100 Hz แหล่งจ่าย ±12 V จงร่าง \(v_o(t)\)</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A 741 with its − input grounded and a 5 V peak, 100 Hz sine at the + input, on ±12 V. Sketch \(v_o(t)\).</p></div>
+  <p class="lead" data-l="th"><b>ลองตอบก่อน</b></p><p class="lead" data-l="en"><b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv3"></canvas></div><div class="card solve"><div id="ask3"></div><div id="st3"></div></div></div>
+</section>
+
+<section class="prob" id="ex4">
+  <div class="prob-head"><span class="prob-no">4</span><div><h2 data-l="th">รูป 13.11: ตัวตรวจจับหน้าต่าง 1–5 V จาก 339 สองตัว</h2><h2 data-l="en">Fig. 13.11: a 1–5 V window detector from two 339s</h2>
+    <div class="src" data-l="th">สไลด์หน้า 6 · Boylestad รูป 13.9–13.11</div><div class="src" data-l="en">Slide p. 6 · Boylestad Figs. 13.9–13.11</div></div></div>
+  <div class="given" data-l="th"><div class="gl">โจทย์</div><p>แหล่งจ่าย +9 V ตัวเปรียบเทียบ 1 มี \(V_{ref1}\) จาก 7.5 kΩ/9.1 kΩ ที่ขั้ว + และขาเข้าที่ขั้ว − ตัวเปรียบเทียบ 2 มี \(V_{ref2}\) จาก 8.2 kΩ/1 kΩ ที่ขั้ว − และขาเข้าที่ขั้ว + ขาออกคอลเล็กเตอร์เปิดทั้งสองต่อร่วมกันผ่าน 5.1 kΩ ขึ้น +9 V จงหา \(V_{ref1}\), \(V_{ref2}\) และช่วงขาเข้าที่ขาออกสูง</p></div>
+  <div class="given" data-l="en"><div class="gl">Problem</div><p>A +9 V supply. Comparator 1 has \(V_{ref1}\) from 7.5 kΩ/9.1 kΩ at + and the input at −; comparator 2 has \(V_{ref2}\) from 8.2 kΩ/1 kΩ at − and the input at +. Both open-collector outputs are tied together through 5.1 kΩ to +9 V. Find \(V_{ref1}\), \(V_{ref2}\) and the input range for which the output is high.</p></div>
+  <p class="lead" data-l="th">แถบเลื่อนใต้ภาพตั้งขาเข้า วงจรใหญ่: ชี้ที่ไดโอดเพื่อดูว่าตัวใดดึงขาออกลง <b>ลองตอบก่อน</b></p><p class="lead" data-l="en">The slider under the picture sets the input. A large circuit: hover over the diodes to see which one pulls the output low. <b>Try it first.</b></p>
+  <div class="duo"><div class="card sim"><canvas id="cv4"></canvas><div class="panel" id="ctl4"></div></div><div class="card solve"><div id="ask4"></div><div id="st4"></div></div></div>
+</section>
+
+<section class="prob" id="tC">
+  <div class="prob-head"><span class="prob-no">C</span><div><h2 data-l="th">ฝึกเพิ่ม</h2><h2 data-l="en">More practice</h2>
+    <div class="src" data-l="th">ตอบทศนิยมอย่างน้อย 2 ตำแหน่ง</div><div class="src" data-l="en">Give at least 2 decimal places</div></div></div>
+  <div class="card"><div id="quiz"></div></div>
+</section>
+
+<section class="notes" data-l="th">
+  <div class="card"><h3>ลองทำดู 1 — ส่วน A</h3>
+    <ol><li>ไซน์ 5 V ไม่มีระดับกระแสตรง \(V_{ref}\) = 6 V: ขาเข้าไม่เคยถึง 6 V ขาออกค้างที่ −12 V ลด \(R_2\) ให้ \(V_{ref}\) ต่ำกว่า 5 V: พัลส์โผล่ กว้างขึ้นเรื่อย ๆ จนที่ \(V_{ref}\) = 0 (R₂ → 0) ได้ครึ่งคาบพอดี</li>
+    <li>ใส่ระดับกระแสตรง +6 V ให้ไซน์ \(v_i\) แกว่งรอบ \(V_{ref}\): ขาออกเป็นสี่เหลี่ยม 50 % นี่คือการเปลี่ยนไซน์เป็นนาฬิกาดิจิทัล</li>
+    <li>สลับเป็นกลับเฟส: รูปคลื่นขาออกกลับหัว LED ติดในช่วงที่ขาเข้าต่ำกว่า \(V_{ref}\)</li></ol></div>
+  <div class="card"><h3>ลองทำดู 2 — ข้อ 1–4</h3>
+    <ol><li>ข้อ 1: เลื่อน \(V_i\) ช้า ๆ ผ่าน 6.00 V: ขาออกกระโดด 24 V ภายใน 0.1 mV ชี้ที่ออปแอมป์เพื่อดู \(V_d\) ที่ "ย่านเชิงเส้น" แคบมากตรงกลาง</li>
+    <li>ข้อ 4: ตั้งขาเข้า 0.9 V แล้ว 1.1 V: ไดโอดของตัวเปรียบเทียบ 2 เลิกนำ ขาออกขึ้น 9 V กระแสในตัวต้านทานดึงขึ้นหายไป ตั้ง 5.1 V: ไดโอดของตัวที่ 1 นำแทน</li>
+    <li>ข้อ 4: ในวงจรจริงขาออก "ต่ำ" ของ 339 คือทรานซิสเตอร์อิ่มตัว ราว 0.2 V ภาพจำลองใช้ไดโอดอุดมคติจึงได้ 0 V พอดี</li></ol>
+    <div class="book">สไลด์บทที่ 8 หน้า 3–7 · Boylestad &amp; Nashelsky พิมพ์ครั้งที่ 11 หัวข้อ 13.2 (รูป 13.1–13.11) และโปรแกรม 13.1–13.2</div></div>
+</section>
+<section class="notes" data-l="en">
+  <div class="card"><h3>Try this 1 — section A</h3>
+    <ol><li>A 5 V sine with no dc level and \(V_{ref}\) = 6 V: the input never reaches 6 V and the output stays at −12 V. Lower \(R_2\) until \(V_{ref}\) is below 5 V: pulses appear and widen, until at \(V_{ref}\) = 0 (R₂ → 0) they are exactly half a period.</li>
+    <li>Give the sine a +6 V dc level so that \(v_i\) swings about \(V_{ref}\): the output is a 50 % square wave. That is how a sine becomes a digital clock.</li>
+    <li>Switch to inverting: the output waveform turns upside down and the LED lights while the input is below \(V_{ref}\).</li></ol></div>
+  <div class="card"><h3>Try this 2 — problems 1–4</h3>
+    <ol><li>Problem 1: move \(V_i\) slowly through 6.00 V: the output jumps 24 V within 0.1 mV. Hover over the op-amp to see \(V_d\) and the very narrow "linear" region in the middle.</li>
+    <li>Problem 4: set the input to 0.9 V, then 1.1 V: comparator 2's diode stops conducting, the output rises to 9 V and the current in the pull-up vanishes. Set 5.1 V: comparator 1's diode conducts instead.</li>
+    <li>Problem 4: in a real circuit the 339's "low" output is a saturated transistor at about 0.2 V; the simulation's ideal diode gives exactly 0 V.</li></ol>
+    <div class="book">Chapter 8 slides pp. 3–7 · Boylestad &amp; Nashelsky, 11th ed., §13.2 (Figs. 13.1–13.11) and Programs 13.1–13.2</div></div>
+</section>
+
+<nav class="navbar" id="mc-nav"></nav>
+</div>
+
+<script>
+document.addEventListener('mc:ready', () => {
+  'use strict';
+  const tx = (s, d) => MC.tex(s, d), ui = MC.ui, R = String.raw, fd = CH6.fd, t = (th, en) => MC.t(th, en), $ = id => document.getElementById(id), C = IE.COL, vtx = OP.vtx, itx = OP.itx, kO = r => CK.eng(r, 'Ω'), TAU = 2 * Math.PI;
+  IC.problem(1, 'comp'); IC.problem(2, 'compInv'); IC.problem(3, 'sine'); IC.problem(4, 'window');
+
+  /* =================================================================== A: the comparator with a sine input */
+  const vrefOf = S => 12 * S.R2 / (10e3 + S.R2), upd = { acc: 0 };
+  const OUTS = { vi: c => c.V('vi').re, vo: c => c.V('o').re, il: c => c.I('LED').re };
+  OP.explorer({ init: { inv: false, Vm: 5, Vdc: 0, R2: 10e3, f: 100 }, title: t('สัญญาณและอ้างอิง', 'The signal and the reference'), layout: { rowAsp: 0.5, rowMin: 230 },
+    controls: (p, S, build) => {
+      ui.radio(p, [{ id: 'm_non', label: t('ไม่กลับเฟส (V_i ที่ +)', 'noninverting (V_i at +)'), on: true }, { id: 'm_inv', label: t('กลับเฟส (V_i ที่ −)', 'inverting (V_i at −)') }], id => { S.inv = id === 'm_inv'; build(); });
+      ui.slider(p, { id: 'aVm', label: t('ขนาดไซน์', 'sine amplitude'), min: 0, max: 8, step: 0.1, value: S.Vm, fmt: v => vtx(v), oninput: v => { S.Vm = v; build(); } });
+      ui.slider(p, { id: 'aVdc', label: t('ระดับกระแสตรงของ v_i', 'dc level of v_i'), min: -6, max: 12, step: 0.1, value: S.Vdc, fmt: v => vtx(v), oninput: v => { S.Vdc = v; build(); } });
+      OP.logSlider(p, 'aR2', t('R_2 (ตั้ง V_ref)', 'R_2 (sets V_ref)'), 100, 100e3, () => S.R2, v => { S.R2 = v; }, build, v => `${kO(v)} → ${vtx(vrefOf({ R2: v }))}`, OP.rndR); },
+    spec: S => IC.ckt({ kind: 'comp', inv: S.inv, R2: S.R2, mode: 'tran', sig: { wave: 'sine', fn: tm => S.Vdc + S.Vm * Math.sin(TAU * S.f * tm), valText: `${vtx(S.Vm)} ${t('ยอด', 'peak')}, ${fd(S.f, 0)} Hz` } }),
+    onBuild: (c, S) => { S.rec = new OP.Rec(2 / S.f, 1200, OUTS, 5); S.rec.sync(c); },
+    tick: (dt, c, S, show) => { if (!S.rec) return; S.rec.run(c, dt); upd.acc += dt; if (upd.acc > 0.15) { upd.acc = 0; show(); } },
+    waves: [(ctx, b, bd, c, S) => OP.timePlot(ctx, b, S.rec, { sigs: [{ key: 'vi', color: C.elec, label: 'v_i' }, { key: 'vo', color: C.q, label: 'v_o', w: 2.8 }], y: [-15, 15], yt: [-12, -6, 0, 6, 12], ms: true, xt: [5, 10, 15, 20], title: bd.short ? '' : t(`ไม่มีป้อนกลับ: v_o เป็น ±12 V เท่านั้น`, 'no feedback: v_o is ±12 V only'), hl: [{ y: vrefOf(S), color: C.tan, label: bd.short ? '' : `V_ref = ${vtx(vrefOf(S))}` }], short: bd.short })],
+    after: (v, c, S) => { OP.tag(v, 'rm', `V_ref = ${vtx(vrefOf(S))}`, C.tan, -0.1, -0.5, 'right'); OP.tag(v, 'o', `v_o = ${vtx(c.V('o').re)}`, c.V('o').re > 0 ? C.q : C.red, 0.1, -0.42); },
+    badge: (c, S) => { const vo = c.V('o').re, vi = c.V('vi').re; return [[`v_i = ${vtx(vi)} ${(vi > vrefOf(S)) !== S.inv ? '→ +V_sat' : '→ −V_sat'} · LED ${c.I('LED').re > 1e-3 ? t('ติด', 'on') : t('ดับ', 'off')}`, `v_i = ${vtx(vi)} ${(vi > vrefOf(S)) !== S.inv ? '→ +V_sat' : '→ −V_sat'} · LED ${c.I('LED').re > 1e-3 ? t('ติด', 'on') : t('ดับ', 'off')}`], vo > 0 ? 'ok' : 'wait']; },
+    rows: (c, S) => { const vref = vrefOf(S), x = (vref - S.Vdc) / Math.max(S.Vm, 1e-9), frac = x >= 1 ? 0 : x <= -1 ? 1 : Math.acos(x) / Math.PI, hi = S.inv ? 1 - frac : frac; return [['V_ref = 12 R_2/(10 kΩ + R_2)', vtx(vref)], ['v_i(t)', vtx(c.V('vi').re)], ['v_o(t)', vtx(c.V('o').re)], ['I_LED', itx(c.I('LED').re)], [t('ขาออกสูง (% ของคาบ)', 'output high (% of a period)'), `${fd(hi * 100, 1)} %`]]; },
+    text: (c, S) => { const vref = vrefOf(S), x = (vref - S.Vdc) / Math.max(S.Vm, 1e-9);
+      if (x >= 1) return t(`ยอดของ \\(v_i\\) (${vtx(S.Vdc + S.Vm)}) ไม่ถึง \\(V_{ref}\\) = ${vtx(vref)} ขาออก${S.inv ? 'ค้างที่ +12 V' : 'ค้างที่ −12 V'}ตลอด ลด \\(R_2\\) หรือเพิ่มระดับกระแสตรง`, `The peak of \\(v_i\\) (${vtx(S.Vdc + S.Vm)}) never reaches \\(V_{ref}\\) = ${vtx(vref)}: the output stays at ${S.inv ? '+12 V' : '−12 V'}. Lower \\(R_2\\) or raise the dc level.`);
+      if (x <= -1) return t(`\\(v_i\\) อยู่เหนือ \\(V_{ref}\\) = ${vtx(vref)} ตลอดเวลา ขาออกค้างที่ ${S.inv ? '−12 V' : '+12 V'}`, `\\(v_i\\) is above \\(V_{ref}\\) = ${vtx(vref)} all the time: the output stays at ${S.inv ? '−12 V' : '+12 V'}.`);
+      const frac = Math.acos(x) / Math.PI; return t(`\\(v_i\\) อยู่เหนือ \\(V_{ref}\\) = ${vtx(vref)} อยู่ ${fd(frac * 100, 1)} % ของคาบ ขาออก${S.inv ? 'ต่ำ' : 'สูง'}ในช่วงนั้นและ${S.inv ? 'สูง' : 'ต่ำ'}ที่เหลือ: สี่เหลี่ยมที่ความถี่ ${fd(S.f, 0)} Hz เท่าขาเข้า ขอบสลับคมเพราะอัตราขยาย 2 × 10⁵ ต้องการแค่ 0.12 mV`, `\\(v_i\\) is above \\(V_{ref}\\) = ${vtx(vref)} for ${fd(frac * 100, 1)} % of each period; the output is ${S.inv ? 'low' : 'high'} then and ${S.inv ? 'high' : 'low'} otherwise: a square wave at the input's ${fd(S.f, 0)} Hz. The edges are sharp because the gain of 2 × 10⁵ needs only 0.12 mV.`); } });
+
+  /* =================================================================== C: more practice */
+  const work = (tex, html = '') => tx(LS.fitIn($('quiz'), tex), true) + html, v1 = 15 * 4.7 / (10 + 4.7), r2 = 12e3 * 2 / (12 - 2);
+  CH6.quiz('quiz', [
+    { q: t('1) ตัวแบ่ง 10 kΩ กับ 4.7 kΩ (ล่าง) บน +15 V ให้ \\(V_{ref}\\) เท่าใด และขาออกของวงจรไม่กลับเฟส (±15 V) เมื่อ \\(V_i\\) = 5 V', '1) A divider of 10 kΩ over 4.7 kΩ on +15 V: what is \\(V_{ref}\\), and what is the output of a noninverting comparator (±15 V) for \\(V_i\\) = 5 V?'),
+      fields: [{ key: 'x', lab: 'V_ref =', ans: v1, unit: 'V', tol: 0.02 }, { key: 'y', lab: 'V_o =', ans: 15, unit: 'V', tol: 0.1 }], work: work(R`V_{ref} = \frac{4.7}{14.7}(15\ \text{V}) = ${fd(v1, 2)}\ \text{V};\quad V_i = 5 > ${fd(v1, 2)} \Rightarrow V_o = +15\ \text{V}`) },
+    { q: t('2) ต้องการ \\(V_{ref}\\) = 2 V จาก +12 V ด้วย \\(R_1\\) = 12 kΩ (บน) จงหา \\(R_2\\)', '2) We want \\(V_{ref}\\) = 2 V from +12 V with \\(R_1\\) = 12 kΩ on top. Find \\(R_2\\).'),
+      fields: [{ key: 'x', lab: 'R_2 =', ans: r2 / 1e3, unit: 'kΩ', tol: 0.01 }], work: work(R`\frac{R_2}{12\ \text{k}\Omega + R_2}(12) = 2 \Rightarrow R_2 = \frac{2(12\ \text{k}\Omega)}{10} = ${fd(r2 / 1e3, 2)}\ \text{k}\Omega`) },
+    { q: t('3) ไซน์ 4 V ยอด เทียบกับ \\(V_{ref}\\) = 2 V (ไม่กลับเฟส): ขาออกสูงกี่เปอร์เซ็นต์ของคาบ', '3) A 4 V peak sine against \\(V_{ref}\\) = 2 V (noninverting): for what percentage of a period is the output high?'),
+      fields: [{ key: 'x', lab: t('สูง =', 'high ='), ans: 100 / 3, unit: '%', tol: 0.2 }], work: work(R`\sin\theta = \tfrac{2}{4} \Rightarrow \theta = 30^\circ:\ \text{high from } 30^\circ \text{ to } 150^\circ = \frac{120^\circ}{360^\circ} = 33.3\ \%`) },
+    { q: t('4) ตัวตรวจจับหน้าต่างข้อ 4 ต้องการหน้าต่าง 2–6 V ด้วยตัวต้านทานล่าง 1 kΩ และ 9.1 kΩ (บน +9 V) จงหาตัวต้านทานบนของแต่ละตัวแบ่ง', '4) The window detector of problem 4 should have a 2–6 V window with lower resistors of 1 kΩ and 9.1 kΩ (on +9 V). Find the upper resistor of each divider.'),
+      fields: [{ key: 'x', lab: t('สำหรับ 2 V: R =', 'for 2 V: R ='), ans: 3.5, unit: 'kΩ', tol: 0.02 }, { key: 'y', lab: t('สำหรับ 6 V: R =', 'for 6 V: R ='), ans: 9.1 * 3 / 6, unit: 'kΩ', tol: 0.02 }], work: work(R`\frac{1}{R + 1}(9) = 2 \Rightarrow R = 3.5\ \text{k}\Omega;\qquad \frac{9.1}{R + 9.1}(9) = 6 \Rightarrow R = ${fd(9.1 * 3 / 6, 2)}\ \text{k}\Omega`) } ], { wide: true });
+});
+</script>
+</body>
+</html>
